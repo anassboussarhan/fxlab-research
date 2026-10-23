@@ -122,6 +122,8 @@ def _breakdowns(r: pd.Series, bars: pd.DataFrame) -> dict:
 
 
 def strategy_wf(cfg: dict, outdir: Path) -> dict:
+    if cfg.get("joint"):
+        return strategy_wf_joint(cfg, outdir)
     from fxlab.evaluate import evaluate as _evaluate, run_signals
 
     def evaluate(*a, exec_cfg=None, **k):  # default: the experiment's configured execution style
@@ -285,6 +287,257 @@ def strategy_wf(cfg: dict, outdir: Path) -> dict:
             "artifacts": {"oos_returns": str(outdir / "oos_returns.parquet"),
                           "oos_trades": str(outdir / "oos_trades.parquet") if len(trades) else None,
                           "candidate_errors": errors}}
+
+
+def strategy_wf_joint(cfg: dict, outdir: Path) -> dict:
+    """JOINT walk-forward optimisation of strategy parameters x entry order type x exit (risk) configuration for
+    one instrument and timeframe.
+
+    cfg["joint"] = {"exec": [None, {...}, ...], "risk": [None, {...}, ...], "n_trials": new trials per fold,
+                    "n_startup": random joint candidates before the first fold}
+      exec None = market entry at the next open; risk None = the family's own exit (signal flat/reversal for
+      target-position families, the family's default stop/target for trade-mode families); a risk dict runs the
+      trade engine with that stop / target / trail / breakeven / partial / time-exit / sizing configuration.
+    In every fold a TPE study searches the joint space using the TRAINING window only. It is warm-started with
+    every candidate simulated so far (each re-scored on this fold's training window; earlier folds only ever saw
+    earlier data) and then asks n_trials new candidates. The best training-window candidate (daily Sharpe, at
+    least min_trades trades) trades the following test window. Selection is per instrument (one job = one pair).
+    Diagnostic 'abstain' stream: folds whose best training Sharpe <= 0 stay flat (decided on training data)."""
+    import collections
+    import optuna
+    from optuna.distributions import IntDistribution
+    from fxlab.evaluate import evaluate as _evaluate, run_signals
+    from fxlab.execution.costs import BASE, STRESS, LATENCY, ZERO
+    from fxlab.validation.splits import time_walk_forward
+    from fxlab.validation.metrics import performance, daily, trading_day
+    from fxlab.validation import stats
+    import fxlab.features, fxlab.models, fxlab.strategies  # noqa: F401
+
+    optuna.logging.set_verbosity(optuna.logging.WARNING)
+    seed = cfg.get("seed", 0)
+    seed_everything(seed)
+    t0 = time.time()
+    outdir.mkdir(parents=True, exist_ok=True)
+    sid, sym, tf = cfg["target"], cfg["symbol"], cfg["tf"]
+    e = CATALOG[sid]
+    bars = cached_bars(sym, tf, cfg.get("start"), cfg.get("end"))
+    panel = load_panel_closes(cfg.get("panel", []), tf, bars.index, cfg.get("start"), cfg.get("end")) if e.multi_asset else None
+    J = cfg["joint"]
+    exec_opts = list(J.get("exec") or [None])
+    risk_opts = list(J.get("risk") or [None])
+    fixed = dict(cfg.get("fixed_params", {}))
+    tune = not e.extra.get("ml")          # model-driven families: params fixed (retraining cost), exec x exit tuned
+    pkeys = [k for k, v in e.space.items() if tune and k not in fixed and isinstance(v, (list, tuple)) and len(v) > 1]
+    dims = {k: len(e.space[k]) for k in pkeys}
+    dims.update({k: n for k, n in (("__exec__", len(exec_opts)), ("__risk__", len(risk_opts))) if n > 1})
+    dists = {k: IntDistribution(0, n - 1) for k, n in dims.items()}
+    base_mode = e.extra.get("mode", "state")
+    min_trades = cfg.get("min_trades", 10)
+    n = len(bars)
+    td = trading_day(bars.index)
+    codes = pd.factorize(td)[0]                         # increasing day codes (bars are sorted)
+    day_last = np.flatnonzero(np.r_[codes[1:] != codes[:-1], True])   # last bar position of each trading day
+
+    def decode(idx):
+        p = dict(fixed) | {k: e.space[k][idx[k]] for k in pkeys if k in idx}
+        return p, exec_opts[idx.get("__exec__", 0)], risk_opts[idx.get("__risk__", 0)]
+
+    def describe(idx):
+        p, ex, ro = decode(idx)
+        return {"params": p, "exec": ex, "risk": ro}
+
+    sig_lru = collections.OrderedDict()
+
+    def signals_for(p):
+        k = json.dumps(p, sort_keys=True, default=str)
+        if k in sig_lru:
+            sig_lru.move_to_end(k)
+            return sig_lru[k]
+        s = run_signals(sid, bars, panel, sym, p)
+        sig_lru[k] = s
+        if len(sig_lru) > 6:
+            sig_lru.popitem(last=False)
+        return s
+
+    def simulate(idx, cost):
+        p, ex, ro = decode(idx)
+        mode = "trade" if (ro is not None and base_mode == "state") else cfg.get("mode_override")
+        return _evaluate(sid, bars, sym, panel, p, cost, risk_override=ro, signals=signals_for(p),
+                         mode_override=mode, exec_cfg=ex, financing=cfg.get("financing"))
+
+    sims, by_key, failed, errors = [], {}, set(), []
+
+    def run(idx):
+        """Simulate a joint candidate over the full history at BASE costs; keep only compact arrays."""
+        key = json.dumps(idx, sort_keys=True)
+        if key in by_key:
+            return by_key[key]
+        if key in failed:
+            return None
+        try:
+            res = simulate(idx, BASE)
+        except Exception as ex:
+            failed.add(key)
+            errors.append({"candidate": describe(idx), "error": repr(ex)[:500]})
+            return None
+        r = res["returns"].reindex(bars.index).fillna(0.0).to_numpy(np.float64)
+        clp = np.r_[0.0, np.cumsum(np.log1p(np.clip(r, -0.999, None)))]
+        tr = res["trades"]
+        ent = (np.sort(bars.index.get_indexer(pd.DatetimeIndex(tr["entry_time"]))) if tr is not None and len(tr)
+               else np.zeros(0, np.int64))
+        sims.append({"idx": dict(idx), "clp": clp, "entries": ent})
+        by_key[key] = len(sims) - 1
+        return by_key[key]
+
+    def score(i, i0, i1):
+        """Daily Sharpe of candidate i over bar positions [i0, i1] using only bars inside the window."""
+        s = sims[i]
+        ntr = int(np.searchsorted(s["entries"], i1, "right") - np.searchsorted(s["entries"], i0, "left"))
+        if ntr < min_trades:
+            return -np.inf
+        c0, c1 = codes[i0], codes[i1]
+        b = np.r_[i0 - 1, day_last[c0:c1], i1]
+        d = np.expm1(np.diff(s["clp"][b + 1]))
+        sd = d.std()
+        return float(d.mean() / sd * np.sqrt(260)) if len(d) > 5 and sd > 0 else -np.inf
+
+    rng = np.random.default_rng(seed)
+    run({})                                             # the family's defaults, market entry, own exit
+    for _ in range(J.get("n_startup", 8) if dims else 0):
+        run({k: int(rng.integers(m)) for k, m in dims.items()})
+    if not sims:
+        raise RuntimeError(f"all initial candidates failed: {errors[:2]}")
+    folds = time_walk_forward(bars.index, cfg.get("train_years", 3), cfg.get("test_months", 6))
+    if not folds:
+        raise RuntimeError("no walk-forward folds (insufficient history)")
+
+    def select(i0, i1, fold_seed, n_new):
+        """TPE over the joint space on bars [i0, i1], warm-started with all simulated candidates."""
+        if dims and n_new > 0:
+            study = optuna.create_study(direction="maximize",
+                                        sampler=optuna.samplers.TPESampler(seed=fold_seed, n_startup_trials=8))
+            clip = lambda v: float(np.clip(v, -10, 10)) if np.isfinite(v) else -10.0   # noqa: E731
+            study.add_trials([optuna.trial.create_trial(params={k: s["idx"][k] for k in dims if k in s["idx"]},
+                                                        distributions={k: dists[k] for k in dims if k in s["idx"]},
+                                                        value=clip(score(j, i0, i1)))
+                              for j, s in enumerate(sims)])
+            for _ in range(n_new):
+                trial = study.ask(fixed_distributions=dists)
+                j = run(dict(trial.params))
+                study.tell(trial, -10.0 if j is None else clip(score(j, i0, i1)))
+        sc = np.array([score(j, i0, i1) for j in range(len(sims))])
+        best = int(np.argmax(sc))
+        fin = sc[np.isfinite(sc)]
+        # deflation benchmark: expected maximum training Sharpe of len(fin) zero-skill trials with the observed
+        # cross-candidate Sharpe variance (Bailey & Lopez de Prado); used only for the 'deflated' diagnostic stream
+        sr0 = stats.expected_max_sr(len(fin), float(fin.var())) if len(fin) > 1 else 0.0
+        return best, float(sc[best]), float(sr0)
+
+    fold_rows, chosen = [], []
+    oos = np.full(n, np.nan)
+    oos_abs = np.full(n, np.nan)
+    oos_dfl = np.full(n, np.nan)
+    for f in folds:
+        i0, i1 = int(f.train[0]), int(f.train[-1])
+        best, best_s, sr0 = select(i0, i1, seed + 1000 * f.fold, J.get("n_trials", 16))
+        t0_, t1_ = int(f.test[0]), int(f.test[-1])
+        rte = np.expm1(np.diff(sims[best]["clp"][t0_:t1_ + 2]))
+        oos[t0_:t1_ + 1] = rte
+        oos_abs[t0_:t1_ + 1] = rte if best_s > 0 else 0.0
+        oos_dfl[t0_:t1_ + 1] = rte if best_s > sr0 else 0.0
+        chosen.append(best)
+        ntest = int(np.searchsorted(sims[best]["entries"], t1_, "right") - np.searchsorted(sims[best]["entries"], t0_, "left"))
+        rs = pd.Series(rte, index=bars.index[t0_:t1_ + 1])
+        fold_rows.append({"fold": f.fold, "train_start": bars.index[i0], "train_end": bars.index[i1],
+                          "test_start": bars.index[t0_], "test_end": bars.index[t1_],
+                          "selected": describe(sims[best]["idx"]),
+                          "train_metrics": {"sharpe": best_s, "deflation_benchmark": sr0},
+                          "test_metrics": {"sharpe": daily_sharpe(rs), "ret": float((1 + rs).prod() - 1),
+                                           "trades": ntest, "abstain": bool(not best_s > 0),
+                                           "deflated_abstain": bool(not best_s > sr0)},
+                          "n_simulated": len(sims)})
+    test_mask = ~np.isnan(oos)
+    oos_r = pd.Series(oos[test_mask], index=bars.index[test_mask])
+    oos_a = pd.Series(oos_abs[test_mask], index=bars.index[test_mask])
+    oos_d = pd.Series(oos_dfl[test_mask], index=bars.index[test_mask])
+    # re-simulate each selected candidate once: OOS trade log, executed sides, stress tests
+    uniq = sorted(set(chosen))
+    full = {}
+    for b in uniq:
+        full[b] = simulate(sims[b]["idx"], BASE)
+    tl, side = [], pd.Series(np.nan, index=bars.index)
+    for fr, b in zip(fold_rows, chosen):
+        t = full[b]["trades"]
+        if t is not None and len(t):
+            tl.append(t[(t["entry_time"] >= fr["test_start"]) & (t["entry_time"] <= fr["test_end"])])
+        sd = full[b]["signals"]["side"].loc[fr["test_start"]:fr["test_end"]]
+        side.loc[sd.index] = sd
+    trades = pd.concat(tl) if tl else pd.DataFrame()
+    m = performance(oos_r, trades if len(trades) else None)
+    d = daily(oos_r)
+    m["psr_0"] = stats.psr(d.to_numpy())
+    m["ttest_p"] = stats.ttest_mean(d.to_numpy())
+    est, lo, hi = stats.sharpe_ci(d.to_numpy(), n_boot=500)
+    m["sharpe_ci95"] = [lo, hi]
+    m["n_candidates"] = len(sims)
+    m["candidate_errors"] = len(errors)
+    m["joint_space"] = {"param_dims": {k: dims[k] for k in pkeys if k in dims}, "exec_options": len(exec_opts),
+                        "risk_options": len(risk_opts), "size": int(np.prod(list(dims.values()))) if dims else 1}
+    pa = performance(oos_a)
+    m["abstain_variant"] = {"sharpe": pa.get("sharpe"), "ann_return": pa.get("ann_return"),
+                            "max_drawdown": pa.get("max_drawdown"),
+                            "folds_active": int(sum(1 for fr in fold_rows if not fr["test_metrics"]["abstain"])),
+                            "folds": len(fold_rows)}
+    pdf = performance(oos_d)
+    m["deflated_variant"] = {"sharpe": pdf.get("sharpe"), "ann_return": pdf.get("ann_return"),
+                             "max_drawdown": pdf.get("max_drawdown"),
+                             "folds_active": int(sum(1 for fr in fold_rows if not fr["test_metrics"]["deflated_abstain"])),
+                             "folds": len(fold_rows)}
+    cnt = lambda xs: dict(collections.Counter(json.dumps(x, sort_keys=True, default=str) for x in xs))   # noqa: E731
+    m["choice_counts"] = {"exec": cnt(fr["selected"]["exec"] for fr in fold_rows),
+                          "risk": cnt(fr["selected"]["risk"] for fr in fold_rows)}
+    # the configuration that would be carried forward: best on the most recent training-length window
+    last = bars.index[-1]
+    j0 = int(bars.index.searchsorted(last - pd.DateOffset(months=int(cfg.get("train_years", 3) * 12))))
+    lb, ls, l0 = select(j0, n - 1, seed + 999_999, J.get("n_trials", 16))
+    m["latest_choice"] = describe(sims[lb]["idx"]) | {"train_sharpe": ls, "deflation_benchmark": l0,
+                                                       "window_start": str(bars.index[j0]),
+                                                       "window_end": str(last)}
+    m["n_candidates"] = len(sims)
+    stress = {}
+    for name, cm in list({f"cost_x{k}": v for k, v in STRESS.items()}.items()) + [("latency1", LATENCY[1])]:
+        sr = pd.Series(np.nan, index=bars.index)
+        try:
+            for b in uniq:
+                res = simulate(sims[b]["idx"], cm)
+                for fr, bb in zip(fold_rows, chosen):
+                    if bb == b:
+                        seg = res["returns"].loc[fr["test_start"]:fr["test_end"]]
+                        sr.loc[seg.index] = seg
+        except Exception as ex:
+            stress[name] = repr(ex)
+            continue
+        s2 = sr.dropna()
+        stress[name] = {"sharpe": daily_sharpe(s2), "ann_return": performance(s2).get("ann_return")}
+    m["stress"] = stress
+    try:
+        m["diagnostic_zero_cost_default_sharpe"] = simulate({}, ZERO)["metrics"].get("sharpe")
+    except Exception:
+        pass
+    m["breakdowns"] = _breakdowns(oos_r, bars)
+    m["param_stability"] = float(len(set(chosen)) / max(1, len(chosen)))
+    m["runtime_s"] = time.time() - t0
+    pd.DataFrame({"ret": oos_r, "side": side.reindex(oos_r.index), "ret_abstain": oos_a,
+                  "ret_deflated": oos_d}).to_parquet(
+        outdir / "oos_returns.parquet")
+    if len(trades):
+        trades.to_parquet(outdir / "oos_trades.parquet")
+    pd.DataFrame(fold_rows).astype({"selected": str, "train_metrics": str, "test_metrics": str}).to_parquet(
+        outdir / "folds.parquet")
+    return {"metrics": m, "folds": fold_rows,
+            "artifacts": {"oos_returns": str(outdir / "oos_returns.parquet"),
+                          "oos_trades": str(outdir / "oos_trades.parquet") if len(trades) else None,
+                          "candidate_errors": errors[:20]}}
 
 
 SCREEN_FEATURES = ["F.PR.LOGRET_N", "F.PR.EFFICIENCY", "F.PR.CLV", "F.PR.RET_TSTAT", "F.TR.EMA", "F.TR.REG_SLOPE",

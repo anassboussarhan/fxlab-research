@@ -1,6 +1,7 @@
 """Cloud sweep, step 3 (one job per instrument x timeframe, or per instrument for models).
 
 --part strategies : every strategy family (model-driven ones in light mode) walk-forward on <pair, tf>;
+                    with --joint (H1/H4/D1) also the joint per-fold optimisation of parameters x entry x exit;
                     on H1 additionally the walk-forward entry-type grid; on H4/D1 FX pairs with interest-rate data
                     use rate-differential financing. Runs in parallel with the all-feature scan (M30..D1) and, on
                     H1, the all-feature cost-aware ML model.
@@ -24,6 +25,7 @@ sys.path.insert(0, ROOT)
 PY = sys.executable
 START, END = "2005-01-01", "2025-12-31"
 FEATURE_TFS = {"M30", "H1", "H2", "H4", "H8", "D1"}
+JOINT_TFS = {"H1", "H4", "D1"}
 RATE_CCY = {"USD", "EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "NZD"}
 
 
@@ -83,6 +85,10 @@ def main():
     ap.add_argument("--only", default="", help="comma-separated strategy family ids (empty = all)")
     ap.add_argument("--no-features", action="store_true", help="skip the all-feature scan")
     ap.add_argument("--no-extras", action="store_true", help="skip the H1 entry-type grid and the all-feature ML")
+    ap.add_argument("--joint", action="store_true",
+                    help=f"on {sorted(JOINT_TFS)}: also run the JOINT per-fold optimisation of strategy parameters x "
+                         "entry type x exit configuration for EVERY family (ignores --only)")
+    ap.add_argument("--joint-trials", type=int, default=16)
     a = ap.parse_args()
     only = [x for x in a.only.split(",") if x.strip()]
     t0 = time.time()
@@ -104,12 +110,17 @@ def main():
                                  "--start", START, "--end", END], log + ".features"))
         names = []
         fx_rates = a.pair[:3] in RATE_CCY and a.pair[3:] in RATE_CCY
-        base = [PY, "scripts/campaign.py", "plan", "--kind", "strategy", "--symbols", a.pair, "--tfs", a.tf,
-                "--ml-light", "--start", START, "--end", END] + (["--only"] + only if only else [])
+        base0 = [PY, "scripts/campaign.py", "plan", "--kind", "strategy", "--symbols", a.pair, "--tfs", a.tf,
+                 "--ml-light", "--start", START, "--end", END]
+        base = base0 + (["--only"] + only if only else [])
         name = f"cloud_{a.tf}_{a.pair}"
         extra = ["--financing", "rates"] if (a.tf in ("H4", "D1") and fx_rates) else []
         sh(base[:3] + ["--name", name] + base[3:] + extra, log)
         names.append(name)
+        if a.joint and a.tf in JOINT_TFS:
+            jn = f"cloud_joint_{a.tf}_{a.pair}"
+            sh(base0[:3] + ["--name", jn] + base0[3:] + extra + ["--joint", "--joint-trials", str(a.joint_trials)], log)
+            names.append(jn)
         if a.tf == "H1" and not a.no_extras:
             g = f"cloud_H1grid_{a.pair}"
             sh(base[:3] + ["--name", g] + base[3:] + ["--exec", "grid"], log)

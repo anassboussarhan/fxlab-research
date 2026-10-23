@@ -3,7 +3,8 @@ $GITHUB_OUTPUT."""
 import json
 import os
 
-c = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "sweep_config.json")))
+c = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                               os.environ.get("FXLAB_SWEEP_CONFIG", "sweep_config.json"))))
 m = c["mode"]
 if m == "off":                     # cancels a running sweep (concurrency group) and runs nothing
     with open(os.environ.get("GITHUB_OUTPUT", "/dev/stdout"), "a") as f:

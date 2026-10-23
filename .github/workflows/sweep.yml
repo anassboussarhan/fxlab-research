@@ -35,6 +35,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: p
+        env:
+          FXLAB_SWEEP_CONFIG: sweep_config.json
         run: python ci/plan.py
 
   data:
@@ -467,7 +469,7 @@ jobs:
     needs: [plan, sweep_hi, sweep_lo, models]
     if: always() && needs.plan.result == 'success' && needs.plan.outputs.mode != 'off'
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -487,6 +489,18 @@ jobs:
           pattern: audit-*
           path: audits/
           merge-multiple: true
+      - name: Wait for the included runs to finish (at most 4.5 hours)
+        if: needs.plan.outputs.include_runs != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for r in ${{ needs.plan.outputs.include_runs }}; do
+            for i in $(seq 1 270); do
+              s=$(gh run view "$r" -R ${{ github.repository }} --json status -q .status 2>/dev/null || echo unknown)
+              [ "$s" = "completed" ] && break
+              echo "run $r: $s - waiting"; sleep 60
+            done
+          done
       - name: Fetch results of earlier runs (merged into one program-wide analysis)
         if: needs.plan.outputs.include_runs != ''
         env:

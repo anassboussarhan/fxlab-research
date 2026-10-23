@@ -57,10 +57,11 @@ def main():
                 shutil.copytree(x, os.path.join(res, "reports", sub, os.path.basename(x)), dirs_exist_ok=True)
     out = os.path.join(ROOT, "sweep_results")
     os.makedirs(out, exist_ok=True)
-    for script in ("program_report.py", "family_portfolios.py", "feature_scan_report.py"):
+    for script in ("program_report.py", "family_portfolios.py", "feature_scan_report.py", "joint_report.py"):
         with open(os.path.join(out, script.replace(".py", ".log")), "w") as f:
             subprocess.run([PY, os.path.join("scripts", script)], cwd=ROOT, stdout=f, stderr=subprocess.STDOUT)
-    for src, dst in (("results/reports/program", "program"), ("results/reports/family_portfolios", "family_portfolios")):
+    for src, dst in (("results/reports/program", "program"), ("results/reports/family_portfolios", "family_portfolios"),
+                     ("results/reports/joint", "joint")):
         if os.path.isdir(os.path.join(ROOT, src)):
             shutil.copytree(os.path.join(ROOT, src), os.path.join(out, dst), dirs_exist_ok=True)
     fs = os.path.join(ROOT, "results", "reports", "feature_scan")

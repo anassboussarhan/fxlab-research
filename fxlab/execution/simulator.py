@@ -106,7 +106,12 @@ def vector_backtest(bars: pd.DataFrame, position: pd.Series, pip: float, cost: C
 # ----------------------------------------------------------------------------------------------- event engine
 @njit(cache=True)
 def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_hold, trail_d, size_f,
-              latency, slip_frac, slip_pips, pip, spread_mult, comm, swap_pips, exit_on_flat, be_m, part_m, part_fr):
+              latency, slip_frac, slip_pips, pip, spread_mult, comm, swap_pips, exit_on_flat, be_m, part_m, part_fr,
+              etype, ek, ettl, atr_):
+    """etype: 0 market entry at the next open; 1 limit at the decision close (limit_touch); 2 limit k x ATR better
+    (limit_pullback); 3 stop k x ATR beyond (stop_breakout). Pending orders live ettl bars (0 = until the signal
+    changes); limit fills need a strict trade-through and fill at the better of level and open; stop fills at the
+    worse of level and open plus slippage. Stops/targets are placed relative to the actual fill price."""
     n = len(bo)
     max_tr = n
     t_entry = np.full(max_tr, -1); t_exit = np.full(max_tr, -1); t_side = np.zeros(max_tr)
@@ -118,6 +123,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
     pos = 0.0; epx = 0.0; stop = np.nan; tgt = np.nan; trail = np.nan; ebar = -1; f = 0.0
     best = 0.0; worst = 0.0; fin = 0.0; mh = 0; last_val = 0.0
     sd0 = 0.0; be_k = np.nan; pm_k = np.nan; pf_k = 0.0; part_done = False
+    pend_side = 0.0; pend_lvl = 0.0; pend_born = 0; pend_d = 0; skip = False; fpx = 0.0
     for j in range(n):
         mid_o = (bo[j] + ao[j]) / 2.0
         hs = spread_mult * (ao[j] - bo[j]) / 2.0
@@ -140,7 +146,77 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                 t_mae[k] = worst; t_mfe[k] = best
                 bar_ret[j] -= f * comm
                 pos = 0.0
-        if pos == 0 and d >= 0 and side_sig[d] != 0 and not np.isnan(stop_d[d]) and size_f[d] > 0:
+        # pending entry orders (non-market entry types): cancel on signal change / expiry, else try to fill
+        if d >= 0 and (d == 0 or side_sig[d] != side_sig[d - 1]):
+            skip = False                         # a new signal re-arms entries after an expired order
+        if pend_side != 0.0 and pos == 0:
+            # cancel on a signal change (continuous-position families) or on an opposite signal (pulse/event
+            # families, whose entry signal lasts one bar: their orders live until filled, expired or reversed)
+            if d >= 0 and ((exit_on_flat and side_sig[d] != pend_side) or side_sig[d] == -pend_side):
+                pend_side = 0.0
+            elif ettl > 0 and j - pend_born > ettl:
+                pend_side = 0.0; skip = True     # expired: skip this signal until it changes
+        filled = False
+        if pend_side != 0.0 and pos == 0:
+            L = pend_lvl
+            if pend_side > 0:
+                if (etype == 3 and ao[j] >= L) or (etype != 3 and ao[j] <= L):
+                    fpx = ao[j] + (slip if etype == 3 else 0.0); filled = True
+                elif etype == 3 and ah[j] >= L:
+                    fpx = L + slip; filled = True
+                elif etype != 3 and al[j] < L:
+                    fpx = L; filled = True
+            else:
+                if (etype == 3 and bo[j] <= L) or (etype != 3 and bo[j] >= L):
+                    fpx = bo[j] - (slip if etype == 3 else 0.0); filled = True
+                elif etype == 3 and bl[j] <= L:
+                    fpx = L - slip; filled = True
+                elif etype != 3 and bh[j] > L:
+                    fpx = L; filled = True
+        if pos == 0 and not filled and etype != 0 and pend_side == 0.0 and not skip and d >= 0 and side_sig[d] != 0 \
+                and not np.isnan(stop_d[d]) and size_f[d] > 0:
+            # place a new pending order from decision bar d
+            ref = (bc[d] + ac[d]) / 2.0
+            a_d = atr_[d] if atr_[d] == atr_[d] else 0.0
+            if etype == 1:
+                pend_lvl = ref
+            elif etype == 2:
+                pend_lvl = ref - side_sig[d] * ek * a_d
+            else:
+                pend_lvl = ref + side_sig[d] * ek * a_d
+            pend_side = side_sig[d]; pend_born = j; pend_d = d
+            # an order can fill on the same bar it is placed (its first bar of life)
+            L = pend_lvl
+            if pend_side > 0:
+                if (etype == 3 and ao[j] >= L) or (etype != 3 and ao[j] <= L):
+                    fpx = ao[j] + (slip if etype == 3 else 0.0); filled = True
+                elif etype == 3 and ah[j] >= L:
+                    fpx = L + slip; filled = True
+                elif etype != 3 and al[j] < L:
+                    fpx = L; filled = True
+            else:
+                if (etype == 3 and bo[j] <= L) or (etype != 3 and bo[j] >= L):
+                    fpx = bo[j] - (slip if etype == 3 else 0.0); filled = True
+                elif etype == 3 and bl[j] <= L:
+                    fpx = L - slip; filled = True
+                elif etype != 3 and bh[j] > L:
+                    fpx = L; filled = True
+        if filled:
+            dd_ = pend_d
+            k += 1
+            pos = pend_side; pend_side = 0.0
+            epx = fpx
+            stop = epx - pos * stop_d[dd_]
+            tgt = epx + pos * tp_d[dd_] if not np.isnan(tp_d[dd_]) else np.nan
+            trail = trail_d[dd_]
+            mh = int(max_hold[dd_]) if not np.isnan(max_hold[dd_]) else 0
+            f = size_f[dd_]; ebar = j; best = 0.0; worst = 0.0; fin = 0.0
+            sd0 = stop_d[dd_]; be_k = be_m[dd_]; pm_k = part_m[dd_]; pf_k = part_fr[dd_]; part_done = False
+            t_entry[k] = j; t_side[k] = pos; t_epx[k] = epx; t_size[k] = f
+            t_spread[k] = abs(epx - mid_o) / mid_o
+            bar_ret[j] -= f * comm
+            last_val = 0.0                       # P&L of this bar is measured from the fill price at the close
+        elif etype == 0 and pos == 0 and d >= 0 and side_sig[d] != 0 and not np.isnan(stop_d[d]) and size_f[d] > 0:
             k += 1
             pos = side_sig[d]
             epx = buy_o if pos > 0 else sell_o
@@ -243,8 +319,21 @@ class TradeResult:
     trades: pd.DataFrame     # trade log
 
 
+ETYPES = {"market": 0, "limit_touch": 1, "limit_pullback": 2, "stop_breakout": 3}
+
+
+def _atr14(bars: pd.DataFrame) -> np.ndarray:
+    from fxlab.features._util import atr
+    if "high" not in bars:
+        m = pd.DataFrame({k: (bars[f"bid_{c}"] + bars[f"ask_{c}"]) / 2 for k, c in
+                          (("open", "o"), ("high", "h"), ("low", "l"), ("close", "c"))}, index=bars.index)
+        return atr(m, 14).to_numpy(np.float64)
+    return atr(bars, 14).to_numpy(np.float64)
+
+
 def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost: CostModel = BASE,
-                    exit_on_flat: bool = True, rollovers: np.ndarray | None = None) -> TradeResult:
+                    exit_on_flat: bool = True, rollovers: np.ndarray | None = None, entry: str = "market",
+                    k: float = 0.0, ttl: int = 0) -> TradeResult:
     """signals (indexed like bars, decided at bar close) columns:
        side (-1/0/1), stop_dist (price, required), tp_dist (price or NaN), max_hold (bars or NaN),
        trail_dist (price or NaN), size (fraction of equity notional, e.g. from risk sizing)."""
@@ -263,7 +352,9 @@ def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost:
         rollovers = rollover_counts(bars.index)
     out = _simulate(*_arrays(bars), rollovers.astype(np.float64), side, stop_d, tp_d, mh, tr, size,
                     int(cost.latency_bars), cost.slip_spread_frac, cost.slip_fixed_pips, pip, cost.spread_mult,
-                    cost.commission_bps_per_side * 1e-4, cost.swap_pips_per_night, exit_on_flat, be, pm, pf)
+                    cost.commission_bps_per_side * 1e-4, cost.swap_pips_per_night, exit_on_flat, be, pm, pf,
+                    int(ETYPES[entry]), float(k), int(ttl),
+                    _atr14(bars) if entry in ("limit_pullback", "stop_breakout") else np.zeros(len(bars)))
     bar_ret, te, tx, ts, ep, xp, rs, sz, fin, mae, mfe, spr = out
     idx = bars.index
     gross = ts * (xp - ep) / ep

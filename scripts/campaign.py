@@ -58,6 +58,12 @@ EXEC_GRID = [{"type": "order", "entry": "market"},
              {"type": "scale_in", "k": 0.5, "ttl": 6}]                             # half market, half pullback
 
 
+# joint optimisation space (per pair, per fold): entry type x exit configuration x strategy parameters.
+# index 0 of each list is the baseline (market entry at the next open / the family's own exit).
+JOINT_EXEC = [None] + EXEC_GRID[1:]
+JOINT_RISK = [None] + RISK_GRID
+
+
 def plan(a):
     man, skipped = [], []
     end = a.end
@@ -90,6 +96,9 @@ def plan(a):
                         # ~2-3 years of training data and a few months of test per refit, whatever the timeframe
                         cfg["fixed_params"] = {"D1": {"train": 750, "test": 125}, "H8": {"train": 2000, "test": 400},
                                                "H4": {"train": 4000, "test": 750}}.get(tf, {"train": 4000, "test": 2000})
+                    if a.joint:
+                        cfg["joint"] = {"exec": JOINT_EXEC, "risk": JOINT_RISK, "n_trials": a.joint_trials,
+                                        "n_startup": 8}
                     if a.exec == "passive":
                         if e.extra.get("mode", "state") != "state":
                             skipped.append({"target": e.id, "symbol": sym, "tf": tf,
@@ -178,6 +187,9 @@ def main():
                    help="rates = overnight swaps from point-in-time interest-rate differentials (FX pairs only)")
     p.add_argument("--exec", choices=["market", "passive", "grid"], default="market",
                    help="grid = entry order type selected per fold on training data (EXEC_GRID)")
+    p.add_argument("--joint", action="store_true",
+                   help="joint per-fold TPE over strategy params x entry type (JOINT_EXEC) x exit (JOINT_RISK)")
+    p.add_argument("--joint-trials", type=int, default=16, help="new TPE trials per fold in --joint mode")
     p.add_argument("--ml-light", action="store_true", help="model-driven families: 3 candidates, 2000-bar test blocks")
     r = sub.add_parser("run")
     r.add_argument("--name", required=True)

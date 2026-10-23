@@ -32,6 +32,11 @@ Scope is set in `ci/sweep_config.json` (`mode`: `smoke` = 2 instruments, 2021-20
 instruments, 2005-2025, M5-D1 + tick/volatility bars + models). A push that changes `ci/RUN` or the config starts
 a run. Data from 2026-01-01 (the holdout) is never downloaded.
 
+`.github/workflows/sweep2.yml` (`ci/sweep2_config.json`, trigger `ci/RUN2`, branch `results2`) is the follow-up
+run: the round-4 families on every timeframe plus the JOINT per-fold optimisation of strategy parameters x entry
+type x exit configuration (H1/H4/D1, all families, all pairs); its collect step waits for and merges run 1.
+Full enumeration: `docs/cloud_sweep.md`.
+
 ## Data
 
 ```bash

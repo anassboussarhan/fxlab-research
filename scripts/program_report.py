@@ -40,7 +40,8 @@ def main():
     for eid, camp, tgt, sym, tf, cfg, m, art in rows:
         m, cfg = json.loads(m), json.loads(cfg)
         x2 = (m.get("stress") or {}).get("cost_x2.0") or {}
-        ex = "grid" if cfg.get("exec_grid") else (cfg.get("exec") or {}).get("type", "market")
+        ex = ("joint" if cfg.get("joint") else "grid" if cfg.get("exec_grid")
+              else (cfg.get("exec") or {}).get("type", "market"))
         S.append({"source": "strategy", "campaign": camp, "name": tgt, "symbol": sym, "tf": tf, "exec": ex,
                   "financing": cfg.get("financing", "flat"), "sharpe": m.get("sharpe"), "p": m.get("ttest_p"),
                   "n_days": m.get("n_days"), "cost_x2_sharpe": x2.get("sharpe") if isinstance(x2, dict) else None,

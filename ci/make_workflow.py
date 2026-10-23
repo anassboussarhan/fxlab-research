@@ -1,4 +1,8 @@
-"""Generate .github/workflows/sweep.yml (run: python ci/make_workflow.py)."""
+"""Generate the sweep workflows (run: python ci/make_workflow.py):
+  .github/workflows/sweep.yml  : ci/sweep_config.json,  triggers ci/RUN  | ci/sweep_config.json,  -> branch results
+  .github/workflows/sweep2.yml : ci/sweep2_config.json, triggers ci/RUN2 | ci/sweep2_config.json, -> branch results2
+Separate concurrency groups, so a follow-up sweep can be queued while another is still running; its collect job
+waits for the runs listed in include_runs to finish, then merges their artifacts."""
 import json
 import os
 
@@ -122,6 +126,8 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - id: p
+        env:
+          FXLAB_SWEEP_CONFIG: sweep_config.json
         run: python ci/plan.py
 
   data:
@@ -196,7 +202,7 @@ jobs:
     needs: [plan, sweep_hi, sweep_lo, models]
     if: always() && needs.plan.result == 'success' && needs.plan.outputs.mode != 'off'
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 355
     steps:
 {SETUP}      - uses: actions/download-artifact@v4
         with:
@@ -207,6 +213,18 @@ jobs:
           pattern: audit-*
           path: audits/
           merge-multiple: true
+      - name: Wait for the included runs to finish (at most 4.5 hours)
+        if: needs.plan.outputs.include_runs != ''
+        env:
+          GH_TOKEN: ${{{{ github.token }}}}
+        run: |
+          for r in ${{{{ needs.plan.outputs.include_runs }}}}; do
+            for i in $(seq 1 270); do
+              s=$(gh run view "$r" -R ${{{{ github.repository }}}} --json status -q .status 2>/dev/null || echo unknown)
+              [ "$s" = "completed" ] && break
+              echo "run $r: $s - waiting"; sleep 60
+            done
+          done
       - name: Fetch results of earlier runs (merged into one program-wide analysis)
         if: needs.plan.outputs.include_runs != ''
         env:
@@ -234,4 +252,12 @@ jobs:
 """
 os.makedirs(os.path.join(HERE, "..", ".github", "workflows"), exist_ok=True)
 open(os.path.join(HERE, "..", ".github", "workflows", "sweep.yml"), "w").write(wf)
-print("written", len(wf), "chars")
+assert json.load(open(os.path.join(HERE, "sweep2_config.json")))["pairs_full"] == PAIRS   # panel restores shared
+wf2 = (wf.replace("name: full-sweep\n", "name: full-sweep-2\n")
+       .replace('paths: ["ci/RUN", "ci/sweep_config.json"]', 'paths: ["ci/RUN2", "ci/sweep2_config.json"]')
+       .replace("  group: sweep\n", "  group: sweep2\n")
+       .replace("FXLAB_SWEEP_CONFIG: sweep_config.json", "FXLAB_SWEEP_CONFIG: sweep2_config.json")
+       .replace("git push -f origin HEAD:results\n", "git push -f origin HEAD:results2\n"))
+assert wf2.count("sweep2_config.json") == 2 and "HEAD:results2" in wf2 and "group: sweep2" in wf2
+open(os.path.join(HERE, "..", ".github", "workflows", "sweep2.yml"), "w").write(wf2)
+print("written", len(wf), len(wf2), "chars")

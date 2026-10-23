@@ -82,7 +82,16 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
         m.update({k: v for k, v in bt.attrs.items()})
         return {"returns": r, "trades": trades, "metrics": m, "signals": sig, "detail": bt}
     rc = risk_config(e, risk_override)
-    orders = build_orders(bars, sig["side"], rc, pip)
+    et = (exec_cfg or {}).get("type")
+    side_in = sig["side"]
+    if et in ("confirm", "session"):      # entry filters act on the decision signal before orders are built
+        from fxlab.execution.entries import confirm_entries, session_entries
+        if et == "confirm":
+            side_in = confirm_entries(side_in, bars["close"], exec_cfg.get("k", 1))
+        else:
+            side_in = session_entries(side_in, exec_cfg.get("tz", "Europe/London"), exec_cfg.get("start", 7.0),
+                                      exec_cfg.get("end", 17.0))
+    orders = build_orders(bars, side_in, rc, pip)
     for col in ("stop_dist", "tp_dist", "max_hold", "trail_dist"):
         if col in sig and sig[col].notna().any():
             orders[col] = sig[col].where(sig[col].notna(), orders[col])
@@ -91,9 +100,28 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
         orders["size"] = size_fixed_fractional(orders["stop_dist"], bars["close"], rc.risk_per_trade, rc.max_leverage)
     if state_with_stops:  # a continuous-position family run with stops: a flat/opposite signal also exits
         orders["side"] = np.sign(orders["side"])
-    res = simulate_trades(bars, orders, pip, cost, exit_on_flat=state_with_stops, rollovers=roll)
-    m = performance(res.bars["net"], res.trades)
-    return {"returns": res.bars["net"], "trades": res.trades, "metrics": m, "signals": sig, "orders": orders}
+    def sim(entry="market", k=0.0, ttl=0):
+        return simulate_trades(bars, orders, pip, cost, exit_on_flat=state_with_stops, rollovers=roll,
+                               entry=entry, k=k, ttl=ttl)
+    if et == "order":
+        res = sim(exec_cfg.get("entry", "market"), exec_cfg.get("k", 0.0), exec_cfg.get("ttl", 0))
+        net, trades = res.bars["net"], res.trades
+    elif et == "passive":                 # resting limit at the decision close (trade engine equivalent)
+        res = sim("limit_touch", 0.0, exec_cfg.get("max_wait", 0) or 3)
+        net, trades = res.bars["net"], res.trades
+    elif et == "scale_in":                # half at market, half via a pullback limit; the engine is linear in size
+        r1, r2 = sim(), sim("limit_pullback", exec_cfg.get("k", 0.5), exec_cfg.get("ttl", 6))
+        net = 0.5 * r1.bars["net"] + 0.5 * r2.bars["net"]
+        t1, t2 = r1.trades.assign(leg="market"), r2.trades.assign(leg="pullback")
+        for t in (t1, t2):
+            t["size"] *= 0.5
+            t["pnl_frac_equity"] *= 0.5
+        trades = pd.concat([t1, t2]).sort_values("entry_time").reset_index(drop=True)
+    else:
+        res = sim()
+        net, trades = res.bars["net"], res.trades
+    m = performance(net, trades)
+    return {"returns": net, "trades": trades, "metrics": m, "signals": sig, "orders": orders}
 
 
 def _state_trades(bt: pd.DataFrame) -> pd.DataFrame:

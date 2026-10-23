@@ -336,3 +336,95 @@ def test_confirmation_and_session_entries_are_causal():
     nxt = (idx + pd.Timedelta(hours=1)).tz_convert("Europe/London")
     new_entries = (sess != 0) & (sess != sess.shift(1))
     assert ((nxt.hour[new_entries.to_numpy()] >= 7) & (nxt.hour[new_entries.to_numpy()] < 17)).all()
+
+
+def test_trade_engine_limit_and_stop_entries():
+    from fxlab.execution.costs import BASE
+    from fxlab.data.store import add_mid
+    # decision at bar 1 (close 1.1000); price dips to 1.0985 at bar 3 then rallies
+    path = [1.1000, 1.1000, 1.0998, 1.0985, 1.0995, 1.1010, 1.1030, 1.1050, 1.1060, 1.1070]
+    b = _trend_bars(path)
+    sig = pd.DataFrame({"side": 0.0, "stop_dist": 0.0030, "tp_dist": 0.0040, "max_hold": np.nan,
+                        "trail_dist": np.nan, "size": 1.0}, index=b.index)
+    sig.iloc[1, 0] = 1.0
+    sig["side"] = sig["side"].replace(0.0, np.nan).ffill(limit=4).fillna(0.0)    # signal persists 5 bars
+    mkt = simulate_trades(b, sig, 1e-4, BASE, exit_on_flat=False)
+    lim = simulate_trades(b, sig, 1e-4, BASE, exit_on_flat=False, entry="limit_touch", ttl=5)
+    stp = simulate_trades(b, sig, 1e-4, BASE, exit_on_flat=False, entry="stop_breakout", k=0.5, ttl=5)
+    e_m, e_l = mkt.trades["entry_px"].iloc[0], lim.trades["entry_px"].iloc[0]
+    assert e_l <= 1.1000 + 1e-12 and e_l <= e_m           # the limit buy fills at/below the decision close, never worse
+    ent_s = stp.trades["entry_px"].iloc[0]
+    assert ent_s > 1.1000                                # the stop buy only fills above the decision close
+    # the stop-loss and target are measured from the actual fill price
+    for res in (lim, stp):
+        t = res.trades.iloc[0]
+        if t["reason"] == "target":
+            assert t["exit_px"] >= t["entry_px"] + 0.0040 - 1e-9     # at the target or better (gap fill at the open)
+
+
+# ------------------------------------------------------------------------------------------- joint optimisation
+def _joint_cfg():
+    import importlib.util, sys
+    spec = importlib.util.spec_from_file_location("campaign_mod", "scripts/campaign.py")
+    c = importlib.util.module_from_spec(spec)
+    argv, sys.argv = sys.argv, ["x"]
+    try:
+        spec.loader.exec_module(c)
+    finally:
+        sys.argv = argv
+    return {"kind": "strategy", "target": "S.TREND.MA_CROSS", "symbol": "EURUSD", "tf": "H4", "start": None,
+            "end": None, "train_years": 2, "test_months": 6, "seed": 0, "panel": [], "min_trades": 3,
+            "joint": {"exec": c.JOINT_EXEC, "risk": c.JOINT_RISK[:5], "n_trials": 6, "n_startup": 4}}
+
+
+def _bars4h(seed, n=6 * 365 * 5):
+    from tests.conftest import _synthetic_bars
+    b = _synthetic_bars(n, seed)
+    b.index = pd.date_range("2015-01-05", periods=n, freq="4h", tz="UTC")
+    return b
+
+
+def test_joint_walk_forward_selection_uses_only_past_data(tmp_path, monkeypatch):
+    """Joint (params x entry x exit) selection: per-fold choices must not depend on data after the fold's test
+    window (perturbing the future leaves earlier folds' selections and OOS returns unchanged)."""
+    from fxlab.orchestration import runners
+    b1 = _bars4h(11)
+    cut = b1.index[int(len(b1) * 0.8)]
+    b2 = b1.copy()
+    tail = _bars4h(99).loc[b2.index >= cut]
+    scale = b1.loc[b1.index < cut, "close"].iloc[-1] / tail["close"].iloc[0]
+    px = [c for c in b2.columns if c[:4] in ("bid_", "ask_") or c in ("open", "high", "low", "close")]
+    b2.loc[b2.index >= cut, px] = (tail[px] * scale).to_numpy()
+    outs = []
+    for b in (b1, b2):
+        monkeypatch.setattr(runners, "cached_bars", lambda *a, _b=b, **k: _b)
+        outs.append(runners.strategy_wf(_joint_cfg(), tmp_path / str(len(outs))))
+    f1, f2 = outs[0]["folds"], outs[1]["folds"]
+    assert len(f1) >= 4 and outs[0]["metrics"]["n_candidates"] > 5
+    early = [i for i, f in enumerate(f1) if f["test_end"] < cut - pd.Timedelta(days=30)]
+    assert len(early) >= 2
+    for i in early:
+        assert f1[i]["selected"] == f2[i]["selected"]
+        assert f1[i]["test_metrics"]["ret"] == pytest.approx(f2[i]["test_metrics"]["ret"], abs=1e-12)
+        assert f1[i]["train_end"] < f1[i]["test_start"]
+    for f in f1:
+        assert set(f["selected"]) == {"params", "exec", "risk"}
+    r = pd.read_parquet(outs[0]["artifacts"]["oos_returns"])
+    assert r.index.min() >= f1[0]["test_start"] and {"ret", "ret_abstain", "ret_deflated"} <= set(r.columns)
+
+
+@pytest.mark.parametrize("sid", ["S.TREND.MA_CROSS", "S.BO.OPENING_RANGE"])
+def test_every_entry_type_runs_with_every_exit_mode(sid):
+    """All joint-space entry types work in both engines: own exit (state or trade) and risk-config exits."""
+    from tests.conftest import _synthetic_bars
+    from fxlab.evaluate import evaluate
+    from fxlab.registry import CATALOG
+    cfg = _joint_cfg()
+    b = _synthetic_bars(3000, 5)
+    base_mode = CATALOG[sid].extra.get("mode", "state")
+    for ex in cfg["joint"]["exec"]:
+        for ro in (None, cfg["joint"]["risk"][2]):
+            mode = "trade" if (ro is not None and base_mode == "state") else None
+            r = evaluate(sid, b, "EURUSD", risk_override=ro, mode_override=mode, exec_cfg=ex)
+            assert np.isfinite(r["returns"].to_numpy()).all(), (ex, ro)
+            assert (r["returns"] > -0.5).all()
