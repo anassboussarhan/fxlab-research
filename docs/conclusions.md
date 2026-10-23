@@ -39,6 +39,15 @@ evaluations, not return streams.
   M5 0.88, M15 0.87, M30 0.78; joint optimisation lowers it to 0.77 (more choices, more noise). It would not
   pass the program-wide correction; only 2019-2025 data or the 2026 holdout can confirm it.
 
+### 8.1d Trade management without prediction - see `docs/no_prediction.md`
+Random entries managed with each of the 13 exit configurations, pyramiding or martingale sizing (504
+direction-neutral runs per method; 14 instruments x H1/H4/D1 x 12 seeds): no exit rule has a positive gross
+expectation; net Sharpe -0.26 to -6.6, at most 14% of runs net-positive. Hedged grids (median net -0.90) and
+zone recovery (net -0.50; 52-61% of months positive, worst month -98%, 34% of runs lose half the account) confirm
+the theory: management reshapes the distribution (win rate, skew) but cannot create expectancy without
+predictability. The trade engine's stop-first rule for bars holding both stop and target was replaced by an
+optional M1 path replay (run 3 re-tests trade-mode families and the joint optimisation with it).
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
