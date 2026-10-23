@@ -492,9 +492,9 @@ jobs:
           mkdir -p /tmp/pub && cp -r sweep_results /tmp/pub/
           git checkout --orphan results-tmp
           git rm -rq --cached . || true
-          rm -rf ./* .github || true
+          rm -rf ./* .github .gitignore || true
           cp -r /tmp/pub/sweep_results .
           echo "run ${{ github.run_id }} mode ${{ needs.plan.outputs.mode }} $(date -u +%FT%TZ)" > sweep_results/RUN.txt
-          git add sweep_results
+          git add -f sweep_results
           git commit -qm "Sweep results (run ${{ github.run_id }}, ${{ needs.plan.outputs.mode }})"
           git push -f origin HEAD:results
