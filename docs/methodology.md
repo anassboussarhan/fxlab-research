@@ -64,6 +64,33 @@ All of the following use only 2007-2025 development data and the same timing/cos
   with an adaptive, causal threshold (previous-20-day average per 60 minutes), so bar duration stays near
   one hour despite the large growth in tick counts over 2007-2025. Prefix-invariance tested.
 
+## Joint optimisation of parameters x entry x exit (third round)
+`orchestration.runners.strategy_wf_joint`, enabled with `campaign.py plan --joint` (cloud: `sweep_job --joint`,
+H1/H4/D1). Per instrument (one experiment = one family x pair x timeframe) the search space is the family's
+parameter grid x 8 entry types (`JOINT_EXEC`: market, two pullback limits, stop breakout, limit at the close,
+one-bar confirmation, London/NY-hours filter, scale-in) x 14 exits (`JOINT_RISK`: the family's own exit plus 13
+stop/target/trail/breakeven/partial/time-exit/sizing configurations run in the trade engine). Model-driven
+families keep fixed parameters (retraining cost); entry and exit are still searched.
+* Every candidate is simulated once over the full history at base costs and stored compactly (cumulative log
+  returns + trade entry positions). Training scores use only bars inside the training window (the trading day
+  that straddles the train/test boundary is cut at the boundary).
+* Per fold a TPE study (Optuna, fixed seed) is warm-started with every candidate simulated so far, re-scored on
+  the current training window (earlier folds only ever used earlier data), then asks 16 new candidates. The best
+  training candidate (daily Sharpe, >= 10 trades) trades the next test window. Test
+  `test_joint_walk_forward_selection_uses_only_past_data`: replacing all data after a cut point leaves earlier
+  folds' selections and OOS returns unchanged.
+* Trade-engine entry types: pending limit / stop orders placed at the decision close, filled with a strict
+  trade-through (limits) or at the worse of level and open plus slippage (stops); stops and targets are set from
+  the actual fill. Orders of continuous-position families are cancelled when the signal changes; orders of
+  one-bar (event) signals live until filled, expired (ttl) or reversed.
+* Diagnostics, never the primary stream: (i) abstain (flat) when the best training Sharpe <= 0; (ii) abstain
+  when it does not exceed the deflation benchmark, the expected maximum Sharpe of that many zero-skill trials
+  given the cross-candidate variance (Bailey & Lopez de Prado). Also reported: selection frequency of every
+  entry / exit, the configuration that would be carried forward (best on the last 3 years of dev data), and the
+  number of distinct candidates simulated, which enters the program-wide DSR.
+* Limitation: rate-differential financing is applied by the vector engine (market entry, own exit); the trade
+  engine uses the flat swap charge.
+
 ## Speculative hypotheses
 Esoteric features/strategies are tagged `speculative`; they pass through exactly the same tests and
 multiple-testing corrections, and are reported separately.
