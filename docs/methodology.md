@@ -54,7 +54,7 @@ All of the following use only 2007-2025 development data and the same timing/cos
   equal-weight composite; entry/exit thresholds with hysteresis, volatility-percentile gate and entry type
   chosen walk-forward from 2014; abstention when no rule is profitable in training.
 * **All-feature scan** (`scripts/feature_scan.py`): every output column of every feature becomes a
-  quantile-threshold rule (48 rules per fold: 4 quantiles x 6 holding periods x 2 directions), chosen on the
+  quantile-threshold rule (60 rules per fold: 5 quantiles incl. the median sign rule x 6 holding periods x 2 directions, on every column and on its deviation from its own 20-bar EMA), chosen on the
   training window, abstaining when none is profitable after costs; reported numbers re-run through the
   vector engine. 20 noise + 20 time-shuffled placebo columns per instrument go through the same pipeline.
   Program-level statistics (`scripts/feature_scan_report.py`): BH/Holm across all streams, Hansen SPA and

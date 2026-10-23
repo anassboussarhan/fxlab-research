@@ -39,7 +39,9 @@ def known_at(index: pd.DatetimeIndex) -> pd.DataFrame:
     m = monthly()
     avail = m.copy()
     avail.index = avail.index + pd.DateOffset(months=1)
-    return avail.reindex(avail.index.union(index)).ffill().reindex(index)
+    u = pd.DatetimeIndex(index).unique()             # shifted indices (t - n months) can contain duplicates
+    res = avail.reindex(avail.index.union(u)).ffill().reindex(u)
+    return res.reindex(index)
 
 
 def has_rates(symbol: str) -> bool:

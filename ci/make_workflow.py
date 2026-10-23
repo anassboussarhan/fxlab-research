@@ -60,10 +60,15 @@ SWEEP_BODY = """    steps:
 """
 
 
-def sweep_job(name, matrix_key, args, tag, workers):
+def sweep_job(name, matrix_key, args, tag, workers, after=None):
+    """`after`: run only once that job group has finished (any result), so the job order is strategies on the
+    higher timeframes first, then lower timeframes, then the slow model families."""
+    needs = ["plan", "panel"] + ([after] if after else [])
+    cond = (f"always() && needs.plan.result == 'success' && needs.panel.result == 'success' && "
+            f"needs.plan.outputs.{matrix_key} != ''")
     return f"""  {name}:
-    needs: [plan, panel]
-    if: needs.plan.outputs.{matrix_key} != ''
+    needs: [{", ".join(needs)}]
+    if: {cond}
     runs-on: ubuntu-latest
     timeout-minutes: 350
     strategy:
@@ -182,8 +187,8 @@ jobs:
           done
 
 {sweep_job("sweep_hi", "hi", "--tf ${{ matrix.tf }} --part strategies --budget-min 320", "${{ matrix.tf }}", 3)}
-{sweep_job("sweep_lo", "lo", "--tf ${{ matrix.tf }} --part strategies --budget-min 320", "${{ matrix.tf }}", 3)}
-{sweep_job("models", "models", "--part models --budget-min 320", "models", 4)}
+{sweep_job("sweep_lo", "lo", "--tf ${{ matrix.tf }} --part strategies --budget-min 320", "${{ matrix.tf }}", 3, after="sweep_hi")}
+{sweep_job("models", "models", "--part models --budget-min 320", "models", 4, after="sweep_lo")}
   collect:
     needs: [plan, sweep_hi, sweep_lo, models]
     if: always() && needs.plan.result == 'success' && needs.plan.outputs.mode != 'off'

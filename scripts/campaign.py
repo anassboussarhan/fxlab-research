@@ -35,6 +35,10 @@ RISK_GRID = [
     {"stop": "atr", "stop_params": {"mult": 2.0}, "target": "affine", "target_params": {"a": 0, "b": 1.5}, "max_hold": 24},
     {"stop": "atr", "stop_params": {"mult": 2.0}, "target": "affine", "target_params": {"a": 0, "b": 1.5}, "sizing": "vol_target"},
     {"stop": "atr", "stop_params": {"mult": 6.0}, "target": "none", "target_params": {}, "max_hold": 12},  # no tight stop: catastrophic stop + time exit
+    {"stop": "atr", "stop_params": {"mult": 2.0}, "target": "affine", "target_params": {"a": 0, "b": 3.0},
+     "breakeven_r": 1.0},                                                       # stop to breakeven after +1R
+    {"stop": "atr", "stop_params": {"mult": 2.0}, "target": "none", "target_params": {}, "trail_atr": 3.0,
+     "partial_r": 1.0, "partial_frac": 0.5, "breakeven_r": 1.0},               # half off at +1R, trail the rest
 ]
 
 MAN_DIR = RESULTS_DIR / "manifests"
@@ -48,7 +52,10 @@ EXEC_GRID = [{"type": "order", "entry": "market"},
              {"type": "order", "entry": "limit_pullback", "k": 0.25, "ttl": 3},
              {"type": "order", "entry": "limit_pullback", "k": 0.5, "ttl": 6},
              {"type": "order", "entry": "stop_breakout", "k": 0.25, "ttl": 3},
-             {"type": "order", "entry": "limit_touch", "k": 0.0, "ttl": 3}]
+             {"type": "order", "entry": "limit_touch", "k": 0.0, "ttl": 3},
+             {"type": "confirm", "k": 1},                                          # wait for a confirming close
+             {"type": "session", "tz": "Europe/London", "start": 7.0, "end": 17.0},  # London/NY-hours entries only
+             {"type": "scale_in", "k": 0.5, "ttl": 6}]                             # half market, half pullback
 
 
 def plan(a):

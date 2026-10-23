@@ -5,7 +5,9 @@ Rule for a column x (decided at the close of bar t, executed at the next open):
     long  when x_t > hi_q      short when x_t < lo_q      (or the reverse, dir = -1)
     the position is kept for h bars after the last trigger, then closed (unless re-triggered)
     hi_q / lo_q = the (1-q) / q quantiles of x over the TRAINING window only
-Grid per fold: q in {0.05, 0.1, 0.2, 0.33} x h in {1, 3, 6, 12, 24, 48} bars x dir in {+1, -1} = 48 rules.
+Grid per fold: q in {0.05, 0.1, 0.2, 0.33, 0.5} x h in {1, 3, 6, 12, 24, 48} bars x dir in {+1, -1} = 60 rules
+(q = 0.5 is the sign rule: above / below the training median). With --derived (default) every column is also
+scanned as its deviation from its own 20-bar EMA (`<column>|d20`: feature momentum / crossing its average).
 Walk-forward: calendar, 3-year training window, 6-month test window, first test 2010-01-01, last test ends
 2025-12-31 (2026 is never loaded). In every fold the rule with the best TRAINING net Sharpe (daily, after costs)
 is used for the test window; if no rule has a positive training net Sharpe the column ABSTAINS (stays flat).
@@ -42,7 +44,7 @@ from fxlab.validation.metrics import daily, trading_day  # noqa: E402
 
 ALL = ["EURUSD", "GBPUSD", "USDJPY", "USDCHF", "USDCAD", "AUDUSD", "NZDUSD", "EURGBP", "EURJPY", "EURCHF",
        "GBPJPY", "AUDJPY", "XAUUSD", "XAGUSD"]
-QS = np.array([0.05, 0.1, 0.2, 0.33])
+QS = np.array([0.05, 0.1, 0.2, 0.33, 0.5])     # 0.5 = sign rule (above/below the training median)
 HS = np.array([1, 3, 6, 12, 24, 48], dtype=np.int64)
 OUT = RESULTS_DIR / "reports" / "feature_scan"
 
@@ -109,7 +111,7 @@ def _scan_column(x, r, c, fin, day, tr_lo, tr_hi, te_hi, thr, hs):
         bq, bh, bd = 0, 0, 1.0
         for qi in range(thr.shape[1]):
             lo, hi = thr[f, qi, 0], thr[f, qi, 1]
-            if not (lo == lo and hi == hi) or hi <= lo:
+            if not (lo == lo and hi == hi) or hi < lo:
                 continue
             for hj in range(len(hs)):
                 _sim(x, lo, hi, hs[hj], r, c, fin, a, m, T, G, K)
@@ -170,7 +172,7 @@ def build_features(bars, sym, tf, panel, max_est, bench):
     return X, log
 
 
-def scan(sym, tf, start, end, max_est, n_placebo=20):
+def scan(sym, tf, start, end, max_est, n_placebo=20, derived=True):
     dest = OUT / f"{sym}_{tf}"
     dest.mkdir(parents=True, exist_ok=True)
     if (dest / "summary.csv").exists():
@@ -192,6 +194,10 @@ def scan(sym, tf, start, end, max_est, n_placebo=20):
         ok = np.isfinite(v)
         v[ok] = rng.permutation(v[ok])
         plac[f"PLACEBO.shuffled:{k}:{col}"] = v
+    if derived:
+        D = (X[real_cols] - X[real_cols].ewm(span=20, adjust=False, min_periods=20).mean()).astype("float32")
+        D.columns = [f"{c}|d20" for c in real_cols]
+        X = pd.concat([X, D], axis=1)
     X = pd.concat([X, pd.DataFrame(plac, index=X.index)], axis=1)
     pip = instrument(sym).pip
     bo, ao = bars["bid_o"].to_numpy(float), bars["ask_o"].to_numpy(float)
@@ -232,6 +238,7 @@ def scan(sym, tf, start, end, max_est, n_placebo=20):
         turn = np.abs(np.diff(np.r_[0.0, bt["position"].to_numpy()]))[oos].sum() / max(yrs, 1e-9)
         active = (ch[:, 3] > 0).mean()
         rows.append({"column": col, "feature": col.split(":")[0], "placebo": col.startswith("PLACEBO"),
+                     "derived": col.endswith("|d20"),
                      "oos_sharpe": float(dn.mean() / sd * np.sqrt(260)) if sd > 0 else 0.0,
                      "oos_gross_sharpe": float(dg.mean() / dg.std() * np.sqrt(260)) if dg.std() > 0 else 0.0,
                      "oos_ann_return": float(dn.mean() * 260), "oos_days": int(len(dn)),
@@ -239,6 +246,7 @@ def scan(sym, tf, start, end, max_est, n_placebo=20):
                      "t_stat": float(dn.mean() / sd * np.sqrt(len(dn))) if sd > 0 else 0.0,
                      "median_train_sharpe": float(np.median(ch[:, 3])),
                      "modal_q": float(QS[int(pd.Series(ch[:, 0]).mode()[0])]),
+                     "share_folds_sign_rule": float((ch[:, 0] == len(QS) - 1).mean()),
                      "modal_h": int(HS[int(pd.Series(ch[:, 1]).mode()[0])]),
                      "share_dir_plus": float((ch[:, 2] > 0).mean())})
     S = pd.DataFrame(rows).sort_values("oos_sharpe", ascending=False)
@@ -262,10 +270,11 @@ def main():
     ap.add_argument("--end", default="2025-12-31")
     ap.add_argument("--max-est-seconds", type=float, default=150.0,
                     help="skip features whose benchmark-extrapolated build time exceeds this (documented)")
+    ap.add_argument("--no-derived", action="store_true", help="do not add the <column>|d20 deviation-from-EMA columns")
     a = ap.parse_args()
     for s in a.symbols:
         try:
-            scan(s, a.tf, a.start, a.end, a.max_est_seconds)
+            scan(s, a.tf, a.start, a.end, a.max_est_seconds, derived=not a.no_derived)
         except FileNotFoundError as ex:
             print("missing data", s, ex)
 

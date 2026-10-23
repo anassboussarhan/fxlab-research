@@ -168,6 +168,9 @@ class RiskConfig:
     max_hold: int | None = None
     trail_atr: float | None = None
     max_leverage: float = 10.0
+    breakeven_r: float | None = None     # move the stop to entry after a favourable move of breakeven_r x stop
+    partial_r: float | None = None       # take partial_frac of the position off at partial_r x stop distance
+    partial_frac: float = 0.5
 
 
 def build_orders(bars: pd.DataFrame, side: pd.Series, rc: RiskConfig, pip: float) -> pd.DataFrame:
@@ -190,4 +193,7 @@ def build_orders(bars: pd.DataFrame, side: pd.Series, rc: RiskConfig, pip: float
                        index=bars.index)
     out["max_hold"] = float(rc.max_hold) if rc.max_hold else np.nan
     out["trail_dist"] = rc.trail_atr * unit if rc.trail_atr else np.nan
+    out["be_mult"] = float(rc.breakeven_r) if rc.breakeven_r else np.nan
+    out["part_mult"] = float(rc.partial_r) if rc.partial_r else np.nan
+    out["part_frac"] = float(rc.partial_frac) if rc.partial_r else 0.0
     return out

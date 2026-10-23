@@ -288,7 +288,7 @@ jobs:
 
   sweep_hi:
     needs: [plan, panel]
-    if: needs.plan.outputs.hi != ''
+    if: always() && needs.plan.result == 'success' && needs.panel.result == 'success' && needs.plan.outputs.hi != ''
     runs-on: ubuntu-latest
     timeout-minutes: 350
     strategy:
@@ -345,8 +345,8 @@ jobs:
           done
 
   sweep_lo:
-    needs: [plan, panel]
-    if: needs.plan.outputs.lo != ''
+    needs: [plan, panel, sweep_hi]
+    if: always() && needs.plan.result == 'success' && needs.panel.result == 'success' && needs.plan.outputs.lo != ''
     runs-on: ubuntu-latest
     timeout-minutes: 350
     strategy:
@@ -403,8 +403,8 @@ jobs:
           done
 
   models:
-    needs: [plan, panel]
-    if: needs.plan.outputs.models != ''
+    needs: [plan, panel, sweep_lo]
+    if: always() && needs.plan.result == 'success' && needs.panel.result == 'success' && needs.plan.outputs.models != ''
     runs-on: ubuntu-latest
     timeout-minutes: 350
     strategy:

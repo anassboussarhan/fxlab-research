@@ -39,11 +39,32 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
     state_with_stops = mode == "trade" and e.extra.get("mode", "state") == "state"
     roll = rollover_counts(bars.index)
     if mode == "state":
-        if exec_cfg and exec_cfg.get("type") == "order":
-            bt = order_backtest(bars, sig["side"], pip, cost, entry=exec_cfg.get("entry", "market"),
+        if exec_cfg and exec_cfg.get("type") in ("confirm", "session"):
+            from fxlab.execution.entries import confirm_entries, session_entries
+            side_in = sig["side"]
+            if exec_cfg["type"] == "confirm":
+                side_x = confirm_entries(side_in, bars["close"], exec_cfg.get("k", 1))
+            else:
+                side_x = session_entries(side_in, exec_cfg.get("tz", "Europe/London"), exec_cfg.get("start", 7.0),
+                                         exec_cfg.get("end", 17.0))
+            sig_exec = sig.copy()          # executed positions; the returned `signals` stay untransformed so that
+            sig_exec["side"] = side_x      # re-simulations (stress tests) do not apply the transform twice
+            exec_cfg = None
+        else:
+            sig_exec = sig
+        if exec_cfg and exec_cfg.get("type") == "scale_in":
+            # half the position at market, half via a pullback limit (k x ATR, ttl bars); engines are linear in size
+            b1 = vector_backtest(bars, sig_exec["side"], pip, cost, roll)
+            b2 = order_backtest(bars, sig_exec["side"], pip, cost, entry="limit_pullback", k=exec_cfg.get("k", 0.5),
+                                ttl=exec_cfg.get("ttl", 6), rollovers=roll)
+            bt = (b1[["position", "gross", "spread_slip", "commission", "financing", "net"]] * 0.5
+                  + b2[["position", "gross", "spread_slip", "commission", "financing", "net"]] * 0.5)
+            bt.attrs.update({f"pullback_{k}": v for k, v in b2.attrs.items()})
+        elif exec_cfg and exec_cfg.get("type") == "order":
+            bt = order_backtest(bars, sig_exec["side"], pip, cost, entry=exec_cfg.get("entry", "market"),
                                 k=exec_cfg.get("k", 0.0), ttl=exec_cfg.get("ttl", 0), rollovers=roll)
         elif exec_cfg and exec_cfg.get("type") == "passive":
-            bt = passive_backtest(bars, sig["side"], pip, cost, offset=exec_cfg.get("offset", 0.0),
+            bt = passive_backtest(bars, sig_exec["side"], pip, cost, offset=exec_cfg.get("offset", 0.0),
                                   max_wait=exec_cfg.get("max_wait", 0), rollovers=roll)
         else:
             carry = None
@@ -51,7 +72,7 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
                 from fxlab.data.rates import has_rates, rate_diff
                 if has_rates(symbol):
                     carry = rate_diff(symbol, bars.index).to_numpy()
-            bt = vector_backtest(bars, sig["side"], pip, cost, roll, carry=carry)
+            bt = vector_backtest(bars, sig_exec["side"], pip, cost, roll, carry=carry)
         r = bt["net"]
         turnover = bt["position"].diff().abs()
         costs = bt["spread_slip"] + bt["commission"] + bt["financing"]

@@ -106,7 +106,7 @@ def vector_backtest(bars: pd.DataFrame, position: pd.Series, pip: float, cost: C
 # ----------------------------------------------------------------------------------------------- event engine
 @njit(cache=True)
 def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_hold, trail_d, size_f,
-              latency, slip_frac, slip_pips, pip, spread_mult, comm, swap_pips, exit_on_flat):
+              latency, slip_frac, slip_pips, pip, spread_mult, comm, swap_pips, exit_on_flat, be_m, part_m, part_fr):
     n = len(bo)
     max_tr = n
     t_entry = np.full(max_tr, -1); t_exit = np.full(max_tr, -1); t_side = np.zeros(max_tr)
@@ -117,6 +117,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
     k = -1
     pos = 0.0; epx = 0.0; stop = np.nan; tgt = np.nan; trail = np.nan; ebar = -1; f = 0.0
     best = 0.0; worst = 0.0; fin = 0.0; mh = 0; last_val = 0.0
+    sd0 = 0.0; be_k = np.nan; pm_k = np.nan; pf_k = 0.0; part_done = False
     for j in range(n):
         mid_o = (bo[j] + ao[j]) / 2.0
         hs = spread_mult * (ao[j] - bo[j]) / 2.0
@@ -148,6 +149,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
             trail = trail_d[d]
             mh = int(max_hold[d]) if not np.isnan(max_hold[d]) else 0
             f = size_f[d]; ebar = j; best = 0.0; worst = 0.0; fin = 0.0
+            sd0 = stop_d[d]; be_k = be_m[d]; pm_k = part_m[d]; pf_k = part_fr[d]; part_done = False
             t_entry[k] = j; t_side[k] = pos; t_epx[k] = epx; t_size[k] = f
             t_spread[k] = (hs + slip) / mid_o
             bar_ret[j] -= f * comm
@@ -186,6 +188,28 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                 t_exit[k] = j; t_xpx[k] = px; t_reason[k] = reason; t_fin[k] = fin
                 t_mae[k] = worst; t_mfe[k] = best
                 pos = 0.0
+            elif not part_done and pm_k == pm_k and pf_k > 0:
+                # partial take-profit at pm_k x initial stop distance (checked after the stop: stop-first rule)
+                lvl = epx + pos * pm_k * sd0
+                hit = False
+                if pos > 0:
+                    if bo[j] >= lvl and ebar != j:
+                        px = bo[j]; hit = True
+                    elif bh[j] >= lvl:
+                        px = lvl; hit = True
+                else:
+                    if ao[j] <= lvl and ebar != j:
+                        px = ao[j]; hit = True
+                    elif al[j] <= lvl:
+                        px = lvl; hit = True
+                if hit:
+                    fp = f * pf_k
+                    r = pos * (px - epx) / epx
+                    bar_ret[j] += fp * (r - last_val) - fp * comm
+                    f -= fp
+                    part_done = True
+                    if be_k == be_k:          # with breakeven enabled, the remainder is protected at entry
+                        stop = max(stop, epx) if pos > 0 else min(stop, epx)
         # ---------------------------------------------------------- 3) close: mark-to-market, trailing, financing
         if pos != 0:
             val = pos * (((bc[j] if pos > 0 else ac[j]) - epx) / epx)
@@ -200,6 +224,11 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                     stop = max(stop, bh[j] - trail)
                 else:
                     stop = min(stop, al[j] + trail)
+            if be_k == be_k:                  # breakeven: once price has moved be_k x stop distance in favour
+                if pos > 0 and bh[j] - epx >= be_k * sd0:
+                    stop = max(stop, epx)
+                elif pos < 0 and epx - al[j] >= be_k * sd0:
+                    stop = min(stop, epx)
     if pos != 0:
         t_exit[k] = n - 1; t_xpx[k] = bc[n - 1] if pos > 0 else ac[n - 1]; t_reason[k] = 6; t_fin[k] = fin
         t_mae[k] = worst; t_mfe[k] = best
@@ -226,11 +255,15 @@ def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost:
     mh = s.get("max_hold", pd.Series(np.nan, index=s.index)).to_numpy(np.float64)
     tr = s.get("trail_dist", pd.Series(np.nan, index=s.index)).to_numpy(np.float64)
     size = s.get("size", pd.Series(1.0, index=s.index)).fillna(0).to_numpy(np.float64)
+    nanc = pd.Series(np.nan, index=s.index)
+    be = s.get("be_mult", nanc).to_numpy(np.float64)
+    pm = s.get("part_mult", nanc).to_numpy(np.float64)
+    pf = s.get("part_frac", pd.Series(0.0, index=s.index)).fillna(0.0).to_numpy(np.float64)
     if rollovers is None:
         rollovers = rollover_counts(bars.index)
     out = _simulate(*_arrays(bars), rollovers.astype(np.float64), side, stop_d, tp_d, mh, tr, size,
                     int(cost.latency_bars), cost.slip_spread_frac, cost.slip_fixed_pips, pip, cost.spread_mult,
-                    cost.commission_bps_per_side * 1e-4, cost.swap_pips_per_night, exit_on_flat)
+                    cost.commission_bps_per_side * 1e-4, cost.swap_pips_per_night, exit_on_flat, be, pm, pf)
     bar_ret, te, tx, ts, ep, xp, rs, sz, fin, mae, mfe, spr = out
     idx = bars.index
     gross = ts * (xp - ep) / ep

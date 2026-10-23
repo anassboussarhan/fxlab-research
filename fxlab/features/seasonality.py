@@ -192,3 +192,34 @@ def f_fix(df):
            (idx.tz_convert("Europe/London").tz_localize(None) + pd.offsets.BMonthEnd(0)).normalize())
     return pd.DataFrame({"min_to_fix": dm, "in_window": (np.abs(dm) <= 5).astype(float),
                          "month_end": np.asarray(lbd, float)}, index=idx)
+
+
+@feature("F.TS.GOTOBI", F, "gotobi day (5/10/15/20/25/30, weekend-adjusted; Tokyo calendar) flag, and hours until the "
+         "09:55 JST Tokyo fix on gotobi days (negative after the fix, NaN on other days)", inputs=())
+def f_gotobi(df):
+    from fxlab.data import calendars as cal
+    g = cal.is_gotobi(df.index).astype(float)
+    jst = cal.local(df.index, "Asia/Tokyo")
+    h = jst.hour + jst.minute / 60.0
+    to_fix = np.where(g > 0, (9 + 55 / 60) - h, np.nan)
+    return pd.DataFrame({"flag": g, "hours_to_fix": to_fix}, index=df.index)
+
+
+@feature("F.TS.FOMC", F, "scheduled FOMC statement day (New York calendar; Fed calendar 2007-2022) flag and hours to "
+         "the ~14:00 NY statement on that day (NaN on other days)", inputs=())
+def f_fomc(df):
+    from fxlab.data import calendars as cal
+    on = cal.is_fomc_day(df.index).astype(float)
+    ny = cal.local(df.index, "America/New_York")
+    h = ny.hour + ny.minute / 60.0
+    return pd.DataFrame({"flag": on, "hours_to_statement": np.where(on > 0, 14.0 - h, np.nan)}, index=df.index)
+
+
+@feature("F.TS.MONTH_END_FIX", F, "last London business day of the month flag and hours to the 16:00 London fix on "
+         "that day (NaN otherwise)", inputs=())
+def f_month_end_fix(df):
+    from fxlab.data import calendars as cal
+    on = cal.is_last_business_day(df.index).astype(float)
+    ldn = cal.local(df.index, "Europe/London")
+    h = ldn.hour + ldn.minute / 60.0
+    return pd.DataFrame({"flag": on, "hours_to_fix": np.where(on > 0, 16.0 - h, np.nan)}, index=df.index)

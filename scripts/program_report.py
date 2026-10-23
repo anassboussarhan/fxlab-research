@@ -55,7 +55,7 @@ def main():
                 S.append({"source": "feature_scan", "campaign": "feature_scan", "name": r.column, "symbol": sym,
                           "tf": tf, "exec": "market", "financing": "flat", "sharpe": r.oos_sharpe,
                           "p": float(st.t.sf(r.t_stat, max(r.oos_days - 1, 1))), "n_days": r.oos_days,
-                          "cost_x2_sharpe": None, "n_candidates": 48, "artifact": f"fs::{d}::{r.column}"})
+                          "cost_x2_sharpe": None, "n_candidates": 60, "artifact": f"fs::{d}::{r.column}"})
     ml = RESULTS_DIR / "reports" / "ml_allfeatures"
     for d in sorted(ml.glob("*")):
         if (d / "summary.json").exists():

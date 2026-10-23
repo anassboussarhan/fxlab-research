@@ -275,3 +275,64 @@ def test_rates_are_point_in_time():
     assert np.isclose(d.iloc[0], dec["AUD"] - dec["JPY"]) and np.isclose(d.iloc[1], dec["AUD"] - dec["JPY"])
     assert np.isclose(d.iloc[2], jan["AUD"] - jan["JPY"])          # January's average only from 1 February
     assert m.index.max() < pd.Timestamp("2026-01-01", tz="UTC")     # no holdout-period rates stored
+
+
+def _trend_bars(path, spread=1e-4):
+    idx = pd.date_range("2012-01-02", periods=len(path), freq="1h", tz="UTC")
+    b = pd.DataFrame(index=idx)
+    mid = np.asarray(path, float)
+    for side, sgn in (("bid", -1), ("ask", 1)):
+        b[f"{side}_o"] = mid + sgn * spread / 2
+        b[f"{side}_h"] = mid + sgn * spread / 2 + 2e-4
+        b[f"{side}_l"] = mid + sgn * spread / 2 - 2e-4
+        b[f"{side}_c"] = mid + sgn * spread / 2
+    return b
+
+
+def test_breakeven_stop_turns_a_round_trip_into_a_scratch():
+    from fxlab.execution.costs import BASE
+    # price rises 1.5R in favour, then declines steadily (no gaps) far below the entry
+    path = [1.1000] * 3 + [1.1000 + 0.0005 * i for i in range(1, 8)] + [1.1035 - 0.0005 * i for i in range(1, 20)]
+    b = _trend_bars(path)
+    sig = pd.DataFrame({"side": 0.0, "stop_dist": 0.002, "tp_dist": np.nan, "max_hold": np.nan,
+                        "trail_dist": np.nan, "size": 1.0}, index=b.index)
+    sig.iloc[1, 0] = 1.0
+    plain = simulate_trades(b, sig, 1e-4, BASE, exit_on_flat=False)
+    be = simulate_trades(b, sig.assign(be_mult=1.0), 1e-4, BASE, exit_on_flat=False)
+    assert plain.trades["net_ret"].iloc[0] < -0.0015          # full stop loss
+    assert abs(be.trades["net_ret"].iloc[0]) < 0.0005          # stopped near entry (costs only)
+
+
+def test_partial_take_profit_banks_half_at_1r():
+    from fxlab.execution.costs import BASE
+    path = [1.1000] * 3 + [1.1000 + 0.0005 * i for i in range(1, 6)] + [1.1025 - 0.0005 * i for i in range(1, 20)]
+    b = _trend_bars(path)
+    base = pd.DataFrame({"side": 0.0, "stop_dist": 0.002, "tp_dist": np.nan, "max_hold": np.nan,
+                         "trail_dist": np.nan, "size": 1.0}, index=b.index)
+    base.iloc[1, 0] = 1.0
+    full = simulate_trades(b, base, 1e-4, BASE, exit_on_flat=False).bars["net"].sum()
+    part = simulate_trades(b, base.assign(part_mult=1.0, part_frac=0.5), 1e-4, BASE, exit_on_flat=False).bars["net"].sum()
+    # half closed at +1R (+0.002) instead of riding to the stop: improvement of about 0.5 x (0.002 + 0.002)/1.1
+    assert part - full == pytest.approx(0.5 * 0.004 / 1.1, rel=0.25)
+
+
+def test_confirmation_and_session_entries_are_causal():
+    from fxlab.execution.entries import confirm_entries, session_entries
+    rng = np.random.default_rng(5)
+    idx = pd.date_range("2013-03-04", periods=800, freq="1h", tz="UTC")
+    close = pd.Series(1.3 + np.cumsum(rng.normal(0, 1e-3, len(idx))), index=idx)
+    side = pd.Series(np.sign(np.sin(np.arange(len(idx)) / 9.0)), index=idx)
+    for f in (lambda s, c: confirm_entries(s, c, 1), lambda s, c: session_entries(s)):
+        full = f(side, close)
+        cut = 500
+        part = f(side.iloc[:cut], close.iloc[:cut])
+        assert np.array_equal(full.iloc[:cut].to_numpy(), part.to_numpy())
+        assert (full.abs() <= 1).all()
+    c = confirm_entries(side, close, 1)
+    # an entry is never taken on the signal bar itself
+    starts = (side != side.shift(1)) & (side != 0)
+    assert not ((c == side) & starts & (c != 0)).any()
+    sess = session_entries(side)
+    nxt = (idx + pd.Timedelta(hours=1)).tz_convert("Europe/London")
+    new_entries = (sess != 0) & (sess != sess.shift(1))
+    assert ((nxt.hour[new_entries.to_numpy()] >= 7) & (nxt.hour[new_entries.to_numpy()] < 17)).all()
