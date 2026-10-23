@@ -54,7 +54,7 @@ SWEEP_BODY = """    steps:
         run: |
           for f in out/*.json out/*/job.log out/*/job.log.features; do
             [ -f "$f" ] || continue
-            msg=$(tail -c 3500 "$f" | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
+            msg=$(tail -c 3500 "$f" | tr '%' ' ' | tr '\\n' '|')
             echo "::error title=$f::$msg"
           done
 """
@@ -154,7 +154,7 @@ jobs:
         run: |
           for f in out/*.json out/*/job.log out/*/job.log.features; do
             [ -f "$f" ] || continue
-            msg=$(tail -c 3500 "$f" | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
+            msg=$(tail -c 3500 "$f" | tr '%' ' ' | tr '\\n' '|')
             echo "::error title=$f::$msg"
           done
 
