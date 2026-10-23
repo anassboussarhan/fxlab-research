@@ -1,6 +1,7 @@
 """Generate the sweep workflows (run: python ci/make_workflow.py):
   .github/workflows/sweep.yml  : ci/sweep_config.json,  triggers ci/RUN  | ci/sweep_config.json,  -> branch results
-  .github/workflows/sweep2.yml : ci/sweep2_config.json, triggers ci/RUN2 | ci/sweep2_config.json, -> branch results2
+  .github/workflows/sweepN.yml : ci/sweepN_config.json, triggers ci/RUNN | ci/sweepN_config.json, -> branch resultsN
+                                 (N = 2, 3; generated when the config exists)
 Separate concurrency groups, so a follow-up sweep can be queued while another is still running; its collect job
 waits for the runs listed in include_runs to finish, then merges their artifacts."""
 import json
@@ -252,12 +253,15 @@ jobs:
 """
 os.makedirs(os.path.join(HERE, "..", ".github", "workflows"), exist_ok=True)
 open(os.path.join(HERE, "..", ".github", "workflows", "sweep.yml"), "w").write(wf)
-assert json.load(open(os.path.join(HERE, "sweep2_config.json")))["pairs_full"] == PAIRS   # panel restores shared
-wf2 = (wf.replace("name: full-sweep\n", "name: full-sweep-2\n")
-       .replace('paths: ["ci/RUN", "ci/sweep_config.json"]', 'paths: ["ci/RUN2", "ci/sweep2_config.json"]')
-       .replace("  group: sweep\n", "  group: sweep2\n")
-       .replace("FXLAB_SWEEP_CONFIG: sweep_config.json", "FXLAB_SWEEP_CONFIG: sweep2_config.json")
-       .replace("git push -f origin HEAD:results\n", "git push -f origin HEAD:results2\n"))
-assert wf2.count("sweep2_config.json") == 2 and "HEAD:results2" in wf2 and "group: sweep2" in wf2
-open(os.path.join(HERE, "..", ".github", "workflows", "sweep2.yml"), "w").write(wf2)
-print("written", len(wf), len(wf2), "chars")
+for n in (2, 3):                       # follow-up sweeps: own config, trigger file, concurrency group, branch
+    if not os.path.exists(os.path.join(HERE, f"sweep{n}_config.json")):
+        continue
+    assert json.load(open(os.path.join(HERE, f"sweep{n}_config.json")))["pairs_full"] == PAIRS   # shared restores
+    w = (wf.replace("name: full-sweep\n", f"name: full-sweep-{n}\n")
+         .replace('paths: ["ci/RUN", "ci/sweep_config.json"]', f'paths: ["ci/RUN{n}", "ci/sweep{n}_config.json"]')
+         .replace("  group: sweep\n", f"  group: sweep{n}\n")
+         .replace("FXLAB_SWEEP_CONFIG: sweep_config.json", f"FXLAB_SWEEP_CONFIG: sweep{n}_config.json")
+         .replace("git push -f origin HEAD:results\n", f"git push -f origin HEAD:results{n}\n"))
+    assert w.count(f"sweep{n}_config.json") == 2 and f"HEAD:results{n}" in w and f"group: sweep{n}" in w
+    open(os.path.join(HERE, "..", ".github", "workflows", f"sweep{n}.yml"), "w").write(w)
+    print(f"sweep{n}.yml written", len(w), "chars")

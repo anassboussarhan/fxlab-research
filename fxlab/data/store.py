@@ -51,8 +51,10 @@ def available(symbol: str) -> list[int]:
 
 
 def load_m1(symbol: str, start: str | pd.Timestamp | None = None,
-            end: str | pd.Timestamp | None = None, allow_holdout: bool = False) -> pd.DataFrame:
-    """Load validated M1 bid/ask bars. Never returns holdout rows unless unlocked."""
+            end: str | pd.Timestamp | None = None, allow_holdout: bool = False,
+            columns: list[str] | None = None) -> pd.DataFrame:
+    """Load validated M1 bid/ask bars. Never returns holdout rows unless unlocked. `columns` restricts the
+    columns read (no mid columns are added then), e.g. the bid/ask highs and lows for intrabar path replay."""
     years = available(symbol)
     if not years:
         raise FileNotFoundError(f"no M1 data for {symbol} in {M1_DIR}")
@@ -80,12 +82,17 @@ def load_m1(symbol: str, start: str | pd.Timestamp | None = None,
         lf = lf.filter(pl.col("ts") <= e.to_pydatetime())
     if not unlocked:
         lf = lf.filter(pl.col("ts") < hs.to_pydatetime())
+    if columns:
+        lf = lf.select(["ts"] + list(columns))
     df = lf.sort("ts").collect().to_pandas()
     df = df.set_index("ts")
     df.index = pd.DatetimeIndex(df.index).tz_convert("UTC")
     if not unlocked and len(df) and df.index.max() >= hs:
         raise HoldoutViolation("holdout rows leaked through loader")  # defensive
-    return add_mid(df)
+    return df if columns else add_mid(df)
+
+
+M1_PATH_COLUMNS = ["bid_h", "bid_l", "ask_h", "ask_l"]
 
 
 def add_mid(df: pd.DataFrame) -> pd.DataFrame:

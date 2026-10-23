@@ -96,6 +96,8 @@ def plan(a):
                         # ~2-3 years of training data and a few months of test per refit, whatever the timeframe
                         cfg["fixed_params"] = {"D1": {"train": 750, "test": 125}, "H8": {"train": 2000, "test": 400},
                                                "H4": {"train": 4000, "test": 750}}.get(tf, {"train": 4000, "test": 2000})
+                    if a.intrabar == "m1":
+                        cfg["intrabar"] = "m1"
                     if a.joint:
                         cfg["joint"] = {"exec": JOINT_EXEC, "risk": JOINT_RISK, "n_trials": a.joint_trials,
                                         "n_startup": 8}
@@ -190,6 +192,8 @@ def main():
     p.add_argument("--joint", action="store_true",
                    help="joint per-fold TPE over strategy params x entry type (JOINT_EXEC) x exit (JOINT_RISK)")
     p.add_argument("--joint-trials", type=int, default=16, help="new TPE trials per fold in --joint mode")
+    p.add_argument("--intrabar", choices=["stopfirst", "m1"], default="stopfirst",
+                   help="trade engine: same-bar stop/target ordering (m1 = replay the M1 path)")
     p.add_argument("--ml-light", action="store_true", help="model-driven families: 3 candidates, 2000-bar test blocks")
     r = sub.add_parser("run")
     r.add_argument("--name", required=True)

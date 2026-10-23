@@ -89,6 +89,7 @@ def main():
                     help=f"on {sorted(JOINT_TFS)}: also run the JOINT per-fold optimisation of strategy parameters x "
                          "entry type x exit configuration for EVERY family (ignores --only)")
     ap.add_argument("--joint-trials", type=int, default=16)
+    ap.add_argument("--intrabar", choices=["stopfirst", "m1"], default="stopfirst")
     a = ap.parse_args()
     only = [x for x in a.only.split(",") if x.strip()]
     t0 = time.time()
@@ -114,7 +115,7 @@ def main():
                  "--ml-light", "--start", START, "--end", END]
         base = base0 + (["--only"] + only if only else [])
         name = f"cloud_{a.tf}_{a.pair}"
-        extra = ["--financing", "rates"] if (a.tf in ("H4", "D1") and fx_rates) else []
+        extra = (["--financing", "rates"] if (a.tf in ("H4", "D1") and fx_rates) else []) + ["--intrabar", a.intrabar]
         sh(base[:3] + ["--name", name] + base[3:] + extra, log)
         names.append(name)
         if a.joint and a.tf in JOINT_TFS:

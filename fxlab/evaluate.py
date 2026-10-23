@@ -29,9 +29,12 @@ def risk_config(e, override: dict | None = None) -> RiskConfig:
 
 def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None, cost: CostModel = BASE,
              risk_override: dict | None = None, signals: pd.DataFrame | None = None,
-             mode_override: str | None = None, exec_cfg: dict | None = None, financing: str | None = None) -> dict:
+             mode_override: str | None = None, exec_cfg: dict | None = None, financing: str | None = None,
+             m1: pd.DataFrame | None = None) -> dict:
     """Returns {'returns': per-bar net returns, 'trades': trade log or None, 'metrics': dict, 'signals': frame}.
-    financing='rates': overnight financing from point-in-time interest-rate differentials (vector engine)."""
+    financing='rates': overnight financing from point-in-time interest-rate differentials (vector engine).
+    m1: the instrument's M1 bars; when given, the trade engine replays the minute path of any bar whose range
+    contains both the stop and the target (otherwise stop-first)."""
     e = CATALOG[sid]
     pip = instrument(symbol).pip
     sig = signals if signals is not None else run_signals(sid, bars, panel, symbol, params)
@@ -102,7 +105,7 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
         orders["side"] = np.sign(orders["side"])
     def sim(entry="market", k=0.0, ttl=0):
         return simulate_trades(bars, orders, pip, cost, exit_on_flat=state_with_stops, rollovers=roll,
-                               entry=entry, k=k, ttl=ttl)
+                               entry=entry, k=k, ttl=ttl, m1=m1)
     if et == "order":
         res = sim(exec_cfg.get("entry", "market"), exec_cfg.get("k", 0.0), exec_cfg.get("ttl", 0))
         net, trades = res.bars["net"], res.trades

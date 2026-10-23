@@ -428,3 +428,32 @@ def test_every_entry_type_runs_with_every_exit_mode(sid):
             r = evaluate(sid, b, "EURUSD", risk_override=ro, mode_override=mode, exec_cfg=ex)
             assert np.isfinite(r["returns"].to_numpy()).all(), (ex, ro)
             assert (r["returns"] > -0.5).all()
+
+
+def test_m1_replay_resolves_same_bar_stop_and_target():
+    """A bar whose range holds both the stop and the target: stop-first by default; with the M1 path the level
+    touched first wins (target first here), and a same-minute double touch stays stop-first."""
+    from fxlab.execution.simulator import simulate_trades
+    from fxlab.execution.costs import ZERO
+    idx = pd.date_range("2020-01-06", periods=4, freq="h", tz="UTC")
+    o = np.array([1.1000, 1.1000, 1.1000, 1.1000])
+    h = np.array([1.1001, 1.1001, 1.1060, 1.1001])
+    l = np.array([1.0999, 1.0999, 1.0940, 1.0999])
+    bars = pd.DataFrame({"bid_o": o, "bid_h": h, "bid_l": l, "bid_c": o, "ask_o": o, "ask_h": h, "ask_l": l,
+                         "ask_c": o}, index=idx)
+    sig = pd.DataFrame({"side": [1.0, 0, 0, 0], "stop_dist": 0.0040, "tp_dist": 0.0040, "size": 1.0}, index=idx)
+    m1i = pd.date_range(idx[0], idx[-1] + pd.Timedelta(minutes=59), freq="min", tz="UTC")
+    mh = np.full(len(m1i), 1.1001); ml = np.full(len(m1i), 1.0999)
+    j2 = (m1i >= idx[2]) & (m1i < idx[3])
+    q = np.flatnonzero(j2)
+    mh[q[10]] = 1.1060                         # target (1.1040) touched at minute 10 ...
+    ml[q[30]] = 1.0940                         # ... stop (1.0960) only at minute 30
+    m1 = pd.DataFrame({"bid_h": mh, "bid_l": ml, "ask_h": mh, "ask_l": ml}, index=m1i)
+    a = simulate_trades(bars, sig, 0.0001, ZERO, exit_on_flat=False).trades.iloc[0]
+    b = simulate_trades(bars, sig, 0.0001, ZERO, exit_on_flat=False, m1=m1).trades.iloc[0]
+    assert a["reason"] == "stop" and b["reason"] == "target"
+    assert b["exit_px"] == pytest.approx(1.1040, abs=1e-9)
+    ml2 = ml.copy(); ml2[q[10]] = 1.0940       # both levels inside the same minute -> stop-first
+    m1b = m1.assign(bid_l=ml2, ask_l=ml2)
+    c = simulate_trades(bars, sig, 0.0001, ZERO, exit_on_flat=False, m1=m1b).trades.iloc[0]
+    assert c["reason"] == "stop"

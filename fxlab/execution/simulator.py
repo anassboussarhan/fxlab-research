@@ -107,11 +107,15 @@ def vector_backtest(bars: pd.DataFrame, position: pd.Series, pip: float, cost: C
 @njit(cache=True)
 def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_hold, trail_d, size_f,
               latency, slip_frac, slip_pips, pip, spread_mult, comm, swap_pips, exit_on_flat, be_m, part_m, part_fr,
-              etype, ek, ettl, atr_):
+              etype, ek, ettl, atr_, m1o, mbh, mbl, mah, mal, use_m1):
     """etype: 0 market entry at the next open; 1 limit at the decision close (limit_touch); 2 limit k x ATR better
     (limit_pullback); 3 stop k x ATR beyond (stop_breakout). Pending orders live ettl bars (0 = until the signal
     changes); limit fills need a strict trade-through and fill at the better of level and open; stop fills at the
-    worse of level and open plus slippage. Stops/targets are placed relative to the actual fill price."""
+    worse of level and open plus slippage. Stops/targets are placed relative to the actual fill price.
+    Intrabar order: when a bar's range contains BOTH the stop and the target, the default is stop-first
+    (conservative). With use_m1, the bar's M1 sub-bars (m1o[j]..m1o[j+1]) are replayed to find which level was
+    touched first (stop-first only if both are inside the same minute). Not used on a bar where a pending order
+    filled mid-bar, since the path before the fill must not count."""
     n = len(bo)
     max_tr = n
     t_entry = np.full(max_tr, -1); t_exit = np.full(max_tr, -1); t_side = np.zeros(max_tr)
@@ -243,6 +247,13 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                     px = bo[j]; reason = 2; done = True
                 elif lo <= stop:
                     px = stop - slip; reason = 1 if np.isnan(trail) else 5; done = True
+                    if use_m1 and not np.isnan(tgt) and hi >= tgt and (ebar != j or etype == 0):
+                        for q in range(m1o[j], m1o[j + 1]):          # replay the minute path of this bar
+                            if mbl[q] <= stop:
+                                break
+                            if mbh[q] >= tgt:
+                                px = tgt; reason = 2
+                                break
                 elif not np.isnan(tgt) and hi >= tgt:
                     px = tgt; reason = 2; done = True
                 worst = min(worst, (lo - epx) / epx); best = max(best, (hi - epx) / epx)
@@ -254,6 +265,13 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                     px = ao[j]; reason = 2; done = True
                 elif hi >= stop:
                     px = stop + slip; reason = 1 if np.isnan(trail) else 5; done = True
+                    if use_m1 and not np.isnan(tgt) and lo <= tgt and (ebar != j or etype == 0):
+                        for q in range(m1o[j], m1o[j + 1]):
+                            if mah[q] >= stop:
+                                break
+                            if mal[q] <= tgt:
+                                px = tgt; reason = 2
+                                break
                 elif not np.isnan(tgt) and lo <= tgt:
                     px = tgt; reason = 2; done = True
                 worst = min(worst, (epx - hi) / epx); best = max(best, (epx - lo) / epx)
@@ -322,6 +340,20 @@ class TradeResult:
 ETYPES = {"market": 0, "limit_touch": 1, "limit_pullback": 2, "stop_breakout": 3}
 
 
+def _m1_path(bars: pd.DataFrame, m1: pd.DataFrame | None):
+    """Offsets of each bar's M1 sub-bars (rows m1o[j]..m1o[j+1]-1 have timestamps in [t_j, t_j+1)) and the M1
+    bid/ask highs and lows, for intrabar stop/target ordering. m1=None -> stop-first rule (use_m1=False)."""
+    if m1 is None or len(bars) < 2:
+        z = np.zeros(1)
+        return np.zeros(len(bars) + 1, np.int64), z, z, z, z, False
+    idx = m1.index
+    off = idx.searchsorted(bars.index).astype(np.int64)
+    last_end = bars.index[-1] + (bars.index[-1] - bars.index[-2])
+    off = np.r_[off, idx.searchsorted(last_end)].astype(np.int64)
+    f = lambda c: m1[c].to_numpy(np.float64)                                    # noqa: E731
+    return off, f("bid_h"), f("bid_l"), f("ask_h"), f("ask_l"), True
+
+
 def _atr14(bars: pd.DataFrame) -> np.ndarray:
     from fxlab.features._util import atr
     if "high" not in bars:
@@ -333,7 +365,7 @@ def _atr14(bars: pd.DataFrame) -> np.ndarray:
 
 def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost: CostModel = BASE,
                     exit_on_flat: bool = True, rollovers: np.ndarray | None = None, entry: str = "market",
-                    k: float = 0.0, ttl: int = 0) -> TradeResult:
+                    k: float = 0.0, ttl: int = 0, m1: pd.DataFrame | None = None) -> TradeResult:
     """signals (indexed like bars, decided at bar close) columns:
        side (-1/0/1), stop_dist (price, required), tp_dist (price or NaN), max_hold (bars or NaN),
        trail_dist (price or NaN), size (fraction of equity notional, e.g. from risk sizing)."""
@@ -354,7 +386,8 @@ def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost:
                     int(cost.latency_bars), cost.slip_spread_frac, cost.slip_fixed_pips, pip, cost.spread_mult,
                     cost.commission_bps_per_side * 1e-4, cost.swap_pips_per_night, exit_on_flat, be, pm, pf,
                     int(ETYPES[entry]), float(k), int(ttl),
-                    _atr14(bars) if entry in ("limit_pullback", "stop_breakout") else np.zeros(len(bars)))
+                    _atr14(bars) if entry in ("limit_pullback", "stop_breakout") else np.zeros(len(bars)),
+                    *_m1_path(bars, m1))
     bar_ret, te, tx, ts, ep, xp, rs, sz, fin, mae, mfe, spr = out
     idx = bars.index
     gross = ts * (xp - ep) / ep

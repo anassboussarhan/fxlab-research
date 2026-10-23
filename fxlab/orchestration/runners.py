@@ -76,6 +76,22 @@ def load_panel_closes(symbols, tf, index, start=None, end=None) -> pd.DataFrame:
     return P.reindex(P.index.union(index)).ffill().reindex(index)
 
 
+_M1_PATH = {}
+
+
+def m1_path_for(cfg: dict):
+    """cfg['intrabar'] == 'm1': the instrument's M1 bid/ask highs/lows for intrabar stop/target ordering in the
+    trade engine (cached per process; one instrument per cloud job). Otherwise None (stop-first rule)."""
+    if cfg.get("intrabar") != "m1":
+        return None
+    from fxlab.data.store import load_m1, M1_PATH_COLUMNS
+    key = (cfg["symbol"], str(cfg.get("start")), str(cfg.get("end")))
+    if key not in _M1_PATH:
+        _M1_PATH.clear()
+        _M1_PATH[key] = load_m1(cfg["symbol"], cfg.get("start"), cfg.get("end"), columns=M1_PATH_COLUMNS)
+    return _M1_PATH[key]
+
+
 def sample_params(space: dict, n: int, seed: int) -> list[dict]:
     rng = np.random.default_rng(seed)
     keys = [k for k, v in space.items() if isinstance(v, (list, tuple)) and len(v) > 0]
@@ -126,9 +142,11 @@ def strategy_wf(cfg: dict, outdir: Path) -> dict:
         return strategy_wf_joint(cfg, outdir)
     from fxlab.evaluate import evaluate as _evaluate, run_signals
 
+    m1p = m1_path_for(cfg)
+
     def evaluate(*a, exec_cfg=None, **k):  # default: the experiment's configured execution style
         return _evaluate(*a, exec_cfg=exec_cfg if exec_cfg is not None else cfg.get("exec"),
-                         financing=cfg.get("financing"), **k)
+                         financing=cfg.get("financing"), m1=m1p, **k)
 
     def strip(p):  # strategy parameters only (candidate keys starting with __ are execution / risk settings)
         return {k: v for k, v in p.items() if not k.startswith("__")}
@@ -359,11 +377,13 @@ def strategy_wf_joint(cfg: dict, outdir: Path) -> dict:
             sig_lru.popitem(last=False)
         return s
 
+    m1p = m1_path_for(cfg)
+
     def simulate(idx, cost):
         p, ex, ro = decode(idx)
         mode = "trade" if (ro is not None and base_mode == "state") else cfg.get("mode_override")
         return _evaluate(sid, bars, sym, panel, p, cost, risk_override=ro, signals=signals_for(p),
-                         mode_override=mode, exec_cfg=ex, financing=cfg.get("financing"))
+                         mode_override=mode, exec_cfg=ex, financing=cfg.get("financing"), m1=m1p)
 
     sims, by_key, failed, errors = [], {}, set(), []
 
