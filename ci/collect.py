@@ -69,6 +69,24 @@ def main():
         shutil.copy(f, os.path.join(out, "feature_scan", os.path.basename(f)))
     for f in glob.glob(os.path.join(fs, "*", "summary.csv")):
         shutil.copy(f, os.path.join(out, "feature_scan", os.path.basename(os.path.dirname(f)) + "_summary.csv"))
+    # data coverage from the per-instrument audits and short job-log tails (for diagnosis; no price data)
+    rows = []
+    for f in sorted(glob.glob(os.path.join(ROOT, "audits", "audit_*.json"))):
+        a = json.load(open(f))
+        for x in a.get("audit", []):
+            rows.append({"pair": a["pair"], **{k: v for k, v in x.items() if not isinstance(v, (dict, list))}})
+        for y, v in a.get("years", {}).items():
+            if "error" in v:
+                rows.append({"pair": a["pair"], "year": y, "download_error": v["error"]})
+    if rows:
+        pd.DataFrame(rows).to_csv(os.path.join(out, "data_coverage.csv"), index=False)
+    os.makedirs(os.path.join(out, "job_logs"), exist_ok=True)
+    for d in sorted(glob.glob(os.path.join(ROOT, "in", "res-*"))):
+        for name in ("job.log", "job.log.features"):
+            p = os.path.join(d, name)
+            if os.path.exists(p):
+                tail = open(p, errors="replace").read()[-4000:]
+                open(os.path.join(out, "job_logs", f"{os.path.basename(d)}.{name}.tail.txt"), "w").write(tail)
     con = duckdb.connect(db, read_only=True)
     cov = con.execute("SELECT kind, tf, symbol, status, count(*) AS n FROM experiments GROUP BY ALL ORDER BY ALL").df()
     con.close()

@@ -49,6 +49,14 @@ SWEEP_BODY = """    steps:
           path: out/res-${{ matrix.pair }}-%TAG%/
           retention-days: 14
           if-no-files-found: ignore
+      - name: Report failure details as annotations
+        if: failure()
+        run: |
+          for f in out/*.json out/*/job.log out/*/job.log.features; do
+            [ -f "$f" ] || continue
+            msg=$(tail -c 3500 "$f" | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
+            echo "::error title=$f::$msg"
+          done
 """
 
 
@@ -140,6 +148,14 @@ jobs:
           name: audit-${{{{ matrix.pair }}}}
           path: out/
           retention-days: 30
+      - name: Report failure details as annotations
+        if: failure()
+        run: |
+          for f in out/*.json out/*/job.log out/*/job.log.features; do
+            [ -f "$f" ] || continue
+            msg=$(tail -c 3500 "$f" | sed 's/%/%25/g' | sed ':a;N;$!ba;s/\n/%0A/g')
+            echo "::error title=$f::$msg"
+          done
 
   panel:
     needs: [plan, data]
@@ -177,6 +193,11 @@ jobs:
         with:
           pattern: res-*
           path: in/
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: audit-*
+          path: audits/
+          merge-multiple: true
       - run: python ci/collect.py
       - name: Publish summaries to the results branch
         run: |
