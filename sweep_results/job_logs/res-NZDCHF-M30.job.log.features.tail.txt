@@ -1,0 +1,45 @@
+/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6324.204996052639 is not greater than 6324.205095748405. Delta is -9.969576603907626e-05
+Model is not converging.  Current: 6303.2139022728015 is not greater than 6303.213939272664. Delta is -3.6999862459197175e-05
+Model is not converging.  Current: 6319.43125115357 is not greater than 6319.431285421813. Delta is -3.426824332564138e-05
+Model is not converging.  Current: 6294.670398292197 is not greater than 6294.670460593497. Delta is -6.230130020412616e-05
+Model is not converging.  Current: 6159.1651544291235 is not greater than 6159.1651971727115. Delta is -4.2743587982840836e-05
+Model is not converging.  Current: 6154.70367409421 is not greater than 6154.703687621469. Delta is -1.3527258488466032e-05
+Model is not converging.  Current: 6168.465327292474 is not greater than 6168.465343915445. Delta is -1.6622971088509075e-05
+Model is not converging.  Current: 6120.069091612304 is not greater than 6120.069118729355. Delta is -2.7117051104141865e-05
+Model is not converging.  Current: 6084.749959708702 is not greater than 6084.74997385762. Delta is -1.4148918126011267e-05
+Model is not converging.  Current: 6110.142349836106 is not greater than 6110.142350015535. Delta is -1.7942875274457037e-07
+Model is not converging.  Current: 6217.539218748041 is not greater than 6217.539259437031. Delta is -4.0688990338821895e-05
+Model is not converging.  Current: 6126.095741416205 is not greater than 6126.095758414137. Delta is -1.6997932107187808e-05
+Model is not converging.  Current: 6115.631948949404 is not greater than 6115.63196187686. Delta is -1.2927455827593803e-05
+Model is not converging.  Current: 6121.420656180283 is not greater than 6121.420701581551. Delta is -4.54012679256266e-05
+Model is not converging.  Current: 6153.613569475623 is not greater than 6153.613646693231. Delta is -7.721760812273715e-05
+  NZDCHF M30: built 267 features in 210s (0 errors, 2 skipped)
+NZDCHF M30: 846 columns, median OOS net Sharpe -0.13, positive 0.02, best 0.63 | placebo median 0.00 best 0.00 | 335.9s

@@ -1,0 +1,540 @@
+{
+ "streams_total": 200948,
+ "by_source": {
+  "feature_scan": 173204,
+  "strategy": 27676,
+  "ml_allfeatures": 68
+ },
+ "configurations_tried": 10587196,
+ "median_oos_sharpe": -0.31159507327251496,
+ "share_positive": 0.14868025558851047,
+ "bh_significant_10pct": 0,
+ "holm_significant_5pct": 0,
+ "survivors_of_predeclared_bar": 0,
+ "best_stream": {
+  "source": "feature_scan",
+  "campaign": "feature_scan",
+  "name": "F.FR.CORR_DIM:v|d20",
+  "symbol": "XAUUSD",
+  "tf": "D1",
+  "exec": "market",
+  "financing": "flat",
+  "sharpe": 1.341201464949021,
+  "p": 0.0014715148366226782,
+  "n_days": 1283,
+  "cost_x2_sharpe": NaN,
+  "n_candidates": 60,
+  "p_bh": 1.0,
+  "p_holm": 1.0
+ },
+ "best_stream_deflated_sharpe": {
+  "feature_scan": {
+   "name": "F.FR.CORR_DIM:v|d20",
+   "symbol": "XAUUSD",
+   "tf": "D1",
+   "sharpe": 1.341201464949021,
+   "dsr": 1.304127316276795e-76
+  },
+  "strategy": {
+   "name": "S.RG.CHANGE_POINT",
+   "symbol": "XAUUSD",
+   "tf": "H8",
+   "sharpe": 1.2768138062246146,
+   "dsr": 2.422551820597975e-75
+  }
+ },
+ "top10": [
+  {
+   "source": "feature_scan",
+   "name": "F.FR.CORR_DIM:v|d20",
+   "symbol": "XAUUSD",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.3412,
+   "p": 0.0015,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.RG.CHANGE_POINT",
+   "symbol": "XAUUSD",
+   "tf": "H8",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.2768,
+   "p": 0.0024,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.TR.VIDYA:v|d20",
+   "symbol": "GBPJPY",
+   "tf": "H8",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.1155,
+   "p": 0.0002,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.ES.LUNAR_PHASE:cos|d20",
+   "symbol": "USDNOK",
+   "tf": "H2",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0923,
+   "p": 0.0004,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.FR.RQA:lam",
+   "symbol": "XAUUSD",
+   "tf": "H2",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0849,
+   "p": 0.003,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.FR.SEVCIK:v",
+   "symbol": "USDJPY",
+   "tf": "H8",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0681,
+   "p": 0.0003,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.SP.WAVELET",
+   "symbol": "AUDCAD",
+   "tf": "H1",
+   "exec": "grid",
+   "financing": "flat",
+   "sharpe": 1.0676,
+   "p": 0.0093,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.TS.HOLIDAYS:near",
+   "symbol": "EURNZD",
+   "tf": "H2",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.065,
+   "p": 0.0007,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.LF.AUTOENCODER:z2|d20",
+   "symbol": "USDSEK",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0641,
+   "p": 0.0018,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.VO.BB_WIDTH:pctb",
+   "symbol": "CADCHF",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0622,
+   "p": 0.0049,
+   "p_bh": 1.0
+  }
+ ]
+}
+        source            campaign     tf   exec financing  streams  median_sharpe  share_positive  best_sharpe  bh10  holm05
+      strategy     cloud_D1_GBPJPY     D1 market     rates       67         -0.084           0.403        0.614     0       0
+      strategy     cloud_D1_EURUSD     D1 market     rates       67         -0.084           0.254        0.340     0       0
+      strategy     cloud_H8_XAUUSD     H8 market      flat       67         -0.093           0.343        1.277     0       0
+      strategy     cloud_D1_XAUUSD     D1 market      flat       67         -0.115           0.239        0.362     0       0
+      strategy     cloud_D1_CADJPY     D1 market     rates       67         -0.162           0.224        0.453     0       0
+      strategy     cloud_D1_GBPCHF     D1 market     rates       67         -0.163           0.269        1.035     0       0
+      strategy     cloud_D1_GBPUSD     D1 market     rates       67         -0.163           0.313        0.538     0       0
+      strategy     cloud_H4_XAUUSD     H4 market      flat       71         -0.166           0.310        0.663     0       0
+      strategy     cloud_D1_USDSEK     D1 market      flat       67         -0.177           0.090        0.177     0       0
+      strategy     cloud_D1_CHFJPY     D1 market     rates       67         -0.182           0.209        0.853     0       0
+      strategy     cloud_D1_AUDJPY     D1 market     rates       67         -0.182           0.209        0.558     0       0
+      strategy     cloud_H8_AUDUSD     H8 market      flat       67         -0.183           0.209        0.577     0       0
+      strategy     cloud_D1_NZDCAD     D1 market     rates       67         -0.185           0.269        0.648     0       0
+      strategy     cloud_H8_EURUSD     H8 market      flat       67         -0.190           0.209        0.419     0       0
+      strategy     cloud_D1_AUDUSD     D1 market     rates       67         -0.191           0.149        0.355     0       0
+      strategy     cloud_D1_GBPCAD     D1 market     rates       67         -0.192           0.358        0.865     0       0
+      strategy     cloud_D1_USDCAD     D1 market     rates       67         -0.194           0.179        0.482     0       0
+      strategy     cloud_H4_AUDJPY     H4 market     rates       71         -0.196           0.239        0.581     0       0
+      strategy     cloud_D1_EURCAD     D1 market     rates       67         -0.203           0.209        0.410     0       0
+  feature_scan        feature_scan     D1 market      flat    29036         -0.205           0.236        1.341     0       0
+      strategy     cloud_H8_EURJPY     H8 market      flat       67         -0.205           0.164        0.481     0       0
+      strategy     cloud_D1_EURNOK     D1 market      flat       67         -0.209           0.179        0.483     0       0
+      strategy     cloud_H8_EURNOK     H8 market      flat       67         -0.211           0.224        0.455     0       0
+      strategy     cloud_H8_GBPJPY     H8 market      flat       67         -0.214           0.343        0.786     0       0
+      strategy     cloud_D1_USDJPY     D1 market     rates       67         -0.219           0.299        0.417     0       0
+      strategy     cloud_D1_EURJPY     D1 market     rates       67         -0.221           0.254        0.453     0       0
+      strategy     cloud_D1_GBPAUD     D1 market     rates       67         -0.222           0.254        1.005     0       0
+      strategy     cloud_D1_EURSEK     D1 market      flat       67         -0.231           0.194        0.477     0       0
+      strategy     cloud_H4_EURJPY     H4 market     rates       71         -0.231           0.197        0.315     0       0
+      strategy     cloud_H4_EURUSD     H4 market     rates       71         -0.233           0.155        0.257     0       0
+      strategy     cloud_H8_GBPAUD     H8 market      flat       67         -0.234           0.328        0.986     0       0
+  feature_scan        feature_scan     H8 market      flat    29036         -0.235           0.224        1.116     0       0
+      strategy     cloud_D1_EURCHF     D1 market     rates       67         -0.235           0.239        0.480     0       0
+      strategy     cloud_D1_GBPNZD     D1 market     rates       67         -0.235           0.269        0.639     0       0
+      strategy     cloud_H8_EURGBP     H8 market      flat       67         -0.241           0.179        0.286     0       0
+  feature_scan        feature_scan    M30 market      flat    28762         -0.242           0.065        1.011     0       0
+      strategy     cloud_H8_EURSEK     H8 market      flat       67         -0.243           0.254        0.635     0       0
+      strategy     cloud_H8_GBPUSD     H8 market      flat       67         -0.251           0.239        0.687     0       0
+      strategy     cloud_H8_CADJPY     H8 market      flat       67         -0.252           0.134        0.210     0       0
+      strategy     cloud_D1_AUDCHF     D1 market     rates       67         -0.253           0.299        0.891     0       0
+      strategy     cloud_H8_AUDJPY     H8 market      flat       67         -0.254           0.209        0.695     0       0
+      strategy     cloud_D1_EURGBP     D1 market     rates       67         -0.255           0.299        0.445     0       0
+      strategy     cloud_H8_USDSEK     H8 market      flat       67         -0.256           0.179        0.455     0       0
+      strategy     cloud_D1_EURNZD     D1 market     rates       67         -0.260           0.224        0.547     0       0
+      strategy     cloud_D1_EURAUD     D1 market     rates       67         -0.262           0.224        0.746     0       0
+      strategy     cloud_D1_XAGUSD     D1 market      flat       67         -0.265           0.194        0.751     0       0
+      strategy     cloud_D1_USDNOK     D1 market      flat       67         -0.268           0.104        0.662     0       0
+      strategy     cloud_H8_AUDNZD     H8 market      flat       67         -0.278           0.134        0.268     0       0
+      strategy     cloud_D1_USDCHF     D1 market     rates       67         -0.278           0.313        0.764     0       0
+      strategy     cloud_H8_USDJPY     H8 market      flat       67         -0.281           0.164        0.407     0       0
+      strategy     cloud_H8_EURAUD     H8 market      flat       67         -0.282           0.194        0.701     0       0
+      strategy     cloud_H4_AUDUSD     H4 market     rates       71         -0.283           0.225        0.447     0       0
+      strategy     cloud_H8_USDCHF     H8 market      flat       67         -0.286           0.239        0.501     0       0
+  feature_scan        feature_scan     H4 market      flat    28846         -0.288           0.180        1.044     0       0
+      strategy     cloud_H8_CHFJPY     H8 market      flat       67         -0.293           0.075        0.308     0       0
+      strategy     cloud_H4_EURGBP     H4 market     rates       71         -0.293           0.197        0.248     0       0
+      strategy     cloud_H8_GBPNZD     H8 market      flat       67         -0.299           0.149        0.482     0       0
+      strategy cloud_H1grid_XAUUSD     H1   grid      flat       56         -0.300           0.161        0.533     0       0
+      strategy     cloud_H8_EURNZD     H8 market      flat       67         -0.303           0.164        0.793     0       0
+      strategy     cloud_H4_USDJPY     H4 market     rates       71         -0.304           0.211        0.293     0       0
+      strategy     cloud_H4_CADJPY     H4 market     rates       71         -0.304           0.169        0.373     0       0
+      strategy     cloud_D1_AUDCAD     D1 market     rates       67         -0.304           0.239        0.520     0       0
+      strategy     cloud_H8_NZDJPY     H8 market      flat       67         -0.306           0.224        0.651     0       0
+      strategy     cloud_H4_GBPJPY     H4 market     rates       71         -0.308           0.239        0.631     0       0
+      strategy     cloud_H8_USDCAD     H8 market      flat       67         -0.316           0.179        0.390     0       0
+      strategy     cloud_H8_USDNOK     H8 market      flat       67         -0.319           0.149        0.593     0       0
+      strategy     cloud_H8_NZDUSD     H8 market      flat       67         -0.319           0.179        0.625     0       0
+      strategy     cloud_D1_NZDUSD     D1 market     rates       67         -0.320           0.149        0.472     0       0
+      strategy     cloud_H8_GBPCHF     H8 market      flat       67         -0.324           0.209        0.653     0       0
+      strategy     cloud_H4_GBPAUD     H4 market     rates       71         -0.331           0.282        0.617     0       0
+      strategy     cloud_H4_EURAUD     H4 market     rates       71         -0.333           0.268        0.499     0       0
+      strategy     cloud_H8_EURCHF     H8 market      flat       67         -0.333           0.164        0.283     0       0
+      strategy     cloud_H8_GBPCAD     H8 market      flat       67         -0.334           0.269        0.809     0       0
+  feature_scan        feature_scan     H2 market      flat    28762         -0.341           0.134        1.092     0       0
+      strategy     cloud_H4_USDSEK     H4 market      flat       71         -0.341           0.155        0.546     0       0
+      strategy     cloud_D1_AUDNZD     D1 market     rates       67         -0.342           0.119        0.464     0       0
+      strategy     cloud_H2_EURUSD     H2 market      flat       71         -0.349           0.183        0.322     0       0
+      strategy     cloud_H8_AUDCAD     H8 market      flat       67         -0.353           0.284        0.643     0       0
+  feature_scan        feature_scan     H1 market      flat    28762         -0.354           0.097        0.968     0       0
+      strategy     cloud_H4_NZDJPY     H4 market     rates       71         -0.369           0.239        0.759     0       0
+      strategy     cloud_H4_GBPNZD     H4 market     rates       71         -0.370           0.127        0.537     0       0
+      strategy     cloud_H8_EURCAD     H8 market      flat       67         -0.371           0.209        0.515     0       0
+      strategy     cloud_H4_USDCHF     H4 market     rates       71         -0.372           0.211        0.654     0       0
+      strategy     cloud_D1_NZDJPY     D1 market     rates       67         -0.379           0.149        0.409     0       0
+      strategy     cloud_H4_GBPUSD     H4 market     rates       71         -0.380           0.183        0.399     0       0
+      strategy     cloud_H4_CHFJPY     H4 market     rates       71         -0.380           0.099        0.573     0       0
+      strategy     cloud_H2_XAUUSD     H2 market      flat       71         -0.386           0.254        0.594     0       0
+      strategy     cloud_H2_GBPJPY     H2 market      flat       71         -0.394           0.239        0.576     0       0
+      strategy cloud_H1grid_USDSEK     H1   grid      flat       56         -0.394           0.089        0.464     0       0
+      strategy     cloud_H4_EURCHF     H4 market     rates       71         -0.396           0.155        0.283     0       0
+      strategy     cloud_D1_NZDCHF     D1 market     rates       67         -0.398           0.269        0.779     0       0
+      strategy     cloud_H4_EURNZD     H4 market     rates       71         -0.407           0.169        0.378     0       0
+      strategy     cloud_H2_EURJPY     H2 market      flat       71         -0.408           0.127        0.536     0       0
+      strategy     cloud_H8_NZDCHF     H8 market      flat       67         -0.410           0.224        0.878     0       0
+      strategy     cloud_H2_GBPUSD     H2 market      flat       71         -0.416           0.127        0.640     0       0
+      strategy     cloud_H2_USDCHF     H2 market      flat       71         -0.417           0.155        0.640     0       0
+      strategy     cloud_H2_USDJPY     H2 market      flat       71         -0.419           0.127        0.570     0       0
+      strategy     cloud_H4_NZDUSD     H4 market     rates       71         -0.420           0.141        0.336     0       0
+      strategy cloud_H1grid_EURUSD     H1   grid      flat       56         -0.423           0.089        0.342     0       0
+      strategy     cloud_H4_GBPCAD     H4 market     rates       71         -0.428           0.211        0.520     0       0
+      strategy     cloud_H8_AUDCHF     H8 market      flat       67         -0.429           0.209        0.697     0       0
+      strategy     cloud_H4_USDNOK     H4 market      flat       71         -0.441           0.085        0.078     0       0
+      strategy     cloud_H8_NZDCAD     H8 market      flat       67         -0.442           0.194        0.599     0       0
+      strategy     cloud_H2_AUDUSD     H2 market      flat       71         -0.444           0.141        0.470     0       0
+      strategy     cloud_H4_GBPCHF     H4 market     rates       71         -0.449           0.169        0.577     0       0
+      strategy     cloud_H2_AUDJPY     H2 market      flat       71         -0.451           0.099        0.359     0       0
+      strategy cloud_H1grid_EURJPY     H1   grid      flat       56         -0.452           0.107        0.311     0       0
+      strategy     cloud_H4_EURCAD     H4 market     rates       71         -0.456           0.169        0.516     0       0
+      strategy cloud_H1grid_AUDUSD     H1   grid      flat       56         -0.457           0.107        0.201     0       0
+ml_allfeatures      ml_allfeatures     H1 market      flat       68         -0.457           0.015        0.027     0       0
+      strategy     cloud_H8_XAGUSD     H8 market      flat       67         -0.463           0.104        0.517     0       0
+      strategy     cloud_H4_EURSEK     H4 market      flat       71         -0.467           0.183        0.828     0       0
+      strategy     cloud_H2_GBPCHF     H2 market      flat       71         -0.469           0.099        0.257     0       0
+      strategy     cloud_H2_CADJPY     H2 market      flat       71         -0.475           0.099        0.465     0       0
+      strategy cloud_H1grid_AUDJPY     H1   grid      flat       56         -0.479           0.143        0.444     0       0
+      strategy     cloud_H4_AUDNZD     H4 market     rates       71         -0.486           0.070        0.700     0       0
+      strategy     cloud_H4_AUDCAD     H4 market     rates       71         -0.490           0.183        0.991     0       0
+      strategy cloud_H1grid_GBPAUD     H1   grid      flat       56         -0.492           0.196        0.699     0       0
+      strategy     cloud_H4_USDCAD     H4 market     rates       71         -0.493           0.169        0.526     0       0
+      strategy     cloud_H4_AUDCHF     H4 market     rates       71         -0.497           0.239        0.771     0       0
+      strategy     cloud_H2_USDNOK     H2 market      flat       71         -0.506           0.056        0.491     0       0
+      strategy     cloud_H2_EURAUD     H2 market      flat       71         -0.507           0.127        0.577     0       0
+      strategy cloud_TICK60_EURUSD TICK60 market      flat       81         -0.508           0.099        0.367     0       0
+      strategy     cloud_H2_GBPAUD     H2 market      flat       71         -0.511           0.127        0.607     0       0
+      strategy cloud_H1grid_CHFJPY     H1   grid      flat       56         -0.512           0.054        0.274     0       0
+      strategy cloud_H1grid_GBPCHF     H1   grid      flat       56         -0.513           0.125        0.341     0       0
+      strategy cloud_H1grid_NZDUSD     H1   grid      flat       56         -0.517           0.125        0.438     0       0
+      strategy cloud_VOLA60_EURJPY VOLA60 market      flat       81         -0.521           0.074        0.337     0       0
+      strategy     cloud_D1_CADCHF     D1 market     rates       67         -0.522           0.254        0.666     0       0
+      strategy cloud_VOLA60_EURUSD VOLA60 market      flat       81         -0.522           0.074        0.235     0       0
+      strategy     cloud_H2_USDCAD     H2 market      flat       71         -0.530           0.070        0.157     0       0
+      strategy cloud_H1grid_GBPUSD     H1   grid      flat       56         -0.532           0.107        0.466     0       0
+      strategy cloud_H1grid_EURAUD     H1   grid      flat       56         -0.536           0.125        0.748     0       0
+      strategy cloud_TICK60_EURJPY TICK60 market      flat       81         -0.538           0.074        0.503     0       0
+      strategy cloud_H1grid_GBPJPY     H1   grid      flat       56         -0.550           0.196        0.499     0       0
+      strategy     cloud_H4_EURNOK     H4 market      flat       71         -0.554           0.183        0.316     0       0
+      strategy cloud_H1grid_EURCHF     H1   grid      flat       56         -0.555           0.107        0.466     0       0
+      strategy     cloud_H8_CADCHF     H8 market      flat       67         -0.555           0.149        0.512     0       0
+      strategy     cloud_H2_NZDJPY     H2 market      flat       71         -0.578           0.099        0.354     0       0
+      strategy cloud_H1grid_USDCHF     H1   grid      flat       56         -0.580           0.125        0.405     0       0
+      strategy     cloud_H2_NZDUSD     H2 market      flat       71         -0.583           0.070        0.161     0       0
+      strategy cloud_H1grid_USDJPY     H1   grid      flat       56         -0.585           0.143        0.970     0       0
+      strategy     cloud_H2_EURCHF     H2 market      flat       71         -0.585           0.070        0.375     0       0
+      strategy cloud_VOLA60_GBPJPY VOLA60 market      flat       81         -0.603           0.185        0.505     0       0
+      strategy cloud_H1grid_USDNOK     H1   grid      flat       56         -0.604           0.089        0.273     0       0
+      strategy cloud_TICK60_GBPJPY TICK60 market      flat       81         -0.605           0.235        0.524     0       0
+      strategy cloud_H1grid_CADJPY     H1   grid      flat       56         -0.608           0.143        0.825     0       0
+      strategy cloud_VOLA60_GBPUSD VOLA60 market      flat       81         -0.611           0.062        0.228     0       0
+      strategy cloud_VOLA60_USDCHF VOLA60 market      flat       81         -0.612           0.111        0.518     0       0
+      strategy cloud_TICK60_AUDJPY TICK60 market      flat       81         -0.614           0.123        0.606     0       0
+      strategy     cloud_H1_EURJPY     H1 market      flat       81         -0.616           0.111        0.546     0       0
+      strategy     cloud_H2_EURGBP     H2 market      flat       71         -0.627           0.113        0.208     0       0
+      strategy     cloud_H4_NZDCAD     H4 market     rates       71         -0.628           0.197        0.405     0       0
+      strategy cloud_H1grid_EURGBP     H1   grid      flat       56         -0.633           0.054        0.464     0       0
+      strategy cloud_VOLA60_USDJPY VOLA60 market      flat       81         -0.636           0.123        0.488     0       0
+      strategy cloud_TICK60_USDJPY TICK60 market      flat       81         -0.638           0.148        0.656     0       0
+      strategy cloud_TICK60_GBPAUD TICK60 market      flat       81         -0.645           0.062        0.590     0       0
+      strategy     cloud_H1_EURUSD     H1 market      flat       81         -0.646           0.086        0.598     0       0
+      strategy     cloud_H4_CADCHF     H4 market     rates       71         -0.658           0.197        0.708     0       0
+      strategy cloud_VOLA60_AUDUSD VOLA60 market      flat       81         -0.662           0.074        0.433     0       0
+      strategy cloud_H1grid_GBPNZD     H1   grid      flat       56         -0.664           0.143        0.536     0       0
+      strategy     cloud_H2_USDSEK     H2 market      flat       71         -0.666           0.113        0.442     0       0
+      strategy     cloud_H2_GBPCAD     H2 market      flat       71         -0.667           0.070        0.085     0       0
+      strategy cloud_TICK60_GBPUSD TICK60 market      flat       81         -0.668           0.086        0.212     0       0
+      strategy     cloud_H2_CHFJPY     H2 market      flat       71         -0.669           0.070        0.505     0       0
+      strategy cloud_VOLA60_GBPAUD VOLA60 market      flat       81         -0.670           0.160        0.519     0       0
+      strategy cloud_H1grid_EURSEK     H1   grid      flat       56         -0.674           0.107        0.781     0       0
+      strategy cloud_VOLA60_EURAUD VOLA60 market      flat       81         -0.675           0.136        0.279     0       0
+      strategy     cloud_H2_EURNZD     H2 market      flat       71         -0.678           0.141        0.392     0       0
+      strategy cloud_TICK60_XAUUSD TICK60 market      flat       81         -0.681           0.099        0.634     0       0
+      strategy cloud_H1grid_EURCAD     H1   grid      flat       56         -0.683           0.089        0.363     0       0
+      strategy cloud_TICK60_USDCHF TICK60 market      flat       81         -0.687           0.099        0.459     0       0
+      strategy cloud_VOLA60_CHFJPY VOLA60 market      flat       81         -0.692           0.025        0.214     0       0
+      strategy     cloud_H1_GBPAUD     H1 market      flat       81         -0.696           0.086        0.648     0       0
+      strategy     cloud_H1_USDJPY     H1 market      flat       81         -0.699           0.074        1.050     0       0
+      strategy cloud_H1grid_GBPCAD     H1   grid      flat       56         -0.705           0.089        0.531     0       0
+      strategy     cloud_H4_NZDCHF     H4 market     rates       71         -0.715           0.211        0.698     0       0
+      strategy cloud_H1grid_EURNOK     H1   grid      flat       56         -0.716           0.071        0.378     0       0
+      strategy cloud_VOLA60_AUDJPY VOLA60 market      flat       81         -0.734           0.074        0.424     0       0
+      strategy     cloud_H1_XAUUSD     H1 market      flat       81         -0.735           0.123        0.571     0       0
+      strategy cloud_TICK60_CHFJPY TICK60 market      flat       81         -0.740           0.025        0.047     0       0
+      strategy     cloud_H2_GBPNZD     H2 market      flat       71         -0.741           0.085        0.513     0       0
+      strategy cloud_H1grid_CADCHF     H1   grid      flat       56         -0.741           0.107        0.563     0       0
+      strategy cloud_VOLA60_XAUUSD VOLA60 market      flat       81         -0.747           0.136        0.649     0       0
+      strategy cloud_H1grid_AUDCAD     H1   grid      flat       56         -0.749           0.161        1.068     0       0
+      strategy     cloud_H1_USDCHF     H1 market      flat       81         -0.749           0.136        0.616     0       0
+      strategy     cloud_H2_EURCAD     H2 market      flat       71         -0.758           0.085        0.256     0       0
+      strategy cloud_H1grid_USDCAD     H1   grid      flat       56         -0.759           0.107        0.550     0       0
+      strategy cloud_TICK60_AUDUSD TICK60 market      flat       81         -0.763           0.086        0.361     0       0
+      strategy     cloud_H1_GBPUSD     H1 market      flat       81         -0.764           0.123        0.414     0       0
+      strategy cloud_TICK60_USDCAD TICK60 market      flat       81         -0.765           0.074        0.294     0       0
+      strategy cloud_VOLA60_EURCHF VOLA60 market      flat       81         -0.772           0.074        0.120     0       0
+      strategy cloud_TICK60_GBPCHF TICK60 market      flat       81         -0.772           0.148        0.442     0       0
+      strategy cloud_TICK60_EURAUD TICK60 market      flat       81         -0.782           0.099        0.581     0       0
+      strategy     cloud_H4_XAGUSD     H4 market      flat       71         -0.790           0.099        0.740     0       0
+      strategy     cloud_H2_EURSEK     H2 market      flat       71         -0.790           0.085        0.712     0       0
+      strategy     cloud_H2_AUDCHF     H2 market      flat       71         -0.794           0.183        0.920     0       0
+      strategy     cloud_H1_GBPJPY     H1 market      flat       81         -0.794           0.210        0.470     0       0
+      strategy cloud_H1grid_NZDJPY     H1   grid      flat       56         -0.798           0.071        0.604     0       0
+      strategy     cloud_H1_AUDJPY     H1 market      flat       81         -0.800           0.074        0.223     0       0
+      strategy cloud_TICK60_CADJPY TICK60 market      flat       81         -0.805           0.074        0.541     0       0
+      strategy cloud_TICK60_EURNOK TICK60 market      flat       81         -0.807           0.049        0.398     0       0
+      strategy cloud_TICK60_EURCAD TICK60 market      flat       81         -0.809           0.062        0.261     0       0
+      strategy     cloud_H2_EURNOK     H2 market      flat       71         -0.816           0.070        0.346     0       0
+      strategy     cloud_H2_AUDNZD     H2 market      flat       71         -0.822           0.042        0.342     0       0
+      strategy cloud_TICK60_EURCHF TICK60 market      flat       81         -0.823           0.111        0.355     0       0
+      strategy     cloud_H1_CHFJPY     H1 market      flat       81         -0.825           0.062        0.169     0       0
+      strategy cloud_VOLA60_USDSEK VOLA60 market      flat       81         -0.831           0.074        0.232     0       0
+      strategy cloud_VOLA60_GBPCHF VOLA60 market      flat       81         -0.854           0.099        0.613     0       0
+      strategy cloud_VOLA60_USDCAD VOLA60 market      flat       81         -0.857           0.049        0.304     0       0
+      strategy cloud_TICK60_NZDUSD TICK60 market      flat       81         -0.861           0.049        0.291     0       0
+      strategy cloud_TICK60_USDSEK TICK60 market      flat       81         -0.870           0.086        0.397     0       0
+      strategy    cloud_M30_EURJPY    M30 market      flat       79         -0.871           0.063        0.463     0       0
+      strategy cloud_H1grid_AUDNZD     H1   grid      flat       56         -0.874           0.089        0.202     0       0
+      strategy     cloud_H1_AUDUSD     H1 market      flat       81         -0.890           0.099        0.433     0       0
+      strategy cloud_VOLA60_CADJPY VOLA60 market      flat       81         -0.891           0.086        0.684     0       0
+      strategy cloud_VOLA60_EURGBP VOLA60 market      flat       81         -0.895           0.037        0.126     0       0
+      strategy cloud_VOLA60_EURCAD VOLA60 market      flat       81         -0.905           0.049        0.430     0       0
+      strategy     cloud_H1_EURAUD     H1 market      flat       81         -0.906           0.136        0.295     0       0
+      strategy cloud_VOLA60_NZDUSD VOLA60 market      flat       81         -0.913           0.111        0.346     0       0
+      strategy     cloud_H2_NZDCHF     H2 market      flat       71         -0.926           0.141        0.618     0       0
+      strategy     cloud_H2_CADCHF     H2 market      flat       71         -0.930           0.127        0.476     0       0
+      strategy     cloud_H1_GBPCHF     H1 market      flat       81         -0.931           0.074        0.477     0       0
+      strategy cloud_TICK60_EURGBP TICK60 market      flat       81         -0.939           0.074        0.327     0       0
+      strategy    cloud_M30_EURUSD    M30 market      flat       79         -0.940           0.063        0.242     0       0
+      strategy cloud_TICK60_USDNOK TICK60 market      flat       81         -0.943           0.037        0.546     0       0
+      strategy     cloud_H2_AUDCAD     H2 market      flat       71         -0.947           0.099        0.824     0       0
+      strategy     cloud_H1_EURGBP     H1 market      flat       81         -0.947           0.062        0.306     0       0
+      strategy cloud_TICK60_NZDJPY TICK60 market      flat       81         -0.953           0.037        0.279     0       0
+      strategy     cloud_H1_USDCAD     H1 market      flat       81         -0.958           0.049        0.263     0       0
+      strategy cloud_H1grid_NZDCHF     H1   grid      flat       56         -0.962           0.071        0.769     0       0
+      strategy cloud_H1grid_AUDCHF     H1   grid      flat       56         -0.968           0.179        0.958     0       0
+      strategy     cloud_H1_USDSEK     H1 market      flat       81         -0.969           0.086        0.483     0       0
+      strategy cloud_TICK60_GBPCAD TICK60 market      flat       81         -0.982           0.074        0.435     0       0
+      strategy cloud_VOLA60_EURNOK VOLA60 market      flat       81         -0.989           0.062        0.413     0       0
+      strategy cloud_VOLA60_GBPNZD VOLA60 market      flat       81         -0.999           0.049        0.470     0       0
+      strategy    cloud_M30_USDJPY    M30 market      flat       79         -1.002           0.051        0.782     0       0
+      strategy cloud_H1grid_EURNZD     H1   grid      flat       56         -1.010           0.161        0.325     0       0
+      strategy cloud_VOLA60_EURNZD VOLA60 market      flat       81         -1.040           0.111        0.596     0       0
+      strategy     cloud_H1_NZDUSD     H1 market      flat       81         -1.042           0.074        0.273     0       0
+      strategy cloud_VOLA60_GBPCAD VOLA60 market      flat       81         -1.053           0.049        0.320     0       0
+      strategy cloud_H1grid_NZDCAD     H1   grid      flat       56         -1.054           0.071        0.216     0       0
+      strategy     cloud_H1_EURCAD     H1 market      flat       81         -1.055           0.099        0.271     0       0
+      strategy    cloud_M30_GBPUSD    M30 market      flat       79         -1.072           0.063        0.230     0       0
+      strategy cloud_VOLA60_USDNOK VOLA60 market      flat       81         -1.082           0.025        0.169     0       0
+      strategy cloud_VOLA60_NZDJPY VOLA60 market      flat       81         -1.099           0.049        0.495     0       0
+      strategy     cloud_H2_NZDCAD     H2 market      flat       71         -1.100           0.070        0.480     0       0
+      strategy cloud_H1grid_XAGUSD     H1   grid      flat       56         -1.100           0.071        1.017     0       0
+      strategy     cloud_H1_CADJPY     H1 market      flat       81         -1.107           0.062        0.556     0       0
+      strategy    cloud_M30_XAUUSD    M30 market      flat       79         -1.113           0.076        0.605     0       0
+      strategy    cloud_M30_GBPJPY    M30 market      flat       79         -1.128           0.076        0.328     0       0
+      strategy     cloud_H1_NZDJPY     H1 market      flat       81         -1.129           0.074        0.189     0       0
+      strategy     cloud_H1_GBPCAD     H1 market      flat       81         -1.139           0.074        0.511     0       0
+      strategy cloud_VOLA60_AUDNZD VOLA60 market      flat       81         -1.139           0.025        0.369     0       0
+      strategy    cloud_M15_EURUSD    M15 market      flat       80         -1.143           0.062        0.668     0       0
+      strategy    cloud_M30_AUDJPY    M30 market      flat       79         -1.154           0.025        0.021     0       0
+      strategy     cloud_H1_EURCHF     H1 market      flat       81         -1.155           0.025        0.191     0       0
+      strategy     cloud_H1_USDNOK     H1 market      flat       81         -1.163           0.025        0.229     0       0
+      strategy    cloud_M30_AUDUSD    M30 market      flat       79         -1.165           0.076        0.603     0       0
+      strategy cloud_TICK60_EURSEK TICK60 market      flat       81         -1.172           0.049        0.458     0       0
+      strategy    cloud_M30_EURAUD    M30 market      flat       79         -1.179           0.051        0.616     0       0
+      strategy cloud_TICK60_GBPNZD TICK60 market      flat       81         -1.203           0.111        0.464     0       0
+      strategy cloud_VOLA60_EURSEK VOLA60 market      flat       81         -1.206           0.049        0.656     0       0
+      strategy    cloud_M15_EURJPY    M15 market      flat       80         -1.246           0.075        0.336     0       0
+      strategy     cloud_H2_XAGUSD     H2 market      flat       71         -1.253           0.056        0.687     0       0
+      strategy     cloud_H1_GBPNZD     H1 market      flat       81         -1.261           0.037        0.486     0       0
+      strategy cloud_VOLA60_AUDCAD VOLA60 market      flat       81         -1.265           0.136        0.956     0       0
+      strategy cloud_TICK60_AUDCHF TICK60 market      flat       81         -1.266           0.111        0.321     0       0
+      strategy     cloud_H1_EURNOK     H1 market      flat       81         -1.283           0.037        0.563     0       0
+      strategy cloud_TICK60_EURNZD TICK60 market      flat       81         -1.284           0.111        0.802     0       0
+      strategy    cloud_M30_GBPAUD    M30 market      flat       79         -1.292           0.038        0.776     0       0
+      strategy cloud_VOLA60_AUDCHF VOLA60 market      flat       81         -1.311           0.074        0.298     0       0
+      strategy     cloud_H1_EURNZD     H1 market      flat       81         -1.315           0.049        0.610     0       0
+      strategy    cloud_M30_CHFJPY    M30 market      flat       79         -1.323           0.038        0.163     0       0
+      strategy     cloud_H1_AUDCHF     H1 market      flat       81         -1.329           0.123        0.393     0       0
+      strategy    cloud_M30_NZDUSD    M30 market      flat       79         -1.332           0.038        0.156     0       0
+      strategy    cloud_M30_CADJPY    M30 market      flat       79         -1.342           0.038        0.378     0       0
+      strategy cloud_TICK60_CADCHF TICK60 market      flat       81         -1.358           0.037        0.714     0       0
+      strategy cloud_VOLA60_CADCHF VOLA60 market      flat       81         -1.367           0.062        0.323     0       0
+      strategy    cloud_M30_USDCHF    M30 market      flat       79         -1.375           0.051        0.617     0       0
+      strategy cloud_TICK60_AUDCAD TICK60 market      flat       81         -1.385           0.123        0.747     0       0
+      strategy    cloud_M15_USDJPY    M15 market      flat       80         -1.392           0.025        0.872     0       0
+      strategy     cloud_H1_EURSEK     H1 market      flat       81         -1.406           0.049        0.625     0       0
+      strategy    cloud_M30_GBPCHF    M30 market      flat       79         -1.423           0.038        0.253     0       0
+      strategy cloud_TICK60_NZDCHF TICK60 market      flat       81         -1.427           0.062        0.778     0       0
+      strategy     cloud_H1_AUDNZD     H1 market      flat       81         -1.463           0.012        0.042     0       0
+      strategy    cloud_M30_USDCAD    M30 market      flat       79         -1.467           0.063        0.360     0       0
+      strategy     cloud_H1_AUDCAD     H1 market      flat       81         -1.475           0.148        0.519     0       0
+      strategy cloud_TICK60_AUDNZD TICK60 market      flat       81         -1.498           0.012        0.135     0       0
+      strategy    cloud_M30_EURCAD    M30 market      flat       79         -1.504           0.063        0.195     0       0
+      strategy cloud_VOLA60_NZDCHF VOLA60 market      flat       81         -1.518           0.099        0.654     0       0
+      strategy    cloud_M15_XAUUSD    M15 market      flat       80         -1.528           0.062        0.673     0       0
+      strategy     cloud_H1_NZDCAD     H1 market      flat       81         -1.529           0.074        0.562     0       0
+      strategy    cloud_M30_EURGBP    M30 market      flat       79         -1.530           0.013        0.044     0       0
+      strategy    cloud_M15_GBPJPY    M15 market      flat       80         -1.531           0.075        0.329     0       0
+      strategy cloud_TICK60_NZDCAD TICK60 market      flat       81         -1.563           0.062        0.468     0       0
+      strategy    cloud_M15_GBPUSD    M15 market      flat       80         -1.581           0.050        0.272     0       0
+      strategy    cloud_M15_AUDJPY    M15 market      flat       80         -1.625           0.012        0.019     0       0
+      strategy    cloud_M30_EURCHF    M30 market      flat       79         -1.645           0.000        0.000     0       0
+      strategy cloud_VOLA60_NZDCAD VOLA60 market      flat       81         -1.657           0.086        0.859     0       0
+      strategy     cloud_H1_CADCHF     H1 market      flat       81         -1.664           0.062        0.623     0       0
+      strategy     cloud_H1_NZDCHF     H1 market      flat       81         -1.672           0.037        0.559     0       0
+      strategy    cloud_M15_EURAUD    M15 market      flat       80         -1.687           0.050        0.505     0       0
+      strategy    cloud_M30_NZDJPY    M30 market      flat       79         -1.691           0.013        0.016     0       0
+      strategy    cloud_M15_AUDUSD    M15 market      flat       80         -1.757           0.025        0.423     0       0
+      strategy    cloud_M30_AUDCHF    M30 market      flat       79         -1.820           0.051        0.452     0       0
+      strategy    cloud_M30_GBPCAD    M30 market      flat       79         -1.821           0.076        0.502     0       0
+      strategy    cloud_M30_EURNZD    M30 market      flat       79         -1.831           0.038        0.172     0       0
+      strategy    cloud_M30_USDSEK    M30 market      flat       79         -1.874           0.051        0.317     0       0
+      strategy cloud_TICK60_XAGUSD TICK60 market      flat       81         -1.910           0.037        0.880     0       0
+      strategy    cloud_M15_GBPAUD    M15 market      flat       80         -1.920           0.025        0.271     0       0
+      strategy    cloud_M15_USDCAD    M15 market      flat       80         -1.934           0.025        0.209     0       0
+      strategy    cloud_M15_CADJPY    M15 market      flat       80         -1.983           0.025        0.394     0       0
+      strategy    cloud_M30_GBPNZD    M30 market      flat       79         -1.992           0.038        0.512     0       0
+      strategy    cloud_M30_USDNOK    M30 market      flat       79         -2.019           0.038        0.278     0       0
+      strategy    cloud_M15_USDCHF    M15 market      flat       80         -2.035           0.038        0.618     0       0
+      strategy cloud_VOLA60_XAGUSD VOLA60 market      flat       81         -2.085           0.074        0.662     0       0
+      strategy    cloud_M15_CHFJPY    M15 market      flat       80         -2.102           0.038        0.545     0       0
+      strategy     cloud_H1_XAGUSD     H1 market      flat       81         -2.135           0.062        0.628     0       0
+      strategy    cloud_M15_NZDUSD    M15 market      flat       80         -2.221           0.012        0.090     0       0
+      strategy    cloud_M15_EURGBP    M15 market      flat       80         -2.277           0.025        0.119     0       0
+      strategy    cloud_M30_AUDCAD    M30 market      flat       79         -2.334           0.025        0.450     0       0
+      strategy    cloud_M15_NZDJPY    M15 market      flat       80         -2.382           0.025        0.288     0       0
+      strategy    cloud_M30_AUDNZD    M30 market      flat       79         -2.388           0.013        0.320     0       0
+      strategy    cloud_M30_NZDCHF    M30 market      flat       79         -2.422           0.025        0.418     0       0
+      strategy    cloud_M30_CADCHF    M30 market      flat       79         -2.475           0.038        0.250     0       0
+      strategy    cloud_M15_EURCAD    M15 market      flat       80         -2.502           0.038        0.152     0       0
+      strategy    cloud_M15_GBPCHF    M15 market      flat       80         -2.565           0.025        0.195     0       0
+      strategy    cloud_M15_AUDCHF    M15 market      flat       80         -2.660           0.025        0.351     0       0
+      strategy    cloud_M15_EURCHF    M15 market      flat       80         -2.765           0.012        0.062     0       0
+      strategy    cloud_M30_EURSEK    M30 market      flat       79         -2.783           0.051        0.677     0       0
+      strategy    cloud_M15_EURNZD    M15 market      flat       80         -2.828           0.025        0.472     0       0
+      strategy    cloud_M30_NZDCAD    M30 market      flat       79         -2.840           0.025        0.205     0       0
+      strategy    cloud_M15_GBPCAD    M15 market      flat       80         -2.857           0.062        0.562     0       0
+      strategy    cloud_M15_USDSEK    M15 market      flat       80         -2.865           0.025        0.312     0       0
+      strategy     cloud_M5_EURUSD     M5 market      flat       80         -2.899           0.038        0.218     0       0
+      strategy    cloud_M30_EURNOK    M30 market      flat       79         -2.922           0.013        0.222     0       0
+      strategy     cloud_M5_EURJPY     M5 market      flat       80         -2.924           0.038        0.101     0       0
+      strategy     cloud_M5_USDJPY     M5 market      flat       80         -3.134           0.038        0.882     0       0
+      strategy    cloud_M15_GBPNZD    M15 market      flat       80         -3.213           0.038        0.480     0       0
+      strategy    cloud_M15_USDNOK    M15 market      flat       80         -3.285           0.038        0.228     0       0
+      strategy    cloud_M15_NZDCHF    M15 market      flat       80         -3.515           0.000        0.000     0       0
+      strategy    cloud_M30_XAGUSD    M30 market      flat       79         -3.586           0.013        0.627     0       0
+      strategy    cloud_M15_AUDCAD    M15 market      flat       80         -3.638           0.025        0.139     0       0
+      strategy     cloud_M5_AUDJPY     M5 market      flat       80         -3.671           0.000        0.000     0       0
+      strategy     cloud_M5_GBPUSD     M5 market      flat       80         -3.698           0.038        0.223     0       0
+      strategy    cloud_M15_CADCHF    M15 market      flat       80         -3.710           0.025        0.252     0       0
+      strategy     cloud_M5_GBPJPY     M5 market      flat       80         -3.753           0.050        0.323     0       0
+      strategy     cloud_M5_XAUUSD     M5 market      flat       80         -3.767           0.025        0.449     0       0
+      strategy    cloud_M15_AUDNZD    M15 market      flat       80         -3.787           0.000        0.000     0       0
+      strategy     cloud_M5_AUDUSD     M5 market      flat       80         -4.122           0.012        0.318     0       0
+      strategy     cloud_M5_EURAUD     M5 market      flat       80         -4.155           0.000        0.000     0       0
+      strategy    cloud_M15_NZDCAD    M15 market      flat       80         -4.269           0.012        0.049     0       0
+      strategy    cloud_M15_EURNOK    M15 market      flat       80         -4.326           0.000        0.000     0       0
+      strategy     cloud_M5_USDCHF     M5 market      flat       80         -4.471           0.025        0.617     0       0
+      strategy    cloud_M15_EURSEK    M15 market      flat       80         -4.524           0.025        0.044     0       0
+      strategy     cloud_M5_GBPAUD     M5 market      flat       80         -4.692           0.025        0.282     0       0
+      strategy     cloud_M5_CADJPY     M5 market      flat       80         -4.707           0.012        0.073     0       0
+      strategy     cloud_M5_CHFJPY     M5 market      flat       80         -4.736           0.000        0.000     0       0
+      strategy     cloud_M5_EURCAD     M5 market      flat       80         -4.809           0.025        0.123     0       0
+      strategy     cloud_M5_EURGBP     M5 market      flat       80         -4.814           0.000        0.000     0       0
+      strategy     cloud_M5_USDCAD     M5 market      flat       80         -4.870           0.012        0.011     0       0
+      strategy     cloud_M5_NZDUSD     M5 market      flat       80         -5.036           0.000        0.000     0       0
+      strategy     cloud_M5_GBPCHF     M5 market      flat       80         -5.353           0.012        0.197     0       0
+      strategy     cloud_M5_EURCHF     M5 market      flat       80         -5.450           0.000        0.000     0       0
+      strategy     cloud_M5_USDSEK     M5 market      flat       80         -5.861           0.000        0.000     0       0
+      strategy     cloud_M5_NZDJPY     M5 market      flat       80         -5.880           0.012        0.028     0       0
+      strategy     cloud_M5_EURNZD     M5 market      flat       80         -5.959           0.000        0.000     0       0
+      strategy     cloud_M5_USDNOK     M5 market      flat       80         -6.024           0.000        0.000     0       0
+      strategy     cloud_M5_GBPCAD     M5 market      flat       80         -6.102           0.025        0.620     0       0
+      strategy     cloud_M5_GBPNZD     M5 market      flat       80         -6.555           0.025        0.475     0       0
+      strategy    cloud_M15_XAGUSD    M15 market      flat       80         -6.564           0.012        0.627     0       0
+      strategy     cloud_M5_AUDCHF     M5 market      flat       80         -6.644           0.012        0.191     0       0
+      strategy     cloud_M5_AUDCAD     M5 market      flat       80         -7.087           0.012        0.163     0       0
+      strategy     cloud_M5_CADCHF     M5 market      flat       80         -7.618           0.025        0.252     0       0
+      strategy     cloud_M5_AUDNZD     M5 market      flat       80         -7.793           0.000        0.000     0       0
+      strategy     cloud_M5_EURNOK     M5 market      flat       80         -7.854           0.012        0.176     0       0
+      strategy     cloud_M5_NZDCHF     M5 market      flat       80         -7.868           0.000        0.000     0       0
+      strategy     cloud_M5_EURSEK     M5 market      flat       80         -8.294           0.000        0.000     0       0
+      strategy     cloud_M5_NZDCAD     M5 market      flat       80         -8.536           0.012        0.060     0       0
+      strategy     cloud_M5_XAGUSD     M5 market      flat       80        -13.565           0.012        0.627     0       0

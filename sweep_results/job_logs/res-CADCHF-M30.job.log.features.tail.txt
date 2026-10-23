@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6199.936588160324 is not greater than 6199.936611789587. Delta is -2.3629262614122126e-05
+Model is not converging.  Current: 6445.593563540473 is not greater than 6445.593564725213. Delta is -1.1847396308439784e-06
+Model is not converging.  Current: 6425.130219123603 is not greater than 6425.130242696475. Delta is -2.35728721236228e-05
+Model is not converging.  Current: 6361.308698120125 is not greater than 6361.308727656833. Delta is -2.9536708098021336e-05
+Model is not converging.  Current: 6172.925347427459 is not greater than 6172.925403422912. Delta is -5.599545238510473e-05
+Model is not converging.  Current: 6218.006161689917 is not greater than 6218.006258300209. Delta is -9.661029253038578e-05
+Model is not converging.  Current: 6163.85163313414 is not greater than 6163.851707187125. Delta is -7.405298492813017e-05
+Model is not converging.  Current: 6175.222091693619 is not greater than 6175.222142018438. Delta is -5.032481840316905e-05
+Model is not converging.  Current: 6172.939274929943 is not greater than 6172.9393514608. Delta is -7.653085685888072e-05
+Model is not converging.  Current: 6178.133975341227 is not greater than 6178.1340204418775. Delta is -4.510065082286019e-05
+  CADCHF M30: built 267 features in 425s (0 errors, 2 skipped)
+CADCHF M30: 846 columns, median OOS net Sharpe -0.25, positive 0.03, best 0.33 | placebo median 0.00 best 0.05 | 631.1s

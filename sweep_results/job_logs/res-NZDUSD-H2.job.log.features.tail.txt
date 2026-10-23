@@ -1,0 +1,19 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6396.507717909785 is not greater than 6396.5077246732. Delta is -6.7634146034833975e-06
+Model is not converging.  Current: 6355.277355257127 is not greater than 6355.277371344383. Delta is -1.6087255971797276e-05
+Model is not converging.  Current: 6210.538946961482 is not greater than 6210.538976490906. Delta is -2.9529423954954837e-05
+Model is not converging.  Current: 6189.482515824718 is not greater than 6189.482520195626. Delta is -4.370908754935954e-06
+  NZDUSD H2: built 267 features in 199s (0 errors, 2 skipped)
+NZDUSD H2: 846 columns, median OOS net Sharpe -0.35, positive 0.11, best 0.72 | placebo median -0.33 best 0.11 | 267.6s

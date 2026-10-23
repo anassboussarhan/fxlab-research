@@ -1,0 +1,12 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6236.677577509353 is not greater than 6236.677587093175. Delta is -9.583822247805074e-06
+Model is not converging.  Current: 6168.768432245865 is not greater than 6168.7684381520185. Delta is -5.90615309192799e-06
+  GBPCAD M30: built 267 features in 406s (0 errors, 2 skipped)
+GBPCAD M30: 846 columns, median OOS net Sharpe -0.23, positive 0.06, best 0.61 | placebo median 0.00 best 0.00 | 611.8s

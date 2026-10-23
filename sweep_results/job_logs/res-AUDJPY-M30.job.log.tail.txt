@@ -1,0 +1,42 @@
+zer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6420.585459391483 is not greater than 6420.585480966977. Delta is -2.1575494429271203e-05
+Model is not converging.  Current: 6298.597620227286 is not greater than 6298.597659787477. Delta is -3.9560190998599865e-05
+Model is not converging.  Current: 6329.246796808393 is not greater than 6329.2468264657655. Delta is -2.9657372579094954e-05
+Model is not converging.  Current: 6422.16246345259 is not greater than 6422.162480455842. Delta is -1.700325265119318e-05
+Model is not converging.  Current: 6379.220572703926 is not greater than 6379.220577442154. Delta is -4.738227289635688e-06
+Model is not converging.  Current: 6274.343179482397 is not greater than 6274.3432007885485. Delta is -2.1306151211319957e-05
+Model is not converging.  Current: 6280.259888224207 is not greater than 6280.259931450287. Delta is -4.322607946960488e-05
+Model is not converging.  Current: 6342.414562486603 is not greater than 6342.414581659688. Delta is -1.9173085092916153e-05
+Model is not converging.  Current: 6305.834496486564 is not greater than 6305.834502210984. Delta is -5.724420589103829e-06
+Model is not converging.  Current: 6269.254412842976 is not greater than 6269.254418593832. Delta is -5.750855962105561e-06
+Model is not converging.  Current: 6249.234820069743 is not greater than 6249.234826663989. Delta is -6.5942458604695275e-06
+Model is not converging.  Current: 6210.90779351691 is not greater than 6210.907795082277. Delta is -1.565366801514756e-06
+Model is not converging.  Current: 6428.131218485721 is not greater than 6428.131229310907. Delta is -1.0825186109286733e-05
+Model is not converging.  Current: 6388.763991221536 is not greater than 6388.763992351689. Delta is -1.130152668338269e-06
+Model is not converging.  Current: 6354.381847574843 is not greater than 6354.381848359191. Delta is -7.843482308089733e-07
+Model is not converging.  Current: 6267.45942395471 is not greater than 6267.459524904024. Delta is -0.00010094931440107757
+Model is not converging.  Current: 6319.439186135464 is not greater than 6319.439189493881. Delta is -3.3584165066713467e-06
+Model is not converging.  Current: 6292.803606364089 is not greater than 6292.803619925116. Delta is -1.3561027117248159e-05
+Model is not converging.  Current: 6240.294389249011 is not greater than 6240.294401617517. Delta is -1.2368505849735811e-05
+Model is not converging.  Current: 6157.090966619235 is not greater than 6157.090968252616. Delta is -1.6333815437974408e-06
+Model is not converging.  Current: 6198.924566775298 is not greater than 6198.924567502089. Delta is -7.267908586072735e-07
+Model is not converging.  Current: 6451.448652421044 is not greater than 6451.448758321613. Delta is -0.00010590056899673073
+Model is not converging.  Current: 6312.648661499125 is not greater than 6312.648737935096. Delta is -7.643597018613946e-05
+Model is not converging.  Current: 6235.591673985572 is not greater than 6235.591742403114. Delta is -6.841754202469019e-05
+Model is not converging.  Current: 6188.6554400171635 is not greater than 6188.65545780702. Delta is -1.778985642886255e-05
+Model is not converging.  Current: 6259.213867998323 is not greater than 6259.213879655676. Delta is -1.1657352843030822e-05
+Model is not converging.  Current: 6241.931290394958 is not greater than 6241.931323542019. Delta is -3.3147061003546696e-05
+Model is not converging.  Current: 6363.749704322219 is not greater than 6363.749754298986. Delta is -4.997676660423167e-05
+Model is not converging.  Current: 6380.739357458397 is not greater than 6380.739400575736. Delta is -4.311733937356621e-05
+Model is not converging.  Current: 6389.943845250634 is not greater than 6389.943845369923. Delta is -1.1928932508453727e-07
+{
+ "planned": 79,
+ "skipped_at_planning": 3,
+ "ok": 79,
+ "failed": 0,
+ "not_yet_run": 0
+}

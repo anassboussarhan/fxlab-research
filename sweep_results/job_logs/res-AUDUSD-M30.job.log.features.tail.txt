@@ -1,0 +1,45 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:75: RuntimeWarning: divide by zero encountered in divide
+  return np.where(r < lo, np.log(lo / r), np.where(r > hi, np.log(r / hi), 0.0))
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:75: RuntimeWarning: divide by zero encountered in log
+  return np.where(r < lo, np.log(lo / r), np.where(r > hi, np.log(r / hi), 0.0))
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6223.739451099635 is not greater than 6223.739458687459. Delta is -7.587824256916065e-06
+Model is not converging.  Current: 6306.087314545488 is not greater than 6306.087379096353. Delta is -6.455086531786947e-05
+Model is not converging.  Current: 6423.724253441726 is not greater than 6423.724306776068. Delta is -5.333434182830388e-05
+Model is not converging.  Current: 6311.065116052358 is not greater than 6311.065152281316. Delta is -3.622895837906981e-05
+Model is not converging.  Current: 6159.658725770241 is not greater than 6159.658728529903. Delta is -2.7596615836955607e-06
+Model is not converging.  Current: 6216.94345139377 is not greater than 6216.943478601147. Delta is -2.720737666095374e-05
+  AUDUSD M30: built 267 features in 525s (0 errors, 2 skipped)
+AUDUSD M30: 846 columns, median OOS net Sharpe -0.28, positive 0.09, best 0.74 | placebo median 0.00 best 0.00 | 781.5s

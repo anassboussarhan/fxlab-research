@@ -1,0 +1,22 @@
+{'tests': 929, 'median_portfolio_sharpe': -1.1435676660648342, 'share_positive': 0.07104413347685684, 'bh10': 0, 'holm05': 0}
+             family     tf   exec financing  instruments  portfolio_sharpe     p  p_bh  median_instrument_sharpe  share_instruments_positive
+     S.MR.BOLLINGER     D1 market      flat            6             0.525 0.066   1.0                     0.093                       0.833
+        S.MR.ZSCORE     D1 market      flat            6             0.468 0.090   1.0                     0.186                       0.667
+         S.XA.PAIRS     H1   grid      flat           34             0.447 0.058   1.0                     0.199                       0.647
+ S.XA.COINTEGRATION     D1 market     rates           28             0.420 0.070   1.0                     0.104                       0.571
+S.MR.STOCH_REVERSAL     D1 market      flat            6             0.406 0.122   1.0                     0.123                       0.833
+      S.XA.STAT_ARB     H4 market      flat            6             0.387 0.112   1.0                     0.028                       0.667
+      S.XA.STAT_ARB     D1 market      flat            6             0.362 0.149   1.0                     0.187                       0.500
+         S.XA.PAIRS TICK60 market      flat           34             0.358 0.105   1.0                     0.099                       0.706
+         S.XA.PAIRS     H4 market      flat            6             0.343 0.140   1.0                     0.230                       0.667
+            S.MR.OU     D1 market      flat            6             0.313 0.185   1.0                    -0.036                       0.333
+S.MR.TWAP_REVERSION     D1 market      flat            6             0.280 0.211   1.0                    -0.023                       0.500
+S.RETAIL.MARTINGALE     D1 market     rates           28             0.249 0.191   1.0                     0.001                       0.500
+     S.EVT.FOMC_USD     H2 market      flat           34             0.248 0.177   1.0                     0.127                       0.206
+         S.XA.PAIRS     H1 market      flat           34             0.245 0.195   1.0                     0.051                       0.676
+     S.EVT.FOMC_USD    M15 market      flat           34             0.210 0.230   1.0                     0.011                       0.176
+     S.EVT.FOMC_USD    M30 market      flat           34             0.210 0.230   1.0                     0.011                       0.176
+     S.EVT.FOMC_USD     M5 market      flat           34             0.210 0.231   1.0                     0.011                       0.176
+     S.EVT.FOMC_USD     H1 market      flat           34             0.210 0.231   1.0                     0.009                       0.176
+  S.RG.CHANGE_POINT     H2 market      flat           34             0.202 0.225   1.0                    -0.068                       0.353
+ S.XA.RATE_MOMENTUM     H4 market     rates           28             0.177 0.248   1.0                     0.012                       0.500

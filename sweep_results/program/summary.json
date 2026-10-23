@@ -1,0 +1,158 @@
+{
+ "streams_total": 200948,
+ "by_source": {
+  "feature_scan": 173204,
+  "strategy": 27676,
+  "ml_allfeatures": 68
+ },
+ "configurations_tried": 10587196,
+ "median_oos_sharpe": -0.31159507327251496,
+ "share_positive": 0.14868025558851047,
+ "bh_significant_10pct": 0,
+ "holm_significant_5pct": 0,
+ "survivors_of_predeclared_bar": 0,
+ "best_stream": {
+  "source": "feature_scan",
+  "campaign": "feature_scan",
+  "name": "F.FR.CORR_DIM:v|d20",
+  "symbol": "XAUUSD",
+  "tf": "D1",
+  "exec": "market",
+  "financing": "flat",
+  "sharpe": 1.341201464949021,
+  "p": 0.0014715148366226782,
+  "n_days": 1283,
+  "cost_x2_sharpe": NaN,
+  "n_candidates": 60,
+  "p_bh": 1.0,
+  "p_holm": 1.0
+ },
+ "best_stream_deflated_sharpe": {
+  "feature_scan": {
+   "name": "F.FR.CORR_DIM:v|d20",
+   "symbol": "XAUUSD",
+   "tf": "D1",
+   "sharpe": 1.341201464949021,
+   "dsr": 1.304127316276795e-76
+  },
+  "strategy": {
+   "name": "S.RG.CHANGE_POINT",
+   "symbol": "XAUUSD",
+   "tf": "H8",
+   "sharpe": 1.2768138062246146,
+   "dsr": 2.422551820597975e-75
+  }
+ },
+ "top10": [
+  {
+   "source": "feature_scan",
+   "name": "F.FR.CORR_DIM:v|d20",
+   "symbol": "XAUUSD",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.3412,
+   "p": 0.0015,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.RG.CHANGE_POINT",
+   "symbol": "XAUUSD",
+   "tf": "H8",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.2768,
+   "p": 0.0024,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.TR.VIDYA:v|d20",
+   "symbol": "GBPJPY",
+   "tf": "H8",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.1155,
+   "p": 0.0002,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.ES.LUNAR_PHASE:cos|d20",
+   "symbol": "USDNOK",
+   "tf": "H2",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0923,
+   "p": 0.0004,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.FR.RQA:lam",
+   "symbol": "XAUUSD",
+   "tf": "H2",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0849,
+   "p": 0.003,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.FR.SEVCIK:v",
+   "symbol": "USDJPY",
+   "tf": "H8",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0681,
+   "p": 0.0003,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.SP.WAVELET",
+   "symbol": "AUDCAD",
+   "tf": "H1",
+   "exec": "grid",
+   "financing": "flat",
+   "sharpe": 1.0676,
+   "p": 0.0093,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.TS.HOLIDAYS:near",
+   "symbol": "EURNZD",
+   "tf": "H2",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.065,
+   "p": 0.0007,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.LF.AUTOENCODER:z2|d20",
+   "symbol": "USDSEK",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0641,
+   "p": 0.0018,
+   "p_bh": 1.0
+  },
+  {
+   "source": "feature_scan",
+   "name": "F.VO.BB_WIDTH:pctb",
+   "symbol": "CADCHF",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "flat",
+   "sharpe": 1.0622,
+   "p": 0.0049,
+   "p_bh": 1.0
+  }
+ ]
+}

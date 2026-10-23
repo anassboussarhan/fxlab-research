@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+Model is not converging.  Current: 6125.709709634589 is not greater than 6125.709725636787. Delta is -1.600219820829807e-05
+Model is not converging.  Current: 6141.310182332492 is not greater than 6141.310190477876. Delta is -8.145383617375046e-06
+  GBPCAD H1: built 267 features in 172s (0 errors, 2 skipped)
+GBPCAD H1: 846 columns, median OOS net Sharpe -0.35, positive 0.12, best 0.49 | placebo median -0.17 best 0.15 | 281.0s

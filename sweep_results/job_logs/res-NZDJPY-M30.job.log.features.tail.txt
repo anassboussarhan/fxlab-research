@@ -1,0 +1,22 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6320.176168675365 is not greater than 6320.176170168627. Delta is -1.4932620615581982e-06
+Model is not converging.  Current: 6239.394171791491 is not greater than 6239.394173037811. Delta is -1.2463196981116198e-06
+Model is not converging.  Current: 6162.742912179525 is not greater than 6162.742955791877. Delta is -4.3612351873889565e-05
+Model is not converging.  Current: 6167.368116715576 is not greater than 6167.368118581981. Delta is -1.8664050003280863e-06
+Model is not converging.  Current: 6157.837285309656 is not greater than 6157.837288962845. Delta is -3.6531891964841634e-06
+Model is not converging.  Current: 6428.328874855763 is not greater than 6428.328902444039. Delta is -2.758827577054035e-05
+Model is not converging.  Current: 6284.0625703717515 is not greater than 6284.062570553741. Delta is -1.8198988982476294e-07
+  NZDJPY M30: built 267 features in 404s (0 errors, 2 skipped)
+NZDJPY M30: 846 columns, median OOS net Sharpe -0.30, positive 0.05, best 0.74 | placebo median 0.00 best 0.00 | 610.4s
