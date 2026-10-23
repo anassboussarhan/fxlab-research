@@ -14,6 +14,31 @@ cost-aware all-feature model each improve or explain parts of the picture, but n
 edge. The one consistent lead (Bayesian change-point family on H8/H12) failed its pre-registered robustness
 check. The gross signals that do exist are smaller than retail trading costs.
 
+### 8.1c Full cloud sweep (runs 39964535615 + 39979322451; branches `results`, `results2`)
+34 instruments (2007-2018, EURUSD to 2022), 10 timeframes (M5-D1, tick and volatility bars), 97 strategy
+families, 269 features, 69 model families. Merged program: **214,090 OOS streams** (40,818 strategy walk-forwards
+incl. 8,704 joint-optimisation streams, 173,204 feature rules, 68 all-feature ML runs) from about **11.4 million
+configurations**. 16 strategy and 21 model experiments failed (logged); 6,711 model experiments are prediction
+evaluations, not return streams.
+* Median OOS net Sharpe -0.32; 14.9% positive; **0** significant after BH (10%) or Holm (5%); **0** meet the
+  survival bar; best-stream deflated Sharpe ~ 0. Strategy medians by timeframe: D1 -0.22, H8 -0.29, H4 -0.38,
+  H1 -0.81, M15 -2.4, M5 -5.4 (costs dominate at high frequency).
+* Cross-instrument family portfolios: 929 tests, median Sharpe -1.14, 7% positive, 0 significant (best: D1
+  Bollinger / z-score mean reversion ~0.5, p ~0.07-0.09).
+* Feature rules vs placebo columns: 0.86% of real rules exceed OOS Sharpe 0.5 against 0.20% of placebo rules -
+  a fatter right tail, but nothing survives correction.
+* **Joint optimisation of parameters x entry x exit per pair** (H1/H4/D1, 96 families x 34 pairs, 761,156
+  candidates simulated): median OOS Sharpe -0.38 (D1 -0.19, H4 -0.29, H1 -0.71), 18% positive; better than the
+  standard walk-forward of the same family/pair/timeframe in 60% of cases (median +0.13 Sharpe, mostly by losing
+  less: pullback limits were chosen in 49% of folds), yet **0** BH/Holm survivors (best q = 0.36: lead-lag
+  EURGBP D1 1.33, liquidity-filtered AUDJPY H4 1.21). The deflation-benchmark abstention traded only 3.9% of
+  folds: the best in-sample combination rarely beat what luck produces with ~100 candidates.
+* Round-4 families (famous traders, forum methods, esoteric): every family's median OOS Sharpe is negative
+  (lunar -0.24, Turtle -0.53, Connors RSI2 -0.96, Raschke 80-20 -2.4, round numbers -3.2).
+* Gotobi USDJPY remains the strongest consistent lead on the same 2010-2018 data: H1 1.05 (0.36 at 2x costs),
+  M5 0.88, M15 0.87, M30 0.78; joint optimisation lowers it to 0.77 (more choices, more noise). It would not
+  pass the program-wide correction; only 2019-2025 data or the 2026 holdout can confirm it.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
