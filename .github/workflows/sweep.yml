@@ -29,6 +29,9 @@ jobs:
       hi: ${{ steps.p.outputs.hi }}
       lo: ${{ steps.p.outputs.lo }}
       models: ${{ steps.p.outputs.models }}
+      only: ${{ steps.p.outputs.only }}
+      flags: ${{ steps.p.outputs.flags }}
+      include_runs: ${{ steps.p.outputs.include_runs }}
     steps:
       - uses: actions/checkout@v4
       - id: p
@@ -327,7 +330,7 @@ jobs:
         run: |
           mkdir -p data/manifests
           cp data/manifests/acq_${{ matrix.pair }}.jsonl data/manifests/acquisition.jsonl || true
-          python ci/sweep_job.py --pair ${{ matrix.pair }} --tf ${{ matrix.tf }} --part strategies --budget-min 320 --workers 3
+          python ci/sweep_job.py --pair ${{ matrix.pair }} --tf ${{ matrix.tf }} --part strategies --budget-min 320 --workers 3 --only "${{ needs.plan.outputs.only }}" ${{ needs.plan.outputs.flags }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -385,7 +388,7 @@ jobs:
         run: |
           mkdir -p data/manifests
           cp data/manifests/acq_${{ matrix.pair }}.jsonl data/manifests/acquisition.jsonl || true
-          python ci/sweep_job.py --pair ${{ matrix.pair }} --tf ${{ matrix.tf }} --part strategies --budget-min 320 --workers 3
+          python ci/sweep_job.py --pair ${{ matrix.pair }} --tf ${{ matrix.tf }} --part strategies --budget-min 320 --workers 3 --only "${{ needs.plan.outputs.only }}" ${{ needs.plan.outputs.flags }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -443,7 +446,7 @@ jobs:
         run: |
           mkdir -p data/manifests
           cp data/manifests/acq_${{ matrix.pair }}.jsonl data/manifests/acquisition.jsonl || true
-          python ci/sweep_job.py --pair ${{ matrix.pair }} --part models --budget-min 320 --workers 4
+          python ci/sweep_job.py --pair ${{ matrix.pair }} --part models --budget-min 320 --workers 4 --only "${{ needs.plan.outputs.only }}" ${{ needs.plan.outputs.flags }}
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -484,6 +487,16 @@ jobs:
           pattern: audit-*
           path: audits/
           merge-multiple: true
+      - name: Fetch results of earlier runs (merged into one program-wide analysis)
+        if: needs.plan.outputs.include_runs != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for r in ${{ needs.plan.outputs.include_runs }}; do
+            gh run download "$r" -R ${{ github.repository }} -p 'res-*' -D "in_prev/$r" || echo "run $r: no artifacts"
+            for d in in_prev/$r/res-*; do [ -d "$d" ] && mv "$d" "in/$(basename $d)__r$r"; done
+          done
+          ls in | wc -l
       - run: python ci/collect.py
       - name: Publish summaries to the results branch
         run: |

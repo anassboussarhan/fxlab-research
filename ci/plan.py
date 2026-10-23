@@ -17,6 +17,8 @@ out = {
     "data": json.dumps({"pair": pairs}),
     "hi": json.dumps({"pair": pairs, "tf": hi}) if hi else "", "lo": json.dumps({"pair": pairs, "tf": lo}) if lo else "",
     "models": json.dumps({"pair": pairs}) if c[f"models_{m}"] else "",
+    "only": ",".join(c.get("only_families", [])), "flags": " ".join(c.get("job_flags", [])),
+    "include_runs": " ".join(str(x) for x in c.get("include_runs", [])),
 }
 with open(os.environ.get("GITHUB_OUTPUT", "/dev/stdout"), "a") as f:
     for k, v in out.items():

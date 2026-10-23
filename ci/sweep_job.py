@@ -80,7 +80,11 @@ def main():
     ap.add_argument("--part", choices=["strategies", "models"], default="strategies")
     ap.add_argument("--budget-min", type=float, default=320)
     ap.add_argument("--workers", type=int, default=3)
+    ap.add_argument("--only", default="", help="comma-separated strategy family ids (empty = all)")
+    ap.add_argument("--no-features", action="store_true", help="skip the all-feature scan")
+    ap.add_argument("--no-extras", action="store_true", help="skip the H1 entry-type grid and the all-feature ML")
     a = ap.parse_args()
+    only = [x for x in a.only.split(",") if x.strip()]
     t0 = time.time()
     left = lambda: max(5.0, a.budget_min - (time.time() - t0) / 60)   # noqa: E731
     tag = a.tf if a.part == "strategies" else "models"
@@ -95,18 +99,18 @@ def main():
         sh([PY, "scripts/campaign.py", "run", "--name", name, "--workers", str(a.workers),
             "--time-budget-min", f"{left() - 15:.0f}"], log)
     else:
-        if a.tf in FEATURE_TFS:
+        if a.tf in FEATURE_TFS and not a.no_features:
             others.append(popen([PY, "scripts/feature_scan.py", "--symbols", a.pair, "--tf", a.tf,
                                  "--start", START, "--end", END], log + ".features"))
         names = []
         fx_rates = a.pair[:3] in RATE_CCY and a.pair[3:] in RATE_CCY
         base = [PY, "scripts/campaign.py", "plan", "--kind", "strategy", "--symbols", a.pair, "--tfs", a.tf,
-                "--ml-light", "--start", START, "--end", END]
+                "--ml-light", "--start", START, "--end", END] + (["--only"] + only if only else [])
         name = f"cloud_{a.tf}_{a.pair}"
         extra = ["--financing", "rates"] if (a.tf in ("H4", "D1") and fx_rates) else []
         sh(base[:3] + ["--name", name] + base[3:] + extra, log)
         names.append(name)
-        if a.tf == "H1":
+        if a.tf == "H1" and not a.no_extras:
             g = f"cloud_H1grid_{a.pair}"
             sh(base[:3] + ["--name", g] + base[3:] + ["--exec", "grid"], log)
             names.append(g)
@@ -118,7 +122,7 @@ def main():
         for n in names:
             sh([PY, "scripts/campaign.py", "run", "--name", n, "--workers", str(a.workers),
                 "--time-budget-min", f"{left() - 15:.0f}"], log)
-        if a.tf == "H1" and left() > 40:
+        if a.tf == "H1" and left() > 40 and not a.no_extras:
             sh([PY, "scripts/ml_allfeatures.py", "--symbols", a.pair, "--tf", "H1", "--horizons", "4", "24",
                 "--start", START, "--end", END], log, timeout=int((left() - 10) * 60))
     for p in others:                        # the feature scan gets whatever time is left, then is stopped

@@ -33,7 +33,8 @@ RARE = {"S.GEO.HARMONIC", "S.SEAS.WEEKEND_GAP_FADE", "S.ST.PIVOT_POINTS", "S.XA.
         # carry families hold the higher-yielding side, which for EURUSD in 2011-12 is always EUR
         "S.XA.CARRY", "S.XA.CARRY_FILTER", "S.XA.CARRY_VOLGATE", "S.XA.CARRY_MOM",
         # event families that are one-directional or silent for EURUSD by construction
-        "S.SEAS.GOTOBI", "S.EVT.FOMC_USD", "S.XA.RATE_MOMENTUM", "S.XA.VALUE_PPP", "S.SMC.SILVER_BULLET"}
+        "S.SEAS.GOTOBI", "S.EVT.FOMC_USD", "S.XA.RATE_MOMENTUM", "S.XA.VALUE_PPP", "S.SMC.SILVER_BULLET",
+        "S.EVT.GOLD_FIX", "S.WEIRD.LUNAR", "S.FORUM.NEWS_STRADDLE", "S.FAMOUS.CRABEL_NR", "S.FAMOUS.TD_SEQUENTIAL"}
 
 
 @pytest.fixture(scope="module")
