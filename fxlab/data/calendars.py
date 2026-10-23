@@ -64,10 +64,12 @@ def gotobi_dates(start: str = "2004-01-01", end: str = "2026-12-31") -> pd.Datet
 _GOTOBI = gotobi_dates()
 
 
-def is_gotobi(index: pd.DatetimeIndex) -> np.ndarray:
-    """True where the Tokyo calendar date of the timestamp is a gotobi business day."""
+def is_gotobi(index: pd.DatetimeIndex, offset_bdays: int = 0) -> np.ndarray:
+    """True where the Tokyo calendar date of the timestamp is a gotobi business day. offset_bdays != 0 shifts the
+    calendar by that many business days (PLACEBO calendars for robustness checks only)."""
     d = local(index, "Asia/Tokyo").normalize()
-    return np.isin(d.values.astype("datetime64[D]"), _GOTOBI.values.astype("datetime64[D]"))
+    days = _GOTOBI if offset_bdays == 0 else (_GOTOBI + pd.offsets.BDay(offset_bdays))
+    return np.isin(d.values.astype("datetime64[D]"), pd.DatetimeIndex(days).values.astype("datetime64[D]"))
 
 
 def is_last_business_day(index: pd.DatetimeIndex, tz: str = "Europe/London") -> np.ndarray:

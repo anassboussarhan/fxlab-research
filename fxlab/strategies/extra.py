@@ -56,11 +56,12 @@ def _usd_sign(symbol: str) -> float:
           "JST on Tuesday-Friday gotobi days; optional short leg 09:55-12:00 JST (post-fix reversal). Other pairs "
           "flat", params={"start": 3, "short_leg": 0}, space={"start": [3, 5, 7], "short_leg": [0, 1]},
           extra=ST, frequencies="M5..H1", **PANEL)
-def s_gotobi(df, panel=None, symbol="USDJPY", start=3, short_leg=0):
+def s_gotobi(df, panel=None, symbol="USDJPY", start=3, short_leg=0, placebo_offset=0):
+    """placebo_offset (not searched): shift the gotobi calendar by n business days - robustness checks only."""
     if not symbol.endswith("JPY"):
         return out(pd.Series(0.0, index=df.index))
     nxt = _next_start(df)
-    g = cal.is_gotobi(nxt)
+    g = cal.is_gotobi(nxt, placebo_offset)
     jst = cal.local(nxt, "Asia/Tokyo")
     h = jst.hour + jst.minute / 60.0
     wd = jst.dayofweek
