@@ -60,7 +60,7 @@ jobs:
           path: |
             data/m1/${{ matrix.pair }}
             data/manifests/acq_${{ matrix.pair }}.jsonl
-          key: m1-v1-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
+          key: m1-v2-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
       - name: Download, audit, closes
         run: |
           ARGS="--pair ${{ matrix.pair }} --first-year ${{ needs.plan.outputs.first_year }} --last-year ${{ needs.plan.outputs.last_year }}"
@@ -73,7 +73,7 @@ jobs:
           path: |
             data/m1/${{ matrix.pair }}
             data/manifests/acq_${{ matrix.pair }}.jsonl
-          key: m1-v1-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
+          key: m1-v2-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
       - name: Save closes
         uses: actions/cache/save@v4
         with:
@@ -109,6 +109,11 @@ jobs:
           path: data/closes/EURUSD_*.parquet
           key: closes-v1-EURUSD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',XAUUSD,')
+        with:
+          path: data/closes/XAUUSD_*.parquet
+          key: closes-v1-XAUUSD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',GBPUSD,')
         with:
           path: data/closes/GBPUSD_*.parquet
@@ -119,65 +124,110 @@ jobs:
           path: data/closes/USDJPY_*.parquet
           key: closes-v1-USDJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',USDCHF,')
+        if: contains(needs.plan.outputs.pairs_csv, ',AUDUSD,')
         with:
-          path: data/closes/USDCHF_*.parquet
-          key: closes-v1-USDCHF-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+          path: data/closes/AUDUSD_*.parquet
+          key: closes-v1-AUDUSD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',USDCAD,')
         with:
           path: data/closes/USDCAD_*.parquet
           key: closes-v1-USDCAD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',AUDUSD,')
+        if: contains(needs.plan.outputs.pairs_csv, ',USDCHF,')
         with:
-          path: data/closes/AUDUSD_*.parquet
-          key: closes-v1-AUDUSD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+          path: data/closes/USDCHF_*.parquet
+          key: closes-v1-USDCHF-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',NZDUSD,')
         with:
           path: data/closes/NZDUSD_*.parquet
           key: closes-v1-NZDUSD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',EURGBP,')
+        if: contains(needs.plan.outputs.pairs_csv, ',XAGUSD,')
         with:
-          path: data/closes/EURGBP_*.parquet
-          key: closes-v1-EURGBP-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+          path: data/closes/XAGUSD_*.parquet
+          key: closes-v1-XAGUSD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',EURJPY,')
         with:
           path: data/closes/EURJPY_*.parquet
           key: closes-v1-EURJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',EURCHF,')
+        if: contains(needs.plan.outputs.pairs_csv, ',EURGBP,')
         with:
-          path: data/closes/EURCHF_*.parquet
-          key: closes-v1-EURCHF-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',EURAUD,')
-        with:
-          path: data/closes/EURAUD_*.parquet
-          key: closes-v1-EURAUD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',EURCAD,')
-        with:
-          path: data/closes/EURCAD_*.parquet
-          key: closes-v1-EURCAD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',EURNZD,')
-        with:
-          path: data/closes/EURNZD_*.parquet
-          key: closes-v1-EURNZD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+          path: data/closes/EURGBP_*.parquet
+          key: closes-v1-EURGBP-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',GBPJPY,')
         with:
           path: data/closes/GBPJPY_*.parquet
           key: closes-v1-GBPJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',EURCHF,')
+        with:
+          path: data/closes/EURCHF_*.parquet
+          key: closes-v1-EURCHF-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',AUDJPY,')
+        with:
+          path: data/closes/AUDJPY_*.parquet
+          key: closes-v1-AUDJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',EURAUD,')
+        with:
+          path: data/closes/EURAUD_*.parquet
+          key: closes-v1-EURAUD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',CHFJPY,')
+        with:
+          path: data/closes/CHFJPY_*.parquet
+          key: closes-v1-CHFJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',CADJPY,')
+        with:
+          path: data/closes/CADJPY_*.parquet
+          key: closes-v1-CADJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',GBPCHF,')
         with:
           path: data/closes/GBPCHF_*.parquet
           key: closes-v1-GBPCHF-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',EURCAD,')
+        with:
+          path: data/closes/EURCAD_*.parquet
+          key: closes-v1-EURCAD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',AUDNZD,')
+        with:
+          path: data/closes/AUDNZD_*.parquet
+          key: closes-v1-AUDNZD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',EURSEK,')
+        with:
+          path: data/closes/EURSEK_*.parquet
+          key: closes-v1-EURSEK-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',EURNOK,')
+        with:
+          path: data/closes/EURNOK_*.parquet
+          key: closes-v1-EURNOK-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',USDSEK,')
+        with:
+          path: data/closes/USDSEK_*.parquet
+          key: closes-v1-USDSEK-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',USDNOK,')
+        with:
+          path: data/closes/USDNOK_*.parquet
+          key: closes-v1-USDNOK-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
+      - uses: actions/cache/restore@v4
+        if: contains(needs.plan.outputs.pairs_csv, ',EURNZD,')
+        with:
+          path: data/closes/EURNZD_*.parquet
+          key: closes-v1-EURNZD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',GBPAUD,')
         with:
@@ -194,11 +244,6 @@ jobs:
           path: data/closes/GBPNZD_*.parquet
           key: closes-v1-GBPNZD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',AUDJPY,')
-        with:
-          path: data/closes/AUDJPY_*.parquet
-          key: closes-v1-AUDJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',AUDCHF,')
         with:
           path: data/closes/AUDCHF_*.parquet
@@ -209,25 +254,10 @@ jobs:
           path: data/closes/AUDCAD_*.parquet
           key: closes-v1-AUDCAD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',AUDNZD,')
-        with:
-          path: data/closes/AUDNZD_*.parquet
-          key: closes-v1-AUDNZD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',CADJPY,')
-        with:
-          path: data/closes/CADJPY_*.parquet
-          key: closes-v1-CADJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',CADCHF,')
         with:
           path: data/closes/CADCHF_*.parquet
           key: closes-v1-CADCHF-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',CHFJPY,')
-        with:
-          path: data/closes/CHFJPY_*.parquet
-          key: closes-v1-CHFJPY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - uses: actions/cache/restore@v4
         if: contains(needs.plan.outputs.pairs_csv, ',NZDJPY,')
         with:
@@ -243,56 +273,6 @@ jobs:
         with:
           path: data/closes/NZDCAD_*.parquet
           key: closes-v1-NZDCAD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',USDSEK,')
-        with:
-          path: data/closes/USDSEK_*.parquet
-          key: closes-v1-USDSEK-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',USDNOK,')
-        with:
-          path: data/closes/USDNOK_*.parquet
-          key: closes-v1-USDNOK-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',USDMXN,')
-        with:
-          path: data/closes/USDMXN_*.parquet
-          key: closes-v1-USDMXN-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',USDZAR,')
-        with:
-          path: data/closes/USDZAR_*.parquet
-          key: closes-v1-USDZAR-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',USDTRY,')
-        with:
-          path: data/closes/USDTRY_*.parquet
-          key: closes-v1-USDTRY-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',USDCNH,')
-        with:
-          path: data/closes/USDCNH_*.parquet
-          key: closes-v1-USDCNH-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',EURSEK,')
-        with:
-          path: data/closes/EURSEK_*.parquet
-          key: closes-v1-EURSEK-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',EURNOK,')
-        with:
-          path: data/closes/EURNOK_*.parquet
-          key: closes-v1-EURNOK-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',XAUUSD,')
-        with:
-          path: data/closes/XAUUSD_*.parquet
-          key: closes-v1-XAUUSD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
-      - uses: actions/cache/restore@v4
-        if: contains(needs.plan.outputs.pairs_csv, ',XAGUSD,')
-        with:
-          path: data/closes/XAGUSD_*.parquet
-          key: closes-v1-XAGUSD-${{ needs.plan.outputs.first_year }}-${{ github.run_id }}
       - run: python ci/panel_job.py
       - uses: actions/cache/save@v4
         with:
@@ -332,7 +312,7 @@ jobs:
           path: |
             data/m1/${{ matrix.pair }}
             data/manifests/acq_${{ matrix.pair }}.jsonl
-          key: m1-v1-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
+          key: m1-v2-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
       - name: Download data if the cache was evicted
         if: steps.m1.outputs.cache-hit != 'true'
         run: python ci/data_job.py --pair ${{ matrix.pair }} --first-year ${{ needs.plan.outputs.first_year }} --last-year ${{ needs.plan.outputs.last_year }}
@@ -390,7 +370,7 @@ jobs:
           path: |
             data/m1/${{ matrix.pair }}
             data/manifests/acq_${{ matrix.pair }}.jsonl
-          key: m1-v1-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
+          key: m1-v2-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
       - name: Download data if the cache was evicted
         if: steps.m1.outputs.cache-hit != 'true'
         run: python ci/data_job.py --pair ${{ matrix.pair }} --first-year ${{ needs.plan.outputs.first_year }} --last-year ${{ needs.plan.outputs.last_year }}
@@ -448,7 +428,7 @@ jobs:
           path: |
             data/m1/${{ matrix.pair }}
             data/manifests/acq_${{ matrix.pair }}.jsonl
-          key: m1-v1-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
+          key: m1-v2-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
       - name: Download data if the cache was evicted
         if: steps.m1.outputs.cache-hit != 'true'
         run: python ci/data_job.py --pair ${{ matrix.pair }} --first-year ${{ needs.plan.outputs.first_year }} --last-year ${{ needs.plan.outputs.last_year }}

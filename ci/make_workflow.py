@@ -23,7 +23,7 @@ M1_RESTORE = """      - name: Restore M1 data of ${{ matrix.pair }}
           path: |
             data/m1/${{ matrix.pair }}
             data/manifests/acq_${{ matrix.pair }}.jsonl
-          key: m1-v1-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
+          key: m1-v2-${{ matrix.pair }}-${{ needs.plan.outputs.first_year }}
 """
 
 SWEEP_BODY = """    steps:
@@ -138,7 +138,7 @@ jobs:
           path: |
             data/m1/${{{{ matrix.pair }}}}
             data/manifests/acq_${{{{ matrix.pair }}}}.jsonl
-          key: m1-v1-${{{{ matrix.pair }}}}-${{{{ needs.plan.outputs.first_year }}}}
+          key: m1-v2-${{{{ matrix.pair }}}}-${{{{ needs.plan.outputs.first_year }}}}
       - name: Save closes
         uses: actions/cache/save@v4
         with:

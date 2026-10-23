@@ -27,12 +27,29 @@ def main():
     ap.add_argument("--last-year", type=int, default=2025)
     ap.add_argument("--workers", type=int, default=6)
     ap.add_argument("--skip-download", action="store_true", help="M1 files already restored from cache")
+    ap.add_argument("--source", choices=["fxdata", "dukascopy"], default="fxdata",
+                    help="fxdata = Dukascopy ticks from the FX-Data GitHub mirror (fast on GitHub runners); "
+                         "dukascopy = direct download (throttled from cloud IPs: mostly HTTP 503)")
     a = ap.parse_args()
     assert a.last_year <= 2025, "2026 is the locked holdout"
     os.makedirs("out", exist_ok=True)
-    from fxlab.data.acquire_dukascopy import download_year
-    log = {"pair": a.pair, "years": {}}
-    if not a.skip_download:
+    log = {"pair": a.pair, "years": {}, "source": a.source}
+    if not a.skip_download and a.source == "fxdata":
+        from pathlib import Path
+        from fxlab.data.acquire_fxdata_git import run as fx_run
+        t = time.time()
+        scratch = Path(os.environ.get("RUNNER_TEMP", "/tmp")) / "fxdata_scratch"
+        scratch.mkdir(parents=True, exist_ok=True)
+        fx_run([a.pair], scratch, None, set(range(a.first_year, a.last_year + 1)))
+        log["download_seconds"] = round(time.time() - t, 1)
+        man = MANIFEST_DIR / "acquisition.jsonl"
+        if man.exists():
+            shutil.copy(man, MANIFEST_DIR / f"acq_{a.pair}.jsonl")
+            for line in man.read_text().splitlines():
+                r = json.loads(line)
+                log["years"][r.get("year")] = {k: r.get(k) for k in ("status", "n_minutes", "error")}
+    if not a.skip_download and a.source == "dukascopy":
+        from fxlab.data.acquire_dukascopy import download_year
         for y in range(a.first_year, a.last_year + 1):
             t = time.time()
             try:
