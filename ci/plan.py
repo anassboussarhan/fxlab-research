@@ -5,6 +5,10 @@ import os
 
 c = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), "sweep_config.json")))
 m = c["mode"]
+if m == "off":                     # cancels a running sweep (concurrency group) and runs nothing
+    with open(os.environ.get("GITHUB_OUTPUT", "/dev/stdout"), "a") as f:
+        f.write("mode=off\n")
+    raise SystemExit(0)
 pairs = c[f"pairs_{m}"]
 hi, lo = c[f"hi_tfs_{m}"], c[f"lo_tfs_{m}"]
 first = c["smoke_first_year"] if m == "smoke" else c["first_year"]

@@ -118,6 +118,7 @@ jobs:
 
   data:
     needs: plan
+    if: needs.plan.outputs.mode != 'off'
     runs-on: ubuntu-latest
     timeout-minutes: 350
     strategy:
@@ -159,7 +160,7 @@ jobs:
 
   panel:
     needs: [plan, data]
-    if: always() && needs.plan.result == 'success'
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.mode != 'off'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -185,7 +186,7 @@ jobs:
 {sweep_job("models", "models", "--part models --budget-min 320", "models", 4)}
   collect:
     needs: [plan, sweep_hi, sweep_lo, models]
-    if: always() && needs.plan.result == 'success'
+    if: always() && needs.plan.result == 'success' && needs.plan.outputs.mode != 'off'
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
