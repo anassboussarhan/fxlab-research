@@ -1,0 +1,16 @@
+data/m1/
+data/cache/
+data/closes/
+data/panel/
+data/manifests/*.jsonl
+results/*
+!results/benchmark.json
+!results/catalog_test_status.json
+out/
+in/
+sweep_results/
+logs/
+catboost_info/
+__pycache__/
+*.pyc
+.pytest_cache/

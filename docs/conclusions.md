@@ -1,0 +1,54 @@
+## 8. Scientific conclusions
+
+All figures below are out-of-sample walk-forward results with costs: real quoted bid/ask, slippage, commission and financing. They come from `results/reports/*/summary.json` and `strategy_results.csv` / `model_results.csv`.
+
+### 8.1 Headline
+No strategy family, instrument, timeframe, risk configuration or portfolio construction produced a trading edge that survives realistic costs and data-snooping control. The pre-declared survival bar (OOS Sharpe > 0, BH-adjusted p < 0.10, DSR > 0.95, Sharpe > 0 at 2x costs) was met by **zero** of 1,107 strategy experiments, covering 5,278 parameter/risk configurations. The engineering system is complete and working; the research answer on this data is **negative**.
+
+### 8.1b Round 2 (more timeframes, every feature, every entry type, carry) - see `docs/round2_report.md`
+Across the whole program, 23,477 out-of-sample streams (5,882 strategy experiments on M5-D1 and event bars,
+17,580 single-feature rules, 15 all-feature ML runs; about 876,000 configurations) give a median net Sharpe of
+-0.26 and **zero** results significant after Benjamini-Hochberg or Holm, and zero meeting the survival bar.
+Walk-forward entry-type selection, real interest-rate financing, carry, information-driven bars and a
+cost-aware all-feature model each improve or explain parts of the picture, but none produces a significant
+edge. The one consistent lead (Bayesian change-point family on H8/H12) failed its pre-registered robustness
+check. The gross signals that do exist are smaller than retail trading costs.
+
+### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
+* 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
+* White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
+* Costs are not the whole story. Even at zero cost (diagnostic only), only 42% of default configurations were profitable; median zero-cost Sharpe was -0.07. Most rules carry no gross information at H1.
+* Families by median OOS Sharpe: cross-asset (-0.35, 21% positive) > trend (-0.60) > geometry (-0.72) > mean reversion (-0.81) > ... > session (-1.70) > model-driven (-1.87). Model-driven strategies are positive before costs (median zero-cost Sharpe +0.14) but the worst after costs, because they trade frequently.
+* Isolated good-looking results did not replicate across instruments. Weekend-gap fade: Sharpe 0.75 on AUDUSD and 0.58 on EURJPY, but positive on only 3 of 14 instruments. Volatility expansion: positive on 8 of 14, median 0.08. Best single results rest on 40-120 trades. They are treated as multiple-testing artefacts, not candidates.
+* Timeframes (EURUSD): H4 is least bad (median -0.36, 14% positive), H1 -0.75, M15 -1.52. Higher frequency loses more to costs. Best M15 result (volatility expansion, 0.73) is not significant after correction (SPA p = 0.20, WRC p = 0.995).
+
+### 8.3 Risk management, portfolio, hedging (OOS streams only)
+* 11 stop/target/sizing designs (fixed, ATR, realised-vol, structural, quantile stops; affine, power, log, piecewise, polynomial targets; trailing; time exit; vol-target sizing; wide catastrophic stop + time exit) selected per fold on EURUSD: best 0.19, 3 of 61 positive, none positive at 2x costs. Risk shaping does not create an edge where the entry signal has none.
+* Portfolios of the 20 best streams by trailing OOS Sharpe, re-selected monthly, lose money under every allocation tested (equal, inverse-vol, currency-netted; Sharpe -0.72 to -1.62). Fractional Kelly comes closest (-0.17 / -0.43). Out-of-sample performance does not persist.
+* Min-variance hedging with the most-correlated pair reduced volatility in 29 of 30 streams but improved Sharpe in 0 of 30 (median Sharpe 0.27 -> 0.00). Hedge-leg costs and basis risk outweigh the variance reduction.
+
+### 8.4 Prediction (EURUSD H1, 198 model runs, 2007-2022)
+* **Direction is weakly but genuinely predictable at 1 hour.** Best AUC 0.539 (extremely randomised trees), with 92 of 171 classifier runs significant after Holm correction. It is stable in every year 2008-2022 (per-year AUC about 0.52-0.56 for the leading models). It decays fast: median AUC 0.528 at 1 hour, 0.514 at 5 hours, 0.499 at 20 hours.
+* Complexity does not help. Linear/logistic models (about 0.535) match trees, ensembles and genetic programming. Neural nets (MLP 0.532 best, LSTM/GRU/TCN/Transformers lower) and time-series models (median 0.499) do not beat them.
+* The edge is economically too small. A sign-trading proxy earns about 0.3 bp per hour gross, against about 1.35 bp modelled round-trip cost on EURUSD (median spread 0.4 pip; median |1h return| 4.7 bp).
+* **Volatility is strongly predictable.** HAR-RV rank correlation with realised volatility is 0.30 / 0.49 / 0.66 at 1 / 5 / 20 hours (R^2_oos 0.34 at 20h); GARCH-family models are close behind. This is useful for position sizing and risk limits, not as a directional signal.
+* RL and evolutionary trading policies (DQN, PPO, discrete SAC, LinUCB, differential evolution) learned nothing usable: correlation of position with realised return |IC| <= 0.024 at every horizon.
+
+### 8.5 Data findings
+* The GitHub mirror stores JPY-quoted pairs and metals at 1/100 of the true price. This was detected (USDJPY financing came out at about 1% per night) and corrected in the store; 132 affected results were discarded and re-run. A price-plausibility check is now part of the audit.
+* The audit after correction: 0 inconsistent bars, 0 implausible price levels, no Saturday data. The last months of each series (June 2018) and the first months (March 2007, Nov 2010-Feb 2011 for silver) are partial.
+
+## 9. Failures, exclusions and limitations
+* **Data depth:** 2007-2018 for most instruments (EURUSD to 2022-07, gold 2011-05 to 2018-06, silver 2010-11 to 2018-06, AUDJPY to 2015). 2019-2025 is not available here, so the development period ends in 2018/2022, not 2025.
+* **Instruments:** 14 of the 38 requested were acquired. USDMXN, USDZAR, USDTRY and USDCNH are not in the mirror. The other 20 (remaining crosses and SEK/NOK pairs) are available in the mirror but were not acquired locally (time budget).
+* **Macro inputs:** round 2 added point-in-time 3-month rates for 8 currencies (FRED/OECD, via the web-fetch tool, rounded to 2 decimals), which unblocked the carry families and real overnight financing (`financing="rates"`). Yields, equity indices and VIX remain unreachable. Round-1 results keep the conservative flat swap (0.5 pip/night both sides).
+* **2026 holdout:** not evaluated. The data does not exist in this environment, and candidates cannot be frozen because none survived.
+* **Scope run locally:** round 1: H1 for all 14 instruments, M15/H4 for EURUSD, models on EURUSD H1 (horizons 1, 5, 20). Round 2 added H4/D1/H8 for all 14, H2 for 7, M30 for 4, M15 for 2, M5 for EURUSD (partial), tick/volatility bars for 4, H6/H12 for one family, the all-feature scan on 14 x H1/H4/D1 and all-feature ML on 7 x H1. Still not run: M1-M10, model horizons 2/3/10/30/50/100, the all-feature scan below H1, Optuna re-optimisation and cross-market model transfer (2 CPUs, 8 GB).
+* **Excluded experiments:** S.ML.RL_POLICY on M15 (compute) and S.XA.CARRY_FILTER (data), recorded in the manifests. No experiment failed (0 of 1,305).
+* **Simplifications:** a reduced TFT (no static covariates or multi-horizon decoder); discrete-action SAC; Kelly sizing on portfolio streams only; intrabar ambiguity resolved stop-first (conservative).
+* **Statistical caveat:** the DSR uses the cross-sectional variance of OOS Sharpe across all configurations; with many strongly negative strategies this variance is large, which makes DSR conservative. Conclusions do not depend on it: BH-adjusted p-values, White RC and SPA all agree.
+
+## 10. What would change the conclusion
+1. Full 2003-2025 Dukascopy history and TrueFX as an independent second source (run `fxlab/data/acquire_dukascopy.py` on an unrestricted machine) to test the post-2018 regime and source sensitivity.
+2. The full directive-scale campaign on rented CPU (about 3,500 core-hours; see `docs/compute_plan.md`). Not authorised; nothing has been spent.
+3. Using the one real predictive signal differently. The 1-hour directional information and the strong volatility forecasts could be used as filters on lower-turnover entries, or for execution timing, rather than as stand-alone hourly trading signals.

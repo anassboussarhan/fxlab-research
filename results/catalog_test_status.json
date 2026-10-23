@@ -1,0 +1,3764 @@
+{
+ "F.CA.COINTEGRATION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.COINTEGRATION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.CORR_LEVEL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.CORR_LEVEL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.CURRENCY_STRENGTH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.CURRENCY_STRENGTH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.DISPERSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.DISPERSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.GRANGER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.GRANGER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.LEAD_LAG": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.LEAD_LAG]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.PCA_FACTOR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.PCA_FACTOR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.ROLLING_CORR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.ROLLING_CORR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.RV_SPREAD_Z": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.RV_SPREAD_Z]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.TRANSFER_ENTROPY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.TRANSFER_ENTROPY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.TRIANGULAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.TRIANGULAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.USD_BETA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.USD_BETA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.CA.USD_BREADTH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.CA.USD_BREADTH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.BOWLEY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.BOWLEY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.CVAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.CVAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.GEV_SHAPE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.GEV_SHAPE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.HILL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.HILL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.KS_SHIFT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.KS_SHIFT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.KURT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.KURT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.LMOMENTS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.LMOMENTS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.MAD": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.MAD]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.OMEGA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.OMEGA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.QUANTILES": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.QUANTILES]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.SKEW": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.SKEW]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.DI.TAIL_RATIO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.DI.TAIL_RATIO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.ADF": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.ADF]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.ARCH_LM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.ARCH_LM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.AR_RESID": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.AR_RESID]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.AUTOCORR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.AUTOCORR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.CUSUM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.CUSUM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.EGARCH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.EGARCH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.GARCH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.GARCH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.GJR_GARCH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.GJR_GARCH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.HAR_RV": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.HAR_RV]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.KALMAN_LEVEL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.KALMAN_LEVEL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.KALMAN_TREND": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.KALMAN_TREND]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.LJUNG_BOX": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.LJUNG_BOX]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.OU": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.OU]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.PACF2": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.PACF2]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.SUP_F": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.SUP_F]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.EC.VARIANCE_RATIO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.EC.VARIANCE_RATIO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.BENFORD": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.BENFORD]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.DATE_NUMEROLOGY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.DATE_NUMEROLOGY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.DIGIT_PATTERN": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.DIGIT_PATTERN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.FIB_SESSION_TIME": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.FIB_SESSION_TIME]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.GOLDEN_GRID": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.GOLDEN_GRID]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.LUNAR_PHASE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.LUNAR_PHASE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.ORDINAL_MARKOV": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.ORDINAL_MARKOV]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.PRIME_INTERVAL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.PRIME_INTERVAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.ROUND_NUMBER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.ROUND_NUMBER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.SAX_RECURRENCE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.SAX_RECURRENCE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ES.TIME_MODULAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ES.TIME_MODULAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.FIB_EXTENSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.FIB_EXTENSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.FIB_RETRACE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.FIB_RETRACE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.FIB_TIME": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.FIB_TIME]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.GANN_ANGLE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.GANN_ANGLE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.GOLDEN_SWING": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.GOLDEN_SWING]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.HARMONIC": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.HARMONIC]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.LEG_VECTOR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.LEG_VECTOR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.MURREY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.MURREY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.PITCHFORK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.PITCHFORK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.SQUARE_OF_9": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.SQUARE_OF_9]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FG.TIME_PRICE_SYMMETRY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FG.TIME_PRICE_SYMMETRY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.BOX_COUNT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.BOX_COUNT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.CORR_DIM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.CORR_DIM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.DFA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.DFA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.GEN_HURST": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.GEN_HURST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.HIGUCHI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.HIGUCHI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.HURST_RS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.HURST_RS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.KATZ": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.KATZ]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.LYAPUNOV": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.LYAPUNOV]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.MFDFA_WIDTH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.MFDFA_WIDTH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.PETROSIAN": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.PETROSIAN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.RQA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.RQA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.SEVCIK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.SEVCIK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.FR.SIMPLEX_SKILL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.FR.SIMPLEX_SKILL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IN.MOVE_TO_COST": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IN.MOVE_TO_COST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IN.MTF_ALIGNMENT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IN.MTF_ALIGNMENT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IN.PAIRWISE_OPS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IN.PAIRWISE_OPS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IN.PIT_RANK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IN.PIT_RANK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IN.REGIME_GATE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IN.REGIME_GATE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IN.SYMBOLIC_COMPOSE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IN.SYMBOLIC_COMPOSE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IN.VOL_NORMALIZE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IN.VOL_NORMALIZE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.APPROX_ENTROPY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.APPROX_ENTROPY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.AUTO_MI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.AUTO_MI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.COND_MI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.COND_MI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.ENTROPY_RATE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.ENTROPY_RATE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.KL_DIVERGENCE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.KL_DIVERGENCE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.LEMPEL_ZIV": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.LEMPEL_ZIV]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.MULTISCALE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.MULTISCALE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.PERMUTATION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.PERMUTATION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.SAMPLE_ENTROPY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.SAMPLE_ENTROPY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.IT.SHANNON": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.IT.SHANNON]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.LF.AUTOENCODER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.LF.AUTOENCODER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.LF.CONTRASTIVE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.LF.CONTRASTIVE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.LF.DICT_LEARNING": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.LF.DICT_LEARNING]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.LF.GRU_EMBED": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.LF.GRU_EMBED]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.LF.ICA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.LF.ICA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.LF.KERNEL_PCA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.LF.KERNEL_PCA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.LF.KMEANS_CODEBOOK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.LF.KMEANS_CODEBOOK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.LF.PCA_EMBED": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.LF.PCA_EMBED]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.AWESOME": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.AWESOME]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.CCI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.CCI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.CFO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.CFO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.CMO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.CMO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.CONNORS_RSI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.CONNORS_RSI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.COPPOCK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.COPPOCK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.DPO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.DPO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.ELDER_RAY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.ELDER_RAY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.FISHER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.FISHER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.KST": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.KST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.MACD": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.MACD]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.MASS_INDEX": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.MASS_INDEX]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.RSI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.RSI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.RSI_DIVERGENCE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.RSI_DIVERGENCE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.RVI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.RVI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.RWI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.RWI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.SCHAFF": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.SCHAFF]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.STOCH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.STOCH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.STOCHRSI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.STOCHRSI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.TRIX": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.TRIX]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.TSI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.TSI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MO.ULTIMATE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MO.ULTIMATE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.ABDI_RANALDO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.ABDI_RANALDO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.AMIHUD": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.AMIHUD]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.CHAIKIN_AD": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.CHAIKIN_AD]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.CORWIN_SCHULTZ": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.CORWIN_SCHULTZ]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.EOM_TICK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.EOM_TICK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.FORCE_TICK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.FORCE_TICK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.KYLE_LAMBDA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.KYLE_LAMBDA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.LIQ_IMBALANCE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.LIQ_IMBALANCE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.MFI_TICK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.MFI_TICK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.NOISE_RATIO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.NOISE_RATIO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.OBV_TICK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.OBV_TICK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.QUOTE_INTENSITY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.QUOTE_INTENSITY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.QUOTE_STALENESS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.QUOTE_STALENESS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.ROLL_SPREAD": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.ROLL_SPREAD]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.SPREAD_COST": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.SPREAD_COST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.SPREAD_SPIKE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.SPREAD_SPIKE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.SPREAD_TO_RANGE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.SPREAD_TO_RANGE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.SPREAD_Z": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.SPREAD_Z]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.TICK_IMBALANCE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.TICK_IMBALANCE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.TWAP_TICK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.TWAP_TICK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.MS.VPIN": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.MS.VPIN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.ACCEL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.ACCEL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.CANDLE_ANATOMY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.CANDLE_ANATOMY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.CLV": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.CLV]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.EFFICIENCY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.EFFICIENCY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.EXTREMA_DIST": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.EXTREMA_DIST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.FRACDIFF": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.FRACDIFF]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.GAP": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.GAP]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.INTRABAR_RET": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.INTRABAR_RET]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.JERK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.JERK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.LOGRET_N": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.LOGRET_N]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.PCT_RANK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.PCT_RANK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.PRICE_Z": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.PRICE_Z]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.RANGE_RATIO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.RANGE_RATIO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.RET_TSTAT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.RET_TSTAT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.STREAK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.STREAK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.PR.UP_FRACTION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.PR.UP_FRACTION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.BOCPD": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.BOCPD]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.CHOPPINESS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.CHOPPINESS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.DRAWDOWN_REGIME": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.DRAWDOWN_REGIME]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.GMM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.GMM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.HMM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.HMM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.LIQUIDITY_REGIME": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.LIQUIDITY_REGIME]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.VARIANCE_CHANGEPOINT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.VARIANCE_CHANGEPOINT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.VOL_HYSTERESIS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.VOL_HYSTERESIS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.RG.VOL_PERCENTILE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.RG.VOL_PERCENTILE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.ACF_PERIODOGRAM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.ACF_PERIODOGRAM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.BANDPASS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.BANDPASS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.CEPSTRUM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.CEPSTRUM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.EMD": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.EMD]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.FFT_DOMINANT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.FFT_DOMINANT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.GOERTZEL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.GOERTZEL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.HILBERT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.HILBERT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.HOMODYNE_CYCLE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.HOMODYNE_CYCLE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.ROOFING": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.ROOFING]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.SINEWAVE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.SINEWAVE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.SPECTRAL_BANDS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.SPECTRAL_BANDS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.SPECTRAL_ENTROPY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.SPECTRAL_ENTROPY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.SPECTRAL_SLOPE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.SPECTRAL_SLOPE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.SSA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.SSA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.SUPER_SMOOTHER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.SUPER_SMOOTHER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.WAVELET_DENOISE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.WAVELET_DENOISE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.WAVELET_ENERGY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.WAVELET_ENERGY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.SP.ZERO_CROSSING": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.SP.ZERO_CROSSING]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.BREAKOUT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.BREAKOUT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.CANDLE_1BAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.CANDLE_1BAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.CANDLE_2BAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.CANDLE_2BAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.CANDLE_3BAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.CANDLE_3BAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.FAIR_VALUE_GAP": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.FAIR_VALUE_GAP]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.FALSE_BREAKOUT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.FALSE_BREAKOUT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.FLOOR_PIVOTS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.FLOOR_PIVOTS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.HEIKIN_ASHI": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.HEIKIN_ASHI]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.INSIDE_OUTSIDE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.INSIDE_OUTSIDE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.LIQ_SWEEP": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.LIQ_SWEEP]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.NARROW_RANGE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.NARROW_RANGE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.ORDER_BLOCK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.ORDER_BLOCK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.RENKO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.RENKO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.SR_LEVELS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.SR_LEVELS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.STRUCTURE_STATE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.STRUCTURE_STATE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.SWING_DIST": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.SWING_DIST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.TRENDLINES": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.TRENDLINES]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.VOLUME_PROFILE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.VOLUME_PROFILE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.ST.ZIGZAG_LEG": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.ST.ZIGZAG_LEG]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.ADX": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.ADX]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.ALMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.ALMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.AROON": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.AROON]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.CURVATURE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.CURVATURE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.DEMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.DEMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.EMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.EMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.FRAMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.FRAMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.HMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.HMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.ICHIMOKU": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.ICHIMOKU]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.KAMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.KAMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.LAGUERRE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.LAGUERRE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.MAMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.MAMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.MANN_KENDALL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.MANN_KENDALL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.MCGINLEY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.MCGINLEY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.PSAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.PSAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.REG_CHANNEL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.REG_CHANNEL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.REG_SLOPE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.REG_SLOPE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.RIBBON": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.RIBBON]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.SMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.SMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.SUPERTREND": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.SUPERTREND]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.T3": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.T3]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.TEMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.TEMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.TRIMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.TRIMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.VIDYA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.VIDYA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.VORTEX": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.VORTEX]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.WMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.WMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TR.ZLEMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TR.ZLEMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.DST_TRANSITION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.DST_TRANSITION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.FIX_WINDOW": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.FIX_WINDOW]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.HOLIDAYS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.HOLIDAYS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.HOUR_CYCLE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.HOUR_CYCLE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.MONTH_CALENDAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.MONTH_CALENDAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.NFP_WINDOW": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.NFP_WINDOW]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.SEASONAL_RETURN": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.SEASONAL_RETURN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.SEASONAL_VOL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.SEASONAL_VOL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.SESSION_CLOCK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.SESSION_CLOCK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.SESSION_RANGE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.SESSION_RANGE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.TS.WEEKDAY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.TS.WEEKDAY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.ATR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.ATR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.ATR_RATIO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.ATR_RATIO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.BB_WIDTH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.BB_WIDTH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.BIPOWER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.BIPOWER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.CHAIKIN_VOL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.CHAIKIN_VOL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.CLUSTERING": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.CLUSTERING]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.DONCHIAN_WIDTH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.DONCHIAN_WIDTH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.EWMA": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.EWMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.GARMAN_KLASS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.GARMAN_KLASS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.HV": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.HV]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.JUMP_RATIO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.JUMP_RATIO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.KELTNER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.KELTNER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.LEE_MYKLAND": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.LEE_MYKLAND]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.MEDRV": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.MEDRV]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.PARKINSON": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.PARKINSON]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.QUARTICITY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.QUARTICITY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.ROGERS_SATCHELL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.ROGERS_SATCHELL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.RV_INTRABAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.RV_INTRABAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.SEMIVAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.SEMIVAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.ULCER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.ULCER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.VOL_OF_VOL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.VOL_OF_VOL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "F.VO.YANG_ZHANG": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_features_generic.py::test_feature_contract[F.VO.YANG_ZHANG]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.ENS.BLENDING": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.ENS.BLENDING-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.ENS.BLENDING-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.ENS.BLENDING]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.ENS.DYNAMIC_SELECTION": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.ENS.DYNAMIC_SELECTION-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.ENS.DYNAMIC_SELECTION-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.ENS.DYNAMIC_SELECTION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.ENS.MIXTURE_OF_EXPERTS": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.ENS.MIXTURE_OF_EXPERTS-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.ENS.MIXTURE_OF_EXPERTS-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.ENS.MIXTURE_OF_EXPERTS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.ENS.REGIME_GATED": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.ENS.REGIME_GATED-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.ENS.REGIME_GATED-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.ENS.REGIME_GATED]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.ENS.STACKING": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.ENS.STACKING-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.ENS.STACKING-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.ENS.STACKING]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.EVO.DE_SHARPE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.EVO.DE_SHARPE-pol]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.EVO.GP": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.EVO.GP-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.EVO.GP-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.EVO.GP]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.EVO.GRAMMATICAL": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.EVO.GRAMMATICAL-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.EVO.GRAMMATICAL-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.EVO.GRAMMATICAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.EVO.SYMBOLIC_REGRESSION": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.EVO.SYMBOLIC_REGRESSION-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.EVO.SYMBOLIC_REGRESSION-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.EVO.SYMBOLIC_REGRESSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.IB.KNN": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.IB.KNN-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.IB.KNN-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.IB.KNN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.KER.GP": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.KER.GP-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.KER.GP-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.KER.GP]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.KER.KRR": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.KER.KRR-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.KER.KRR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.KER.LINEAR_SVM": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.KER.LINEAR_SVM-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.KER.LINEAR_SVM-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.KER.LINEAR_SVM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.KER.RBF_SVM": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.KER.RBF_SVM-clf]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.KER.RBF_SVM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.KER.SVR": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.KER.SVR-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.KER.SVR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.BAYES_RIDGE": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.BAYES_RIDGE-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.LIN.BAYES_RIDGE-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.BAYES_RIDGE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.ELASTICNET": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.ELASTICNET-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.LIN.ELASTICNET-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.ELASTICNET]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.GAM": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.GAM-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.LIN.GAM-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.GAM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.HUBER": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.HUBER-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.LIN.HUBER-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.HUBER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.LASSO": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.LASSO-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.LIN.LASSO-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.LASSO]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.LOGISTIC": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.LOGISTIC-clf]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.LOGISTIC]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.OLS": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.OLS-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.LIN.OLS-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.OLS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.QUANTILE": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.QUANTILE-q]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.LIN.QUANTILE-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.QUANTILE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.LIN.RIDGE": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.LIN.RIDGE-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.LIN.RIDGE-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.LIN.RIDGE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.ATTENTION": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.ATTENTION-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.ATTENTION-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.ATTENTION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.CNN": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.CNN-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.CNN-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.CNN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.GRU": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.GRU-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.GRU-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.GRU]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.LSTM": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.LSTM-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.LSTM-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.LSTM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.MLP": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.MLP-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.MLP-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.MLP]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.NBEATS": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.NBEATS-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.NBEATS-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.NBEATS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.NHITS": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.NHITS-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.NHITS-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.NHITS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.PATCHTST": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.PATCHTST-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.PATCHTST-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.PATCHTST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.TCN": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.TCN-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.TCN-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.TCN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.TFT": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.TFT-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.TFT-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.TFT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.NN.TRANSFORMER": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.NN.TRANSFORMER-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.NN.TRANSFORMER-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.NN.TRANSFORMER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.PB.BAYES_SSM": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.PB.BAYES_SSM-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.PB.BAYES_SSM-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.PB.BAYES_SSM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.PB.GMM_CLASSIFIER": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.PB.GMM_CLASSIFIER-clf]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.PB.GMM_CLASSIFIER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.PB.GNB": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.PB.GNB-clf]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.PB.GNB]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.PB.HMM": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.PB.HMM-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.PB.HMM-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.PB.HMM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.PB.QDA": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.PB.QDA-clf]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.PB.QDA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.REP.AUTOENCODER": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.REP.AUTOENCODER-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.REP.AUTOENCODER-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.REP.AUTOENCODER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.REP.CONTRASTIVE": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.REP.CONTRASTIVE-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.REP.CONTRASTIVE-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.REP.CONTRASTIVE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.REP.LATENT_STATE": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.REP.LATENT_STATE-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.REP.LATENT_STATE-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.REP.LATENT_STATE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.REP.VAE": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.REP.VAE-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.REP.VAE-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.REP.VAE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.RL.DQN": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.RL.DQN-pol]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.RL.LINUCB": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.RL.LINUCB-pol]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.RL.PPO": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.RL.PPO-pol]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.RL.SAC": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.RL.SAC-pol]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.ADABOOST": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.ADABOOST-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.ADABOOST-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.ADABOOST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.CART": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.CART-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.CART-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.CART]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.CATBOOST": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.CATBOOST-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.CATBOOST-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.CATBOOST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.EXTRA": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.EXTRA-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.EXTRA-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.EXTRA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.GBM": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.GBM-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.GBM-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.GBM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.HGB": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.HGB-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.HGB-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.HGB]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.LGBM": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.LGBM-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.LGBM-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.LGBM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.RF": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.RF-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.RF-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.RF]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TREE.XGB": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TREE.XGB-clf]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TREE.XGB-reg]:passed",
+   "tests/test_models_generic.py::test_model_learns_planted_signal[M.TREE.XGB]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.AR": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.AR-reg]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TS.AR-clf]:passed",
+   "tests/test_models_generic.py::test_ts_model_learns_ar_structure[M.TS.AR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.ARIMA": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.ARIMA-reg]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TS.ARIMA-clf]:passed",
+   "tests/test_models_generic.py::test_ts_model_learns_ar_structure[M.TS.ARIMA]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.EGARCH": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.EGARCH-vol]:passed",
+   "tests/test_models_generic.py::test_vol_model_tracks_volatility[M.TS.EGARCH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.GARCH": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.GARCH-vol]:passed",
+   "tests/test_models_generic.py::test_vol_model_tracks_volatility[M.TS.GARCH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.GJR_GARCH": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.GJR_GARCH-vol]:passed",
+   "tests/test_models_generic.py::test_vol_model_tracks_volatility[M.TS.GJR_GARCH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.HAR": {
+  "failed": 0,
+  "passed": 2,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.HAR-vol]:passed",
+   "tests/test_models_generic.py::test_vol_model_tracks_volatility[M.TS.HAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.HOLT_WINTERS": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.HOLT_WINTERS-reg]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TS.HOLT_WINTERS-clf]:passed",
+   "tests/test_models_generic.py::test_ts_model_learns_ar_structure[M.TS.HOLT_WINTERS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.KALMAN": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.KALMAN-reg]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TS.KALMAN-clf]:passed",
+   "tests/test_models_generic.py::test_ts_model_learns_ar_structure[M.TS.KALMAN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.MARKOV_SWITCHING": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.MARKOV_SWITCHING-reg]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TS.MARKOV_SWITCHING-clf]:passed",
+   "tests/test_models_generic.py::test_ts_model_learns_ar_structure[M.TS.MARKOV_SWITCHING]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.SARIMAX": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.SARIMAX-reg]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TS.SARIMAX-clf]:passed",
+   "tests/test_models_generic.py::test_ts_model_learns_ar_structure[M.TS.SARIMAX]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.VAR": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.VAR-reg]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TS.VAR-clf]:passed",
+   "tests/test_models_generic.py::test_ts_model_learns_ar_structure[M.TS.VAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "M.TS.VECM": {
+  "failed": 0,
+  "passed": 3,
+  "skipped": 0,
+  "tests": [
+   "tests/test_models_generic.py::test_model_contract[M.TS.VECM-reg]:passed",
+   "tests/test_models_generic.py::test_model_contract[M.TS.VECM-clf]:passed",
+   "tests/test_models_generic.py::test_ts_model_learns_ar_structure[M.TS.VECM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.BO.FALSE_BREAKOUT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.BO.FALSE_BREAKOUT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.BO.OPENING_RANGE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.BO.OPENING_RANGE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.BO.RANGE_EXPANSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.BO.RANGE_EXPANSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.BO.RETEST": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.BO.RETEST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.BO.VOL_BREAKOUT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.BO.VOL_BREAKOUT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.GEO.FIB_EXTENSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.GEO.FIB_EXTENSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.GEO.FIB_RETRACE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.GEO.FIB_RETRACE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.GEO.GANN": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.GEO.GANN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.GEO.HARMONIC": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.GEO.HARMONIC]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ML.META_LABEL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ML.META_LABEL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ML.REGIME_GATED_ENSEMBLE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ML.REGIME_GATED_ENSEMBLE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ML.RETURN_REGRESSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ML.RETURN_REGRESSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ML.RL_POLICY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ML.RL_POLICY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ML.SUPERVISED_DIRECTION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ML.SUPERVISED_DIRECTION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ML.TRIPLE_BARRIER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ML.TRIPLE_BARRIER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MR.BOLLINGER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MR.BOLLINGER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MR.OU": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MR.OU]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MR.RSI_REVERSAL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MR.RSI_REVERSAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MR.SHORT_REVERSAL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MR.SHORT_REVERSAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MR.STOCH_REVERSAL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MR.STOCH_REVERSAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MR.TWAP_REVERSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MR.TWAP_REVERSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MR.ZSCORE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MR.ZSCORE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MS.LIQUIDITY_FILTERED": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MS.LIQUIDITY_FILTERED]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MS.ORDER_FLOW": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MS.ORDER_FLOW]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.MS.TICK_IMBALANCE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.MS.TICK_IMBALANCE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.RG.CHANGE_POINT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.RG.CHANGE_POINT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.RG.ENTROPY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.RG.ENTROPY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.RG.FRACTAL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.RG.FRACTAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.RG.HMM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.RG.HMM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.RG.VOL_FORECAST": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.RG.VOL_FORECAST]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SEAS.FIX_REVERSAL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SEAS.FIX_REVERSAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SEAS.INTRADAY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SEAS.INTRADAY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SEAS.TURN_OF_MONTH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SEAS.TURN_OF_MONTH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SEAS.WEEKDAY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SEAS.WEEKDAY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SEAS.WEEKEND_GAP_FADE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SEAS.WEEKEND_GAP_FADE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SES.ASIAN_RANGE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SES.ASIAN_RANGE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SES.LONDON_BREAKOUT": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SES.LONDON_BREAKOUT]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SES.NY_OPEN_REVERSAL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SES.NY_OPEN_REVERSAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SES.OVERLAP_MOMENTUM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SES.OVERLAP_MOMENTUM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SES.SESSION_MOMENTUM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SES.SESSION_MOMENTUM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SP.SPECTRAL_CYCLE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SP.SPECTRAL_CYCLE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.SP.WAVELET": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.SP.WAVELET]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ST.CANDLESTICK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ST.CANDLESTICK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ST.CHANNEL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ST.CHANNEL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ST.PIVOT_POINTS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ST.PIVOT_POINTS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ST.SR_REVERSAL": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ST.SR_REVERSAL]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ST.SWING_STRUCTURE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ST.SWING_STRUCTURE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.ST.TRENDLINE_BREAK": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.ST.TRENDLINE_BREAK]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.TREND.ADAPTIVE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.TREND.ADAPTIVE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.TREND.DONCHIAN": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.TREND.DONCHIAN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.TREND.KALMAN": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.TREND.KALMAN]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.TREND.MA_CROSS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.TREND.MA_CROSS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.TREND.REGRESSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.TREND.REGRESSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.TREND.TSMOM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.TREND.TSMOM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.TREND.XS_MOMENTUM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.TREND.XS_MOMENTUM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.VOL.COMPRESSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.VOL.COMPRESSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.VOL.EXPANSION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.VOL.EXPANSION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.VOL.REGIME_SWITCH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.VOL.REGIME_SWITCH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.CARRY": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.CARRY]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.CARRY_FILTER": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.CARRY_FILTER]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.CARRY_MOM": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.CARRY_MOM]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.CARRY_VOLGATE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.CARRY_VOLGATE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.COINTEGRATION": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.COINTEGRATION]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.CURRENCY_STRENGTH": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.CURRENCY_STRENGTH]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.GOLD_FX": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.GOLD_FX]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.LEAD_LAG": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.LEAD_LAG]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.PAIRS": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.PAIRS]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.RELATIVE_VALUE": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.RELATIVE_VALUE]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.STAT_ARB": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.STAT_ARB]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ },
+ "S.XA.TRIANGULAR": {
+  "failed": 0,
+  "passed": 1,
+  "skipped": 0,
+  "tests": [
+   "tests/test_strategies_generic.py::test_strategy_contract[S.XA.TRIANGULAR]:passed"
+  ],
+  "ts": "2026-10-23T02:23:24.996302+00:00"
+ }
+}

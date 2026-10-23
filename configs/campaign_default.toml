@@ -1,0 +1,45 @@
+# Default research-campaign configuration (consumed by scripts/campaign.py arguments; kept here as the
+# documented, versioned source of the defaults used in this repository's runs).
+
+[data]
+source = "dukascopy ticks via FX-Data GitHub mirror (see docs/data_sources.md)"
+development_end = "2025-12-31"
+holdout_start = "2026-01-01"          # locked; see README "The 2026 holdout"
+base_timeframe = "M1"                 # all higher timeframes are built from validated M1 bid/ask bars
+
+[execution]
+spread = "quoted bid/ask of the execution bar"
+spread_mult = 1.0
+slip_spread_frac = 0.25
+slip_fixed_pips = 0.1
+commission_bps_per_side = 0.35        # ~ $3.5 per $100k per side
+swap_pips_per_night = 0.5             # conservative constant; historical swaps unavailable
+latency_bars = 0
+stress_multipliers = [1.5, 2.0, 3.0]
+latency_stress_bars = [1]
+intrabar_ambiguity = "stop first"
+
+[walk_forward]
+train_years = 3
+test_months = 6
+mode = "rolling"
+selection_metric = "daily net Sharpe on the training window"
+min_train_trades = 10
+n_trials_screen = 6
+n_trials_optimise = 30
+optimiser = "random (screen) / optuna TPE (optimise)"
+
+[model_walk_forward]
+train_bars = 10000
+test_bars = 5000
+embargo = "h + 1 bars"
+horizons = [1, 2, 3, 5, 10, 20, 30, 50, 100]
+
+[survival_bar]
+oos_sharpe_gt = 0.0
+bh_adjusted_p_lt = 0.10
+deflated_sharpe_gt = 0.95
+sharpe_at_2x_costs_gt = 0.0
+
+[reproducibility]
+global_seed = 20251231

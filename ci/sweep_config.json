@@ -1,0 +1,18 @@
+{
+  "mode": "smoke",
+  "first_year": 2005,
+  "last_year": 2025,
+  "pairs_full": ["EURUSD", "GBPUSD", "USDJPY", "USDCHF", "USDCAD", "AUDUSD", "NZDUSD",
+                 "EURGBP", "EURJPY", "EURCHF", "EURAUD", "EURCAD", "EURNZD", "GBPJPY", "GBPCHF", "GBPAUD", "GBPCAD",
+                 "GBPNZD", "AUDJPY", "AUDCHF", "AUDCAD", "AUDNZD", "CADJPY", "CADCHF", "CHFJPY", "NZDJPY", "NZDCHF",
+                 "NZDCAD", "USDSEK", "USDNOK", "USDMXN", "USDZAR", "USDTRY", "USDCNH", "EURSEK", "EURNOK",
+                 "XAUUSD", "XAGUSD"],
+  "pairs_smoke": ["EURUSD", "USDJPY"],
+  "hi_tfs_full": ["H1", "H2", "H4", "H8", "D1", "TICK60"],
+  "lo_tfs_full": ["M30", "M15", "M5", "VOLA60"],
+  "hi_tfs_smoke": ["H4", "D1"],
+  "lo_tfs_smoke": [],
+  "smoke_first_year": 2021,
+  "models_full": true,
+  "models_smoke": false
+}
