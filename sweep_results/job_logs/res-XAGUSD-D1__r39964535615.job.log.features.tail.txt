@@ -1,0 +1,8 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+  XAGUSD D1: built 269 features in 96s (0 errors, 0 skipped)
+XAGUSD D1: 854 columns, median OOS net Sharpe -0.18, positive 0.25, best 0.91 | placebo median -0.47 best 0.03 | 108.3s

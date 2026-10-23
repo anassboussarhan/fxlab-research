@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6271.178802176101 is not greater than 6271.1788085775615. Delta is -6.40146026853472e-06
+Model is not converging.  Current: 6188.843699111401 is not greater than 6188.843765144425. Delta is -6.603302335861372e-05
+Model is not converging.  Current: 6261.912004028521 is not greater than 6261.912018932438. Delta is -1.4903916962794028e-05
+Model is not converging.  Current: 6213.221890376801 is not greater than 6213.221908565801. Delta is -1.8189000002166722e-05
+Model is not converging.  Current: 6185.940170967579 is not greater than 6185.940183654094. Delta is -1.2686514310189523e-05
+  GBPUSD M30: built 267 features in 553s (0 errors, 2 skipped)
+GBPUSD M30: 846 columns, median OOS net Sharpe -0.35, positive 0.08, best 0.78 | placebo median 0.00 best 0.06 | 812.4s

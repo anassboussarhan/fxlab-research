@@ -1,0 +1,21 @@
+planned 71 experiments (11 skipped) -> /home/runner/work/fxlab-research/fxlab-research/results/manifests/cloud_H2_XAGUSD.json
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6330.43773961083 is not greater than 6330.437843587051. Delta is -0.00010397622099844739
+{
+ "planned": 71,
+ "skipped_at_planning": 11,
+ "ok": 71,
+ "failed": 0,
+ "not_yet_run": 0
+}

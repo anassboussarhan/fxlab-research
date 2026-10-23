@@ -1,0 +1,18 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6238.720167503754 is not greater than 6238.720175705747. Delta is -8.201993296097498e-06
+Model is not converging.  Current: 6235.219045266599 is not greater than 6235.219048895313. Delta is -3.628713784564752e-06
+Model is not converging.  Current: 6200.234898039854 is not greater than 6200.234898196514. Delta is -1.566604623803869e-07
+  CADCHF H1: built 267 features in 138s (0 errors, 2 skipped)
+CADCHF H1: 846 columns, median OOS net Sharpe -0.44, positive 0.05, best 0.50 | placebo median 0.00 best 0.20 | 229.1s

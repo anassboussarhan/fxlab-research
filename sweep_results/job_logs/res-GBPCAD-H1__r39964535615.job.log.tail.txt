@@ -1,0 +1,51 @@
+ = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+Model is not converging.  Current: 6125.709709634589 is not greater than 6125.709725636787. Delta is -1.600219820829807e-05
+Model is not converging.  Current: 6141.310182332492 is not greater than 6141.310190477876. Delta is -8.145383617375046e-06
+{
+ "planned": 81,
+ "skipped_at_planning": 1,
+ "ok": 81,
+ "failed": 0,
+ "not_yet_run": 0
+}
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+Model is not converging.  Current: 6125.709709634589 is not greater than 6125.709725636787. Delta is -1.600219820829807e-05
+Model is not converging.  Current: 6141.310182332492 is not greater than 6141.310190477876. Delta is -8.145383617375046e-06
+{
+ "planned": 56,
+ "skipped_at_planning": 26,
+ "ok": 56,
+ "failed": 0,
+ "not_yet_run": 0
+}
+GBPCAD H1 h=4: net -0.95 gross -0.13 IC 0.036 abstain 0.88 in-market 0.03 (42.3s)
+GBPCAD H1 h=24: net 0.00 gross 0.00 IC 0.034 abstain 1.00 in-market 0.00 (9.5s)

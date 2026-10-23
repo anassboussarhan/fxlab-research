@@ -1,0 +1,8 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+  USDCAD D1: built 269 features in 125s (0 errors, 0 skipped)
+USDCAD D1: 854 columns, median OOS net Sharpe -0.16, positive 0.28, best 0.74 | placebo median -0.37 best 0.29 | 141.2s

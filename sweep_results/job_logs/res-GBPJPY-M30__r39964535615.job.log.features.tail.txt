@@ -1,0 +1,35 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6328.074389471295 is not greater than 6328.074407698711. Delta is -1.822741614887491e-05
+Model is not converging.  Current: 6185.140555762237 is not greater than 6185.140557254568. Delta is -1.4923307389835827e-06
+Model is not converging.  Current: 6132.641443907228 is not greater than 6132.641486053989. Delta is -4.214676118863281e-05
+Model is not converging.  Current: 6143.2832942074265 is not greater than 6143.283296688027. Delta is -2.4806004148558713e-06
+Model is not converging.  Current: 6175.201507617737 is not greater than 6175.201516188811. Delta is -8.571074431529269e-06
+Model is not converging.  Current: 6163.578878019931 is not greater than 6163.57888204571. Delta is -4.025779162475374e-06
+Model is not converging.  Current: 6249.84459058347 is not greater than 6249.844600435214. Delta is -9.851743925537448e-06
+Model is not converging.  Current: 6315.936112281233 is not greater than 6315.936151067253. Delta is -3.878602001350373e-05
+Model is not converging.  Current: 6290.143836167424 is not greater than 6290.143892901604. Delta is -5.673418036167277e-05
+Model is not converging.  Current: 6316.587662964664 is not greater than 6316.587741893962. Delta is -7.892929806985194e-05
+Model is not converging.  Current: 6274.547863588862 is not greater than 6274.547874692892. Delta is -1.1104029908892699e-05
+Model is not converging.  Current: 6237.376102443668 is not greater than 6237.376104693402. Delta is -2.2497342797578312e-06
+Model is not converging.  Current: 6495.048563035675 is not greater than 6495.048570467987. Delta is -7.432311576849315e-06
+Model is not converging.  Current: 6172.4553177663765 is not greater than 6172.455333283527. Delta is -1.5517150131927337e-05
+Model is not converging.  Current: 6280.078295317359 is not greater than 6280.078316227117. Delta is -2.0909757949993946e-05
+  GBPJPY M30: built 267 features in 546s (0 errors, 2 skipped)
+GBPJPY M30: 846 columns, median OOS net Sharpe -0.28, positive 0.11, best 0.86 | placebo median 0.00 best 0.00 | 805.4s

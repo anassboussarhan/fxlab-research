@@ -1,0 +1,46 @@
+s/cloud_VOLA60_AUDJPY.json
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+Model is not converging.  Current: 6415.317073555017 is not greater than 6415.317107694739. Delta is -3.4139722629333846e-05
+Model is not converging.  Current: 6257.957324131709 is not greater than 6257.957367599537. Delta is -4.3467827708809637e-05
+Model is not converging.  Current: 6109.298010072581 is not greater than 6109.298028156882. Delta is -1.8084300791088026e-05
+Model is not converging.  Current: 6191.386789971851 is not greater than 6191.386822447253. Delta is -3.2475401894771494e-05
+Model is not converging.  Current: 6240.389481253377 is not greater than 6240.389515654429. Delta is -3.440105137997307e-05
+Model is not converging.  Current: 6256.6082032916065 is not greater than 6256.608274862605. Delta is -7.15709984433488e-05
+Model is not converging.  Current: 6041.7150895329805 is not greater than 6041.71509241792. Delta is -2.884939021896571e-06
+Model is not converging.  Current: 6176.870892088743 is not greater than 6176.870898131051. Delta is -6.042308086762205e-06
+Model is not converging.  Current: 6044.385082157305 is not greater than 6044.3850945186505. Delta is -1.2361345397948753e-05
+{
+ "planned": 81,
+ "skipped_at_planning": 1,
+ "ok": 81,
+ "failed": 0,
+ "not_yet_run": 0
+}

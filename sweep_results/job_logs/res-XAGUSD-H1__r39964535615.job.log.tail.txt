@@ -1,0 +1,46 @@
+ab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6367.438484031002 is not greater than 6367.438547684069. Delta is -6.365306671796134e-05
+Model is not converging.  Current: 6301.423149982512 is not greater than 6301.423156836321. Delta is -6.853809281892609e-06
+Model is not converging.  Current: 6328.494813892711 is not greater than 6328.494821884236. Delta is -7.991525308170822e-06
+Model is not converging.  Current: 6230.53192841239 is not greater than 6230.531928976651. Delta is -5.64261426916346e-07
+Model is not converging.  Current: 6478.825369178787 is not greater than 6478.825380849509. Delta is -1.1670722415146884e-05
+Model is not converging.  Current: 6351.709839733182 is not greater than 6351.709866805851. Delta is -2.7072668672190048e-05
+Model is not converging.  Current: 6266.730892589424 is not greater than 6266.7309194847485. Delta is -2.689532448130194e-05
+Model is not converging.  Current: 6345.678742365765 is not greater than 6345.678760685728. Delta is -1.8319962691748515e-05
+Model is not converging.  Current: 6320.759069448718 is not greater than 6320.759092736688. Delta is -2.3287970179808326e-05
+Model is not converging.  Current: 6267.5850926078865 is not greater than 6267.585110054495. Delta is -1.7446608580939937e-05
+Model is not converging.  Current: 6257.83957054861 is not greater than 6257.83957938526. Delta is -8.836649612931069e-06
+Model is not converging.  Current: 6306.49238502054 is not greater than 6306.492386735108. Delta is -1.714568497845903e-06
+Model is not converging.  Current: 6344.131076138932 is not greater than 6344.1310800744795. Delta is -3.93554728361778e-06
+Model is not converging.  Current: 6275.683754873657 is not greater than 6275.683755406929. Delta is -5.33272213942837e-07
+{
+ "planned": 81,
+ "skipped_at_planning": 1,
+ "ok": 81,
+ "failed": 0,
+ "not_yet_run": 0
+}
+Model is not converging.  Current: 6367.438484031002 is not greater than 6367.438547684069. Delta is -6.365306671796134e-05
+Model is not converging.  Current: 6301.423149982512 is not greater than 6301.423156836321. Delta is -6.853809281892609e-06
+Model is not converging.  Current: 6328.494813892711 is not greater than 6328.494821884236. Delta is -7.991525308170822e-06
+Model is not converging.  Current: 6230.53192841239 is not greater than 6230.531928976651. Delta is -5.64261426916346e-07
+Model is not converging.  Current: 6478.825369178787 is not greater than 6478.825380849509. Delta is -1.1670722415146884e-05
+Model is not converging.  Current: 6351.709839733182 is not greater than 6351.709866805851. Delta is -2.7072668672190048e-05
+Model is not converging.  Current: 6266.730892589424 is not greater than 6266.7309194847485. Delta is -2.689532448130194e-05
+Model is not converging.  Current: 6345.678742365765 is not greater than 6345.678760685728. Delta is -1.8319962691748515e-05
+Model is not converging.  Current: 6320.759069448718 is not greater than 6320.759092736688. Delta is -2.3287970179808326e-05
+Model is not converging.  Current: 6267.5850926078865 is not greater than 6267.585110054495. Delta is -1.7446608580939937e-05
+Model is not converging.  Current: 6257.83957054861 is not greater than 6257.83957938526. Delta is -8.836649612931069e-06
+Model is not converging.  Current: 6306.49238502054 is not greater than 6306.492386735108. Delta is -1.714568497845903e-06
+Model is not converging.  Current: 6344.131076138932 is not greater than 6344.1310800744795. Delta is -3.93554728361778e-06
+Model is not converging.  Current: 6275.683754873657 is not greater than 6275.683755406929. Delta is -5.33272213942837e-07
+{
+ "planned": 56,
+ "skipped_at_planning": 26,
+ "ok": 56,
+ "failed": 0,
+ "not_yet_run": 0
+}
+XAGUSD H1 h=4: net -0.50 gross 0.52 IC 0.034 abstain 0.93 in-market 0.00 (43.3s)
+XAGUSD H1 h=24: net 0.00 gross 0.00 IC 0.014 abstain 1.00 in-market 0.00 (9.7s)

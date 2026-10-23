@@ -1,0 +1,36 @@
+planned 81 experiments (1 skipped) -> /home/runner/work/fxlab-research/fxlab-research/results/manifests/cloud_VOLA60_AUDNZD.json
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+Model is not converging.  Current: 6162.571648651311 is not greater than 6162.5716827910965. Delta is -3.413978538446827e-05
+Model is not converging.  Current: 6142.988015882743 is not greater than 6142.988026900609. Delta is -1.1017866199836135e-05
+Model is not converging.  Current: 6144.648566960106 is not greater than 6144.648603932942. Delta is -3.697283591463929e-05
+Model is not converging.  Current: -388.23440050596594 is not greater than -388.2099380534392. Delta is -0.02446245252673407
+{
+ "planned": 81,
+ "skipped_at_planning": 1,
+ "ok": 81,
+ "failed": 0,
+ "not_yet_run": 0
+}

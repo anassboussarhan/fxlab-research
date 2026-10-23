@@ -1,0 +1,17 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6210.6321710420025 is not greater than 6210.6321733176555. Delta is -2.275653059768956e-06
+Model is not converging.  Current: 6089.681810361307 is not greater than 6089.681833108298. Delta is -2.2746990907762665e-05
+Model is not converging.  Current: 6076.040339324586 is not greater than 6076.040367425712. Delta is -2.8101126190449577e-05
+Model is not converging.  Current: 6041.930954463964 is not greater than 6041.930973830961. Delta is -1.9366997548786458e-05
+Model is not converging.  Current: 6057.637813333536 is not greater than 6057.63782740791. Delta is -1.4074374121264555e-05
+Model is not converging.  Current: 6222.627823421079 is not greater than 6222.627830585428. Delta is -7.164348971855361e-06
+Model is not converging.  Current: 6219.793520414846 is not greater than 6219.793527183681. Delta is -6.768835191905964e-06
+  USDCAD H1: built 267 features in 311s (0 errors, 2 skipped)
+USDCAD H1: 846 columns, median OOS net Sharpe -0.35, positive 0.11, best 0.81 | placebo median 0.00 best 0.20 | 452.3s

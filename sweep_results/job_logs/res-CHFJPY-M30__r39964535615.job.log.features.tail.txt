@@ -1,0 +1,39 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6123.618108189923 is not greater than 6123.618151888053. Delta is -4.369812995719258e-05
+Model is not converging.  Current: 6186.271088655857 is not greater than 6186.271126611384. Delta is -3.7955526750010904e-05
+Model is not converging.  Current: 6113.1795139443275 is not greater than 6113.1795214458325. Delta is -7.501505024265498e-06
+Model is not converging.  Current: 6125.676624044753 is not greater than 6125.676657569614. Delta is -3.352486055518966e-05
+Model is not converging.  Current: 6190.996451387371 is not greater than 6190.996479922295. Delta is -2.8534924240375403e-05
+Model is not converging.  Current: 6166.75675918604 is not greater than 6166.7568313700685. Delta is -7.218402879516361e-05
+Model is not converging.  Current: 6173.566369704757 is not greater than 6173.566403645743. Delta is -3.394098621356534e-05
+Model is not converging.  Current: 6194.762124887636 is not greater than 6194.762160319036. Delta is -3.5431400647212286e-05
+Model is not converging.  Current: 6357.351043982656 is not greater than 6357.351047642001. Delta is -3.6593446566257626e-06
+  CHFJPY M30: built 267 features in 555s (0 errors, 2 skipped)
+CHFJPY M30: 846 columns, median OOS net Sharpe -0.30, positive 0.07, best 0.62 | placebo median 0.00 best 0.00 | 814.0s

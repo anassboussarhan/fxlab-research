@@ -1,0 +1,50 @@
+erWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+Model is not converging.  Current: 6416.627309431445 is not greater than 6416.62737903341. Delta is -6.960196515137795e-05
+Model is not converging.  Current: 6162.033938896692 is not greater than 6162.033940266728. Delta is -1.370035533909686e-06
+Model is not converging.  Current: 6448.3412659509095 is not greater than 6448.341291586989. Delta is -2.5636079953983426e-05
+Model is not converging.  Current: 6400.109486958916 is not greater than 6400.109505531479. Delta is -1.8572563021734823e-05
+Model is not converging.  Current: 6345.374832988879 is not greater than 6345.374849777641. Delta is -1.6788762877695262e-05
+Model is not converging.  Current: 6320.600246214289 is not greater than 6320.600253712161. Delta is -7.497872502426617e-06
+{
+ "planned": 81,
+ "skipped_at_planning": 1,
+ "ok": 81,
+ "failed": 0,
+ "not_yet_run": 0
+}
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+Model is not converging.  Current: 6416.627309431445 is not greater than 6416.62737903341. Delta is -6.960196515137795e-05
+Model is not converging.  Current: 6162.033938896692 is not greater than 6162.033940266728. Delta is -1.370035533909686e-06
+Model is not converging.  Current: 6448.3412659509095 is not greater than 6448.341291586989. Delta is -2.5636079953983426e-05
+Model is not converging.  Current: 6400.109486958916 is not greater than 6400.109505531479. Delta is -1.8572563021734823e-05
+Model is not converging.  Current: 6345.374832988879 is not greater than 6345.374849777641. Delta is -1.6788762877695262e-05
+Model is not converging.  Current: 6320.600246214289 is not greater than 6320.600253712161. Delta is -7.497872502426617e-06
+{
+ "planned": 56,
+ "skipped_at_planning": 26,
+ "ok": 56,
+ "failed": 0,
+ "not_yet_run": 0
+}
+CHFJPY H1 h=4: net -0.99 gross 0.20 IC 0.005 abstain 0.76 in-market 0.06 (47.4s)
+CHFJPY H1 h=24: net 0.00 gross 0.00 IC 0.008 abstain 1.00 in-market 0.00 (12.5s)

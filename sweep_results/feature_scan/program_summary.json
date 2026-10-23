@@ -1,0 +1,3198 @@
+{
+ "streams_real": 173204,
+ "streams_placebo": 8160,
+ "instruments_by_tf": {
+  "D1": 34,
+  "H1": 34,
+  "H2": 34,
+  "H4": 34,
+  "H8": 34,
+  "M30": 34
+ },
+ "bh_significant_10pct": 0,
+ "bh_significant_5pct": 0,
+ "holm_significant_5pct": 0,
+ "by_tf": {
+  "D1": {
+   "real_columns": 29036,
+   "real_median_sharpe": -0.20474143319984683,
+   "real_share_positive": 0.23553519768563164,
+   "real_best": 1.341201464949021,
+   "real_median_gross_sharpe": 0.0,
+   "placebo_median_sharpe": -0.3555548034942567,
+   "placebo_p95_sharpe": 0.19480056945736782,
+   "placebo_best": 0.9615870890477348,
+   "share_real_above_placebo_p95": 0.10852045736327318,
+   "median_share_folds_active": 1.0,
+   "spa_by_instrument": {
+    "AUDCAD": {
+     "spa_p": 0.994,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:ny_ldn_gap|d20",
+     "best_sharpe": 0.7578846994495916,
+     "K": 761
+    },
+    "AUDCHF": {
+     "spa_p": 0.985,
+     "rc_p": 0.896,
+     "best_column": "F.MO.CMO:v",
+     "best_sharpe": 0.8353215271550724,
+     "K": 761
+    },
+    "AUDJPY": {
+     "spa_p": 0.952,
+     "rc_p": 0.983,
+     "best_column": "F.TR.MCGINLEY:v",
+     "best_sharpe": 0.7393816188358172,
+     "K": 818
+    },
+    "AUDNZD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.RG.DRAWDOWN_REGIME:drawdown",
+     "best_sharpe": 0.8593030953474461,
+     "K": 806
+    },
+    "AUDUSD": {
+     "spa_p": 1.0,
+     "rc_p": 0.999,
+     "best_column": "F.MS.LIQ_IMBALANCE:v",
+     "best_sharpe": 0.6808638461145529,
+     "K": 818
+    },
+    "CADCHF": {
+     "spa_p": 0.531,
+     "rc_p": 0.876,
+     "best_column": "F.VO.BB_WIDTH:pctb",
+     "best_sharpe": 1.0621685998867034,
+     "K": 762
+    },
+    "CADJPY": {
+     "spa_p": 0.982,
+     "rc_p": 0.958,
+     "best_column": "F.TS.DST_TRANSITION:ny_ldn_gap",
+     "best_sharpe": 0.7067050149654315,
+     "K": 819
+    },
+    "CHFJPY": {
+     "spa_p": 0.603,
+     "rc_p": 0.754,
+     "best_column": "F.FR.CORR_DIM:v|d20",
+     "best_sharpe": 0.9905397354886125,
+     "K": 818
+    },
+    "EURAUD": {
+     "spa_p": 0.723,
+     "rc_p": 0.98,
+     "best_column": "F.LF.CONTRASTIVE:c2",
+     "best_sharpe": 0.9152283716277125,
+     "K": 818
+    },
+    "EURCAD": {
+     "spa_p": 0.971,
+     "rc_p": 0.999,
+     "best_column": "F.IN.VOL_NORMALIZE:v",
+     "best_sharpe": 0.7910259932448496,
+     "K": 818
+    },
+    "EURCHF": {
+     "spa_p": 0.938,
+     "rc_p": 0.949,
+     "best_column": "F.EC.ARCH_LM:v",
+     "best_sharpe": 0.708297430930835,
+     "K": 818
+    },
+    "EURGBP": {
+     "spa_p": 0.999,
+     "rc_p": 1.0,
+     "best_column": "F.IN.SYMBOLIC_COMPOSE:v|d20",
+     "best_sharpe": 0.6908905403944898,
+     "K": 818
+    },
+    "EURJPY": {
+     "spa_p": 0.867,
+     "rc_p": 0.875,
+     "best_column": "F.SP.ACF_PERIODOGRAM:v",
+     "best_sharpe": 0.8813271512244456,
+     "K": 818
+    },
+    "EURNOK": {
+     "spa_p": 0.235,
+     "rc_p": 0.1,
+     "best_column": "F.TR.AROON:osc|d20",
+     "best_sharpe": 1.0619515123235586,
+     "K": 809
+    },
+    "EURNZD": {
+     "spa_p": 0.938,
+     "rc_p": 1.0,
+     "best_column": "F.EC.ARCH_LM:v|d20",
+     "best_sharpe": 0.8831883136639802,
+     "K": 762
+    },
+    "EURSEK": {
+     "spa_p": 0.685,
+     "rc_p": 0.895,
+     "best_column": "F.RG.VOL_PERCENTILE:v|d20",
+     "best_sharpe": 0.9550829811796461,
+     "K": 805
+    },
+    "EURUSD": {
+     "spa_p": 0.73,
+     "rc_p": 0.896,
+     "best_column": "F.FR.HURST_RS:v",
+     "best_sharpe": 0.6860021657711575,
+     "K": 818
+    },
+    "GBPAUD": {
+     "spa_p": 0.994,
+     "rc_p": 0.999,
+     "best_column": "F.ST.CANDLE_3BAR:three_inside",
+     "best_sharpe": 0.9270657107377198,
+     "K": 762
+    },
+    "GBPCAD": {
+     "spa_p": 0.899,
+     "rc_p": 0.787,
+     "best_column": "F.SP.CEPSTRUM:peak",
+     "best_sharpe": 0.9694725708348827,
+     "K": 762
+    },
+    "GBPCHF": {
+     "spa_p": 0.716,
+     "rc_p": 0.402,
+     "best_column": "F.SP.CEPSTRUM:quefrency",
+     "best_sharpe": 0.947474164207873,
+     "K": 818
+    },
+    "GBPJPY": {
+     "spa_p": 0.998,
+     "rc_p": 0.977,
+     "best_column": "F.TS.DST_TRANSITION:ny_ldn_gap",
+     "best_sharpe": 0.6908943847785632,
+     "K": 818
+    },
+    "GBPNZD": {
+     "spa_p": 0.991,
+     "rc_p": 0.981,
+     "best_column": "F.DI.CVAR:v",
+     "best_sharpe": 0.9053030129092103,
+     "K": 762
+    },
+    "GBPUSD": {
+     "spa_p": 0.54,
+     "rc_p": 0.759,
+     "best_column": "F.MO.TRIX:v|d20",
+     "best_sharpe": 0.9061294954164901,
+     "K": 818
+    },
+    "NZDCAD": {
+     "spa_p": 0.998,
+     "rc_p": 1.0,
+     "best_column": "F.DI.GEV_SHAPE:v",
+     "best_sharpe": 0.815355898675374,
+     "K": 762
+    },
+    "NZDCHF": {
+     "spa_p": 0.904,
+     "rc_p": 0.633,
+     "best_column": "F.MS.MFI_TICK:v",
+     "best_sharpe": 0.8178392506497879,
+     "K": 761
+    },
+    "NZDJPY": {
+     "spa_p": 0.983,
+     "rc_p": 0.98,
+     "best_column": "F.MS.QUOTE_STALENESS:zero_change_share",
+     "best_sharpe": 0.7810799709619527,
+     "K": 762
+    },
+    "NZDUSD": {
+     "spa_p": 0.998,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.7190414031829668,
+     "K": 814
+    },
+    "USDCAD": {
+     "spa_p": 0.944,
+     "rc_p": 0.96,
+     "best_column": "F.FR.HURST_RS:v|d20",
+     "best_sharpe": 0.7441859576260451,
+     "K": 814
+    },
+    "USDCHF": {
+     "spa_p": 0.605,
+     "rc_p": 0.654,
+     "best_column": "F.DI.QUANTILES:q05|d20",
+     "best_sharpe": 0.889450995525052,
+     "K": 818
+    },
+    "USDJPY": {
+     "spa_p": 0.625,
+     "rc_p": 0.614,
+     "best_column": "F.ES.TIME_MODULAR:cos|d20",
+     "best_sharpe": 0.9593616004478366,
+     "K": 820
+    },
+    "USDNOK": {
+     "spa_p": 0.818,
+     "rc_p": 0.725,
+     "best_column": "F.TS.HOLIDAYS:to_next",
+     "best_sharpe": 0.863502544331125,
+     "K": 809
+    },
+    "USDSEK": {
+     "spa_p": 0.702,
+     "rc_p": 0.875,
+     "best_column": "F.LF.AUTOENCODER:z2|d20",
+     "best_sharpe": 1.0641195046669516,
+     "K": 808
+    },
+    "XAGUSD": {
+     "spa_p": 0.988,
+     "rc_p": 0.951,
+     "best_column": "F.PR.PCT_RANK:v",
+     "best_sharpe": 0.9111411906726771,
+     "K": 758
+    },
+    "XAUUSD": {
+     "spa_p": 0.292,
+     "rc_p": 0.728,
+     "best_column": "F.FR.CORR_DIM:v|d20",
+     "best_sharpe": 1.3412015645652058,
+     "K": 756
+    }
+   },
+   "cross_instrument": {
+    "columns": 854,
+    "median_sharpe": -0.4973875377008633,
+    "share_positive": 0.04215456674473068,
+    "top5": {
+     "F.LF.AUTOENCODER:z2|d20": 0.319,
+     "F.SP.ACF_PERIODOGRAM:v": 0.194,
+     "F.FR.GEN_HURST:h1": 0.155,
+     "F.IT.ENTROPY_RATE:v": 0.151,
+     "F.FR.GEN_HURST:h2": 0.144
+    },
+    "placebo_best": 0.11124106751364621
+   },
+   "meta_trailing_winners": {
+    "top1": {
+     "oos_sharpe": -0.11613806196689322,
+     "ci95": [
+      -0.6981589385328145,
+      0.5308313307001382
+     ],
+     "ann_return": -0.010163556784391403,
+     "by_year": {
+      "2013": 0.11186683177947998,
+      "2014": -0.07490628957748413,
+      "2015": -0.015128016471862793,
+      "2016": -0.1797446608543396,
+      "2017": -0.0207059383392334,
+      "2018": 0.07525789737701416,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURSEK|F.SP.ACF_PERIODOGRAM:v"
+       ],
+       "trailing_sharpe_top": 1.9478222131729126
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "GBPAUD|F.CA.PCA_FACTOR:loading"
+       ],
+       "trailing_sharpe_top": 2.9998135566711426
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "GBPAUD|F.CA.PCA_FACTOR:loading"
+       ],
+       "trailing_sharpe_top": 2.5424258708953857
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "XAUUSD|F.FR.CORR_DIM:v|d20"
+       ],
+       "trailing_sharpe_top": 1.3412013053894043
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "XAUUSD|F.FR.CORR_DIM:v|d20"
+       ],
+       "trailing_sharpe_top": 1.3412015438079834
+      }
+     ]
+    },
+    "top5": {
+     "oos_sharpe": -0.4070030797273019,
+     "ci95": [
+      -0.895028615229727,
+      0.15088860882358224
+     ],
+     "ann_return": -0.017557425424456596,
+     "by_year": {
+      "2013": -0.018688738346099854,
+      "2014": -0.06281208992004395,
+      "2015": 0.07253372669219971,
+      "2016": -0.13881546258926392,
+      "2017": -0.011380493640899658,
+      "2018": -0.0017837882041931152,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURSEK|F.SP.ACF_PERIODOGRAM:v",
+        "EURNOK|F.ST.ZIGZAG_LEG:leg",
+        "EURCAD|F.SP.SUPER_SMOOTHER:v",
+        "EURNOK|F.TR.RIBBON:align",
+        "EURNOK|F.TR.AROON:osc|d20"
+       ],
+       "trailing_sharpe_top": 1.9478222131729126
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "GBPAUD|F.CA.PCA_FACTOR:loading",
+        "GBPAUD|F.TS.MONTH_CALENDAR:sin|d20",
+        "GBPAUD|F.TS.MONTH_CALENDAR:cos",
+        "NZDJPY|F.VO.EWMA:v",
+        "GBPAUD|F.SP.SINEWAVE:lead|d20"
+       ],
+       "trailing_sharpe_top": 2.9998135566711426
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "GBPAUD|F.CA.PCA_FACTOR:loading",
+        "CADCHF|F.ST.VOLUME_PROFILE:poc|d20",
+        "NZDJPY|F.ES.TIME_MODULAR:sin",
+        "NZDJPY|F.ES.TIME_MODULAR:cos",
+        "NZDJPY|F.TS.DST_TRANSITION:us_dst"
+       ],
+       "trailing_sharpe_top": 2.5424258708953857
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "XAUUSD|F.FR.CORR_DIM:v|d20",
+        "USDSEK|F.LF.AUTOENCODER:z2|d20",
+        "CADCHF|F.VO.BB_WIDTH:pctb",
+        "EURNOK|F.TR.AROON:osc|d20",
+        "CHFJPY|F.FR.CORR_DIM:v|d20"
+       ],
+       "trailing_sharpe_top": 1.3412013053894043
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "XAUUSD|F.FR.CORR_DIM:v|d20",
+        "USDSEK|F.LF.AUTOENCODER:z2|d20",
+        "CADCHF|F.VO.BB_WIDTH:pctb",
+        "EURNOK|F.TR.AROON:osc|d20",
+        "CHFJPY|F.FR.CORR_DIM:v|d20"
+       ],
+       "trailing_sharpe_top": 1.3412015438079834
+      }
+     ]
+    },
+    "top20": {
+     "oos_sharpe": -0.5441640358625797,
+     "ci95": [
+      -1.004784050032932,
+      -0.00504880834582504
+     ],
+     "ann_return": -0.016582675278186798,
+     "by_year": {
+      "2013": -0.005035817623138428,
+      "2014": -0.029429495334625244,
+      "2015": 0.028742432594299316,
+      "2016": -0.11375772953033447,
+      "2017": -0.025864601135253906,
+      "2018": -0.009027421474456787,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURSEK|F.SP.ACF_PERIODOGRAM:v",
+        "EURNOK|F.ST.ZIGZAG_LEG:leg",
+        "EURCAD|F.SP.SUPER_SMOOTHER:v",
+        "EURNOK|F.TR.RIBBON:align",
+        "EURNOK|F.TR.AROON:osc|d20"
+       ],
+       "trailing_sharpe_top": 1.9478222131729126
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "GBPAUD|F.CA.PCA_FACTOR:loading",
+        "GBPAUD|F.TS.MONTH_CALENDAR:sin|d20",
+        "GBPAUD|F.TS.MONTH_CALENDAR:cos",
+        "NZDJPY|F.VO.EWMA:v",
+        "GBPAUD|F.SP.SINEWAVE:lead|d20"
+       ],
+       "trailing_sharpe_top": 2.9998135566711426
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "GBPAUD|F.CA.PCA_FACTOR:loading",
+        "CADCHF|F.ST.VOLUME_PROFILE:poc|d20",
+        "NZDJPY|F.ES.TIME_MODULAR:sin",
+        "NZDJPY|F.ES.TIME_MODULAR:cos",
+        "NZDJPY|F.TS.DST_TRANSITION:us_dst"
+       ],
+       "trailing_sharpe_top": 2.5424258708953857
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "XAUUSD|F.FR.CORR_DIM:v|d20",
+        "USDSEK|F.LF.AUTOENCODER:z2|d20",
+        "CADCHF|F.VO.BB_WIDTH:pctb",
+        "EURNOK|F.TR.AROON:osc|d20",
+        "CHFJPY|F.FR.CORR_DIM:v|d20"
+       ],
+       "trailing_sharpe_top": 1.3412013053894043
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "XAUUSD|F.FR.CORR_DIM:v|d20",
+        "USDSEK|F.LF.AUTOENCODER:z2|d20",
+        "CADCHF|F.VO.BB_WIDTH:pctb",
+        "EURNOK|F.TR.AROON:osc|d20",
+        "CHFJPY|F.FR.CORR_DIM:v|d20"
+       ],
+       "trailing_sharpe_top": 1.3412015438079834
+      }
+     ]
+    }
+   }
+  },
+  "H1": {
+   "real_columns": 28762,
+   "real_median_sharpe": -0.35443680990331783,
+   "real_share_positive": 0.09728113483067936,
+   "real_best": 0.96786926488706,
+   "real_median_gross_sharpe": 0.0,
+   "placebo_median_sharpe": 0.0,
+   "placebo_p95_sharpe": 0.0,
+   "placebo_best": 0.4660051697433114,
+   "share_real_above_placebo_p95": 0.09728113483067936,
+   "median_share_folds_active": 0.625,
+   "spa_by_instrument": {
+    "AUDCAD": {
+     "spa_p": 0.999,
+     "rc_p": 1.0,
+     "best_column": "F.RG.HMM:p1",
+     "best_sharpe": 0.755166719909698,
+     "K": 679
+    },
+    "AUDCHF": {
+     "spa_p": 0.999,
+     "rc_p": 0.999,
+     "best_column": "F.MS.AMIHUD:v",
+     "best_sharpe": 0.5703077096852338,
+     "K": 760
+    },
+    "AUDJPY": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:to_next|d20",
+     "best_sharpe": 0.5710839749255548,
+     "K": 792
+    },
+    "AUDNZD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:days_since_change",
+     "best_sharpe": 0.41581783192809957,
+     "K": 588
+    },
+    "AUDUSD": {
+     "spa_p": 0.943,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.8307880973050168,
+     "K": 790
+    },
+    "CADCHF": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.IT.ENTROPY_RATE:v",
+     "best_sharpe": 0.49584400247826804,
+     "K": 697
+    },
+    "CADJPY": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:ny_ldn_gap|d20",
+     "best_sharpe": 0.6222502641339592,
+     "K": 737
+    },
+    "CHFJPY": {
+     "spa_p": 1.0,
+     "rc_p": 0.976,
+     "best_column": "F.TS.FOMC:hours_to_statement",
+     "best_sharpe": 0.6259654408613922,
+     "K": 751
+    },
+    "EURAUD": {
+     "spa_p": 0.995,
+     "rc_p": 0.995,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.7639209230613396,
+     "K": 781
+    },
+    "EURCAD": {
+     "spa_p": 0.814,
+     "rc_p": 0.681,
+     "best_column": "F.SP.WAVELET_ENERGY:e0",
+     "best_sharpe": 0.850608840559949,
+     "K": 724
+    },
+    "EURCHF": {
+     "spa_p": 0.972,
+     "rc_p": 0.949,
+     "best_column": "F.ST.CANDLE_2BAR:tweezer",
+     "best_sharpe": 0.7470713480786352,
+     "K": 729
+    },
+    "EURGBP": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.MONTH_CALENDAR:turn_of_month",
+     "best_sharpe": 0.49672184355402843,
+     "K": 708
+    },
+    "EURJPY": {
+     "spa_p": 0.988,
+     "rc_p": 0.994,
+     "best_column": "F.MO.MACD:signal",
+     "best_sharpe": 0.7783436705292093,
+     "K": 813
+    },
+    "EURNOK": {
+     "spa_p": 0.929,
+     "rc_p": 0.586,
+     "best_column": "F.TS.HOLIDAYS:to_next",
+     "best_sharpe": 0.6866503048985322,
+     "K": 568
+    },
+    "EURNZD": {
+     "spa_p": 0.795,
+     "rc_p": 0.857,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.9154548298770363,
+     "K": 759
+    },
+    "EURSEK": {
+     "spa_p": 0.984,
+     "rc_p": 1.0,
+     "best_column": "F.MO.MACD:signal",
+     "best_sharpe": 0.6910530256900922,
+     "K": 587
+    },
+    "EURUSD": {
+     "spa_p": 0.27,
+     "rc_p": 0.923,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 0.8159378423144849,
+     "K": 826
+    },
+    "GBPAUD": {
+     "spa_p": 0.958,
+     "rc_p": 0.96,
+     "best_column": "F.CA.LEAD_LAG:corr0",
+     "best_sharpe": 0.8672663765444869,
+     "K": 807
+    },
+    "GBPCAD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.FR.HURST_RS:v",
+     "best_sharpe": 0.494375117385473,
+     "K": 745
+    },
+    "GBPCHF": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.RG.DRAWDOWN_REGIME:drawdown",
+     "best_sharpe": 0.42880842619162557,
+     "K": 721
+    },
+    "GBPJPY": {
+     "spa_p": 0.928,
+     "rc_p": 0.883,
+     "best_column": "F.EC.VARIANCE_RATIO:vr",
+     "best_sharpe": 0.8109197197286752,
+     "K": 805
+    },
+    "GBPNZD": {
+     "spa_p": 0.999,
+     "rc_p": 0.979,
+     "best_column": "F.DI.BOWLEY:v",
+     "best_sharpe": 0.7088544461419699,
+     "K": 729
+    },
+    "GBPUSD": {
+     "spa_p": 0.996,
+     "rc_p": 0.964,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 0.6758490272963062,
+     "K": 808
+    },
+    "NZDCAD": {
+     "spa_p": 0.999,
+     "rc_p": 0.836,
+     "best_column": "F.PR.EXTREMA_DIST:to_min",
+     "best_sharpe": 0.6150291292685881,
+     "K": 622
+    },
+    "NZDCHF": {
+     "spa_p": 0.583,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.9142804906796149,
+     "K": 662
+    },
+    "NZDJPY": {
+     "spa_p": 0.99,
+     "rc_p": 0.989,
+     "best_column": "F.TS.MONTH_CALENDAR:sin|d20",
+     "best_sharpe": 0.7438583440207901,
+     "K": 747
+    },
+    "NZDUSD": {
+     "spa_p": 0.75,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.895197688961272,
+     "K": 706
+    },
+    "USDCAD": {
+     "spa_p": 0.833,
+     "rc_p": 0.447,
+     "best_column": "F.ES.LUNAR_PHASE:days_to_full",
+     "best_sharpe": 0.8061443339559999,
+     "K": 744
+    },
+    "USDCHF": {
+     "spa_p": 1.0,
+     "rc_p": 0.989,
+     "best_column": "F.DI.LMOMENTS:tau4",
+     "best_sharpe": 0.5333282188721943,
+     "K": 753
+    },
+    "USDJPY": {
+     "spa_p": 0.998,
+     "rc_p": 1.0,
+     "best_column": "F.ES.FIB_SESSION_TIME:dist|d20",
+     "best_sharpe": 0.8485376185719037,
+     "K": 820
+    },
+    "USDNOK": {
+     "spa_p": 0.506,
+     "rc_p": 0.051,
+     "best_column": "F.ES.LUNAR_PHASE:cos|d20",
+     "best_sharpe": 0.9678692224022704,
+     "K": 629
+    },
+    "USDSEK": {
+     "spa_p": 0.992,
+     "rc_p": 0.995,
+     "best_column": "F.FG.GOLDEN_SWING:phi_dev",
+     "best_sharpe": 0.6960494635469878,
+     "K": 686
+    },
+    "XAGUSD": {
+     "spa_p": 0.967,
+     "rc_p": 0.982,
+     "best_column": "F.TS.FOMC:hours_to_statement|d20",
+     "best_sharpe": 0.7463229546228463,
+     "K": 777
+    },
+    "XAUUSD": {
+     "spa_p": 0.944,
+     "rc_p": 0.945,
+     "best_column": "F.FR.MFDFA_WIDTH:v",
+     "best_sharpe": 0.7898803067224752,
+     "K": 835
+    }
+   },
+   "cross_instrument": {
+    "columns": 846,
+    "median_sharpe": -0.9102716090158245,
+    "share_positive": 0.010638297872340425,
+    "top5": {
+     "F.TS.FOMC:flag|d20": 0.371,
+     "F.TS.HOLIDAYS:since_last": 0.254,
+     "F.TS.DST_TRANSITION:us_dst|d20": 0.171,
+     "F.TS.FOMC:flag": 0.155,
+     "F.TS.FOMC:hours_to_statement": 0.119
+    },
+    "placebo_best": -0.43688628805460406
+   },
+   "meta_trailing_winners": {
+    "top1": {
+     "oos_sharpe": -0.5580430432580679,
+     "ci95": [
+      -1.4766731286786063,
+      0.0532283822379071
+     ],
+     "ann_return": -0.03734710067510605,
+     "by_year": {
+      "2013": -0.1126900315284729,
+      "2014": 0.02184450626373291,
+      "2015": -0.0036031603813171387,
+      "2016": -0.2115250825881958,
+      "2017": -0.016557157039642334,
+      "2018": -0.02067643404006958,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.8908089399337769
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "GBPCAD|F.PR.FRACDIFF:v"
+       ],
+       "trailing_sharpe_top": 1.9273515939712524
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.79783296585083
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20"
+       ],
+       "trailing_sharpe_top": 0.9678692817687988
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20"
+       ],
+       "trailing_sharpe_top": 0.967869222164154
+      }
+     ]
+    },
+    "top5": {
+     "oos_sharpe": -0.4388507983503619,
+     "ci95": [
+      -1.1741672159758922,
+      0.1134198588084443
+     ],
+     "ann_return": -0.012124704197049141,
+     "by_year": {
+      "2013": -0.03942883014678955,
+      "2014": -0.022508203983306885,
+      "2015": -0.022164463996887207,
+      "2016": -0.02949213981628418,
+      "2017": -0.009127318859100342,
+      "2018": -0.0014511942863464355,
+      "2019": 0.011127591133117676,
+      "2020": -0.004358172416687012,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "EURAUD|F.TS.HOLIDAYS:near",
+        "EURCHF|F.MS.FORCE_TICK:v",
+        "NZDJPY|F.EC.CUSUM:v",
+        "GBPCAD|F.PR.FRACDIFF:v"
+       ],
+       "trailing_sharpe_top": 1.8908089399337769
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "GBPCAD|F.PR.FRACDIFF:v",
+        "USDCAD|F.ES.LUNAR_PHASE:days_to_full",
+        "AUDCHF|F.TS.FOMC:flag",
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20"
+       ],
+       "trailing_sharpe_top": 1.9273515939712524
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "EURAUD|F.CA.PCA_FACTOR:share",
+        "GBPAUD|F.CA.LEAD_LAG:corr0",
+        "EURNZD|F.TS.HOLIDAYS:since_last",
+        "AUDUSD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.79783296585083
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "NZDCHF|F.TS.HOLIDAYS:near",
+        "NZDUSD|F.TS.HOLIDAYS:since_last",
+        "NZDUSD|F.TS.DST_TRANSITION:us_dst|d20"
+       ],
+       "trailing_sharpe_top": 0.9678692817687988
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "NZDCHF|F.TS.HOLIDAYS:near",
+        "NZDUSD|F.TS.HOLIDAYS:since_last",
+        "NZDUSD|F.TS.DST_TRANSITION:us_dst|d20"
+       ],
+       "trailing_sharpe_top": 0.967869222164154
+      }
+     ]
+    },
+    "top20": {
+     "oos_sharpe": -0.8330301541103238,
+     "ci95": [
+      -1.4561172666029203,
+      -0.2586703629374657
+     ],
+     "ann_return": -0.012093156576156616,
+     "by_year": {
+      "2013": -0.040622174739837646,
+      "2014": -0.025002598762512207,
+      "2015": 0.002809286117553711,
+      "2016": -0.0383417010307312,
+      "2017": -0.013519585132598877,
+      "2018": -0.003079712390899658,
+      "2019": 0.0029937028884887695,
+      "2020": -0.0006859302520751953,
+      "2021": 0.001244187355041504,
+      "2022": -0.00012880563735961914
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "EURAUD|F.TS.HOLIDAYS:near",
+        "EURCHF|F.MS.FORCE_TICK:v",
+        "NZDJPY|F.EC.CUSUM:v",
+        "GBPCAD|F.PR.FRACDIFF:v"
+       ],
+       "trailing_sharpe_top": 1.8908089399337769
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "GBPCAD|F.PR.FRACDIFF:v",
+        "USDCAD|F.ES.LUNAR_PHASE:days_to_full",
+        "AUDCHF|F.TS.FOMC:flag",
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20"
+       ],
+       "trailing_sharpe_top": 1.9273515939712524
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "EURAUD|F.CA.PCA_FACTOR:share",
+        "GBPAUD|F.CA.LEAD_LAG:corr0",
+        "EURNZD|F.TS.HOLIDAYS:since_last",
+        "AUDUSD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.79783296585083
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "NZDCHF|F.TS.HOLIDAYS:near",
+        "NZDUSD|F.TS.HOLIDAYS:since_last",
+        "NZDUSD|F.TS.DST_TRANSITION:us_dst|d20"
+       ],
+       "trailing_sharpe_top": 0.9678692817687988
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "NZDCHF|F.TS.HOLIDAYS:near",
+        "NZDUSD|F.TS.HOLIDAYS:since_last",
+        "NZDUSD|F.TS.DST_TRANSITION:us_dst|d20"
+       ],
+       "trailing_sharpe_top": 0.967869222164154
+      }
+     ]
+    }
+   }
+  },
+  "H2": {
+   "real_columns": 28762,
+   "real_median_sharpe": -0.3408348951405429,
+   "real_share_positive": 0.1338224045615743,
+   "real_best": 1.0923169419704228,
+   "real_median_gross_sharpe": 0.00311879024344435,
+   "placebo_median_sharpe": -0.3788578219329952,
+   "placebo_p95_sharpe": 0.0,
+   "placebo_best": 0.6507149664697967,
+   "share_real_above_placebo_p95": 0.1338224045615743,
+   "median_share_folds_active": 0.8823529411764706,
+   "spa_by_instrument": {
+    "AUDCAD": {
+     "spa_p": 1.0,
+     "rc_p": 0.999,
+     "best_column": "F.TS.DST_TRANSITION:days_since_change",
+     "best_sharpe": 0.6022732827075441,
+     "K": 784
+    },
+    "AUDCHF": {
+     "spa_p": 0.933,
+     "rc_p": 0.943,
+     "best_column": "F.SP.SPECTRAL_BANDS:mid",
+     "best_sharpe": 0.7090120058204782,
+     "K": 817
+    },
+    "AUDJPY": {
+     "spa_p": 0.99,
+     "rc_p": 1.0,
+     "best_column": "F.EC.PACF2:v",
+     "best_sharpe": 0.6712092161307196,
+     "K": 834
+    },
+    "AUDNZD": {
+     "spa_p": 0.857,
+     "rc_p": 1.0,
+     "best_column": "F.FR.KATZ:v|d20",
+     "best_sharpe": 0.7136535589725982,
+     "K": 732
+    },
+    "AUDUSD": {
+     "spa_p": 0.618,
+     "rc_p": 0.624,
+     "best_column": "F.TR.FRAMA:v",
+     "best_sharpe": 0.9248441973598049,
+     "K": 834
+    },
+    "CADCHF": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.ST.SR_LEVELS:touches",
+     "best_sharpe": 0.3259560750343929,
+     "K": 795
+    },
+    "CADJPY": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.FG.HARMONIC:score",
+     "best_sharpe": 0.5962938238293799,
+     "K": 821
+    },
+    "CHFJPY": {
+     "spa_p": 0.998,
+     "rc_p": 0.996,
+     "best_column": "F.FR.RQA:rr",
+     "best_sharpe": 0.6363147029924878,
+     "K": 829
+    },
+    "EURAUD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.CA.USD_BETA:v",
+     "best_sharpe": 0.6296998395091921,
+     "K": 834
+    },
+    "EURCAD": {
+     "spa_p": 1.0,
+     "rc_p": 0.995,
+     "best_column": "F.FG.SQUARE_OF_9:sin|d20",
+     "best_sharpe": 0.6212018285149418,
+     "K": 813
+    },
+    "EURCHF": {
+     "spa_p": 0.999,
+     "rc_p": 0.995,
+     "best_column": "F.FG.FIB_TIME:fib_dist",
+     "best_sharpe": 0.6057604394046234,
+     "K": 803
+    },
+    "EURGBP": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.CA.LEAD_LAG:lag",
+     "best_sharpe": 0.5238995065211743,
+     "K": 812
+    },
+    "EURJPY": {
+     "spa_p": 0.944,
+     "rc_p": 0.983,
+     "best_column": "F.CA.COINTEGRATION:adf_t",
+     "best_sharpe": 0.6934365438156,
+     "K": 839
+    },
+    "EURNOK": {
+     "spa_p": 0.899,
+     "rc_p": 0.812,
+     "best_column": "F.DI.CVAR:v",
+     "best_sharpe": 0.7524770927023455,
+     "K": 713
+    },
+    "EURNZD": {
+     "spa_p": 0.722,
+     "rc_p": 0.998,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 1.065039033282508,
+     "K": 821
+    },
+    "EURSEK": {
+     "spa_p": 0.994,
+     "rc_p": 0.873,
+     "best_column": "F.SP.WAVELET_DENOISE:v",
+     "best_sharpe": 0.6577951990026093,
+     "K": 737
+    },
+    "EURUSD": {
+     "spa_p": 0.74,
+     "rc_p": 0.766,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 0.6527181492171745,
+     "K": 839
+    },
+    "GBPAUD": {
+     "spa_p": 0.998,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.7236259513274984,
+     "K": 834
+    },
+    "GBPCAD": {
+     "spa_p": 0.982,
+     "rc_p": 1.0,
+     "best_column": "F.MS.NOISE_RATIO:v",
+     "best_sharpe": 0.71456185477844,
+     "K": 817
+    },
+    "GBPCHF": {
+     "spa_p": 0.782,
+     "rc_p": 0.79,
+     "best_column": "F.CA.CORR_LEVEL:v",
+     "best_sharpe": 0.7549877157762802,
+     "K": 817
+    },
+    "GBPJPY": {
+     "spa_p": 0.66,
+     "rc_p": 0.849,
+     "best_column": "F.IT.AUTO_MI:v|d20",
+     "best_sharpe": 0.9472800228121663,
+     "K": 839
+    },
+    "GBPNZD": {
+     "spa_p": 0.982,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.7947603918926494,
+     "K": 811
+    },
+    "GBPUSD": {
+     "spa_p": 0.981,
+     "rc_p": 0.957,
+     "best_column": "F.TS.FIX_WINDOW:month_end|d20",
+     "best_sharpe": 0.7330568261445596,
+     "K": 841
+    },
+    "NZDCAD": {
+     "spa_p": 0.999,
+     "rc_p": 1.0,
+     "best_column": "F.MO.TRIX:v",
+     "best_sharpe": 0.6123950053562954,
+     "K": 744
+    },
+    "NZDCHF": {
+     "spa_p": 0.902,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.8184566347045755,
+     "K": 789
+    },
+    "NZDJPY": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:uk_dst",
+     "best_sharpe": 0.6597764984444378,
+     "K": 833
+    },
+    "NZDUSD": {
+     "spa_p": 0.993,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:us_dst|d20",
+     "best_sharpe": 0.7208001488280461,
+     "K": 808
+    },
+    "USDCAD": {
+     "spa_p": 0.794,
+     "rc_p": 0.498,
+     "best_column": "F.ES.LUNAR_PHASE:days_to_full",
+     "best_sharpe": 0.8095883614692558,
+     "K": 817
+    },
+    "USDCHF": {
+     "spa_p": 1.0,
+     "rc_p": 0.469,
+     "best_column": "F.CA.USD_BETA:v|d20",
+     "best_sharpe": 0.678118355201134,
+     "K": 830
+    },
+    "USDJPY": {
+     "spa_p": 0.407,
+     "rc_p": 0.225,
+     "best_column": "F.ST.SR_LEVELS:touches",
+     "best_sharpe": 0.9468939024867942,
+     "K": 837
+    },
+    "USDNOK": {
+     "spa_p": 0.056,
+     "rc_p": 0.023,
+     "best_column": "F.ES.LUNAR_PHASE:cos|d20",
+     "best_sharpe": 1.0923169806123185,
+     "K": 763
+    },
+    "USDSEK": {
+     "spa_p": 0.601,
+     "rc_p": 0.982,
+     "best_column": "F.CA.PCA_FACTOR:share",
+     "best_sharpe": 0.7792998409304652,
+     "K": 802
+    },
+    "XAGUSD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.PR.GAP:v|d20",
+     "best_sharpe": 0.5785085017358094,
+     "K": 831
+    },
+    "XAUUSD": {
+     "spa_p": 0.656,
+     "rc_p": 0.74,
+     "best_column": "F.FR.RQA:lam",
+     "best_sharpe": 1.0848934749665835,
+     "K": 834
+    }
+   },
+   "cross_instrument": {
+    "columns": 846,
+    "median_sharpe": -0.7992279566311975,
+    "share_positive": 0.015366430260047281,
+    "top5": {
+     "F.TS.FOMC:flag|d20": 0.431,
+     "F.TS.HOLIDAYS:since_last": 0.321,
+     "F.FR.SEVCIK:v": 0.124,
+     "F.RG.HMM:p1": 0.077,
+     "F.TS.HOLIDAYS:near": 0.075
+    },
+    "placebo_best": -0.5144639463610237
+   },
+   "meta_trailing_winners": {
+    "top1": {
+     "oos_sharpe": -0.37354549523925507,
+     "ci95": [
+      -0.9630110885563724,
+      0.25048302148574897
+     ],
+     "ann_return": -0.033579036593437195,
+     "by_year": {
+      "2013": -0.26052647829055786,
+      "2014": 0.1483311653137207,
+      "2015": -0.24064332246780396,
+      "2016": 0.026494860649108887,
+      "2017": 0.028787732124328613,
+      "2018": -0.021099746227264404,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAUUSD|F.DI.LMOMENTS:tau3|d20"
+       ],
+       "trailing_sharpe_top": 2.483203411102295
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.CA.COINTEGRATION:z|d20"
+       ],
+       "trailing_sharpe_top": 2.0210671424865723
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "XAUUSD|F.SP.ZERO_CROSSING:v|d20"
+       ],
+       "trailing_sharpe_top": 1.5658814907073975
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20"
+       ],
+       "trailing_sharpe_top": 1.0923168659210205
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20"
+       ],
+       "trailing_sharpe_top": 1.0923168659210205
+      }
+     ]
+    },
+    "top5": {
+     "oos_sharpe": -0.41324729052427095,
+     "ci95": [
+      -0.9120005766713613,
+      0.16289640205748657
+     ],
+     "ann_return": -0.01832287572324276,
+     "by_year": {
+      "2013": -0.19795840978622437,
+      "2014": 0.037609100341796875,
+      "2015": -0.051651716232299805,
+      "2016": -0.04091465473175049,
+      "2017": 0.0574566125869751,
+      "2018": 0.014570832252502441,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAUUSD|F.DI.LMOMENTS:tau3|d20",
+        "XAUUSD|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAUUSD|F.RG.DRAWDOWN_REGIME:rally",
+        "XAGUSD|F.TR.REG_SLOPE:slope|d20",
+        "GBPNZD|F.ES.GOLDEN_GRID:cos|d20"
+       ],
+       "trailing_sharpe_top": 2.483203411102295
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.CA.COINTEGRATION:z|d20",
+        "GBPNZD|F.ES.GOLDEN_GRID:cos|d20",
+        "XAUUSD|F.PR.ACCEL:v|d20",
+        "XAUUSD|F.CA.DISPERSION:v|d20",
+        "XAUUSD|F.SP.BANDPASS:v|d20"
+       ],
+       "trailing_sharpe_top": 2.0210671424865723
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "XAUUSD|F.SP.ZERO_CROSSING:v|d20",
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "GBPNZD|F.ES.GOLDEN_GRID:cos|d20",
+        "GBPCAD|F.TR.ADX:mdi",
+        "AUDUSD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.5658814907073975
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20",
+        "XAUUSD|F.FR.RQA:lam",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "XAUUSD|F.SP.WAVELET_ENERGY:e0|d20",
+        "GBPJPY|F.IT.AUTO_MI:v|d20"
+       ],
+       "trailing_sharpe_top": 1.0923168659210205
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20",
+        "XAUUSD|F.FR.RQA:lam",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "XAUUSD|F.SP.WAVELET_ENERGY:e0|d20",
+        "GBPJPY|F.IT.AUTO_MI:v|d20"
+       ],
+       "trailing_sharpe_top": 1.0923168659210205
+      }
+     ]
+    },
+    "top20": {
+     "oos_sharpe": -0.10435270463606601,
+     "ci95": [
+      -0.6709189623109079,
+      0.4588196991975852
+     ],
+     "ann_return": -0.0017752863932400942,
+     "by_year": {
+      "2013": -0.05021911859512329,
+      "2014": 0.021545052528381348,
+      "2015": -0.0075460076332092285,
+      "2016": 0.008251070976257324,
+      "2017": 0.0027723312377929688,
+      "2018": 0.007261157035827637,
+      "2019": 4.5299530029296875e-05,
+      "2020": -0.0011684894561767578,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAUUSD|F.DI.LMOMENTS:tau3|d20",
+        "XAUUSD|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAUUSD|F.RG.DRAWDOWN_REGIME:rally",
+        "XAGUSD|F.TR.REG_SLOPE:slope|d20",
+        "GBPNZD|F.ES.GOLDEN_GRID:cos|d20"
+       ],
+       "trailing_sharpe_top": 2.483203411102295
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.CA.COINTEGRATION:z|d20",
+        "GBPNZD|F.ES.GOLDEN_GRID:cos|d20",
+        "XAUUSD|F.PR.ACCEL:v|d20",
+        "XAUUSD|F.CA.DISPERSION:v|d20",
+        "XAUUSD|F.SP.BANDPASS:v|d20"
+       ],
+       "trailing_sharpe_top": 2.0210671424865723
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "XAUUSD|F.SP.ZERO_CROSSING:v|d20",
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "GBPNZD|F.ES.GOLDEN_GRID:cos|d20",
+        "GBPCAD|F.TR.ADX:mdi",
+        "AUDUSD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.5658814907073975
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20",
+        "XAUUSD|F.FR.RQA:lam",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "XAUUSD|F.SP.WAVELET_ENERGY:e0|d20",
+        "GBPJPY|F.IT.AUTO_MI:v|d20"
+       ],
+       "trailing_sharpe_top": 1.0923168659210205
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "USDNOK|F.ES.LUNAR_PHASE:cos|d20",
+        "XAUUSD|F.FR.RQA:lam",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "XAUUSD|F.SP.WAVELET_ENERGY:e0|d20",
+        "GBPJPY|F.IT.AUTO_MI:v|d20"
+       ],
+       "trailing_sharpe_top": 1.0923168659210205
+      }
+     ]
+    }
+   }
+  },
+  "H4": {
+   "real_columns": 28846,
+   "real_median_sharpe": -0.28759619557234206,
+   "real_share_positive": 0.18002496013312072,
+   "real_best": 1.043884614210574,
+   "real_median_gross_sharpe": 0.0078902726772588,
+   "placebo_median_sharpe": -0.40886291485313037,
+   "placebo_p95_sharpe": 0.06245947070400166,
+   "placebo_best": 0.4581677412687419,
+   "share_real_above_placebo_p95": 0.13423004922692922,
+   "median_share_folds_active": 1.0,
+   "spa_by_instrument": {
+    "AUDCAD": {
+     "spa_p": 0.999,
+     "rc_p": 1.0,
+     "best_column": "F.TR.ADX:pdi",
+     "best_sharpe": 0.5870659204776939,
+     "K": 838
+    },
+    "AUDCHF": {
+     "spa_p": 1.0,
+     "rc_p": 0.997,
+     "best_column": "F.DI.LMOMENTS:tau3",
+     "best_sharpe": 0.5095973165351064,
+     "K": 841
+    },
+    "AUDJPY": {
+     "spa_p": 0.999,
+     "rc_p": 1.0,
+     "best_column": "F.DI.QUANTILES:q95|d20",
+     "best_sharpe": 0.6004272575302984,
+     "K": 837
+    },
+    "AUDNZD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:ny_ldn_gap",
+     "best_sharpe": 0.4262873211642408,
+     "K": 829
+    },
+    "AUDUSD": {
+     "spa_p": 0.899,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.8571018250544179,
+     "K": 838
+    },
+    "CADCHF": {
+     "spa_p": 0.998,
+     "rc_p": 0.927,
+     "best_column": "F.IT.LEMPEL_ZIV:v|d20",
+     "best_sharpe": 0.6938519775695318,
+     "K": 838
+    },
+    "CADJPY": {
+     "spa_p": 0.998,
+     "rc_p": 1.0,
+     "best_column": "F.EC.AUTOCORR:v",
+     "best_sharpe": 0.6651358101167616,
+     "K": 835
+    },
+    "CHFJPY": {
+     "spa_p": 1.0,
+     "rc_p": 0.935,
+     "best_column": "F.TS.FIX_WINDOW:min_to_fix|d20",
+     "best_sharpe": 0.5511447765863611,
+     "K": 837
+    },
+    "EURAUD": {
+     "spa_p": 0.455,
+     "rc_p": 0.835,
+     "best_column": "F.MS.NOISE_RATIO:v",
+     "best_sharpe": 0.8844003158116207,
+     "K": 840
+    },
+    "EURCAD": {
+     "spa_p": 1.0,
+     "rc_p": 0.996,
+     "best_column": "F.DI.QUANTILES:q50",
+     "best_sharpe": 0.6270907641618777,
+     "K": 841
+    },
+    "EURCHF": {
+     "spa_p": 0.971,
+     "rc_p": 0.941,
+     "best_column": "F.TR.VIDYA:v|d20",
+     "best_sharpe": 0.7322511874071778,
+     "K": 837
+    },
+    "EURGBP": {
+     "spa_p": 0.999,
+     "rc_p": 1.0,
+     "best_column": "F.TS.MONTH_END_FIX:hours_to_fix",
+     "best_sharpe": 0.6012006995510655,
+     "K": 836
+    },
+    "EURJPY": {
+     "spa_p": 0.919,
+     "rc_p": 0.991,
+     "best_column": "F.FG.SQUARE_OF_9:sin|d20",
+     "best_sharpe": 0.7417916872388319,
+     "K": 838
+    },
+    "EURNOK": {
+     "spa_p": 0.951,
+     "rc_p": 0.888,
+     "best_column": "F.TR.MCGINLEY:v",
+     "best_sharpe": 0.7029202789136705,
+     "K": 807
+    },
+    "EURNZD": {
+     "spa_p": 0.587,
+     "rc_p": 0.974,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 1.0438845890966115,
+     "K": 841
+    },
+    "EURSEK": {
+     "spa_p": 0.713,
+     "rc_p": 0.519,
+     "best_column": "F.TR.MANN_KENDALL:v",
+     "best_sharpe": 0.814098725014871,
+     "K": 814
+    },
+    "EURUSD": {
+     "spa_p": 0.684,
+     "rc_p": 0.671,
+     "best_column": "F.CA.DISPERSION:v",
+     "best_sharpe": 0.6737095074224569,
+     "K": 838
+    },
+    "GBPAUD": {
+     "spa_p": 0.901,
+     "rc_p": 0.962,
+     "best_column": "F.IT.ENTROPY_RATE:v",
+     "best_sharpe": 0.8542472497429162,
+     "K": 842
+    },
+    "GBPCAD": {
+     "spa_p": 0.997,
+     "rc_p": 0.985,
+     "best_column": "F.DI.TAIL_RATIO:v",
+     "best_sharpe": 0.6666738040201261,
+     "K": 839
+    },
+    "GBPCHF": {
+     "spa_p": 1.0,
+     "rc_p": 0.996,
+     "best_column": "F.DI.QUANTILES:q95",
+     "best_sharpe": 0.49839391035195274,
+     "K": 838
+    },
+    "GBPJPY": {
+     "spa_p": 0.969,
+     "rc_p": 0.888,
+     "best_column": "F.FG.SQUARE_OF_9:sin",
+     "best_sharpe": 0.6311724188148076,
+     "K": 838
+    },
+    "GBPNZD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.MONTH_CALENDAR:quarter_end_month",
+     "best_sharpe": 0.6541576908471594,
+     "K": 841
+    },
+    "GBPUSD": {
+     "spa_p": 0.796,
+     "rc_p": 0.867,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 0.8167637241367531,
+     "K": 840
+    },
+    "NZDCAD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.5190007400471435,
+     "K": 832
+    },
+    "NZDCHF": {
+     "spa_p": 0.944,
+     "rc_p": 0.975,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.8109133524675536,
+     "K": 839
+    },
+    "NZDJPY": {
+     "spa_p": 0.868,
+     "rc_p": 0.989,
+     "best_column": "F.MO.MACD:hist|d20",
+     "best_sharpe": 0.8201198113643301,
+     "K": 841
+    },
+    "NZDUSD": {
+     "spa_p": 0.972,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.7220183380313047,
+     "K": 832
+    },
+    "USDCAD": {
+     "spa_p": 0.741,
+     "rc_p": 0.615,
+     "best_column": "F.ES.LUNAR_PHASE:sin",
+     "best_sharpe": 0.8158314009304526,
+     "K": 833
+    },
+    "USDCHF": {
+     "spa_p": 0.675,
+     "rc_p": 0.733,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 1.0165451316216265,
+     "K": 837
+    },
+    "USDJPY": {
+     "spa_p": 0.884,
+     "rc_p": 0.961,
+     "best_column": "F.LF.GRU_EMBED:h0",
+     "best_sharpe": 0.7686069869728094,
+     "K": 837
+    },
+    "USDNOK": {
+     "spa_p": 0.217,
+     "rc_p": 0.258,
+     "best_column": "F.ES.LUNAR_PHASE:sin",
+     "best_sharpe": 0.9691555292858295,
+     "K": 830
+    },
+    "USDSEK": {
+     "spa_p": 0.742,
+     "rc_p": 0.698,
+     "best_column": "F.CA.DISPERSION:v",
+     "best_sharpe": 0.7784182155391326,
+     "K": 832
+    },
+    "XAGUSD": {
+     "spa_p": 0.971,
+     "rc_p": 0.988,
+     "best_column": "F.CA.PCA_FACTOR:share|d20",
+     "best_sharpe": 0.7914516987124774,
+     "K": 840
+    },
+    "XAUUSD": {
+     "spa_p": 0.936,
+     "rc_p": 0.978,
+     "best_column": "F.IT.ENTROPY_RATE:v",
+     "best_sharpe": 0.8974365020675171,
+     "K": 842
+    }
+   },
+   "cross_instrument": {
+    "columns": 854,
+    "median_sharpe": -0.6782693674130171,
+    "share_positive": 0.01522248243559719,
+    "top5": {
+     "F.MS.QUOTE_STALENESS:stale_bars|d20": 0.349,
+     "F.TS.FOMC:flag|d20": 0.311,
+     "F.TS.HOLIDAYS:since_last": 0.234,
+     "F.TS.FOMC:flag": 0.202,
+     "F.SP.WAVELET_ENERGY:e0": 0.093
+    },
+    "placebo_best": 0.020952144736877492
+   },
+   "meta_trailing_winners": {
+    "top1": {
+     "oos_sharpe": -0.1509592164480993,
+     "ci95": [
+      -0.5877933154379881,
+      0.3225662473733203
+     ],
+     "ann_return": -0.009890509769320488,
+     "by_year": {
+      "2013": -0.02018827199935913,
+      "2014": -0.020888984203338623,
+      "2015": -0.01931917667388916,
+      "2016": -0.07946169376373291,
+      "2017": -0.008890867233276367,
+      "2018": 0.015110015869140625,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAUUSD|F.EC.PACF2:v"
+       ],
+       "trailing_sharpe_top": 2.5234439373016357
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.DI.KURT:v|d20"
+       ],
+       "trailing_sharpe_top": 2.0578231811523438
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "XAUUSD|F.DI.KURT:v|d20"
+       ],
+       "trailing_sharpe_top": 1.5407038927078247
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "EURNZD|F.TS.HOLIDAYS:near"
+       ],
+       "trailing_sharpe_top": 1.0438846349716187
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "EURNZD|F.TS.HOLIDAYS:near"
+       ],
+       "trailing_sharpe_top": 1.0438847541809082
+      }
+     ]
+    },
+    "top5": {
+     "oos_sharpe": -0.2490601191303638,
+     "ci95": [
+      -0.70741610023404,
+      0.2594682658175401
+     ],
+     "ann_return": -0.00848732702434063,
+     "by_year": {
+      "2013": -0.040021538734436035,
+      "2014": -0.02762734889984131,
+      "2015": 0.013996601104736328,
+      "2016": -0.03114527463912964,
+      "2017": -0.03724205493927002,
+      "2018": 0.02122783660888672,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAUUSD|F.EC.PACF2:v",
+        "XAUUSD|F.FR.KATZ:v",
+        "XAUUSD|F.SP.FFT_DOMINANT:power_share",
+        "XAUUSD|F.SP.HILBERT:sin",
+        "XAUUSD|F.EC.ADF:v"
+       ],
+       "trailing_sharpe_top": 2.5234439373016357
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.DI.KURT:v|d20",
+        "XAUUSD|F.SP.HILBERT:sin",
+        "XAUUSD|F.LF.CONTRASTIVE:c2",
+        "XAUUSD|F.SP.HILBERT:sin|d20",
+        "XAUUSD|F.LF.ICA:ic1"
+       ],
+       "trailing_sharpe_top": 2.0578231811523438
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "XAUUSD|F.DI.KURT:v|d20",
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "XAGUSD|F.CA.LEAD_LAG:lag",
+        "USDCHF|F.TS.FOMC:flag|d20",
+        "AUDUSD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.5407038927078247
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "USDCHF|F.TS.FOMC:flag|d20",
+        "USDNOK|F.ES.LUNAR_PHASE:sin",
+        "XAUUSD|F.IT.ENTROPY_RATE:v",
+        "EURAUD|F.MS.NOISE_RATIO:v"
+       ],
+       "trailing_sharpe_top": 1.0438846349716187
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "USDCHF|F.TS.FOMC:flag|d20",
+        "USDNOK|F.ES.LUNAR_PHASE:sin",
+        "XAUUSD|F.IT.ENTROPY_RATE:v",
+        "EURAUD|F.MS.NOISE_RATIO:v"
+       ],
+       "trailing_sharpe_top": 1.0438847541809082
+      }
+     ]
+    },
+    "top20": {
+     "oos_sharpe": -0.57679060267151,
+     "ci95": [
+      -1.0644842243076353,
+      -0.06608045371614475
+     ],
+     "ann_return": -0.010113718919456005,
+     "by_year": {
+      "2013": -0.03839045763015747,
+      "2014": -0.00491410493850708,
+      "2015": -0.021394670009613037,
+      "2016": -0.04118525981903076,
+      "2017": -0.005179166793823242,
+      "2018": -0.0023530125617980957,
+      "2019": -0.0019025802612304688,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAUUSD|F.EC.PACF2:v",
+        "XAUUSD|F.FR.KATZ:v",
+        "XAUUSD|F.SP.FFT_DOMINANT:power_share",
+        "XAUUSD|F.SP.HILBERT:sin",
+        "XAUUSD|F.EC.ADF:v"
+       ],
+       "trailing_sharpe_top": 2.5234439373016357
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.DI.KURT:v|d20",
+        "XAUUSD|F.SP.HILBERT:sin",
+        "XAUUSD|F.LF.CONTRASTIVE:c2",
+        "XAUUSD|F.SP.HILBERT:sin|d20",
+        "XAUUSD|F.LF.ICA:ic1"
+       ],
+       "trailing_sharpe_top": 2.0578231811523438
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "XAUUSD|F.DI.KURT:v|d20",
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "XAGUSD|F.CA.LEAD_LAG:lag",
+        "USDCHF|F.TS.FOMC:flag|d20",
+        "AUDUSD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.5407038927078247
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "USDCHF|F.TS.FOMC:flag|d20",
+        "USDNOK|F.ES.LUNAR_PHASE:sin",
+        "XAUUSD|F.IT.ENTROPY_RATE:v",
+        "EURAUD|F.MS.NOISE_RATIO:v"
+       ],
+       "trailing_sharpe_top": 1.0438846349716187
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "USDCHF|F.TS.FOMC:flag|d20",
+        "USDNOK|F.ES.LUNAR_PHASE:sin",
+        "XAUUSD|F.IT.ENTROPY_RATE:v",
+        "EURAUD|F.MS.NOISE_RATIO:v"
+       ],
+       "trailing_sharpe_top": 1.0438847541809082
+      }
+     ]
+    }
+   }
+  },
+  "H8": {
+   "real_columns": 29036,
+   "real_median_sharpe": -0.23486495475181254,
+   "real_share_positive": 0.22379115580658493,
+   "real_best": 1.115522796973884,
+   "real_median_gross_sharpe": 0.00639537863374035,
+   "placebo_median_sharpe": -0.4013728648109153,
+   "placebo_p95_sharpe": 0.14160211529056232,
+   "placebo_best": 0.6509630371994349,
+   "share_real_above_placebo_p95": 0.11413417826146852,
+   "median_share_folds_active": 1.0,
+   "spa_by_instrument": {
+    "AUDCAD": {
+     "spa_p": 0.871,
+     "rc_p": 0.946,
+     "best_column": "F.PR.FRACDIFF:v",
+     "best_sharpe": 0.8467352631949918,
+     "K": 839
+    },
+    "AUDCHF": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.SP.SSA:lead_share",
+     "best_sharpe": 0.5695045938249002,
+     "K": 841
+    },
+    "AUDJPY": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.CA.GRANGER:v|d20",
+     "best_sharpe": 0.5832138476361474,
+     "K": 842
+    },
+    "AUDNZD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.MONTH_CALENDAR:sin|d20",
+     "best_sharpe": 0.52560725400878,
+     "K": 841
+    },
+    "AUDUSD": {
+     "spa_p": 0.979,
+     "rc_p": 0.998,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.7567980602638447,
+     "K": 843
+    },
+    "CADCHF": {
+     "spa_p": 0.982,
+     "rc_p": 0.97,
+     "best_column": "F.FG.GOLDEN_SWING:log_ratio",
+     "best_sharpe": 0.6476228986758923,
+     "K": 840
+    },
+    "CADJPY": {
+     "spa_p": 0.991,
+     "rc_p": 0.996,
+     "best_column": "F.VO.VOL_OF_VOL:v",
+     "best_sharpe": 0.6838967047374584,
+     "K": 842
+    },
+    "CHFJPY": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.CA.LEAD_LAG:max_corr",
+     "best_sharpe": 0.6226123570588726,
+     "K": 843
+    },
+    "EURAUD": {
+     "spa_p": 0.62,
+     "rc_p": 0.979,
+     "best_column": "F.FR.RQA:rr|d20",
+     "best_sharpe": 0.9033732522413659,
+     "K": 844
+    },
+    "EURCAD": {
+     "spa_p": 0.743,
+     "rc_p": 0.644,
+     "best_column": "F.ST.CANDLE_3BAR:star|d20",
+     "best_sharpe": 0.8638304582788858,
+     "K": 844
+    },
+    "EURCHF": {
+     "spa_p": 1.0,
+     "rc_p": 0.991,
+     "best_column": "F.TR.FRAMA:v|d20",
+     "best_sharpe": 0.6199793744481018,
+     "K": 844
+    },
+    "EURGBP": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.ST.NARROW_RANGE:nr|d20",
+     "best_sharpe": 0.5838318323759464,
+     "K": 842
+    },
+    "EURJPY": {
+     "spa_p": 0.997,
+     "rc_p": 0.958,
+     "best_column": "F.ES.DATE_NUMEROLOGY:sin|d20",
+     "best_sharpe": 0.7129549022357589,
+     "K": 844
+    },
+    "EURNOK": {
+     "spa_p": 0.785,
+     "rc_p": 0.548,
+     "best_column": "F.MS.EOM_TICK:v",
+     "best_sharpe": 0.7827419462516844,
+     "K": 833
+    },
+    "EURNZD": {
+     "spa_p": 0.747,
+     "rc_p": 0.988,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 1.0471311714465978,
+     "K": 842
+    },
+    "EURSEK": {
+     "spa_p": 0.584,
+     "rc_p": 0.314,
+     "best_column": "F.TR.VORTEX:vip",
+     "best_sharpe": 0.8607478028685296,
+     "K": 836
+    },
+    "EURUSD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.ES.LUNAR_PHASE:sin|d20",
+     "best_sharpe": 0.4667112599700443,
+     "K": 844
+    },
+    "GBPAUD": {
+     "spa_p": 0.989,
+     "rc_p": 0.99,
+     "best_column": "F.EC.PACF2:v",
+     "best_sharpe": 0.7530705094251755,
+     "K": 842
+    },
+    "GBPCAD": {
+     "spa_p": 0.999,
+     "rc_p": 1.0,
+     "best_column": "F.FG.MURREY:octave_pos|d20",
+     "best_sharpe": 0.6560275632193603,
+     "K": 844
+    },
+    "GBPCHF": {
+     "spa_p": 0.94,
+     "rc_p": 0.713,
+     "best_column": "F.VO.BB_WIDTH:width|d20",
+     "best_sharpe": 0.7600265619949856,
+     "K": 842
+    },
+    "GBPJPY": {
+     "spa_p": 0.056,
+     "rc_p": 0.191,
+     "best_column": "F.TR.VIDYA:v|d20",
+     "best_sharpe": 1.1155227641123804,
+     "K": 844
+    },
+    "GBPNZD": {
+     "spa_p": 0.928,
+     "rc_p": 0.584,
+     "best_column": "F.IT.SAMPLE_ENTROPY:v",
+     "best_sharpe": 0.8207777416573917,
+     "K": 842
+    },
+    "GBPUSD": {
+     "spa_p": 0.997,
+     "rc_p": 0.95,
+     "best_column": "F.FR.LYAPUNOV:v",
+     "best_sharpe": 0.616299397862341,
+     "K": 842
+    },
+    "NZDCAD": {
+     "spa_p": 0.741,
+     "rc_p": 0.999,
+     "best_column": "F.MO.MACD:hist",
+     "best_sharpe": 0.8026757984942762,
+     "K": 839
+    },
+    "NZDCHF": {
+     "spa_p": 0.545,
+     "rc_p": 0.604,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.9175803537901184,
+     "K": 841
+    },
+    "NZDJPY": {
+     "spa_p": 0.71,
+     "rc_p": 0.947,
+     "best_column": "F.FR.SEVCIK:v",
+     "best_sharpe": 0.9087847634411865,
+     "K": 842
+    },
+    "NZDUSD": {
+     "spa_p": 0.772,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.8370003216251252,
+     "K": 838
+    },
+    "USDCAD": {
+     "spa_p": 0.791,
+     "rc_p": 0.67,
+     "best_column": "F.ES.LUNAR_PHASE:sin",
+     "best_sharpe": 0.7955903583729957,
+     "K": 839
+    },
+    "USDCHF": {
+     "spa_p": 0.999,
+     "rc_p": 0.934,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 0.6247704981680774,
+     "K": 842
+    },
+    "USDJPY": {
+     "spa_p": 0.132,
+     "rc_p": 0.559,
+     "best_column": "F.FR.SEVCIK:v",
+     "best_sharpe": 1.068133041639581,
+     "K": 844
+    },
+    "USDNOK": {
+     "spa_p": 0.282,
+     "rc_p": 0.053,
+     "best_column": "F.ES.LUNAR_PHASE:sin|d20",
+     "best_sharpe": 0.991367299228913,
+     "K": 835
+    },
+    "USDSEK": {
+     "spa_p": 0.91,
+     "rc_p": 0.977,
+     "best_column": "F.SP.SPECTRAL_ENTROPY:v|d20",
+     "best_sharpe": 0.7589334354111148,
+     "K": 836
+    },
+    "XAGUSD": {
+     "spa_p": 0.999,
+     "rc_p": 0.999,
+     "best_column": "F.SP.SSA:lead_share",
+     "best_sharpe": 0.7203308336285856,
+     "K": 838
+    },
+    "XAUUSD": {
+     "spa_p": 0.688,
+     "rc_p": 0.159,
+     "best_column": "F.MS.SPREAD_COST:bps",
+     "best_sharpe": 1.0620374102801986,
+     "K": 840
+    }
+   },
+   "cross_instrument": {
+    "columns": 854,
+    "median_sharpe": -0.5500982030908791,
+    "share_positive": 0.0351288056206089,
+    "top5": {
+     "F.MS.QUOTE_STALENESS:stale_bars|d20": 0.409,
+     "F.TS.FOMC:flag": 0.35,
+     "F.TR.RIBBON:disp": 0.298,
+     "F.FR.SEVCIK:v": 0.287,
+     "F.RG.DRAWDOWN_REGIME:drawdown": 0.282
+    },
+    "placebo_best": -0.19142846192089286
+   },
+   "meta_trailing_winners": {
+    "top1": {
+     "oos_sharpe": 0.14026373449351828,
+     "ci95": [
+      -0.3718398135523982,
+      0.6128454563650346
+     ],
+     "ann_return": 0.012219471856951714,
+     "by_year": {
+      "2013": 0.12470519542694092,
+      "2014": 0.03447306156158447,
+      "2015": -0.0037174224853515625,
+      "2016": -0.08969908952713013,
+      "2017": 0.0300828218460083,
+      "2018": 0.01312267780303955,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAGUSD|F.IT.PERMUTATION:v|d20"
+       ],
+       "trailing_sharpe_top": 3.1370065212249756
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAGUSD|F.IT.PERMUTATION:v|d20"
+       ],
+       "trailing_sharpe_top": 2.72902512550354
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "GBPJPY|F.MS.VPIN:v"
+       ],
+       "trailing_sharpe_top": 1.654276728630066
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "GBPJPY|F.TR.VIDYA:v|d20"
+       ],
+       "trailing_sharpe_top": 1.1155227422714233
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "GBPJPY|F.TR.VIDYA:v|d20"
+       ],
+       "trailing_sharpe_top": 1.1155226230621338
+      }
+     ]
+    },
+    "top5": {
+     "oos_sharpe": -0.11084734101431638,
+     "ci95": [
+      -0.6295950418045422,
+      0.4645521189918958
+     ],
+     "ann_return": -0.003260233672335744,
+     "by_year": {
+      "2013": -0.014154434204101562,
+      "2014": -0.020510852336883545,
+      "2015": -0.002696812152862549,
+      "2016": -0.04869234561920166,
+      "2017": 0.017514944076538086,
+      "2018": 0.02847731113433838,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAGUSD|F.IT.PERMUTATION:v|d20",
+        "XAUUSD|F.FR.SEVCIK:v|d20",
+        "XAGUSD|F.FR.RQA:lam",
+        "XAUUSD|F.ES.BENFORD:v|d20",
+        "GBPJPY|F.MS.VPIN:v"
+       ],
+       "trailing_sharpe_top": 3.1370065212249756
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAGUSD|F.IT.PERMUTATION:v|d20",
+        "USDCAD|F.ES.LUNAR_PHASE:days_to_full",
+        "USDCAD|F.ES.LUNAR_PHASE:sin",
+        "XAUUSD|F.FR.GEN_HURST:multiscale|d20",
+        "EURNZD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 2.72902512550354
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "GBPJPY|F.MS.VPIN:v",
+        "XAGUSD|F.IT.PERMUTATION:v|d20",
+        "EURNZD|F.TS.HOLIDAYS:since_last",
+        "AUDCHF|F.MS.LIQ_IMBALANCE:v|d20",
+        "XAGUSD|F.IT.KL_DIVERGENCE:v|d20"
+       ],
+       "trailing_sharpe_top": 1.654276728630066
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "GBPJPY|F.TR.VIDYA:v|d20",
+        "USDJPY|F.FR.SEVCIK:v",
+        "XAUUSD|F.MS.SPREAD_COST:bps",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "USDJPY|F.TR.RIBBON:disp"
+       ],
+       "trailing_sharpe_top": 1.1155227422714233
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "GBPJPY|F.TR.VIDYA:v|d20",
+        "USDJPY|F.FR.SEVCIK:v",
+        "XAUUSD|F.MS.SPREAD_COST:bps",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "USDJPY|F.TR.RIBBON:disp"
+       ],
+       "trailing_sharpe_top": 1.1155226230621338
+      }
+     ]
+    },
+    "top20": {
+     "oos_sharpe": -0.7242312015450543,
+     "ci95": [
+      -1.0946875315607383,
+      -0.31253259420983087
+     ],
+     "ann_return": -0.01267262827605009,
+     "by_year": {
+      "2013": -0.06708526611328125,
+      "2014": -0.02603888511657715,
+      "2015": -0.03671950101852417,
+      "2016": -0.027941226959228516,
+      "2017": 0.013953924179077148,
+      "2018": 0.0012968778610229492,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "XAGUSD|F.IT.PERMUTATION:v|d20",
+        "XAUUSD|F.FR.SEVCIK:v|d20",
+        "XAGUSD|F.FR.RQA:lam",
+        "XAUUSD|F.ES.BENFORD:v|d20",
+        "GBPJPY|F.MS.VPIN:v"
+       ],
+       "trailing_sharpe_top": 3.1370065212249756
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAGUSD|F.IT.PERMUTATION:v|d20",
+        "USDCAD|F.ES.LUNAR_PHASE:days_to_full",
+        "USDCAD|F.ES.LUNAR_PHASE:sin",
+        "XAUUSD|F.FR.GEN_HURST:multiscale|d20",
+        "EURNZD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 2.72902512550354
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "GBPJPY|F.MS.VPIN:v",
+        "XAGUSD|F.IT.PERMUTATION:v|d20",
+        "EURNZD|F.TS.HOLIDAYS:since_last",
+        "AUDCHF|F.MS.LIQ_IMBALANCE:v|d20",
+        "XAGUSD|F.IT.KL_DIVERGENCE:v|d20"
+       ],
+       "trailing_sharpe_top": 1.654276728630066
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "GBPJPY|F.TR.VIDYA:v|d20",
+        "USDJPY|F.FR.SEVCIK:v",
+        "XAUUSD|F.MS.SPREAD_COST:bps",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "USDJPY|F.TR.RIBBON:disp"
+       ],
+       "trailing_sharpe_top": 1.1155227422714233
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "GBPJPY|F.TR.VIDYA:v|d20",
+        "USDJPY|F.FR.SEVCIK:v",
+        "XAUUSD|F.MS.SPREAD_COST:bps",
+        "EURNZD|F.TS.HOLIDAYS:near",
+        "USDJPY|F.TR.RIBBON:disp"
+       ],
+       "trailing_sharpe_top": 1.1155226230621338
+      }
+     ]
+    }
+   }
+  },
+  "M30": {
+   "real_columns": 28762,
+   "real_median_sharpe": -0.24243954578735405,
+   "real_share_positive": 0.0647381962311383,
+   "real_best": 1.0114542944114526,
+   "real_median_gross_sharpe": 0.0,
+   "placebo_median_sharpe": 0.0,
+   "placebo_p95_sharpe": 0.0,
+   "placebo_best": 0.6489528103267039,
+   "share_real_above_placebo_p95": 0.0647381962311383,
+   "median_share_folds_active": 0.2352941176470588,
+   "spa_by_instrument": {
+    "AUDCAD": {
+     "spa_p": 0.905,
+     "rc_p": 0.999,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.8136030397434071,
+     "K": 506
+    },
+    "AUDCHF": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.FOMC:flag",
+     "best_sharpe": 0.4172454799948573,
+     "K": 608
+    },
+    "AUDJPY": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:us_dst|d20",
+     "best_sharpe": 0.530117197074887,
+     "K": 674
+    },
+    "AUDNZD": {
+     "spa_p": 0.954,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:ny_ldn_gap",
+     "best_sharpe": 0.536425771270835,
+     "K": 352
+    },
+    "AUDUSD": {
+     "spa_p": 0.992,
+     "rc_p": 0.88,
+     "best_column": "F.CA.PCA_FACTOR:share",
+     "best_sharpe": 0.7354416057085915,
+     "K": 690
+    },
+    "CADCHF": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:near|d20",
+     "best_sharpe": 0.3266041540932665,
+     "K": 523
+    },
+    "CADJPY": {
+     "spa_p": 0.999,
+     "rc_p": 0.675,
+     "best_column": "F.VO.RV_INTRABAR:v|d20",
+     "best_sharpe": 0.6423524283167645,
+     "K": 749
+    },
+    "CHFJPY": {
+     "spa_p": 1.0,
+     "rc_p": 0.903,
+     "best_column": "F.TS.FOMC:hours_to_statement",
+     "best_sharpe": 0.6215451199989962,
+     "K": 645
+    },
+    "EURAUD": {
+     "spa_p": 1.0,
+     "rc_p": 0.966,
+     "best_column": "F.CA.TRIANGULAR:bps|d20",
+     "best_sharpe": 0.5851775470071398,
+     "K": 623
+    },
+    "EURCAD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.ES.DIGIT_PATTERN:cos",
+     "best_sharpe": 0.6047188515947367,
+     "K": 554
+    },
+    "EURCHF": {
+     "spa_p": 0.996,
+     "rc_p": 0.991,
+     "best_column": "F.ST.CANDLE_2BAR:tweezer",
+     "best_sharpe": 0.7600180923363239,
+     "K": 589
+    },
+    "EURGBP": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.MONTH_CALENDAR:turn_of_month",
+     "best_sharpe": 0.5142913695572288,
+     "K": 526
+    },
+    "EURJPY": {
+     "spa_p": 0.871,
+     "rc_p": 0.993,
+     "best_column": "F.TS.FOMC:hours_to_statement|d20",
+     "best_sharpe": 0.8350884613706225,
+     "K": 736
+    },
+    "EURNOK": {
+     "spa_p": 0.841,
+     "rc_p": 0.316,
+     "best_column": "F.TS.HOLIDAYS:to_next",
+     "best_sharpe": 0.6612009628806347,
+     "K": 324
+    },
+    "EURNZD": {
+     "spa_p": 0.716,
+     "rc_p": 0.9,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.8294030378055722,
+     "K": 571
+    },
+    "EURSEK": {
+     "spa_p": 0.135,
+     "rc_p": 0.033,
+     "best_column": "F.RG.DRAWDOWN_REGIME:drawdown",
+     "best_sharpe": 0.9800254051163652,
+     "K": 366
+    },
+    "EURUSD": {
+     "spa_p": 0.966,
+     "rc_p": 0.997,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 0.6104922755139671,
+     "K": 765
+    },
+    "GBPAUD": {
+     "spa_p": 0.997,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.7742077139512425,
+     "K": 663
+    },
+    "GBPCAD": {
+     "spa_p": 0.995,
+     "rc_p": 0.993,
+     "best_column": "F.CA.PCA_FACTOR:share",
+     "best_sharpe": 0.6113847132355062,
+     "K": 563
+    },
+    "GBPCHF": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.FR.CORR_DIM:v",
+     "best_sharpe": 0.43220938458955915,
+     "K": 545
+    },
+    "GBPJPY": {
+     "spa_p": 0.769,
+     "rc_p": 0.197,
+     "best_column": "F.CA.COINTEGRATION:adf_t",
+     "best_sharpe": 0.859406533306421,
+     "K": 696
+    },
+    "GBPNZD": {
+     "spa_p": 0.999,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.4690871794301571,
+     "K": 594
+    },
+    "GBPUSD": {
+     "spa_p": 0.949,
+     "rc_p": 0.592,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 0.7792369492097644,
+     "K": 708
+    },
+    "NZDCAD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.FG.LEG_VECTOR:slope",
+     "best_sharpe": 0.5549318553096667,
+     "K": 370
+    },
+    "NZDCHF": {
+     "spa_p": 0.952,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:near",
+     "best_sharpe": 0.6338609647891393,
+     "K": 459
+    },
+    "NZDJPY": {
+     "spa_p": 0.995,
+     "rc_p": 0.713,
+     "best_column": "F.RG.DRAWDOWN_REGIME:drawdown",
+     "best_sharpe": 0.7426462217361474,
+     "K": 610
+    },
+    "NZDUSD": {
+     "spa_p": 0.814,
+     "rc_p": 1.0,
+     "best_column": "F.TS.HOLIDAYS:since_last",
+     "best_sharpe": 0.8363079120124052,
+     "K": 519
+    },
+    "USDCAD": {
+     "spa_p": 0.975,
+     "rc_p": 0.557,
+     "best_column": "F.TS.FOMC:hours_to_statement",
+     "best_sharpe": 0.7010880694916886,
+     "K": 563
+    },
+    "USDCHF": {
+     "spa_p": 0.977,
+     "rc_p": 0.911,
+     "best_column": "F.ES.DIGIT_PATTERN:cos",
+     "best_sharpe": 0.6022935858609317,
+     "K": 624
+    },
+    "USDJPY": {
+     "spa_p": 0.921,
+     "rc_p": 1.0,
+     "best_column": "F.TS.DST_TRANSITION:us_dst|d20",
+     "best_sharpe": 0.8492319503766604,
+     "K": 728
+    },
+    "USDNOK": {
+     "spa_p": 0.869,
+     "rc_p": 0.282,
+     "best_column": "F.TS.HOLIDAYS:to_next",
+     "best_sharpe": 0.7544026485751097,
+     "K": 403
+    },
+    "USDSEK": {
+     "spa_p": 0.815,
+     "rc_p": 0.939,
+     "best_column": "F.TS.FOMC:flag|d20",
+     "best_sharpe": 0.7734673696746074,
+     "K": 461
+    },
+    "XAGUSD": {
+     "spa_p": 0.18,
+     "rc_p": 0.348,
+     "best_column": "F.TS.FOMC:hours_to_statement",
+     "best_sharpe": 1.0114543261494293,
+     "K": 680
+    },
+    "XAUUSD": {
+     "spa_p": 1.0,
+     "rc_p": 1.0,
+     "best_column": "F.TS.MONTH_CALENDAR:quarter_end_month",
+     "best_sharpe": 0.5786451575759185,
+     "K": 794
+    }
+   },
+   "cross_instrument": {
+    "columns": 846,
+    "median_sharpe": -0.8597063351956451,
+    "share_positive": 0.01182033096926714,
+    "top5": {
+     "F.TS.FOMC:flag|d20": 0.332,
+     "F.TS.HOLIDAYS:since_last": 0.314,
+     "F.TS.FOMC:flag": 0.246,
+     "F.TS.SEASONAL_RETURN:v": 0.229,
+     "F.VO.RV_INTRABAR:v|d20": 0.128
+    },
+    "placebo_best": -0.1437826073592032
+   },
+   "meta_trailing_winners": {
+    "top1": {
+     "oos_sharpe": 0.17136095726324932,
+     "ci95": [
+      -0.42200821623550305,
+      0.6202031918080904
+     ],
+     "ann_return": 0.009191352874040604,
+     "by_year": {
+      "2013": 0.0722208023071289,
+      "2014": 0.023034214973449707,
+      "2015": -0.0075525641441345215,
+      "2016": 0.01984095573425293,
+      "2017": 0.018027424812316895,
+      "2018": -0.04726642370223999,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURCAD|F.DI.KURT:v"
+       ],
+       "trailing_sharpe_top": 1.7633976936340332
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.TR.ICHIMOKU:cloud_thick|d20"
+       ],
+       "trailing_sharpe_top": 1.702014446258545
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.6307059526443481
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "XAGUSD|F.TS.FOMC:hours_to_statement"
+       ],
+       "trailing_sharpe_top": 1.0114543437957764
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "XAGUSD|F.TS.FOMC:hours_to_statement"
+       ],
+       "trailing_sharpe_top": 1.0114543437957764
+      }
+     ]
+    },
+    "top5": {
+     "oos_sharpe": -0.00534434241412405,
+     "ci95": [
+      -0.5590871237261673,
+      0.5079161802813049
+     ],
+     "ann_return": -0.00013252251665107906,
+     "by_year": {
+      "2013": 0.01811540126800537,
+      "2014": -0.03270775079727173,
+      "2015": 0.051595449447631836,
+      "2016": -0.04698789119720459,
+      "2017": 0.01054537296295166,
+      "2018": -0.0015617609024047852,
+      "2019": 0.0,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURCAD|F.DI.KURT:v",
+        "GBPCAD|F.CA.COINTEGRATION:z",
+        "EURSEK|F.RG.DRAWDOWN_REGIME:drawdown",
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "AUDCHF|F.TS.FOMC:flag"
+       ],
+       "trailing_sharpe_top": 1.7633976936340332
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.TR.ICHIMOKU:cloud_thick|d20",
+        "USDCAD|F.ES.LUNAR_PHASE:cos|d20",
+        "AUDCHF|F.TS.FOMC:flag",
+        "GBPCAD|F.CA.COINTEGRATION:z",
+        "EURAUD|F.CA.PCA_FACTOR:share"
+       ],
+       "trailing_sharpe_top": 1.702014446258545
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "XAUUSD|F.TR.ICHIMOKU:cloud_thick|d20",
+        "EURAUD|F.CA.PCA_FACTOR:share",
+        "EURSEK|F.RG.DRAWDOWN_REGIME:drawdown",
+        "AUDUSD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.6307059526443481
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "XAGUSD|F.TS.FOMC:hours_to_statement",
+        "EURSEK|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAGUSD|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAGUSD|F.TS.FOMC:hours_to_statement|d20",
+        "GBPJPY|F.CA.COINTEGRATION:adf_t"
+       ],
+       "trailing_sharpe_top": 1.0114543437957764
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "XAGUSD|F.TS.FOMC:hours_to_statement",
+        "EURSEK|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAGUSD|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAGUSD|F.TS.FOMC:hours_to_statement|d20",
+        "GBPJPY|F.CA.COINTEGRATION:adf_t"
+       ],
+       "trailing_sharpe_top": 1.0114543437957764
+      }
+     ]
+    },
+    "top20": {
+     "oos_sharpe": 0.02923279973686847,
+     "ci95": [
+      -0.50648555491894,
+      0.5036332015203918
+     ],
+     "ann_return": 0.000403210666263476,
+     "by_year": {
+      "2013": 0.008962869644165039,
+      "2014": 0.0037431716918945312,
+      "2015": 0.004180192947387695,
+      "2016": -0.012823879718780518,
+      "2017": -0.0009709000587463379,
+      "2018": 0.003921389579772949,
+      "2019": -0.003922164440155029,
+      "2020": 0.0,
+      "2021": 0.0,
+      "2022": 0.0
+     },
+     "first_picks": [
+      {
+       "start": "2013-01-01",
+       "top": [
+        "EURCAD|F.DI.KURT:v",
+        "GBPCAD|F.CA.COINTEGRATION:z",
+        "EURSEK|F.RG.DRAWDOWN_REGIME:drawdown",
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "AUDCHF|F.TS.FOMC:flag"
+       ],
+       "trailing_sharpe_top": 1.7633976936340332
+      },
+      {
+       "start": "2013-07-01",
+       "top": [
+        "XAUUSD|F.TR.ICHIMOKU:cloud_thick|d20",
+        "USDCAD|F.ES.LUNAR_PHASE:cos|d20",
+        "AUDCHF|F.TS.FOMC:flag",
+        "GBPCAD|F.CA.COINTEGRATION:z",
+        "EURAUD|F.CA.PCA_FACTOR:share"
+       ],
+       "trailing_sharpe_top": 1.702014446258545
+      },
+      {
+       "start": "2014-01-01",
+       "top": [
+        "EURAUD|F.TS.HOLIDAYS:since_last",
+        "XAUUSD|F.TR.ICHIMOKU:cloud_thick|d20",
+        "EURAUD|F.CA.PCA_FACTOR:share",
+        "EURSEK|F.RG.DRAWDOWN_REGIME:drawdown",
+        "AUDUSD|F.TS.HOLIDAYS:since_last"
+       ],
+       "trailing_sharpe_top": 1.6307059526443481
+      }
+     ],
+     "last_picks": [
+      {
+       "start": "2022-01-01",
+       "top": [
+        "XAGUSD|F.TS.FOMC:hours_to_statement",
+        "EURSEK|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAGUSD|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAGUSD|F.TS.FOMC:hours_to_statement|d20",
+        "GBPJPY|F.CA.COINTEGRATION:adf_t"
+       ],
+       "trailing_sharpe_top": 1.0114543437957764
+      },
+      {
+       "start": "2022-07-01",
+       "top": [
+        "XAGUSD|F.TS.FOMC:hours_to_statement",
+        "EURSEK|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAGUSD|F.RG.DRAWDOWN_REGIME:drawdown",
+        "XAGUSD|F.TS.FOMC:hours_to_statement|d20",
+        "GBPJPY|F.CA.COINTEGRATION:adf_t"
+       ],
+       "trailing_sharpe_top": 1.0114543437957764
+      }
+     ]
+    }
+   }
+  }
+ },
+ "top25_streams": [
+  {
+   "column": "F.FR.CORR_DIM:v|d20",
+   "symbol": "XAUUSD",
+   "tf": "D1",
+   "oos_sharpe": 1.3412,
+   "oos_gross_sharpe": 1.3847,
+   "t_stat": 2.9793,
+   "p_bh": 1.0,
+   "turnover_per_year": 7.8578,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.TR.VIDYA:v|d20",
+   "symbol": "GBPJPY",
+   "tf": "H8",
+   "oos_sharpe": 1.1155,
+   "oos_gross_sharpe": 1.2358,
+   "t_stat": 3.5526,
+   "p_bh": 1.0,
+   "turnover_per_year": 37.4021,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.ES.LUNAR_PHASE:cos|d20",
+   "symbol": "USDNOK",
+   "tf": "H2",
+   "oos_sharpe": 1.0923,
+   "oos_gross_sharpe": 1.3409,
+   "t_stat": 3.381,
+   "p_bh": 1.0,
+   "turnover_per_year": 50.9851,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.FR.RQA:lam",
+   "symbol": "XAUUSD",
+   "tf": "H2",
+   "oos_sharpe": 1.0849,
+   "oos_gross_sharpe": 1.1796,
+   "t_stat": 2.7487,
+   "p_bh": 1.0,
+   "turnover_per_year": 38.2902,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.FR.SEVCIK:v",
+   "symbol": "USDJPY",
+   "tf": "H8",
+   "oos_sharpe": 1.0681,
+   "oos_gross_sharpe": 1.2452,
+   "t_stat": 3.4068,
+   "p_bh": 1.0,
+   "turnover_per_year": 23.8253,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.TS.HOLIDAYS:near",
+   "symbol": "EURNZD",
+   "tf": "H2",
+   "oos_sharpe": 1.065,
+   "oos_gross_sharpe": 1.2305,
+   "t_stat": 3.1883,
+   "p_bh": 1.0,
+   "turnover_per_year": 9.093,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.LF.AUTOENCODER:z2|d20",
+   "symbol": "USDSEK",
+   "tf": "D1",
+   "oos_sharpe": 1.0641,
+   "oos_gross_sharpe": 1.2477,
+   "t_stat": 2.9082,
+   "p_bh": 1.0,
+   "turnover_per_year": 3.3281,
+   "share_folds_active": 0.1333
+  },
+  {
+   "column": "F.VO.BB_WIDTH:pctb",
+   "symbol": "CADCHF",
+   "tf": "D1",
+   "oos_sharpe": 1.0622,
+   "oos_gross_sharpe": 1.5174,
+   "t_stat": 2.5842,
+   "p_bh": 1.0,
+   "turnover_per_year": 21.8378,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.MS.SPREAD_COST:bps",
+   "symbol": "XAUUSD",
+   "tf": "H8",
+   "oos_sharpe": 1.062,
+   "oos_gross_sharpe": 1.1302,
+   "t_stat": 2.9522,
+   "p_bh": 1.0,
+   "turnover_per_year": 45.3431,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.TR.AROON:osc|d20",
+   "symbol": "EURNOK",
+   "tf": "D1",
+   "oos_sharpe": 1.062,
+   "oos_gross_sharpe": 1.3823,
+   "t_stat": 2.8986,
+   "p_bh": 1.0,
+   "turnover_per_year": 19.8622,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.TS.HOLIDAYS:near",
+   "symbol": "EURNZD",
+   "tf": "H8",
+   "oos_sharpe": 1.0471,
+   "oos_gross_sharpe": 1.1766,
+   "t_stat": 3.1266,
+   "p_bh": 1.0,
+   "turnover_per_year": 9.1741,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.TS.HOLIDAYS:near",
+   "symbol": "EURNZD",
+   "tf": "H4",
+   "oos_sharpe": 1.0439,
+   "oos_gross_sharpe": 1.1782,
+   "t_stat": 3.2214,
+   "p_bh": 1.0,
+   "turnover_per_year": 9.3437,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.SP.WAVELET_ENERGY:e0|d20",
+   "symbol": "XAUUSD",
+   "tf": "H2",
+   "oos_sharpe": 1.0419,
+   "oos_gross_sharpe": 1.4528,
+   "t_stat": 2.6399,
+   "p_bh": 1.0,
+   "turnover_per_year": 223.0751,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.TS.FOMC:flag|d20",
+   "symbol": "USDCHF",
+   "tf": "H4",
+   "oos_sharpe": 1.0165,
+   "oos_gross_sharpe": 1.2084,
+   "t_stat": 3.2374,
+   "p_bh": 1.0,
+   "turnover_per_year": 32.292,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.TR.RIBBON:disp",
+   "symbol": "USDJPY",
+   "tf": "H8",
+   "oos_sharpe": 1.012,
+   "oos_gross_sharpe": 1.1818,
+   "t_stat": 3.2277,
+   "p_bh": 1.0,
+   "turnover_per_year": 34.4406,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.TS.FOMC:hours_to_statement",
+   "symbol": "XAGUSD",
+   "tf": "M30",
+   "oos_sharpe": 1.0115,
+   "oos_gross_sharpe": 1.5005,
+   "t_stat": 2.6598,
+   "p_bh": 1.0,
+   "turnover_per_year": 28.714,
+   "share_folds_active": 0.9286
+  },
+  {
+   "column": "F.TR.EMA:v|d20",
+   "symbol": "GBPJPY",
+   "tf": "H8",
+   "oos_sharpe": 0.9958,
+   "oos_gross_sharpe": 1.1112,
+   "t_stat": 3.1714,
+   "p_bh": 1.0,
+   "turnover_per_year": 33.84,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.ES.LUNAR_PHASE:sin|d20",
+   "symbol": "USDNOK",
+   "tf": "H8",
+   "oos_sharpe": 0.9914,
+   "oos_gross_sharpe": 1.2002,
+   "t_stat": 3.1632,
+   "p_bh": 1.0,
+   "turnover_per_year": 49.3255,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.FR.CORR_DIM:v|d20",
+   "symbol": "CHFJPY",
+   "tf": "D1",
+   "oos_sharpe": 0.9905,
+   "oos_gross_sharpe": 1.1907,
+   "t_stat": 2.8748,
+   "p_bh": 1.0,
+   "turnover_per_year": 10.8285,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.PR.EFFICIENCY:v|d20",
+   "symbol": "XAUUSD",
+   "tf": "D1",
+   "oos_sharpe": 0.9898,
+   "oos_gross_sharpe": 1.0729,
+   "t_stat": 2.1988,
+   "p_bh": 1.0,
+   "turnover_per_year": 15.3127,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.RG.DRAWDOWN_REGIME:drawdown",
+   "symbol": "EURSEK",
+   "tf": "M30",
+   "oos_sharpe": 0.98,
+   "oos_gross_sharpe": 1.1746,
+   "t_stat": 2.8449,
+   "p_bh": 1.0,
+   "turnover_per_year": 28.1131,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.SP.CEPSTRUM:peak",
+   "symbol": "GBPCAD",
+   "tf": "D1",
+   "oos_sharpe": 0.9695,
+   "oos_gross_sharpe": 1.1672,
+   "t_stat": 2.3602,
+   "p_bh": 1.0,
+   "turnover_per_year": 17.4012,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.ES.LUNAR_PHASE:sin",
+   "symbol": "USDNOK",
+   "tf": "H4",
+   "oos_sharpe": 0.9692,
+   "oos_gross_sharpe": 1.174,
+   "t_stat": 3.0923,
+   "p_bh": 1.0,
+   "turnover_per_year": 50.1601,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.ES.LUNAR_PHASE:cos|d20",
+   "symbol": "USDNOK",
+   "tf": "H1",
+   "oos_sharpe": 0.9679,
+   "oos_gross_sharpe": 1.2208,
+   "t_stat": 2.818,
+   "p_bh": 1.0,
+   "turnover_per_year": 50.7565,
+   "share_folds_active": 1.0
+  },
+  {
+   "column": "F.ES.TIME_MODULAR:cos|d20",
+   "symbol": "USDJPY",
+   "tf": "D1",
+   "oos_sharpe": 0.9594,
+   "oos_gross_sharpe": 1.1073,
+   "t_stat": 2.7919,
+   "p_bh": 1.0,
+   "turnover_per_year": 4.2461,
+   "share_folds_active": 1.0
+  }
+ ]
+}

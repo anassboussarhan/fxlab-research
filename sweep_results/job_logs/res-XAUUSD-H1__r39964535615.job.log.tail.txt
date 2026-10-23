@@ -1,0 +1,30 @@
+planned 81 experiments (1 skipped) -> /home/runner/work/fxlab-research/fxlab-research/results/manifests/cloud_H1_XAUUSD.json
+planned 56 experiments (26 skipped) -> /home/runner/work/fxlab-research/fxlab-research/results/manifests/cloud_H1grid_XAUUSD.json
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+{
+ "planned": 81,
+ "skipped_at_planning": 1,
+ "ok": 81,
+ "failed": 0,
+ "not_yet_run": 0
+}
+{
+ "planned": 56,
+ "skipped_at_planning": 26,
+ "ok": 56,
+ "failed": 0,
+ "not_yet_run": 0
+}
+XAUUSD H1 h=4: net -0.20 gross 0.80 IC 0.024 abstain 0.85 in-market 0.12 (42.6s)
+XAUUSD H1 h=24: net -0.70 gross -0.17 IC 0.041 abstain 0.91 in-market 0.09 (9.1s)

@@ -1,0 +1,47 @@
+ice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+/home/runner/work/fxlab-research/fxlab-research/fxlab/strategies/extra.py:315: UserWarning: Converting to PeriodArray/Index representation will drop timezone information.
+  month = q.index.to_period("M")
+Model is not converging.  Current: 10924.758610711668 is not greater than 10924.899656027763. Delta is -0.14104531609518745
+Model is not converging.  Current: 6103.88274981092 is not greater than 6103.882757584475. Delta is -7.77355489844922e-06
+Model is not converging.  Current: 6071.146577007676 is not greater than 6071.146585093877. Delta is -8.086200978141278e-06
+Model is not converging.  Current: 6030.543079953295 is not greater than 6030.543098852304. Delta is -1.889900886453688e-05
+Model is not converging.  Current: 6034.676389291675 is not greater than 6034.676399635233. Delta is -1.0343557732994668e-05
+Model is not converging.  Current: 6088.560471177161 is not greater than 6088.560509303804. Delta is -3.812664272118127e-05
+Model is not converging.  Current: 6126.91660447909 is not greater than 6126.916638604409. Delta is -3.412531896174187e-05
+Model is not converging.  Current: 6098.029937925984 is not greater than 6098.029949542592. Delta is -1.1616607480391394e-05
+Model is not converging.  Current: 6076.104271045567 is not greater than 6076.104280473991. Delta is -9.428424164070748e-06
+Model is not converging.  Current: 6130.516559428482 is not greater than 6130.51656915145. Delta is -9.72296857071342e-06
+Model is not converging.  Current: 6083.416372894968 is not greater than 6083.416373116131. Delta is -2.2116273612482473e-07
+Model is not converging.  Current: 6243.409226907388 is not greater than 6243.409278699777. Delta is -5.1792389058391564e-05
+Model is not converging.  Current: 6180.640067369318 is not greater than 6180.640086500848. Delta is -1.9131530279992148e-05
+Model is not converging.  Current: 6076.803282830599 is not greater than 6076.803283979491. Delta is -1.1488928066683002e-06
+Model is not converging.  Current: 6027.353033421762 is not greater than 6027.3530482354845. Delta is -1.4813722373219207e-05
+Model is not converging.  Current: 5997.065709047331 is not greater than 5997.065710518821. Delta is -1.471489667892456e-06
+{
+ "planned": 81,
+ "skipped_at_planning": 1,
+ "ok": 81,
+ "failed": 0,
+ "not_yet_run": 0
+}

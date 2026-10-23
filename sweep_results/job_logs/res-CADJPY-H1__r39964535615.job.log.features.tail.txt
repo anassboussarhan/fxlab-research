@@ -1,0 +1,38 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6255.1846357461645 is not greater than 6255.184657346084. Delta is -2.1599919818982016e-05
+Model is not converging.  Current: 6248.258683856665 is not greater than 6248.258684316944. Delta is -4.6027889766264707e-07
+Model is not converging.  Current: 6278.584923688378 is not greater than 6278.584943677035. Delta is -1.9988657186331693e-05
+Model is not converging.  Current: 6189.673110206697 is not greater than 6189.6731185651415. Delta is -8.358444574696478e-06
+Model is not converging.  Current: 6172.956034245164 is not greater than 6172.956046126107. Delta is -1.1880943020514678e-05
+Model is not converging.  Current: 6203.326623836104 is not greater than 6203.326637334502. Delta is -1.3498398402589373e-05
+Model is not converging.  Current: 6255.6341936323 is not greater than 6255.634204267749. Delta is -1.0635449143592268e-05
+Model is not converging.  Current: 6351.052684634735 is not greater than 6351.05270983301. Delta is -2.519827557989629e-05
+Model is not converging.  Current: 6195.744653675154 is not greater than 6195.744675619998. Delta is -2.1944843865639996e-05
+Model is not converging.  Current: 6216.415480519967 is not greater than 6216.415491862485. Delta is -1.1342518519086298e-05
+Model is not converging.  Current: 6232.353242762303 is not greater than 6232.353248505557. Delta is -5.743253495893441e-06
+Model is not converging.  Current: 6308.309456394203 is not greater than 6308.309460476005. Delta is -4.0818022171151824e-06
+Model is not converging.  Current: 6182.936566405454 is not greater than 6182.936569239794. Delta is -2.834340193658136e-06
+Model is not converging.  Current: 6207.622593556535 is not greater than 6207.6225955431455. Delta is -1.986610186577309e-06
+Model is not converging.  Current: 6568.670916629816 is not greater than 6568.670994382522. Delta is -7.775270569254644e-05
+Model is not converging.  Current: 6487.690843230126 is not greater than 6487.690888842319. Delta is -4.5612192479893565e-05
+Model is not converging.  Current: 6192.175427231346 is not greater than 6192.175458006246. Delta is -3.077490055147791e-05
+Model is not converging.  Current: 6171.177110656334 is not greater than 6171.177111104912. Delta is -4.4857824832433835e-07
+  CADJPY H1: built 266 features in 312s (1 errors, 2 skipped)
+CADJPY H1: 844 columns, median OOS net Sharpe -0.34, positive 0.08, best 0.62 | placebo median 0.00 best 0.23 | 452.7s

@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:92: RuntimeWarning: All-NaN slice encountered
+  d = np.nanmin(np.abs(np.log((t[:, None] + 1) / (FIBS[None, :] + 1))), axis=1)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6190.827403129223 is not greater than 6190.827430510496. Delta is -2.7381272957427427e-05
+Model is not converging.  Current: 6225.699968905952 is not greater than 6225.699985919533. Delta is -1.7013580873026513e-05
+Model is not converging.  Current: 6344.703613552451 is not greater than 6344.703629035124. Delta is -1.548267300677253e-05
+Model is not converging.  Current: 6331.022954488058 is not greater than 6331.023018948045. Delta is -6.445998769777361e-05
+Model is not converging.  Current: 6207.691873688912 is not greater than 6207.691899698484. Delta is -2.6009572138718795e-05
+Model is not converging.  Current: 6331.32705773794 is not greater than 6331.327062304379. Delta is -4.566439201880712e-06
+Model is not converging.  Current: 6348.368455628671 is not greater than 6348.368464124646. Delta is -8.495975635014474e-06
+Model is not converging.  Current: 6331.2403566769435 is not greater than 6331.240358995252. Delta is -2.3183083612821065e-06
+Model is not converging.  Current: 6360.571338730426 is not greater than 6360.571349357019. Delta is -1.0626593393681105e-05
+Model is not converging.  Current: 6294.80690374435 is not greater than 6294.80693932689. Delta is -3.558253956725821e-05
+  GBPCHF M30: built 267 features in 495s (0 errors, 2 skipped)
+GBPCHF M30: 846 columns, median OOS net Sharpe -0.16, positive 0.07, best 0.43 | placebo median 0.00 best 0.00 | 766.3s

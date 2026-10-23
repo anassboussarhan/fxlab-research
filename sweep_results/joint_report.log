@@ -1,0 +1,20 @@
+{
+ "joint_streams": 8704,
+ "families": 96,
+ "pairs": 34,
+ "tfs": [
+  "D1",
+  "H1",
+  "H4"
+ ],
+ "median_oos_sharpe": -0.37545540939982486,
+ "share_positive": 0.18462775735294118,
+ "median_delta_vs_standard": 0.12509280005183077,
+ "share_better_than_standard": 0.6000689338235294,
+ "median_abstain_sharpe": -0.2048970952445947,
+ "deflated_share_of_folds_traded": 0.03875597334004024,
+ "bh_survivors_q10": 0,
+ "holm_survivors_a05": 0,
+ "total_candidates_simulated": 761156,
+ "note": "top10 is a post-hoc ranking across all joint streams (selection bias); only BH/Holm survivors and pre-registered follow-ups count as evidence."
+}
