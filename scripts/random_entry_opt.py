@@ -13,6 +13,10 @@ direction (the entry rate is itself optimised). Everything else is the strategy 
   zone         zone recovery (hedging martingale): zone 0.25-5 ATR, take-profit 0.25-5 ATR, up to K = 1-8 legs
   hedged_grid  bi-directional grid with locked hedges (no entries needed): step 0.25-5 ATR, basket take-profit
                0.5-10 steps, stop-out 2-50 steps, N = 3-20 positions per side
+  smart        the bracket plus the "smart entry" levers: market / limit / stop entry 0.05-2 ATR from the price,
+               live 1-50 bars; session window (start hour, 1-23 hours; intraday bars); volatility regime filter
+               (ATR14/ATR100 above or below 0.6-1.6); spread cap (0.5-3 x its 1000-bar mean); stop-and-reverse;
+               flat before the daily rollover (no swap; H8 and faster). 1.5 x the trials of the other families.
 Costs: quoted bid/ask, slippage 0.25 x spread + 0.1 pip, commission 0.35 bp per side, swap 0.5 pip per night on
 every open position (both legs of a hedge). Stop-first inside a bar; on M5+ a bar holding both the stop and the
 target of a bracket is resolved from the M1 path.
@@ -162,6 +166,216 @@ def _bracket(bo, bh, bl, bc, ao, ah, al, ac, atr, roll, ent, sl, tp, trail, be, 
             if d > 0 and bh[j] - epx >= be * sd:
                 stop = max(stop, epx)
             elif d < 0 and epx - al[j] >= be * sd:
+                stop = min(stop, epx)
+    return bar, ntr
+
+
+@njit(cache=False)
+def _smart(bo, bh, bl, bc, ao, ah, al, ac, atr, roll, ent, allow, etype, koff, ttl, sl, tp, trail, be, part_r, tmax,
+           size_mode, risk, levcap, sar, flat_roll, slip_frac, slip_pips, pip, comm, swap_pips, m1o, mbh, mbl, mah,
+           mal, use_m1):
+    """Bracket with smart execution of a random entry signal ent[j-1] (decided at the close of bar j-1), acted on
+    only if allow[j] (session / volatility / spread filters, precomputed from information up to the close of j-1).
+      etype 0  market at the open of bar j
+      etype 1  limit koff ATR better than the mid close of j-1, live for ttl bars (one order at a time; new signals
+               are ignored while an order is pending or a position is open). A buy limit fills when the ask trades
+               strictly below the level (at the level; at the open if the bar gaps through it), a sell limit when
+               the bid trades strictly above it; no slippage.
+      etype 2  stop koff ATR worse: a buy stop fills when the ask reaches the level, a sell stop when the bid does
+               (+ slippage; at the open + slippage on a gap).
+    On a bar where an order filled mid-bar: with the M1 path the rest of the bar is replayed from the fill minute
+    (on the fill minute itself only the stop can trigger); without M1 only the stop can trigger. Partial,
+    trailing and breakeven never use the fill bar's extremes (they may predate the fill).
+    sar: after a stop-out, reverse at the next open (market). flat_roll: close at the open of a bar that contains
+    the daily rollover, no orders on it (no swap). Stops, targets, trailing, breakeven, partial, time exit and sizing
+    as in _bracket."""
+    n = len(bo)
+    bar = np.zeros(n)
+    ntr = 0
+    pos = 0.0; epx = 0.0; stop = 0.0; tgt = np.nan; trl = 0.0; sd = 0.0; ebar = -1; f = 0.0; last = 0.0
+    part_done = False; open_fill = True
+    pend = 0.0; L = 0.0; pend_end = -1; patr = 0.0; sar_dir = 0.0
+    for j in range(1, n):
+        slip = slip_frac * (ao[j] - bo[j]) + slip_pips * pip
+        if flat_roll and roll[j] > 0:
+            if pos != 0.0:
+                px = bo[j] - slip if pos > 0 else ao[j] + slip
+                r = pos * (px - epx) / epx
+                bar[j] += f * (r - last) - f * comm
+                pos = 0.0
+            pend = 0.0; sar_dir = 0.0
+            continue
+        a1 = atr[j - 1]
+        okatr = a1 == a1 and a1 > 0
+        newpos = False
+        if pos == 0.0 and pend == 0.0:
+            d = 0.0; mkt = False
+            if sar_dir != 0.0:
+                if allow[j] and okatr:
+                    d = sar_dir; mkt = True
+                sar_dir = 0.0
+            elif ent[j - 1] != 0 and allow[j] and okatr:
+                d = float(ent[j - 1]); mkt = etype == 0
+            if d != 0.0:
+                patr = a1
+                if mkt:
+                    epx = ao[j] + slip if d > 0 else bo[j] - slip
+                    pos = d; open_fill = True; newpos = True
+                else:
+                    ref = 0.5 * (bc[j - 1] + ac[j - 1])
+                    L = ref - d * koff * a1 if etype == 1 else ref + d * koff * a1
+                    pend = d; pend_end = j + ttl - 1
+        else:
+            sar_dir = 0.0
+        if pos == 0.0 and pend != 0.0:
+            if j > pend_end:
+                pend = 0.0
+            else:
+                d = pend; px = -1.0
+                if etype == 1:
+                    if d > 0:
+                        if ao[j] <= L:
+                            px = ao[j]; open_fill = True
+                        elif al[j] < L:
+                            px = L; open_fill = False
+                    else:
+                        if bo[j] >= L:
+                            px = bo[j]; open_fill = True
+                        elif bh[j] > L:
+                            px = L; open_fill = False
+                else:
+                    if d > 0:
+                        if ao[j] >= L:
+                            px = ao[j] + slip; open_fill = True
+                        elif ah[j] >= L:
+                            px = L + slip; open_fill = False
+                    else:
+                        if bo[j] <= L:
+                            px = bo[j] - slip; open_fill = True
+                        elif bl[j] <= L:
+                            px = L - slip; open_fill = False
+                if px > 0:
+                    epx = px; pos = d; pend = 0.0; newpos = True
+        if pos == 0.0:
+            continue
+        d = pos
+        if newpos:
+            sd = sl * patr
+            stop = epx - d * sd
+            tgt = epx + d * tp * sd if tp > 0 else np.nan
+            trl = trail * patr if trail > 0 else 0.0
+            f = 1.0 if size_mode == 0 else min(levcap, risk / (sd / epx))
+            ebar = j; part_done = False; last = 0.0
+            bar[j] -= f * comm
+            ntr += 1
+        fillbar = ebar == j and not open_fill
+        done = False; px = 0.0; stopped = False
+        if ebar != j:
+            if d > 0:
+                if bo[j] <= stop:
+                    px = bo[j] - slip; done = True; stopped = True
+                elif tgt == tgt and bo[j] >= tgt:
+                    px = bo[j]; done = True
+            else:
+                if ao[j] >= stop:
+                    px = ao[j] + slip; done = True; stopped = True
+                elif tgt == tgt and ao[j] <= tgt:
+                    px = ao[j]; done = True
+        if not done and fillbar:
+            qf = -1
+            if use_m1:
+                for q in range(m1o[j], m1o[j + 1]):
+                    if etype == 1:
+                        hit = (d > 0 and mal[q] < L) or (d < 0 and mbh[q] > L)
+                    else:
+                        hit = (d > 0 and mah[q] >= L) or (d < 0 and mbl[q] <= L)
+                    if hit:
+                        qf = q
+                        break
+            if qf >= 0:
+                for q in range(qf, m1o[j + 1]):
+                    if d > 0:
+                        if mbl[q] <= stop:
+                            px = stop - slip; done = True; stopped = True
+                            break
+                        if q > qf and tgt == tgt and mbh[q] >= tgt:
+                            px = tgt; done = True
+                            break
+                    else:
+                        if mah[q] >= stop:
+                            px = stop + slip; done = True; stopped = True
+                            break
+                        if q > qf and tgt == tgt and mal[q] <= tgt:
+                            px = tgt; done = True
+                            break
+            elif (d > 0 and bl[j] <= stop) or (d < 0 and ah[j] >= stop):
+                px = stop - d * slip; done = True; stopped = True
+        elif not done:
+            if d > 0:
+                hs = bl[j] <= stop
+                ht = tgt == tgt and bh[j] >= tgt
+            else:
+                hs = ah[j] >= stop
+                ht = tgt == tgt and al[j] <= tgt
+            if hs and ht and use_m1:
+                first = 1
+                for q in range(m1o[j], m1o[j + 1]):
+                    if d > 0:
+                        if mbl[q] <= stop:
+                            first = 1
+                            break
+                        if mbh[q] >= tgt:
+                            first = 2
+                            break
+                    else:
+                        if mah[q] >= stop:
+                            first = 1
+                            break
+                        if mal[q] <= tgt:
+                            first = 2
+                            break
+                px = stop - d * slip if first == 1 else tgt
+                done = True; stopped = first == 1
+            elif hs:
+                px = stop - d * slip; done = True; stopped = True
+            elif ht:
+                px = tgt; done = True
+        if not done and part_r > 0 and not part_done and not fillbar:
+            lv = epx + d * part_r * sd
+            if (d > 0 and bh[j] >= lv) or (d < 0 and al[j] <= lv):
+                fp = 0.5 * f
+                r = d * (lv - epx) / epx
+                bar[j] += fp * (r - last) - fp * comm
+                f -= fp; part_done = True
+                if be > 0:
+                    stop = max(stop, epx) if d > 0 else min(stop, epx)
+        if not done and tmax > 0 and j - ebar + 1 >= tmax:
+            px = bc[j] - slip if d > 0 else ac[j] + slip
+            done = True
+        if done:
+            r = d * (px - epx) / epx
+            bar[j] += f * (r - last) - f * comm
+            pos = 0.0
+            if stopped and sar:
+                sar_dir = -d
+            continue
+        mark = bc[j] if d > 0 else ac[j]
+        val = d * (mark - epx) / epx
+        bar[j] += f * (val - last)
+        last = val
+        if roll[j] > 0:
+            bar[j] -= f * roll[j] * swap_pips * pip / epx
+        ext_hi = bc[j] if fillbar else bh[j]
+        ext_lo = ac[j] if fillbar else al[j]
+        if trl > 0:
+            if d > 0:
+                stop = max(stop, ext_hi - trl)
+            else:
+                stop = min(stop, ext_lo + trl)
+        if be > 0:
+            if d > 0 and ext_hi - epx >= be * sd:
+                stop = max(stop, epx)
+            elif d < 0 and epx - ext_lo >= be * sd:
                 stop = min(stop, epx)
     return bar, ntr
 
@@ -389,12 +603,22 @@ class Data:
         self.mo, self.mc = mid["open"].to_numpy(), mid["close"].to_numpy()
         self.spr = self.A[7] - self.A[3]
         self.roll = rollover_counts(bars.index).astype(np.float64)
-        self.day = pd.factorize(trading_day(bars.index))[0].astype(np.int64)
+        codes, self.days = pd.factorize(trading_day(bars.index))       # days[c] = date of trading-day code c
+        self.day = codes.astype(np.int64)
         self.n = len(bars)
         self.pip = pip
         self.m1o, self.mbh, self.mbl, self.mah, self.mal, self.use_m1 = _m1_path(bars, m1)
         self.Amid = (self.mo, mid["high"].to_numpy(), mid["low"].to_numpy(), self.mc,
                      self.mo, mid["high"].to_numpy(), mid["low"].to_numpy(), self.mc)
+        # smart-execution inputs. hour: UTC hour of each bar's open (the entry bar). vr_prev / sr_prev: volatility
+        # ratio ATR14 / ATR100 and close spread / its 1000-bar mean, both at the close of the PREVIOUS bar (known
+        # when the order is placed at this bar's open).
+        self.hour = np.asarray(bars.index.hour, np.int64)
+        vr = self.atr / atr(mid, 100).to_numpy(np.float64)
+        sp = pd.Series(self.spr)
+        sr = (sp / sp.rolling(1000, min_periods=100).mean()).to_numpy(np.float64)
+        self.vr_prev = np.r_[np.nan, vr[:-1]]
+        self.sr_prev = np.r_[np.nan, sr[:-1]]
 
 
 def daily_sharpe(b, day, i0):
@@ -420,17 +644,47 @@ def entries(p, seed, w0, i0, i1):
     return e
 
 
-def run_family(fam, P, D, e, i0, i1, gross=False):
-    """Bar returns for bars [i0, i1) (the kernel runs on [i0 - WARM, i1) with no entries in the warm-up)."""
+def allow_mask(P, D, w0, i1):
+    """Entry filters of the smart family for bars [w0, i1): session window (UTC hour of the entry bar), volatility
+    regime and spread cap (previous close). NaN (warm-up) blocks entries."""
+    m = np.ones(i1 - w0, np.bool_)
+    if "h0" in P:
+        m &= ((D.hour[w0:i1] - int(P["h0"])) % 24) < int(P["width"])
+    if P.get("vol", "none") != "none":
+        v = D.vr_prev[w0:i1]
+        m &= (v >= P["vq"]) if P["vol"] == "high" else (v <= P["vq"])
+    if "scap" in P:
+        m &= D.sr_prev[w0:i1] <= P["scap"]
+    return m
+
+
+def run_family(fam, P, D, e, i0, i1, gross=False, costs=None, allow=None):
+    """Bar returns for bars [i0, i1) (the kernel runs on [i0 - WARM, i1) with no entries in the warm-up).
+    gross: mid prices, no costs, no M1 replay (diagnostic). costs: (slip_frac, slip_pips, commission, swap) override
+    of the net run (tests)."""
     from fxlab.execution.costs import BASE
     w0 = max(0, i0 - WARM)
     sl_ = slice(w0, i1)
     A = D.Amid if gross else D.A
     A = tuple(x[sl_] for x in A)
-    slip_frac, slip_pips, comm, swap = (0.0, 0.0, 0.0, 0.0) if gross else (
-        BASE.slip_spread_frac, BASE.slip_fixed_pips, BASE.commission_bps_per_side * 1e-4, BASE.swap_pips_per_night)
+    if gross:
+        slip_frac, slip_pips, comm, swap = 0.0, 0.0, 0.0, 0.0
+    elif costs is not None:
+        slip_frac, slip_pips, comm, swap = costs
+    else:
+        slip_frac, slip_pips, comm, swap = (BASE.slip_spread_frac, BASE.slip_fixed_pips,
+                                            BASE.commission_bps_per_side * 1e-4, BASE.swap_pips_per_night)
     at = D.atr[sl_]; ro = D.roll[sl_]
-    if fam in ("bracket", "martingale"):
+    if fam == "smart":
+        if allow is None:
+            allow = allow_mask(P, D, w0, i1)
+        et = {"market": 0, "limit": 1, "stop": 2}[P.get("etype", "market")]
+        bar, ntr = _smart(*A, at, ro, e, allow, et, float(P.get("k", 0.0)), int(P.get("ttl", 1)), P["sl"],
+                          P.get("tp", 0.0), P.get("trail", 0.0), P.get("be", 0.0), P.get("part", 0.0),
+                          int(P.get("tmax", 0)), 1 if P.get("size") == "risk" else 0, 0.005, 10.0,
+                          bool(P.get("sar", False)), bool(P.get("flat_roll", False)), slip_frac, slip_pips, D.pip,
+                          comm, swap, D.m1o[w0:i1 + 1], D.mbh, D.mbl, D.mah, D.mal, D.use_m1 and not gross)
+    elif fam in ("bracket", "martingale"):
         mg = {"none": 0, "martingale": 1, "anti": 2}[P.get("mg_mode", "none")]
         bar, ntr = _bracket(*A, at, ro, e, P["sl"], P.get("tp", 0.0), P.get("trail", 0.0), P.get("be", 0.0),
                             P.get("part", 0.0), P.get("tmax", 0), 1 if P.get("size") == "risk" else 0, 0.005, 10.0,
@@ -469,6 +723,34 @@ def suggest(trial, fam, bpd):
         if trial.suggest_categorical("use_time", [False, True]):
             P["tmax"] = trial.suggest_int("tmax", 1, 500, log=True)
         P["size"] = trial.suggest_categorical("size", ["notional", "risk"])
+    elif fam == "smart":
+        P["etype"] = trial.suggest_categorical("etype", ["market", "limit", "stop"])
+        if P["etype"] != "market":
+            P["k"] = trial.suggest_float("k", 0.05, 2.0, log=True)
+            P["ttl"] = trial.suggest_int("ttl", 1, 50, log=True)
+        P["sl"] = trial.suggest_float("sl", 0.25, 10.0, log=True)
+        if trial.suggest_categorical("use_tp", [False, True]):
+            P["tp"] = trial.suggest_float("tp", 0.2, 8.0, log=True)
+        if trial.suggest_categorical("use_trail", [False, True]):
+            P["trail"] = trial.suggest_float("trail", 0.25, 10.0, log=True)
+        if trial.suggest_categorical("use_be", [False, True]):
+            P["be"] = trial.suggest_float("be", 0.2, 4.0, log=True)
+        if trial.suggest_categorical("use_part", [False, True]):
+            P["part"] = trial.suggest_float("part", 0.2, 4.0, log=True)
+        if trial.suggest_categorical("use_time", [False, True]):
+            P["tmax"] = trial.suggest_int("tmax", 1, 500, log=True)
+        P["size"] = trial.suggest_categorical("size", ["notional", "risk"])
+        if bpd >= 2 and trial.suggest_categorical("use_session", [False, True]):
+            P["h0"] = trial.suggest_int("h0", 0, 23)
+            P["width"] = trial.suggest_int("width", 1, 23)
+        if bpd >= 3:
+            P["flat_roll"] = trial.suggest_categorical("flat_roll", [False, True])
+        P["vol"] = trial.suggest_categorical("vol", ["none", "high", "low"])
+        if P["vol"] != "none":
+            P["vq"] = trial.suggest_float("vq", 0.6, 1.6)
+        if trial.suggest_categorical("use_spread", [False, True]):
+            P["scap"] = trial.suggest_float("scap", 0.5, 3.0, log=True)
+        P["sar"] = trial.suggest_categorical("sar", [False, True])
     elif fam == "martingale":
         P["sl"] = trial.suggest_float("sl", 0.25, 10.0, log=True)
         P["tp"] = trial.suggest_float("tp", 0.2, 8.0, log=True)
@@ -501,14 +783,15 @@ def suggest(trial, fam, bpd):
     return P
 
 
-def evaluate(fam, P, D, i0, i1, seeds, bpd, gross=False):
+def evaluate(fam, P, D, i0, i1, seeds, bpd, gross=False, costs=None):
     """Mean over seeds of the daily net Sharpe on [i0, i1), per-seed bar returns, mean trades."""
     p = min(1.0, P.get("rate", 1.0) / bpd)
     sh, bars_, trades = [], [], []
     w0 = max(0, i0 - WARM)
+    allow = allow_mask(P, D, w0, i1) if fam == "smart" else None
     for s in (seeds if fam != "hedged_grid" else seeds[:1]):
         e = entries(p, s, w0, i0, i1)
-        b, ntr = run_family(fam, P, D, e, i0, i1, gross)
+        b, ntr = run_family(fam, P, D, e, i0, i1, gross, costs, allow)
         x, _ = daily_sharpe(b, D.day, i0)
         sh.append(x); bars_.append(b); trades.append(ntr)
     return float(np.mean(sh)), bars_, float(np.mean(trades))
@@ -539,7 +822,11 @@ def main():
     ap.add_argument("--end", default="2025-12-31")
     ap.add_argument("--out", default=os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
                                                   "results", "reports", "random_entry_opt"))
+    ap.add_argument("--families", default=",".join(FAMILIES), help="comma-separated families (smart = execution "
+                    "and filter levers on top of the bracket)")
+    ap.add_argument("--tag", default="", help="suffix of the output files (keeps runs with other families apart)")
     a = ap.parse_args()
+    fams = [x for x in a.families.split(",") if x]
     import feature_scan as FS
     from fxlab.data.store import load_m1, M1_PATH_COLUMNS, TF_MINUTES
     from fxlab.data.instruments import get as instrument
@@ -560,14 +847,15 @@ def main():
     tr_lo, tr_hi, te_hi = FS.folds(bars.index)
     out = {"pair": a.pair, "tf": a.tf, "bars": D.n, "folds": int(len(tr_lo)), "families": {}}
     daily = {}
-    for fam in FAMILIES:
+    for fam in fams:
         tf0 = time.time()
+        nt, nh = (int(N_TRIALS * 1.5), int(N_HIND * 1.5)) if fam == "smart" else (N_TRIALS, N_HIND)   # more levers
         test_bar = np.zeros((TEST_SEEDS, D.n), np.float32); test_gross = np.zeros((TEST_SEEDS, D.n), np.float32)
         mask = np.zeros(D.n, bool)
         sel = []
         for f in range(len(tr_lo)):
             i0, i1, i2 = int(tr_lo[f]), int(tr_hi[f]), int(te_hi[f])
-            P, s_in, _ = optimise(fam, D, i0, i1, [1000 * f + k for k in range(TRAIN_SEEDS)], bpd, N_TRIALS, seed=f)
+            P, s_in, _ = optimise(fam, D, i0, i1, [1000 * f + k for k in range(TRAIN_SEEDS)], bpd, nt, seed=f)
             tseeds = [10 ** 6 + 1000 * f + k for k in range(TEST_SEEDS)]
             _, bs, ntr = evaluate(fam, P, D, i1, i2, tseeds, bpd)
             _, bg, _ = evaluate(fam, P, D, i1, i2, tseeds, bpd, gross=True)
@@ -587,7 +875,7 @@ def main():
         ev_t = float(ev_d.mean() / ev_d.std() * math.sqrt(len(ev_d))) if ev_d.std() > 0 else 0.0
         evg_sh, _ = daily_sharpe(test_gross.mean(0)[i0a:i1a], D.day, i0a)
         # hindsight: optimise on the whole tested span, then re-randomise the entries on the same data
-        Ph, sh_in, vals = optimise(fam, D, i0a, i1a, [7 * 10 ** 6 + k for k in range(TRAIN_SEEDS)], bpd, N_HIND, seed=999)
+        Ph, sh_in, vals = optimise(fam, D, i0a, i1a, [7 * 10 ** 6 + k for k in range(TRAIN_SEEDS)], bpd, nh, seed=999)
         sh_re, _, _ = evaluate(fam, Ph, D, i0a, i1a, [9 * 10 ** 6 + k for k in range(TEST_SEEDS)], bpd)
         bench = float("nan")      # (the trial distribution is far from normal; the re-randomised run is the test)
         out["families"][fam] = {
@@ -598,14 +886,15 @@ def main():
                    "median_train_sharpe": float(np.median([s["train_sharpe"] for s in sel]))},
             "hindsight": {"in_sample_best": sh_in, "rerandomised": sh_re, "deflation_benchmark": bench, "params": Ph},
             "selection": sel, "seconds": round(time.time() - tf0, 1)}
-        daily[fam] = pd.Series(ev_d, dtype="float32")
+        d0 = int(D.day[i0a])
+        daily[fam] = pd.Series(ev_d, index=pd.DatetimeIndex(D.days[d0:d0 + len(ev_d)]), dtype="float32")
         print(f"{a.pair} {a.tf} {fam:11s}: WF single-trader median {np.median(per_seed):+.2f} (gross {np.median(per_seed_g):+.2f}) "
               f"| expected stream {ev_sh:+.2f} t={ev_t:+.1f} gross {evg_sh:+.2f} | train median "
               f"{out['families'][fam]['wf']['median_train_sharpe']:+.2f} | hindsight in-sample {sh_in:+.2f} "
               f"re-randomised {sh_re:+.2f} (deflation bench {bench:.2f}) | {time.time() - tf0:.0f}s", flush=True)
     out["seconds"] = round(time.time() - t0, 1)
-    json.dump(out, open(os.path.join(a.out, f"{a.pair}_{a.tf}.json"), "w"), indent=1, default=float)
-    pd.DataFrame(daily).to_parquet(os.path.join(a.out, f"{a.pair}_{a.tf}_daily.parquet"))
+    json.dump(out, open(os.path.join(a.out, f"{a.pair}_{a.tf}{a.tag}.json"), "w"), indent=1, default=float)
+    pd.DataFrame(daily).rename_axis("day").to_parquet(os.path.join(a.out, f"{a.pair}_{a.tf}{a.tag}_daily.parquet"))
     print(f"done {a.pair} {a.tf} in {out['seconds'] / 60:.1f} min")
 
 
