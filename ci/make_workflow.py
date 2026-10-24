@@ -231,6 +231,7 @@ jobs:
         env:
           GH_TOKEN: ${{{{ github.token }}}}
         run: |
+          mkdir -p in in_prev
           for r in ${{{{ needs.plan.outputs.include_runs }}}}; do
             gh run download "$r" -R ${{{{ github.repository }}}} -p 'res-*' -D "in_prev/$r" || echo "run $r: no artifacts"
             for d in in_prev/$r/res-*; do [ -d "$d" ] && mv "$d" "in/$(basename $d)__r$r"; done
