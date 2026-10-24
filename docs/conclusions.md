@@ -46,7 +46,8 @@ expectation; net Sharpe -0.26 to -6.6, at most 14% of runs net-positive. Hedged 
 zone recovery (net -0.50; 52-61% of months positive, worst month -98%, 34% of runs lose half the account) confirm
 the theory: management reshapes the distribution (win rate, skew) but cannot create expectancy without
 predictability. The trade engine's stop-first rule for bars holding both stop and target was replaced by an
-optional M1 path replay (run 3 re-tests trade-mode families and the joint optimisation with it).
+optional M1 path replay. Run 3 re-tested the trade-mode families and the joint optimisation with it: per-stream
+change median 0.00 (mean +0.005, correlation 0.98 with stop-first), still 0 BH/Holm survivors.
 
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.

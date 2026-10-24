@@ -86,6 +86,18 @@ Run 3 (`ci/sweep3_config.json`, branch `results3`) re-runs, with this resolution
 - the 29 trade-mode families;
 - the joint parameters x entry x exit optimisation.
 
+## Run 3 result: does the M1 replay change the sweep? (branch `results3`, run 40040589503)
+11,322 experiments (all ok): the 29 trade-mode families with their own stops/targets and the joint optimisation
+(8,704 streams, 762,429 candidates), H1/H4/D1, 34 pairs, with M1 replay of same-bar stop/target ambiguity.
+* Joint streams, M1 replay vs stop-first (same family x pair x timeframe): median change 0.00, mean +0.005,
+  correlation 0.98. Medians: D1 -0.19 (was -0.19), H4 -0.28 (-0.29), H1 -0.71 (-0.71). 0 BH/Holm survivors
+  (best q = 0.23: lead-lag EURGBP D1 1.36, liquidity-filtered AUDJPY H4 1.25).
+* Tight exits are chosen slightly more often (fixed 20-pip stop 5.7% -> 6.5% of folds; 1.5 ATR / 1R 5.9% ->
+  6.1%).
+* Trade-mode families with their own exits: median change 0.00 per timeframe; the largest family gains are
+  intraday breakouts (opening range +0.12, London breakout +0.14), which remain negative.
+The stop-first rule was not what kept the sweep negative.
+
 ## Where retail "winners" come from
 
 - **Survivorship and short track records** of negatively skewed systems (grid, martingale, zone recovery).
