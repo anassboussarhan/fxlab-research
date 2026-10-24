@@ -93,6 +93,8 @@ def main():
     ap.add_argument("--projections-only", action="store_true",
                     help="run only scripts/projection_lab.py (non-random projection search) for <pair, tf>")
     ap.add_argument("--projections-set", default="", help="wave2 = only the second-wave projections")
+    ap.add_argument("--random-entry-opt-only", action="store_true",
+                    help="run only scripts/random_entry_opt.py (optimised management of random entries)")
     ap.add_argument("--edge-harvest-opt-only", action="store_true",
                     help="run only scripts/edge_harvest_opt.py (TPE-optimised trade management per fold)")
     ap.add_argument("--edge-harvest-only", action="store_true",
@@ -108,6 +110,12 @@ def main():
     os.makedirs(out, exist_ok=True)
     log = os.path.join(out, "job.log")
     others = []
+    if a.random_entry_opt_only:
+        sh([PY, "scripts/random_entry_opt.py", "--pair", a.pair, "--tf", a.tf, "--start", START, "--end", END,
+            "--out", os.path.join(out, "random_entry_opt")], log, timeout=int((a.budget_min - 5) * 60))
+        json.dump({"pair": a.pair, "tf": a.tf, "part": "random_entry_opt", "streams_exported": 0,
+                   "minutes": round((time.time() - t0) / 60, 1)}, open(os.path.join(out, "job.json"), "w"))
+        return
     if a.edge_harvest_opt_only:
         sh([PY, "scripts/edge_harvest_opt.py", "--pair", a.pair, "--tf", a.tf, "--start", START, "--end", END,
             "--out", os.path.join(out, "edge_harvest_opt")], log, timeout=int((a.budget_min - 5) * 60))
