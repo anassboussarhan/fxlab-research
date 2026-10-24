@@ -42,10 +42,17 @@ def main():
         return
     df = pd.concat([pd.read_csv(f) for f in files], ignore_index=True)
     df = df[np.isfinite(df.z)]
-    df["p"] = st.norm.sf(df.z)
+    # z = (ic - mean_null) / sd_null with sd_null estimated from K = 20 shifted nulls: its null distribution is a
+    # t with K-1 degrees of freedom scaled by sqrt(1 + 1/K), not a standard normal (normal p-values would be too small)
+    K = int(os.environ.get("FR_K", 20))
+    df["p"] = st.t.sf(df.z / np.sqrt(1 + 1 / K), df=K - 1)
     df["p_bh"] = benjamini_hochberg(df.p.to_numpy())
     df["sig"] = df.p_bh < 0.05
     df["edge_over_cost"] = (df.spread_bps / 2) / df.cost_rt_bps        # one leg of the decile spread vs a round trip
+    df["sig_cover"] = df.sig & (df.edge_over_cost >= 1)
+    keep = ["pair", "tf", "h", "column", "feature", "ic_oos", "z", "p_bh", "spread_bps", "cost_rt_bps"]
+    df[keep].astype({"pair": "category", "tf": "category", "feature": "category"}).to_parquet(
+        OUT / "rows.parquet", compression="zstd", index=False)
     try:
         import fxlab.features  # noqa: F401
         from fxlab.registry import by_kind
@@ -67,6 +74,8 @@ def main():
             **{f"sig_{tf}": by_tf.get(tf, np.nan) for tf in TF_ORDER if tf in set(df.tf)},
             "best_z": float(b.z), "best_test": f"{b.pair} {b.tf} h={int(b.h)} {b.column.split(':', 1)[-1]}",
             "best_ic": float(b.ic_oos),
+            "share_significant_and_covering_cost": float(g.sig_cover.mean()),
+            "median_edge_over_cost_of_significant": float(sig.edge_over_cost.median()) if len(sig) else np.nan,
             "best_sig_edge_over_cost": float(bs.edge_over_cost) if bs is not None else np.nan,
             "best_sig_edge_test": (f"{bs.pair} {bs.tf} h={int(bs.h)} {bs.column.split(':', 1)[-1]}: "
                                    f"{bs.spread_bps / 2:.2f}bp vs {bs.cost_rt_bps:.2f}bp") if bs is not None else ""})
@@ -81,7 +90,8 @@ def main():
             return "rarely predictive (<1% of tests)"
         return "no detectable predictive information"
     F["verdict"] = F.apply(verdict, axis=1)
-    F["covers_costs"] = np.where(F.best_sig_edge_over_cost >= 1, "in its best significant test", "no")
+    F["covers_costs"] = np.where(F.median_edge_over_cost_of_significant >= 1, "typically (median significant test)",
+                                 np.where(F.share_significant_and_covering_cost > 0, "in some tests only", "no"))
     F = F.sort_values(["share_significant_bh", "median_z"], ascending=False).reset_index(drop=True)
     F.insert(0, "rank", range(1, len(F) + 1))
     F.to_csv(OUT / "features.csv", index=False)
@@ -101,7 +111,8 @@ def main():
     summ = {"tests": int(len(df)), "features": int(F.feature.nunique()), "pairs": int(df.pair.nunique()),
             "tfs": [t for t in TF_ORDER if t in set(df.tf)], "horizons": sorted(df.h.unique().tolist()),
             "significant_tests": int(df.sig.sum()), "share_significant": float(df.sig.mean()),
-            "significant_covering_cost": int((df.sig & (df.edge_over_cost >= 1)).sum()),
+            "significant_covering_cost": int(df.sig_cover.sum()),
+            "p_value_reference": f"t({K - 1}) for z with a {K}-draw null",
             "verdicts": F.verdict.value_counts().to_dict()}
     json.dump(summ, open(OUT / "summary.json", "w"), indent=1, default=float)
     print(T.round(4).to_string())
