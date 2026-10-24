@@ -1,0 +1,23 @@
+kind,choice,folds_selected,share
+exec,"limit_pullback(k=0.5,ttl=6)",36666,0.28818221830985913
+exec,"limit_pullback(k=0.25,ttl=3)",21499,0.16897478621730383
+exec,"confirm,k=1",21295,0.16737141599597585
+exec,default,13595,0.10685204979879276
+exec,"session,end=17.0,start=7.0,tz=Europe/London",10291,0.08088373993963782
+exec,"stop_breakout(k=0.25,ttl=3)",9445,0.07423446931589538
+exec,"limit_touch(k=0.0,ttl=3)",9161,0.07200232645875251
+exec,"scale_in,k=0.5,ttl=6",5280,0.0414989939637827
+risk,default,30538,0.24001823440643863
+risk,"quantile{'q': 0.9}->piecewise{'knots': [[1.5, 2.0], [3.0, 1.5]]}",15264,0.11996981891348088
+risk,"structural{'k': 3}->log{'a': 0.5, 'b': 2.0}",13028,0.10239562374245473
+risk,"realized_vol{'mult': 2.0}->power{'b': 1.5, 'gamma': 0.8}",10935,0.08594535965794768
+risk,"atr{'mult': 6.0}->none{},max_hold=12",7485,0.05882953973843058
+risk,"atr{'mult': 3.0}->none{},trail_atr=3.0",6953,0.05464820171026157
+risk,"atr{'mult': 2.0}->polynomial{'a': 0.5, 'b': 0.3}",6569,0.0516300930583501
+risk,"atr{'mult': 2.0}->affine{'a': 0, 'b': 1.5},sizing=vol_target",6524,0.051276408450704226
+risk,"atr{'mult': 1.5}->affine{'a': 0, 'b': 1.0}",6505,0.05112707494969819
+risk,"atr{'mult': 2.0}->none{},trail_atr=3.0,breakeven_r=1.0,partial_r=1.0",5369,0.04219850352112676
+risk,"atr{'mult': 2.0}->affine{'a': 0, 'b': 3.0},breakeven_r=1.0",5324,0.04184481891348089
+risk,"atr{'mult': 2.0}->affine{'a': 0, 'b': 2.0}",5034,0.039565518108651915
+risk,"atr{'mult': 2.0}->affine{'a': 0, 'b': 1.5},max_hold=24",4422,0.034755407444668006
+risk,"fixed{'pips': 20}->affine{'a': 0, 'b': 1.5}",3282,0.025795397384305835

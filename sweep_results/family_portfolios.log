@@ -1,0 +1,22 @@
+{'tests': 398, 'median_portfolio_sharpe': -0.6590907864695956, 'share_positive': 0.06281407035175879, 'bh10': 0, 'holm05': 0}
+                family tf   exec financing  instruments  portfolio_sharpe     p  p_bh  median_instrument_sharpe  share_instruments_positive
+   S.BO.FALSE_BREAKOUT D1 market      flat            6             0.624 0.037   1.0                     0.188                       0.667
+      S.ST.SR_REVERSAL D1 market      flat            6             0.584 0.047   1.0                    -0.027                       0.333
+         S.XA.STAT_ARB D1 market      flat            6             0.570 0.051   1.0                     0.223                       0.667
+   S.MR.STOCH_REVERSAL D1 market      flat            6             0.546 0.059   1.0                     0.152                       0.833
+           S.MR.ZSCORE D1 market      flat            6             0.459 0.094   1.0                     0.144                       0.667
+          S.SP.WAVELET D1 market      flat            6             0.356 0.154   1.0                     0.028                       0.500
+   S.SP.SPECTRAL_CYCLE D1 market      flat            6             0.328 0.173   1.0                     0.045                       0.500
+   S.MR.STOCH_REVERSAL H4 market      flat            6             0.321 0.156   1.0                     0.086                       0.667
+         S.XA.STAT_ARB H4 market      flat            6             0.286 0.185   1.0                    -0.061                       0.333
+  S.BO.RANGE_EXPANSION D1 market      flat            6             0.250 0.236   1.0                    -0.046                       0.333
+     S.VOL.COMPRESSION H4 market      flat            6             0.248 0.218   1.0                     0.103                       0.500
+            S.XA.PAIRS D1 market      flat            6             0.205 0.278   1.0                     0.148                       0.667
+            S.XA.PAIRS H1 market      flat           34             0.204 0.237   1.0                    -0.012                       0.500
+          S.ST.CHANNEL D1 market      flat            6             0.138 0.346   1.0                    -0.016                       0.333
+        S.MR.BOLLINGER D1 market      flat            6             0.118 0.368   1.0                     0.147                       0.667
+S.FAMOUS.TD_SEQUENTIAL D1 market      flat            6             0.104 0.383   1.0                    -0.042                       0.333
+   S.GEO.FIB_EXTENSION D1 market     rates           28             0.101 0.362   1.0                    -0.129                       0.286
+     S.MR.RSI_REVERSAL H4 market      flat            6             0.085 0.395   1.0                    -0.138                       0.333
+            S.XA.PAIRS D1 market     rates           28             0.084 0.384   1.0                    -0.154                       0.393
+        S.GEO.HARMONIC H4 market     rates           28             0.068 0.397   1.0                    -0.056                       0.429

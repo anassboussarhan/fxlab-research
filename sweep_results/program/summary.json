@@ -1,0 +1,149 @@
+{
+ "streams_total": 11322,
+ "by_source": {
+  "strategy": 11322
+ },
+ "configurations_tried": 772688,
+ "median_oos_sharpe": -0.43638953429848476,
+ "share_positive": 0.15818759936406995,
+ "bh_significant_10pct": 0,
+ "holm_significant_5pct": 0,
+ "survivors_of_predeclared_bar": 0,
+ "best_stream": {
+  "source": "strategy",
+  "campaign": "cloud_joint_D1_GBPAUD",
+  "name": "S.BO.RANGE_EXPANSION",
+  "symbol": "GBPAUD",
+  "tf": "D1",
+  "exec": "joint",
+  "financing": "rates",
+  "sharpe": 1.164091795239407,
+  "p": 0.003736476156875013,
+  "n_days": 1377,
+  "cost_x2_sharpe": 1.1157357210124794,
+  "n_candidates": 70,
+  "p_bh": 1.0,
+  "p_holm": 1.0
+ },
+ "best_stream_deflated_sharpe": {
+  "strategy": {
+   "name": "S.BO.RANGE_EXPANSION",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "sharpe": 1.164091795239407,
+   "dsr": 5.6509044471279166e-11
+  }
+ },
+ "top10": [
+  {
+   "source": "strategy",
+   "name": "S.BO.RANGE_EXPANSION",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.1641,
+   "p": 0.0037,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.SEAS.WEEKEND_GAP_FADE",
+   "symbol": "AUDUSD",
+   "tf": "H4",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.1038,
+   "p": 0.0003,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.ST.TRENDLINE_BREAK",
+   "symbol": "NZDJPY",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.0516,
+   "p": 0.0078,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.VOL.EXPANSION",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "rates",
+   "sharpe": 1.0051,
+   "p": 0.0104,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.FAMOUS.RASCHKE_8020",
+   "symbol": "AUDJPY",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 0.9881,
+   "p": 0.0024,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.RETAIL.GRID",
+   "symbol": "NZDCHF",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 0.987,
+   "p": 0.0116,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.RETAIL.PYRAMID",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 0.9769,
+   "p": 0.0124,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.MR.STOCH_REVERSAL",
+   "symbol": "AUDNZD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 0.9728,
+   "p": 0.0069,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.EVT.FOMC_USD",
+   "symbol": "XAGUSD",
+   "tf": "H4",
+   "exec": "joint",
+   "financing": "flat",
+   "sharpe": 0.9628,
+   "p": 0.0121,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.FAMOUS.TD_SEQUENTIAL",
+   "symbol": "GBPAUD",
+   "tf": "H1",
+   "exec": "joint",
+   "financing": "flat",
+   "sharpe": 0.9218,
+   "p": 0.017,
+   "p_bh": 1.0
+  }
+ ]
+}

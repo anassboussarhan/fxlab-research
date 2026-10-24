@@ -1,0 +1,142 @@
+{
+ "joint_streams": 8704,
+ "families": 96,
+ "pairs": 34,
+ "tfs": [
+  "D1",
+  "H1",
+  "H4"
+ ],
+ "median_oos_sharpe": -0.40977221043265,
+ "share_positive": 0.16302849264705882,
+ "median_delta_vs_standard": 0.210844637573113,
+ "share_better_than_standard": 0.20140165441176472,
+ "median_abstain_sharpe": -0.23629744444315498,
+ "deflated_share_of_folds_traded": 0.04542096327967807,
+ "bh_survivors_q10": 0,
+ "holm_survivors_a05": 0,
+ "total_candidates_simulated": 761842,
+ "top10": [
+  {
+   "family": "S.BO.RANGE_EXPANSION",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "sharpe": 1.164091795239407,
+   "p": 0.003736476156875013,
+   "bh": 1.0,
+   "cost_x2_sharpe": 1.1157357210124794,
+   "deflated_sharpe": 0.3956864709446519,
+   "latest_exec": "scale_in,k=0.5,ttl=6",
+   "latest_risk": "atr{'mult': 1.5}->affine{'a': 0, 'b': 1.0}"
+  },
+  {
+   "family": "S.SEAS.WEEKEND_GAP_FADE",
+   "symbol": "AUDUSD",
+   "tf": "H4",
+   "sharpe": 1.10380747231223,
+   "p": 0.00029133932387170235,
+   "bh": 1.0,
+   "cost_x2_sharpe": 1.0510650066143157,
+   "deflated_sharpe": 0.22203506198575734,
+   "latest_exec": "limit_pullback(k=0.5,ttl=6)",
+   "latest_risk": "atr{'mult': 2.0}->none{},trail_atr=3.0,breakeven_r=1.0,partial_r=1.0"
+  },
+  {
+   "family": "S.ST.TRENDLINE_BREAK",
+   "symbol": "NZDJPY",
+   "tf": "D1",
+   "sharpe": 1.0515887004404427,
+   "p": 0.007785739724029457,
+   "bh": 1.0,
+   "cost_x2_sharpe": 0.8270729480407804,
+   "deflated_sharpe": 0.8661356392938053,
+   "latest_exec": "default",
+   "latest_risk": "atr{'mult': 1.5}->affine{'a': 0, 'b': 1.0}"
+  },
+  {
+   "family": "S.FAMOUS.RASCHKE_8020",
+   "symbol": "AUDJPY",
+   "tf": "D1",
+   "sharpe": 0.9880777792016124,
+   "p": 0.002402659043997133,
+   "bh": 1.0,
+   "cost_x2_sharpe": 0.8408073318928596,
+   "deflated_sharpe": -0.0845484896490885,
+   "latest_exec": "limit_pullback(k=0.25,ttl=3)",
+   "latest_risk": "default"
+  },
+  {
+   "family": "S.RETAIL.GRID",
+   "symbol": "NZDCHF",
+   "tf": "D1",
+   "sharpe": 0.986950459632017,
+   "p": 0.011616135226784457,
+   "bh": 1.0,
+   "cost_x2_sharpe": 0.4573264911223318,
+   "deflated_sharpe": 0.8360594436818607,
+   "latest_exec": "confirm,k=1",
+   "latest_risk": "atr{'mult': 2.0}->none{},trail_atr=3.0,breakeven_r=1.0,partial_r=1.0"
+  },
+  {
+   "family": "S.RETAIL.PYRAMID",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "sharpe": 0.976871666643622,
+   "p": 0.012363436259655062,
+   "bh": 1.0,
+   "cost_x2_sharpe": 0.7875790263007647,
+   "deflated_sharpe": 0.21808055520268027,
+   "latest_exec": "limit_pullback(k=0.5,ttl=6)",
+   "latest_risk": "atr{'mult': 2.0}->affine{'a': 0, 'b': 1.5},max_hold=24"
+  },
+  {
+   "family": "S.MR.STOCH_REVERSAL",
+   "symbol": "AUDNZD",
+   "tf": "D1",
+   "sharpe": 0.9728478573813415,
+   "p": 0.006861558801367077,
+   "bh": 1.0,
+   "cost_x2_sharpe": 0.7675297800891367,
+   "deflated_sharpe": 0.11361201093675075,
+   "latest_exec": "limit_pullback(k=0.5,ttl=6)",
+   "latest_risk": "atr{'mult': 2.0}->affine{'a': 0, 'b': 2.0}"
+  },
+  {
+   "family": "S.EVT.FOMC_USD",
+   "symbol": "XAGUSD",
+   "tf": "H4",
+   "sharpe": 0.9627822051336533,
+   "p": 0.01209992430164336,
+   "bh": 1.0,
+   "cost_x2_sharpe": 0.8052080357812672,
+   "deflated_sharpe": 0.0,
+   "latest_exec": "default",
+   "latest_risk": "atr{'mult': 2.0}->none{},trail_atr=3.0,breakeven_r=1.0,partial_r=1.0"
+  },
+  {
+   "family": "S.FAMOUS.TD_SEQUENTIAL",
+   "symbol": "GBPAUD",
+   "tf": "H1",
+   "sharpe": 0.9217998655232934,
+   "p": 0.017034414185277926,
+   "bh": 1.0,
+   "cost_x2_sharpe": 0.7424300683061916,
+   "deflated_sharpe": 0.0,
+   "latest_exec": "limit_pullback(k=0.25,ttl=3)",
+   "latest_risk": "atr{'mult': 2.0}->polynomial{'a': 0.5, 'b': 0.3}"
+  },
+  {
+   "family": "S.XA.CURRENCY_STRENGTH",
+   "symbol": "GBPCAD",
+   "tf": "D1",
+   "sharpe": 0.9098653554185994,
+   "p": 0.018225428419795592,
+   "bh": 1.0,
+   "cost_x2_sharpe": 0.8369207991747276,
+   "deflated_sharpe": 0.0,
+   "latest_exec": "stop_breakout(k=0.25,ttl=3)",
+   "latest_risk": "atr{'mult': 6.0}->none{},max_hold=12"
+  }
+ ],
+ "note": "top10 is a post-hoc ranking across all joint streams (selection bias); only BH/Holm survivors and pre-registered follow-ups count as evidence."
+}
