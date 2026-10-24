@@ -1,0 +1,61 @@
+       tf  tests  share_sig  share_z3  median_ic  best_ic  median_cost  sig_median_edge_over_cost  sig_covering_cost
+7      M5  80472     0.2147    0.2047     0.0014   0.0464       4.1097                     0.0239                 12
+5     M15  84534     0.0743    0.0666     0.0010   0.0576       4.1260                     0.0356                 12
+6     M30  86286     0.0444    0.0373     0.0011   0.0802       4.1504                     0.0720                 46
+1      H1  86286     0.0251    0.0201     0.0009   0.0809       4.1660                     0.0979                122
+2      H2  86286     0.0174    0.0139     0.0007   0.1180       4.1758                     0.1943                230
+3      H4  86538     0.0159    0.0126     0.0007   0.1655       4.0536                     0.3859                463
+4      H8  87108     0.0141    0.0113     0.0012   0.2460       4.0816                     0.8555                571
+0      D1  87108     0.0139    0.0107     0.0005   0.4096       8.2340                     0.9889                602
+8  TICK60  86292     0.0193    0.0155     0.0006   0.0864       3.9099                     0.1413                162
+9  VOLA60  86292     0.0183    0.0145     0.0006   0.0801       3.9643                     0.1290                144
+                             features  predictive  weak  median_share_sig
+category                                                                 
+Trend                              27          25     2          0.106373
+Momentum/oscillators               22          18     3          0.097549
+Price/returns                      16          12     4          0.089828
+Structure/levels                   19           8    10          0.047794
+Interactions                        7           3     3          0.044608
+Microstructure/spread/ticks        21          10     6          0.027451
+Time/calendar                      14           3    10          0.024877
+Volatility                         22           4    15          0.017892
+Econometrics                       16           3     7          0.014338
+Fibonacci/geometry                 11           1     7          0.014216
+Regime                              9           2     4          0.014216
+Distribution                       12           1     8          0.012990
+Esoteric                           11           1     5          0.011111
+Spectral/cycles                    18           4     7          0.010771
+Cross-asset/currency               13           1     6          0.010294
+Fractal/chaos                      13           0     6          0.009314
+Learned representations             8           0     1          0.007329
+Information theory                 10           0     0          0.006618
+{
+ "tests": 857202,
+ "features": 269,
+ "pairs": 34,
+ "tfs": [
+  "M5",
+  "M15",
+  "M30",
+  "H1",
+  "H2",
+  "H4",
+  "H8",
+  "D1",
+  "TICK60",
+  "VOLA60"
+ ],
+ "horizons": [
+  1,
+  6,
+  24
+ ],
+ "significant_tests": 38117,
+ "share_significant": 0.044466765126539604,
+ "significant_covering_cost": 2364,
+ "verdicts": {
+  "weakly predictive (1-5% of tests)": 104,
+  "predictive (significant in >=5% of its tests)": 96,
+  "rarely predictive (<1% of tests)": 69
+ }
+}

@@ -1,0 +1,34 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6105.740414314985 is not greater than 6105.74041692778. Delta is -2.6127945602638647e-06
+Model is not converging.  Current: 6149.345952492126 is not greater than 6149.3459564431005. Delta is -3.950974132749252e-06
+Model is not converging.  Current: 6173.040129164114 is not greater than 6173.0401381687325. Delta is -9.0046187324333e-06
+Model is not converging.  Current: 6196.445008455045 is not greater than 6196.44502550612. Delta is -1.70510747921071e-05
+Model is not converging.  Current: 6174.605481441173 is not greater than 6174.605489476398. Delta is -8.035225619096309e-06
+Model is not converging.  Current: 6214.740455146387 is not greater than 6214.74048394788. Delta is -2.880149349948624e-05
+Model is not converging.  Current: 6184.54789861524 is not greater than 6184.547939180389. Delta is -4.0565148992754985e-05
+Model is not converging.  Current: 6114.861627736472 is not greater than 6114.8616480845685. Delta is -2.034809676842997e-05
+Model is not converging.  Current: 6032.720984896535 is not greater than 6032.720994345838. Delta is -9.449303433939349e-06
+Model is not converging.  Current: 6089.190488921007 is not greater than 6089.190507162325. Delta is -1.8241317775391508e-05
+Model is not converging.  Current: 6029.913868628985 is not greater than 6029.913876297616. Delta is -7.668631042179186e-06
+Model is not converging.  Current: 6070.818866059999 is not greater than 6070.81888574503. Delta is -1.9685030565597117e-05
+Model is not converging.  Current: 6047.356708634285 is not greater than 6047.356740048443. Delta is -3.141415800200775e-05
+Model is not converging.  Current: 6094.199469954317 is not greater than 6094.199475935146. Delta is -5.980829882901162e-06
+Model is not converging.  Current: 6056.528940955317 is not greater than 6056.5289583233325. Delta is -1.736801550578093e-05
+Model is not converging.  Current: 6030.668837582943 is not greater than 6030.668839337457. Delta is -1.7545144146424718e-06
+Model is not converging.  Current: 5993.790144095755 is not greater than 5993.790145025825. Delta is -9.300702004111372e-07
+  GBPUSD TICK60: built 267 features in 250s (0 errors, 2 skipped)
+GBPUSD TICK60: 846 columns, h=1 median z 0.07, z>3 0.012, max z 4.6, median |spread| 0.16bp vs cost 2.02bp | 270s

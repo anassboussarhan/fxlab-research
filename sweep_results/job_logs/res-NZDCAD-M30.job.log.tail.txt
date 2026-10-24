@@ -1,0 +1,13 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6039.495732031573 is not greater than 6039.495755853132. Delta is -2.382155889790738e-05
+  NZDCAD M30: built 267 features in 327s (0 errors, 2 skipped)
+NZDCAD M30: 846 columns, h=1 median z 0.50, z>3 0.118, max z 6.6, median |spread| 0.11bp vs cost 7.24bp | 355s

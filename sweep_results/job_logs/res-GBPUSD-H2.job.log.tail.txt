@@ -1,0 +1,13 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6332.419736768796 is not greater than 6332.419765454235. Delta is -2.868543924705591e-05
+  GBPUSD H2: built 267 features in 120s (0 errors, 2 skipped)
+GBPUSD H2: 846 columns, h=1 median z -0.29, z>3 0.001, max z 3.1, median |spread| 0.29bp vs cost 2.17bp | 128s

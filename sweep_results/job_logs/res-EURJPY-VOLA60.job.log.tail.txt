@@ -1,0 +1,29 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6340.730388584269 is not greater than 6340.730423942267. Delta is -3.53579980583163e-05
+Model is not converging.  Current: 6285.542085610916 is not greater than 6285.5421359055645. Delta is -5.0294648644921836e-05
+Model is not converging.  Current: 6147.861126330314 is not greater than 6147.861143606667. Delta is -1.727635299175745e-05
+Model is not converging.  Current: 6059.995406367894 is not greater than 6059.995406813097. Delta is -4.45203113486059e-07
+Model is not converging.  Current: 6182.377182093717 is not greater than 6182.3772072977645. Delta is -2.520404723327374e-05
+Model is not converging.  Current: 6150.623659987797 is not greater than 6150.623681007091. Delta is -2.1019294763391372e-05
+Model is not converging.  Current: 6082.162774961174 is not greater than 6082.162786280263. Delta is -1.1319089026073925e-05
+Model is not converging.  Current: 6046.96066790137 is not greater than 6046.960685240242. Delta is -1.733887256705202e-05
+Model is not converging.  Current: 6013.510576661541 is not greater than 6013.510607555296. Delta is -3.0893755138095e-05
+Model is not converging.  Current: 6022.451404148783 is not greater than 6022.451426772956. Delta is -2.262417365272995e-05
+Model is not converging.  Current: 6027.16985324374 is not greater than 6027.1698658978075. Delta is -1.2654067177209072e-05
+Model is not converging.  Current: 5997.377425440853 is not greater than 5997.377432977261. Delta is -7.536408702435438e-06
+  EURJPY VOLA60: built 267 features in 237s (0 errors, 2 skipped)
+EURJPY VOLA60: 846 columns, h=1 median z 0.24, z>3 0.005, max z 3.7, median |spread| 0.21bp vs cost 2.50bp | 255s

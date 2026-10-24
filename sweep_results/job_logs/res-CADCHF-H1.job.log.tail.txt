@@ -1,0 +1,9 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6238.720167610682 is not greater than 6238.720175588636. Delta is -7.977953828230966e-06
+Model is not converging.  Current: 6235.219045716014 is not greater than 6235.21904948282. Delta is -3.766806003113743e-06
+  CADCHF H1: built 267 features in 203s (0 errors, 2 skipped)
+CADCHF H1: 846 columns, h=1 median z 0.24, z>3 0.019, max z 4.0, median |spread| 0.23bp vs cost 6.68bp | 218s

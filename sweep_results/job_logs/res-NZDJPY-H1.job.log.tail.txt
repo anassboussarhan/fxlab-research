@@ -1,0 +1,13 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6262.330507676269 is not greater than 6262.3305202100555. Delta is -1.2533786502899602e-05
+  NZDJPY H1: built 267 features in 202s (0 errors, 2 skipped)
+NZDJPY H1: 846 columns, h=1 median z 0.07, z>3 0.008, max z 4.5, median |spread| 0.26bp vs cost 5.35bp | 217s

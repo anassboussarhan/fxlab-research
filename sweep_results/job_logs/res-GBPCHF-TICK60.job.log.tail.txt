@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6024.05796141411 is not greater than 6024.057997784032. Delta is -3.63699218723923e-05
+Model is not converging.  Current: 6095.466883209681 is not greater than 6095.466937805949. Delta is -5.459626754600322e-05
+Model is not converging.  Current: 6112.132169204247 is not greater than 6112.132221033803. Delta is -5.1829556468874216e-05
+Model is not converging.  Current: 6129.985456342737 is not greater than 6129.9854906488645. Delta is -3.430612741794903e-05
+Model is not converging.  Current: 6102.793261887995 is not greater than 6102.793276183585. Delta is -1.4295589608082082e-05
+Model is not converging.  Current: 6141.756321423621 is not greater than 6141.756338085509. Delta is -1.666188836679794e-05
+Model is not converging.  Current: 6132.808087661557 is not greater than 6132.808109501054. Delta is -2.1839497094333638e-05
+Model is not converging.  Current: 6280.827358726388 is not greater than 6280.827411316105. Delta is -5.258971668808954e-05
+  GBPCHF TICK60: built 267 features in 250s (0 errors, 2 skipped)
+GBPCHF TICK60: 846 columns, h=1 median z 0.05, z>3 0.007, max z 3.9, median |spread| 0.20bp vs cost 3.73bp | 269s

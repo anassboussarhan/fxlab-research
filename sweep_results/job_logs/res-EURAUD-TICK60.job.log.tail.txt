@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6359.937900234189 is not greater than 6359.937929745. Delta is -2.9510810236388352e-05
+Model is not converging.  Current: 5994.758938673902 is not greater than 5994.7589433822095. Delta is -4.708307642431464e-06
+Model is not converging.  Current: 6045.3071984567705 is not greater than 6045.3071989988475. Delta is -5.420770321507007e-07
+  EURAUD TICK60: built 267 features in 136s (0 errors, 2 skipped)
+EURAUD TICK60: 846 columns, h=1 median z 0.09, z>3 0.025, max z 6.7, median |spread| 0.18bp vs cost 3.17bp | 149s

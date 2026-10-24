@@ -1,0 +1,16 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6328.499547891548 is not greater than 6328.499551290833. Delta is -3.3992846510955133e-06
+Model is not converging.  Current: 6141.447658425271 is not greater than 6141.447659188627. Delta is -7.633561835973524e-07
+Model is not converging.  Current: 6123.716878933844 is not greater than 6123.716890301034. Delta is -1.1367190381861292e-05
+Model is not converging.  Current: 6146.658480905876 is not greater than 6146.658493019096. Delta is -1.2113219781895168e-05
+Model is not converging.  Current: 6045.719570766616 is not greater than 6045.719574694048. Delta is -3.92743186239386e-06
+Model is not converging.  Current: 6010.707378672538 is not greater than 6010.707383948274. Delta is -5.275735929899383e-06
+Model is not converging.  Current: 6087.809441958385 is not greater than 6087.809450048566. Delta is -8.090180926956236e-06
+Model is not converging.  Current: 6074.179233406339 is not greater than 6074.179307304381. Delta is -7.389804159174673e-05
+Model is not converging.  Current: 6067.644024356787 is not greater than 6067.644057026095. Delta is -3.2669307984178886e-05
+  USDCHF TICK60: built 267 features in 197s (0 errors, 2 skipped)
+USDCHF TICK60: 846 columns, h=1 median z 0.00, z>3 0.005, max z 3.9, median |spread| 0.19bp vs cost 2.93bp | 215s

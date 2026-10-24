@@ -1,0 +1,30 @@
+{
+ "tests": 857202,
+ "features": 269,
+ "pairs": 34,
+ "tfs": [
+  "M5",
+  "M15",
+  "M30",
+  "H1",
+  "H2",
+  "H4",
+  "H8",
+  "D1",
+  "TICK60",
+  "VOLA60"
+ ],
+ "horizons": [
+  1,
+  6,
+  24
+ ],
+ "significant_tests": 38117,
+ "share_significant": 0.044466765126539604,
+ "significant_covering_cost": 2364,
+ "verdicts": {
+  "weakly predictive (1-5% of tests)": 104,
+  "predictive (significant in >=5% of its tests)": 96,
+  "rarely predictive (<1% of tests)": 69
+ }
+}

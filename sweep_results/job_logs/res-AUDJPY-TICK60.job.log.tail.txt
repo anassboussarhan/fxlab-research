@@ -1,0 +1,51 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6432.706809247759 is not greater than 6432.70686217983. Delta is -5.293207050272031e-05
+Model is not converging.  Current: 6240.321924243203 is not greater than 6240.321994668731. Delta is -7.042552806524327e-05
+Model is not converging.  Current: 6133.614630375177 is not greater than 6133.614661517939. Delta is -3.1142762054514606e-05
+Model is not converging.  Current: 6111.086834997488 is not greater than 6111.086864568186. Delta is -2.9570697734015994e-05
+Model is not converging.  Current: 6161.145074021166 is not greater than 6161.145098579003. Delta is -2.455783760524355e-05
+Model is not converging.  Current: 6161.978174523709 is not greater than 6161.978205231792. Delta is -3.070808361371746e-05
+Model is not converging.  Current: 6227.680144588245 is not greater than 6227.680165575923. Delta is -2.098767799907364e-05
+Model is not converging.  Current: 6274.778631498927 is not greater than 6274.778648971133. Delta is -1.7472206309321336e-05
+Model is not converging.  Current: 6115.7852597542 is not greater than 6115.785261922796. Delta is -2.1685964384232648e-06
+  AUDJPY TICK60: built 267 features in 269s (0 errors, 2 skipped)
+AUDJPY TICK60: 846 columns, h=1 median z 0.12, z>3 0.011, max z 4.0, median |spread| 0.28bp vs cost 3.70bp | 291s

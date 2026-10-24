@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6255.1846349183625 is not greater than 6255.184657710621. Delta is -2.2792258278059307e-05
+Model is not converging.  Current: 6248.258684266954 is not greater than 6248.2586843013505. Delta is -3.439618012635037e-08
+Model is not converging.  Current: 6278.584922861548 is not greater than 6278.584943602366. Delta is -2.0740818399644922e-05
+Model is not converging.  Current: 6189.673111011333 is not greater than 6189.673119371758. Delta is -8.360424544662237e-06
+Model is not converging.  Current: 6172.956034561528 is not greater than 6172.956046083126. Delta is -1.1521598025865387e-05
+Model is not converging.  Current: 6203.326623045664 is not greater than 6203.326636924464. Delta is -1.3878800018574111e-05
+Model is not converging.  Current: 6255.63419478523 is not greater than 6255.634205030232. Delta is -1.0245002158626448e-05
+Model is not converging.  Current: 6351.052685523367 is not greater than 6351.052709938043. Delta is -2.4414676772721577e-05
+Model is not converging.  Current: 6195.744653025756 is not greater than 6195.744674648678. Delta is -2.1622921849484555e-05
+Model is not converging.  Current: 6216.4154807244295 is not greater than 6216.41549210395. Delta is -1.1379520401533227e-05
+Model is not converging.  Current: 6232.353242204689 is not greater than 6232.353248248596. Delta is -6.0439069784479216e-06
+Model is not converging.  Current: 6308.30945561472 is not greater than 6308.309459356629. Delta is -3.7419094951474108e-06
+Model is not converging.  Current: 6182.936566906729 is not greater than 6182.936569810547. Delta is -2.9038174034212716e-06
+Model is not converging.  Current: 6207.622592457986 is not greater than 6207.622594970932. Delta is -2.5129465939244255e-06
+Model is not converging.  Current: 6568.67091690127 is not greater than 6568.670994386623. Delta is -7.748535244900268e-05
+Model is not converging.  Current: 6487.6908425053625 is not greater than 6487.690887912008. Delta is -4.540664576779818e-05
+Model is not converging.  Current: 6192.175427470515 is not greater than 6192.175458702088. Delta is -3.123157239315333e-05
+Model is not converging.  Current: 6171.177110215039 is not greater than 6171.177110490209. Delta is -2.7517035050550476e-07
+  CADJPY H1: built 266 features in 169s (1 errors, 2 skipped)
+CADJPY H1: 844 columns, h=1 median z 0.00, z>3 0.011, max z 3.9, median |spread| 0.25bp vs cost 4.10bp | 188s

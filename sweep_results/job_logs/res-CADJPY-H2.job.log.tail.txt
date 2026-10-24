@@ -1,0 +1,19 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6248.657803652224 is not greater than 6248.657822370251. Delta is -1.8718026694841683e-05
+Model is not converging.  Current: 6261.122703596197 is not greater than 6261.122744841936. Delta is -4.1245738430006895e-05
+  CADJPY H2: built 266 features in 99s (1 errors, 2 skipped)
+CADJPY H2: 844 columns, h=1 median z 0.03, z>3 0.009, max z 3.7, median |spread| 0.46bp vs cost 4.12bp | 109s

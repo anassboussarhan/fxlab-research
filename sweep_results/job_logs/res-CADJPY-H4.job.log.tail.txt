@@ -1,0 +1,7 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  CADJPY H4: built 266 features in 114s (1 errors, 2 skipped)
+CADJPY H4: 844 columns, h=1 median z -0.05, z>3 0.001, max z 3.0, median |spread| 0.89bp vs cost 3.90bp | 121s

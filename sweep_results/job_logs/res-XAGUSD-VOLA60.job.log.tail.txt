@@ -1,0 +1,19 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6049.818898999747 is not greater than 6049.818906580414. Delta is -7.580666533613112e-06
+Model is not converging.  Current: 6133.4158421375405 is not greater than 6133.41584309194. Delta is -9.54399183683563e-07
+Model is not converging.  Current: 6138.012863656418 is not greater than 6138.012871118123. Delta is -7.461705536115915e-06
+Model is not converging.  Current: 6171.446414130323 is not greater than 6171.446415391593. Delta is -1.2612699720193632e-06
+Model is not converging.  Current: 6174.698441478451 is not greater than 6174.69844801363. Delta is -6.535178727062885e-06
+Model is not converging.  Current: 6122.417089898892 is not greater than 6122.417119398642. Delta is -2.949974987132009e-05
+Model is not converging.  Current: 6115.825857135564 is not greater than 6115.825875201037. Delta is -1.8065473341266625e-05
+Model is not converging.  Current: 6185.286237703952 is not greater than 6185.286267883764. Delta is -3.0179811801644973e-05
+Model is not converging.  Current: 6242.1441548737175 is not greater than 6242.1441948822085. Delta is -4.000849094154546e-05
+Model is not converging.  Current: 6234.348028225695 is not greater than 6234.348057755832. Delta is -2.9530136998801026e-05
+Model is not converging.  Current: 6213.801525262418 is not greater than 6213.801559592593. Delta is -3.4330174457863905e-05
+Model is not converging.  Current: 6179.669440708884 is not greater than 6179.669454071257. Delta is -1.336237255600281e-05
+  XAGUSD VOLA60: built 267 features in 134s (0 errors, 2 skipped)
+XAGUSD VOLA60: 846 columns, h=1 median z 0.14, z>3 0.008, max z 6.0, median |spread| 0.57bp vs cost 26.61bp | 145s

@@ -1,0 +1,13 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6187.65304406838 is not greater than 6187.653055039659. Delta is -1.097127915272722e-05
+  NZDCAD VOLA60: built 267 features in 116s (0 errors, 2 skipped)
+NZDCAD VOLA60: 846 columns, h=1 median z 0.42, z>3 0.035, max z 5.7, median |spread| 0.21bp vs cost 7.10bp | 127s
