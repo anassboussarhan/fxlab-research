@@ -52,6 +52,9 @@ def main():
             m.execute("INSERT INTO folds SELECT * FROM s.folds WHERE id NOT IN (SELECT DISTINCT id FROM folds)")
             m.execute("DETACH s")
             m.close()
+        for x in glob.glob(os.path.join(d, "feature_ic", "*")):
+            os.makedirs(os.path.join(res, "reports", "feature_ic"), exist_ok=True)
+            shutil.copy(x, os.path.join(res, "reports", "feature_ic", os.path.basename(x)))
         for x in glob.glob(os.path.join(d, "projections", "*.json")):
             os.makedirs(os.path.join(res, "reports", "projection_lab"), exist_ok=True)
             shutil.copy(x, os.path.join(res, "reports", "projection_lab", os.path.basename(x)))
@@ -61,11 +64,12 @@ def main():
     out = os.path.join(ROOT, "sweep_results")
     os.makedirs(out, exist_ok=True)
     for script in ("program_report.py", "family_portfolios.py", "feature_scan_report.py", "joint_report.py",
-                   "projection_report.py"):
+                   "projection_report.py", "feature_ic_report.py"):
         with open(os.path.join(out, script.replace(".py", ".log")), "w") as f:
             subprocess.run([PY, os.path.join("scripts", script)], cwd=ROOT, stdout=f, stderr=subprocess.STDOUT)
     for src, dst in (("results/reports/program", "program"), ("results/reports/family_portfolios", "family_portfolios"),
-                     ("results/reports/joint", "joint"), ("results/reports/projection_lab_summary", "projections")):
+                     ("results/reports/joint", "joint"), ("results/reports/projection_lab_summary", "projections"),
+                     ("results/reports/feature_ic_summary", "feature_ic")):
         if os.path.isdir(os.path.join(ROOT, src)):
             shutil.copytree(os.path.join(ROOT, src), os.path.join(out, dst), dirs_exist_ok=True)
     fs = os.path.join(ROOT, "results", "reports", "feature_scan")

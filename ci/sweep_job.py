@@ -93,6 +93,8 @@ def main():
     ap.add_argument("--projections-only", action="store_true",
                     help="run only scripts/projection_lab.py (non-random projection search) for <pair, tf>")
     ap.add_argument("--projections-set", default="", help="wave2 = only the second-wave projections")
+    ap.add_argument("--feature-ic-only", action="store_true",
+                    help="run only scripts/feature_ic_lab.py (predictive information of every feature column)")
     a = ap.parse_args()
     only = [x for x in a.only.split(",") if x.strip()]
     t0 = time.time()
@@ -102,6 +104,12 @@ def main():
     os.makedirs(out, exist_ok=True)
     log = os.path.join(out, "job.log")
     others = []
+    if a.feature_ic_only:
+        sh([PY, "scripts/feature_ic_lab.py", "--pair", a.pair, "--tf", a.tf, "--start", START, "--end", END,
+            "--out", os.path.join(out, "feature_ic")], log, timeout=int((a.budget_min - 5) * 60))
+        json.dump({"pair": a.pair, "tf": a.tf, "part": "feature_ic", "streams_exported": 0,
+                   "minutes": round((time.time() - t0) / 60, 1)}, open(os.path.join(out, "job.json"), "w"))
+        return
     if a.projections_only:
         if a.projections_set:
             os.environ["PL_SET"] = a.projections_set
