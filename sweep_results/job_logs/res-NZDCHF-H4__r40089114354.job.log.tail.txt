@@ -1,0 +1,17 @@
+NZDCHF H4 ordinal_3  ic=+0.0195 t=+1.8 hit=0.5102 info=+0.00044 z_sur=+6.7 edge=+0.591bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 ordinal_4  ic=+0.0007 t=+0.1 hit=0.4986 info=-0.00269 z_sur=+1.5 edge=-0.046bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 ordinal_5  ic=+0.0013 t=+0.1 hit=0.5022 info=-0.01815 z_sur=+3.4 edge=-0.073bp cost=9.24bp gross=-0.36 net=-0.72
+NZDCHF H4 ordinal_6  ic=+0.0057 t=+0.5 hit=0.5109 info=-0.04855 z_sur=+7.0 edge=+0.102bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 markov_1   ic=+0.0128 t=+1.2 hit=0.5072 info=+0.00037 z_sur=+2.5 edge=+0.075bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 markov_2   ic=+0.0311 t=+2.9 hit=0.5128 info=-0.00002 z_sur=+3.1 edge=+0.630bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 markov_3   ic=+0.0209 t=+1.9 hit=0.5056 info=-0.00292 z_sur=+2.6 edge=+0.634bp cost=9.24bp gross=-0.24 net=-0.83
+NZDCHF H4 markov_5   ic=+0.0059 t=+0.5 hit=0.5282 info=-0.02938 z_sur=+0.9 edge=+0.081bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 dc_3       ic=+0.0014 t=+0.1 hit=0.5073 info=+0.00000 z_sur=+0.7 edge=+0.354bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 dc_10      ic=+0.0009 t=+0.1 hit=0.5014 info=-0.00125 z_sur=-0.0 edge=-0.205bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 phase      ic=-0.0031 t=-0.3 hit=0.4979 info=-0.00042 z_sur=+0.2 edge=-0.135bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 fracdiff   ic=+0.0275 t=+2.5 hit=0.5027 info=-0.00021 z_sur=+2.8 edge=+0.140bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 clock      ic=+0.0184 t=+1.7 hit=0.5134 info=-0.00411 z_sur=+3.3 edge=+0.641bp cost=9.24bp gross=+0.00 net=+0.00
+NZDCHF H4 simplex_2  ic=-0.0078 t=-0.7 hit=0.5058 info=+nan z_sur=+0.3 edge=+0.219bp cost=9.24bp gross=+0.04 net=-4.76
+NZDCHF H4 simplex_4  ic=+0.0052 t=+0.5 hit=0.5096 info=+nan z_sur=+3.8 edge=+0.490bp cost=9.24bp gross=+0.04 net=-4.26
+NZDCHF H4 simplex_8  ic=-0.0035 t=-0.3 hit=0.5054 info=+nan z_sur=-0.5 edge=+0.080bp cost=9.24bp gross=-0.19 net=-3.68
+done NZDCHF H4 in 0.0 min

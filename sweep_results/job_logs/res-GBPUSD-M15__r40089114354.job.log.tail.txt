@@ -1,0 +1,17 @@
+GBPUSD M15 ordinal_3  ic=+0.0268 t=+11.9 hit=0.5254 info=+0.00248 z_sur=+29.6 edge=+0.154bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 ordinal_4  ic=+0.0246 t=+10.9 hit=0.5251 info=+0.00283 z_sur=+38.2 edge=+0.139bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 ordinal_5  ic=+0.0190 t=+8.4 hit=0.5174 info=+0.00204 z_sur=+20.4 edge=+0.105bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 ordinal_6  ic=+0.0116 t=+5.2 hit=0.5124 info=-0.00364 z_sur=+7.7 edge=+0.057bp cost=2.63bp gross=-0.24 net=-0.88
+GBPUSD M15 markov_1   ic=+0.0293 t=+13.0 hit=0.5209 info=+0.00216 z_sur=+22.2 edge=+0.133bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 markov_2   ic=+0.0272 t=+12.0 hit=0.5252 info=+0.00247 z_sur=+25.8 edge=+0.146bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 markov_3   ic=+0.0261 t=+11.6 hit=0.5201 info=+0.00261 z_sur=+56.8 edge=+0.130bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 markov_5   ic=+0.0150 t=+6.6 hit=0.5118 info=+0.00066 z_sur=+7.3 edge=+0.059bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 dc_3       ic=+0.0059 t=+2.6 hit=0.5112 info=+0.00092 z_sur=+4.4 edge=+0.034bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 dc_10      ic=-0.0007 t=-0.3 hit=0.5017 info=+0.00006 z_sur=+1.9 edge=+0.008bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 phase      ic=+0.0203 t=+9.0 hit=0.5254 info=+0.00249 z_sur=+22.7 edge=+0.100bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 fracdiff   ic=+0.0109 t=+4.8 hit=0.5154 info=+0.00152 z_sur=+6.1 edge=+0.043bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 clock      ic=+0.0060 t=+2.7 hit=0.5013 info=-0.00094 z_sur=+9.2 edge=+0.030bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M15 simplex_2  ic=-0.0004 t=-0.2 hit=0.5025 info=+nan z_sur=-1.3 edge=+0.009bp cost=2.63bp gross=+0.18 net=-19.48
+GBPUSD M15 simplex_4  ic=-0.0004 t=-0.2 hit=0.5039 info=+nan z_sur=-0.6 edge=+0.005bp cost=2.63bp gross=+0.11 net=-15.49
+GBPUSD M15 simplex_8  ic=+0.0003 t=+0.1 hit=0.5038 info=+nan z_sur=-0.4 edge=+0.010bp cost=2.63bp gross=+0.18 net=-10.59
+done GBPUSD M15 in 1.6 min

@@ -1,0 +1,17 @@
+GBPUSD VOLA60 ordinal_3  ic=-0.0024 t=-0.5 hit=0.5088 info=+0.00077 z_sur=+0.2 edge=-0.001bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 ordinal_4  ic=-0.0021 t=-0.5 hit=0.5050 info=+0.00033 z_sur=-0.7 edge=+0.027bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 ordinal_5  ic=-0.0022 t=-0.5 hit=0.5056 info=-0.00451 z_sur=-0.8 edge=+0.048bp cost=2.35bp gross=-0.46 net=-1.53
+GBPUSD VOLA60 ordinal_6  ic=+0.0091 t=+2.0 hit=0.5095 info=-0.02404 z_sur=+3.0 edge=+0.079bp cost=2.35bp gross=+0.12 net=-1.29
+GBPUSD VOLA60 markov_1   ic=+0.0071 t=+1.6 hit=0.5139 info=+0.00084 z_sur=+2.3 edge=+0.124bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 markov_2   ic=+0.0022 t=+0.5 hit=0.5071 info=+0.00062 z_sur=+1.3 edge=+0.045bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 markov_3   ic=-0.0038 t=-0.8 hit=0.5027 info=+0.00013 z_sur=-0.4 edge=-0.051bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 markov_5   ic=-0.0038 t=-0.8 hit=0.4985 info=-0.00896 z_sur=-1.5 edge=-0.030bp cost=2.35bp gross=+0.47 net=-1.33
+GBPUSD VOLA60 dc_3       ic=-0.0033 t=-0.7 hit=0.5020 info=+0.00034 z_sur=-4.2 edge=-0.010bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 dc_10      ic=-0.0063 t=-1.4 hit=0.4946 info=-0.00038 z_sur=-0.7 edge=-0.049bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 phase      ic=-0.0022 t=-0.5 hit=0.4972 info=+0.00067 z_sur=+0.2 edge=-0.016bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 fracdiff   ic=+0.0058 t=+1.3 hit=0.5014 info=+0.00032 z_sur=+4.5 edge=+0.064bp cost=2.35bp gross=+0.00 net=+0.00
+GBPUSD VOLA60 clock      ic=+0.0133 t=+2.9 hit=0.5059 info=-0.00423 z_sur=+3.7 edge=+0.113bp cost=2.35bp gross=+0.77 net=-0.82
+GBPUSD VOLA60 simplex_2  ic=+0.0012 t=+0.3 hit=0.5035 info=+nan z_sur=+0.3 edge=+0.035bp cost=2.35bp gross=+0.02 net=-6.91
+GBPUSD VOLA60 simplex_4  ic=+0.0046 t=+1.0 hit=0.5019 info=+nan z_sur=+2.4 edge=+0.042bp cost=2.35bp gross=+0.75 net=-6.13
+GBPUSD VOLA60 simplex_8  ic=+0.0021 t=+0.5 hit=0.5015 info=+nan z_sur=+0.9 edge=+0.035bp cost=2.35bp gross=-0.31 net=-6.97
+done GBPUSD VOLA60 in 0.3 min

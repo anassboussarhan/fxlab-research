@@ -1,0 +1,17 @@
+AUDUSD M30 ordinal_3  ic=+0.0228 t=+7.1 hit=0.5204 info=+0.00174 z_sur=+100.7 edge=+0.236bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 ordinal_4  ic=+0.0169 t=+5.2 hit=0.5141 info=+0.00161 z_sur=+7.7 edge=+0.134bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 ordinal_5  ic=+0.0121 t=+3.8 hit=0.5125 info=-0.00054 z_sur=+2.4 edge=+0.126bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 ordinal_6  ic=+0.0105 t=+3.3 hit=0.5106 info=-0.01165 z_sur=+5.4 edge=+0.078bp cost=4.18bp gross=-0.31 net=-1.13
+AUDUSD M30 markov_1   ic=+0.0241 t=+7.5 hit=0.5185 info=+0.00165 z_sur=+28.5 edge=+0.201bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 markov_2   ic=+0.0227 t=+7.1 hit=0.5182 info=+0.00180 z_sur=+28.1 edge=+0.189bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 markov_3   ic=+0.0202 t=+6.3 hit=0.5151 info=+0.00182 z_sur=+7.6 edge=+0.170bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 markov_5   ic=+0.0104 t=+3.2 hit=0.5037 info=-0.00259 z_sur=+7.8 edge=+0.073bp cost=4.18bp gross=+0.24 net=-0.41
+AUDUSD M30 dc_3       ic=+0.0025 t=+0.8 hit=0.5025 info=+0.00061 z_sur=+0.6 edge=+0.009bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 dc_10      ic=+0.0049 t=+1.5 hit=0.5022 info=-0.00002 z_sur=+11.1 edge=+0.047bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 phase      ic=+0.0087 t=+2.7 hit=0.5089 info=+0.00108 z_sur=+10.8 edge=+0.103bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 fracdiff   ic=+0.0054 t=+1.7 hit=0.5080 info=+0.00071 z_sur=+1.1 edge=+0.046bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 clock      ic=+0.0131 t=+4.1 hit=0.5027 info=-0.00154 z_sur=+2.6 edge=+0.030bp cost=4.18bp gross=+0.00 net=+0.00
+AUDUSD M30 simplex_2  ic=+0.0048 t=+1.5 hit=0.5018 info=+nan z_sur=+3.3 edge=+0.043bp cost=4.18bp gross=+0.47 net=-13.43
+AUDUSD M30 simplex_4  ic=+0.0039 t=+1.2 hit=0.5036 info=+nan z_sur=+1.1 edge=+0.053bp cost=4.18bp gross=+0.72 net=-11.05
+AUDUSD M30 simplex_8  ic=+0.0166 t=+5.2 hit=0.5033 info=+nan z_sur=+24.8 edge=+0.121bp cost=4.18bp gross=+1.27 net=-7.85
+done AUDUSD M30 in 0.4 min

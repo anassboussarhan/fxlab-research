@@ -1,0 +1,17 @@
+EURCAD VOLA60 ordinal_3  ic=-0.0011 t=-0.2 hit=0.5029 info=+0.00012 z_sur=+0.6 edge=-0.042bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 ordinal_4  ic=-0.0022 t=-0.4 hit=0.5027 info=-0.00073 z_sur=-4.1 edge=+0.008bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 ordinal_5  ic=+0.0035 t=+0.7 hit=0.5060 info=-0.00470 z_sur=+3.2 edge=+0.103bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 ordinal_6  ic=-0.0014 t=-0.3 hit=0.5047 info=-0.02338 z_sur=-1.5 edge=+0.012bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 markov_1   ic=-0.0023 t=-0.5 hit=0.5000 info=+0.00013 z_sur=-3.0 edge=-0.056bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 markov_2   ic=+0.0003 t=+0.1 hit=0.5015 info=-0.00012 z_sur=-2.4 edge=-0.047bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 markov_3   ic=+0.0015 t=+0.3 hit=0.5027 info=-0.00074 z_sur=-3.8 edge=-0.032bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 markov_5   ic=+0.0011 t=+0.2 hit=0.4981 info=-0.01029 z_sur=+5.1 edge=-0.053bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 dc_3       ic=+0.0076 t=+1.5 hit=0.5033 info=-0.00001 z_sur=+1.2 edge=+0.092bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 dc_10      ic=+0.0074 t=+1.5 hit=0.5002 info=-0.00018 z_sur=+0.7 edge=+0.021bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 phase      ic=+0.0088 t=+1.8 hit=0.5027 info=+0.00005 z_sur=+2.7 edge=+0.098bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 fracdiff   ic=+0.0052 t=+1.0 hit=0.5027 info=-0.00020 z_sur=+0.9 edge=+0.111bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 clock      ic=+0.0133 t=+2.6 hit=0.5052 info=-0.00360 z_sur=+7.2 edge=+0.117bp cost=5.15bp gross=+0.00 net=+0.00
+EURCAD VOLA60 simplex_2  ic=+0.0018 t=+0.4 hit=0.5037 info=+nan z_sur=+0.2 edge=+0.011bp cost=5.15bp gross=+0.43 net=-8.69
+EURCAD VOLA60 simplex_4  ic=+0.0020 t=+0.4 hit=0.5021 info=+nan z_sur=+0.1 edge=+0.069bp cost=5.15bp gross=+0.01 net=-8.09
+EURCAD VOLA60 simplex_8  ic=+0.0030 t=+0.6 hit=0.5024 info=+nan z_sur=+13.4 edge=+0.001bp cost=5.15bp gross=+0.29 net=-5.57
+done EURCAD VOLA60 in 0.2 min

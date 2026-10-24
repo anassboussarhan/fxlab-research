@@ -1,0 +1,17 @@
+EURGBP H4 ordinal_3  ic=+0.0029 t=+0.3 hit=0.5094 info=+0.00061 z_sur=+0.7 edge=+0.183bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 ordinal_4  ic=-0.0053 t=-0.6 hit=0.5028 info=-0.00253 z_sur=-1.6 edge=-0.282bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 ordinal_5  ic=-0.0026 t=-0.3 hit=0.5121 info=-0.01314 z_sur=+0.3 edge=+0.110bp cost=4.13bp gross=+0.14 net=-0.45
+EURGBP H4 ordinal_6  ic=-0.0056 t=-0.6 hit=0.5006 info=-0.04640 z_sur=-1.5 edge=-0.007bp cost=4.13bp gross=-0.23 net=-0.54
+EURGBP H4 markov_1   ic=+0.0028 t=+0.3 hit=0.5054 info=+0.00080 z_sur=+0.8 edge=-0.010bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 markov_2   ic=+0.0072 t=+0.8 hit=0.5019 info=+0.00017 z_sur=+1.0 edge=-0.030bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 markov_3   ic=+0.0020 t=+0.2 hit=0.5044 info=-0.00229 z_sur=+2.6 edge=-0.061bp cost=4.13bp gross=-0.62 net=-1.10
+EURGBP H4 markov_5   ic=-0.0170 t=-2.0 hit=0.4989 info=-0.03055 z_sur=-2.3 edge=-0.143bp cost=4.13bp gross=+0.37 net=-0.07
+EURGBP H4 dc_3       ic=-0.0027 t=-0.3 hit=0.5017 info=-0.00058 z_sur=-0.3 edge=-0.019bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 dc_10      ic=+0.0107 t=+1.2 hit=0.5005 info=-0.00138 z_sur=+3.6 edge=+0.172bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 phase      ic=-0.0087 t=-1.0 hit=0.5048 info=-0.00021 z_sur=-2.0 edge=-0.121bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 fracdiff   ic=-0.0049 t=-0.6 hit=0.4977 info=-0.00140 z_sur=+0.4 edge=+0.059bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 clock      ic=-0.0065 t=-0.7 hit=0.4931 info=-0.00087 z_sur=-2.0 edge=-0.234bp cost=4.13bp gross=+0.00 net=+0.00
+EURGBP H4 simplex_2  ic=-0.0173 t=-2.0 hit=0.4950 info=+nan z_sur=-1.7 edge=-0.223bp cost=4.13bp gross=-0.56 net=-3.63
+EURGBP H4 simplex_4  ic=+0.0037 t=+0.4 hit=0.5071 info=+nan z_sur=+0.9 edge=+0.148bp cost=4.13bp gross=+0.15 net=-2.79
+EURGBP H4 simplex_8  ic=+0.0096 t=+1.1 hit=0.5039 info=+nan z_sur=+2.0 edge=+0.139bp cost=4.13bp gross=+0.18 net=-2.51
+done EURGBP H4 in 0.1 min

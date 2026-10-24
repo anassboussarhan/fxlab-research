@@ -1,0 +1,17 @@
+CADCHF M5 ordinal_3  ic=+0.0405 t=+24.9 hit=0.5261 info=+0.00265 z_sur=+88.4 edge=+0.162bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 ordinal_4  ic=+0.0420 t=+25.8 hit=0.5271 info=+0.00299 z_sur=+45.2 edge=+0.165bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 ordinal_5  ic=+0.0398 t=+24.5 hit=0.5272 info=+0.00294 z_sur=+23.4 edge=+0.162bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 ordinal_6  ic=+0.0305 t=+18.7 hit=0.5219 info=+0.00107 z_sur=+101.9 edge=+0.125bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 markov_1   ic=+0.0399 t=+24.6 hit=0.5220 info=+0.00229 z_sur=+119.6 edge=+0.143bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 markov_2   ic=+0.0420 t=+25.8 hit=0.5260 info=+0.00266 z_sur=+42.9 edge=+0.161bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 markov_3   ic=+0.0410 t=+25.2 hit=0.5271 info=+0.00280 z_sur=+49.7 edge=+0.166bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 markov_5   ic=+0.0329 t=+20.2 hit=0.5231 info=+0.00221 z_sur=+19.4 edge=+0.134bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 dc_3       ic=+0.0178 t=+11.0 hit=0.5142 info=+0.00076 z_sur=+20.6 edge=+0.073bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 dc_10      ic=+0.0037 t=+2.3 hit=0.5021 info=+0.00009 z_sur=+2.7 edge=+0.009bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 phase      ic=+0.0394 t=+24.2 hit=0.5267 info=+0.00289 z_sur=+16.4 edge=+0.154bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 fracdiff   ic=+0.0316 t=+19.4 hit=0.5215 info=+0.00176 z_sur=+49.7 edge=+0.127bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 clock      ic=+0.0050 t=+3.1 hit=0.5035 info=-0.00014 z_sur=+5.3 edge=+0.020bp cost=8.41bp gross=+0.00 net=+0.00
+CADCHF M5 simplex_2  ic=+0.0093 t=+5.7 hit=0.5028 info=+nan z_sur=+0.9 edge=+0.027bp cost=8.41bp gross=-0.14 net=-4.82
+CADCHF M5 simplex_4  ic=+0.0096 t=+5.9 hit=0.5044 info=+nan z_sur=+0.8 edge=+0.028bp cost=8.41bp gross=-0.29 net=-2.50
+CADCHF M5 simplex_8  ic=+0.0106 t=+6.5 hit=0.5060 info=+nan z_sur=+1.0 edge=+0.046bp cost=8.41bp gross=-0.44 net=-1.16
+done CADCHF M5 in 3.5 min

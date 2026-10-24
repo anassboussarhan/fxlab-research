@@ -1,0 +1,17 @@
+XAUUSD H1 ordinal_3  ic=-0.0046 t=-0.7 hit=0.5084 info=+0.00196 z_sur=+0.6 edge=-0.018bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 ordinal_4  ic=+0.0029 t=+0.4 hit=0.5057 info=+0.00125 z_sur=+0.6 edge=-0.036bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 ordinal_5  ic=+0.0001 t=+0.0 hit=0.5012 info=-0.00170 z_sur=-3.6 edge=-0.070bp cost=4.17bp gross=+0.11 net=-0.39
+XAUUSD H1 ordinal_6  ic=-0.0072 t=-1.1 hit=0.5062 info=-0.02129 z_sur=-0.9 edge=+0.020bp cost=4.17bp gross=+0.10 net=-0.48
+XAUUSD H1 markov_1   ic=+0.0069 t=+1.1 hit=0.5157 info=+0.00226 z_sur=+1.2 edge=+0.141bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 markov_2   ic=+0.0050 t=+0.8 hit=0.5044 info=+0.00213 z_sur=+1.0 edge=+0.068bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 markov_3   ic=+0.0014 t=+0.2 hit=0.5011 info=+0.00119 z_sur=+0.2 edge=-0.000bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 markov_5   ic=-0.0095 t=-1.4 hit=0.4972 info=-0.00848 z_sur=-6.0 edge=-0.079bp cost=4.17bp gross=-0.33 net=-1.89
+XAUUSD H1 dc_3       ic=-0.0070 t=-1.1 hit=0.4951 info=+0.00053 z_sur=+0.2 edge=-0.076bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 dc_10      ic=-0.0001 t=-0.0 hit=0.4983 info=-0.00028 z_sur=+0.4 edge=-0.048bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 phase      ic=+0.0042 t=+0.7 hit=0.4901 info=+0.00076 z_sur=+0.6 edge=-0.013bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 fracdiff   ic=+0.0042 t=+0.6 hit=0.5039 info=+0.00099 z_sur=+2.1 edge=+0.115bp cost=4.17bp gross=+0.00 net=+0.00
+XAUUSD H1 clock      ic=+0.0242 t=+3.7 hit=0.5125 info=-0.00340 z_sur=+33.2 edge=+0.298bp cost=4.17bp gross=+0.31 net=-1.01
+XAUUSD H1 simplex_2  ic=-0.0143 t=-2.2 hit=0.4964 info=+nan z_sur=-3.2 edge=-0.177bp cost=4.17bp gross=-0.73 net=-10.35
+XAUUSD H1 simplex_4  ic=+0.0096 t=+1.5 hit=0.5036 info=+nan z_sur=+0.3 edge=+0.041bp cost=4.17bp gross=+0.34 net=-8.20
+XAUUSD H1 simplex_8  ic=-0.0021 t=-0.3 hit=0.4982 info=+nan z_sur=-0.9 edge=-0.037bp cost=4.17bp gross=+0.21 net=-7.84
+done XAUUSD H1 in 0.2 min

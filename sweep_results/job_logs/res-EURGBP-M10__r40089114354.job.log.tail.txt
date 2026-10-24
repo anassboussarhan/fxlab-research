@@ -1,0 +1,17 @@
+EURGBP M10 ordinal_3  ic=+0.0391 t=+21.2 hit=0.5301 info=+0.00354 z_sur=+35.1 edge=+0.157bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 ordinal_4  ic=+0.0373 t=+20.2 hit=0.5308 info=+0.00371 z_sur=+10.9 edge=+0.159bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 ordinal_5  ic=+0.0331 t=+18.0 hit=0.5270 info=+0.00313 z_sur=+8.3 edge=+0.145bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 ordinal_6  ic=+0.0201 t=+10.9 hit=0.5177 info=-0.00115 z_sur=+8.3 edge=+0.084bp cost=4.14bp gross=+0.25 net=-1.40
+EURGBP M10 markov_1   ic=+0.0370 t=+20.1 hit=0.5246 info=+0.00272 z_sur=+18.0 edge=+0.145bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 markov_2   ic=+0.0386 t=+20.9 hit=0.5291 info=+0.00320 z_sur=+15.6 edge=+0.167bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 markov_3   ic=+0.0370 t=+20.0 hit=0.5289 info=+0.00317 z_sur=+14.1 edge=+0.162bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 markov_5   ic=+0.0262 t=+14.2 hit=0.5202 info=+0.00193 z_sur=+17.8 edge=+0.103bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 dc_3       ic=+0.0118 t=+6.4 hit=0.5137 info=+0.00079 z_sur=+5.0 edge=+0.059bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 dc_10      ic=+0.0035 t=+1.9 hit=0.5018 info=+0.00011 z_sur=+16.7 edge=+0.011bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 phase      ic=+0.0291 t=+15.8 hit=0.5277 info=+0.00308 z_sur=+48.1 edge=+0.125bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 fracdiff   ic=+0.0182 t=+9.9 hit=0.5190 info=+0.00159 z_sur=+19.5 edge=+0.072bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 clock      ic=+0.0047 t=+2.5 hit=0.5016 info=-0.00057 z_sur=+3.1 edge=+0.011bp cost=4.14bp gross=+0.00 net=+0.00
+EURGBP M10 simplex_2  ic=+0.0053 t=+2.9 hit=0.5047 info=+nan z_sur=+4.1 edge=+0.018bp cost=4.14bp gross=+0.57 net=-16.79
+EURGBP M10 simplex_4  ic=+0.0084 t=+4.6 hit=0.5075 info=+nan z_sur=+7.9 edge=+0.038bp cost=4.14bp gross=+0.92 net=-12.37
+EURGBP M10 simplex_8  ic=+0.0062 t=+3.4 hit=0.5064 info=+nan z_sur=+2.0 edge=+0.040bp cost=4.14bp gross=+0.05 net=-5.21
+done EURGBP M10 in 2.2 min

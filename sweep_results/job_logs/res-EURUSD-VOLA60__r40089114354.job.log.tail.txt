@@ -1,0 +1,17 @@
+EURUSD VOLA60 ordinal_3  ic=+0.0085 t=+2.3 hit=0.5114 info=+0.00076 z_sur=+7.0 edge=+0.105bp cost=1.95bp gross=+0.00 net=+0.00
+EURUSD VOLA60 ordinal_4  ic=+0.0066 t=+1.8 hit=0.5103 info=-0.00000 z_sur=+1.9 edge=+0.087bp cost=1.95bp gross=-0.08 net=-0.41
+EURUSD VOLA60 ordinal_5  ic=+0.0087 t=+2.4 hit=0.5091 info=-0.00358 z_sur=+1.7 edge=+0.155bp cost=1.95bp gross=-0.22 net=-1.08
+EURUSD VOLA60 ordinal_6  ic=+0.0078 t=+2.1 hit=0.5068 info=-0.02243 z_sur=+5.3 edge=+0.092bp cost=1.95bp gross=+0.02 net=-1.03
+EURUSD VOLA60 markov_1   ic=+0.0113 t=+3.1 hit=0.5136 info=+0.00068 z_sur=+4.4 edge=+0.124bp cost=1.95bp gross=+0.00 net=+0.00
+EURUSD VOLA60 markov_2   ic=+0.0070 t=+1.9 hit=0.5093 info=+0.00074 z_sur=+2.8 edge=+0.071bp cost=1.95bp gross=+0.00 net=+0.00
+EURUSD VOLA60 markov_3   ic=+0.0039 t=+1.1 hit=0.5063 info=+0.00016 z_sur=+1.8 edge=+0.041bp cost=1.95bp gross=+0.00 net=+0.00
+EURUSD VOLA60 markov_5   ic=+0.0010 t=+0.3 hit=0.5031 info=-0.00795 z_sur=+2.0 edge=+0.016bp cost=1.95bp gross=-0.02 net=-1.54
+EURUSD VOLA60 dc_3       ic=+0.0130 t=+3.6 hit=0.5005 info=+0.00021 z_sur=+6.5 edge=+0.121bp cost=1.95bp gross=+0.00 net=+0.00
+EURUSD VOLA60 dc_10      ic=-0.0048 t=-1.3 hit=0.4995 info=-0.00031 z_sur=-1.3 edge=-0.027bp cost=1.95bp gross=+0.00 net=+0.00
+EURUSD VOLA60 phase      ic=-0.0001 t=-0.0 hit=0.4979 info=+0.00041 z_sur=-1.1 edge=-0.038bp cost=1.95bp gross=+0.00 net=+0.00
+EURUSD VOLA60 fracdiff   ic=+0.0004 t=+0.1 hit=0.5010 info=+0.00016 z_sur=+0.1 edge=-0.006bp cost=1.95bp gross=+0.00 net=+0.00
+EURUSD VOLA60 clock      ic=+0.0048 t=+1.3 hit=0.5017 info=-0.00409 z_sur=+1.4 edge=+0.015bp cost=1.95bp gross=+0.24 net=-0.81
+EURUSD VOLA60 simplex_2  ic=-0.0010 t=-0.3 hit=0.5014 info=+nan z_sur=+0.3 edge=+0.003bp cost=1.95bp gross=-0.00 net=-5.31
+EURUSD VOLA60 simplex_4  ic=-0.0016 t=-0.4 hit=0.4994 info=+nan z_sur=+0.8 edge=-0.040bp cost=1.95bp gross=-0.13 net=-5.54
+EURUSD VOLA60 simplex_8  ic=+0.0026 t=+0.7 hit=0.5036 info=+nan z_sur=+0.6 edge=+0.032bp cost=1.95bp gross=+0.04 net=-4.93
+done EURUSD VOLA60 in 0.3 min

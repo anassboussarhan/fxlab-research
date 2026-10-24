@@ -1,0 +1,17 @@
+USDNOK TICK60 ordinal_3  ic=+0.0220 t=+4.4 hit=0.5161 info=+0.00091 z_sur=+3.2 edge=+0.332bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 ordinal_4  ic=+0.0144 t=+2.9 hit=0.5129 info=+0.00016 z_sur=+4.5 edge=+0.215bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 ordinal_5  ic=+0.0155 t=+3.1 hit=0.5086 info=-0.00306 z_sur=+5.4 edge=+0.129bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 ordinal_6  ic=+0.0123 t=+2.5 hit=0.5103 info=-0.02200 z_sur=+8.6 edge=+0.135bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 markov_1   ic=+0.0223 t=+4.4 hit=0.5180 info=+0.00086 z_sur=+5.4 edge=+0.416bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 markov_2   ic=+0.0189 t=+3.8 hit=0.5155 info=+0.00070 z_sur=+9.6 edge=+0.324bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 markov_3   ic=+0.0160 t=+3.2 hit=0.5105 info=+0.00001 z_sur=+9.2 edge=+0.189bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 markov_5   ic=+0.0098 t=+2.0 hit=0.5056 info=-0.00770 z_sur=+1.7 edge=+0.153bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 dc_3       ic=-0.0032 t=-0.6 hit=0.5009 info=-0.00018 z_sur=-2.8 edge=-0.021bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 dc_10      ic=+0.0015 t=+0.3 hit=0.5007 info=-0.00040 z_sur=+0.8 edge=-0.049bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 phase      ic=+0.0025 t=+0.5 hit=0.5055 info=+0.00009 z_sur=+2.1 edge=+0.097bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 fracdiff   ic=+0.0121 t=+2.4 hit=0.5034 info=+0.00012 z_sur=+3.3 edge=+0.001bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 clock      ic=+0.0006 t=+0.1 hit=0.4996 info=-0.00464 z_sur=-0.7 edge=-0.040bp cost=7.80bp gross=+0.00 net=+0.00
+USDNOK TICK60 simplex_2  ic=+0.0094 t=+1.9 hit=0.5030 info=+nan z_sur=+2.3 edge=+0.115bp cost=7.80bp gross=+0.18 net=-10.60
+USDNOK TICK60 simplex_4  ic=+0.0050 t=+1.0 hit=0.5024 info=+nan z_sur=-0.2 edge=+0.070bp cost=7.80bp gross=+0.25 net=-8.71
+USDNOK TICK60 simplex_8  ic=+0.0047 t=+0.9 hit=0.5019 info=+nan z_sur=-0.2 edge=+0.023bp cost=7.80bp gross=+0.17 net=-6.52
+done USDNOK TICK60 in 0.2 min

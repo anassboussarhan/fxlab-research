@@ -1,0 +1,17 @@
+CADJPY H12 ordinal_3  ic=+0.0233 t=+1.6 hit=0.5109 info=-0.00054 z_sur=+6.6 edge=+1.088bp cost=7.04bp gross=+0.68 net=+0.04
+CADJPY H12 ordinal_4  ic=+0.0222 t=+1.5 hit=0.5168 info=-0.00701 z_sur=+3.9 edge=+1.125bp cost=7.04bp gross=+0.26 net=-0.46
+CADJPY H12 ordinal_5  ic=+0.0140 t=+1.0 hit=0.5046 info=-0.03208 z_sur=+1.6 edge=+0.985bp cost=7.04bp gross=+0.11 net=-0.41
+CADJPY H12 ordinal_6  ic=+0.0017 t=+0.1 hit=0.5153 info=-0.05710 z_sur=+0.1 edge=+0.024bp cost=7.04bp gross=+0.19 net=-0.03
+CADJPY H12 markov_1   ic=-0.0038 t=-0.3 hit=0.5002 info=-0.00106 z_sur=+0.2 edge=-1.163bp cost=7.04bp gross=+0.00 net=+0.00
+CADJPY H12 markov_2   ic=+0.0198 t=+1.4 hit=0.5152 info=-0.00071 z_sur=+2.7 edge=+0.930bp cost=7.04bp gross=-0.16 net=-0.93
+CADJPY H12 markov_3   ic=+0.0015 t=+0.1 hit=0.5034 info=-0.00991 z_sur=+0.4 edge=+0.553bp cost=7.04bp gross=-0.25 net=-0.96
+CADJPY H12 markov_5   ic=+0.0388 t=+2.7 hit=1.0000 info=-0.06993 z_sur=+1.5 edge=+0.042bp cost=7.04bp gross=+0.00 net=+0.00
+CADJPY H12 dc_3       ic=+0.0259 t=+1.8 hit=0.4983 info=-0.00363 z_sur=+1.6 edge=+0.589bp cost=7.04bp gross=+1.01 net=+0.95
+CADJPY H12 dc_10      ic=-0.0182 t=-1.2 hit=0.4972 info=-0.00587 z_sur=-1.0 edge=-0.266bp cost=7.04bp gross=-0.34 net=-0.41
+CADJPY H12 phase      ic=-0.0228 t=-1.6 hit=0.5036 info=-0.00215 z_sur=-1.1 edge=-0.911bp cost=7.04bp gross=-0.37 net=-0.66
+CADJPY H12 fracdiff   ic=-0.0074 t=-0.5 hit=0.4878 info=-0.00499 z_sur=+0.9 edge=-0.438bp cost=7.04bp gross=+0.19 net=-0.19
+CADJPY H12 clock      ic=+0.0111 t=+0.8 hit=0.4964 info=-0.00406 z_sur=+1.5 edge=-0.278bp cost=7.04bp gross=-0.08 net=-0.82
+CADJPY H12 simplex_2  ic=-0.0038 t=-0.3 hit=0.4979 info=+nan z_sur=-0.1 edge=+0.009bp cost=7.04bp gross=+0.07 net=-1.15
+CADJPY H12 simplex_4  ic=+0.0176 t=+1.2 hit=0.5064 info=+nan z_sur=+2.9 edge=+1.034bp cost=7.04bp gross=+0.23 net=-0.99
+CADJPY H12 simplex_8  ic=+0.0202 t=+1.4 hit=0.5019 info=+nan z_sur=+1.6 edge=+0.560bp cost=7.04bp gross=+0.40 net=-0.81
+done CADJPY H12 in 0.1 min

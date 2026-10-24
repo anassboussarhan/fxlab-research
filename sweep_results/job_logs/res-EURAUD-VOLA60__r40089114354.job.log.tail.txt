@@ -1,0 +1,17 @@
+EURAUD VOLA60 ordinal_3  ic=+0.0035 t=+0.8 hit=0.5016 info=-0.00004 z_sur=+3.7 edge=+0.007bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 ordinal_4  ic=+0.0009 t=+0.2 hit=0.5020 info=-0.00080 z_sur=+0.8 edge=+0.038bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 ordinal_5  ic=+0.0063 t=+1.4 hit=0.5019 info=-0.00431 z_sur=+0.9 edge=+0.102bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 ordinal_6  ic=+0.0076 t=+1.7 hit=0.5057 info=-0.02285 z_sur=+1.6 edge=+0.084bp cost=4.86bp gross=+0.14 net=-0.47
+EURAUD VOLA60 markov_1   ic=+0.0060 t=+1.3 hit=0.5063 info=+0.00014 z_sur=+1.2 edge=+0.048bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 markov_2   ic=+0.0070 t=+1.5 hit=0.5062 info=-0.00015 z_sur=+1.1 edge=+0.048bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 markov_3   ic=+0.0048 t=+1.1 hit=0.5038 info=-0.00123 z_sur=+0.7 edge=+0.092bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 markov_5   ic=-0.0002 t=-0.1 hit=0.5018 info=-0.01094 z_sur=-1.2 edge=-0.004bp cost=4.86bp gross=-0.10 net=-0.71
+EURAUD VOLA60 dc_3       ic=+0.0040 t=+0.9 hit=0.4990 info=-0.00027 z_sur=+3.0 edge=+0.018bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 dc_10      ic=-0.0050 t=-1.1 hit=0.4967 info=-0.00033 z_sur=-2.7 edge=-0.091bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 phase      ic=+0.0014 t=+0.3 hit=0.4994 info=-0.00035 z_sur=+0.4 edge=+0.020bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 fracdiff   ic=-0.0047 t=-1.0 hit=0.4997 info=-0.00040 z_sur=-0.4 edge=-0.006bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 clock      ic=+0.0133 t=+2.9 hit=0.5074 info=-0.00415 z_sur=+4.8 edge=+0.181bp cost=4.86bp gross=+0.00 net=+0.00
+EURAUD VOLA60 simplex_2  ic=+0.0020 t=+0.4 hit=0.4980 info=+nan z_sur=+1.5 edge=-0.053bp cost=4.86bp gross=+0.14 net=-8.75
+EURAUD VOLA60 simplex_4  ic=-0.0045 t=-1.0 hit=0.4954 info=+nan z_sur=-1.0 edge=-0.079bp cost=4.86bp gross=+0.25 net=-8.01
+EURAUD VOLA60 simplex_8  ic=-0.0085 t=-1.9 hit=0.4992 info=+nan z_sur=-2.4 edge=-0.047bp cost=4.86bp gross=-0.53 net=-6.53
+done EURAUD VOLA60 in 0.3 min

@@ -1,0 +1,17 @@
+AUDUSD M15 ordinal_3  ic=+0.0243 t=+10.7 hit=0.5217 info=+0.00188 z_sur=+14.2 edge=+0.172bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 ordinal_4  ic=+0.0190 t=+8.3 hit=0.5174 info=+0.00196 z_sur=+22.6 edge=+0.130bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 ordinal_5  ic=+0.0150 t=+6.6 hit=0.5150 info=+0.00125 z_sur=+10.5 edge=+0.120bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 ordinal_6  ic=+0.0108 t=+4.8 hit=0.5125 info=-0.00450 z_sur=+7.9 edge=+0.089bp cost=4.16bp gross=-0.39 net=-1.36
+AUDUSD M15 markov_1   ic=+0.0289 t=+12.7 hit=0.5198 info=+0.00193 z_sur=+20.9 edge=+0.178bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 markov_2   ic=+0.0286 t=+12.6 hit=0.5232 info=+0.00227 z_sur=+10.4 edge=+0.192bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 markov_3   ic=+0.0254 t=+11.1 hit=0.5183 info=+0.00231 z_sur=+6.9 edge=+0.150bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 markov_5   ic=+0.0132 t=+5.8 hit=0.5103 info=+0.00036 z_sur=+5.4 edge=+0.083bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 dc_3       ic=+0.0076 t=+3.3 hit=0.5089 info=+0.00097 z_sur=+4.8 edge=+0.035bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 dc_10      ic=+0.0032 t=+1.4 hit=0.5004 info=+0.00005 z_sur=+3.2 edge=+0.027bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 phase      ic=+0.0117 t=+5.2 hit=0.5178 info=+0.00171 z_sur=+8.4 edge=+0.098bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 fracdiff   ic=+0.0115 t=+5.0 hit=0.5134 info=+0.00126 z_sur=+7.1 edge=+0.069bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 clock      ic=+0.0084 t=+3.7 hit=0.5031 info=-0.00097 z_sur=+3.1 edge=+0.043bp cost=4.16bp gross=+0.00 net=+0.00
+AUDUSD M15 simplex_2  ic=+0.0060 t=+2.6 hit=0.5041 info=+nan z_sur=+5.7 edge=+0.047bp cost=4.16bp gross=+0.15 net=-19.33
+AUDUSD M15 simplex_4  ic=+0.0027 t=+1.2 hit=0.5026 info=+nan z_sur=+1.5 edge=+0.007bp cost=4.16bp gross=+0.02 net=-15.00
+AUDUSD M15 simplex_8  ic=+0.0091 t=+4.0 hit=0.5032 info=+nan z_sur=+3.7 edge=+0.054bp cost=4.16bp gross=+0.77 net=-9.82
+done AUDUSD M15 in 1.4 min

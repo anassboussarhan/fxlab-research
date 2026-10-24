@@ -1,0 +1,17 @@
+GBPAUD TICK60 ordinal_3  ic=-0.0043 t=-0.8 hit=0.4987 info=-0.00028 z_sur=-1.5 edge=-0.032bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 ordinal_4  ic=-0.0018 t=-0.3 hit=0.5036 info=-0.00084 z_sur=-1.5 edge=-0.014bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 ordinal_5  ic=+0.0027 t=+0.5 hit=0.5021 info=-0.00492 z_sur=+4.6 edge=+0.138bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 ordinal_6  ic=+0.0018 t=+0.3 hit=0.4963 info=-0.02274 z_sur=+2.6 edge=-0.074bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 markov_1   ic=-0.0057 t=-1.0 hit=0.4976 info=-0.00012 z_sur=-1.4 edge=-0.078bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 markov_2   ic=+0.0004 t=+0.1 hit=0.5022 info=-0.00025 z_sur=-0.0 edge=+0.057bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 markov_3   ic=+0.0020 t=+0.4 hit=0.4982 info=-0.00083 z_sur=+1.2 edge=-0.056bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 markov_5   ic=+0.0030 t=+0.5 hit=0.5012 info=-0.00986 z_sur=+0.6 edge=+0.052bp cost=4.46bp gross=-0.17 net=-0.49
+GBPAUD TICK60 dc_3       ic=-0.0043 t=-0.8 hit=0.4981 info=-0.00018 z_sur=-0.5 edge=-0.078bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 dc_10      ic=+0.0036 t=+0.6 hit=0.4990 info=+0.00001 z_sur=+2.9 edge=+0.004bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 phase      ic=-0.0066 t=-1.2 hit=0.4982 info=-0.00016 z_sur=-4.1 edge=-0.108bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 fracdiff   ic=-0.0046 t=-0.8 hit=0.4995 info=-0.00035 z_sur=-1.3 edge=-0.050bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 clock      ic=+0.0087 t=+1.5 hit=0.5021 info=-0.00468 z_sur=+2.0 edge=+0.052bp cost=4.46bp gross=+0.00 net=+0.00
+GBPAUD TICK60 simplex_2  ic=+0.0017 t=+0.3 hit=0.4997 info=+nan z_sur=+0.1 edge=-0.059bp cost=4.46bp gross=-0.67 net=-8.80
+GBPAUD TICK60 simplex_4  ic=+0.0095 t=+1.7 hit=0.5030 info=+nan z_sur=+2.6 edge=+0.131bp cost=4.46bp gross=+0.08 net=-7.89
+GBPAUD TICK60 simplex_8  ic=+0.0179 t=+3.2 hit=0.5040 info=+nan z_sur=+7.9 edge=+0.165bp cost=4.46bp gross=+0.69 net=-6.73
+done GBPAUD TICK60 in 0.2 min

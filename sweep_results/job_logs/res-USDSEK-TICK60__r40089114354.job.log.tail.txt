@@ -1,0 +1,17 @@
+USDSEK TICK60 ordinal_3  ic=+0.0203 t=+4.1 hit=0.5075 info=+0.00027 z_sur=+8.9 edge=+0.234bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 ordinal_4  ic=+0.0145 t=+2.9 hit=0.5051 info=-0.00037 z_sur=+2.8 edge=+0.196bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 ordinal_5  ic=+0.0027 t=+0.5 hit=0.5053 info=-0.00420 z_sur=+2.3 edge=+0.065bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 ordinal_6  ic=+0.0076 t=+1.5 hit=0.5071 info=-0.02336 z_sur=+3.6 edge=+0.117bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 markov_1   ic=+0.0181 t=+3.6 hit=0.5086 info=+0.00026 z_sur=+4.7 edge=+0.195bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 markov_2   ic=+0.0182 t=+3.6 hit=0.5077 info=-0.00002 z_sur=+3.2 edge=+0.234bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 markov_3   ic=+0.0145 t=+2.9 hit=0.5085 info=-0.00079 z_sur=+1.4 edge=+0.248bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 markov_5   ic=+0.0006 t=+0.1 hit=0.4951 info=-0.01147 z_sur=+0.1 edge=-0.015bp cost=6.43bp gross=+0.49 net=+0.09
+USDSEK TICK60 dc_3       ic=+0.0070 t=+1.4 hit=0.5031 info=-0.00027 z_sur=+2.2 edge=+0.049bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 dc_10      ic=+0.0042 t=+0.8 hit=0.4983 info=-0.00032 z_sur=+0.3 edge=+0.050bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 phase      ic=+0.0089 t=+1.8 hit=0.4999 info=-0.00001 z_sur=+1.8 edge=+0.072bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 fracdiff   ic=+0.0127 t=+2.5 hit=0.5021 info=-0.00002 z_sur=+9.2 edge=+0.100bp cost=6.43bp gross=+0.00 net=+0.00
+USDSEK TICK60 clock      ic=+0.0123 t=+2.4 hit=0.5042 info=-0.00401 z_sur=+2.5 edge=+0.141bp cost=6.43bp gross=-0.65 net=-1.17
+USDSEK TICK60 simplex_2  ic=+0.0016 t=+0.3 hit=0.5015 info=+nan z_sur=+0.5 edge=+0.078bp cost=6.43bp gross=-0.01 net=-10.57
+USDSEK TICK60 simplex_4  ic=-0.0034 t=-0.7 hit=0.4985 info=+nan z_sur=+0.6 edge=-0.013bp cost=6.43bp gross=-0.12 net=-9.95
+USDSEK TICK60 simplex_8  ic=+0.0025 t=+0.5 hit=0.4973 info=+nan z_sur=+9.1 edge=+0.012bp cost=6.43bp gross=-0.16 net=-7.54
+done USDSEK TICK60 in 0.2 min

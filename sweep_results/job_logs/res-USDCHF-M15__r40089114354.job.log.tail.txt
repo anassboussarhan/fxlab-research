@@ -1,0 +1,17 @@
+USDCHF M15 ordinal_3  ic=+0.0255 t=+11.3 hit=0.5274 info=+0.00299 z_sur=+8.0 edge=+0.183bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 ordinal_4  ic=+0.0249 t=+11.0 hit=0.5244 info=+0.00318 z_sur=+14.0 edge=+0.169bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 ordinal_5  ic=+0.0178 t=+7.9 hit=0.5202 info=+0.00228 z_sur=+8.8 edge=+0.151bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 ordinal_6  ic=+0.0121 t=+5.3 hit=0.5139 info=-0.00329 z_sur=+11.1 edge=+0.103bp cost=3.64bp gross=-0.20 net=-2.02
+USDCHF M15 markov_1   ic=+0.0245 t=+10.8 hit=0.5225 info=+0.00252 z_sur=+15.1 edge=+0.183bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 markov_2   ic=+0.0251 t=+11.1 hit=0.5257 info=+0.00286 z_sur=+14.1 edge=+0.186bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 markov_3   ic=+0.0223 t=+9.9 hit=0.5252 info=+0.00288 z_sur=+42.6 edge=+0.169bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 markov_5   ic=+0.0103 t=+4.6 hit=0.5129 info=+0.00078 z_sur=+4.0 edge=+0.087bp cost=3.64bp gross=+0.26 net=-2.57
+USDCHF M15 dc_3       ic=+0.0077 t=+3.4 hit=0.5082 info=+0.00100 z_sur=+5.9 edge=+0.065bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 dc_10      ic=-0.0044 t=-1.9 hit=0.4970 info=-0.00001 z_sur=-2.9 edge=-0.049bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 phase      ic=+0.0187 t=+8.3 hit=0.5242 info=+0.00258 z_sur=+8.4 edge=+0.142bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 fracdiff   ic=+0.0107 t=+4.8 hit=0.5159 info=+0.00153 z_sur=+11.4 edge=+0.082bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 clock      ic=+0.0060 t=+2.7 hit=0.5034 info=-0.00082 z_sur=+5.4 edge=+0.050bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M15 simplex_2  ic=+0.0040 t=+1.8 hit=0.5030 info=+nan z_sur=-6.7 edge=-0.010bp cost=3.64bp gross=+0.29 net=-17.73
+USDCHF M15 simplex_4  ic=+0.0056 t=+2.5 hit=0.5030 info=+nan z_sur=-0.9 edge=+0.002bp cost=3.64bp gross=+0.41 net=-13.50
+USDCHF M15 simplex_8  ic=+0.0038 t=+1.7 hit=0.5062 info=+nan z_sur=-0.3 edge=+0.049bp cost=3.64bp gross=+0.79 net=-7.82
+done USDCHF M15 in 1.5 min

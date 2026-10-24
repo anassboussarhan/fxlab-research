@@ -1,0 +1,17 @@
+EURCHF M1 ordinal_3  ic=+0.0174 t=+29.7 hit=0.5334 info=+0.00392 z_sur=+51.8 edge=+0.034bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 ordinal_4  ic=+0.0201 t=+34.4 hit=0.5352 info=+0.00446 z_sur=+71.9 edge=+0.038bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 ordinal_5  ic=+0.0213 t=+36.4 hit=0.5336 info=+0.00479 z_sur=+200.0 edge=+0.039bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 ordinal_6  ic=+0.0188 t=+32.1 hit=0.5298 info=+0.00464 z_sur=+154.8 edge=+0.034bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 markov_1   ic=+0.0187 t=+32.0 hit=0.5261 info=+0.00305 z_sur=+242.7 edge=+0.031bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 markov_2   ic=+0.0204 t=+34.8 hit=0.5312 info=+0.00344 z_sur=+87.2 edge=+0.037bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 markov_3   ic=+0.0211 t=+36.0 hit=0.5322 info=+0.00362 z_sur=+37.8 edge=+0.038bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 markov_5   ic=+0.0202 t=+34.5 hit=0.5299 info=+0.00371 z_sur=+78.5 edge=+0.036bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 dc_3       ic=+0.0217 t=+37.1 hit=0.5186 info=+0.00123 z_sur=+92.0 edge=+0.040bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 dc_10      ic=+0.0085 t=+14.5 hit=0.5070 info=+0.00025 z_sur=+22.1 edge=+0.014bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 phase      ic=+0.0292 t=+49.9 hit=0.5323 info=+0.00408 z_sur=+58.7 edge=+0.049bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 fracdiff   ic=+0.0318 t=+54.4 hit=0.5303 info=+0.00360 z_sur=+138.6 edge=+0.050bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 clock      ic=+0.0003 t=+0.6 hit=0.5004 info=-0.00005 z_sur=+0.2 edge=+0.002bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M1 simplex_2  ic=-0.1146 t=-131.2 hit=0.5044 info=+nan z_sur=-0.5 edge=+0.004bp cost=2.87bp gross=+0.47 net=-6.11
+EURCHF M1 simplex_4  ic=-0.0227 t=-26.0 hit=0.5077 info=+nan z_sur=+0.6 edge=+0.011bp cost=2.87bp gross=+0.50 net=-3.93
+EURCHF M1 simplex_8  ic=+0.0551 t=+63.1 hit=0.5096 info=+nan z_sur=+1.4 edge=+0.017bp cost=2.87bp gross=+0.52 net=-2.18
+done EURCHF M1 in 15.8 min

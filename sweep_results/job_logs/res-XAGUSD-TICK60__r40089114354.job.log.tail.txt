@@ -1,0 +1,17 @@
+XAGUSD TICK60 ordinal_3  ic=+0.0096 t=+1.5 hit=0.5109 info=+0.00174 z_sur=+3.7 edge=+0.092bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 ordinal_4  ic=+0.0048 t=+0.8 hit=0.5035 info=+0.00091 z_sur=+0.1 edge=+0.102bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 ordinal_5  ic=+0.0004 t=+0.1 hit=0.5024 info=-0.00283 z_sur=-0.4 edge=-0.091bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 ordinal_6  ic=-0.0097 t=-1.5 hit=0.4943 info=-0.02378 z_sur=-5.2 edge=-0.195bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 markov_1   ic=+0.0042 t=+0.7 hit=0.5079 info=+0.00176 z_sur=+11.2 edge=+0.120bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 markov_2   ic=+0.0101 t=+1.6 hit=0.5059 info=+0.00199 z_sur=+2.2 edge=+0.134bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 markov_3   ic=+0.0102 t=+1.6 hit=0.5030 info=+0.00174 z_sur=+1.7 edge=+0.111bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 markov_5   ic=+0.0063 t=+1.0 hit=0.5047 info=-0.00899 z_sur=+0.7 edge=+0.325bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 dc_3       ic=-0.0005 t=-0.1 hit=0.5114 info=+0.00058 z_sur=-0.4 edge=+0.034bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 dc_10      ic=+0.0006 t=+0.1 hit=0.5042 info=-0.00024 z_sur=+0.7 edge=+0.189bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 phase      ic=+0.0075 t=+1.2 hit=0.5148 info=+0.00168 z_sur=+3.1 edge=+0.207bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 fracdiff   ic=-0.0055 t=-0.9 hit=0.5030 info=+0.00006 z_sur=-1.5 edge=+0.039bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 clock      ic=-0.0072 t=-1.2 hit=0.4993 info=-0.00493 z_sur=-2.4 edge=-0.223bp cost=19.25bp gross=+0.00 net=+0.00
+XAGUSD TICK60 simplex_2  ic=+0.0024 t=+0.4 hit=0.5012 info=+nan z_sur=+2.2 edge=-0.040bp cost=19.25bp gross=+0.47 net=-18.90
+XAGUSD TICK60 simplex_4  ic=-0.0182 t=-2.9 hit=0.5007 info=+nan z_sur=-14.4 edge=-0.104bp cost=19.25bp gross=-1.14 net=-13.56
+XAGUSD TICK60 simplex_8  ic=-0.0011 t=-0.2 hit=0.4995 info=+nan z_sur=-2.8 edge=+0.140bp cost=19.25bp gross=-0.41 net=-10.26
+done XAGUSD TICK60 in 0.1 min

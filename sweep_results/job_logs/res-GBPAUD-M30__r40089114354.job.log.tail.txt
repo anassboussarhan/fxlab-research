@@ -1,0 +1,17 @@
+GBPAUD M30 ordinal_3  ic=+0.0287 t=+7.2 hit=0.5253 info=+0.00198 z_sur=+15.8 edge=+0.305bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 ordinal_4  ic=+0.0268 t=+6.7 hit=0.5222 info=+0.00170 z_sur=+7.6 edge=+0.271bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 ordinal_5  ic=+0.0154 t=+3.9 hit=0.5139 info=-0.00005 z_sur=+3.9 edge=+0.133bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 ordinal_6  ic=+0.0079 t=+2.0 hit=0.5055 info=-0.01225 z_sur=+2.1 edge=+0.037bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 markov_1   ic=+0.0246 t=+6.2 hit=0.5174 info=+0.00148 z_sur=+4.7 edge=+0.168bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 markov_2   ic=+0.0234 t=+5.9 hit=0.5186 info=+0.00150 z_sur=+4.0 edge=+0.173bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 markov_3   ic=+0.0200 t=+5.0 hit=0.5146 info=+0.00119 z_sur=+3.7 edge=+0.124bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 markov_5   ic=+0.0078 t=+2.0 hit=0.5064 info=-0.00346 z_sur=+1.8 edge=+0.067bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 dc_3       ic=+0.0073 t=+1.8 hit=0.5043 info=+0.00032 z_sur=+2.2 edge=+0.072bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 dc_10      ic=-0.0011 t=-0.3 hit=0.5004 info=-0.00023 z_sur=+5.8 edge=+0.005bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 phase      ic=+0.0140 t=+3.5 hit=0.5177 info=+0.00111 z_sur=+10.8 edge=+0.160bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 fracdiff   ic=+0.0059 t=+1.5 hit=0.5089 info=+0.00046 z_sur=+3.6 edge=+0.070bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 clock      ic=+0.0048 t=+1.2 hit=0.5046 info=-0.00171 z_sur=+2.3 edge=+0.026bp cost=4.72bp gross=+0.00 net=+0.00
+GBPAUD M30 simplex_2  ic=+0.0077 t=+1.9 hit=0.5036 info=+nan z_sur=+1.5 edge=+0.061bp cost=4.72bp gross=+0.34 net=-16.44
+GBPAUD M30 simplex_4  ic=-0.0103 t=-2.6 hit=0.5010 info=+nan z_sur=-3.8 edge=-0.031bp cost=4.72bp gross=-0.71 net=-12.10
+GBPAUD M30 simplex_8  ic=-0.0029 t=-0.7 hit=0.5045 info=+nan z_sur=-0.5 edge=+0.012bp cost=4.72bp gross=-0.31 net=-8.55
+done GBPAUD M30 in 0.4 min

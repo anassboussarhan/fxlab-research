@@ -1,0 +1,17 @@
+GBPCHF M15 ordinal_3  ic=+0.0311 t=+13.7 hit=0.5354 info=+0.00443 z_sur=+45.0 edge=+0.272bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 ordinal_4  ic=+0.0296 t=+13.1 hit=0.5328 info=+0.00466 z_sur=+12.0 edge=+0.264bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 ordinal_5  ic=+0.0222 t=+9.8 hit=0.5298 info=+0.00392 z_sur=+33.7 edge=+0.230bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 ordinal_6  ic=+0.0118 t=+5.2 hit=0.5177 info=-0.00152 z_sur=+18.1 edge=+0.124bp cost=4.73bp gross=-0.30 net=-3.27
+GBPCHF M15 markov_1   ic=+0.0313 t=+13.9 hit=0.5266 info=+0.00369 z_sur=+32.7 edge=+0.218bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 markov_2   ic=+0.0312 t=+13.8 hit=0.5296 info=+0.00404 z_sur=+20.4 edge=+0.233bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 markov_3   ic=+0.0286 t=+12.7 hit=0.5300 info=+0.00411 z_sur=+31.6 edge=+0.242bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 markov_5   ic=+0.0183 t=+8.1 hit=0.5204 info=+0.00213 z_sur=+12.6 edge=+0.150bp cost=4.73bp gross=+0.34 net=-2.21
+GBPCHF M15 dc_3       ic=+0.0072 t=+3.2 hit=0.5095 info=+0.00065 z_sur=+6.9 edge=+0.074bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 dc_10      ic=+0.0021 t=+0.9 hit=0.5002 info=+0.00009 z_sur=+3.9 edge=+0.010bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 phase      ic=+0.0247 t=+10.9 hit=0.5285 info=+0.00314 z_sur=+42.6 edge=+0.212bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 fracdiff   ic=+0.0141 t=+6.2 hit=0.5189 info=+0.00166 z_sur=+20.5 edge=+0.124bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 clock      ic=+0.0060 t=+2.7 hit=0.5024 info=-0.00088 z_sur=+2.5 edge=+0.026bp cost=4.73bp gross=+0.00 net=+0.00
+GBPCHF M15 simplex_2  ic=+0.0146 t=+6.5 hit=0.5045 info=+nan z_sur=+1.6 edge=+0.061bp cost=4.73bp gross=+0.78 net=-15.26
+GBPCHF M15 simplex_4  ic=+0.0181 t=+8.0 hit=0.5064 info=+nan z_sur=+2.2 edge=+0.062bp cost=4.73bp gross=+0.66 net=-10.13
+GBPCHF M15 simplex_8  ic=+0.0084 t=+3.7 hit=0.5068 info=+nan z_sur=+1.0 edge=+0.056bp cost=4.73bp gross=-0.02 net=-6.23
+done GBPCHF M15 in 1.5 min

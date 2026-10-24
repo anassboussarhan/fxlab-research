@@ -1,0 +1,17 @@
+AUDJPY M10 ordinal_3  ic=+0.0233 t=+12.6 hit=0.5223 info=+0.00206 z_sur=+21.6 edge=+0.178bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 ordinal_4  ic=+0.0216 t=+11.7 hit=0.5199 info=+0.00215 z_sur=+16.8 edge=+0.145bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 ordinal_5  ic=+0.0168 t=+9.1 hit=0.5139 info=+0.00173 z_sur=+10.1 edge=+0.104bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 ordinal_6  ic=+0.0118 t=+6.4 hit=0.5107 info=-0.00206 z_sur=+32.8 edge=+0.095bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 markov_1   ic=+0.0289 t=+15.6 hit=0.5226 info=+0.00196 z_sur=+67.3 edge=+0.171bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 markov_2   ic=+0.0294 t=+15.9 hit=0.5230 info=+0.00241 z_sur=+30.9 edge=+0.171bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 markov_3   ic=+0.0272 t=+14.7 hit=0.5200 info=+0.00241 z_sur=+23.9 edge=+0.148bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 markov_5   ic=+0.0167 t=+9.0 hit=0.5107 info=+0.00117 z_sur=+14.2 edge=+0.073bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 dc_3       ic=+0.0091 t=+4.9 hit=0.5097 info=+0.00071 z_sur=+6.4 edge=+0.055bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 dc_10      ic=+0.0039 t=+2.1 hit=0.5012 info=-0.00001 z_sur=+15.4 edge=+0.012bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 phase      ic=+0.0192 t=+10.4 hit=0.5216 info=+0.00209 z_sur=+4.6 edge=+0.127bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 fracdiff   ic=+0.0164 t=+8.9 hit=0.5171 info=+0.00124 z_sur=+7.6 edge=+0.099bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 clock      ic=+0.0032 t=+1.7 hit=0.5013 info=-0.00058 z_sur=+1.9 edge=+0.021bp cost=5.72bp gross=+0.00 net=+0.00
+AUDJPY M10 simplex_2  ic=+0.0043 t=+2.3 hit=0.5021 info=+nan z_sur=+3.2 edge=+0.023bp cost=5.72bp gross=-0.00 net=-14.48
+AUDJPY M10 simplex_4  ic=+0.0001 t=+0.1 hit=0.5018 info=+nan z_sur=-0.8 edge=+0.009bp cost=5.72bp gross=+0.34 net=-9.43
+AUDJPY M10 simplex_8  ic=+0.0083 t=+4.5 hit=0.5052 info=+nan z_sur=+9.7 edge=+0.060bp cost=5.72bp gross=+0.37 net=-5.41
+done AUDJPY M10 in 1.8 min

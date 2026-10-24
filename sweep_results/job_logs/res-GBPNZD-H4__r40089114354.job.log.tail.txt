@@ -1,0 +1,17 @@
+GBPNZD H4 ordinal_3  ic=+0.0094 t=+0.9 hit=0.5121 info=+0.00019 z_sur=+1.9 edge=+0.214bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 ordinal_4  ic=+0.0145 t=+1.3 hit=0.5131 info=-0.00175 z_sur=+4.3 edge=+0.605bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 ordinal_5  ic=+0.0156 t=+1.4 hit=0.5050 info=-0.01563 z_sur=+1.5 edge=+0.258bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 ordinal_6  ic=-0.0027 t=-0.3 hit=0.4998 info=-0.04884 z_sur=-1.6 edge=+0.044bp cost=5.94bp gross=-0.07 net=-0.29
+GBPNZD H4 markov_1   ic=+0.0081 t=+0.7 hit=0.5089 info=+0.00034 z_sur=+1.9 edge=+0.347bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 markov_2   ic=+0.0119 t=+1.1 hit=0.5063 info=-0.00030 z_sur=+8.6 edge=+0.307bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 markov_3   ic=+0.0065 t=+0.6 hit=0.5026 info=-0.00291 z_sur=+1.0 edge=+0.181bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 markov_5   ic=-0.0110 t=-1.0 hit=0.4785 info=-0.03368 z_sur=-1.3 edge=-0.166bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 dc_3       ic=-0.0056 t=-0.5 hit=0.5009 info=-0.00030 z_sur=-9.0 edge=-0.094bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 dc_10      ic=+0.0091 t=+0.8 hit=0.4961 info=-0.00077 z_sur=+1.1 edge=-0.133bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 phase      ic=-0.0140 t=-1.3 hit=0.4989 info=-0.00072 z_sur=-2.2 edge=-0.537bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 fracdiff   ic=-0.0271 t=-2.5 hit=0.4904 info=-0.00130 z_sur=-2.0 edge=-0.739bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 clock      ic=+0.0188 t=+1.7 hit=0.5132 info=-0.00322 z_sur=+1.3 edge=+0.668bp cost=5.94bp gross=+0.00 net=+0.00
+GBPNZD H4 simplex_2  ic=+0.0040 t=+0.4 hit=0.4951 info=+nan z_sur=+3.3 edge=+0.201bp cost=5.94bp gross=+0.25 net=-3.70
+GBPNZD H4 simplex_4  ic=-0.0047 t=-0.4 hit=0.5036 info=+nan z_sur=-0.1 edge=+0.156bp cost=5.94bp gross=+0.12 net=-3.66
+GBPNZD H4 simplex_8  ic=+0.0024 t=+0.2 hit=0.5082 info=+nan z_sur=+0.3 edge=+0.468bp cost=5.94bp gross=+0.25 net=-3.49
+done GBPNZD H4 in 0.1 min

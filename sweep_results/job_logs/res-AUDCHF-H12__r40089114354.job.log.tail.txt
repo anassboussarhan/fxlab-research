@@ -1,0 +1,17 @@
+AUDCHF H12 ordinal_3  ic=+0.0130 t=+0.7 hit=0.4950 info=-0.00349 z_sur=+0.3 edge=+1.232bp cost=6.44bp gross=+0.11 net=-0.39
+AUDCHF H12 ordinal_4  ic=+0.0001 t=+0.0 hit=0.4882 info=-0.01158 z_sur=+0.4 edge=+0.265bp cost=6.44bp gross=+0.32 net=-0.40
+AUDCHF H12 ordinal_5  ic=-0.0400 t=-2.2 hit=0.4779 info=-0.03504 z_sur=-4.1 edge=-0.900bp cost=6.44bp gross=-0.83 net=-1.18
+AUDCHF H12 ordinal_6  ic=-0.0077 t=-0.4 hit=0.4937 info=-0.06354 z_sur=-1.3 edge=-0.191bp cost=6.44bp gross=+0.00 net=+0.00
+AUDCHF H12 markov_1   ic=+0.0011 t=+0.1 hit=0.4787 info=-0.00165 z_sur=+0.6 edge=+0.067bp cost=6.44bp gross=+0.00 net=+0.00
+AUDCHF H12 markov_2   ic=-0.0061 t=-0.3 hit=0.4777 info=-0.00606 z_sur=-0.3 edge=-0.887bp cost=6.44bp gross=-0.03 net=-0.90
+AUDCHF H12 markov_3   ic=+0.0094 t=+0.5 hit=0.4850 info=-0.01362 z_sur=+0.7 edge=+0.776bp cost=6.44bp gross=+0.33 net=-0.89
+AUDCHF H12 markov_5   ic=+0.0000 t=+0.0 hit=nan info=-0.07317 z_sur=+0.0 edge=+0.000bp cost=6.44bp gross=+0.00 net=+0.00
+AUDCHF H12 dc_3       ic=+0.0024 t=+0.1 hit=0.5017 info=-0.00387 z_sur=+1.7 edge=+0.239bp cost=6.44bp gross=+0.47 net=+0.36
+AUDCHF H12 dc_10      ic=-0.0202 t=-1.1 hit=0.4966 info=-0.00806 z_sur=-0.9 edge=-0.095bp cost=6.44bp gross=-0.41 net=-0.54
+AUDCHF H12 phase      ic=-0.0048 t=-0.3 hit=0.5076 info=-0.00402 z_sur=+1.1 edge=+0.328bp cost=6.44bp gross=-0.42 net=-0.85
+AUDCHF H12 fracdiff   ic=-0.0096 t=-0.5 hit=0.4934 info=-0.00885 z_sur=+0.6 edge=+0.559bp cost=6.44bp gross=-0.45 net=-1.23
+AUDCHF H12 clock      ic=+0.0407 t=+2.2 hit=0.5066 info=-0.00283 z_sur=+4.4 edge=+0.987bp cost=6.44bp gross=+0.87 net=-0.25
+AUDCHF H12 simplex_2  ic=+0.0055 t=+0.3 hit=0.5007 info=+nan z_sur=-1.3 edge=+1.003bp cost=6.44bp gross=+0.20 net=-1.69
+AUDCHF H12 simplex_4  ic=+0.0181 t=+1.0 hit=0.4967 info=+nan z_sur=+3.0 edge=+0.152bp cost=6.44bp gross=-0.16 net=-1.89
+AUDCHF H12 simplex_8  ic=-0.0244 t=-1.3 hit=0.5043 info=+nan z_sur=-1.4 edge=+0.554bp cost=6.44bp gross=+0.10 net=-1.81
+done AUDCHF H12 in 0.0 min

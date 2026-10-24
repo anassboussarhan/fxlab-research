@@ -1,0 +1,17 @@
+AUDNZD D1 ordinal_3  ic=-0.0276 t=-1.1 hit=0.4973 info=-0.00508 z_sur=-2.0 edge=-1.032bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 ordinal_4  ic=+0.0343 t=+1.4 hit=0.5309 info=-0.01556 z_sur=+1.2 edge=+2.042bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 ordinal_5  ic=+0.0237 t=+1.0 hit=0.5185 info=-0.04391 z_sur=+1.8 edge=+0.275bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 ordinal_6  ic=+0.0000 t=+0.0 hit=nan info=-0.04409 z_sur=-1.1 edge=+0.000bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 markov_1   ic=-0.0067 t=-0.3 hit=0.5009 info=-0.00310 z_sur=+2.1 edge=+0.246bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 markov_2   ic=-0.0053 t=-0.2 hit=0.5099 info=-0.00748 z_sur=+2.0 edge=+0.361bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 markov_3   ic=+0.0177 t=+0.7 hit=0.5103 info=-0.01951 z_sur=+1.0 edge=+0.281bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 markov_5   ic=+0.0000 t=+0.0 hit=nan info=-0.07875 z_sur=+0.0 edge=+0.000bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 dc_3       ic=-0.0286 t=-1.2 hit=0.4943 info=-0.00487 z_sur=-0.7 edge=-0.819bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 dc_10      ic=-0.0428 t=-1.8 hit=0.4989 info=-0.02643 z_sur=-2.2 edge=-2.192bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 phase      ic=-0.0066 t=-0.3 hit=0.4943 info=-0.00732 z_sur=-0.3 edge=+0.100bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 fracdiff   ic=-0.0093 t=-0.4 hit=0.5044 info=-0.00282 z_sur=-5.1 edge=-0.515bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 clock      ic=+0.0070 t=+0.3 hit=0.5009 info=-0.00561 z_sur=+1.5 edge=-0.265bp cost=13.49bp gross=+0.00 net=+0.00
+AUDNZD D1 simplex_2  ic=-0.0169 t=-0.7 hit=0.5015 info=+nan z_sur=-2.3 edge=-0.363bp cost=13.49bp gross=-0.13 net=-2.77
+AUDNZD D1 simplex_4  ic=+0.0326 t=+1.3 hit=0.5213 info=+nan z_sur=+2.7 edge=+2.887bp cost=13.49bp gross=+0.57 net=-2.04
+AUDNZD D1 simplex_8  ic=+0.0290 t=+1.2 hit=0.4991 info=+nan z_sur=+3.9 edge=+0.717bp cost=13.49bp gross=+0.57 net=-1.71
+done AUDNZD D1 in 0.0 min

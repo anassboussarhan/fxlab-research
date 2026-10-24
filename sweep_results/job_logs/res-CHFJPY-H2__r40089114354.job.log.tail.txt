@@ -1,0 +1,17 @@
+CHFJPY H2 ordinal_3  ic=+0.0171 t=+2.7 hit=0.5198 info=+0.00192 z_sur=+3.6 edge=+0.522bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 ordinal_4  ic=+0.0083 t=+1.3 hit=0.5115 info=+0.00069 z_sur=+3.8 edge=+0.147bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 ordinal_5  ic=+0.0082 t=+1.3 hit=0.5057 info=-0.00681 z_sur=+1.1 edge=+0.169bp cost=5.48bp gross=-0.07 net=-1.07
+CHFJPY H2 ordinal_6  ic=+0.0084 t=+1.4 hit=0.5117 info=-0.03628 z_sur=+1.6 edge=+0.115bp cost=5.48bp gross=-0.13 net=-0.34
+CHFJPY H2 markov_1   ic=+0.0174 t=+2.8 hit=0.5214 info=+0.00207 z_sur=+3.0 edge=+0.369bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 markov_2   ic=+0.0145 t=+2.3 hit=0.5146 info=+0.00178 z_sur=+3.0 edge=+0.267bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 markov_3   ic=+0.0098 t=+1.6 hit=0.5120 info=+0.00037 z_sur=+4.7 edge=+0.205bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 markov_5   ic=+0.0032 t=+0.5 hit=0.5047 info=-0.01637 z_sur=+3.4 edge=+0.129bp cost=5.48bp gross=-0.10 net=-1.07
+CHFJPY H2 dc_3       ic=+0.0102 t=+1.6 hit=0.4983 info=-0.00072 z_sur=+1.6 edge=-0.005bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 dc_10      ic=-0.0039 t=-0.6 hit=0.4952 info=-0.00087 z_sur=+0.5 edge=-0.214bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 phase      ic=+0.0006 t=+0.1 hit=0.5116 info=+0.00102 z_sur=+0.3 edge=+0.058bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 fracdiff   ic=+0.0051 t=+0.8 hit=0.5012 info=-0.00051 z_sur=+1.0 edge=+0.041bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 clock      ic=+0.0134 t=+2.1 hit=0.5010 info=-0.00050 z_sur=+1.5 edge=+0.181bp cost=5.48bp gross=+0.00 net=+0.00
+CHFJPY H2 simplex_2  ic=-0.0014 t=-0.2 hit=0.5007 info=+nan z_sur=+0.1 edge=-0.002bp cost=5.48bp gross=-0.27 net=-4.47
+CHFJPY H2 simplex_4  ic=-0.0109 t=-1.8 hit=0.5026 info=+nan z_sur=-2.4 edge=+0.037bp cost=5.48bp gross=+0.25 net=-4.25
+CHFJPY H2 simplex_8  ic=+0.0099 t=+1.6 hit=0.5038 info=+nan z_sur=+3.4 edge=+0.102bp cost=5.48bp gross=+0.07 net=-4.81
+done CHFJPY H2 in 0.1 min
