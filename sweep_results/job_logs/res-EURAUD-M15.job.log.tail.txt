@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURAUD M15: built 262 features in 544s (0 errors, 7 skipped)
+EURAUD M15 h=1: OOS IC +0.0012 hit 0.5018 | selected net -6.13 gross -4.07 x2 -10.22 | hindsight best +0.12 | {'passive1:always': 12, 'passive3:signal': 3, 'passive1:signal': 2}
+EURAUD M15 h=6: OOS IC +0.0096 hit 0.5073 | selected net -0.83 gross -0.44 x2 -2.15 | hindsight best -0.24 | {'passive3:signal': 8, 'passive1:signal': 5, 'market:signal': 4}
+EURAUD M15 h=24: OOS IC +0.0306 hit 0.5078 | selected net -0.38 gross +0.02 x2 -1.77 | hindsight best -0.11 | {'passive3:signal': 15, 'passive1:signal': 2}
+done EURAUD M15 in 12.4 min

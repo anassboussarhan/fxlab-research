@@ -1,0 +1,36 @@
+{
+ "streams": 816,
+ "pairs": 34,
+ "tfs": [
+  "M5",
+  "M15",
+  "M30",
+  "H1",
+  "H2",
+  "H4",
+  "H8",
+  "D1"
+ ],
+ "median_net_sharpe": -0.5890951709264267,
+ "share_net_positive": 0.10416666666666667,
+ "median_gross_sharpe": -0.20971630563985075,
+ "bh_survivors_q10": 0,
+ "best_stream": [
+  {
+   "pair": "XAGUSD",
+   "tf": "D1",
+   "h": 24,
+   "net_sharpe": 1.1155101175201614,
+   "p_bh": 1.0
+  }
+ ],
+ "best_portfolio": [
+  {
+   "portfolio": "D1 h=24",
+   "streams": 34,
+   "sharpe": 0.22577928003811892,
+   "t": 0.7989868064930591,
+   "ann_return": 0.006400639191269875
+  }
+ ]
+}

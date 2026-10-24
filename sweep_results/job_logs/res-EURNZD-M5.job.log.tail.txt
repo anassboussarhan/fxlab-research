@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURNZD M5: built 258 features in 446s (0 errors, 11 skipped)
+EURNZD M5 h=1: OOS IC +0.0169 hit 0.5104 | selected net -31.69 gross -20.80 x2 -48.69 | hindsight best +0.00 | {'passive1:always': 16}
+EURNZD M5 h=6: OOS IC +0.0115 hit 0.5097 | selected net -16.15 gross -11.93 x2 -19.47 | hindsight best +0.00 | {'passive1:always': 11, 'passive3:signal': 3, 'limit_touch:stops': 2}
+EURNZD M5 h=24: OOS IC +0.0168 hit 0.5049 | selected net -1.11 gross -0.69 x2 -2.18 | hindsight best -0.25 | {'passive3:signal': 12, 'passive1:signal': 4}
+done EURNZD M5 in 14.0 min

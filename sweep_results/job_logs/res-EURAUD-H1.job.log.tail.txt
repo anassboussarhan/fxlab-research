@@ -1,0 +1,18 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6062.729715932597 is not greater than 6062.729717883681. Delta is -1.951083504536655e-06
+Model is not converging.  Current: 6108.257916174569 is not greater than 6108.257917306027. Delta is -1.1314577932353131e-06
+Model is not converging.  Current: 6068.0702781925775 is not greater than 6068.070280324879. Delta is -2.1323012333596125e-06
+  EURAUD H1: built 267 features in 248s (0 errors, 2 skipped)
+EURAUD H1 h=1: OOS IC +0.0167 hit 0.5049 | selected net +0.13 gross +0.50 x2 -0.56 | hindsight best +0.48 | {'passive3:signal': 10, 'limit_touch:stops': 3, 'market:signal': 3, 'passive1:signal': 1}
+EURAUD H1 h=6: OOS IC +0.0356 hit 0.5038 | selected net -0.28 gross +0.10 x2 -1.26 | hindsight best +0.19 | {'passive3:signal': 10, 'limit_touch:stops': 4, 'passive1:signal': 2, 'market:signal': 1}
+EURAUD H1 h=24: OOS IC +0.0281 hit 0.5035 | selected net -0.17 gross +0.15 x2 -1.04 | hindsight best -0.03 | {'passive3:signal': 15, 'passive1:signal': 1, 'market:signal': 1}
+done EURAUD H1 in 5.4 min

@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDUSD M15: built 262 features in 391s (0 errors, 7 skipped)
+NZDUSD M15 h=1: OOS IC +0.0117 hit 0.5064 | selected net -9.24 gross -6.61 x2 -14.21 | hindsight best +0.60 | {'passive1:always': 13, 'passive1:signal': 2, 'market:signal': 1, 'passive3:signal': 1}
+NZDUSD M15 h=6: OOS IC +0.0206 hit 0.5031 | selected net -0.84 gross -0.35 x2 -1.87 | hindsight best +0.41 | {'passive3:signal': 7, 'market:signal': 5, 'passive1:signal': 3, 'limit_touch:stops': 2}
+NZDUSD M15 h=24: OOS IC +0.0161 hit 0.4999 | selected net -0.77 gross -0.37 x2 -2.03 | hindsight best -0.59 | {'passive3:signal': 15, 'passive1:signal': 2}
+done NZDUSD M15 in 9.3 min

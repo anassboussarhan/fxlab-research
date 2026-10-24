@@ -1,0 +1,41 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6223.7394507316785 is not greater than 6223.73945878039. Delta is -8.048711606534198e-06
+Model is not converging.  Current: 6306.08731529795 is not greater than 6306.08737971653. Delta is -6.44185802229913e-05
+Model is not converging.  Current: 6423.724253445582 is not greater than 6423.724307244457. Delta is -5.379887534218142e-05
+Model is not converging.  Current: 6311.065115444746 is not greater than 6311.065151511941. Delta is -3.6067194741917774e-05
+Model is not converging.  Current: 6159.658726086528 is not greater than 6159.658729207075. Delta is -3.120547262369655e-06
+Model is not converging.  Current: 6216.943451692481 is not greater than 6216.943478592661. Delta is -2.6900180273514707e-05
+  AUDUSD M30: built 267 features in 333s (0 errors, 2 skipped)
+AUDUSD M30 h=1: OOS IC +0.0078 hit 0.5033 | selected net -1.10 gross -0.35 x2 -1.84 | hindsight best +0.00 | {'passive3:signal': 6, 'passive1:signal': 4, 'market:stops': 3, 'limit_touch:stops': 2, 'market:signal': 2}
+AUDUSD M30 h=6: OOS IC +0.0066 hit 0.5054 | selected net -1.18 gross -0.26 x2 -2.45 | hindsight best -0.85 | {'market:signal': 7, 'passive3:signal': 7, 'passive1:signal': 3}
+AUDUSD M30 h=24: OOS IC +0.0313 hit 0.5185 | selected net +0.20 gross +0.83 x2 -0.69 | hindsight best +0.24 | {'market:signal': 7, 'passive1:signal': 6, 'passive3:signal': 4}
+done AUDUSD M30 in 7.9 min

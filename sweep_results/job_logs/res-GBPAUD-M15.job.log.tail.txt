@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPAUD M15: built 266 features in 581s (0 errors, 3 skipped)
+GBPAUD M15 h=1: OOS IC -0.0008 hit 0.5040 | selected net -9.41 gross -6.37 x2 -15.30 | hindsight best +0.00 | {'passive1:always': 14, 'passive3:signal': 1, 'market:signal': 1}
+GBPAUD M15 h=6: OOS IC +0.0115 hit 0.5060 | selected net -1.21 gross -0.81 x2 -2.65 | hindsight best -0.43 | {'passive3:signal': 13, 'passive1:signal': 3}
+GBPAUD M15 h=24: OOS IC -0.0036 hit 0.5028 | selected net -1.82 gross -1.51 x2 -3.10 | hindsight best -1.10 | {'passive3:signal': 16}
+done GBPAUD M15 in 12.3 min

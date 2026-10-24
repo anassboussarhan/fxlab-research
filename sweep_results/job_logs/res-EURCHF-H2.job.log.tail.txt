@@ -1,0 +1,31 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6389.672224282742 is not greater than 6389.672391860889. Delta is -0.00016757814682932803
+Model is not converging.  Current: 6377.348048392939 is not greater than 6377.348224850038. Delta is -0.00017645709885982797
+Model is not converging.  Current: 6743.135820517179 is not greater than 6743.135831953558. Delta is -1.1436379281803966e-05
+Model is not converging.  Current: 6243.540840901638 is not greater than 6243.540849490839. Delta is -8.589200660935603e-06
+Model is not converging.  Current: 6279.192424714785 is not greater than 6279.19244822936. Delta is -2.3514574422733858e-05
+Model is not converging.  Current: 6259.580459551948 is not greater than 6259.580461840955. Delta is -2.289007170475088e-06
+  EURCHF H2: built 267 features in 163s (0 errors, 2 skipped)
+EURCHF H2 h=1: OOS IC -0.0002 hit 0.5041 | selected net -0.45 gross -0.21 x2 -1.07 | hindsight best -0.14 | {'passive3:signal': 12, 'passive1:signal': 2, 'market:signal': 2, 'limit_touch:stops': 1}
+EURCHF H2 h=6: OOS IC -0.0275 hit 0.4897 | selected net -1.37 gross -1.11 x2 -1.92 | hindsight best -1.09 | {'passive3:signal': 13, 'passive1:signal': 3, 'limit_touch:stops': 1}
+EURCHF H2 h=24: OOS IC -0.0273 hit 0.4972 | selected net -0.98 gross -0.75 x2 -1.49 | hindsight best -0.90 | {'passive3:signal': 15, 'passive1:signal': 2}
+done EURCHF H2 in 3.6 min

@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDNOK H4: built 268 features in 263s (0 errors, 1 skipped)
+USDNOK H4 h=1: OOS IC +0.0114 hit 0.5001 | selected net -0.99 gross -0.80 x2 -1.90 | hindsight best +0.27 | {'passive3:signal': 11, 'limit_touch:stops': 2, 'passive1:signal': 2, 'market:signal': 1, 'passive1:always': 1}
+USDNOK H4 h=6: OOS IC +0.0044 hit 0.5084 | selected net -0.19 gross +0.01 x2 -0.74 | hindsight best +0.28 | {'passive3:signal': 10, 'market:signal': 3, 'passive1:signal': 2, 'passive1:always': 1, 'limit_touch:stops': 1}
+USDNOK H4 h=24: OOS IC +0.0020 hit 0.4851 | selected net -0.47 gross -0.28 x2 -0.85 | hindsight best -0.21 | {'passive3:signal': 6, 'market:signal': 4, 'passive1:signal': 3, 'limit_touch:stops': 3, 'passive1:always': 1}
+done USDNOK H4 in 5.1 min

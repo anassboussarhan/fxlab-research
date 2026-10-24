@@ -1,0 +1,12 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6236.677577592618 is not greater than 6236.677587089132. Delta is -9.49651439441368e-06
+Model is not converging.  Current: 6168.768431291646 is not greater than 6168.768437577472. Delta is -6.285825293161906e-06
+  GBPCAD M30: built 267 features in 240s (0 errors, 2 skipped)
+GBPCAD M30 h=1: OOS IC +0.0069 hit 0.5033 | selected net -5.36 gross -3.15 x2 -10.03 | hindsight best +0.00 | {'passive1:always': 11, 'market:signal': 2, 'passive1:signal': 2, 'market:always': 1}
+GBPCAD M30 h=6: OOS IC +0.0057 hit 0.5042 | selected net -0.86 gross -0.55 x2 -1.90 | hindsight best -0.54 | {'passive3:signal': 10, 'market:signal': 4, 'limit_touch:stops': 1, 'passive1:signal': 1}
+GBPCAD M30 h=24: OOS IC +0.0411 hit 0.5088 | selected net -0.08 gross +0.22 x2 -1.23 | hindsight best -0.00 | {'passive3:signal': 14, 'passive1:signal': 2}
+done GBPCAD M30 in 5.3 min

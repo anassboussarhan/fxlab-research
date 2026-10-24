@@ -1,0 +1,27 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6286.174969873111 is not greater than 6286.174983946638. Delta is -1.4073527381697204e-05
+Model is not converging.  Current: 6224.015762922017 is not greater than 6224.015765958089. Delta is -3.0360724849742837e-06
+Model is not converging.  Current: 6247.766207069787 is not greater than 6247.766223124129. Delta is -1.6054342268034816e-05
+Model is not converging.  Current: 6220.660218645972 is not greater than 6220.660249338414. Delta is -3.069244212383637e-05
+Model is not converging.  Current: 6212.11067517037 is not greater than 6212.11069638634. Delta is -2.1215970264165662e-05
+Model is not converging.  Current: 6211.65501599875 is not greater than 6211.655044809857. Delta is -2.881110685848398e-05
+Model is not converging.  Current: 6178.070123454573 is not greater than 6178.07015769479. Delta is -3.4240217246406246e-05
+Model is not converging.  Current: 6182.001463604436 is not greater than 6182.001496462373. Delta is -3.285793718532659e-05
+Model is not converging.  Current: 6176.042969165401 is not greater than 6176.042982610037. Delta is -1.3444636351778172e-05
+Model is not converging.  Current: 6228.811874720817 is not greater than 6228.811879641559. Delta is -4.920741957903374e-06
+Model is not converging.  Current: 6192.636148948943 is not greater than 6192.636191528091. Delta is -4.2579148612276185e-05
+Model is not converging.  Current: 6246.915077856263 is not greater than 6246.915111183379. Delta is -3.3327115488646086e-05
+Model is not converging.  Current: 6183.480198885521 is not greater than 6183.480223149068. Delta is -2.4263546947622672e-05
+Model is not converging.  Current: 6190.482225862345 is not greater than 6190.482271708148. Delta is -4.5845802560506854e-05
+Model is not converging.  Current: 6175.992994533471 is not greater than 6175.99304170956. Delta is -4.7176089537970256e-05
+Model is not converging.  Current: 6229.595499265878 is not greater than 6229.595554117086. Delta is -5.485120800585719e-05
+Model is not converging.  Current: 6231.356129917503 is not greater than 6231.3561577520995. Delta is -2.7834596949105617e-05
+  GBPUSD H1: built 267 features in 249s (0 errors, 2 skipped)
+GBPUSD H1 h=1: OOS IC +0.0026 hit 0.5022 | selected net -1.19 gross -0.83 x2 -1.74 | hindsight best -0.00 | {'market:signal': 6, 'passive1:signal': 6, 'passive3:signal': 3, 'limit_touch:stops': 2}
+GBPUSD H1 h=6: OOS IC -0.0006 hit 0.4999 | selected net -1.10 gross -0.22 x2 -2.08 | hindsight best -0.72 | {'market:signal': 10, 'passive1:signal': 3, 'passive3:signal': 2, 'market:stops': 1, 'limit_touch:stops': 1}
+GBPUSD H1 h=24: OOS IC +0.0069 hit 0.4964 | selected net -0.63 gross -0.19 x2 -1.22 | hindsight best -0.66 | {'passive3:signal': 7, 'market:signal': 5, 'passive1:signal': 3, 'market:stops': 1, 'limit_touch:stops': 1}
+done GBPUSD H1 in 5.4 min

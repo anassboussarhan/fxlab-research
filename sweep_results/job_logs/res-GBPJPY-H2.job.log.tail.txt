@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPJPY H2: built 267 features in 134s (0 errors, 2 skipped)
+GBPJPY H2 h=1: OOS IC +0.0088 hit 0.5046 | selected net -0.58 gross +0.06 x2 -1.33 | hindsight best -0.13 | {'market:signal': 10, 'passive3:signal': 3, 'passive1:signal': 2, 'market:always': 1, 'market:stops': 1}
+GBPJPY H2 h=6: OOS IC +0.0078 hit 0.5075 | selected net -0.13 gross +0.22 x2 -0.62 | hindsight best +0.01 | {'passive1:signal': 6, 'market:signal': 4, 'limit_touch:stops': 4, 'passive3:signal': 3}
+GBPJPY H2 h=24: OOS IC +0.0103 hit 0.5224 | selected net -0.42 gross -0.06 x2 -0.88 | hindsight best -0.00 | {'market:signal': 5, 'limit_touch:stops': 5, 'passive3:signal': 4, 'passive1:signal': 3}
+done GBPJPY H2 in 3.1 min

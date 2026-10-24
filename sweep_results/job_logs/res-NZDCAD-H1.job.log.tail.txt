@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDCAD H1: built 267 features in 117s (0 errors, 2 skipped)
+NZDCAD H1 h=1: OOS IC +0.0082 hit 0.5040 | selected net -3.86 gross -2.59 x2 -8.78 | hindsight best +0.00 | {'passive1:always': 12, 'passive3:signal': 3, 'market:signal': 1}
+NZDCAD H1 h=6: OOS IC +0.0220 hit 0.5050 | selected net -0.38 gross -0.10 x2 -2.12 | hindsight best -0.32 | {'passive3:signal': 13, 'passive1:signal': 3}
+NZDCAD H1 h=24: OOS IC +0.0172 hit 0.5062 | selected net -0.28 gross +0.06 x2 -1.43 | hindsight best -0.15 | {'passive3:signal': 14, 'passive1:signal': 2}
+done NZDCAD H1 in 2.6 min

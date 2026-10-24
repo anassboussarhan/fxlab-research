@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPCAD H4: built 268 features in 112s (0 errors, 1 skipped)
+GBPCAD H4 h=1: OOS IC +0.0159 hit 0.5062 | selected net -0.15 gross +0.40 x2 -1.30 | hindsight best +0.20 | {'passive3:signal': 6, 'passive1:signal': 4, 'passive1:always': 2, 'limit_touch:stops': 2, 'market:signal': 1, 'market:always': 1}
+GBPCAD H4 h=6: OOS IC +0.0512 hit 0.5150 | selected net -0.36 gross -0.12 x2 -0.91 | hindsight best -0.09 | {'passive3:signal': 11, 'passive1:signal': 2, 'market:signal': 2, 'market:stops': 1}
+GBPCAD H4 h=24: OOS IC +0.0689 hit 0.5155 | selected net -0.02 gross +0.17 x2 -0.39 | hindsight best +0.02 | {'passive3:signal': 10, 'passive1:signal': 3, 'limit_touch:stops': 2, 'market:signal': 1}
+done GBPCAD H4 in 2.2 min

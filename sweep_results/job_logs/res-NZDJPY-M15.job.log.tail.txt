@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDJPY M15: built 266 features in 602s (0 errors, 3 skipped)
+NZDJPY M15 h=1: OOS IC +0.0008 hit 0.5041 | selected net -8.28 gross -5.68 x2 -15.30 | hindsight best +0.00 | {'passive1:always': 15, 'passive3:signal': 1}
+NZDJPY M15 h=6: OOS IC +0.0100 hit 0.5044 | selected net +0.18 gross +1.18 x2 -1.05 | hindsight best +0.03 | {'passive3:signal': 9, 'market:signal': 6, 'limit_touch:stops': 1}
+NZDJPY M15 h=24: OOS IC +0.0234 hit 0.5003 | selected net -1.87 gross -0.95 x2 -3.46 | hindsight best -0.15 | {'passive3:signal': 10, 'passive1:signal': 4, 'limit_touch:stops': 1, 'market:signal': 1}
+done NZDJPY M15 in 12.9 min

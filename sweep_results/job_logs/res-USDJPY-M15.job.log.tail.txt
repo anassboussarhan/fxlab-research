@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDJPY M15: built 262 features in 304s (0 errors, 7 skipped)
+USDJPY M15 h=1: OOS IC +0.0053 hit 0.5044 | selected net -1.52 gross -0.75 x2 -2.79 | hindsight best +0.46 | {'passive3:signal': 7, 'market:signal': 6, 'passive1:always': 2, 'passive1:signal': 1, 'market:stops': 1}
+USDJPY M15 h=6: OOS IC +0.0074 hit 0.5089 | selected net -0.90 gross +0.00 x2 -1.91 | hindsight best +0.18 | {'market:signal': 9, 'passive3:signal': 4, 'limit_touch:stops': 2, 'passive1:signal': 2}
+USDJPY M15 h=24: OOS IC -0.0068 hit 0.5012 | selected net -1.09 gross -0.33 x2 -2.12 | hindsight best -0.58 | {'market:signal': 8, 'passive3:signal': 6, 'passive1:signal': 3}
+done USDJPY M15 in 7.2 min

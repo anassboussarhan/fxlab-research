@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURNZD H2: built 267 features in 137s (0 errors, 2 skipped)
+EURNZD H2 h=1: OOS IC +0.0203 hit 0.5002 | selected net -0.06 gross +0.24 x2 -1.30 | hindsight best +0.08 | {'passive3:signal': 8, 'passive1:signal': 4, 'passive1:always': 2, 'limit_touch:stops': 2}
+EURNZD H2 h=6: OOS IC +0.0236 hit 0.5010 | selected net -0.21 gross +0.16 x2 -1.12 | hindsight best +0.15 | {'passive3:signal': 7, 'passive1:signal': 3, 'passive1:always': 2, 'limit_touch:stops': 2, 'market:signal': 1, 'market:stops': 1}
+EURNZD H2 h=24: OOS IC +0.0334 hit 0.5006 | selected net -0.17 gross +0.24 x2 -0.81 | hindsight best +0.12 | {'passive3:signal': 5, 'limit_touch:stops': 4, 'market:signal': 4, 'passive1:signal': 3}
+done EURNZD H2 in 3.1 min

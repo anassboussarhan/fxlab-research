@@ -1,0 +1,6 @@
+Model is not converging.  Current: 6317.281894289506 is not greater than 6317.284155331612. Delta is -0.0022610421056015184
+  USDNOK H2: built 267 features in 148s (0 errors, 2 skipped)
+USDNOK H2 h=1: OOS IC +0.0029 hit 0.4989 | selected net -0.51 gross -0.04 x2 -1.33 | hindsight best +0.31 | {'passive3:signal': 10, 'limit_touch:stops': 3, 'passive1:signal': 2, 'market:stops': 1, 'market:signal': 1}
+USDNOK H2 h=6: OOS IC +0.0174 hit 0.5008 | selected net -0.17 gross -0.04 x2 -1.00 | hindsight best +0.00 | {'passive3:signal': 14, 'passive1:signal': 3}
+USDNOK H2 h=24: OOS IC +0.0331 hit 0.5118 | selected net +0.17 gross +0.32 x2 -0.35 | hindsight best +0.39 | {'passive3:signal': 12, 'passive1:signal': 3, 'limit_touch:stops': 2}
+done USDNOK H2 in 3.3 min

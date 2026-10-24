@@ -1,0 +1,35 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6155.852485150388 is not greater than 6155.852570387586. Delta is -8.523719770892058e-05
+Model is not converging.  Current: 6227.20362089545 is not greater than 6227.203635919572. Delta is -1.502412214904325e-05
+Model is not converging.  Current: 6162.373559101356 is not greater than 6162.37355997362. Delta is -8.722645361558534e-07
+Model is not converging.  Current: 6850.071338813071 is not greater than 6850.071349840181. Delta is -1.1027110303984955e-05
+Model is not converging.  Current: 6642.294050153938 is not greater than 6642.294067864701. Delta is -1.771076313161757e-05
+Model is not converging.  Current: 6257.955703688047 is not greater than 6257.955729613572. Delta is -2.5925524823833257e-05
+Model is not converging.  Current: 6233.38528884151 is not greater than 6233.385325479293. Delta is -3.663778261397965e-05
+Model is not converging.  Current: 6237.453983781849 is not greater than 6237.4540140643385. Delta is -3.0282489206001628e-05
+Model is not converging.  Current: 6297.790154695464 is not greater than 6297.790160701179. Delta is -6.005715476931073e-06
+Model is not converging.  Current: -0.9903979838231382 is not greater than -0.879362466579126. Delta is -0.11103551724401217
+  EURCHF H1: built 267 features in 247s (0 errors, 2 skipped)
+EURCHF H1 h=1: OOS IC +0.0081 hit 0.5030 | selected net -0.81 gross -0.58 x2 -1.39 | hindsight best +0.10 | {'passive3:signal': 8, 'passive1:signal': 5, 'market:signal': 2, 'passive1:always': 2}
+EURCHF H1 h=6: OOS IC -0.0068 hit 0.5096 | selected net -0.56 gross -0.21 x2 -1.36 | hindsight best -0.37 | {'passive3:signal': 14, 'passive1:signal': 1, 'market:signal': 1, 'limit_touch:stops': 1}
+EURCHF H1 h=24: OOS IC -0.0116 hit 0.4911 | selected net -1.14 gross -0.72 x2 -1.84 | hindsight best -1.04 | {'passive3:signal': 12, 'passive1:signal': 2, 'limit_touch:stops': 2, 'market:signal': 1}
+done EURCHF H1 in 5.4 min

@@ -1,0 +1,17 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6248.657803652344 is not greater than 6248.65782214512. Delta is -1.849277578003239e-05
+Model is not converging.  Current: 6261.12270242651 is not greater than 6261.122744424682. Delta is -4.1998172491730656e-05
+  CADJPY H2: built 266 features in 164s (1 errors, 2 skipped)
+CADJPY H2 h=1: OOS IC -0.0011 hit 0.5023 | selected net -1.02 gross -0.56 x2 -1.88 | hindsight best -0.07 | {'passive1:signal': 6, 'market:signal': 5, 'limit_touch:stops': 3, 'market:stops': 1, 'passive1:always': 1, 'passive3:signal': 1}
+CADJPY H2 h=6: OOS IC -0.0020 hit 0.4979 | selected net -0.88 gross -0.37 x2 -1.59 | hindsight best -0.56 | {'passive3:signal': 6, 'limit_touch:stops': 5, 'market:signal': 4, 'passive1:signal': 2}
+CADJPY H2 h=24: OOS IC -0.0003 hit 0.5072 | selected net -0.68 gross -0.30 x2 -1.21 | hindsight best -0.31 | {'passive1:signal': 6, 'passive3:signal': 4, 'market:signal': 3, 'limit_touch:stops': 3, 'market:always': 1}
+done CADJPY H2 in 3.6 min

@@ -1,0 +1,35 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPUSD M15: built 261 features in 553s (0 errors, 8 skipped)
+GBPUSD M15 h=1: OOS IC +0.0083 hit 0.5038 | selected net -7.48 gross -4.08 x2 -11.01 | hindsight best +0.00 | {'passive1:always': 8, 'market:signal': 5, 'market:stops': 1, 'passive3:signal': 1, 'market:always': 1, 'limit_touch:stops': 1}
+GBPUSD M15 h=6: OOS IC +0.0012 hit 0.5015 | selected net -1.63 gross -1.05 x2 -2.55 | hindsight best -0.23 | {'passive3:signal': 7, 'market:signal': 6, 'passive1:signal': 3, 'limit_touch:stops': 1}
+GBPUSD M15 h=24: OOS IC +0.0154 hit 0.4995 | selected net -0.40 gross +0.22 x2 -1.39 | hindsight best -0.25 | {'passive3:signal': 8, 'market:signal': 6, 'passive1:signal': 3}
+done GBPUSD M15 in 12.7 min

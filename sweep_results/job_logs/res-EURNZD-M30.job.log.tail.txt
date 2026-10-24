@@ -1,0 +1,21 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6068.955160108637 is not greater than 6068.955165192948. Delta is -5.084310942038428e-06
+Model is not converging.  Current: 6106.720098113778 is not greater than 6106.720101409709. Delta is -3.2959314921754412e-06
+Model is not converging.  Current: 6124.600047080967 is not greater than 6124.600050180503. Delta is -3.099536115769297e-06
+Model is not converging.  Current: 6149.168794121118 is not greater than 6149.168801921588. Delta is -7.800470484653488e-06
+Model is not converging.  Current: 6174.530545665503 is not greater than 6174.530547825487. Delta is -2.159983523597475e-06
+Model is not converging.  Current: 6162.653133100263 is not greater than 6162.6531342644475. Delta is -1.1641841410892084e-06
+  EURNZD M30: built 267 features in 330s (0 errors, 2 skipped)
+EURNZD M30 h=1: OOS IC +0.0023 hit 0.5033 | selected net -5.40 gross -4.07 x2 -8.63 | hindsight best +0.00 | {'passive1:always': 8, 'passive1:signal': 4, 'passive3:signal': 4}
+EURNZD M30 h=6: OOS IC +0.0121 hit 0.5052 | selected net -0.93 gross -0.58 x2 -2.95 | hindsight best -0.50 | {'passive3:signal': 12, 'limit_touch:stops': 3, 'market:signal': 1}
+EURNZD M30 h=24: OOS IC +0.0450 hit 0.5098 | selected net +0.01 gross +0.28 x2 -1.14 | hindsight best +0.57 | {'passive3:signal': 13, 'passive1:signal': 3}
+done EURNZD M30 in 7.2 min

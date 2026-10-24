@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  AUDCHF M5: built 258 features in 603s (0 errors, 11 skipped)
+AUDCHF M5 h=1: OOS IC +0.0109 hit 0.5105 | selected net -27.19 gross -18.52 x2 -37.94 | hindsight best +0.00 | {'passive1:always': 16}
+AUDCHF M5 h=6: OOS IC +0.0119 hit 0.5060 | selected net -4.75 gross -3.06 x2 -6.43 | hindsight best +0.00 | {'passive3:signal': 5, 'passive1:signal': 4, 'market:signal': 3, 'passive1:always': 3, 'market:stops': 1}
+AUDCHF M5 h=24: OOS IC +0.0112 hit 0.5038 | selected net -0.60 gross -0.23 x2 -1.45 | hindsight best +0.08 | {'passive3:signal': 8, 'passive1:signal': 4, 'market:signal': 3, 'limit_touch:stops': 1}
+done AUDCHF M5 in 18.0 min

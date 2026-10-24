@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDCHF H1: built 267 features in 204s (0 errors, 2 skipped)
+NZDCHF H1 h=1: OOS IC +0.0034 hit 0.5017 | selected net -0.94 gross -0.77 x2 -1.83 | hindsight best +0.00 | {'passive3:signal': 11, 'passive1:signal': 2, 'market:signal': 2, 'limit_touch:stops': 1}
+NZDCHF H1 h=6: OOS IC +0.0254 hit 0.5022 | selected net -0.32 gross -0.06 x2 -1.84 | hindsight best +0.03 | {'passive3:signal': 12, 'limit_touch:stops': 3, 'passive1:signal': 1}
+NZDCHF H1 h=24: OOS IC +0.0278 hit 0.5040 | selected net -0.53 gross -0.21 x2 -1.63 | hindsight best -0.02 | {'passive3:signal': 12, 'passive1:signal': 3, 'market:signal': 1}
+done NZDCHF H1 in 4.5 min

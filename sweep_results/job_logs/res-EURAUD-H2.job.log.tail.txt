@@ -1,0 +1,26 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 5997.17702847498 is not greater than 5997.177046920388. Delta is -1.8445408386469353e-05
+  EURAUD H2: built 267 features in 163s (0 errors, 2 skipped)
+EURAUD H2 h=1: OOS IC +0.0253 hit 0.5043 | selected net -0.25 gross +0.03 x2 -1.15 | hindsight best +0.55 | {'passive3:signal': 7, 'passive1:signal': 5, 'passive1:always': 2, 'limit_touch:stops': 1, 'market:stops': 1, 'market:signal': 1}
+EURAUD H2 h=6: OOS IC -0.0014 hit 0.4981 | selected net -0.46 gross -0.13 x2 -1.18 | hindsight best -0.18 | {'passive3:signal': 7, 'passive1:signal': 4, 'market:signal': 3, 'limit_touch:stops': 3}
+EURAUD H2 h=24: OOS IC +0.0256 hit 0.5105 | selected net -0.51 gross -0.21 x2 -1.08 | hindsight best -0.34 | {'passive3:signal': 9, 'market:signal': 3, 'passive1:signal': 3, 'limit_touch:stops': 1, 'passive1:always': 1}
+done EURAUD H2 in 3.6 min

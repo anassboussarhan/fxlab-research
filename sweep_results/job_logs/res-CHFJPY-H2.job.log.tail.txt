@@ -1,0 +1,14 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6434.08216708709 is not greater than 6434.082191617834. Delta is -2.4530743758077733e-05
+Model is not converging.  Current: 6179.066107440866 is not greater than 6179.066120154255. Delta is -1.2713388969132211e-05
+Model is not converging.  Current: 6205.594384198039 is not greater than 6205.594404530984. Delta is -2.0332945496193133e-05
+Model is not converging.  Current: 6211.654916901151 is not greater than 6211.6549458172285. Delta is -2.8916077098983806e-05
+  CHFJPY H2: built 267 features in 163s (0 errors, 2 skipped)
+CHFJPY H2 h=1: OOS IC +0.0020 hit 0.4988 | selected net -0.78 gross -0.57 x2 -1.52 | hindsight best +0.63 | {'passive3:signal': 6, 'passive1:signal': 4, 'market:signal': 4, 'limit_touch:stops': 2, 'passive1:always': 1}
+CHFJPY H2 h=6: OOS IC +0.0060 hit 0.4977 | selected net -0.50 gross -0.16 x2 -1.34 | hindsight best -0.18 | {'passive3:signal': 10, 'passive1:signal': 3, 'market:signal': 2, 'passive1:always': 1, 'limit_touch:stops': 1}
+CHFJPY H2 h=24: OOS IC +0.0234 hit 0.4988 | selected net -0.05 gross +0.31 x2 -0.72 | hindsight best +0.12 | {'passive3:signal': 5, 'market:signal': 5, 'passive1:signal': 4, 'passive1:always': 1, 'limit_touch:stops': 1, 'market:stops': 1}
+done CHFJPY H2 in 3.7 min

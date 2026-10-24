@@ -1,0 +1,18 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6272.960182572165 is not greater than 6272.960189614641. Delta is -7.042476681817789e-06
+Model is not converging.  Current: 6206.4662185953075 is not greater than 6206.4662187580825. Delta is -1.6277499526040629e-07
+Model is not converging.  Current: 6397.949570516305 is not greater than 6397.949641673756. Delta is -7.115745029295795e-05
+Model is not converging.  Current: 6295.093855021875 is not greater than 6295.0938664525. Delta is -1.1430624908825848e-05
+Model is not converging.  Current: 6253.915902364212 is not greater than 6253.915924889637. Delta is -2.2525424355990253e-05
+Model is not converging.  Current: 6280.8284622466035 is not greater than 6280.828492346139. Delta is -3.0099535251792986e-05
+Model is not converging.  Current: 6272.604058819102 is not greater than 6272.604074037333. Delta is -1.5218231055769138e-05
+Model is not converging.  Current: 6223.36563223579 is not greater than 6223.365712183889. Delta is -7.994809857336804e-05
+  USDJPY H1: built 267 features in 251s (0 errors, 2 skipped)
+USDJPY H1 h=1: OOS IC +0.0029 hit 0.4995 | selected net -0.23 gross +0.65 x2 -1.10 | hindsight best +0.62 | {'market:signal': 12, 'market:stops': 2, 'passive3:signal': 1, 'limit_touch:stops': 1, 'passive1:signal': 1}
+USDJPY H1 h=6: OOS IC -0.0127 hit 0.4897 | selected net -1.10 gross -0.29 x2 -2.01 | hindsight best -0.83 | {'market:signal': 11, 'passive1:signal': 2, 'market:stops': 2, 'limit_touch:stops': 1, 'passive3:signal': 1}
+USDJPY H1 h=24: OOS IC -0.0090 hit 0.4864 | selected net -0.98 gross -0.22 x2 -1.76 | hindsight best -0.52 | {'market:signal': 7, 'passive3:signal': 3, 'limit_touch:stops': 3, 'market:stops': 2, 'passive1:signal': 1, 'market:always': 1}
+done USDJPY H1 in 5.5 min

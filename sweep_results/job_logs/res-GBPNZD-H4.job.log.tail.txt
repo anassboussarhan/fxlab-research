@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPNZD H4: built 268 features in 148s (0 errors, 1 skipped)
+GBPNZD H4 h=1: OOS IC +0.0112 hit 0.5113 | selected net -0.62 gross -0.47 x2 -1.51 | hindsight best -0.10 | {'passive1:signal': 7, 'passive3:signal': 6, 'market:signal': 3}
+GBPNZD H4 h=6: OOS IC -0.0281 hit 0.5042 | selected net -0.58 gross -0.25 x2 -1.15 | hindsight best -0.25 | {'passive3:signal': 8, 'market:signal': 3, 'limit_touch:stops': 3, 'market:stops': 2}
+GBPNZD H4 h=24: OOS IC -0.0418 hit 0.4855 | selected net -0.74 gross -0.42 x2 -1.22 | hindsight best -0.36 | {'limit_touch:stops': 5, 'passive3:signal': 4, 'market:signal': 4, 'market:stops': 1, 'passive1:signal': 1, 'passive1:always': 1}
+done GBPNZD H4 in 2.9 min

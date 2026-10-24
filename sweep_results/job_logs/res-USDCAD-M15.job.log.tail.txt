@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDCAD M15: built 261 features in 540s (0 errors, 8 skipped)
+USDCAD M15 h=1: OOS IC +0.0113 hit 0.5055 | selected net -8.69 gross -5.14 x2 -15.15 | hindsight best +0.49 | {'passive1:always': 16, 'passive3:signal': 1}
+USDCAD M15 h=6: OOS IC +0.0237 hit 0.5074 | selected net -0.89 gross -0.43 x2 -1.98 | hindsight best +0.11 | {'passive3:signal': 11, 'market:signal': 6}
+USDCAD M15 h=24: OOS IC +0.0317 hit 0.5087 | selected net -0.28 gross +0.39 x2 -1.42 | hindsight best -0.08 | {'passive3:signal': 8, 'market:signal': 6, 'passive1:signal': 3}
+done USDCAD M15 in 12.3 min

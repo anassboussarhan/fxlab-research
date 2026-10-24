@@ -1,0 +1,22 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6320.176168466929 is not greater than 6320.1761699490335. Delta is -1.482104380556848e-06
+Model is not converging.  Current: 6239.394170836477 is not greater than 6239.394172623284. Delta is -1.7868069335236214e-06
+Model is not converging.  Current: 6162.742912608619 is not greater than 6162.742957639024. Delta is -4.5030405090074055e-05
+Model is not converging.  Current: 6167.3681172541 is not greater than 6167.368119006359. Delta is -1.752258867782075e-06
+Model is not converging.  Current: 6157.837285363195 is not greater than 6157.837289052846. Delta is -3.68965083907824e-06
+Model is not converging.  Current: 6428.328874712143 is not greater than 6428.328902028031. Delta is -2.7315887564327568e-05
+Model is not converging.  Current: 6284.062570275711 is not greater than 6284.06257052691. Delta is -2.5119970814557746e-07
+  NZDJPY M30: built 267 features in 246s (0 errors, 2 skipped)
+NZDJPY M30 h=1: OOS IC +0.0034 hit 0.5023 | selected net -1.57 gross -1.23 x2 -2.63 | hindsight best +0.49 | {'passive3:signal': 13, 'passive1:signal': 1, 'passive1:always': 1, 'market:signal': 1}
+NZDJPY M30 h=6: OOS IC +0.0020 hit 0.5019 | selected net -1.41 gross -1.11 x2 -2.89 | hindsight best -0.62 | {'passive3:signal': 12, 'passive1:signal': 4}
+NZDJPY M30 h=24: OOS IC +0.0136 hit 0.4944 | selected net -0.86 gross -0.47 x2 -2.28 | hindsight best -0.56 | {'passive3:signal': 14, 'passive1:always': 1, 'passive1:signal': 1}
+done NZDJPY M30 in 5.5 min

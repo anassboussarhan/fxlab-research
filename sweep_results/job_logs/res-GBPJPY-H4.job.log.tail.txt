@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPJPY H4: built 267 features in 88s (0 errors, 2 skipped)
+GBPJPY H4 h=1: OOS IC +0.0058 hit 0.5064 | selected net -0.83 gross -0.30 x2 -1.54 | hindsight best -0.48 | {'market:signal': 5, 'passive3:signal': 3, 'limit_touch:stops': 3, 'market:stops': 3, 'passive1:signal': 2, 'market:always': 1}
+GBPJPY H4 h=6: OOS IC +0.0084 hit 0.4972 | selected net +0.19 gross +0.46 x2 -0.13 | hindsight best +0.21 | {'market:signal': 9, 'limit_touch:stops': 4, 'passive1:signal': 2, 'passive3:signal': 1, 'passive1:always': 1}
+GBPJPY H4 h=24: OOS IC -0.0581 hit 0.4859 | selected net -0.45 gross -0.22 x2 -0.71 | hindsight best -0.63 | {'market:signal': 8, 'limit_touch:stops': 6, 'passive1:signal': 1, 'market:stops': 1, 'passive3:signal': 1}
+done GBPJPY H4 in 1.9 min

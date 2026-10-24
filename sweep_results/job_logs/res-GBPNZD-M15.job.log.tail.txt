@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPNZD M15: built 266 features in 419s (0 errors, 3 skipped)
+GBPNZD M15 h=1: OOS IC +0.0095 hit 0.5081 | selected net -9.46 gross -6.22 x2 -18.56 | hindsight best +0.00 | {'passive1:always': 16}
+GBPNZD M15 h=6: OOS IC +0.0158 hit 0.5098 | selected net -2.48 gross -1.67 x2 -4.56 | hindsight best +0.22 | {'passive3:signal': 9, 'limit_touch:stops': 3, 'market:signal': 2, 'passive1:always': 2}
+GBPNZD M15 h=24: OOS IC +0.0203 hit 0.5074 | selected net -1.14 gross -0.79 x2 -2.56 | hindsight best -0.25 | {'passive3:signal': 13, 'market:signal': 3}
+done GBPNZD M15 in 9.3 min

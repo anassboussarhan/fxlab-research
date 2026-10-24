@@ -1,0 +1,16 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6244.41951082331 is not greater than 6244.419572363948. Delta is -6.154063794383546e-05
+  CADCHF H2: built 267 features in 139s (0 errors, 2 skipped)
+CADCHF H2 h=1: OOS IC +0.0098 hit 0.5045 | selected net -0.94 gross -0.72 x2 -1.92 | hindsight best +0.10 | {'passive3:signal': 11, 'passive1:signal': 3, 'limit_touch:stops': 1, 'passive1:always': 1}
+CADCHF H2 h=6: OOS IC +0.0113 hit 0.5009 | selected net -0.40 gross -0.13 x2 -1.17 | hindsight best -0.02 | {'passive3:signal': 13, 'passive1:always': 1, 'passive1:signal': 1, 'market:signal': 1}
+CADCHF H2 h=24: OOS IC +0.0234 hit 0.4993 | selected net -0.37 gross -0.10 x2 -1.07 | hindsight best -0.21 | {'passive3:signal': 12, 'passive1:signal': 3, 'market:signal': 1}
+done CADCHF H2 in 3.1 min

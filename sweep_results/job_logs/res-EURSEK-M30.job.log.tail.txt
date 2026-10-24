@@ -1,0 +1,9 @@
+Model is not converging.  Current: 6288.302076513889 is not greater than 6288.302091671905. Delta is -1.5158016140048858e-05
+Model is not converging.  Current: 6262.922035723582 is not greater than 6262.923717489635. Delta is -0.0016817660534798051
+Model is not converging.  Current: 6230.151372091951 is not greater than 6230.1523519524335. Delta is -0.000979860482402728
+Model is not converging.  Current: 6211.223263619123 is not greater than 6211.2236854793755. Delta is -0.0004218602525725146
+  EURSEK M30: built 267 features in 370s (0 errors, 2 skipped)
+EURSEK M30 h=1: OOS IC +0.0141 hit 0.5059 | selected net -9.33 gross -6.34 x2 -14.00 | hindsight best +0.00 | {'passive1:always': 16, 'market:signal': 1}
+EURSEK M30 h=6: OOS IC +0.0206 hit 0.5137 | selected net -0.86 gross -0.28 x2 -2.12 | hindsight best +0.13 | {'passive3:signal': 10, 'market:signal': 4, 'passive1:signal': 2, 'limit_touch:stops': 1}
+EURSEK M30 h=24: OOS IC +0.0271 hit 0.5105 | selected net -0.41 gross +0.23 x2 -1.68 | hindsight best -0.41 | {'passive3:signal': 13, 'market:signal': 3, 'passive1:signal': 1}
+done EURSEK M30 in 8.0 min

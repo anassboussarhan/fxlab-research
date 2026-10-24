@@ -1,0 +1,18 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: -4823.325380443848 is not greater than -4819.730148889347. Delta is -3.5952315545009697
+Model is not converging.  Current: -4921.525926313132 is not greater than -4919.4291355953155. Delta is -2.096790717816475
+Model is not converging.  Current: -4943.432861230177 is not greater than -4940.71657163038. Delta is -2.7162895997971646
+  NZDCHF H8: built 269 features in 86s (0 errors, 0 skipped)
+NZDCHF H8 h=1: OOS IC +0.0173 hit 0.5002 | selected net -0.46 gross -0.33 x2 -0.97 | hindsight best +0.01 | {'passive3:signal': 8, 'passive1:signal': 6, 'market:stops': 1}
+NZDCHF H8 h=6: OOS IC +0.0599 hit 0.4947 | selected net -0.47 gross -0.19 x2 -1.00 | hindsight best -0.13 | {'passive3:signal': 8, 'market:signal': 3, 'passive1:signal': 3, 'limit_touch:stops': 1}
+NZDCHF H8 h=24: OOS IC +0.0959 hit 0.5229 | selected net -0.47 gross -0.16 x2 -0.92 | hindsight best +0.04 | {'passive3:signal': 7, 'limit_touch:stops': 4, 'passive1:signal': 2, 'market:signal': 1, 'market:stops': 1}
+done NZDCHF H8 in 1.7 min

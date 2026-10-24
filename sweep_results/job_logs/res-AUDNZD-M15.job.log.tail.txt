@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  AUDNZD M15: built 265 features in 561s (0 errors, 4 skipped)
+AUDNZD M15 h=1: OOS IC +0.0132 hit 0.5060 | selected net -12.26 gross -6.48 x2 -26.67 | hindsight best +0.00 | {'passive1:always': 17}
+AUDNZD M15 h=6: OOS IC +0.0159 hit 0.5015 | selected net -3.09 gross -1.27 x2 -7.35 | hindsight best +0.00 | {'passive3:signal': 9, 'passive1:always': 7, 'market:signal': 1}
+AUDNZD M15 h=24: OOS IC +0.0268 hit 0.5110 | selected net -0.27 gross +0.09 x2 -1.83 | hindsight best +0.02 | {'passive3:signal': 16, 'market:signal': 1}
+done AUDNZD M15 in 12.4 min

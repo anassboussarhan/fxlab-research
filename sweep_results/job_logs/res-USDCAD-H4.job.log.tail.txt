@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDCAD H4: built 267 features in 70s (0 errors, 2 skipped)
+USDCAD H4 h=1: OOS IC +0.0133 hit 0.5084 | selected net -1.01 gross -0.21 x2 -2.04 | hindsight best -0.14 | {'market:signal': 6, 'passive3:signal': 4, 'passive1:signal': 3, 'market:always': 2, 'passive1:always': 1, 'market:stops': 1}
+USDCAD H4 h=6: OOS IC +0.0041 hit 0.5098 | selected net -0.37 gross +0.05 x2 -0.84 | hindsight best -0.24 | {'market:signal': 8, 'passive3:signal': 5, 'limit_touch:stops': 2, 'passive1:signal': 1, 'passive1:always': 1}
+USDCAD H4 h=24: OOS IC -0.0142 hit 0.4929 | selected net -0.48 gross -0.11 x2 -0.99 | hindsight best -0.35 | {'passive3:signal': 6, 'market:signal': 6, 'limit_touch:stops': 3, 'passive1:signal': 1, 'market:stops': 1}
+done USDCAD H4 in 1.5 min

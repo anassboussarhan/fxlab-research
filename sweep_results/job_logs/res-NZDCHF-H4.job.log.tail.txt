@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDCHF H4: built 268 features in 116s (0 errors, 1 skipped)
+NZDCHF H4 h=1: OOS IC +0.0139 hit 0.5030 | selected net -0.43 gross -0.25 x2 -1.30 | hindsight best -0.05 | {'passive3:signal': 6, 'passive1:signal': 5, 'limit_touch:stops': 2, 'market:signal': 2, 'passive1:always': 1}
+NZDCHF H4 h=6: OOS IC -0.0172 hit 0.5038 | selected net -0.22 gross +0.01 x2 -0.70 | hindsight best -0.25 | {'passive3:signal': 7, 'passive1:signal': 4, 'limit_touch:stops': 3, 'passive1:always': 1, 'market:signal': 1}
+NZDCHF H4 h=24: OOS IC +0.0600 hit 0.5237 | selected net -0.58 gross -0.31 x2 -1.12 | hindsight best -0.22 | {'passive3:signal': 11, 'market:signal': 3, 'limit_touch:stops': 2}
+done NZDCHF H4 in 2.2 min

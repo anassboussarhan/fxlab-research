@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  AUDUSD H1: built 267 features in 242s (0 errors, 2 skipped)
+AUDUSD H1 h=1: OOS IC +0.0089 hit 0.5062 | selected net -0.46 gross -0.09 x2 -0.88 | hindsight best +0.11 | {'passive3:signal': 6, 'passive1:signal': 5, 'market:signal': 4, 'limit_touch:stops': 2}
+AUDUSD H1 h=6: OOS IC +0.0048 hit 0.5038 | selected net -0.77 gross -0.08 x2 -1.61 | hindsight best -0.53 | {'market:signal': 11, 'passive3:signal': 4, 'passive1:signal': 2}
+AUDUSD H1 h=24: OOS IC +0.0066 hit 0.5055 | selected net -0.73 gross -0.16 x2 -1.43 | hindsight best -0.58 | {'market:signal': 9, 'passive1:signal': 4, 'passive3:signal': 3, 'market:always': 1}
+done AUDUSD H1 in 5.3 min

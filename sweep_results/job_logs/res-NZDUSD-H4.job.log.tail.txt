@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDUSD H4: built 267 features in 98s (0 errors, 2 skipped)
+NZDUSD H4 h=1: OOS IC +0.0176 hit 0.5042 | selected net -0.52 gross +0.11 x2 -1.30 | hindsight best -0.06 | {'market:signal': 6, 'passive3:signal': 4, 'passive1:signal': 3, 'limit_touch:stops': 2, 'market:always': 2}
+NZDUSD H4 h=6: OOS IC +0.0003 hit 0.5078 | selected net -0.18 gross +0.21 x2 -0.66 | hindsight best -0.17 | {'market:signal': 9, 'limit_touch:stops': 3, 'passive3:signal': 3, 'passive1:signal': 2}
+NZDUSD H4 h=24: OOS IC +0.0146 hit 0.5043 | selected net -0.42 gross -0.04 x2 -0.92 | hindsight best -0.11 | {'limit_touch:stops': 7, 'passive3:signal': 3, 'passive1:signal': 3, 'market:signal': 2, 'market:stops': 1, 'market:always': 1}
+done NZDUSD H4 in 2.2 min

@@ -1,0 +1,19 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6396.5077176306695 is not greater than 6396.507724657333. Delta is -7.026663297438063e-06
+Model is not converging.  Current: 6355.277355370937 is not greater than 6355.277370982471. Delta is -1.5611534763593227e-05
+Model is not converging.  Current: 6210.538948192101 is not greater than 6210.538977692097. Delta is -2.949999634438427e-05
+Model is not converging.  Current: 6189.482516345698 is not greater than 6189.482520852989. Delta is -4.5072911234456114e-06
+  NZDUSD H2: built 267 features in 87s (0 errors, 2 skipped)
+NZDUSD H2 h=1: OOS IC +0.0099 hit 0.5060 | selected net -0.89 gross +0.17 x2 -2.02 | hindsight best +0.02 | {'passive3:signal': 7, 'market:signal': 4, 'passive1:signal': 2, 'limit_touch:stops': 2, 'market:stops': 1, 'market:always': 1}
+NZDUSD H2 h=6: OOS IC -0.0024 hit 0.4983 | selected net -0.67 gross -0.12 x2 -1.49 | hindsight best -0.53 | {'market:signal': 7, 'passive1:signal': 5, 'passive1:always': 2, 'limit_touch:stops': 2, 'passive3:signal': 1}
+NZDUSD H2 h=24: OOS IC +0.0066 hit 0.5041 | selected net -0.59 gross -0.01 x2 -1.32 | hindsight best -0.39 | {'market:signal': 9, 'passive3:signal': 4, 'passive1:signal': 3, 'market:always': 1}
+done NZDUSD H2 in 1.9 min

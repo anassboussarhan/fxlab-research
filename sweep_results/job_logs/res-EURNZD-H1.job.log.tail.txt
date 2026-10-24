@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURNZD H1: built 267 features in 201s (0 errors, 2 skipped)
+EURNZD H1 h=1: OOS IC +0.0168 hit 0.5068 | selected net -0.27 gross +0.12 x2 -1.24 | hindsight best +0.05 | {'passive3:signal': 11, 'passive1:signal': 3, 'limit_touch:stops': 2}
+EURNZD H1 h=6: OOS IC +0.0440 hit 0.5139 | selected net +0.44 gross +0.82 x2 -1.35 | hindsight best +0.37 | {'passive3:signal': 12, 'passive1:signal': 2, 'market:signal': 2}
+EURNZD H1 h=24: OOS IC +0.0390 hit 0.5011 | selected net -0.07 gross +0.15 x2 -1.03 | hindsight best +0.24 | {'passive3:signal': 14, 'passive1:signal': 2}
+done EURNZD H1 in 4.4 min

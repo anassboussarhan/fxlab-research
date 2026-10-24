@@ -1,0 +1,16 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6332.419736768796 is not greater than 6332.419765454235. Delta is -2.868543924705591e-05
+  GBPUSD H2: built 267 features in 135s (0 errors, 2 skipped)
+GBPUSD H2 h=1: OOS IC +0.0021 hit 0.5012 | selected net -0.44 gross +0.02 x2 -0.99 | hindsight best -0.24 | {'market:signal': 7, 'limit_touch:stops': 4, 'passive1:signal': 4, 'passive3:signal': 2}
+GBPUSD H2 h=6: OOS IC +0.0049 hit 0.5024 | selected net -0.40 gross +0.15 x2 -1.09 | hindsight best +0.00 | {'market:signal': 6, 'passive3:signal': 4, 'passive1:signal': 2, 'limit_touch:stops': 2, 'passive1:always': 1, 'market:always': 1, 'market:stops': 1}
+GBPUSD H2 h=24: OOS IC +0.0322 hit 0.5041 | selected net -0.66 gross -0.26 x2 -1.19 | hindsight best -0.45 | {'market:signal': 5, 'passive1:signal': 5, 'passive3:signal': 4, 'limit_touch:stops': 2, 'market:stops': 1}
+done GBPUSD H2 in 2.9 min

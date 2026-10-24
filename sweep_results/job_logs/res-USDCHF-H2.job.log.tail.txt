@@ -1,0 +1,9 @@
+Model is not converging.  Current: 6239.192054920158 is not greater than 6239.192091953678. Delta is -3.7033520129625686e-05
+Model is not converging.  Current: 6108.39325552586 is not greater than 6108.393264930453. Delta is -9.404593583894894e-06
+Model is not converging.  Current: 6169.335553376406 is not greater than 6169.335589343686. Delta is -3.5967279472970404e-05
+Model is not converging.  Current: 6185.253813239966 is not greater than 6185.253850792444. Delta is -3.755247780645732e-05
+  USDCHF H2: built 267 features in 160s (0 errors, 2 skipped)
+USDCHF H2 h=1: OOS IC -0.0030 hit 0.5031 | selected net -1.14 gross -0.61 x2 -1.82 | hindsight best +0.07 | {'passive3:signal': 9, 'limit_touch:stops': 4, 'passive1:signal': 2, 'market:signal': 1, 'market:stops': 1}
+USDCHF H2 h=6: OOS IC -0.0159 hit 0.4978 | selected net -0.92 gross -0.45 x2 -1.59 | hindsight best -0.63 | {'passive1:signal': 5, 'market:signal': 4, 'passive3:signal': 4, 'limit_touch:stops': 3, 'market:always': 1}
+USDCHF H2 h=24: OOS IC +0.0319 hit 0.5049 | selected net +0.13 gross +0.36 x2 -0.30 | hindsight best +0.25 | {'passive3:signal': 10, 'passive1:signal': 5, 'market:signal': 2}
+done USDCHF H2 in 3.5 min

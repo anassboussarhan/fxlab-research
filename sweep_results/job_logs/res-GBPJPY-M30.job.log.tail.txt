@@ -1,0 +1,26 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6328.0743901395135 is not greater than 6328.074408279332. Delta is -1.813981816667365e-05
+Model is not converging.  Current: 6185.140554893497 is not greater than 6185.140556703203. Delta is -1.8097061911248602e-06
+Model is not converging.  Current: 6193.489082847224 is not greater than 6193.489083379391. Delta is -5.321662683854811e-07
+Model is not converging.  Current: 6132.641443314015 is not greater than 6132.641486015858. Delta is -4.270184308552416e-05
+Model is not converging.  Current: 6143.283294531263 is not greater than 6143.283296716954. Delta is -2.1856913008377887e-06
+Model is not converging.  Current: 6175.201508064721 is not greater than 6175.201517103132. Delta is -9.038411008077674e-06
+Model is not converging.  Current: 6163.57887866604 is not greater than 6163.578882712783. Delta is -4.04674301535124e-06
+Model is not converging.  Current: 6249.844590928331 is not greater than 6249.844600506477. Delta is -9.578146091371309e-06
+Model is not converging.  Current: 6315.936112078733 is not greater than 6315.936150765978. Delta is -3.868724525091238e-05
+Model is not converging.  Current: 6290.143836533272 is not greater than 6290.14389355971. Delta is -5.702643738914048e-05
+Model is not converging.  Current: 6316.58766274306 is not greater than 6316.587741758443. Delta is -7.901538356236415e-05
+Model is not converging.  Current: 6274.547863971753 is not greater than 6274.547874989458. Delta is -1.1017705219273921e-05
+Model is not converging.  Current: 6237.376103352424 is not greater than 6237.376105288074. Delta is -1.935649379447568e-06
+Model is not converging.  Current: 6495.0485635720115 is not greater than 6495.0485707833. Delta is -7.211288902908564e-06
+Model is not converging.  Current: 6172.455317957615 is not greater than 6172.455333484054. Delta is -1.5526438801316544e-05
+Model is not converging.  Current: 6280.078294193916 is not greater than 6280.07831485158. Delta is -2.0657664208556525e-05
+  GBPJPY M30: built 267 features in 236s (0 errors, 2 skipped)
+GBPJPY M30 h=1: OOS IC +0.0129 hit 0.5007 | selected net -0.53 gross -0.15 x2 -1.04 | hindsight best +0.34 | {'passive3:signal': 9, 'passive1:signal': 4, 'market:signal': 3, 'market:stops': 1}
+GBPJPY M30 h=6: OOS IC +0.0185 hit 0.5043 | selected net -0.52 gross +0.21 x2 -1.64 | hindsight best -0.25 | {'passive3:signal': 8, 'market:signal': 4, 'market:stops': 2, 'passive1:signal': 2, 'limit_touch:stops': 1}
+GBPJPY M30 h=24: OOS IC +0.0034 hit 0.4955 | selected net -0.59 gross -0.18 x2 -1.29 | hindsight best -0.34 | {'passive3:signal': 8, 'market:signal': 5, 'passive1:signal': 3, 'passive1:always': 1}
+done GBPJPY M30 in 5.2 min

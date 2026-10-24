@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPCHF H4: built 267 features in 120s (0 errors, 2 skipped)
+GBPCHF H4 h=1: OOS IC +0.0029 hit 0.4981 | selected net -0.90 gross -0.64 x2 -1.59 | hindsight best -0.06 | {'passive3:signal': 6, 'passive1:signal': 6, 'market:signal': 3, 'limit_touch:stops': 1, 'passive1:always': 1}
+GBPCHF H4 h=6: OOS IC +0.0037 hit 0.4940 | selected net -0.61 gross -0.38 x2 -0.98 | hindsight best -0.38 | {'passive3:signal': 9, 'market:signal': 4, 'passive1:signal': 3, 'limit_touch:stops': 1}
+GBPCHF H4 h=24: OOS IC +0.0025 hit 0.4851 | selected net -0.62 gross -0.42 x2 -0.99 | hindsight best -0.10 | {'passive3:signal': 9, 'limit_touch:stops': 5, 'passive1:signal': 3}
+done GBPCHF H4 in 2.7 min

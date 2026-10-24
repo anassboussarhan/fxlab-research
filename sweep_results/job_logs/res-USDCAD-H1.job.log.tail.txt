@@ -1,0 +1,12 @@
+Model is not converging.  Current: 6210.632171457191 is not greater than 6210.632174197356. Delta is -2.7401647457736544e-06
+Model is not converging.  Current: 6089.681810855948 is not greater than 6089.681834043503. Delta is -2.318755468877498e-05
+Model is not converging.  Current: 6076.040339811843 is not greater than 6076.040367879983. Delta is -2.8068139727110974e-05
+Model is not converging.  Current: 6041.930954137223 is not greater than 6041.930973860612. Delta is -1.972338850464439e-05
+Model is not converging.  Current: 6057.6378132327745 is not greater than 6057.637826973818. Delta is -1.3741043403570075e-05
+Model is not converging.  Current: 6222.627824111194 is not greater than 6222.62782990551. Delta is -5.7943161664297804e-06
+Model is not converging.  Current: 6219.7935205675485 is not greater than 6219.793527410036. Delta is -6.8424878918449394e-06
+  USDCAD H1: built 267 features in 197s (0 errors, 2 skipped)
+USDCAD H1 h=1: OOS IC +0.0152 hit 0.5051 | selected net -0.93 gross -0.34 x2 -1.63 | hindsight best +0.00 | {'passive3:signal': 6, 'market:signal': 6, 'passive1:signal': 3, 'limit_touch:stops': 1, 'market:stops': 1}
+USDCAD H1 h=6: OOS IC +0.0197 hit 0.5064 | selected net -0.55 gross +0.13 x2 -1.60 | hindsight best -0.01 | {'passive1:signal': 6, 'passive3:signal': 4, 'market:signal': 3, 'limit_touch:stops': 3, 'market:stops': 1}
+USDCAD H1 h=24: OOS IC -0.0030 hit 0.5000 | selected net -0.68 gross -0.21 x2 -1.35 | hindsight best -0.28 | {'passive3:signal': 7, 'market:signal': 6, 'passive1:signal': 3, 'limit_touch:stops': 1}
+done USDCAD H1 in 4.7 min

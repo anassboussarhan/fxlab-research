@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6190.827403129223 is not greater than 6190.827430510496. Delta is -2.7381272957427427e-05
+Model is not converging.  Current: 6225.699968905952 is not greater than 6225.699985919533. Delta is -1.7013580873026513e-05
+Model is not converging.  Current: 6344.703613552451 is not greater than 6344.703629035124. Delta is -1.548267300677253e-05
+Model is not converging.  Current: 6331.022954488058 is not greater than 6331.023018948045. Delta is -6.445998769777361e-05
+Model is not converging.  Current: 6207.691873688912 is not greater than 6207.691899698484. Delta is -2.6009572138718795e-05
+Model is not converging.  Current: 6331.32705773794 is not greater than 6331.327062304379. Delta is -4.566439201880712e-06
+Model is not converging.  Current: 6348.368455628671 is not greater than 6348.368464124646. Delta is -8.495975635014474e-06
+Model is not converging.  Current: 6331.2403566769435 is not greater than 6331.240358995252. Delta is -2.3183083612821065e-06
+Model is not converging.  Current: 6360.571338730426 is not greater than 6360.571349357019. Delta is -1.0626593393681105e-05
+Model is not converging.  Current: 6294.80690374435 is not greater than 6294.80693932689. Delta is -3.558253956725821e-05
+  GBPCHF M30: built 267 features in 425s (0 errors, 2 skipped)
+GBPCHF M30 h=1: OOS IC +0.0032 hit 0.5028 | selected net -0.53 gross +0.46 x2 -1.67 | hindsight best +0.59 | {'passive1:signal': 5, 'passive3:signal': 5, 'market:signal': 4, 'limit_touch:stops': 3}
+GBPCHF M30 h=6: OOS IC +0.0041 hit 0.5031 | selected net -0.82 gross -0.05 x2 -2.21 | hindsight best +0.22 | {'passive3:signal': 9, 'market:signal': 4, 'market:stops': 2, 'passive1:signal': 1, 'limit_touch:stops': 1}
+GBPCHF M30 h=24: OOS IC +0.0166 hit 0.5040 | selected net -0.31 gross +0.12 x2 -1.46 | hindsight best +0.21 | {'passive3:signal': 13, 'passive1:signal': 2, 'market:signal': 1, 'passive1:always': 1}
+done GBPCHF M30 in 9.1 min

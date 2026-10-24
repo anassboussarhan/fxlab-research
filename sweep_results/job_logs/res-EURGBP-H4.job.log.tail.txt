@@ -1,0 +1,11 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6204.877192328536 is not greater than 6204.8772112917895. Delta is -1.8963253751280718e-05
+  EURGBP H4: built 267 features in 118s (0 errors, 2 skipped)
+EURGBP H4 h=1: OOS IC +0.0075 hit 0.5017 | selected net -1.38 gross -0.86 x2 -2.12 | hindsight best -0.26 | {'passive3:signal': 9, 'limit_touch:stops': 3, 'market:stops': 2, 'market:signal': 2, 'passive1:always': 1}
+EURGBP H4 h=6: OOS IC +0.0119 hit 0.5003 | selected net -0.34 gross +0.06 x2 -0.84 | hindsight best -0.27 | {'passive1:signal': 6, 'market:signal': 5, 'passive3:signal': 3, 'limit_touch:stops': 2, 'passive1:always': 1}
+EURGBP H4 h=24: OOS IC +0.0405 hit 0.5029 | selected net -0.70 gross -0.33 x2 -1.20 | hindsight best -0.48 | {'passive3:signal': 9, 'market:signal': 4, 'passive1:signal': 2, 'passive1:always': 1, 'limit_touch:stops': 1}
+done EURGBP H4 in 2.6 min

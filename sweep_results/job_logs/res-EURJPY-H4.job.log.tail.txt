@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURJPY H4: built 267 features in 78s (0 errors, 2 skipped)
+EURJPY H4 h=1: OOS IC -0.0017 hit 0.5045 | selected net -1.11 gross -0.36 x2 -1.86 | hindsight best -0.74 | {'market:signal': 12, 'market:stops': 3, 'market:always': 1, 'limit_touch:stops': 1}
+EURJPY H4 h=6: OOS IC +0.0209 hit 0.5024 | selected net -0.14 gross +0.16 x2 -0.48 | hindsight best -0.04 | {'market:signal': 10, 'passive3:signal': 2, 'limit_touch:stops': 2, 'passive1:signal': 2, 'market:stops': 1}
+EURJPY H4 h=24: OOS IC +0.0526 hit 0.5215 | selected net +0.45 gross +0.74 x2 +0.13 | hindsight best +0.64 | {'market:signal': 9, 'passive3:signal': 3, 'market:always': 2, 'limit_touch:stops': 2, 'market:stops': 1}
+done EURJPY H4 in 1.7 min

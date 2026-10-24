@@ -1,0 +1,35 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPJPY M15: built 261 features in 568s (0 errors, 8 skipped)
+GBPJPY M15 h=1: OOS IC +0.0043 hit 0.5017 | selected net -4.28 gross -2.86 x2 -6.84 | hindsight best +0.46 | {'passive1:always': 7, 'market:signal': 5, 'passive3:signal': 2, 'passive1:signal': 2, 'market:stops': 1}
+GBPJPY M15 h=6: OOS IC +0.0103 hit 0.5039 | selected net -0.55 gross -0.26 x2 -1.56 | hindsight best -0.48 | {'passive3:signal': 12, 'market:signal': 2, 'limit_touch:stops': 2, 'passive1:signal': 1}
+GBPJPY M15 h=24: OOS IC +0.0132 hit 0.5020 | selected net -0.77 gross -0.36 x2 -1.83 | hindsight best -0.28 | {'passive3:signal': 14, 'market:signal': 2, 'passive1:signal': 1}
+done GBPJPY M15 in 12.9 min

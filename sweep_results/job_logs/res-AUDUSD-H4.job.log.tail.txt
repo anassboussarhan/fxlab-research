@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  AUDUSD H4: built 267 features in 68s (0 errors, 2 skipped)
+AUDUSD H4 h=1: OOS IC +0.0130 hit 0.5057 | selected net -0.15 gross +0.51 x2 -0.82 | hindsight best +0.23 | {'market:signal': 11, 'limit_touch:stops': 2, 'passive3:signal': 2, 'market:always': 1, 'passive1:signal': 1}
+AUDUSD H4 h=6: OOS IC +0.0099 hit 0.5002 | selected net -0.15 gross +0.26 x2 -0.59 | hindsight best +0.19 | {'market:signal': 9, 'market:always': 2, 'passive1:signal': 2, 'passive3:signal': 2, 'limit_touch:stops': 2}
+AUDUSD H4 h=24: OOS IC +0.0146 hit 0.4949 | selected net -0.21 gross +0.13 x2 -0.65 | hindsight best -0.19 | {'market:signal': 6, 'passive3:signal': 5, 'limit_touch:stops': 3, 'passive1:signal': 2, 'market:stops': 1}
+done AUDUSD H4 in 1.5 min

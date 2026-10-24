@@ -1,0 +1,22 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6417.718888362754 is not greater than 6417.718897686473. Delta is -9.32371858652914e-06
+Model is not converging.  Current: 6387.444019869763 is not greater than 6387.444036992628. Delta is -1.7122864846896846e-05
+Model is not converging.  Current: 6115.157095104346 is not greater than 6115.157095312112. Delta is -2.077658791677095e-07
+Model is not converging.  Current: 6308.614052778209 is not greater than 6308.614060414308. Delta is -7.63609932619147e-06
+Model is not converging.  Current: 6280.261088876613 is not greater than 6280.261102601399. Delta is -1.3724786185775883e-05
+Model is not converging.  Current: 6287.1032124856065 is not greater than 6287.1032271580325. Delta is -1.467242600483587e-05
+Model is not converging.  Current: 6289.916166388763 is not greater than 6289.916181134238. Delta is -1.474547570978757e-05
+Model is not converging.  Current: 6271.892732391627 is not greater than 6271.892772622722. Delta is -4.0231095226772595e-05
+Model is not converging.  Current: 6447.614874016461 is not greater than 6447.614884881065. Delta is -1.0864604519156273e-05
+Model is not converging.  Current: 6403.487681437123 is not greater than 6403.4877971113. Delta is -0.00011567417732294416
+Model is not converging.  Current: 6505.438461594759 is not greater than 6505.438664123017. Delta is -0.00020252825743227731
+Model is not converging.  Current: 6465.758516680252 is not greater than 6465.758568341966. Delta is -5.166171376913553e-05
+  USDCHF M30: built 267 features in 427s (0 errors, 2 skipped)
+USDCHF M30 h=1: OOS IC +0.0007 hit 0.5041 | selected net -0.50 gross -0.30 x2 -0.76 | hindsight best +0.50 | {'passive3:signal': 8, 'market:signal': 6, 'passive1:signal': 3}
+USDCHF M30 h=6: OOS IC +0.0019 hit 0.5008 | selected net -1.06 gross -0.49 x2 -2.21 | hindsight best -0.50 | {'passive3:signal': 11, 'market:signal': 3, 'passive1:signal': 2, 'limit_touch:stops': 1}
+USDCHF M30 h=24: OOS IC -0.0114 hit 0.5028 | selected net -0.65 gross -0.19 x2 -1.49 | hindsight best -0.36 | {'passive1:signal': 7, 'passive3:signal': 7, 'market:signal': 3}
+done USDCHF M30 in 9.0 min

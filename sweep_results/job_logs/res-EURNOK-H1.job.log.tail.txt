@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURNOK H1: built 267 features in 114s (0 errors, 2 skipped)
+EURNOK H1 h=1: OOS IC +0.0109 hit 0.5029 | selected net -2.89 gross -1.81 x2 -5.28 | hindsight best +0.00 | {'passive3:signal': 7, 'passive1:always': 7, 'passive1:signal': 3}
+EURNOK H1 h=6: OOS IC +0.0127 hit 0.5091 | selected net -1.27 gross -0.97 x2 -2.39 | hindsight best +0.48 | {'passive3:signal': 13, 'market:signal': 2, 'passive1:signal': 1, 'market:stops': 1}
+EURNOK H1 h=24: OOS IC +0.0350 hit 0.5173 | selected net +0.06 gross +0.29 x2 -0.81 | hindsight best +0.54 | {'passive3:signal': 14, 'passive1:signal': 3}
+done EURNOK H1 in 2.6 min

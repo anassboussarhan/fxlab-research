@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  CHFJPY H8: built 269 features in 127s (0 errors, 0 skipped)
+CHFJPY H8 h=1: OOS IC -0.0050 hit 0.4991 | selected net -1.01 gross -0.62 x2 -1.53 | hindsight best -0.42 | {'market:signal': 9, 'passive1:signal': 4, 'limit_touch:stops': 2, 'market:stops': 1, 'passive3:signal': 1}
+CHFJPY H8 h=6: OOS IC +0.0331 hit 0.5036 | selected net -0.05 gross +0.16 x2 -0.31 | hindsight best +0.13 | {'market:signal': 6, 'limit_touch:stops': 4, 'passive3:signal': 4, 'passive1:signal': 2, 'market:stops': 1}
+CHFJPY H8 h=24: OOS IC +0.0402 hit 0.4971 | selected net +0.12 gross +0.43 x2 -0.23 | hindsight best +0.34 | {'limit_touch:stops': 9, 'market:signal': 4, 'passive3:signal': 2, 'market:stops': 1, 'passive1:signal': 1}
+done CHFJPY H8 in 2.4 min

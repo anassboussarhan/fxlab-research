@@ -1,0 +1,23 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6048.974815016245 is not greater than 6048.974817428357. Delta is -2.4121118258335628e-06
+Model is not converging.  Current: 6144.946000011855 is not greater than 6144.946008890466. Delta is -8.878610969986767e-06
+Model is not converging.  Current: 6259.657435334617 is not greater than 6259.657438404806. Delta is -3.07018945022719e-06
+  AUDCAD M30: built 267 features in 232s (0 errors, 2 skipped)
+AUDCAD M30 h=1: OOS IC +0.0141 hit 0.5050 | selected net -6.19 gross -3.76 x2 -12.63 | hindsight best +0.44 | {'passive1:always': 15}
+AUDCAD M30 h=6: OOS IC +0.0329 hit 0.5150 | selected net -0.70 gross -0.42 x2 -2.36 | hindsight best +0.12 | {'passive3:signal': 10, 'passive1:signal': 3, 'market:signal': 2}
+AUDCAD M30 h=24: OOS IC +0.0241 hit 0.5084 | selected net -0.21 gross +0.28 x2 -1.94 | hindsight best +0.05 | {'passive3:signal': 14, 'market:signal': 1}
+done AUDCAD M30 in 5.1 min

@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  XAGUSD H8: built 269 features in 100s (0 errors, 0 skipped)
+XAGUSD H8 h=1: OOS IC +0.0268 hit 0.4964 | selected net -0.31 gross +0.19 x2 -1.02 | hindsight best -0.05 | {'passive3:signal': 7, 'limit_touch:stops': 3, 'market:always': 1, 'market:signal': 1, 'passive1:signal': 1}
+XAGUSD H8 h=6: OOS IC +0.0774 hit 0.5172 | selected net -0.25 gross -0.18 x2 -0.80 | hindsight best +0.33 | {'passive3:signal': 8, 'limit_touch:stops': 3, 'passive1:signal': 2}
+XAGUSD H8 h=24: OOS IC +0.0473 hit 0.5409 | selected net +0.07 gross +0.12 x2 -0.19 | hindsight best +0.11 | {'passive3:signal': 8, 'passive1:signal': 4, 'passive1:always': 1}
+done XAGUSD H8 in 1.9 min

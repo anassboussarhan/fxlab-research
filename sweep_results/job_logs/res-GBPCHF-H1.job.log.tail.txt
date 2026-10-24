@@ -1,0 +1,19 @@
+Model is not converging.  Current: 6199.534209111994 is not greater than 6199.53422220802. Delta is -1.3096026123093907e-05
+Model is not converging.  Current: 6121.427986277278 is not greater than 6121.428013047153. Delta is -2.6769875148602296e-05
+Model is not converging.  Current: 6088.096713734959 is not greater than 6088.096722215323. Delta is -8.480364158458542e-06
+Model is not converging.  Current: 6100.217794699636 is not greater than 6100.217809991911. Delta is -1.5292274838429876e-05
+Model is not converging.  Current: 6219.677627250823 is not greater than 6219.6776311660515. Delta is -3.915228262485471e-06
+Model is not converging.  Current: 6255.04052809999 is not greater than 6255.040603756877. Delta is -7.565688702015905e-05
+Model is not converging.  Current: 6240.2937127629375 is not greater than 6240.2937738197825. Delta is -6.105684497015318e-05
+Model is not converging.  Current: 6253.560518415231 is not greater than 6253.560559103322. Delta is -4.068809084856184e-05
+Model is not converging.  Current: 6207.532690494124 is not greater than 6207.53271561153. Delta is -2.5117406039498746e-05
+Model is not converging.  Current: 6191.397600329067 is not greater than 6191.397631828206. Delta is -3.149913845845731e-05
+Model is not converging.  Current: 6191.664665711391 is not greater than 6191.664696860209. Delta is -3.114881837973371e-05
+Model is not converging.  Current: 6164.8222423791885 is not greater than 6164.822279150192. Delta is -3.677100357890595e-05
+Model is not converging.  Current: 6149.659663592877 is not greater than 6149.6596780928585. Delta is -1.4499981261906214e-05
+Model is not converging.  Current: 6179.574296403827 is not greater than 6179.574323682562. Delta is -2.7278734705760144e-05
+  GBPCHF H1: built 267 features in 179s (0 errors, 2 skipped)
+GBPCHF H1 h=1: OOS IC +0.0063 hit 0.5009 | selected net -0.38 gross -0.10 x2 -1.61 | hindsight best -0.15 | {'passive3:signal': 10, 'market:signal': 3, 'passive1:signal': 2, 'limit_touch:stops': 2}
+GBPCHF H1 h=6: OOS IC +0.0121 hit 0.5062 | selected net -0.64 gross -0.24 x2 -1.94 | hindsight best -0.25 | {'passive3:signal': 13, 'passive1:signal': 2, 'market:signal': 2}
+GBPCHF H1 h=24: OOS IC +0.0218 hit 0.5006 | selected net -0.31 gross +0.09 x2 -1.12 | hindsight best -0.31 | {'passive3:signal': 14, 'market:signal': 2, 'passive1:signal': 1}
+done GBPCHF H1 in 4.0 min

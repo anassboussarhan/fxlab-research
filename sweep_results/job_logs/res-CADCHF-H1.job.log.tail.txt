@@ -1,0 +1,12 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6238.720167610682 is not greater than 6238.720175588636. Delta is -7.977953828230966e-06
+Model is not converging.  Current: 6235.219045716014 is not greater than 6235.21904948282. Delta is -3.766806003113743e-06
+  CADCHF H1: built 267 features in 197s (0 errors, 2 skipped)
+CADCHF H1 h=1: OOS IC -0.0054 hit 0.5015 | selected net -1.57 gross -1.20 x2 -2.71 | hindsight best +0.31 | {'passive3:signal': 6, 'passive1:signal': 3, 'limit_touch:stops': 2, 'market:signal': 2, 'passive1:always': 2, 'market:stops': 1}
+CADCHF H1 h=6: OOS IC -0.0108 hit 0.5031 | selected net -0.98 gross -0.73 x2 -2.34 | hindsight best -0.90 | {'passive3:signal': 13, 'limit_touch:stops': 1, 'market:signal': 1, 'passive1:signal': 1}
+CADCHF H1 h=24: OOS IC -0.0016 hit 0.4941 | selected net -0.46 gross -0.19 x2 -1.30 | hindsight best -0.17 | {'passive3:signal': 13, 'passive1:signal': 3}
+done CADCHF H1 in 4.3 min

@@ -1,0 +1,8 @@
+Model is not converging.  Current: 6245.969823953918 is not greater than 6245.969827117009. Delta is -3.1630906960344873e-06
+Model is not converging.  Current: 6139.754987052991 is not greater than 6139.754988118899. Delta is -1.0659077815944329e-06
+Model is not converging.  Current: 6147.07800155893 is not greater than 6147.078007596336. Delta is -6.037405910319649e-06
+  USDCAD H2: built 267 features in 161s (0 errors, 2 skipped)
+USDCAD H2 h=1: OOS IC +0.0212 hit 0.5047 | selected net -0.15 gross +0.26 x2 -0.77 | hindsight best +0.31 | {'passive3:signal': 7, 'market:signal': 5, 'passive1:signal': 4, 'limit_touch:stops': 1}
+USDCAD H2 h=6: OOS IC +0.0161 hit 0.4976 | selected net -0.55 gross +0.01 x2 -1.31 | hindsight best -0.44 | {'market:signal': 7, 'passive3:signal': 5, 'passive1:signal': 2, 'limit_touch:stops': 2, 'passive1:always': 1}
+USDCAD H2 h=24: OOS IC -0.0031 hit 0.4953 | selected net -0.54 gross -0.10 x2 -1.12 | hindsight best -0.41 | {'market:signal': 6, 'passive3:signal': 5, 'passive1:signal': 4, 'limit_touch:stops': 1, 'market:stops': 1}
+done USDCAD H2 in 3.6 min

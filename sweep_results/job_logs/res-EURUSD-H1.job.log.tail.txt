@@ -1,0 +1,17 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6335.689528940902 is not greater than 6335.689540865952. Delta is -1.1925049875571858e-05
+Model is not converging.  Current: 6545.613963031039 is not greater than 6545.6140030572415. Delta is -4.0026202441367786e-05
+  EURUSD H1: built 267 features in 236s (0 errors, 2 skipped)
+EURUSD H1 h=1: OOS IC +0.0076 hit 0.5026 | selected net -0.64 gross +0.07 x2 -1.51 | hindsight best +0.17 | {'passive3:signal': 9, 'market:signal': 8, 'passive1:signal': 7, 'limit_touch:stops': 2}
+EURUSD H1 h=6: OOS IC +0.0147 hit 0.5031 | selected net -0.86 gross -0.25 x2 -1.65 | hindsight best -0.44 | {'market:signal': 11, 'passive3:signal': 10, 'passive1:signal': 3, 'limit_touch:stops': 1, 'market:stops': 1}
+EURUSD H1 h=24: OOS IC +0.0218 hit 0.5076 | selected net -0.39 gross +0.19 x2 -1.04 | hindsight best -0.28 | {'market:signal': 12, 'passive3:signal': 6, 'passive1:signal': 4, 'limit_touch:stops': 2, 'market:stops': 1, 'market:always': 1}
+done EURUSD H1 in 5.5 min

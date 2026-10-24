@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURNOK H4: built 268 features in 199s (0 errors, 1 skipped)
+EURNOK H4 h=1: OOS IC +0.0064 hit 0.5031 | selected net -0.79 gross -0.61 x2 -1.51 | hindsight best -0.20 | {'passive3:signal': 14, 'passive1:signal': 2, 'market:signal': 1}
+EURNOK H4 h=6: OOS IC +0.0025 hit 0.5037 | selected net -0.50 gross -0.26 x2 -1.06 | hindsight best -0.42 | {'passive3:signal': 11, 'limit_touch:stops': 2, 'market:signal': 2, 'passive1:always': 1, 'passive1:signal': 1}
+EURNOK H4 h=24: OOS IC +0.0094 hit 0.5096 | selected net -0.23 gross -0.08 x2 -0.65 | hindsight best -0.08 | {'passive3:signal': 9, 'passive1:signal': 4, 'limit_touch:stops': 2, 'market:signal': 1, 'passive1:always': 1}
+done EURNOK H4 in 3.9 min

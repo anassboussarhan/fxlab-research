@@ -1,0 +1,26 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6170.23414320979 is not greater than 6170.234171123227. Delta is -2.7913436497328803e-05
+  GBPJPY H1: built 267 features in 202s (0 errors, 2 skipped)
+GBPJPY H1 h=1: OOS IC +0.0104 hit 0.5021 | selected net -0.68 gross -0.20 x2 -1.41 | hindsight best -0.47 | {'passive3:signal': 5, 'limit_touch:stops': 4, 'passive1:signal': 3, 'market:signal': 3, 'market:stops': 2}
+GBPJPY H1 h=6: OOS IC +0.0043 hit 0.4961 | selected net -0.75 gross -0.25 x2 -1.56 | hindsight best -0.47 | {'passive3:signal': 8, 'market:signal': 3, 'limit_touch:stops': 2, 'passive1:signal': 2, 'market:stops': 1, 'market:always': 1}
+GBPJPY H1 h=24: OOS IC -0.0092 hit 0.5046 | selected net -0.93 gross -0.59 x2 -1.52 | hindsight best -0.76 | {'passive3:signal': 9, 'market:signal': 4, 'passive1:signal': 2, 'market:stops': 1, 'limit_touch:stops': 1}
+done GBPJPY H1 in 4.8 min

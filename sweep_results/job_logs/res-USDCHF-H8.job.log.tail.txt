@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDCHF H8: built 269 features in 148s (0 errors, 0 skipped)
+USDCHF H8 h=1: OOS IC +0.0041 hit 0.5069 | selected net -0.21 gross +0.34 x2 -0.80 | hindsight best +0.09 | {'market:signal': 5, 'limit_touch:stops': 4, 'passive1:signal': 4, 'market:stops': 2, 'market:always': 2}
+USDCHF H8 h=6: OOS IC +0.0115 hit 0.5058 | selected net -0.12 gross +0.17 x2 -0.45 | hindsight best +0.25 | {'passive1:signal': 6, 'limit_touch:stops': 5, 'market:signal': 4, 'passive3:signal': 1, 'market:stops': 1}
+USDCHF H8 h=24: OOS IC +0.1207 hit 0.5293 | selected net -0.17 gross +0.06 x2 -0.42 | hindsight best +0.32 | {'market:signal': 5, 'limit_touch:stops': 5, 'passive1:signal': 5, 'passive1:always': 1, 'market:stops': 1}
+done USDCHF H8 in 2.9 min

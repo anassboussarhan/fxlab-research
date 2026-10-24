@@ -1,0 +1,32 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6224.3252986277 is not greater than 6224.325442560531. Delta is -0.00014393283072422491
+Model is not converging.  Current: 6269.272883956291 is not greater than 6269.2729779876245. Delta is -9.403133390151197e-05
+Model is not converging.  Current: 6207.591564390047 is not greater than 6207.591614531167. Delta is -5.014111957279965e-05
+Model is not converging.  Current: 6205.740500744761 is not greater than 6205.740512618245. Delta is -1.1873483344970737e-05
+Model is not converging.  Current: 6188.384194332156 is not greater than 6188.38419983996. Delta is -5.507804416993167e-06
+Model is not converging.  Current: 6337.633670443535 is not greater than 6337.633735260749. Delta is -6.481721356976777e-05
+Model is not converging.  Current: 6245.06605124049 is not greater than 6245.066080065988. Delta is -2.8825497793150134e-05
+Model is not converging.  Current: 6281.754008556101 is not greater than 6281.754089402262. Delta is -8.084616092673969e-05
+Model is not converging.  Current: 6323.493615878776 is not greater than 6323.493659425864. Delta is -4.3547088353079744e-05
+Model is not converging.  Current: 6406.791264923019 is not greater than 6406.791336985536. Delta is -7.206251666502794e-05
+Model is not converging.  Current: 6469.647668058159 is not greater than 6469.647720044329. Delta is -5.198616963753011e-05
+Model is not converging.  Current: 6406.091530639667 is not greater than 6406.09157192554. Delta is -4.128587261220673e-05
+Model is not converging.  Current: 6367.006068382695 is not greater than 6367.006113472238. Delta is -4.5089543164067436e-05
+Model is not converging.  Current: 6313.991491948671 is not greater than 6313.991552087427. Delta is -6.01387564529432e-05
+Model is not converging.  Current: 6398.45302960117 is not greater than 6398.4530773756005. Delta is -4.7774430640856735e-05
+Model is not converging.  Current: 6317.971667280585 is not greater than 6317.971724679449. Delta is -5.7398863646085374e-05
+Model is not converging.  Current: 6276.834530044513 is not greater than 6276.834595652278. Delta is -6.560776546393754e-05
+Model is not converging.  Current: 6283.352655901337 is not greater than 6283.352716073716. Delta is -6.017237865307834e-05
+Model is not converging.  Current: 6359.837066211395 is not greater than 6359.837112112237. Delta is -4.5900842451374047e-05
+Model is not converging.  Current: 6416.696685557711 is not greater than 6416.696739761197. Delta is -5.420348588813795e-05
+Model is not converging.  Current: 6370.44143836678 is not greater than 6370.44150690759. Delta is -6.854081038909499e-05
+Model is not converging.  Current: 6445.862718179173 is not greater than 6445.862720758509. Delta is -2.5793360691750422e-06
+  XAGUSD M15: built 267 features in 514s (0 errors, 2 skipped)
+XAGUSD M15 h=1: OOS IC +0.0090 hit 0.5077 | selected net -18.90 gross -15.81 x2 -21.67 | hindsight best +0.00 | {'passive1:always': 12, 'passive3:signal': 2}
+XAGUSD M15 h=6: OOS IC +0.0076 hit 0.5090 | selected net -7.75 gross -6.14 x2 -9.26 | hindsight best +0.03 | {'passive3:signal': 9, 'passive1:always': 5}
+XAGUSD M15 h=24: OOS IC +0.0229 hit 0.5045 | selected net -0.78 gross -0.52 x2 -1.36 | hindsight best -0.41 | {'passive3:signal': 7, 'passive1:signal': 5, 'market:signal': 2}
+done XAGUSD M15 in 10.9 min

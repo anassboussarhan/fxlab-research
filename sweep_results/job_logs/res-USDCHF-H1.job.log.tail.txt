@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6253.438057387599 is not greater than 6253.438104863607. Delta is -4.7476008148805704e-05
+Model is not converging.  Current: 6159.917269101523 is not greater than 6159.917392823153. Delta is -0.0001237216301888111
+Model is not converging.  Current: 6180.826018615775 is not greater than 6180.826097975482. Delta is -7.935970734251896e-05
+Model is not converging.  Current: 6219.8283523521795 is not greater than 6219.828432807543. Delta is -8.045536378631368e-05
+Model is not converging.  Current: 6210.254557024028 is not greater than 6210.254582538665. Delta is -2.551463694544509e-05
+  USDCHF H1: built 267 features in 243s (0 errors, 2 skipped)
+USDCHF H1 h=1: OOS IC -0.0031 hit 0.4969 | selected net -1.01 gross -0.79 x2 -1.66 | hindsight best +0.01 | {'passive3:signal': 12, 'passive1:signal': 3, 'market:signal': 1, 'limit_touch:stops': 1}
+USDCHF H1 h=6: OOS IC -0.0026 hit 0.5000 | selected net -0.87 gross -0.51 x2 -1.71 | hindsight best -0.59 | {'passive3:signal': 13, 'market:signal': 1, 'limit_touch:stops': 1, 'passive1:signal': 1, 'passive1:always': 1}
+USDCHF H1 h=24: OOS IC -0.0247 hit 0.5054 | selected net -0.81 gross -0.51 x2 -1.39 | hindsight best -0.60 | {'passive3:signal': 10, 'passive1:signal': 5, 'market:signal': 2}
+done USDCHF H1 in 5.3 min

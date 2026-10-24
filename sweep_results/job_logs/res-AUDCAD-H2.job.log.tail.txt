@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  AUDCAD H2: built 267 features in 138s (0 errors, 2 skipped)
+AUDCAD H2 h=1: OOS IC +0.0285 hit 0.5031 | selected net -0.41 gross -0.15 x2 -1.78 | hindsight best +0.39 | {'passive3:signal': 10, 'passive1:signal': 4, 'market:signal': 1}
+AUDCAD H2 h=6: OOS IC +0.0294 hit 0.5028 | selected net -0.47 gross -0.11 x2 -1.51 | hindsight best +0.13 | {'passive3:signal': 7, 'passive1:signal': 4, 'limit_touch:stops': 3, 'passive1:always': 1}
+AUDCAD H2 h=24: OOS IC +0.0412 hit 0.5124 | selected net -0.54 gross -0.05 x2 -1.46 | hindsight best -0.00 | {'passive3:signal': 6, 'passive1:signal': 4, 'market:signal': 3, 'limit_touch:stops': 1, 'passive1:always': 1}
+done AUDCAD H2 in 3.0 min

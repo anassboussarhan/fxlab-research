@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDJPY H4: built 267 features in 77s (0 errors, 2 skipped)
+USDJPY H4 h=1: OOS IC -0.0024 hit 0.4969 | selected net -0.86 gross -0.12 x2 -1.58 | hindsight best -0.58 | {'market:signal': 8, 'market:stops': 4, 'limit_touch:stops': 4, 'market:always': 1}
+USDJPY H4 h=6: OOS IC -0.0025 hit 0.4995 | selected net -0.58 gross -0.17 x2 -0.99 | hindsight best -0.29 | {'market:signal': 8, 'limit_touch:stops': 5, 'passive3:signal': 2, 'market:stops': 1, 'market:always': 1}
+USDJPY H4 h=24: OOS IC -0.0246 hit 0.4995 | selected net -0.86 gross -0.50 x2 -1.25 | hindsight best -0.48 | {'market:signal': 6, 'market:stops': 4, 'limit_touch:stops': 4, 'passive1:signal': 3}
+done USDJPY H4 in 1.7 min

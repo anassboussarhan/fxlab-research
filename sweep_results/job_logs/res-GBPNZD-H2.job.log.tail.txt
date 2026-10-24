@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPNZD H2: built 267 features in 139s (0 errors, 2 skipped)
+GBPNZD H2 h=1: OOS IC +0.0034 hit 0.4986 | selected net -0.68 gross -0.47 x2 -1.34 | hindsight best -0.19 | {'passive3:signal': 10, 'limit_touch:stops': 2, 'passive1:signal': 2, 'market:signal': 2}
+GBPNZD H2 h=6: OOS IC -0.0064 hit 0.5073 | selected net -0.64 gross -0.41 x2 -1.59 | hindsight best -0.36 | {'passive3:signal': 11, 'passive1:signal': 3, 'limit_touch:stops': 1, 'passive1:always': 1}
+GBPNZD H2 h=24: OOS IC -0.0129 hit 0.5041 | selected net -0.42 gross -0.21 x2 -1.13 | hindsight best -0.23 | {'passive3:signal': 8, 'passive1:signal': 5, 'passive1:always': 1, 'market:signal': 1, 'limit_touch:stops': 1}
+done GBPNZD H2 in 3.1 min
