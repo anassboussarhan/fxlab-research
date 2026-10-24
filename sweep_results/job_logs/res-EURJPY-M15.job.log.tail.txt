@@ -1,0 +1,17 @@
+EURJPY M15 ordinal_3  ic=+0.0131 t=+5.7 hit=0.5262 info=+0.00236 z_sur=+9.4 edge=+0.110bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 ordinal_4  ic=+0.0093 t=+4.1 hit=0.5196 info=+0.00262 z_sur=+7.5 edge=+0.061bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 ordinal_5  ic=+0.0078 t=+3.4 hit=0.5129 info=+0.00177 z_sur=+3.0 edge=+0.068bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 ordinal_6  ic=+0.0090 t=+4.0 hit=0.5101 info=-0.00414 z_sur=+2.0 edge=+0.066bp cost=3.11bp gross=+0.07 net=-0.60
+EURJPY M15 markov_1   ic=+0.0167 t=+7.3 hit=0.5218 info=+0.00226 z_sur=+7.0 edge=+0.092bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 markov_2   ic=+0.0174 t=+7.6 hit=0.5225 info=+0.00264 z_sur=+7.3 edge=+0.101bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 markov_3   ic=+0.0155 t=+6.8 hit=0.5192 info=+0.00277 z_sur=+8.5 edge=+0.092bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 markov_5   ic=+0.0049 t=+2.1 hit=0.5065 info=+0.00065 z_sur=+1.9 edge=+0.023bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 dc_3       ic=-0.0007 t=-0.3 hit=0.5017 info=+0.00078 z_sur=-6.5 edge=+0.000bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 dc_10      ic=-0.0032 t=-1.4 hit=0.4994 info=-0.00003 z_sur=-2.2 edge=-0.032bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 phase      ic=+0.0102 t=+4.5 hit=0.5192 info=+0.00243 z_sur=+9.3 edge=+0.070bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 fracdiff   ic=+0.0040 t=+1.8 hit=0.5083 info=+0.00108 z_sur=+6.0 edge=+0.006bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 clock      ic=+0.0004 t=+0.2 hit=0.4993 info=-0.00109 z_sur=+0.8 edge=-0.001bp cost=3.11bp gross=+0.00 net=+0.00
+EURJPY M15 simplex_2  ic=-0.0095 t=-4.2 hit=0.5034 info=+nan z_sur=-4.6 edge=+0.003bp cost=3.11bp gross=-0.58 net=-16.08
+EURJPY M15 simplex_4  ic=+0.0051 t=+2.2 hit=0.5029 info=+nan z_sur=+1.6 edge=+0.036bp cost=3.11bp gross=+0.69 net=-14.11
+EURJPY M15 simplex_8  ic=+0.0022 t=+1.0 hit=0.5040 info=+nan z_sur=+1.1 edge=+0.029bp cost=3.11bp gross=+0.35 net=-11.18
+done EURJPY M15 in 1.5 min

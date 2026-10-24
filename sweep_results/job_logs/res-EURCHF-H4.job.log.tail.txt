@@ -1,0 +1,17 @@
+EURCHF H4 ordinal_3  ic=-0.0055 t=-0.6 hit=0.5158 info=+0.00245 z_sur=-3.7 edge=-0.071bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF H4 ordinal_4  ic=+0.0002 t=+0.0 hit=0.5129 info=+0.00100 z_sur=-0.4 edge=-0.050bp cost=2.87bp gross=-0.12 net=-1.79
+EURCHF H4 ordinal_5  ic=+0.0028 t=+0.3 hit=0.5157 info=-0.01047 z_sur=+1.2 edge=+0.093bp cost=2.87bp gross=-0.17 net=-1.60
+EURCHF H4 ordinal_6  ic=-0.0025 t=-0.3 hit=0.4927 info=-0.04472 z_sur=+2.6 edge=-0.119bp cost=2.87bp gross=-0.13 net=-0.88
+EURCHF H4 markov_1   ic=+0.0023 t=+0.3 hit=0.5051 info=+0.00144 z_sur=+1.0 edge=+0.127bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF H4 markov_2   ic=+0.0046 t=+0.5 hit=0.5020 info=+0.00145 z_sur=+3.2 edge=-0.006bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF H4 markov_3   ic=-0.0059 t=-0.7 hit=0.5056 info=-0.00190 z_sur=-0.7 edge=-0.068bp cost=2.87bp gross=-0.29 net=-1.93
+EURCHF H4 markov_5   ic=-0.0056 t=-0.6 hit=0.5110 info=-0.02935 z_sur=-0.3 edge=-0.157bp cost=2.87bp gross=-0.03 net=-0.87
+EURCHF H4 dc_3       ic=-0.0006 t=-0.1 hit=0.5006 info=-0.00120 z_sur=+0.1 edge=+0.262bp cost=2.87bp gross=-0.43 net=-0.46
+EURCHF H4 dc_10      ic=+0.0031 t=+0.4 hit=0.5037 info=-0.00203 z_sur=+1.3 edge=+0.136bp cost=2.87bp gross=-0.12 net=-0.34
+EURCHF H4 phase      ic=+0.0073 t=+0.8 hit=0.4997 info=+0.00214 z_sur=+2.0 edge=+0.206bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF H4 fracdiff   ic=-0.0089 t=-1.0 hit=0.4920 info=-0.00112 z_sur=-2.2 edge=-0.095bp cost=2.87bp gross=-0.28 net=-0.35
+EURCHF H4 clock      ic=+0.0157 t=+1.8 hit=0.5087 info=-0.00051 z_sur=+2.9 edge=+0.402bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF H4 simplex_2  ic=-0.0243 t=-2.8 hit=0.5035 info=+nan z_sur=-1.2 edge=+0.064bp cost=2.87bp gross=-0.30 net=-3.14
+EURCHF H4 simplex_4  ic=-0.0172 t=-2.0 hit=0.5051 info=+nan z_sur=-5.4 edge=+0.054bp cost=2.87bp gross=-0.01 net=-2.47
+EURCHF H4 simplex_8  ic=+0.0128 t=+1.5 hit=0.5031 info=+nan z_sur=+1.7 edge=+0.134bp cost=2.87bp gross=+0.20 net=-2.05
+done EURCHF H4 in 0.1 min

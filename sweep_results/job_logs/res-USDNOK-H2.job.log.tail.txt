@@ -1,0 +1,17 @@
+USDNOK H2 ordinal_3  ic=+0.0237 t=+3.4 hit=0.5192 info=+0.00129 z_sur=+4.9 edge=+0.502bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 ordinal_4  ic=+0.0202 t=+2.9 hit=0.5075 info=+0.00017 z_sur=+3.1 edge=+0.307bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 ordinal_5  ic=+0.0188 t=+2.7 hit=0.5015 info=-0.00606 z_sur=+4.0 edge=+0.241bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 ordinal_6  ic=+0.0078 t=+1.1 hit=0.5058 info=-0.03709 z_sur=+3.7 edge=+0.111bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 markov_1   ic=+0.0225 t=+3.3 hit=0.5154 info=+0.00110 z_sur=+2.4 edge=+0.449bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 markov_2   ic=+0.0174 t=+2.5 hit=0.5077 info=+0.00060 z_sur=+2.9 edge=+0.307bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 markov_3   ic=+0.0151 t=+2.2 hit=0.5081 info=-0.00042 z_sur=+2.1 edge=+0.353bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 markov_5   ic=-0.0025 t=-0.4 hit=0.5008 info=-0.01734 z_sur=-0.6 edge=-0.036bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 dc_3       ic=+0.0018 t=+0.3 hit=0.5029 info=+0.00006 z_sur=+0.4 edge=+0.101bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 dc_10      ic=+0.0029 t=+0.4 hit=0.5034 info=-0.00116 z_sur=+2.3 edge=+0.037bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 phase      ic=+0.0029 t=+0.4 hit=0.5080 info=+0.00077 z_sur=+2.4 edge=+0.051bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 fracdiff   ic=+0.0061 t=+0.9 hit=0.5054 info=-0.00016 z_sur=+0.9 edge=+0.212bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 clock      ic=+0.0117 t=+1.7 hit=0.5057 info=-0.00357 z_sur=+3.9 edge=+0.237bp cost=10.32bp gross=+0.00 net=+0.00
+USDNOK H2 simplex_2  ic=-0.0007 t=-0.1 hit=0.5080 info=+nan z_sur=+1.1 edge=+0.230bp cost=10.32bp gross=+0.26 net=-7.66
+USDNOK H2 simplex_4  ic=+0.0054 t=+0.8 hit=0.5047 info=+nan z_sur=+2.5 edge=+0.106bp cost=10.32bp gross=+0.29 net=-5.86
+USDNOK H2 simplex_8  ic=+0.0079 t=+1.2 hit=0.5060 info=+nan z_sur=+4.7 edge=+0.292bp cost=10.32bp gross=-0.01 net=-4.21
+done USDNOK H2 in 0.1 min

@@ -1,0 +1,17 @@
+AUDUSD D1 ordinal_3  ic=+0.0198 t=+0.9 hit=0.5074 info=-0.00634 z_sur=+1.3 edge=+0.915bp cost=4.66bp gross=+0.18 net=-0.53
+AUDUSD D1 ordinal_4  ic=+0.0483 t=+2.2 hit=0.5165 info=-0.01944 z_sur=+1.9 edge=+2.196bp cost=4.66bp gross=+0.59 net=-0.13
+AUDUSD D1 ordinal_5  ic=+0.0107 t=+0.5 hit=0.5219 info=-0.06025 z_sur=-0.0 edge=+0.338bp cost=4.66bp gross=+0.08 net=-0.11
+AUDUSD D1 ordinal_6  ic=+0.0156 t=+0.7 hit=0.5000 info=-0.06804 z_sur=+15.7 edge=+0.073bp cost=4.66bp gross=+0.00 net=+0.00
+AUDUSD D1 markov_1   ic=+0.0162 t=+0.7 hit=0.4941 info=-0.00284 z_sur=+1.1 edge=-0.129bp cost=4.66bp gross=+0.27 net=-0.39
+AUDUSD D1 markov_2   ic=-0.0084 t=-0.4 hit=0.5107 info=-0.00712 z_sur=+0.1 edge=+1.610bp cost=4.66bp gross=-0.38 net=-1.23
+AUDUSD D1 markov_3   ic=-0.0138 t=-0.6 hit=0.4643 info=-0.02169 z_sur=-0.0 edge=-2.125bp cost=4.66bp gross=+0.12 net=-0.51
+AUDUSD D1 markov_5   ic=+0.0000 t=+0.0 hit=nan info=-0.09161 z_sur=+0.0 edge=+0.000bp cost=4.66bp gross=+0.00 net=+0.00
+AUDUSD D1 dc_3       ic=-0.0222 t=-1.0 hit=0.4832 info=-0.00780 z_sur=+0.0 edge=-1.270bp cost=4.66bp gross=-0.08 net=-0.39
+AUDUSD D1 dc_10      ic=-0.0012 t=-0.1 hit=0.4940 info=-0.01227 z_sur=-0.1 edge=+1.261bp cost=4.66bp gross=-0.26 net=-0.41
+AUDUSD D1 phase      ic=-0.0276 t=-1.3 hit=0.4909 info=-0.00707 z_sur=-1.4 edge=-1.195bp cost=4.66bp gross=-0.32 net=-0.60
+AUDUSD D1 fracdiff   ic=+0.0011 t=+0.0 hit=0.4917 info=-0.01905 z_sur=-0.8 edge=-1.223bp cost=4.66bp gross=-0.02 net=-0.50
+AUDUSD D1 clock      ic=-0.0094 t=-0.4 hit=0.4836 info=-0.00506 z_sur=-0.2 edge=-2.104bp cost=4.66bp gross=+0.31 net=-0.58
+AUDUSD D1 simplex_2  ic=+0.0270 t=+1.2 hit=0.5116 info=+nan z_sur=+7.2 edge=+1.349bp cost=4.66bp gross=+0.41 net=-0.62
+AUDUSD D1 simplex_4  ic=+0.0050 t=+0.2 hit=0.4983 info=+nan z_sur=-1.0 edge=+0.389bp cost=4.66bp gross=+0.44 net=-0.63
+AUDUSD D1 simplex_8  ic=-0.0020 t=-0.1 hit=0.4907 info=+nan z_sur=-0.2 edge=-0.027bp cost=4.66bp gross=-0.05 net=-1.06
+done AUDUSD D1 in 0.1 min

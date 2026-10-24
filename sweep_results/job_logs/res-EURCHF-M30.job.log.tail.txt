@@ -1,0 +1,17 @@
+EURCHF M30 ordinal_3  ic=+0.0286 t=+8.9 hit=0.5383 info=+0.00566 z_sur=+11.2 edge=+0.267bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 ordinal_4  ic=+0.0265 t=+8.3 hit=0.5381 info=+0.00593 z_sur=+14.9 edge=+0.250bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 ordinal_5  ic=+0.0167 t=+5.2 hit=0.5273 info=+0.00421 z_sur=+5.5 edge=+0.171bp cost=2.89bp gross=+0.33 net=-2.79
+EURCHF M30 ordinal_6  ic=+0.0087 t=+2.7 hit=0.5184 info=-0.00685 z_sur=+14.6 edge=+0.078bp cost=2.89bp gross=-0.18 net=-1.31
+EURCHF M30 markov_1   ic=+0.0281 t=+8.8 hit=0.5293 info=+0.00477 z_sur=+8.3 edge=+0.184bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 markov_2   ic=+0.0304 t=+9.5 hit=0.5336 info=+0.00541 z_sur=+15.9 edge=+0.230bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 markov_3   ic=+0.0248 t=+7.7 hit=0.5306 info=+0.00532 z_sur=+7.7 edge=+0.191bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 markov_5   ic=+0.0161 t=+5.0 hit=0.5193 info=+0.00081 z_sur=+7.8 edge=+0.137bp cost=2.89bp gross=+0.98 net=-2.88
+EURCHF M30 dc_3       ic=+0.0065 t=+2.0 hit=0.5101 info=+0.00109 z_sur=+19.9 edge=+0.047bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 dc_10      ic=-0.0028 t=-0.9 hit=0.5031 info=+0.00006 z_sur=-1.1 edge=+0.030bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 phase      ic=+0.0244 t=+7.6 hit=0.5288 info=+0.00420 z_sur=+13.5 edge=+0.176bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 fracdiff   ic=+0.0146 t=+4.6 hit=0.5225 info=+0.00320 z_sur=+8.0 edge=+0.135bp cost=2.89bp gross=+0.00 net=+0.00
+EURCHF M30 clock      ic=+0.0057 t=+1.8 hit=0.5031 info=-0.00184 z_sur=+1.4 edge=+0.045bp cost=2.89bp gross=+0.08 net=-1.01
+EURCHF M30 simplex_2  ic=+0.0326 t=+10.2 hit=0.5077 info=+nan z_sur=+3.4 edge=+0.118bp cost=2.89bp gross=+1.11 net=-11.50
+EURCHF M30 simplex_4  ic=-0.0000 t=-0.0 hit=0.5080 info=+nan z_sur=+0.7 edge=+0.065bp cost=2.89bp gross=+0.69 net=-9.11
+EURCHF M30 simplex_8  ic=-0.0012 t=-0.4 hit=0.5083 info=+nan z_sur=+0.3 edge=+0.048bp cost=2.89bp gross=+0.10 net=-6.70
+done EURCHF M30 in 0.4 min

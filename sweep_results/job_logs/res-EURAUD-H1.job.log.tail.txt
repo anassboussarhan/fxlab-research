@@ -1,0 +1,17 @@
+EURAUD H1 ordinal_3  ic=+0.0131 t=+2.9 hit=0.5131 info=+0.00116 z_sur=+7.6 edge=+0.150bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 ordinal_4  ic=+0.0133 t=+3.0 hit=0.5120 info=+0.00059 z_sur=+7.3 edge=+0.181bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 ordinal_5  ic=+0.0099 t=+2.2 hit=0.5048 info=-0.00242 z_sur=+3.6 edge=+0.057bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 ordinal_6  ic=-0.0056 t=-1.2 hit=0.4971 info=-0.02277 z_sur=-2.8 edge=-0.067bp cost=4.93bp gross=-0.13 net=-0.39
+EURAUD H1 markov_1   ic=+0.0075 t=+1.7 hit=0.5112 info=+0.00086 z_sur=+0.5 edge=+0.078bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 markov_2   ic=+0.0101 t=+2.2 hit=0.5139 info=+0.00088 z_sur=+3.0 edge=+0.117bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 markov_3   ic=+0.0074 t=+1.6 hit=0.5064 info=+0.00040 z_sur=+5.4 edge=+0.046bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 markov_5   ic=-0.0001 t=-0.0 hit=0.5021 info=-0.00774 z_sur=+0.8 edge=+0.004bp cost=4.93bp gross=-0.19 net=-0.62
+EURAUD H1 dc_3       ic=+0.0049 t=+1.1 hit=0.5022 info=+0.00002 z_sur=+2.8 edge=+0.049bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 dc_10      ic=-0.0100 t=-2.2 hit=0.4983 info=-0.00041 z_sur=-2.3 edge=-0.117bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 phase      ic=+0.0008 t=+0.2 hit=0.5036 info=+0.00043 z_sur=-0.3 edge=+0.034bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 fracdiff   ic=-0.0044 t=-1.0 hit=0.5017 info=-0.00050 z_sur=-1.4 edge=-0.039bp cost=4.93bp gross=+0.00 net=+0.00
+EURAUD H1 clock      ic=+0.0223 t=+4.9 hit=0.5098 info=-0.00244 z_sur=+21.4 edge=+0.298bp cost=4.93bp gross=-0.40 net=-0.85
+EURAUD H1 simplex_2  ic=-0.0070 t=-1.5 hit=0.5012 info=+nan z_sur=-5.8 edge=-0.114bp cost=4.93bp gross=-0.44 net=-9.83
+EURAUD H1 simplex_4  ic=+0.0047 t=+1.0 hit=0.5021 info=+nan z_sur=+0.2 edge=+0.033bp cost=4.93bp gross=-0.02 net=-8.02
+EURAUD H1 simplex_8  ic=+0.0089 t=+2.0 hit=0.5061 info=+nan z_sur=+2.5 edge=+0.123bp cost=4.93bp gross=+0.28 net=-6.49
+done EURAUD H1 in 0.3 min

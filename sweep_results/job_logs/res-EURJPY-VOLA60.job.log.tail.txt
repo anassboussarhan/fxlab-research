@@ -1,0 +1,17 @@
+EURJPY VOLA60 ordinal_3  ic=+0.0006 t=+0.1 hit=0.5058 info=+0.00061 z_sur=+0.8 edge=+0.012bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 ordinal_4  ic=+0.0064 t=+1.4 hit=0.5019 info=-0.00005 z_sur=+4.0 edge=-0.038bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 ordinal_5  ic=-0.0039 t=-0.8 hit=0.5015 info=-0.00474 z_sur=-2.5 edge=+0.002bp cost=3.09bp gross=+0.08 net=-1.07
+EURJPY VOLA60 ordinal_6  ic=+0.0029 t=+0.6 hit=0.5062 info=-0.02376 z_sur=+2.6 edge=+0.017bp cost=3.09bp gross=+0.29 net=-1.15
+EURJPY VOLA60 markov_1   ic=+0.0004 t=+0.1 hit=0.5035 info=+0.00062 z_sur=+0.1 edge=+0.022bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 markov_2   ic=+0.0019 t=+0.4 hit=0.5029 info=+0.00069 z_sur=+0.5 edge=+0.009bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 markov_3   ic=-0.0010 t=-0.2 hit=0.5020 info=-0.00001 z_sur=+0.2 edge=+0.030bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 markov_5   ic=+0.0057 t=+1.2 hit=0.5035 info=-0.00841 z_sur=+2.8 edge=+0.035bp cost=3.09bp gross=+0.13 net=-1.61
+EURJPY VOLA60 dc_3       ic=+0.0043 t=+0.9 hit=0.4972 info=-0.00030 z_sur=+1.4 edge=-0.100bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 dc_10      ic=-0.0104 t=-2.2 hit=0.5013 info=-0.00040 z_sur=-2.8 edge=-0.074bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 phase      ic=+0.0087 t=+1.9 hit=0.4987 info=+0.00044 z_sur=+10.0 edge=+0.058bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 fracdiff   ic=-0.0039 t=-0.8 hit=0.4992 info=-0.00010 z_sur=-0.8 edge=-0.095bp cost=3.09bp gross=+0.00 net=+0.00
+EURJPY VOLA60 clock      ic=-0.0002 t=-0.0 hit=0.5015 info=-0.00480 z_sur=+0.8 edge=+0.032bp cost=3.09bp gross=+0.03 net=-1.41
+EURJPY VOLA60 simplex_2  ic=+0.0140 t=+3.0 hit=0.5026 info=+nan z_sur=+6.1 edge=+0.121bp cost=3.09bp gross=+0.88 net=-5.08
+EURJPY VOLA60 simplex_4  ic=+0.0060 t=+1.3 hit=0.5060 info=+nan z_sur=+2.5 edge=+0.093bp cost=3.09bp gross=+0.41 net=-5.53
+EURJPY VOLA60 simplex_8  ic=+0.0011 t=+0.2 hit=0.5008 info=+nan z_sur=+0.3 edge=+0.012bp cost=3.09bp gross=+0.12 net=-5.41
+done EURJPY VOLA60 in 0.3 min

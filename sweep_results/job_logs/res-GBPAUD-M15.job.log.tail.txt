@@ -1,0 +1,17 @@
+GBPAUD M15 ordinal_3  ic=+0.0400 t=+14.2 hit=0.5286 info=+0.00284 z_sur=+23.7 edge=+0.278bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 ordinal_4  ic=+0.0391 t=+13.9 hit=0.5274 info=+0.00279 z_sur=+34.9 edge=+0.277bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 ordinal_5  ic=+0.0315 t=+11.2 hit=0.5231 info=+0.00193 z_sur=+34.6 edge=+0.231bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 ordinal_6  ic=+0.0232 t=+8.3 hit=0.5153 info=-0.00383 z_sur=+6.9 edge=+0.148bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 markov_1   ic=+0.0408 t=+14.5 hit=0.5244 info=+0.00279 z_sur=+20.6 edge=+0.239bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 markov_2   ic=+0.0406 t=+14.4 hit=0.5265 info=+0.00292 z_sur=+13.3 edge=+0.253bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 markov_3   ic=+0.0392 t=+13.9 hit=0.5261 info=+0.00291 z_sur=+19.9 edge=+0.245bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 markov_5   ic=+0.0235 t=+8.3 hit=0.5163 info=+0.00077 z_sur=+12.8 edge=+0.135bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 dc_3       ic=+0.0050 t=+1.8 hit=0.5062 info=+0.00036 z_sur=+3.2 edge=+0.010bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 dc_10      ic=+0.0019 t=+0.7 hit=0.4997 info=-0.00000 z_sur=+0.6 edge=+0.004bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 phase      ic=+0.0246 t=+8.8 hit=0.5200 info=+0.00190 z_sur=+14.3 edge=+0.147bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 fracdiff   ic=+0.0155 t=+5.5 hit=0.5149 info=+0.00098 z_sur=+51.1 edge=+0.111bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 clock      ic=+0.0041 t=+1.5 hit=0.5028 info=-0.00069 z_sur=+0.6 edge=+0.031bp cost=4.69bp gross=+0.00 net=+0.00
+GBPAUD M15 simplex_2  ic=+0.0070 t=+2.5 hit=0.5036 info=+nan z_sur=+1.4 edge=+0.046bp cost=4.69bp gross=+0.37 net=-18.53
+GBPAUD M15 simplex_4  ic=+0.0014 t=+0.5 hit=0.5016 info=+nan z_sur=+0.8 edge=+0.015bp cost=4.69bp gross=+0.57 net=-14.82
+GBPAUD M15 simplex_8  ic=+0.0059 t=+2.1 hit=0.5044 info=+nan z_sur=+9.5 edge=+0.059bp cost=4.69bp gross=+0.15 net=-9.05
+done GBPAUD M15 in 1.0 min

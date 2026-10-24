@@ -1,0 +1,17 @@
+GBPCAD TICK60 ordinal_3  ic=+0.0012 t=+0.2 hit=0.5039 info=-0.00021 z_sur=+0.7 edge=+0.014bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 ordinal_4  ic=-0.0007 t=-0.1 hit=0.5030 info=-0.00086 z_sur=-0.4 edge=-0.013bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 ordinal_5  ic=+0.0013 t=+0.2 hit=0.5048 info=-0.00440 z_sur=+0.4 edge=+0.006bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 ordinal_6  ic=-0.0062 t=-1.1 hit=0.5001 info=-0.02191 z_sur=-2.0 edge=-0.094bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 markov_1   ic=+0.0023 t=+0.4 hit=0.5096 info=+0.00021 z_sur=-0.0 edge=+0.063bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 markov_2   ic=-0.0002 t=-0.0 hit=0.5062 info=-0.00012 z_sur=-0.8 edge=+0.022bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 markov_3   ic=+0.0005 t=+0.1 hit=0.5041 info=-0.00092 z_sur=-1.3 edge=+0.023bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 markov_5   ic=-0.0036 t=-0.6 hit=0.4977 info=-0.01067 z_sur=-1.1 edge=-0.024bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 dc_3       ic=-0.0039 t=-0.7 hit=0.4994 info=-0.00021 z_sur=-2.1 edge=-0.071bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 dc_10      ic=+0.0084 t=+1.5 hit=0.5036 info=-0.00042 z_sur=+3.9 edge=+0.043bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 phase      ic=-0.0024 t=-0.4 hit=0.5020 info=-0.00032 z_sur=+0.2 edge=+0.001bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 fracdiff   ic=-0.0040 t=-0.7 hit=0.5051 info=-0.00038 z_sur=-0.9 edge=+0.020bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 clock      ic=+0.0022 t=+0.4 hit=0.5023 info=-0.00377 z_sur=+1.1 edge=+0.014bp cost=5.67bp gross=+0.00 net=+0.00
+GBPCAD TICK60 simplex_2  ic=+0.0060 t=+1.1 hit=0.5051 info=+nan z_sur=-0.4 edge=+0.092bp cost=5.67bp gross=+0.33 net=-9.68
+GBPCAD TICK60 simplex_4  ic=+0.0089 t=+1.6 hit=0.4991 info=+nan z_sur=+0.3 edge=-0.038bp cost=5.67bp gross=+0.68 net=-8.62
+GBPCAD TICK60 simplex_8  ic=+0.0001 t=+0.0 hit=0.4976 info=+nan z_sur=-0.6 edge=-0.016bp cost=5.67bp gross=+0.39 net=-7.18
+done GBPCAD TICK60 in 0.1 min

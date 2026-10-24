@@ -1,0 +1,17 @@
+AUDCAD VOLA60 ordinal_3  ic=+0.0176 t=+3.0 hit=0.5130 info=+0.00055 z_sur=+3.4 edge=+0.222bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 ordinal_4  ic=+0.0190 t=+3.2 hit=0.5117 info=+0.00003 z_sur=+4.3 edge=+0.225bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 ordinal_5  ic=+0.0087 t=+1.5 hit=0.5026 info=-0.00439 z_sur=+0.7 edge=+0.095bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 ordinal_6  ic=+0.0117 t=+2.0 hit=0.5026 info=-0.02284 z_sur=+2.6 edge=+0.006bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 markov_1   ic=+0.0243 t=+4.1 hit=0.5164 info=+0.00099 z_sur=+12.8 edge=+0.270bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 markov_2   ic=+0.0196 t=+3.3 hit=0.5173 info=+0.00075 z_sur=+18.3 edge=+0.257bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 markov_3   ic=+0.0151 t=+2.5 hit=0.5109 info=+0.00029 z_sur=+4.1 edge=+0.158bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 markov_5   ic=+0.0137 t=+2.3 hit=0.5077 info=-0.00766 z_sur=+2.6 edge=+0.158bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 dc_3       ic=+0.0033 t=+0.6 hit=0.5014 info=+0.00020 z_sur=+0.5 edge=-0.049bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 dc_10      ic=+0.0011 t=+0.2 hit=0.4999 info=-0.00029 z_sur=+2.6 edge=-0.018bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 phase      ic=+0.0181 t=+3.1 hit=0.5143 info=+0.00069 z_sur=+3.0 edge=+0.275bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 fracdiff   ic=+0.0157 t=+2.7 hit=0.5105 info=+0.00045 z_sur=+13.1 edge=+0.167bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 clock      ic=+0.0054 t=+0.9 hit=0.5038 info=-0.00397 z_sur=+1.0 edge=+0.116bp cost=6.35bp gross=+0.00 net=+0.00
+AUDCAD VOLA60 simplex_2  ic=+0.0009 t=+0.2 hit=0.5002 info=+nan z_sur=+2.1 edge=-0.045bp cost=6.35bp gross=+0.06 net=-12.68
+AUDCAD VOLA60 simplex_4  ic=-0.0051 t=-0.9 hit=0.4935 info=+nan z_sur=-1.2 edge=-0.063bp cost=6.35bp gross=+0.04 net=-11.45
+AUDCAD VOLA60 simplex_8  ic=+0.0029 t=+0.5 hit=0.5031 info=+nan z_sur=-0.3 edge=+0.072bp cost=6.35bp gross=-0.07 net=-7.93
+done AUDCAD VOLA60 in 0.2 min

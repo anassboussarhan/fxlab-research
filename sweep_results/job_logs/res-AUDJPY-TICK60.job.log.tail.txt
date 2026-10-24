@@ -1,0 +1,17 @@
+AUDJPY TICK60 ordinal_3  ic=+0.0151 t=+3.3 hit=0.5079 info=+0.00056 z_sur=+4.9 edge=+0.266bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 ordinal_4  ic=+0.0099 t=+2.2 hit=0.5083 info=-0.00019 z_sur=+4.5 edge=+0.204bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 ordinal_5  ic=+0.0042 t=+0.9 hit=0.5030 info=-0.00363 z_sur=+2.0 edge=+0.048bp cost=5.64bp gross=+0.01 net=-0.55
+AUDJPY TICK60 ordinal_6  ic=+0.0066 t=+1.5 hit=0.5094 info=-0.02136 z_sur=+1.2 edge=+0.124bp cost=5.64bp gross=+0.21 net=-0.60
+AUDJPY TICK60 markov_1   ic=+0.0070 t=+1.5 hit=0.5104 info=+0.00058 z_sur=+1.4 edge=+0.169bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 markov_2   ic=+0.0090 t=+2.0 hit=0.5027 info=+0.00060 z_sur=+2.5 edge=+0.058bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 markov_3   ic=+0.0130 t=+2.9 hit=0.5049 info=-0.00013 z_sur=+2.0 edge=+0.160bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 markov_5   ic=+0.0057 t=+1.3 hit=0.5034 info=-0.00766 z_sur=+3.4 edge=+0.015bp cost=5.64bp gross=+0.21 net=-0.98
+AUDJPY TICK60 dc_3       ic=+0.0098 t=+2.2 hit=0.5013 info=-0.00019 z_sur=+4.4 edge=+0.203bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 dc_10      ic=+0.0013 t=+0.3 hit=0.5004 info=-0.00034 z_sur=-0.8 edge=+0.040bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 phase      ic=+0.0090 t=+2.0 hit=0.4987 info=-0.00001 z_sur=+1.5 edge=+0.066bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 fracdiff   ic=+0.0012 t=+0.3 hit=0.5000 info=-0.00036 z_sur=-1.0 edge=+0.004bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 clock      ic=+0.0051 t=+1.1 hit=0.5027 info=-0.00013 z_sur=+1.8 edge=-0.023bp cost=5.64bp gross=+0.00 net=+0.00
+AUDJPY TICK60 simplex_2  ic=+0.0140 t=+3.1 hit=0.5041 info=+nan z_sur=+1.0 edge=+0.174bp cost=5.64bp gross=+0.74 net=-5.91
+AUDJPY TICK60 simplex_4  ic=+0.0068 t=+1.5 hit=0.5054 info=+nan z_sur=+1.1 edge=+0.185bp cost=5.64bp gross=+0.94 net=-5.58
+AUDJPY TICK60 simplex_8  ic=-0.0044 t=-1.0 hit=0.4993 info=+nan z_sur=-1.2 edge=+0.044bp cost=5.64bp gross=+0.05 net=-5.23
+done AUDJPY TICK60 in 0.2 min

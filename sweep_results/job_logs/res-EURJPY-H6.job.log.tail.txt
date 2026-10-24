@@ -1,0 +1,17 @@
+EURJPY H6 ordinal_3  ic=-0.0240 t=-2.3 hit=0.4938 info=-0.00105 z_sur=-7.6 edge=-0.605bp cost=3.12bp gross=-0.10 net=-0.79
+EURJPY H6 ordinal_4  ic=+0.0011 t=+0.1 hit=0.5017 info=-0.00383 z_sur=-4.4 edge=-0.040bp cost=3.12bp gross=-0.02 net=-1.00
+EURJPY H6 ordinal_5  ic=+0.0016 t=+0.1 hit=0.4959 info=-0.02188 z_sur=-1.4 edge=-0.068bp cost=3.12bp gross=-0.11 net=-0.92
+EURJPY H6 ordinal_6  ic=+0.0163 t=+1.5 hit=0.5233 info=-0.05106 z_sur=+1.6 edge=+0.325bp cost=3.12bp gross=+0.27 net=-0.18
+EURJPY H6 markov_1   ic=-0.0161 t=-1.5 hit=0.5034 info=+0.00030 z_sur=-5.5 edge=-0.137bp cost=3.12bp gross=+0.00 net=+0.00
+EURJPY H6 markov_2   ic=-0.0176 t=-1.7 hit=0.4990 info=-0.00222 z_sur=-2.1 edge=-0.375bp cost=3.12bp gross=-0.09 net=-0.73
+EURJPY H6 markov_3   ic=-0.0116 t=-1.1 hit=0.4967 info=-0.00565 z_sur=-2.0 edge=-0.465bp cost=3.12bp gross=-0.32 net=-1.26
+EURJPY H6 markov_5   ic=-0.0030 t=-0.3 hit=0.4608 info=-0.04507 z_sur=+0.8 edge=-0.024bp cost=3.12bp gross=+0.21 net=+0.09
+EURJPY H6 dc_3       ic=-0.0137 t=-1.3 hit=0.4940 info=-0.00183 z_sur=-0.4 edge=-0.133bp cost=3.12bp gross=-0.47 net=-0.66
+EURJPY H6 dc_10      ic=-0.0027 t=-0.3 hit=0.5014 info=-0.00134 z_sur=+0.7 edge=-0.560bp cost=3.12bp gross=+0.57 net=+0.48
+EURJPY H6 phase      ic=-0.0088 t=-0.8 hit=0.4959 info=-0.00122 z_sur=-0.2 edge=+0.140bp cost=3.12bp gross=-0.36 net=-0.67
+EURJPY H6 fracdiff   ic=+0.0064 t=+0.6 hit=0.4932 info=-0.00196 z_sur=+4.0 edge=-0.235bp cost=3.12bp gross=+0.28 net=-0.29
+EURJPY H6 clock      ic=+0.0031 t=+0.3 hit=0.5056 info=-0.00220 z_sur=+1.3 edge=-0.040bp cost=3.12bp gross=+0.08 net=-1.01
+EURJPY H6 simplex_2  ic=-0.0212 t=-2.0 hit=0.4903 info=+nan z_sur=-3.9 edge=-1.191bp cost=3.12bp gross=-0.92 net=-2.27
+EURJPY H6 simplex_4  ic=+0.0080 t=+0.8 hit=0.5076 info=+nan z_sur=-0.4 edge=+0.323bp cost=3.12bp gross=-0.12 net=-1.44
+EURJPY H6 simplex_8  ic=+0.0327 t=+3.1 hit=0.4993 info=+nan z_sur=+9.1 edge=+0.294bp cost=3.12bp gross=+0.22 net=-1.14
+done EURJPY H6 in 0.1 min

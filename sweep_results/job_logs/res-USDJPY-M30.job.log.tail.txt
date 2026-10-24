@@ -1,0 +1,17 @@
+USDJPY M30 ordinal_3  ic=+0.0106 t=+3.3 hit=0.5193 info=+0.00228 z_sur=+5.1 edge=+0.093bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 ordinal_4  ic=+0.0076 t=+2.4 hit=0.5168 info=+0.00224 z_sur=+3.1 edge=+0.077bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 ordinal_5  ic=+0.0101 t=+3.2 hit=0.5137 info=+0.00054 z_sur=+3.3 edge=+0.100bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 ordinal_6  ic=+0.0068 t=+2.1 hit=0.5110 info=-0.00996 z_sur=+2.4 edge=+0.051bp cost=2.59bp gross=-0.05 net=-1.23
+USDJPY M30 markov_1   ic=+0.0126 t=+4.0 hit=0.5209 info=+0.00199 z_sur=+14.2 edge=+0.093bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 markov_2   ic=+0.0133 t=+4.2 hit=0.5142 info=+0.00250 z_sur=+3.5 edge=+0.069bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 markov_3   ic=+0.0142 t=+4.5 hit=0.5151 info=+0.00240 z_sur=+5.1 edge=+0.139bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 markov_5   ic=+0.0105 t=+3.3 hit=0.5066 info=-0.00133 z_sur=+4.4 edge=+0.076bp cost=2.59bp gross=+0.80 net=-0.67
+USDJPY M30 dc_3       ic=+0.0015 t=+0.5 hit=0.5021 info=+0.00071 z_sur=+0.7 edge=-0.013bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 dc_10      ic=+0.0033 t=+1.0 hit=0.5022 info=-0.00019 z_sur=+0.9 edge=+0.061bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 phase      ic=+0.0107 t=+3.3 hit=0.5132 info=+0.00202 z_sur=+3.6 edge=+0.084bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 fracdiff   ic=+0.0078 t=+2.4 hit=0.5045 info=+0.00086 z_sur=+13.3 edge=+0.009bp cost=2.59bp gross=+0.00 net=+0.00
+USDJPY M30 clock      ic=+0.0095 t=+3.0 hit=0.5045 info=-0.00176 z_sur=+2.0 edge=+0.107bp cost=2.59bp gross=-0.28 net=-0.64
+USDJPY M30 simplex_2  ic=+0.0025 t=+0.8 hit=0.5029 info=+nan z_sur=+0.9 edge=+0.007bp cost=2.59bp gross=+0.37 net=-11.07
+USDJPY M30 simplex_4  ic=+0.0038 t=+1.2 hit=0.4997 info=+nan z_sur=+1.7 edge=+0.000bp cost=2.59bp gross=+0.16 net=-9.89
+USDJPY M30 simplex_8  ic=+0.0073 t=+2.3 hit=0.5043 info=+nan z_sur=+1.9 edge=+0.045bp cost=2.59bp gross=+0.45 net=-7.85
+done USDJPY M30 in 0.5 min

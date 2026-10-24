@@ -1,0 +1,17 @@
+GBPUSD M10 ordinal_3  ic=+0.0255 t=+13.8 hit=0.5246 info=+0.00232 z_sur=+19.1 edge=+0.118bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 ordinal_4  ic=+0.0235 t=+12.7 hit=0.5227 info=+0.00253 z_sur=+18.1 edge=+0.107bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 ordinal_5  ic=+0.0177 t=+9.6 hit=0.5195 info=+0.00221 z_sur=+12.7 edge=+0.085bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 ordinal_6  ic=+0.0126 t=+6.8 hit=0.5148 info=-0.00154 z_sur=+9.4 edge=+0.064bp cost=2.63bp gross=+0.23 net=-0.66
+GBPUSD M10 markov_1   ic=+0.0297 t=+16.1 hit=0.5201 info=+0.00221 z_sur=+10.0 edge=+0.111bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 markov_2   ic=+0.0296 t=+16.0 hit=0.5245 info=+0.00253 z_sur=+11.0 edge=+0.130bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 markov_3   ic=+0.0277 t=+15.0 hit=0.5231 info=+0.00263 z_sur=+11.5 edge=+0.118bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 markov_5   ic=+0.0182 t=+9.9 hit=0.5137 info=+0.00142 z_sur=+10.5 edge=+0.076bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 dc_3       ic=+0.0038 t=+2.1 hit=0.5126 info=+0.00116 z_sur=+6.6 edge=+0.022bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 dc_10      ic=-0.0003 t=-0.1 hit=0.5012 info=+0.00024 z_sur=-0.7 edge=-0.000bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 phase      ic=+0.0204 t=+11.1 hit=0.5261 info=+0.00272 z_sur=+14.6 edge=+0.091bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 fracdiff   ic=+0.0134 t=+7.3 hit=0.5177 info=+0.00192 z_sur=+5.7 edge=+0.048bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 clock      ic=+0.0062 t=+3.3 hit=0.5022 info=-0.00061 z_sur=+3.5 edge=+0.027bp cost=2.63bp gross=+0.00 net=+0.00
+GBPUSD M10 simplex_2  ic=+0.0071 t=+3.8 hit=0.5030 info=+nan z_sur=+2.2 edge=+0.010bp cost=2.63bp gross=+0.17 net=-20.53
+GBPUSD M10 simplex_4  ic=+0.0015 t=+0.8 hit=0.5032 info=+nan z_sur=-0.3 edge=+0.016bp cost=2.63bp gross=+0.08 net=-15.86
+GBPUSD M10 simplex_8  ic=+0.0049 t=+2.7 hit=0.5037 info=+nan z_sur=+1.7 edge=+0.026bp cost=2.63bp gross=+0.65 net=-10.92
+done GBPUSD M10 in 2.3 min

@@ -1,0 +1,17 @@
+GBPJPY H1 ordinal_3  ic=+0.0115 t=+2.5 hit=0.5194 info=+0.00204 z_sur=+4.8 edge=+0.179bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 ordinal_4  ic=+0.0065 t=+1.4 hit=0.5142 info=+0.00137 z_sur=+0.9 edge=+0.112bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 ordinal_5  ic=+0.0025 t=+0.5 hit=0.5079 info=-0.00227 z_sur=-0.9 edge=+0.026bp cost=4.28bp gross=-0.24 net=-1.08
+GBPJPY H1 ordinal_6  ic=+0.0089 t=+2.0 hit=0.5097 info=-0.02129 z_sur=+3.2 edge=+0.119bp cost=4.28bp gross=+0.45 net=-0.24
+GBPJPY H1 markov_1   ic=+0.0120 t=+2.7 hit=0.5169 info=+0.00200 z_sur=+3.5 edge=+0.103bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 markov_2   ic=+0.0094 t=+2.1 hit=0.5143 info=+0.00201 z_sur=+7.2 edge=+0.100bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 markov_3   ic=+0.0066 t=+1.5 hit=0.5067 info=+0.00108 z_sur=+3.1 edge=+0.048bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 markov_5   ic=+0.0115 t=+2.6 hit=0.5046 info=-0.00648 z_sur=+2.2 edge=+0.194bp cost=4.28bp gross=+0.31 net=-1.09
+GBPJPY H1 dc_3       ic=-0.0042 t=-0.9 hit=0.4993 info=-0.00012 z_sur=-0.9 edge=-0.039bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 dc_10      ic=-0.0002 t=-0.0 hit=0.4989 info=-0.00026 z_sur=-0.2 edge=+0.030bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 phase      ic=+0.0078 t=+1.7 hit=0.5112 info=+0.00104 z_sur=+1.7 edge=+0.134bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 fracdiff   ic=+0.0006 t=+0.1 hit=0.5051 info=+0.00023 z_sur=+0.3 edge=+0.100bp cost=4.28bp gross=+0.00 net=+0.00
+GBPJPY H1 clock      ic=+0.0055 t=+1.2 hit=0.5042 info=-0.00457 z_sur=+0.4 edge=+0.160bp cost=4.28bp gross=-0.83 net=-2.28
+GBPJPY H1 simplex_2  ic=+0.0071 t=+1.6 hit=0.5030 info=+nan z_sur=+2.5 edge=+0.029bp cost=4.28bp gross=+0.28 net=-7.27
+GBPJPY H1 simplex_4  ic=+0.0051 t=+1.1 hit=0.5027 info=+nan z_sur=+1.0 edge=+0.030bp cost=4.28bp gross=+0.33 net=-5.69
+GBPJPY H1 simplex_8  ic=+0.0078 t=+1.7 hit=0.5077 info=+nan z_sur=+1.0 edge=+0.065bp cost=4.28bp gross=+0.54 net=-5.41
+done GBPJPY H1 in 0.2 min

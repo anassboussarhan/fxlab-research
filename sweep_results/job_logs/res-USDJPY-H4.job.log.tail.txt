@@ -1,0 +1,17 @@
+USDJPY H4 ordinal_3  ic=+0.0158 t=+1.8 hit=0.5143 info=+0.00061 z_sur=+2.7 edge=+0.359bp cost=2.58bp gross=+0.00 net=+0.00
+USDJPY H4 ordinal_4  ic=-0.0065 t=-0.7 hit=0.5047 info=-0.00335 z_sur=-0.1 edge=-0.015bp cost=2.58bp gross=-0.02 net=-1.26
+USDJPY H4 ordinal_5  ic=+0.0051 t=+0.6 hit=0.4951 info=-0.01784 z_sur=+1.0 edge=-0.063bp cost=2.58bp gross=+0.13 net=-1.04
+USDJPY H4 ordinal_6  ic=-0.0029 t=-0.3 hit=0.5064 info=-0.05126 z_sur=-0.0 edge=-0.039bp cost=2.58bp gross=-0.29 net=-0.83
+USDJPY H4 markov_1   ic=+0.0033 t=+0.4 hit=0.5126 info=+0.00083 z_sur=+1.1 edge=-0.094bp cost=2.58bp gross=+0.00 net=+0.00
+USDJPY H4 markov_2   ic=+0.0143 t=+1.6 hit=0.5127 info=+0.00032 z_sur=+3.4 edge=+0.291bp cost=2.58bp gross=+0.26 net=-0.72
+USDJPY H4 markov_3   ic=+0.0054 t=+0.6 hit=0.5049 info=-0.00269 z_sur=+3.0 edge=+0.091bp cost=2.58bp gross=+0.09 net=-1.01
+USDJPY H4 markov_5   ic=-0.0031 t=-0.4 hit=0.5030 info=-0.03062 z_sur=-1.3 edge=+0.066bp cost=2.58bp gross=-0.02 net=-0.59
+USDJPY H4 dc_3       ic=-0.0120 t=-1.4 hit=0.4983 info=-0.00106 z_sur=-31.3 edge=-0.151bp cost=2.58bp gross=-0.16 net=-0.23
+USDJPY H4 dc_10      ic=-0.0009 t=-0.1 hit=0.5000 info=-0.00342 z_sur=+0.6 edge=+0.025bp cost=2.58bp gross=+0.08 net=+0.05
+USDJPY H4 phase      ic=+0.0104 t=+1.2 hit=0.5064 info=-0.00027 z_sur=+7.7 edge=+0.285bp cost=2.58bp gross=+0.00 net=+0.00
+USDJPY H4 fracdiff   ic=+0.0146 t=+1.7 hit=0.5069 info=-0.00126 z_sur=+8.0 edge=+0.349bp cost=2.58bp gross=+0.07 net=-0.40
+USDJPY H4 clock      ic=+0.0055 t=+0.6 hit=0.5008 info=-0.00062 z_sur=+0.1 edge=-0.062bp cost=2.58bp gross=-0.02 net=-0.23
+USDJPY H4 simplex_2  ic=-0.0065 t=-0.7 hit=0.5049 info=+nan z_sur=-1.8 edge=+0.034bp cost=2.58bp gross=-0.11 net=-1.84
+USDJPY H4 simplex_4  ic=-0.0020 t=-0.2 hit=0.4964 info=+nan z_sur=-0.6 edge=-0.151bp cost=2.58bp gross=-0.24 net=-1.98
+USDJPY H4 simplex_8  ic=+0.0033 t=+0.4 hit=0.5046 info=+nan z_sur=-0.0 edge=+0.173bp cost=2.58bp gross=+0.23 net=-1.45
+done USDJPY H4 in 0.1 min

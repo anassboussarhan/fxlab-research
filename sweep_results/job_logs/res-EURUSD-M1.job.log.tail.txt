@@ -1,0 +1,17 @@
+EURUSD M1 ordinal_3  ic=+0.0081 t=+17.3 hit=0.5079 info=+0.00047 z_sur=+51.2 edge=+0.008bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 ordinal_4  ic=+0.0096 t=+20.4 hit=0.5086 info=+0.00057 z_sur=+15.3 edge=+0.009bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 ordinal_5  ic=+0.0102 t=+21.8 hit=0.5086 info=+0.00058 z_sur=+25.3 edge=+0.011bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 ordinal_6  ic=+0.0081 t=+17.3 hit=0.5074 info=+0.00028 z_sur=+31.4 edge=+0.010bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 markov_1   ic=+0.0103 t=+22.0 hit=0.5083 info=+0.00040 z_sur=+30.0 edge=+0.008bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 markov_2   ic=+0.0134 t=+28.6 hit=0.5099 info=+0.00052 z_sur=+53.2 edge=+0.012bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 markov_3   ic=+0.0155 t=+33.1 hit=0.5096 info=+0.00059 z_sur=+97.0 edge=+0.015bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 markov_5   ic=+0.0156 t=+33.3 hit=0.5081 info=+0.00056 z_sur=+43.7 edge=+0.014bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 dc_3       ic=+0.0138 t=+29.5 hit=0.5135 info=+0.00097 z_sur=+52.3 edge=+0.017bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 dc_10      ic=+0.0038 t=+8.2 hit=0.5072 info=+0.00050 z_sur=+14.7 edge=+0.004bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 phase      ic=+0.0123 t=+26.3 hit=0.5164 info=+0.00109 z_sur=+58.6 edge=+0.016bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 fracdiff   ic=+0.0139 t=+29.7 hit=0.5196 info=+0.00166 z_sur=+23.4 edge=+0.018bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 clock      ic=+0.0017 t=+3.7 hit=0.5008 info=-0.00006 z_sur=+1.7 edge=+0.002bp cost=1.97bp gross=+0.00 net=+0.00
+EURUSD M1 simplex_2  ic=+0.0006 t=+0.8 hit=0.5014 info=+nan z_sur=-0.1 edge=+0.002bp cost=1.97bp gross=-0.27 net=-13.20
+EURUSD M1 simplex_4  ic=+0.0028 t=+3.5 hit=0.5010 info=+nan z_sur=+1.5 edge=+0.001bp cost=1.97bp gross=+0.38 net=-8.94
+EURUSD M1 simplex_8  ic=+0.0041 t=+5.2 hit=0.5012 info=+nan z_sur=+3.6 edge=+0.003bp cost=1.97bp gross=+0.35 net=-4.82
+done EURUSD M1 in 14.6 min

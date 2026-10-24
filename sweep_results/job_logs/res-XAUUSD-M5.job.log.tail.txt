@@ -1,0 +1,17 @@
+XAUUSD M5 ordinal_3  ic=+0.0103 t=+5.5 hit=0.5114 info=+0.00175 z_sur=+6.3 edge=+0.041bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 ordinal_4  ic=+0.0097 t=+5.1 hit=0.5095 info=+0.00211 z_sur=+8.7 edge=+0.034bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 ordinal_5  ic=+0.0099 t=+5.2 hit=0.5111 info=+0.00200 z_sur=+18.1 edge=+0.052bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 ordinal_6  ic=+0.0036 t=+1.9 hit=0.5076 info=+0.00008 z_sur=+7.1 edge=+0.022bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 markov_1   ic=+0.0154 t=+8.1 hit=0.5194 info=+0.00179 z_sur=+22.8 edge=+0.061bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 markov_2   ic=+0.0160 t=+8.5 hit=0.5156 info=+0.00212 z_sur=+14.7 edge=+0.052bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 markov_3   ic=+0.0142 t=+7.5 hit=0.5117 info=+0.00236 z_sur=+10.9 edge=+0.049bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 markov_5   ic=+0.0064 t=+3.4 hit=0.5068 info=+0.00191 z_sur=+6.6 edge=+0.034bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 dc_3       ic=+0.0064 t=+3.4 hit=0.5065 info=+0.00118 z_sur=+4.0 edge=+0.026bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 dc_10      ic=+0.0005 t=+0.3 hit=0.4986 info=+0.00012 z_sur=+0.6 edge=-0.017bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 phase      ic=+0.0039 t=+2.1 hit=0.5131 info=+0.00231 z_sur=+5.2 edge=+0.017bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 fracdiff   ic=+0.0069 t=+3.6 hit=0.5110 info=+0.00167 z_sur=+8.7 edge=+0.025bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 clock      ic=+0.0060 t=+3.1 hit=0.5022 info=-0.00029 z_sur=+4.7 edge=+0.024bp cost=4.13bp gross=+0.00 net=+0.00
+XAUUSD M5 simplex_2  ic=+0.0011 t=+0.6 hit=0.5016 info=+nan z_sur=-0.0 edge=+0.011bp cost=4.13bp gross=-0.12 net=-23.30
+XAUUSD M5 simplex_4  ic=+0.0030 t=+1.6 hit=0.5016 info=+nan z_sur=+2.6 edge=+0.005bp cost=4.13bp gross=+0.22 net=-16.64
+XAUUSD M5 simplex_8  ic=+0.0030 t=+1.6 hit=0.5027 info=+nan z_sur=+2.3 edge=+0.016bp cost=4.13bp gross=+0.21 net=-10.44
+done XAUUSD M5 in 3.2 min

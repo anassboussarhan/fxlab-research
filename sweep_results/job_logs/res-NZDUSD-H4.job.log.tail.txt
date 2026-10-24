@@ -1,0 +1,17 @@
+NZDUSD H4 ordinal_3  ic=+0.0135 t=+1.6 hit=0.5077 info=-0.00034 z_sur=+1.5 edge=+0.347bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 ordinal_4  ic=+0.0054 t=+0.6 hit=0.4996 info=-0.00413 z_sur=+0.8 edge=+0.211bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 ordinal_5  ic=+0.0137 t=+1.6 hit=0.5064 info=-0.01675 z_sur=+1.7 edge=+0.508bp cost=8.12bp gross=+0.17 net=-0.30
+NZDUSD H4 ordinal_6  ic=+0.0096 t=+1.1 hit=0.5006 info=-0.04898 z_sur=+1.2 edge=+0.082bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 markov_1   ic=+0.0083 t=+0.9 hit=0.5073 info=+0.00003 z_sur=+2.6 edge=+0.146bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 markov_2   ic=+0.0039 t=+0.4 hit=0.5001 info=-0.00016 z_sur=+2.1 edge=-0.213bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 markov_3   ic=-0.0006 t=-0.1 hit=0.5002 info=-0.00353 z_sur=+0.3 edge=-0.035bp cost=8.12bp gross=+0.28 net=+0.10
+NZDUSD H4 markov_5   ic=-0.0065 t=-0.7 hit=0.4940 info=-0.03030 z_sur=-0.3 edge=-0.038bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 dc_3       ic=+0.0036 t=+0.4 hit=0.5047 info=-0.00054 z_sur=-0.1 edge=+0.273bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 dc_10      ic=-0.0095 t=-1.1 hit=0.4998 info=-0.00134 z_sur=-0.6 edge=-0.165bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 phase      ic=-0.0150 t=-1.7 hit=0.4976 info=-0.00114 z_sur=-2.6 edge=-0.256bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 fracdiff   ic=+0.0005 t=+0.1 hit=0.5058 info=-0.00082 z_sur=+1.2 edge=+0.068bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 clock      ic=+0.0106 t=+1.2 hit=0.4986 info=-0.00073 z_sur=+9.2 edge=-0.116bp cost=8.12bp gross=+0.00 net=+0.00
+NZDUSD H4 simplex_2  ic=-0.0040 t=-0.5 hit=0.4939 info=+nan z_sur=-0.9 edge=-0.288bp cost=8.12bp gross=-0.27 net=-3.19
+NZDUSD H4 simplex_4  ic=+0.0016 t=+0.2 hit=0.4971 info=+nan z_sur=+1.8 edge=-0.180bp cost=8.12bp gross=+0.02 net=-2.74
+NZDUSD H4 simplex_8  ic=+0.0080 t=+0.9 hit=0.5010 info=+nan z_sur=+0.3 edge=+0.041bp cost=8.12bp gross=+0.23 net=-2.34
+done NZDUSD H4 in 0.1 min

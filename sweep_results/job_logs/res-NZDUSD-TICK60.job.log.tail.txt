@@ -1,0 +1,17 @@
+NZDUSD TICK60 ordinal_3  ic=+0.0131 t=+2.9 hit=0.5066 info=+0.00018 z_sur=+1.9 edge=+0.178bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 ordinal_4  ic=+0.0088 t=+1.9 hit=0.5050 info=-0.00050 z_sur=+1.2 edge=+0.093bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 ordinal_5  ic=+0.0012 t=+0.3 hit=0.5007 info=-0.00428 z_sur=-3.2 edge=+0.012bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 ordinal_6  ic=-0.0006 t=-0.1 hit=0.5027 info=-0.02366 z_sur=-0.2 edge=+0.056bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 markov_1   ic=+0.0206 t=+4.5 hit=0.5102 info=+0.00050 z_sur=+10.1 edge=+0.215bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 markov_2   ic=+0.0194 t=+4.3 hit=0.5072 info=+0.00030 z_sur=+15.0 edge=+0.157bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 markov_3   ic=+0.0133 t=+2.9 hit=0.5102 info=-0.00026 z_sur=+3.1 edge=+0.238bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 markov_5   ic=+0.0034 t=+0.7 hit=0.5035 info=-0.00930 z_sur=-0.1 edge=+0.078bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 dc_3       ic=+0.0156 t=+3.4 hit=0.5047 info=+0.00002 z_sur=+6.5 edge=+0.157bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 dc_10      ic=+0.0007 t=+0.2 hit=0.4995 info=-0.00055 z_sur=-0.1 edge=-0.017bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 phase      ic=+0.0115 t=+2.5 hit=0.5041 info=+0.00022 z_sur=+6.8 edge=+0.111bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 fracdiff   ic=+0.0084 t=+1.9 hit=0.5063 info=+0.00013 z_sur=+2.4 edge=+0.105bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 clock      ic=+0.0007 t=+0.2 hit=0.4982 info=-0.00013 z_sur=-0.2 edge=-0.033bp cost=7.84bp gross=+0.00 net=+0.00
+NZDUSD TICK60 simplex_2  ic=+0.0006 t=+0.1 hit=0.5001 info=+nan z_sur=-0.2 edge=-0.021bp cost=7.84bp gross=+0.18 net=-8.19
+NZDUSD TICK60 simplex_4  ic=+0.0032 t=+0.7 hit=0.5025 info=+nan z_sur=+0.2 edge=+0.083bp cost=7.84bp gross=+0.39 net=-6.69
+NZDUSD TICK60 simplex_8  ic=+0.0063 t=+1.4 hit=0.5015 info=+nan z_sur=-0.2 edge=+0.025bp cost=7.84bp gross=+0.78 net=-4.87
+done NZDUSD TICK60 in 0.3 min

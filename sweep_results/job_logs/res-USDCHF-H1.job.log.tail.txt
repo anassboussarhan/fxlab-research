@@ -1,0 +1,17 @@
+USDCHF H1 ordinal_3  ic=+0.0209 t=+4.6 hit=0.5267 info=+0.00248 z_sur=+20.8 edge=+0.359bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 ordinal_4  ic=+0.0167 t=+3.7 hit=0.5179 info=+0.00213 z_sur=+9.2 edge=+0.243bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 ordinal_5  ic=+0.0087 t=+1.9 hit=0.5106 info=-0.00163 z_sur=+4.1 edge=+0.096bp cost=3.65bp gross=+0.19 net=-0.78
+USDCHF H1 ordinal_6  ic=+0.0064 t=+1.4 hit=0.5062 info=-0.02060 z_sur=+2.6 edge=+0.088bp cost=3.65bp gross=-0.09 net=-1.00
+USDCHF H1 markov_1   ic=+0.0267 t=+5.9 hit=0.5251 info=+0.00246 z_sur=+8.9 edge=+0.355bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 markov_2   ic=+0.0236 t=+5.2 hit=0.5233 info=+0.00245 z_sur=+13.0 edge=+0.333bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 markov_3   ic=+0.0193 t=+4.3 hit=0.5196 info=+0.00181 z_sur=+5.5 edge=+0.288bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 markov_5   ic=+0.0027 t=+0.6 hit=0.5035 info=-0.00665 z_sur=-0.2 edge=+0.002bp cost=3.65bp gross=+0.22 net=-0.89
+USDCHF H1 dc_3       ic=+0.0017 t=+0.4 hit=0.5029 info=+0.00044 z_sur=+0.5 edge=-0.006bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 dc_10      ic=-0.0007 t=-0.2 hit=0.4993 info=-0.00014 z_sur=-0.4 edge=-0.004bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 phase      ic=+0.0057 t=+1.3 hit=0.5008 info=+0.00149 z_sur=+2.8 edge=+0.051bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 fracdiff   ic=+0.0107 t=+2.4 hit=0.5071 info=+0.00074 z_sur=+6.1 edge=+0.144bp cost=3.65bp gross=+0.00 net=+0.00
+USDCHF H1 clock      ic=+0.0096 t=+2.1 hit=0.5087 info=-0.00346 z_sur=+3.1 edge=+0.231bp cost=3.65bp gross=-0.40 net=-1.59
+USDCHF H1 simplex_2  ic=+0.0220 t=+4.9 hit=0.5019 info=+nan z_sur=+6.7 edge=+0.157bp cost=3.65bp gross=+0.69 net=-6.85
+USDCHF H1 simplex_4  ic=+0.0019 t=+0.4 hit=0.5024 info=+nan z_sur=+3.9 edge=-0.034bp cost=3.65bp gross=-0.23 net=-7.48
+USDCHF H1 simplex_8  ic=-0.0055 t=-1.2 hit=0.5024 info=+nan z_sur=-1.5 edge=-0.095bp cost=3.65bp gross=-0.32 net=-7.15
+done USDCHF H1 in 0.3 min

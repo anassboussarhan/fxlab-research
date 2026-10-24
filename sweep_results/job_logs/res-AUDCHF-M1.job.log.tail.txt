@@ -1,0 +1,17 @@
+AUDCHF M1 ordinal_3  ic=+0.0216 t=+29.6 hit=0.5178 info=+0.00112 z_sur=+31.2 edge=+0.046bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 ordinal_4  ic=+0.0241 t=+33.1 hit=0.5185 info=+0.00129 z_sur=+21.8 edge=+0.050bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 ordinal_5  ic=+0.0243 t=+33.3 hit=0.5183 info=+0.00133 z_sur=+28.7 edge=+0.050bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 ordinal_6  ic=+0.0214 t=+29.3 hit=0.5157 info=+0.00101 z_sur=+38.8 edge=+0.045bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 markov_1   ic=+0.0224 t=+30.7 hit=0.5157 info=+0.00103 z_sur=+25.5 edge=+0.043bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 markov_2   ic=+0.0249 t=+34.1 hit=0.5177 info=+0.00121 z_sur=+21.9 edge=+0.049bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 markov_3   ic=+0.0261 t=+35.8 hit=0.5184 info=+0.00129 z_sur=+64.2 edge=+0.052bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 markov_5   ic=+0.0239 t=+32.8 hit=0.5167 info=+0.00124 z_sur=+20.5 edge=+0.047bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 dc_3       ic=+0.0226 t=+31.0 hit=0.5152 info=+0.00089 z_sur=+35.9 edge=+0.046bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 dc_10      ic=+0.0072 t=+9.8 hit=0.5057 info=+0.00021 z_sur=+19.8 edge=+0.014bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 phase      ic=+0.0304 t=+41.7 hit=0.5214 info=+0.00162 z_sur=+42.0 edge=+0.059bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 fracdiff   ic=+0.0301 t=+41.3 hit=0.5207 info=+0.00173 z_sur=+78.1 edge=+0.056bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 clock      ic=+0.0024 t=+3.3 hit=0.5014 info=-0.00004 z_sur=+4.5 edge=+0.006bp cost=6.16bp gross=+0.00 net=+0.00
+AUDCHF M1 simplex_2  ic=+0.0079 t=+7.8 hit=0.5021 info=+nan z_sur=+2.2 edge=+0.007bp cost=6.16bp gross=+0.30 net=-3.65
+AUDCHF M1 simplex_4  ic=-0.0044 t=-4.3 hit=0.5018 info=+nan z_sur=-1.2 edge=+0.009bp cost=6.16bp gross=+0.77 net=-2.08
+AUDCHF M1 simplex_8  ic=+0.0099 t=+9.7 hit=0.5026 info=+nan z_sur=+2.0 edge=+0.009bp cost=6.16bp gross=+0.52 net=-1.12
+done AUDCHF M1 in 8.7 min

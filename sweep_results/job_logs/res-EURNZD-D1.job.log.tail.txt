@@ -1,0 +1,17 @@
+EURNZD D1 ordinal_3  ic=+0.0225 t=+0.8 hit=0.4985 info=-0.00853 z_sur=+2.8 edge=+1.764bp cost=9.94bp gross=-0.01 net=-0.90
+EURNZD D1 ordinal_4  ic=-0.0062 t=-0.2 hit=0.5037 info=-0.01858 z_sur=+0.4 edge=+0.026bp cost=9.94bp gross=-0.26 net=-0.83
+EURNZD D1 ordinal_5  ic=-0.0183 t=-0.7 hit=0.4286 info=-0.06378 z_sur=-1.9 edge=-0.553bp cost=9.94bp gross=-0.26 net=-0.53
+EURNZD D1 ordinal_6  ic=-0.0213 t=-0.8 hit=0.6250 info=-0.07314 z_sur=-2.9 edge=-0.048bp cost=9.94bp gross=+0.00 net=+0.00
+EURNZD D1 markov_1   ic=+0.0017 t=+0.1 hit=0.5226 info=-0.00052 z_sur=+1.3 edge=+0.743bp cost=9.94bp gross=+0.00 net=+0.00
+EURNZD D1 markov_2   ic=+0.0405 t=+1.5 hit=0.5058 info=-0.00419 z_sur=+1.8 edge=+0.716bp cost=9.94bp gross=+0.41 net=-0.38
+EURNZD D1 markov_3   ic=+0.0060 t=+0.2 hit=0.5092 info=-0.01042 z_sur=+1.8 edge=-0.787bp cost=9.94bp gross=-0.14 net=-0.71
+EURNZD D1 markov_5   ic=+0.0000 t=+0.0 hit=nan info=-0.06365 z_sur=+0.0 edge=+0.000bp cost=9.94bp gross=+0.00 net=+0.00
+EURNZD D1 dc_3       ic=-0.0376 t=-1.4 hit=0.4803 info=-0.00586 z_sur=-0.2 edge=-1.575bp cost=9.94bp gross=-0.49 net=-0.54
+EURNZD D1 dc_10      ic=-0.0224 t=-0.8 hit=0.5142 info=-0.01487 z_sur=+0.4 edge=-0.208bp cost=9.94bp gross=+0.00 net=+0.00
+EURNZD D1 phase      ic=-0.0146 t=-0.5 hit=0.4934 info=-0.00613 z_sur=+0.8 edge=-0.349bp cost=9.94bp gross=+0.00 net=+0.00
+EURNZD D1 fracdiff   ic=-0.0036 t=-0.1 hit=0.5058 info=-0.01025 z_sur=+0.1 edge=-0.118bp cost=9.94bp gross=-0.01 net=-0.20
+EURNZD D1 clock      ic=-0.0670 t=-2.5 hit=0.4898 info=-0.00620 z_sur=-2.1 edge=-1.878bp cost=9.94bp gross=-0.96 net=-1.24
+EURNZD D1 simplex_2  ic=-0.0005 t=-0.0 hit=0.4760 info=+nan z_sur=-0.3 edge=-0.998bp cost=9.94bp gross=-0.47 net=-2.45
+EURNZD D1 simplex_4  ic=+0.0705 t=+2.6 hit=0.5269 info=+nan z_sur=+2.9 edge=+5.154bp cost=9.94bp gross=+1.38 net=-0.48
+EURNZD D1 simplex_8  ic=+0.0325 t=+1.2 hit=0.5073 info=+nan z_sur=+1.2 edge=+2.802bp cost=9.94bp gross=+0.64 net=-1.10
+done EURNZD D1 in 0.0 min

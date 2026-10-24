@@ -1,0 +1,17 @@
+XAUUSD M30 ordinal_3  ic=+0.0021 t=+0.5 hit=0.5143 info=+0.00239 z_sur=+2.2 edge=+0.012bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 ordinal_4  ic=-0.0024 t=-0.5 hit=0.5076 info=+0.00241 z_sur=-1.7 edge=-0.025bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 ordinal_5  ic=+0.0039 t=+0.8 hit=0.5061 info=+0.00044 z_sur=+0.8 edge=+0.029bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 ordinal_6  ic=-0.0051 t=-1.1 hit=0.5056 info=-0.01029 z_sur=-1.7 edge=-0.020bp cost=4.16bp gross=-0.27 net=-0.88
+XAUUSD M30 markov_1   ic=-0.0003 t=-0.1 hit=0.5154 info=+0.00239 z_sur=+4.1 edge=-0.018bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 markov_2   ic=-0.0017 t=-0.4 hit=0.5134 info=+0.00272 z_sur=-1.4 edge=+0.004bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 markov_3   ic=-0.0034 t=-0.7 hit=0.5092 info=+0.00240 z_sur=-0.4 edge=+0.050bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 markov_5   ic=+0.0022 t=+0.5 hit=0.5017 info=-0.00225 z_sur=-1.7 edge=-0.000bp cost=4.16bp gross=+0.25 net=-0.14
+XAUUSD M30 dc_3       ic=-0.0023 t=-0.5 hit=0.4959 info=+0.00074 z_sur=-1.4 edge=-0.029bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 dc_10      ic=-0.0036 t=-0.8 hit=0.5011 info=-0.00007 z_sur=-1.5 edge=+0.010bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 phase      ic=+0.0069 t=+1.5 hit=0.5009 info=+0.00146 z_sur=+10.1 edge=+0.078bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 fracdiff   ic=-0.0042 t=-0.9 hit=0.4995 info=+0.00077 z_sur=-6.9 edge=-0.035bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 clock      ic=+0.0126 t=+2.7 hit=0.5072 info=-0.00096 z_sur=+6.8 edge=+0.081bp cost=4.16bp gross=+0.00 net=+0.00
+XAUUSD M30 simplex_2  ic=+0.0025 t=+0.5 hit=0.4998 info=+nan z_sur=-0.2 edge=-0.104bp cost=4.16bp gross=-0.41 net=-17.06
+XAUUSD M30 simplex_4  ic=-0.0014 t=-0.3 hit=0.5037 info=+nan z_sur=+5.8 edge=+0.039bp cost=4.16bp gross=+0.13 net=-13.33
+XAUUSD M30 simplex_8  ic=+0.0021 t=+0.5 hit=0.5037 info=+nan z_sur=+0.5 edge=+0.096bp cost=4.16bp gross=-0.14 net=-11.72
+done XAUUSD M30 in 0.3 min

@@ -1,0 +1,17 @@
+AUDJPY M1 ordinal_3  ic=+0.0088 t=+15.0 hit=0.5098 info=+0.00068 z_sur=+74.8 edge=+0.026bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 ordinal_4  ic=+0.0104 t=+17.7 hit=0.5104 info=+0.00082 z_sur=+14.9 edge=+0.028bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 ordinal_5  ic=+0.0113 t=+19.2 hit=0.5096 info=+0.00086 z_sur=+33.6 edge=+0.027bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 ordinal_6  ic=+0.0080 t=+13.8 hit=0.5073 info=+0.00049 z_sur=+41.7 edge=+0.021bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 markov_1   ic=+0.0108 t=+18.4 hit=0.5084 info=+0.00067 z_sur=+14.1 edge=+0.021bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 markov_2   ic=+0.0134 t=+22.9 hit=0.5096 info=+0.00084 z_sur=+21.4 edge=+0.028bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 markov_3   ic=+0.0148 t=+25.4 hit=0.5106 info=+0.00091 z_sur=+25.6 edge=+0.031bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 markov_5   ic=+0.0144 t=+24.5 hit=0.5092 info=+0.00086 z_sur=+33.1 edge=+0.030bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 dc_3       ic=+0.0179 t=+30.6 hit=0.5149 info=+0.00089 z_sur=+26.5 edge=+0.040bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 dc_10      ic=+0.0059 t=+10.0 hit=0.5067 info=+0.00024 z_sur=+5.5 edge=+0.012bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 phase      ic=+0.0195 t=+33.4 hit=0.5173 info=+0.00133 z_sur=+89.8 edge=+0.041bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 fracdiff   ic=+0.0239 t=+40.8 hit=0.5203 info=+0.00170 z_sur=+70.7 edge=+0.051bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 clock      ic=+0.0006 t=+1.0 hit=0.5000 info=-0.00006 z_sur=+0.5 edge=+0.002bp cost=5.70bp gross=+0.00 net=+0.00
+AUDJPY M1 simplex_2  ic=-0.0031 t=-3.5 hit=0.5013 info=+nan z_sur=-0.7 edge=+0.002bp cost=5.70bp gross=-0.32 net=-5.80
+AUDJPY M1 simplex_4  ic=+0.0022 t=+2.5 hit=0.5016 info=+nan z_sur=+2.9 edge=+0.005bp cost=5.70bp gross=+0.11 net=-3.32
+AUDJPY M1 simplex_8  ic=+0.0004 t=+0.5 hit=0.5023 info=+nan z_sur=+0.9 edge=+0.005bp cost=5.70bp gross=-0.42 net=-1.81
+done AUDJPY M1 in 11.0 min

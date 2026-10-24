@@ -1,0 +1,17 @@
+CHFJPY D1 ordinal_3  ic=+0.0037 t=+0.2 hit=0.5028 info=-0.00248 z_sur=+0.8 edge=+1.215bp cost=8.64bp gross=-0.33 net=-0.92
+CHFJPY D1 ordinal_4  ic=+0.0282 t=+1.3 hit=0.5016 info=-0.01523 z_sur=+3.9 edge=+1.653bp cost=8.64bp gross=+0.41 net=-0.31
+CHFJPY D1 ordinal_5  ic=+0.0004 t=+0.0 hit=0.5180 info=-0.04928 z_sur=+0.5 edge=-0.242bp cost=8.64bp gross=+0.14 net=-0.18
+CHFJPY D1 ordinal_6  ic=+0.0096 t=+0.4 hit=0.5909 info=-0.05465 z_sur=-0.0 edge=+0.098bp cost=8.64bp gross=-0.14 net=-0.30
+CHFJPY D1 markov_1   ic=-0.0159 t=-0.7 hit=0.5014 info=-0.00096 z_sur=-1.4 edge=-0.155bp cost=8.64bp gross=+0.00 net=+0.00
+CHFJPY D1 markov_2   ic=+0.0201 t=+0.9 hit=0.5193 info=-0.00296 z_sur=+6.5 edge=+1.803bp cost=8.64bp gross=+0.17 net=-0.64
+CHFJPY D1 markov_3   ic=-0.0081 t=-0.4 hit=0.4995 info=-0.01761 z_sur=-0.1 edge=-0.332bp cost=8.64bp gross=-0.18 net=-0.69
+CHFJPY D1 markov_5   ic=+0.0000 t=+0.0 hit=nan info=-0.09849 z_sur=+0.0 edge=+0.000bp cost=8.64bp gross=+0.00 net=+0.00
+CHFJPY D1 dc_3       ic=-0.0060 t=-0.3 hit=0.5206 info=-0.00143 z_sur=-0.3 edge=+1.023bp cost=8.64bp gross=-0.16 net=-0.31
+CHFJPY D1 dc_10      ic=-0.0037 t=-0.2 hit=0.4946 info=-0.00411 z_sur=-0.4 edge=+0.162bp cost=8.64bp gross=-0.34 net=-0.43
+CHFJPY D1 phase      ic=-0.0065 t=-0.3 hit=0.4911 info=-0.00477 z_sur=-0.1 edge=-1.898bp cost=8.64bp gross=+0.02 net=-0.31
+CHFJPY D1 fracdiff   ic=+0.0161 t=+0.7 hit=0.5005 info=-0.00676 z_sur=+2.0 edge=-0.424bp cost=8.64bp gross=+0.09 net=-0.55
+CHFJPY D1 clock      ic=+0.0289 t=+1.3 hit=0.4873 info=-0.00282 z_sur=+2.7 edge=+0.617bp cost=8.64bp gross=+0.39 net=+0.06
+CHFJPY D1 simplex_2  ic=+0.0019 t=+0.1 hit=0.5071 info=+nan z_sur=-0.4 edge=+0.729bp cost=8.64bp gross=+0.05 net=-1.08
+CHFJPY D1 simplex_4  ic=-0.0085 t=-0.4 hit=0.4760 info=+nan z_sur=+0.3 edge=-1.702bp cost=8.64bp gross=-0.51 net=-1.67
+CHFJPY D1 simplex_8  ic=+0.0209 t=+1.0 hit=0.4981 info=+nan z_sur=+0.4 edge=+2.044bp cost=8.64bp gross=+0.39 net=-1.00
+done CHFJPY D1 in 0.0 min

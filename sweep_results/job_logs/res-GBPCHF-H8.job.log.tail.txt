@@ -1,0 +1,17 @@
+GBPCHF H8 ordinal_3  ic=-0.0007 t=-0.1 hit=0.5029 info=-0.00174 z_sur=+0.4 edge=+0.011bp cost=4.62bp gross=-0.39 net=-0.89
+GBPCHF H8 ordinal_4  ic=+0.0009 t=+0.1 hit=0.4975 info=-0.00504 z_sur=+3.1 edge=+0.171bp cost=4.62bp gross=+0.02 net=-0.74
+GBPCHF H8 ordinal_5  ic=+0.0077 t=+0.6 hit=0.5069 info=-0.02516 z_sur=+2.2 edge=+0.153bp cost=4.62bp gross=-0.09 net=-0.97
+GBPCHF H8 ordinal_6  ic=+0.0026 t=+0.2 hit=0.4917 info=-0.05362 z_sur=+0.8 edge=-0.085bp cost=4.62bp gross=+0.23 net=-0.16
+GBPCHF H8 markov_1   ic=+0.0044 t=+0.4 hit=0.5037 info=-0.00016 z_sur=+1.4 edge=+0.173bp cost=4.62bp gross=+0.00 net=+0.00
+GBPCHF H8 markov_2   ic=-0.0005 t=-0.0 hit=0.5011 info=-0.00169 z_sur=+0.0 edge=+0.314bp cost=4.62bp gross=-0.16 net=-0.66
+GBPCHF H8 markov_3   ic=-0.0085 t=-0.7 hit=0.5052 info=-0.00687 z_sur=-0.6 edge=-0.022bp cost=4.62bp gross=-0.14 net=-1.12
+GBPCHF H8 markov_5   ic=-0.0023 t=-0.2 hit=0.4954 info=-0.05612 z_sur=-1.8 edge=+0.011bp cost=4.62bp gross=+0.00 net=+0.00
+GBPCHF H8 dc_3       ic=-0.0014 t=-0.1 hit=0.5018 info=-0.00192 z_sur=+0.8 edge=+0.202bp cost=4.62bp gross=-0.22 net=-0.35
+GBPCHF H8 dc_10      ic=+0.0047 t=+0.4 hit=0.5004 info=-0.00216 z_sur=+0.2 edge=-0.346bp cost=4.62bp gross=+0.29 net=+0.17
+GBPCHF H8 phase      ic=-0.0123 t=-1.0 hit=0.5024 info=-0.00124 z_sur=-0.4 edge=+0.282bp cost=4.62bp gross=-0.25 net=-0.39
+GBPCHF H8 fracdiff   ic=-0.0117 t=-1.0 hit=0.5009 info=-0.00423 z_sur=-1.4 edge=+0.412bp cost=4.62bp gross=-0.67 net=-1.11
+GBPCHF H8 clock      ic=+0.0362 t=+3.0 hit=0.5159 info=-0.00280 z_sur=+5.0 edge=+0.900bp cost=4.62bp gross=+0.87 net=+0.08
+GBPCHF H8 simplex_2  ic=-0.0104 t=-0.9 hit=0.4957 info=+nan z_sur=-1.8 edge=-0.138bp cost=4.62bp gross=-0.01 net=-1.95
+GBPCHF H8 simplex_4  ic=-0.0075 t=-0.6 hit=0.4971 info=+nan z_sur=-0.5 edge=+0.200bp cost=4.62bp gross=+0.21 net=-1.46
+GBPCHF H8 simplex_8  ic=-0.0284 t=-2.3 hit=0.4926 info=+nan z_sur=-1.9 edge=-0.522bp cost=4.62bp gross=-0.51 net=-2.25
+done GBPCHF H8 in 0.1 min

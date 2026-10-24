@@ -1,0 +1,17 @@
+CADJPY M5 ordinal_3  ic=+0.0066 t=+5.1 hit=0.5193 info=+0.00160 z_sur=+4.6 edge=+0.083bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 ordinal_4  ic=+0.0027 t=+2.1 hit=0.5193 info=+0.00180 z_sur=+1.9 edge=+0.077bp cost=6.49bp gross=-0.54 net=-3.79
+CADJPY M5 ordinal_5  ic=+0.0026 t=+2.0 hit=0.5162 info=+0.00166 z_sur=+1.1 edge=+0.071bp cost=6.49bp gross=-0.01 net=-3.57
+CADJPY M5 ordinal_6  ic=+0.0018 t=+1.4 hit=0.5110 info=-0.00022 z_sur=-1.2 edge=+0.049bp cost=6.49bp gross=-0.01 net=-2.39
+CADJPY M5 markov_1   ic=+0.0152 t=+11.7 hit=0.5174 info=+0.00148 z_sur=+17.2 edge=+0.090bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 markov_2   ic=+0.0125 t=+9.5 hit=0.5197 info=+0.00184 z_sur=+6.3 edge=+0.092bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 markov_3   ic=+0.0088 t=+6.7 hit=0.5190 info=+0.00189 z_sur=+3.1 edge=+0.088bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 markov_5   ic=+0.0012 t=+0.9 hit=0.5117 info=+0.00128 z_sur=+17.8 edge=+0.062bp cost=6.49bp gross=-0.47 net=-2.93
+CADJPY M5 dc_3       ic=+0.0090 t=+6.9 hit=0.5116 info=+0.00082 z_sur=+15.9 edge=+0.043bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 dc_10      ic=+0.0014 t=+1.0 hit=0.5023 info=+0.00011 z_sur=-0.6 edge=+0.009bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 phase      ic=+0.0114 t=+8.7 hit=0.5205 info=+0.00203 z_sur=+5.1 edge=+0.071bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 fracdiff   ic=+0.0088 t=+6.8 hit=0.5184 info=+0.00146 z_sur=+2.9 edge=+0.071bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 clock      ic=+0.0028 t=+2.1 hit=0.5010 info=-0.00028 z_sur=+0.5 edge=+0.009bp cost=6.49bp gross=+0.00 net=+0.00
+CADJPY M5 simplex_2  ic=-0.0007 t=-0.6 hit=0.5015 info=+nan z_sur=+0.6 edge=+0.018bp cost=6.49bp gross=-0.39 net=-10.70
+CADJPY M5 simplex_4  ic=+0.0108 t=+8.3 hit=0.5022 info=+nan z_sur=+11.5 edge=+0.019bp cost=6.49bp gross=+0.97 net=-7.34
+CADJPY M5 simplex_8  ic=+0.0069 t=+5.3 hit=0.5030 info=+nan z_sur=+8.2 edge=+0.025bp cost=6.49bp gross=+0.01 net=-2.73
+done CADJPY M5 in 5.2 min

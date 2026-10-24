@@ -1,0 +1,17 @@
+AUDCHF M10 ordinal_3  ic=+0.0339 t=+14.7 hit=0.5252 info=+0.00256 z_sur=+13.8 edge=+0.209bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 ordinal_4  ic=+0.0327 t=+14.2 hit=0.5251 info=+0.00253 z_sur=+33.5 edge=+0.204bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 ordinal_5  ic=+0.0271 t=+11.8 hit=0.5193 info=+0.00204 z_sur=+119.2 edge=+0.148bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 ordinal_6  ic=+0.0184 t=+8.0 hit=0.5155 info=-0.00162 z_sur=+30.5 edge=+0.117bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 markov_1   ic=+0.0364 t=+15.8 hit=0.5233 info=+0.00256 z_sur=+16.8 edge=+0.201bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 markov_2   ic=+0.0373 t=+16.2 hit=0.5273 info=+0.00288 z_sur=+11.6 edge=+0.206bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 markov_3   ic=+0.0344 t=+14.9 hit=0.5257 info=+0.00280 z_sur=+37.4 edge=+0.202bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 markov_5   ic=+0.0199 t=+8.6 hit=0.5162 info=+0.00150 z_sur=+7.8 edge=+0.124bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 dc_3       ic=+0.0123 t=+5.4 hit=0.5098 info=+0.00064 z_sur=+10.6 edge=+0.068bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 dc_10      ic=+0.0013 t=+0.6 hit=0.5003 info=-0.00003 z_sur=+0.8 edge=+0.002bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 phase      ic=+0.0300 t=+13.0 hit=0.5222 info=+0.00239 z_sur=+56.7 edge=+0.163bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 fracdiff   ic=+0.0219 t=+9.5 hit=0.5159 info=+0.00128 z_sur=+12.3 edge=+0.107bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 clock      ic=+0.0052 t=+2.2 hit=0.5046 info=-0.00044 z_sur=+2.7 edge=+0.048bp cost=6.23bp gross=+0.00 net=+0.00
+AUDCHF M10 simplex_2  ic=+0.0030 t=+1.3 hit=0.5012 info=+nan z_sur=+2.8 edge=+0.003bp cost=6.23bp gross=-0.08 net=-13.10
+AUDCHF M10 simplex_4  ic=+0.0106 t=+4.6 hit=0.5035 info=+nan z_sur=+0.6 edge=+0.026bp cost=6.23bp gross=-0.21 net=-8.56
+AUDCHF M10 simplex_8  ic=+0.0031 t=+1.4 hit=0.5051 info=+nan z_sur=+0.7 edge=+0.037bp cost=6.23bp gross=-0.15 net=-3.91
+done AUDCHF M10 in 1.4 min

@@ -1,0 +1,17 @@
+EURCHF VOLA60 ordinal_3  ic=+0.0109 t=+2.4 hit=0.5252 info=+0.00314 z_sur=+10.9 edge=+0.132bp cost=2.82bp gross=+0.00 net=+0.00
+EURCHF VOLA60 ordinal_4  ic=+0.0086 t=+1.9 hit=0.5179 info=+0.00307 z_sur=+10.4 edge=+0.133bp cost=2.82bp gross=+0.23 net=-2.68
+EURCHF VOLA60 ordinal_5  ic=+0.0063 t=+1.4 hit=0.5125 info=-0.00078 z_sur=+3.9 edge=+0.024bp cost=2.82bp gross=+0.46 net=-1.63
+EURCHF VOLA60 ordinal_6  ic=+0.0063 t=+1.4 hit=0.5121 info=-0.02245 z_sur=+2.2 edge=+0.055bp cost=2.82bp gross=-0.54 net=-2.50
+EURCHF VOLA60 markov_1   ic=+0.0193 t=+4.2 hit=0.5257 info=+0.00305 z_sur=+19.8 edge=+0.265bp cost=2.82bp gross=+0.00 net=+0.00
+EURCHF VOLA60 markov_2   ic=+0.0127 t=+2.8 hit=0.5246 info=+0.00321 z_sur=+13.4 edge=+0.207bp cost=2.82bp gross=+0.00 net=+0.00
+EURCHF VOLA60 markov_3   ic=+0.0093 t=+2.0 hit=0.5191 info=+0.00290 z_sur=+5.3 edge=+0.146bp cost=2.82bp gross=+0.00 net=+0.00
+EURCHF VOLA60 markov_5   ic=+0.0053 t=+1.2 hit=0.5081 info=-0.00586 z_sur=+10.0 edge=+0.063bp cost=2.82bp gross=-0.17 net=-2.62
+EURCHF VOLA60 dc_3       ic=-0.0037 t=-0.8 hit=0.5027 info=+0.00040 z_sur=-0.8 edge=-0.016bp cost=2.82bp gross=+0.00 net=+0.00
+EURCHF VOLA60 dc_10      ic=+0.0013 t=+0.3 hit=0.5011 info=-0.00050 z_sur=+2.4 edge=+0.036bp cost=2.82bp gross=+0.00 net=+0.00
+EURCHF VOLA60 phase      ic=+0.0086 t=+1.9 hit=0.5166 info=+0.00318 z_sur=+3.4 edge=+0.142bp cost=2.82bp gross=+0.00 net=+0.00
+EURCHF VOLA60 fracdiff   ic=+0.0116 t=+2.5 hit=0.5129 info=+0.00224 z_sur=+4.5 edge=+0.132bp cost=2.82bp gross=+0.00 net=+0.00
+EURCHF VOLA60 clock      ic=+0.0076 t=+1.7 hit=0.5063 info=-0.00441 z_sur=+2.2 edge=+0.162bp cost=2.82bp gross=-0.18 net=-1.20
+EURCHF VOLA60 simplex_2  ic=+0.0442 t=+9.7 hit=0.5068 info=+nan z_sur=+0.7 edge=+0.110bp cost=2.82bp gross=+0.92 net=-7.48
+EURCHF VOLA60 simplex_4  ic=+0.0128 t=+2.8 hit=0.5044 info=+nan z_sur=-0.3 edge=+0.041bp cost=2.82bp gross=-0.35 net=-4.98
+EURCHF VOLA60 simplex_8  ic=+0.0125 t=+2.7 hit=0.5096 info=+nan z_sur=+0.0 edge=+0.137bp cost=2.82bp gross=+0.14 net=-2.94
+done EURCHF VOLA60 in 0.3 min

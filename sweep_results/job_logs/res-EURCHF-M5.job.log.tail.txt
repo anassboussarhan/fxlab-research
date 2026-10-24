@@ -1,0 +1,17 @@
+EURCHF M5 ordinal_3  ic=+0.0259 t=+19.9 hit=0.5355 info=+0.00485 z_sur=+42.7 edge=+0.106bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 ordinal_4  ic=+0.0269 t=+20.6 hit=0.5349 info=+0.00543 z_sur=+52.0 edge=+0.101bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 ordinal_5  ic=+0.0249 t=+19.0 hit=0.5338 info=+0.00550 z_sur=+24.3 edge=+0.096bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 ordinal_6  ic=+0.0179 t=+13.7 hit=0.5275 info=+0.00359 z_sur=+57.2 edge=+0.082bp cost=2.87bp gross=-0.23 net=-2.44
+EURCHF M5 markov_1   ic=+0.0262 t=+20.1 hit=0.5297 info=+0.00406 z_sur=+81.0 edge=+0.097bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 markov_2   ic=+0.0282 t=+21.6 hit=0.5345 info=+0.00459 z_sur=+39.2 edge=+0.111bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 markov_3   ic=+0.0281 t=+21.5 hit=0.5353 info=+0.00482 z_sur=+60.1 edge=+0.112bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 markov_5   ic=+0.0190 t=+14.5 hit=0.5289 info=+0.00430 z_sur=+53.9 edge=+0.089bp cost=2.87bp gross=-0.35 net=-1.90
+EURCHF M5 dc_3       ic=+0.0168 t=+12.8 hit=0.5174 info=+0.00125 z_sur=+13.8 edge=+0.068bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 dc_10      ic=-0.0004 t=-0.3 hit=0.5042 info=+0.00014 z_sur=-1.8 edge=+0.005bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 phase      ic=+0.0294 t=+22.5 hit=0.5355 info=+0.00486 z_sur=+57.1 edge=+0.117bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 fracdiff   ic=+0.0269 t=+20.6 hit=0.5296 info=+0.00355 z_sur=+78.8 edge=+0.100bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 clock      ic=+0.0013 t=+1.0 hit=0.5021 info=-0.00024 z_sur=+0.8 edge=+0.012bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M5 simplex_2  ic=+0.0605 t=+46.3 hit=0.5052 info=+nan z_sur=+1.9 edge=+0.021bp cost=2.87bp gross=+0.59 net=-10.19
+EURCHF M5 simplex_4  ic=-0.0037 t=-2.9 hit=0.5084 info=+nan z_sur=-1.0 edge=+0.024bp cost=2.87bp gross=+0.21 net=-6.60
+EURCHF M5 simplex_8  ic=-0.0383 t=-29.3 hit=0.5099 info=+nan z_sur=-0.6 edge=+0.033bp cost=2.87bp gross=+0.98 net=-4.89
+done EURCHF M5 in 5.1 min

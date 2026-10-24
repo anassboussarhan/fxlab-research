@@ -1,0 +1,17 @@
+GBPAUD M1 ordinal_3  ic=+0.0240 t=+33.1 hit=0.5155 info=+0.00086 z_sur=+29.6 edge=+0.045bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 ordinal_4  ic=+0.0264 t=+36.4 hit=0.5164 info=+0.00101 z_sur=+47.7 edge=+0.047bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 ordinal_5  ic=+0.0272 t=+37.4 hit=0.5164 info=+0.00106 z_sur=+63.3 edge=+0.047bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 ordinal_6  ic=+0.0249 t=+34.2 hit=0.5150 info=+0.00076 z_sur=+55.5 edge=+0.044bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 markov_1   ic=+0.0246 t=+33.8 hit=0.5130 info=+0.00073 z_sur=+64.5 edge=+0.041bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 markov_2   ic=+0.0277 t=+38.1 hit=0.5154 info=+0.00091 z_sur=+125.1 edge=+0.049bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 markov_3   ic=+0.0290 t=+39.9 hit=0.5161 info=+0.00099 z_sur=+43.1 edge=+0.050bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 markov_5   ic=+0.0287 t=+39.5 hit=0.5155 info=+0.00097 z_sur=+36.5 edge=+0.047bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 dc_3       ic=+0.0251 t=+34.5 hit=0.5153 info=+0.00090 z_sur=+27.7 edge=+0.046bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 dc_10      ic=+0.0061 t=+8.4 hit=0.5073 info=+0.00021 z_sur=+5.7 edge=+0.011bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 phase      ic=+0.0318 t=+43.7 hit=0.5204 info=+0.00144 z_sur=+63.2 edge=+0.056bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 fracdiff   ic=+0.0302 t=+41.5 hit=0.5192 info=+0.00155 z_sur=+42.8 edge=+0.050bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 clock      ic=+0.0015 t=+2.1 hit=0.5012 info=-0.00004 z_sur=+6.0 edge=+0.004bp cost=4.66bp gross=+0.00 net=+0.00
+GBPAUD M1 simplex_2  ic=+0.0039 t=+3.8 hit=0.5018 info=+nan z_sur=+3.6 edge=+0.006bp cost=4.66bp gross=-0.03 net=-4.22
+GBPAUD M1 simplex_4  ic=+0.0037 t=+3.6 hit=0.5016 info=+nan z_sur=+4.3 edge=+0.007bp cost=4.66bp gross=-0.20 net=-1.85
+GBPAUD M1 simplex_8  ic=-0.0006 t=-0.6 hit=0.5023 info=+nan z_sur=-6.6 edge=+0.007bp cost=4.66bp gross=+0.20 net=-0.76
+done GBPAUD M1 in 9.5 min

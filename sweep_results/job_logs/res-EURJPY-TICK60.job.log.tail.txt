@@ -1,0 +1,17 @@
+EURJPY TICK60 ordinal_3  ic=-0.0088 t=-1.9 hit=0.4983 info=+0.00032 z_sur=-6.9 edge=-0.167bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 ordinal_4  ic=-0.0062 t=-1.4 hit=0.4988 info=-0.00040 z_sur=-4.9 edge=-0.030bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 ordinal_5  ic=-0.0051 t=-1.1 hit=0.4979 info=-0.00439 z_sur=-1.6 edge=-0.051bp cost=3.08bp gross=-0.19 net=-1.73
+EURJPY TICK60 ordinal_6  ic=-0.0057 t=-1.2 hit=0.5017 info=-0.02500 z_sur=-1.2 edge=+0.042bp cost=3.08bp gross=-0.42 net=-1.59
+EURJPY TICK60 markov_1   ic=-0.0032 t=-0.7 hit=0.5041 info=+0.00053 z_sur=+0.6 edge=-0.026bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 markov_2   ic=-0.0007 t=-0.2 hit=0.4971 info=+0.00031 z_sur=+0.0 edge=-0.025bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 markov_3   ic=-0.0062 t=-1.3 hit=0.4971 info=-0.00064 z_sur=-0.6 edge=-0.088bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 markov_5   ic=-0.0103 t=-2.2 hit=0.4971 info=-0.00895 z_sur=-2.5 edge=-0.129bp cost=3.08bp gross=-0.34 net=-2.03
+EURJPY TICK60 dc_3       ic=+0.0097 t=+2.1 hit=0.5008 info=-0.00007 z_sur=+24.6 edge=+0.103bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 dc_10      ic=-0.0041 t=-0.9 hit=0.5012 info=-0.00027 z_sur=-0.2 edge=-0.038bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 phase      ic=+0.0064 t=+1.4 hit=0.5011 info=+0.00031 z_sur=+4.6 edge=+0.090bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 fracdiff   ic=+0.0021 t=+0.5 hit=0.5019 info=-0.00026 z_sur=-0.7 edge=-0.049bp cost=3.08bp gross=+0.00 net=+0.00
+EURJPY TICK60 clock      ic=-0.0011 t=-0.2 hit=0.4979 info=-0.00450 z_sur=+0.4 edge=-0.026bp cost=3.08bp gross=+0.37 net=-1.18
+EURJPY TICK60 simplex_2  ic=-0.0035 t=-0.8 hit=0.5011 info=+nan z_sur=-1.1 edge=+0.002bp cost=3.08bp gross=+0.06 net=-5.93
+EURJPY TICK60 simplex_4  ic=-0.0073 t=-1.6 hit=0.4996 info=+nan z_sur=-1.6 edge=-0.084bp cost=3.08bp gross=-0.43 net=-6.10
+EURJPY TICK60 simplex_8  ic=-0.0068 t=-1.5 hit=0.5006 info=+nan z_sur=-3.4 edge=-0.025bp cost=3.08bp gross=-0.54 net=-6.22
+done EURJPY TICK60 in 0.3 min

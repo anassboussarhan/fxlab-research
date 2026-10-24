@@ -1,0 +1,17 @@
+CHFJPY TICK60 ordinal_3  ic=+0.0196 t=+4.3 hit=0.5136 info=+0.00120 z_sur=+7.5 edge=+0.274bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 ordinal_4  ic=+0.0072 t=+1.6 hit=0.5113 info=+0.00055 z_sur=+5.4 edge=+0.194bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 ordinal_5  ic=+0.0080 t=+1.8 hit=0.5074 info=-0.00300 z_sur=+4.0 edge=+0.138bp cost=5.38bp gross=-0.60 net=-1.37
+CHFJPY TICK60 ordinal_6  ic=+0.0060 t=+1.3 hit=0.5063 info=-0.02190 z_sur=+6.6 edge=+0.063bp cost=5.38bp gross=+0.56 net=-0.30
+CHFJPY TICK60 markov_1   ic=+0.0058 t=+1.3 hit=0.5111 info=+0.00069 z_sur=+0.6 edge=+0.067bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 markov_2   ic=+0.0133 t=+2.9 hit=0.5105 info=+0.00074 z_sur=+2.8 edge=+0.187bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 markov_3   ic=+0.0069 t=+1.5 hit=0.5045 info=+0.00012 z_sur=+1.1 edge=+0.001bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 markov_5   ic=+0.0043 t=+1.0 hit=0.5038 info=-0.00828 z_sur=+1.0 edge=+0.116bp cost=5.38bp gross=-0.20 net=-0.96
+CHFJPY TICK60 dc_3       ic=+0.0048 t=+1.1 hit=0.5007 info=+0.00005 z_sur=+0.8 edge=+0.004bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 dc_10      ic=-0.0028 t=-0.6 hit=0.5012 info=-0.00021 z_sur=-1.6 edge=+0.009bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 phase      ic=+0.0064 t=+1.4 hit=0.5046 info=+0.00071 z_sur=+3.4 edge=+0.063bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 fracdiff   ic=+0.0097 t=+2.1 hit=0.5058 info=+0.00023 z_sur=+19.4 edge=+0.132bp cost=5.38bp gross=+0.00 net=+0.00
+CHFJPY TICK60 clock      ic=+0.0056 t=+1.2 hit=0.5018 info=-0.00432 z_sur=+4.3 edge=+0.073bp cost=5.38bp gross=-0.21 net=-0.67
+CHFJPY TICK60 simplex_2  ic=+0.0057 t=+1.3 hit=0.5020 info=+nan z_sur=+3.4 edge=+0.061bp cost=5.38bp gross=+0.27 net=-7.96
+CHFJPY TICK60 simplex_4  ic=+0.0079 t=+1.7 hit=0.5001 info=+nan z_sur=+2.3 edge=+0.040bp cost=5.38bp gross=+0.14 net=-7.40
+CHFJPY TICK60 simplex_8  ic=+0.0168 t=+3.7 hit=0.5014 info=+nan z_sur=+4.2 edge=+0.128bp cost=5.38bp gross=+0.94 net=-4.22
+done CHFJPY TICK60 in 0.3 min

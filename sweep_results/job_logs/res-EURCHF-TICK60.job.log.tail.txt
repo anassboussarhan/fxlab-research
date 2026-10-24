@@ -1,0 +1,17 @@
+EURCHF TICK60 ordinal_3  ic=+0.0146 t=+3.2 hit=0.5210 info=+0.00234 z_sur=+13.2 edge=+0.152bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 ordinal_4  ic=+0.0053 t=+1.2 hit=0.5175 info=+0.00152 z_sur=+6.0 edge=+0.080bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 ordinal_5  ic=+0.0087 t=+1.9 hit=0.5119 info=-0.00218 z_sur=+3.9 edge=+0.057bp cost=2.81bp gross=-0.32 net=-2.73
+EURCHF TICK60 ordinal_6  ic=+0.0030 t=+0.7 hit=0.5120 info=-0.02287 z_sur=+0.5 edge=+0.047bp cost=2.81bp gross=+0.00 net=-2.28
+EURCHF TICK60 markov_1   ic=+0.0225 t=+5.0 hit=0.5212 info=+0.00214 z_sur=+9.9 edge=+0.225bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 markov_2   ic=+0.0218 t=+4.8 hit=0.5242 info=+0.00233 z_sur=+6.7 edge=+0.260bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 markov_3   ic=+0.0166 t=+3.7 hit=0.5172 info=+0.00164 z_sur=+4.0 edge=+0.223bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 markov_5   ic=+0.0033 t=+0.7 hit=0.5079 info=-0.00755 z_sur=+0.5 edge=+0.059bp cost=2.81bp gross=-0.08 net=-2.44
+EURCHF TICK60 dc_3       ic=-0.0004 t=-0.1 hit=0.5031 info=+0.00034 z_sur=+0.5 edge=+0.019bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 dc_10      ic=+0.0010 t=+0.2 hit=0.5034 info=-0.00035 z_sur=+0.8 edge=+0.084bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 phase      ic=+0.0084 t=+1.8 hit=0.5170 info=+0.00218 z_sur=+7.1 edge=+0.102bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 fracdiff   ic=+0.0125 t=+2.7 hit=0.5086 info=+0.00098 z_sur=+10.8 edge=+0.149bp cost=2.81bp gross=+0.00 net=+0.00
+EURCHF TICK60 clock      ic=+0.0034 t=+0.7 hit=0.5033 info=-0.00397 z_sur=+0.7 edge=+0.088bp cost=2.81bp gross=-0.26 net=-1.28
+EURCHF TICK60 simplex_2  ic=+0.0069 t=+1.5 hit=0.5058 info=+nan z_sur=-0.0 edge=+0.061bp cost=2.81bp gross=+0.37 net=-7.55
+EURCHF TICK60 simplex_4  ic=+0.0158 t=+3.5 hit=0.5057 info=+nan z_sur=+0.8 edge=+0.003bp cost=2.81bp gross=+0.34 net=-5.96
+EURCHF TICK60 simplex_8  ic=+0.0101 t=+2.2 hit=0.5074 info=+nan z_sur=+0.3 edge=+0.042bp cost=2.81bp gross=+0.07 net=-5.06
+done EURCHF TICK60 in 0.2 min

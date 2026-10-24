@@ -1,0 +1,17 @@
+USDCHF M10 ordinal_3  ic=+0.0209 t=+11.3 hit=0.5254 info=+0.00239 z_sur=+17.8 edge=+0.148bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 ordinal_4  ic=+0.0191 t=+10.4 hit=0.5232 info=+0.00260 z_sur=+14.1 edge=+0.138bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 ordinal_5  ic=+0.0117 t=+6.4 hit=0.5209 info=+0.00219 z_sur=+30.3 edge=+0.119bp cost=3.64bp gross=-0.15 net=-2.43
+USDCHF M10 ordinal_6  ic=+0.0078 t=+4.3 hit=0.5149 info=-0.00156 z_sur=+4.5 edge=+0.076bp cost=3.64bp gross=+0.36 net=-2.64
+USDCHF M10 markov_1   ic=+0.0223 t=+12.1 hit=0.5197 info=+0.00184 z_sur=+30.5 edge=+0.139bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 markov_2   ic=+0.0225 t=+12.2 hit=0.5240 info=+0.00248 z_sur=+18.6 edge=+0.152bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 markov_3   ic=+0.0214 t=+11.6 hit=0.5224 info=+0.00248 z_sur=+13.6 edge=+0.146bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 markov_5   ic=+0.0111 t=+6.0 hit=0.5138 info=+0.00123 z_sur=+8.1 edge=+0.080bp cost=3.64bp gross=+0.14 net=-4.16
+USDCHF M10 dc_3       ic=+0.0070 t=+3.8 hit=0.5129 info=+0.00105 z_sur=+33.5 edge=+0.050bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 dc_10      ic=-0.0018 t=-1.0 hit=0.4994 info=+0.00010 z_sur=-3.4 edge=-0.009bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 phase      ic=+0.0199 t=+10.8 hit=0.5248 info=+0.00279 z_sur=+17.5 edge=+0.132bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 fracdiff   ic=+0.0122 t=+6.6 hit=0.5194 info=+0.00181 z_sur=+8.4 edge=+0.089bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 clock      ic=+0.0038 t=+2.0 hit=0.5032 info=-0.00053 z_sur=+2.1 edge=+0.029bp cost=3.64bp gross=+0.00 net=+0.00
+USDCHF M10 simplex_2  ic=-0.0028 t=-1.5 hit=0.5014 info=+nan z_sur=-0.7 edge=+0.011bp cost=3.64bp gross=+0.12 net=-17.01
+USDCHF M10 simplex_4  ic=-0.0020 t=-1.1 hit=0.5014 info=+nan z_sur=-0.8 edge=+0.005bp cost=3.64bp gross=+0.38 net=-12.81
+USDCHF M10 simplex_8  ic=+0.0199 t=+10.8 hit=0.5041 info=+nan z_sur=+1.0 edge=+0.037bp cost=3.64bp gross=+0.88 net=-8.16
+done USDCHF M10 in 2.5 min

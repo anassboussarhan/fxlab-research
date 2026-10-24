@@ -1,0 +1,17 @@
+GBPJPY VOLA60 ordinal_3  ic=+0.0013 t=+0.3 hit=0.5016 info=+0.00063 z_sur=+0.5 edge=-0.015bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 ordinal_4  ic=+0.0067 t=+1.5 hit=0.5027 info=-0.00009 z_sur=+3.6 edge=+0.079bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 ordinal_5  ic=+0.0063 t=+1.4 hit=0.5035 info=-0.00358 z_sur=+3.9 edge=+0.227bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 ordinal_6  ic=+0.0008 t=+0.2 hit=0.5037 info=-0.02114 z_sur=+0.5 edge=+0.081bp cost=4.15bp gross=-0.00 net=-0.89
+GBPJPY VOLA60 markov_1   ic=+0.0036 t=+0.8 hit=0.5040 info=+0.00075 z_sur=-0.1 edge=-0.016bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 markov_2   ic=+0.0013 t=+0.3 hit=0.5055 info=+0.00073 z_sur=+0.2 edge=+0.036bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 markov_3   ic=+0.0099 t=+2.2 hit=0.5075 info=+0.00007 z_sur=+5.9 edge=+0.208bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 markov_5   ic=+0.0025 t=+0.6 hit=0.5034 info=-0.00940 z_sur=+2.2 edge=+0.138bp cost=4.15bp gross=-0.13 net=-1.25
+GBPJPY VOLA60 dc_3       ic=+0.0007 t=+0.2 hit=0.5013 info=-0.00031 z_sur=-2.8 edge=+0.018bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 dc_10      ic=+0.0007 t=+0.2 hit=0.4994 info=-0.00041 z_sur=+1.8 edge=-0.002bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 phase      ic=+0.0014 t=+0.3 hit=0.5015 info=+0.00032 z_sur=+0.6 edge=-0.012bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 fracdiff   ic=+0.0049 t=+1.1 hit=0.5003 info=-0.00029 z_sur=+1.3 edge=+0.073bp cost=4.15bp gross=+0.00 net=+0.00
+GBPJPY VOLA60 clock      ic=+0.0058 t=+1.3 hit=0.5001 info=-0.00380 z_sur=+0.9 edge=-0.043bp cost=4.15bp gross=-0.37 net=-1.71
+GBPJPY VOLA60 simplex_2  ic=-0.0179 t=-3.9 hit=0.5020 info=+nan z_sur=-0.7 edge=+0.011bp cost=4.15bp gross=-0.25 net=-7.52
+GBPJPY VOLA60 simplex_4  ic=-0.0065 t=-1.4 hit=0.5001 info=+nan z_sur=-0.3 edge=+0.023bp cost=4.15bp gross=-0.02 net=-6.41
+GBPJPY VOLA60 simplex_8  ic=-0.0074 t=-1.6 hit=0.4981 info=+nan z_sur=-3.8 edge=-0.124bp cost=4.15bp gross=-0.83 net=-6.54
+done GBPJPY VOLA60 in 0.2 min

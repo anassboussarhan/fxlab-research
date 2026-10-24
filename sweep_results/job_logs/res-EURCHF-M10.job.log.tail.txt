@@ -1,0 +1,17 @@
+EURCHF M10 ordinal_3  ic=+0.0246 t=+13.3 hit=0.5358 info=+0.00529 z_sur=+14.6 edge=+0.147bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 ordinal_4  ic=+0.0228 t=+12.3 hit=0.5369 info=+0.00565 z_sur=+14.4 edge=+0.154bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 ordinal_5  ic=+0.0164 t=+8.9 hit=0.5339 info=+0.00536 z_sur=+9.9 edge=+0.140bp cost=2.87bp gross=+0.06 net=-3.63
+EURCHF M10 ordinal_6  ic=+0.0118 t=+6.4 hit=0.5255 info=+0.00152 z_sur=+25.1 edge=+0.122bp cost=2.87bp gross=+0.28 net=-4.99
+EURCHF M10 markov_1   ic=+0.0248 t=+13.4 hit=0.5300 info=+0.00444 z_sur=+13.8 edge=+0.141bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 markov_2   ic=+0.0254 t=+13.7 hit=0.5344 info=+0.00492 z_sur=+13.8 edge=+0.152bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 markov_3   ic=+0.0240 t=+13.0 hit=0.5337 info=+0.00497 z_sur=+26.5 edge=+0.150bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 markov_5   ic=+0.0124 t=+6.7 hit=0.5254 info=+0.00379 z_sur=+18.6 edge=+0.115bp cost=2.87bp gross=+0.40 net=-4.97
+EURCHF M10 dc_3       ic=+0.0146 t=+7.9 hit=0.5174 info=+0.00127 z_sur=+11.3 edge=+0.094bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 dc_10      ic=+0.0047 t=+2.6 hit=0.5024 info=+0.00011 z_sur=+8.0 edge=+0.029bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 phase      ic=+0.0240 t=+13.0 hit=0.5343 info=+0.00466 z_sur=+14.9 edge=+0.160bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 fracdiff   ic=+0.0207 t=+11.2 hit=0.5282 info=+0.00336 z_sur=+11.7 edge=+0.125bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 clock      ic=+0.0022 t=+1.2 hit=0.5024 info=-0.00053 z_sur=+2.1 edge=+0.025bp cost=2.87bp gross=+0.00 net=+0.00
+EURCHF M10 simplex_2  ic=-0.0991 t=-53.7 hit=0.5057 info=+nan z_sur=-3.1 edge=+0.035bp cost=2.87bp gross=+0.28 net=-11.85
+EURCHF M10 simplex_4  ic=-0.0885 t=-47.9 hit=0.5083 info=+nan z_sur=-1.1 edge=+0.049bp cost=2.87bp gross=+0.60 net=-8.74
+EURCHF M10 simplex_8  ic=-0.0816 t=-44.2 hit=0.5117 info=+nan z_sur=-0.3 edge=+0.066bp cost=2.87bp gross=+0.53 net=-5.59
+done EURCHF M10 in 2.3 min
