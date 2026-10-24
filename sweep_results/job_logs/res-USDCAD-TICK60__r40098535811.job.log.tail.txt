@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6201.850319735785 is not greater than 6201.850319933872. Delta is -1.98087036551442e-07
+Model is not converging.  Current: 6148.516913975257 is not greater than 6148.516914691135. Delta is -7.158778316807002e-07
+Model is not converging.  Current: 6202.226094904109 is not greater than 6202.226095148875. Delta is -2.4476594262523577e-07
+  USDCAD TICK60: built 267 features in 246s (0 errors, 2 skipped)
+USDCAD TICK60: 846 columns, h=1 median z 0.17, z>3 0.007, max z 3.9, median |spread| 0.16bp vs cost 2.71bp | 266s

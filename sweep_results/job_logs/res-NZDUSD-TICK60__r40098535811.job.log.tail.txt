@@ -1,0 +1,16 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6084.978264729286 is not greater than 6084.978266343432. Delta is -1.6141457308549434e-06
+Model is not converging.  Current: 6136.884398756113 is not greater than 6136.884401736809. Delta is -2.9806960810674354e-06
+Model is not converging.  Current: 6014.950590196285 is not greater than 6014.9506176056075. Delta is -2.7409322683524806e-05
+Model is not converging.  Current: 6044.1788794707645 is not greater than 6044.178923568622. Delta is -4.409785742609529e-05
+  NZDUSD TICK60: built 267 features in 246s (0 errors, 2 skipped)
+NZDUSD TICK60: 846 columns, h=1 median z -0.03, z>3 0.008, max z 4.2, median |spread| 0.24bp vs cost 4.19bp | 265s

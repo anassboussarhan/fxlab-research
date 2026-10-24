@@ -1,0 +1,14 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6182.253171753195 is not greater than 6182.253180707144. Delta is -8.953948963608127e-06
+Model is not converging.  Current: 5983.808236000033 is not greater than 5983.808247524745. Delta is -1.1524712135724258e-05
+  GBPJPY VOLA60: built 267 features in 252s (0 errors, 2 skipped)
+GBPJPY VOLA60: 846 columns, h=1 median z 0.12, z>3 0.015, max z 3.8, median |spread| 0.23bp vs cost 3.09bp | 275s

@@ -1,0 +1,13 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6229.886395510287 is not greater than 6229.8864167164975. Delta is -2.1206210476520937e-05
+  EURGBP H2: built 267 features in 167s (0 errors, 2 skipped)
+EURGBP H2: 846 columns, h=1 median z -0.21, z>3 0.005, max z 3.3, median |spread| 0.28bp vs cost 3.09bp | 178s

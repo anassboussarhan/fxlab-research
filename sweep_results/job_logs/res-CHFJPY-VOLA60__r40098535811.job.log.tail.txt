@@ -1,0 +1,12 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6177.991987159084 is not greater than 6177.9920063835125. Delta is -1.922442879731534e-05
+Model is not converging.  Current: 6068.7670496641795 is not greater than 6068.767064149668. Delta is -1.4485488463833462e-05
+Model is not converging.  Current: 6170.984879048685 is not greater than 6170.984889216834. Delta is -1.0168148946831934e-05
+Model is not converging.  Current: 6135.837643193756 is not greater than 6135.837653043698. Delta is -9.849942216533236e-06
+Model is not converging.  Current: 6088.3002870741975 is not greater than 6088.300293980087. Delta is -6.905889677000232e-06
+  CHFJPY VOLA60: built 267 features in 177s (0 errors, 2 skipped)
+CHFJPY VOLA60: 846 columns, h=1 median z 0.33, z>3 0.011, max z 5.0, median |spread| 0.25bp vs cost 3.85bp | 193s

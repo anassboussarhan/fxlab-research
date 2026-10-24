@@ -1,0 +1,7 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURAUD H4: built 267 features in 117s (0 errors, 2 skipped)
+EURAUD H4: 846 columns, h=1 median z 0.14, z>3 0.021, max z 5.0, median |spread| 0.76bp vs cost 3.22bp | 124s

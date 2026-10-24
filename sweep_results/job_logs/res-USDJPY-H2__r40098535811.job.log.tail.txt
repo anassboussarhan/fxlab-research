@@ -1,0 +1,34 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6379.482086097238 is not greater than 6379.482101967899. Delta is -1.5870661627559457e-05
+Model is not converging.  Current: 6291.8117168490335 is not greater than 6291.811771228975. Delta is -5.437994150270242e-05
+Model is not converging.  Current: 6187.078013631552 is not greater than 6187.078082512793. Delta is -6.888124153192621e-05
+Model is not converging.  Current: 6166.312843573546 is not greater than 6166.312902076624. Delta is -5.850307752552908e-05
+Model is not converging.  Current: 6243.283404093869 is not greater than 6243.283439309433. Delta is -3.521556391206104e-05
+Model is not converging.  Current: 6238.389602507493 is not greater than 6238.389646246476. Delta is -4.3738983549701516e-05
+Model is not converging.  Current: 6243.182607201477 is not greater than 6243.182624623251. Delta is -1.7421773918613326e-05
+  USDJPY H2: built 267 features in 91s (0 errors, 2 skipped)
+USDJPY H2: 846 columns, h=1 median z -0.01, z>3 0.014, max z 5.5, median |spread| 0.38bp vs cost 2.10bp | 98s

@@ -1,0 +1,32 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6025.973719820142 is not greater than 6025.973722123646. Delta is -2.3035045160213485e-06
+Model is not converging.  Current: 6024.756530059879 is not greater than 6024.756535547719. Delta is -5.48784009879455e-06
+Model is not converging.  Current: 6025.49081360815 is not greater than 6025.49081936452. Delta is -5.7563693189877085e-06
+Model is not converging.  Current: 6007.313996347721 is not greater than 6007.314005919139. Delta is -9.571418559062295e-06
+Model is not converging.  Current: 6006.777331566845 is not greater than 6006.777334311667. Delta is -2.7448222681414336e-06
+Model is not converging.  Current: 6017.49236508027 is not greater than 6017.4923750218895. Delta is -9.941619282471947e-06
+Model is not converging.  Current: 6010.296332517155 is not greater than 6010.296341238098. Delta is -8.720942787476815e-06
+Model is not converging.  Current: 6045.555484219661 is not greater than 6045.555491306571. Delta is -7.086910045472905e-06
+Model is not converging.  Current: 6047.652342050742 is not greater than 6047.652351706579. Delta is -9.655836947786156e-06
+Model is not converging.  Current: 6016.325530064007 is not greater than 6016.325550977607. Delta is -2.0913600565108936e-05
+  GBPUSD VOLA60: built 267 features in 140s (0 errors, 2 skipped)
+GBPUSD VOLA60: 846 columns, h=1 median z 0.22, z>3 0.005, max z 4.3, median |spread| 0.16bp vs cost 2.04bp | 153s

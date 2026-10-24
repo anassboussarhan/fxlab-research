@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6036.034224151605 is not greater than 6036.034226582144. Delta is -2.430539097986184e-06
+Model is not converging.  Current: 6017.172464921963 is not greater than 6017.172467160708. Delta is -2.238744855276309e-06
+Model is not converging.  Current: 6044.4317397174955 is not greater than 6044.431743597715. Delta is -3.880219082930125e-06
+  GBPCAD TICK60: built 267 features in 202s (0 errors, 2 skipped)
+GBPCAD TICK60: 846 columns, h=1 median z 0.00, z>3 0.014, max z 5.2, median |spread| 0.17bp vs cost 3.99bp | 218s

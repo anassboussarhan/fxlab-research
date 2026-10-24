@@ -1,0 +1,18 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6416.627309663134 is not greater than 6416.6273794559875. Delta is -6.979285353736486e-05
+Model is not converging.  Current: 6162.033938580655 is not greater than 6162.033940067101. Delta is -1.4864463082631119e-06
+Model is not converging.  Current: 6448.341266701229 is not greater than 6448.341292405254. Delta is -2.5704024665174074e-05
+Model is not converging.  Current: 6400.109488989446 is not greater than 6400.109506353442. Delta is -1.7363996448693797e-05
+Model is not converging.  Current: 6345.374833476392 is not greater than 6345.374849870545. Delta is -1.6394153135479428e-05
+Model is not converging.  Current: 6320.600247087205 is not greater than 6320.600254149534. Delta is -7.062328222673386e-06
+  CHFJPY H1: built 267 features in 247s (0 errors, 2 skipped)
+CHFJPY H1: 846 columns, h=1 median z 0.02, z>3 0.017, max z 4.4, median |spread| 0.23bp vs cost 3.94bp | 266s

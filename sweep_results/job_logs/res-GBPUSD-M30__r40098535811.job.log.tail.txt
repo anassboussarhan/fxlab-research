@@ -1,0 +1,17 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6271.178802083008 is not greater than 6271.178808441117. Delta is -6.358109203574713e-06
+Model is not converging.  Current: 6188.84369859774 is not greater than 6188.843764828364. Delta is -6.623062472499441e-05
+Model is not converging.  Current: 6261.912004370208 is not greater than 6261.912018813328. Delta is -1.4443120562646072e-05
+Model is not converging.  Current: 6213.221891060054 is not greater than 6213.221909103045. Delta is -1.8042990632238798e-05
+Model is not converging.  Current: 6185.940171739893 is not greater than 6185.94018414056. Delta is -1.2400666491885204e-05
+  GBPUSD M30: built 267 features in 342s (0 errors, 2 skipped)
+GBPUSD M30: 846 columns, h=1 median z 0.21, z>3 0.001, max z 3.4, median |spread| 0.09bp vs cost 2.17bp | 387s

@@ -1,0 +1,27 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6045.028350433905 is not greater than 6045.0283505031175. Delta is -6.921254680491984e-08
+Model is not converging.  Current: 6092.349995771168 is not greater than 6092.349995876465. Delta is -1.0529674909776077e-07
+Model is not converging.  Current: 6281.12728806051 is not greater than 6281.127336593048. Delta is -4.8532538130530156e-05
+Model is not converging.  Current: 6025.548664718465 is not greater than 6025.548678694742. Delta is -1.3976276932226028e-05
+Model is not converging.  Current: 6064.5013181412305 is not greater than 6064.50132306876. Delta is -4.927529516862705e-06
+  USDJPY VOLA60: built 267 features in 201s (0 errors, 2 skipped)
+USDJPY VOLA60: 846 columns, h=1 median z 0.05, z>3 0.012, max z 3.8, median |spread| 0.21bp vs cost 2.05bp | 224s

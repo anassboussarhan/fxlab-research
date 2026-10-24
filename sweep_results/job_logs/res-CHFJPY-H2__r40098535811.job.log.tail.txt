@@ -1,0 +1,11 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6434.082166494152 is not greater than 6434.082191316928. Delta is -2.4822776140354108e-05
+Model is not converging.  Current: 6179.066107253323 is not greater than 6179.066119905054. Delta is -1.2651730685320217e-05
+Model is not converging.  Current: 6205.5943842673105 is not greater than 6205.594404515782. Delta is -2.0248471628292464e-05
+Model is not converging.  Current: 6211.654916789078 is not greater than 6211.6549457451365. Delta is -2.8956058486073744e-05
+  CHFJPY H2: built 267 features in 96s (0 errors, 2 skipped)
+CHFJPY H2: 846 columns, h=1 median z 0.04, z>3 0.013, max z 4.0, median |spread| 0.46bp vs cost 3.96bp | 103s

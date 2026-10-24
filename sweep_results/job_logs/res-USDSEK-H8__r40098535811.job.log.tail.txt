@@ -1,0 +1,7 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDSEK H8: built 269 features in 115s (0 errors, 0 skipped)
+USDSEK H8: 854 columns, h=1 median z 0.42, z>3 0.020, max z 4.2, median |spread| 1.82bp vs cost 5.32bp | 118s

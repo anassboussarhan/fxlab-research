@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: -4823.325380443848 is not greater than -4819.730148889347. Delta is -3.5952315545009697
+Model is not converging.  Current: -4921.525926313132 is not greater than -4919.4291355953155. Delta is -2.096790717816475
+Model is not converging.  Current: -4943.432861230177 is not greater than -4940.71657163038. Delta is -2.7162895997971646
+  NZDCHF H8: built 269 features in 124s (0 errors, 0 skipped)
+NZDCHF H8: 854 columns, h=1 median z 0.44, z>3 0.009, max z 6.0, median |spread| 1.89bp vs cost 6.98bp | 127s

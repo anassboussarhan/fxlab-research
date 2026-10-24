@@ -1,0 +1,22 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6320.87607994466 is not greater than 6320.87610486972. Delta is -2.4925059733504895e-05
+Model is not converging.  Current: 6169.656497874632 is not greater than 6169.656571959564. Delta is -7.408493183902465e-05
+Model is not converging.  Current: 6189.239856400253 is not greater than 6189.23985787148. Delta is -1.4712268239236437e-06
+Model is not converging.  Current: 6134.8439695091065 is not greater than 6134.843997519221. Delta is -2.8010114874632563e-05
+Model is not converging.  Current: 6111.556206103351 is not greater than 6111.556264835601. Delta is -5.873225018149242e-05
+  NZDUSD H1: built 267 features in 180s (0 errors, 2 skipped)
+NZDUSD H1: 846 columns, h=1 median z 0.09, z>3 0.017, max z 3.9, median |spread| 0.21bp vs cost 4.34bp | 196s

@@ -1,0 +1,8 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6330.437738764354 is not greater than 6330.437843123293. Delta is -0.00010435893818794284
+  XAGUSD H2: built 267 features in 71s (0 errors, 2 skipped)
+XAGUSD H2: 846 columns, h=1 median z 0.02, z>3 0.004, max z 5.6, median |spread| 0.97bp vs cost 27.07bp | 75s

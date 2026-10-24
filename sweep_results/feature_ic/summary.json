@@ -1,0 +1,32 @@
+{
+ "tests": 857202,
+ "features": 269,
+ "pairs": 34,
+ "tfs": [
+  "M5",
+  "M15",
+  "M30",
+  "H1",
+  "H2",
+  "H4",
+  "H8",
+  "D1",
+  "TICK60",
+  "VOLA60"
+ ],
+ "horizons": [
+  1,
+  6,
+  24
+ ],
+ "significant_tests": 23731,
+ "share_significant": 0.02768425645297141,
+ "significant_covering_cost": 882,
+ "p_value_reference": "t(19) for z with a 20-draw null",
+ "verdicts": {
+  "rarely predictive (<1% of tests)": 142,
+  "predictive (significant in >=5% of its tests)": 68,
+  "weakly predictive (1-5% of tests)": 58,
+  "no detectable predictive information": 1
+ }
+}

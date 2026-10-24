@@ -1,0 +1,13 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6346.952190923694 is not greater than 6346.9522012093485. Delta is -1.0285654752806295e-05
+Model is not converging.  Current: 6234.250132591799 is not greater than 6234.250146370151. Delta is -1.3778351785731502e-05
+Model is not converging.  Current: 6297.217246948978 is not greater than 6297.217281571733. Delta is -3.462275526544545e-05
+Model is not converging.  Current: 6396.442758573126 is not greater than 6396.442774251929. Delta is -1.5678802810725756e-05
+Model is not converging.  Current: 6417.753680295957 is not greater than 6417.753741270666. Delta is -6.097470941313077e-05
+Model is not converging.  Current: 6410.605983342576 is not greater than 6410.606083835608. Delta is -0.00010049303182313452
+  EURGBP H1: built 267 features in 180s (0 errors, 2 skipped)
+EURGBP H1: 846 columns, h=1 median z -0.14, z>3 0.013, max z 4.4, median |spread| 0.15bp vs cost 3.07bp | 195s

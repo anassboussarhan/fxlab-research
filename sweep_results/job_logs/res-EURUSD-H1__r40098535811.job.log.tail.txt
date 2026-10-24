@@ -1,0 +1,9 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6335.68952902901 is not greater than 6335.689540811382. Delta is -1.1782371984736528e-05
+Model is not converging.  Current: 6545.613962054907 is not greater than 6545.614004004722. Delta is -4.194981556793209e-05
+  EURUSD H1: built 267 features in 328s (0 errors, 2 skipped)
+EURUSD H1: 846 columns, h=1 median z 0.26, z>3 0.012, max z 4.1, median |spread| 0.12bp vs cost 1.43bp | 357s

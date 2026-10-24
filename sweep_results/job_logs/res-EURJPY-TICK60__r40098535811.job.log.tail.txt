@@ -1,0 +1,46 @@
+unner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6490.0920496726285 is not greater than 6490.092055640206. Delta is -5.9675776356016286e-06
+Model is not converging.  Current: 6331.051623110987 is not greater than 6331.051655527824. Delta is -3.241683680244023e-05
+Model is not converging.  Current: 6220.120559461509 is not greater than 6220.120588549267. Delta is -2.9087757866363972e-05
+Model is not converging.  Current: 6127.79936157978 is not greater than 6127.7993620043435. Delta is -4.245630407240242e-07
+Model is not converging.  Current: 6110.186519131591 is not greater than 6110.186535539637. Delta is -1.640804566704901e-05
+Model is not converging.  Current: 6145.8296368092415 is not greater than 6145.829638781355. Delta is -1.9721137505257502e-06
+Model is not converging.  Current: 6150.918822220982 is not greater than 6150.9188222813955. Delta is -6.041318556526676e-08
+Model is not converging.  Current: 6151.336215530072 is not greater than 6151.336237627908. Delta is -2.2097836335888132e-05
+Model is not converging.  Current: 6085.058015160225 is not greater than 6085.058017790412. Delta is -2.6301868274458684e-06
+Model is not converging.  Current: 6239.741913049434 is not greater than 6239.741932940531. Delta is -1.9891097508661915e-05
+Model is not converging.  Current: 6155.537293491914 is not greater than 6155.537312269372. Delta is -1.8777457626129035e-05
+Model is not converging.  Current: 6227.55857364955 is not greater than 6227.5585989373385. Delta is -2.528778804844478e-05
+Model is not converging.  Current: 6210.686804006562 is not greater than 6210.686827728629. Delta is -2.3722067453491036e-05
+Model is not converging.  Current: 6167.10027112722 is not greater than 6167.100306103227. Delta is -3.497600664559286e-05
+Model is not converging.  Current: 6129.242507657196 is not greater than 6129.242526402227. Delta is -1.8745030502032023e-05
+Model is not converging.  Current: 6096.07317560543 is not greater than 6096.073183903785. Delta is -8.298355169245042e-06
+Model is not converging.  Current: 6187.033498935768 is not greater than 6187.03352801637. Delta is -2.9080601962050423e-05
+Model is not converging.  Current: 6098.150104698204 is not greater than 6098.150126917813. Delta is -2.221960949100321e-05
+Model is not converging.  Current: 6090.66864335068 is not greater than 6090.6686500792985. Delta is -6.728618245688267e-06
+  EURJPY TICK60: built 267 features in 187s (0 errors, 2 skipped)
+EURJPY TICK60: 846 columns, h=1 median z 0.10, z>3 0.005, max z 5.3, median |spread| 0.20bp vs cost 2.48bp | 204s

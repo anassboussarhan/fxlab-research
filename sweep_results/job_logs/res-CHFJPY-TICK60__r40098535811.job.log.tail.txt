@@ -1,0 +1,24 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6108.401661640757 is not greater than 6108.401683842131. Delta is -2.2201374122232664e-05
+Model is not converging.  Current: 6131.358899781959 is not greater than 6131.358942750514. Delta is -4.296855513530318e-05
+Model is not converging.  Current: 6236.451464490154 is not greater than 6236.451474055185. Delta is -9.565031177771743e-06
+Model is not converging.  Current: 6062.930887114911 is not greater than 6062.930888081558. Delta is -9.66647348832339e-07
+Model is not converging.  Current: 6199.71188937452 is not greater than 6199.711891557545. Delta is -2.1830246623721905e-06
+Model is not converging.  Current: 6170.856901645549 is not greater than 6170.856904781294. Delta is -3.1357449188362807e-06
+Model is not converging.  Current: 6122.637830451646 is not greater than 6122.637832099772. Delta is -1.6481262719025835e-06
+  CHFJPY TICK60: built 267 features in 182s (0 errors, 2 skipped)
+CHFJPY TICK60: 846 columns, h=1 median z 0.43, z>3 0.028, max z 5.1, median |spread| 0.25bp vs cost 3.77bp | 199s
