@@ -457,3 +457,31 @@ def test_m1_replay_resolves_same_bar_stop_and_target():
     m1b = m1.assign(bid_l=ml2, ask_l=ml2)
     c = simulate_trades(bars, sig, 0.0001, ZERO, exit_on_flat=False, m1=m1b).trades.iloc[0]
     assert c["reason"] == "stop"
+
+
+def test_mid_bar_fill_cannot_take_profit_on_the_fill_bar():
+    """A limit buy that fills during a bar must not be credited with that bar's high, which may have come before
+    the fill: the target can only trigger from the next bar on."""
+    from fxlab.execution.simulator import simulate_trades
+    from fxlab.execution.costs import ZERO
+    idx = pd.date_range("2020-01-06", periods=5, freq="h", tz="UTC")
+    # bar 1: decision close 1.1000; bar 2 opens ABOVE the limit (1.1010), spikes to 1.1050, then dips to 1.0980
+    # and fills the 1.1000 limit mid-bar; its high came before the fill
+    o = np.array([1.1000, 1.1000, 1.1010, 1.0995, 1.0995])
+    h = np.array([1.1001, 1.1001, 1.1050, 1.1000, 1.1000])
+    l = np.array([1.0999, 1.0999, 1.0980, 1.0990, 1.0990])
+    c = np.array([1.1000, 1.1000, 1.0995, 1.0995, 1.0995])
+    bars = pd.DataFrame({"bid_o": o, "bid_h": h, "bid_l": l, "bid_c": c, "ask_o": o, "ask_h": h, "ask_l": l,
+                         "ask_c": c}, index=idx)
+    bars["high"], bars["low"], bars["close"], bars["open"] = h, l, c, o
+    sig = pd.DataFrame({"side": [0.0, 1.0, 1.0, 1.0, 1.0], "stop_dist": 0.0030, "tp_dist": 0.0030, "size": 1.0},
+                       index=idx)
+    res = simulate_trades(bars, sig, 0.0001, ZERO, exit_on_flat=False, entry="limit_pullback", k=0.0, ttl=3)
+    t = res.trades.iloc[0]
+    assert t["entry_time"] == idx[2] and t["entry_px"] == pytest.approx(1.1000, abs=1e-9)
+    assert not (t["reason"] == "target" and t["exit_time"] == idx[2])     # no take-profit on the fill bar
+    # a fill at the bar's OPEN makes the whole bar post-fill: the target may trigger on that bar
+    o2 = o.copy(); o2[2] = 1.0995
+    b2 = bars.assign(bid_o=o2, ask_o=o2, open=o2)
+    t2 = simulate_trades(b2, sig, 0.0001, ZERO, exit_on_flat=False, entry="limit_pullback", k=0.0, ttl=3).trades.iloc[0]
+    assert t2["entry_px"] == pytest.approx(1.0995, abs=1e-9) and t2["reason"] == "target" and t2["exit_time"] == idx[2]

@@ -21,8 +21,8 @@ from scipy import stats as st  # noqa: E402
 from fxlab.config import RESULTS_DIR  # noqa: E402
 from fxlab.validation.stats import benjamini_hochberg  # noqa: E402
 
-IN = Path(os.environ.get("EH_IN", RESULTS_DIR / "reports" / "edge_harvest"))
-OUT = Path(os.environ.get("EH_OUT", RESULTS_DIR / "reports" / "edge_harvest_summary"))
+IN = Path(os.environ.get("EH_IN", RESULTS_DIR / "reports" / os.environ.get("EH_NAME", "edge_harvest")))
+OUT = Path(os.environ.get("EH_OUT", RESULTS_DIR / "reports" / (os.environ.get("EH_NAME", "edge_harvest") + "_summary")))
 TF_ORDER = ["M1", "M5", "M15", "M30", "H1", "H2", "H4", "H8", "D1", "TICK60", "VOLA60"]
 
 
@@ -45,12 +45,17 @@ def main():
             rows.append({"pair": J["pair"], "tf": J["tf"], "h": int(h), "ic_oos": H["ic_oos"], "hit": H["hit_rate"],
                          "cost_rt_bps": H["cost_rt_bps"], "net_sharpe": s["net_sharpe"], "gross_sharpe": s["gross_sharpe"],
                          "cost_x2_sharpe": s["cost_x2_sharpe"], "ann_return": s["ann_return"], "t": s["t"], "days": s["days"],
-                         "hindsight_best_sharpe": H["best_in_hindsight"]["sharpe"]})
+                         "hindsight_best_sharpe": H.get("best_in_hindsight", {}).get("sharpe"),
+                         "median_inner_sharpe": H.get("median_inner_sharpe")})
             for sel in H["selection"]:
-                p = P[sel["policy"]] if sel["policy"] < len(P) else {}
+                if "params" in sel:                                  # optimised version (edge_harvest_opt.py)
+                    p = dict(sel["params"]); p["kind"] = p.get("mode")
+                else:
+                    p = P[sel["policy"]] if sel["policy"] < len(P) else {}
                 choices.append({"tf": J["tf"], "h": int(h), "kind": p.get("kind"), "exec": p.get("exec", p.get("entry")),
                                 "theta": p.get("theta"), "exit": p.get("exit", p.get("risk")), "size": p.get("size"),
-                                "pyramid": p.get("pyramid")})
+                                "pyramid": p.get("pyramid"), "sl_atr": p.get("sl_atr"), "tp_r": p.get("tp_r"),
+                                "trail_atr": p.get("trail_atr"), "inner_sharpe": sel.get("inner_sharpe")})
             col = f"h{h}"
             if col in D:
                 daily[(J["pair"], J["tf"], int(h))] = D[col]
@@ -68,7 +73,8 @@ def main():
                                    share_net_positive=("net_sharpe", lambda x: float((x > 0).mean())),
                                    best_net=("net_sharpe", "max"), median_x2=("cost_x2_sharpe", "median"),
                                    bh_survivors=("p_bh", lambda p: int((p < 0.10).sum())),
-                                   median_hindsight_best=("hindsight_best_sharpe", "median")).reset_index()
+                                   median_hindsight_best=("hindsight_best_sharpe", "median"),
+                                   median_inner_training=("median_inner_sharpe", "median")).reset_index()
     T["o"] = T.tf.map({t: i for i, t in enumerate(TF_ORDER)})
     T = T.sort_values(["o", "h"]).drop(columns="o")
     T.to_csv(OUT / "by_tf.csv", index=False)

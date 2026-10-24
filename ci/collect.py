@@ -52,9 +52,10 @@ def main():
             m.execute("INSERT INTO folds SELECT * FROM s.folds WHERE id NOT IN (SELECT DISTINCT id FROM folds)")
             m.execute("DETACH s")
             m.close()
-        for x in glob.glob(os.path.join(d, "edge_harvest", "*")):
-            os.makedirs(os.path.join(res, "reports", "edge_harvest"), exist_ok=True)
-            shutil.copy(x, os.path.join(res, "reports", "edge_harvest", os.path.basename(x)))
+        for sub in ("edge_harvest", "edge_harvest_opt"):
+            for x in glob.glob(os.path.join(d, sub, "*")):
+                os.makedirs(os.path.join(res, "reports", sub), exist_ok=True)
+                shutil.copy(x, os.path.join(res, "reports", sub, os.path.basename(x)))
         for x in glob.glob(os.path.join(d, "feature_ic", "*")):
             os.makedirs(os.path.join(res, "reports", "feature_ic"), exist_ok=True)
             shutil.copy(x, os.path.join(res, "reports", "feature_ic", os.path.basename(x)))
@@ -70,10 +71,14 @@ def main():
                    "projection_report.py", "feature_ic_report.py", "edge_harvest_report.py"):
         with open(os.path.join(out, script.replace(".py", ".log")), "w") as f:
             subprocess.run([PY, os.path.join("scripts", script)], cwd=ROOT, stdout=f, stderr=subprocess.STDOUT)
+    with open(os.path.join(out, "edge_harvest_opt_report.log"), "w") as f:
+        subprocess.run([PY, os.path.join("scripts", "edge_harvest_report.py")], cwd=ROOT, stdout=f,
+                       stderr=subprocess.STDOUT, env={**os.environ, "EH_NAME": "edge_harvest_opt"})
     for src, dst in (("results/reports/program", "program"), ("results/reports/family_portfolios", "family_portfolios"),
                      ("results/reports/joint", "joint"), ("results/reports/projection_lab_summary", "projections"),
                      ("results/reports/feature_ic_summary", "feature_ic"),
-                     ("results/reports/edge_harvest_summary", "edge_harvest")):
+                     ("results/reports/edge_harvest_summary", "edge_harvest"),
+                     ("results/reports/edge_harvest_opt_summary", "edge_harvest_opt")):
         if os.path.isdir(os.path.join(ROOT, src)):
             shutil.copytree(os.path.join(ROOT, src), os.path.join(out, dst), dirs_exist_ok=True)
     fs = os.path.join(ROOT, "results", "reports", "feature_scan")

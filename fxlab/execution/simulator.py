@@ -127,7 +127,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
     pos = 0.0; epx = 0.0; stop = np.nan; tgt = np.nan; trail = np.nan; ebar = -1; f = 0.0
     best = 0.0; worst = 0.0; fin = 0.0; mh = 0; last_val = 0.0
     sd0 = 0.0; be_k = np.nan; pm_k = np.nan; pf_k = 0.0; part_done = False
-    pend_side = 0.0; pend_lvl = 0.0; pend_born = 0; pend_d = 0; skip = False; fpx = 0.0
+    pend_side = 0.0; pend_lvl = 0.0; pend_born = 0; pend_d = 0; skip = False; fpx = 0.0; open_fill = False
     for j in range(n):
         mid_o = (bo[j] + ao[j]) / 2.0
         hs = spread_mult * (ao[j] - bo[j]) / 2.0
@@ -165,18 +165,18 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
             L = pend_lvl
             if pend_side > 0:
                 if (etype == 3 and ao[j] >= L) or (etype != 3 and ao[j] <= L):
-                    fpx = ao[j] + (slip if etype == 3 else 0.0); filled = True
+                    fpx = ao[j] + (slip if etype == 3 else 0.0); filled = True; open_fill = True
                 elif etype == 3 and ah[j] >= L:
-                    fpx = L + slip; filled = True
+                    fpx = L + slip; filled = True; open_fill = False
                 elif etype != 3 and al[j] < L:
-                    fpx = L; filled = True
+                    fpx = L; filled = True; open_fill = False
             else:
                 if (etype == 3 and bo[j] <= L) or (etype != 3 and bo[j] >= L):
-                    fpx = bo[j] - (slip if etype == 3 else 0.0); filled = True
+                    fpx = bo[j] - (slip if etype == 3 else 0.0); filled = True; open_fill = True
                 elif etype == 3 and bl[j] <= L:
-                    fpx = L - slip; filled = True
+                    fpx = L - slip; filled = True; open_fill = False
                 elif etype != 3 and bh[j] > L:
-                    fpx = L; filled = True
+                    fpx = L; filled = True; open_fill = False
         if pos == 0 and not filled and etype != 0 and pend_side == 0.0 and not skip and d >= 0 and side_sig[d] != 0 \
                 and not np.isnan(stop_d[d]) and size_f[d] > 0:
             # place a new pending order from decision bar d
@@ -193,18 +193,18 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
             L = pend_lvl
             if pend_side > 0:
                 if (etype == 3 and ao[j] >= L) or (etype != 3 and ao[j] <= L):
-                    fpx = ao[j] + (slip if etype == 3 else 0.0); filled = True
+                    fpx = ao[j] + (slip if etype == 3 else 0.0); filled = True; open_fill = True
                 elif etype == 3 and ah[j] >= L:
-                    fpx = L + slip; filled = True
+                    fpx = L + slip; filled = True; open_fill = False
                 elif etype != 3 and al[j] < L:
-                    fpx = L; filled = True
+                    fpx = L; filled = True; open_fill = False
             else:
                 if (etype == 3 and bo[j] <= L) or (etype != 3 and bo[j] >= L):
-                    fpx = bo[j] - (slip if etype == 3 else 0.0); filled = True
+                    fpx = bo[j] - (slip if etype == 3 else 0.0); filled = True; open_fill = True
                 elif etype == 3 and bl[j] <= L:
-                    fpx = L - slip; filled = True
+                    fpx = L - slip; filled = True; open_fill = False
                 elif etype != 3 and bh[j] > L:
-                    fpx = L; filled = True
+                    fpx = L; filled = True; open_fill = False
         if filled:
             dd_ = pend_d
             k += 1
@@ -237,6 +237,10 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
             last_val = pos * (mid_o - epx) / epx
             bar_ret[j] += f * last_val
         # ---------------------------------------------------------- 2) intrabar stop / target
+        # A pending order that filled DURING this bar: the bar's high/low may have happened before the fill, so on
+        # this bar only the stop can trigger (pessimistic); targets, partials, trailing and breakeven wait for the
+        # next bar (using the extremes would credit moves that preceded the position).
+        fillbar = ebar == j and etype != 0 and not open_fill    # filled at the open = whole bar is post-fill
         if pos != 0:
             done = False
             if pos > 0:
@@ -254,7 +258,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                             if mbh[q] >= tgt:
                                 px = tgt; reason = 2
                                 break
-                elif not np.isnan(tgt) and hi >= tgt:
+                elif not np.isnan(tgt) and hi >= tgt and not fillbar:
                     px = tgt; reason = 2; done = True
                 worst = min(worst, (lo - epx) / epx); best = max(best, (hi - epx) / epx)
             else:
@@ -272,7 +276,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                             if mal[q] <= tgt:
                                 px = tgt; reason = 2
                                 break
-                elif not np.isnan(tgt) and lo <= tgt:
+                elif not np.isnan(tgt) and lo <= tgt and not fillbar:
                     px = tgt; reason = 2; done = True
                 worst = min(worst, (epx - hi) / epx); best = max(best, (epx - lo) / epx)
             if done:
@@ -282,7 +286,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                 t_exit[k] = j; t_xpx[k] = px; t_reason[k] = reason; t_fin[k] = fin
                 t_mae[k] = worst; t_mfe[k] = best
                 pos = 0.0
-            elif not part_done and pm_k == pm_k and pf_k > 0:
+            elif not part_done and pm_k == pm_k and pf_k > 0 and not fillbar:
                 # partial take-profit at pm_k x initial stop distance (checked after the stop: stop-first rule)
                 lvl = epx + pos * pm_k * sd0
                 hit = False
@@ -313,15 +317,17 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                 fc = roll[j] * swap_pips * pip / epx
                 fin += fc
                 bar_ret[j] -= f * fc
+            ext_hi = bc[j] if fillbar else bh[j]        # on a mid-bar fill bar only the close is known post-fill
+            ext_lo = ac[j] if fillbar else al[j]
             if not np.isnan(trail):
                 if pos > 0:
-                    stop = max(stop, bh[j] - trail)
+                    stop = max(stop, ext_hi - trail)
                 else:
-                    stop = min(stop, al[j] + trail)
+                    stop = min(stop, ext_lo + trail)
             if be_k == be_k:                  # breakeven: once price has moved be_k x stop distance in favour
-                if pos > 0 and bh[j] - epx >= be_k * sd0:
+                if pos > 0 and ext_hi - epx >= be_k * sd0:
                     stop = max(stop, epx)
-                elif pos < 0 and epx - al[j] >= be_k * sd0:
+                elif pos < 0 and epx - ext_lo >= be_k * sd0:
                     stop = min(stop, epx)
     if pos != 0:
         t_exit[k] = n - 1; t_xpx[k] = bc[n - 1] if pos > 0 else ac[n - 1]; t_reason[k] = 6; t_fin[k] = fin
