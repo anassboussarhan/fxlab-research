@@ -120,7 +120,7 @@ const S = D.summary;
 document.getElementById("lede").textContent =
   `Out-of-sample information each of the ${S.features} features carries about the next 1, 6 and 24 bars, on ${S.pairs} currency pairs and metals across ${S.tfs.join(", ")}. ` +
   `A test is significant when it beats 20 time-shifted copies of the same feature after Benjamini-Hochberg correction over all ${S.tests.toLocaleString()} tests. ` +
-  `"Covers costs" asks whether the best significant test's predicted move exceeds a retail round trip.`;
+  `Edge / cost compares the predicted move of a feature's significant tests with a retail round trip; it is a single-test measure, not a strategy result.`;
 const v = S.verdicts || {};
 const stats = [[S.features, "features tested"], [S.tests.toLocaleString(), "feature x pair x timeframe x horizon tests"],
   [pct(S.share_significant), "of tests significant (chance: under 0.1%)"],
@@ -137,7 +137,8 @@ const catSel = document.getElementById("cat"), verSel = document.getElementById(
 const cols = [["rank", "#", "num"], ["feature", "Feature", "mono"], ["name", "Name", "wrap"], ["category", "Category", ""],
   ["verdict", "Verdict", "pill"], ["share_significant_bh", "Significant", "pct"], ["share_z_gt_3", "z > 3", "pct"],
   ["median_ic", "Median IC", "f3"], ...D.tfs.map(t => ["sig_" + t, t, "heat"]), ["best_z", "Best z", "f2"],
-  ["best_test", "Best test", "mono"], ["best_sig_edge_test", "Best significant edge vs cost", "mono"], ["covers_costs", "Covers costs", ""]];
+  ["best_test", "Best test", "mono"], ["median_edge_over_cost_of_significant", "Edge / cost (median significant test)", "f2"],
+  ["share_significant_and_covering_cost", "Significant and above cost", "pct"], ["covers_costs", "Covers costs", ""]];
 let sortKey = "rank", asc = true;
 function render() {
   const q = document.getElementById("q").value.toLowerCase(), c = catSel.value, ve = verSel.value;
@@ -164,7 +165,7 @@ render();
 document.getElementById("method").textContent =
   "Method: walk-forward with 3-year training and 6-month test windows from 2010 on 2007-2018 data (EURUSD to 2022). In each fold the sign of the feature's relation with the next move is learned on training data and measured on the test window, with the feature standardised by training statistics only. " +
   "The null shifts the target in time by 20 random offsets, which keeps the feature's own persistence. IC is the out-of-sample correlation, equal to the normalised P&L of holding a position proportional to the feature, before costs. " +
-  "Edge vs cost compares half the top-minus-bottom-decile spread of the next move with a round trip (spread x 1.25, slippage, commission). M1 is not included: building every feature on about 4 million one-minute bars per pair exceeds the cloud machines' memory.";
+  "p-values use a t distribution with 19 degrees of freedom, because the null spread is estimated from 20 draws. Edge vs cost compares half the top-minus-bottom-decile spread of the next move with a round trip (spread x 1.25, slippage, commission); trading-rule tests of the same features after costs (the earlier feature scan) had no survivors after program-wide correction. M1 is not included: building every feature on about 4 million one-minute bars per pair exceeds the cloud machines' memory.";
 </script>
 """
 open(out, "w").write(html.replace("__DATA__", data))

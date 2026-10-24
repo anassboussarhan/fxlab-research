@@ -66,6 +66,15 @@ reversion, lag-1 autocorrelation -0.01 to -0.04) - but the predictable move is 0
 The structure fades with the timeframe (35% at H1, 4% at H4, 0.3% at D1) faster than moves grow relative to
 costs; the best non-random test reaches 0.61 of its cost. 0 of 9,520 are tradable.
 
+### 8.1g Feature predictability - see `docs/feature_predictability.md`
+Out-of-sample information coefficient of every column of all 269 features (raw and |d20) with the next 1/6/24-bar
+return, 34 pairs x 10 timeframes (857,202 tests), against 20 circular-shift nulls with t(19) p-values and BH:
+2.8% of tests are significant - 17.6% at M5, 1.0% at H1, 0.4% at D1. 68 features are predictive in >= 5% of their
+tests (trend, momentum and price-shape features, almost entirely at M5), 58 weakly, 142 rarely, 1 never. The
+predicted move of significant tests is 2-10% of the round-trip cost at M5-H1; the rare significant tests at H8/D1
+are about cost-sized, concentrated in EURSEK/EURNOK, and none survived as trading rules after program-wide
+correction.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
