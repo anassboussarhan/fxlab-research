@@ -92,6 +92,7 @@ def main():
     ap.add_argument("--intrabar", choices=["stopfirst", "m1"], default="stopfirst")
     ap.add_argument("--projections-only", action="store_true",
                     help="run only scripts/projection_lab.py (non-random projection search) for <pair, tf>")
+    ap.add_argument("--projections-set", default="", help="wave2 = only the second-wave projections")
     a = ap.parse_args()
     only = [x for x in a.only.split(",") if x.strip()]
     t0 = time.time()
@@ -102,6 +103,8 @@ def main():
     log = os.path.join(out, "job.log")
     others = []
     if a.projections_only:
+        if a.projections_set:
+            os.environ["PL_SET"] = a.projections_set
         sh([PY, "scripts/projection_lab.py", "--pair", a.pair, "--tf", a.tf, "--out", os.path.join(out, "projections")],
            log, timeout=int((a.budget_min - 5) * 60))
         json.dump({"pair": a.pair, "tf": a.tf, "part": "projections", "streams_exported": 0,

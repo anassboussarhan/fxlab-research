@@ -19,6 +19,11 @@ Projections (all causal: the state at bar t uses data up to the close of t only)
   fracdiff      fractional differencing d = 0.4 of the log price (memory-preserving stationary projection),
                 causal z-score in 10 bins.
   clock         the time projection: hour of the week (day of the week on D1).
+  hvg           horizontal visibility graph (Luque et al. 2009): how many earlier bars the current close
+                "sees", x sign of the last move (i.i.d. data have a universal degree law)
+  levy_N        path signature of the last N standardised moves (rough-path theory): level-1 increment and
+                Levy area (did the move happen early or late in the window), 10 states
+  record_50     record statistics: bars since the last 50-bar high / low (arcsine law for a random walk)
 For bin projections the training window estimates the mean next return of each state (shrunk towards zero);
 the forecast for a test bar is the mean of its state.
 
@@ -136,6 +141,76 @@ def _dc(lp, delta):
     return out
 
 
+@njit(cache=False)
+def _hvg_back_degree(x):
+    """Horizontal visibility graph (Luque et al. 2009): number of EARLIER bars that bar t 'sees' (every bar in
+    between is lower than both). Monotonic stack, O(n). For i.i.d. data the degree law is universal
+    P(k) = (1/3)(2/3)^(k-2); correlated or deterministic dynamics deviate."""
+    n = len(x)
+    out = np.zeros(n, np.int64)
+    stack = np.empty(n)
+    top = 0
+    for t in range(n):
+        v = x[t]
+        k = 0
+        while top > 0 and stack[top - 1] < v:
+            top -= 1
+            k += 1
+        if top > 0:
+            k += 1
+            if stack[top - 1] == v:
+                top -= 1
+        stack[top] = v
+        top += 1
+        out[t] = k
+    return out
+
+
+@njit(cache=False)
+def _levy(z, N):
+    """Signature projection of the last N standardised moves as a path (time, cumulative move): level-1
+    increment and the Levy area (level-2 antisymmetric part) - whether the move happened early or late."""
+    n = len(z)
+    dx = np.full(n, np.nan)
+    area = np.full(n, np.nan)
+    for t in range(N, n):
+        x = 0.0
+        a = 0.0
+        ok = True
+        for k in range(N):
+            v = z[t - N + 1 + k]
+            if v != v:
+                ok = False
+                break
+            tk = k / N
+            a += 0.5 * (tk * v - x / N)          # 1/2 (t dx - x dt)
+            x += v
+        if ok:
+            dx[t] = x
+            area[t] = a
+    return dx, area
+
+
+@njit(cache=False)
+def _record(lp, N):
+    """Record-time projection: bars since the last N-bar high and since the last N-bar low (arcsine law for a
+    random walk), each in 3 buckets -> 9 states."""
+    n = len(lp)
+    out = np.full(n, -1, np.int64)
+    for t in range(N - 1, n):
+        imax = t; imin = t
+        for k in range(t - N + 1, t + 1):
+            if lp[k] >= lp[imax]:
+                imax = k
+            if lp[k] <= lp[imin]:
+                imin = k
+        a = (t - imax) / N; b = (t - imin) / N
+        ba = 0 if a < 0.1 else (1 if a < 0.5 else 2)
+        bb = 0 if b < 0.1 else (1 if b < 0.5 else 2)
+        out[t] = ba * 3 + bb
+    return out
+
+
 def ewm_abs(r, span):
     return pd.Series(np.abs(r)).ewm(span=span, min_periods=span // 2).mean().to_numpy() * math.sqrt(math.pi / 2)
 
@@ -174,6 +249,24 @@ def states(name, lp, r, index):
         st = np.searchsorted(edges, z).astype(np.int64)
         st[np.isnan(z)] = -1
         return st
+    if name == "hvg":                                   # visibility-graph degree x sign of the last move
+        k = np.minimum(_hvg_back_degree(lp), 8)
+        st = k * 2 + (np.nan_to_num(r) > 0)
+        st[:2] = -1
+        return st.astype(np.int64)
+    if name.startswith("levy_"):
+        N = int(name.split("_")[1])
+        sd = ewm_abs(r, 100)
+        dx, area = _levy(np.r_[np.nan, r[1:] / sd[:-1]], N)
+        a_ = pd.Series(area)
+        az = (area / (a_.abs().rolling(2000, min_periods=200).mean() * 1.25 + 1e-15)).to_numpy()
+        edges = np.array([-0.84, -0.25, 0.25, 0.84])
+        q = np.searchsorted(edges, az)
+        st = q * 2 + (dx > 0)
+        st[np.isnan(az) | np.isnan(dx)] = -1
+        return st.astype(np.int64)
+    if name.startswith("record_"):
+        return _record(lp, int(name.split("_")[1]))
     if name == "clock":
         if index.freq is None and len(index) > 2 and (index[2] - index[1]) >= pd.Timedelta(hours=20):
             return index.dayofweek.to_numpy().astype(np.int64)
@@ -182,8 +275,10 @@ def states(name, lp, r, index):
 
 
 BIN_PROJ = ["ordinal_3", "ordinal_4", "ordinal_5", "ordinal_6", "markov_1", "markov_2", "markov_3", "markov_5",
-            "dc_3", "dc_10", "phase", "fracdiff", "clock"]
+            "dc_3", "dc_10", "phase", "fracdiff", "clock", "hvg", "levy_8", "levy_32", "record_50"]
 KNN_PROJ = ["simplex_2", "simplex_4", "simplex_8"]
+if os.environ.get("PL_SET") == "wave2":              # only the second-wave projections
+    BIN_PROJ, KNN_PROJ = ["hvg", "levy_8", "levy_32", "record_50"], []
 
 
 # ----------------------------------------------------------------------------------------------- fitting
@@ -371,7 +466,8 @@ def main():
     os.makedirs(a.out, exist_ok=True)
     rows, sec = run(a.pair, a.tf)
     json.dump({"pair": a.pair, "tf": a.tf, "seconds": sec, "rows": rows},
-              open(os.path.join(a.out, f"{a.pair}_{a.tf}.json"), "w"), indent=1, default=float)
+              open(os.path.join(a.out, f"{a.pair}_{a.tf}{'_w2' if os.environ.get('PL_SET') == 'wave2' else ''}.json"), "w"),
+              indent=1, default=float)
     print(f"done {a.pair} {a.tf} in {sec / 60:.1f} min")
 
 

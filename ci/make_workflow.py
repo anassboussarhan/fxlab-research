@@ -253,7 +253,7 @@ jobs:
 """
 os.makedirs(os.path.join(HERE, "..", ".github", "workflows"), exist_ok=True)
 open(os.path.join(HERE, "..", ".github", "workflows", "sweep.yml"), "w").write(wf)
-for n in (2, 3, 4):                     # follow-up sweeps: own config, trigger file, concurrency group, branch
+for n in (2, 3, 4, 5):                     # follow-up sweeps: own config, trigger file, concurrency group, branch
     if not os.path.exists(os.path.join(HERE, f"sweep{n}_config.json")):
         continue
     assert json.load(open(os.path.join(HERE, f"sweep{n}_config.json")))["pairs_full"] == PAIRS   # shared restores
