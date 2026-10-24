@@ -1,0 +1,33 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6272.960182460133 is not greater than 6272.960189910389. Delta is -7.450255907315295e-06
+Model is not converging.  Current: 6206.466218690348 is not greater than 6206.466218721304. Delta is -3.095647116424516e-08
+Model is not converging.  Current: 6397.949569932293 is not greater than 6397.949641017235. Delta is -7.10849417373538e-05
+Model is not converging.  Current: 6295.093854744903 is not greater than 6295.093865791464. Delta is -1.104656075767707e-05
+Model is not converging.  Current: 6253.915901829419 is not greater than 6253.915924130961. Delta is -2.2301541321212426e-05
+Model is not converging.  Current: 6280.828461642277 is not greater than 6280.828492108127. Delta is -3.0465849704341963e-05
+Model is not converging.  Current: 6272.604059806904 is not greater than 6272.604074920467. Delta is -1.5113562767510302e-05
+Model is not converging.  Current: 6223.365633661503 is not greater than 6223.36571160992. Delta is -7.794841712893685e-05
+  USDJPY H1: built 267 features in 192s (0 errors, 2 skipped)
+USDJPY H1 h=1: OOS IC +0.0029 hit 0.4991 | optimised net -0.14 gross +0.19 x2 -0.67 | median inner (training) Sharpe +1.96 | {'signal:market': 6, 'signal:passive': 6, 'stops:market': 2, 'stops:limit_touch': 1, 'stops:stop_breakout': 1, 'stops:limit_pullback': 1}
+USDJPY H1 h=6: OOS IC -0.0111 hit 0.4904 | optimised net -0.58 gross -0.12 x2 -1.12 | median inner (training) Sharpe +1.74 | {'signal:market': 6, 'stops:limit_pullback': 5, 'stops:stop_breakout': 4, 'signal:passive': 2}
+USDJPY H1 h=24: OOS IC -0.0096 hit 0.4866 | optimised net -0.71 gross -0.15 x2 -1.28 | median inner (training) Sharpe +1.23 | {'signal:market': 5, 'stops:limit_pullback': 4, 'stops:stop_breakout': 4, 'signal:passive': 3, 'stops:limit_touch': 1}
+done USDJPY H1 in 5.1 min

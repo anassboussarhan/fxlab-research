@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURUSD H2: built 267 features in 199s (0 errors, 2 skipped)
+EURUSD H2 h=1: OOS IC +0.0029 hit 0.5035 | optimised net -0.18 gross +0.17 x2 -0.63 | median inner (training) Sharpe +1.60 | {'signal:passive': 10, 'signal:market': 8, 'stops:limit_pullback': 3, 'stops:stop_breakout': 3, 'stops:limit_touch': 2}
+EURUSD H2 h=6: OOS IC +0.0084 hit 0.5006 | optimised net -0.53 gross -0.15 x2 -0.96 | median inner (training) Sharpe +1.38 | {'stops:limit_pullback': 9, 'signal:market': 8, 'signal:passive': 6, 'stops:stop_breakout': 3}
+EURUSD H2 h=24: OOS IC +0.0051 hit 0.4966 | optimised net -0.50 gross -0.23 x2 -0.83 | median inner (training) Sharpe +1.39 | {'stops:limit_pullback': 13, 'signal:passive': 7, 'stops:stop_breakout': 4, 'signal:market': 2}
+done EURUSD H2 in 5.9 min

@@ -1,0 +1,8 @@
+Model is not converging.  Current: -4823.325380443848 is not greater than -4819.730148889347. Delta is -3.5952315545009697
+Model is not converging.  Current: -4921.525926313132 is not greater than -4919.4291355953155. Delta is -2.096790717816475
+Model is not converging.  Current: -4943.432861230178 is not greater than -4940.7164090763235. Delta is -2.716452153854334
+  NZDCHF H8: built 269 features in 190s (0 errors, 0 skipped)
+NZDCHF H8 h=1: OOS IC +0.0177 hit 0.5010 | optimised net -0.67 gross -0.52 x2 -1.03 | median inner (training) Sharpe +1.38 | {'signal:passive': 6, 'stops:limit_pullback': 5, 'signal:market': 2, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+NZDCHF H8 h=6: OOS IC +0.0597 hit 0.4943 | optimised net -0.19 gross +0.07 x2 -0.61 | median inner (training) Sharpe +1.27 | {'signal:passive': 6, 'signal:market': 4, 'stops:limit_pullback': 4, 'stops:stop_breakout': 1}
+NZDCHF H8 h=24: OOS IC +0.1068 hit 0.5262 | optimised net +0.07 gross +0.27 x2 -0.26 | median inner (training) Sharpe +0.84 | {'signal:passive': 5, 'stops:limit_pullback': 4, 'signal:market': 3, 'stops:limit_touch': 2, 'stops:market': 1}
+done NZDCHF H8 in 4.3 min

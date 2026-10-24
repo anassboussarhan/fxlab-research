@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6320.876081054606 is not greater than 6320.876106265585. Delta is -2.5210978492395952e-05
+Model is not converging.  Current: 6169.656497999198 is not greater than 6169.656572463347. Delta is -7.446414929290768e-05
+Model is not converging.  Current: 6189.239856610844 is not greater than 6189.239858852197. Delta is -2.2413532860809937e-06
+Model is not converging.  Current: 6134.843969406508 is not greater than 6134.843996783147. Delta is -2.7376639081921894e-05
+Model is not converging.  Current: 6111.556206580883 is not greater than 6111.556264576191. Delta is -5.799530845251866e-05
+  NZDUSD H1: built 267 features in 247s (0 errors, 2 skipped)
+NZDUSD H1 h=1: OOS IC +0.0086 hit 0.4982 | optimised net -0.57 gross -0.19 x2 -0.95 | median inner (training) Sharpe +1.00 | {'signal:market': 7, 'stops:limit_pullback': 4, 'signal:passive': 4, 'stops:market': 1, 'stops:stop_breakout': 1}
+NZDUSD H1 h=6: OOS IC +0.0050 hit 0.5002 | optimised net -0.84 gross -0.44 x2 -1.37 | median inner (training) Sharpe +1.96 | {'signal:passive': 7, 'signal:market': 6, 'stops:limit_pullback': 3, 'stops:market': 1}
+NZDUSD H1 h=24: OOS IC -0.0189 hit 0.4919 | optimised net -1.05 gross -0.67 x2 -1.58 | median inner (training) Sharpe +1.24 | {'signal:passive': 7, 'stops:limit_pullback': 5, 'stops:stop_breakout': 4, 'signal:market': 1}
+done NZDUSD H1 in 6.1 min

@@ -1,0 +1,5 @@
+  EURAUD H8: built 269 features in 226s (0 errors, 0 skipped)
+EURAUD H8 h=1: OOS IC +0.0129 hit 0.5077 | optimised net -0.16 gross +0.10 x2 -0.42 | median inner (training) Sharpe +1.64 | {'stops:limit_pullback': 7, 'signal:market': 4, 'stops:stop_breakout': 3, 'stops:limit_touch': 2, 'signal:passive': 1}
+EURAUD H8 h=6: OOS IC +0.0445 hit 0.5016 | optimised net -0.71 gross -0.56 x2 -0.94 | median inner (training) Sharpe +1.00 | {'stops:limit_pullback': 6, 'signal:passive': 6, 'stops:stop_breakout': 4, 'stops:limit_touch': 1}
+EURAUD H8 h=24: OOS IC +0.0977 hit 0.5280 | optimised net -0.33 gross -0.09 x2 -0.57 | median inner (training) Sharpe +1.54 | {'stops:limit_pullback': 7, 'stops:stop_breakout': 5, 'signal:market': 2, 'stops:limit_touch': 2, 'signal:passive': 1}
+done EURAUD H8 in 5.1 min

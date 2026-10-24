@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDUSD M15: built 262 features in 547s (0 errors, 7 skipped)
+NZDUSD M15 h=1: OOS IC +0.0117 hit 0.5065 | optimised net -0.76 gross -0.67 x2 -0.82 | median inner (training) Sharpe +0.84 | {'signal:market': 7, 'signal:passive': 6, 'stops:limit_pullback': 3, 'stops:limit_touch': 1}
+NZDUSD M15 h=6: OOS IC +0.0206 hit 0.5031 | optimised net -0.64 gross -0.01 x2 -1.28 | median inner (training) Sharpe +2.14 | {'signal:market': 11, 'signal:passive': 5, 'stops:limit_touch': 1}
+NZDUSD M15 h=24: OOS IC +0.0164 hit 0.4994 | optimised net -0.79 gross -0.61 x2 -1.32 | median inner (training) Sharpe +2.14 | {'signal:passive': 11, 'signal:market': 4, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+done NZDUSD M15 in 12.9 min

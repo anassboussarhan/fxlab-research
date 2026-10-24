@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPAUD H1: built 267 features in 200s (0 errors, 2 skipped)
+GBPAUD H1 h=1: OOS IC -0.0005 hit 0.5038 | optimised net -0.27 gross -0.08 x2 -0.58 | median inner (training) Sharpe +2.23 | {'signal:passive': 10, 'signal:market': 4, 'stops:limit_touch': 1, 'stops:market': 1}
+GBPAUD H1 h=6: OOS IC +0.0052 hit 0.5041 | optimised net -0.48 gross -0.21 x2 -0.93 | median inner (training) Sharpe +1.00 | {'signal:passive': 7, 'signal:market': 6, 'stops:stop_breakout': 1, 'stops:market': 1, 'stops:limit_pullback': 1}
+GBPAUD H1 h=24: OOS IC -0.0224 hit 0.4820 | optimised net -1.22 gross -0.81 x2 -1.70 | median inner (training) Sharpe +1.38 | {'stops:limit_pullback': 7, 'signal:passive': 4, 'signal:market': 3, 'stops:stop_breakout': 2}
+done GBPAUD H1 in 5.0 min

@@ -1,0 +1,8 @@
+Model is not converging.  Current: 6155.4254418299215 is not greater than 6155.425446606475. Delta is -4.776553396368399e-06
+Model is not converging.  Current: 6142.236245978005 is not greater than 6142.236247549166. Delta is -1.5711611922597513e-06
+Model is not converging.  Current: 6175.531182319652 is not greater than 6175.531224956249. Delta is -4.2636597754608374e-05
+  EURCAD M30: built 267 features in 274s (0 errors, 2 skipped)
+EURCAD M30 h=1: OOS IC +0.0058 hit 0.5043 | optimised net -0.44 gross +0.02 x2 -0.93 | median inner (training) Sharpe +1.22 | {'signal:passive': 6, 'signal:market': 5, 'stops:limit_pullback': 3, 'stops:stop_breakout': 2, 'stops:limit_touch': 1}
+EURCAD M30 h=6: OOS IC +0.0156 hit 0.5070 | optimised net +0.14 gross +0.38 x2 -0.72 | median inner (training) Sharpe +1.39 | {'signal:passive': 11, 'signal:market': 4, 'stops:limit_pullback': 1, 'stops:market': 1}
+EURCAD M30 h=24: OOS IC +0.0176 hit 0.5046 | optimised net -0.26 gross +0.07 x2 -0.72 | median inner (training) Sharpe +1.93 | {'signal:passive': 10, 'signal:market': 5, 'stops:limit_pullback': 2}
+done EURCAD M30 in 6.6 min

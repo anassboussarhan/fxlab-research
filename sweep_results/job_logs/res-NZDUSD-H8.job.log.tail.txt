@@ -1,0 +1,5 @@
+  NZDUSD H8: built 269 features in 189s (0 errors, 0 skipped)
+NZDUSD H8 h=1: OOS IC +0.0036 hit 0.5026 | optimised net -0.44 gross -0.08 x2 -0.81 | median inner (training) Sharpe +1.87 | {'stops:limit_pullback': 6, 'signal:market': 5, 'signal:passive': 3, 'stops:stop_breakout': 2, 'stops:market': 1}
+NZDUSD H8 h=6: OOS IC -0.0089 hit 0.4868 | optimised net -0.24 gross +0.06 x2 -0.53 | median inner (training) Sharpe +1.93 | {'stops:limit_pullback': 7, 'stops:stop_breakout': 6, 'signal:passive': 1, 'stops:limit_touch': 1, 'stops:market': 1, 'signal:market': 1}
+NZDUSD H8 h=24: OOS IC +0.0063 hit 0.4949 | optimised net -0.21 gross +0.02 x2 -0.48 | median inner (training) Sharpe +1.46 | {'stops:limit_pullback': 7, 'stops:stop_breakout': 4, 'stops:limit_touch': 3, 'signal:market': 1, 'stops:market': 1, 'signal:passive': 1}
+done NZDUSD H8 in 4.3 min

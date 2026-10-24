@@ -1,0 +1,5 @@
+  GBPCAD H8: built 269 features in 102s (0 errors, 0 skipped)
+GBPCAD H8 h=1: OOS IC +0.0091 hit 0.5070 | optimised net -0.07 gross +0.16 x2 -0.43 | median inner (training) Sharpe +1.77 | {'stops:limit_pullback': 4, 'signal:passive': 4, 'signal:market': 4, 'stops:limit_touch': 2, 'stops:market': 1}
+GBPCAD H8 h=6: OOS IC +0.0098 hit 0.5032 | optimised net -0.62 gross -0.45 x2 -0.82 | median inner (training) Sharpe +2.00 | {'stops:limit_pullback': 6, 'signal:passive': 4, 'signal:market': 2, 'stops:stop_breakout': 2, 'stops:market': 1}
+GBPCAD H8 h=24: OOS IC -0.0016 hit 0.5241 | optimised net +0.30 gross +0.52 x2 +0.02 | median inner (training) Sharpe +1.98 | {'stops:limit_pullback': 10, 'signal:market': 2, 'stops:stop_breakout': 2, 'signal:passive': 1}
+done GBPCAD H8 in 2.3 min

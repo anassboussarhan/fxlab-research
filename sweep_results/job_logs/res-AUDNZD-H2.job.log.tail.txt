@@ -1,0 +1,9 @@
+Model is not converging.  Current: 6187.305173507761 is not greater than 6187.30519860386. Delta is -2.5096099307120312e-05
+Model is not converging.  Current: 6153.7022290576 is not greater than 6153.702232609331. Delta is -3.551731424522586e-06
+Model is not converging.  Current: 6151.417974058295 is not greater than 6151.417976487584. Delta is -2.429289452265948e-06
+Model is not converging.  Current: 6162.244397420825 is not greater than 6162.244414980104. Delta is -1.755927860358497e-05
+  AUDNZD H2: built 267 features in 148s (0 errors, 2 skipped)
+AUDNZD H2 h=1: OOS IC +0.0067 hit 0.5039 | optimised net -0.37 gross -0.01 x2 -1.60 | median inner (training) Sharpe +1.51 | {'signal:passive': 13, 'signal:market': 3, 'stops:stop_breakout': 1}
+AUDNZD H2 h=6: OOS IC -0.0028 hit 0.5044 | optimised net -0.46 gross -0.23 x2 -1.10 | median inner (training) Sharpe +1.61 | {'signal:passive': 14, 'stops:limit_pullback': 3}
+AUDNZD H2 h=24: OOS IC +0.0093 hit 0.5059 | optimised net +0.01 gross +0.29 x2 -0.47 | median inner (training) Sharpe +1.14 | {'signal:passive': 9, 'stops:limit_pullback': 5, 'signal:market': 2, 'stops:stop_breakout': 1}
+done AUDNZD H2 in 4.0 min

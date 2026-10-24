@@ -1,0 +1,16 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6262.330507676269 is not greater than 6262.3305202100555. Delta is -1.2533786502899602e-05
+  NZDJPY H1: built 267 features in 201s (0 errors, 2 skipped)
+NZDJPY H1 h=1: OOS IC +0.0025 hit 0.5036 | optimised net -0.42 gross -0.18 x2 -1.13 | median inner (training) Sharpe +1.85 | {'signal:passive': 9, 'stops:limit_pullback': 4, 'signal:market': 3}
+NZDJPY H1 h=6: OOS IC +0.0051 hit 0.5034 | optimised net -0.84 gross -0.66 x2 -1.61 | median inner (training) Sharpe +1.55 | {'signal:passive': 11, 'stops:limit_pullback': 2, 'signal:market': 2, 'stops:limit_touch': 1}
+NZDJPY H1 h=24: OOS IC -0.0199 hit 0.4883 | optimised net -1.04 gross -0.77 x2 -1.64 | median inner (training) Sharpe +0.90 | {'signal:passive': 8, 'stops:stop_breakout': 3, 'stops:limit_pullback': 2, 'signal:market': 2, 'stops:limit_touch': 1}
+done NZDJPY H1 in 5.0 min

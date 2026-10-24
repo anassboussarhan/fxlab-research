@@ -1,0 +1,5 @@
+  EURGBP D1: built 269 features in 113s (0 errors, 0 skipped)
+EURGBP D1 h=1: OOS IC -0.0129 hit 0.4911 | optimised net -0.59 gross -0.27 x2 -1.06 | median inner (training) Sharpe +1.19 | {'signal:passive': 7, 'stops:limit_pullback': 4, 'signal:market': 4, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+EURGBP D1 h=6: OOS IC -0.0331 hit 0.4808 | optimised net -0.08 gross +0.22 x2 -0.46 | median inner (training) Sharpe +0.60 | {'signal:passive': 7, 'stops:limit_pullback': 6, 'signal:market': 3, 'stops:limit_touch': 1}
+EURGBP D1 h=24: OOS IC -0.0285 hit 0.5405 | optimised net -0.82 gross -0.47 x2 -1.18 | median inner (training) Sharpe +0.90 | {'stops:limit_pullback': 7, 'signal:passive': 3, 'stops:limit_touch': 2, 'stops:stop_breakout': 2, 'stops:market': 2, 'signal:market': 1}
+done EURGBP D1 in 3.2 min

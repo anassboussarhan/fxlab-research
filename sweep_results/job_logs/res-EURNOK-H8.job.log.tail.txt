@@ -1,0 +1,5 @@
+  EURNOK H8: built 269 features in 267s (0 errors, 0 skipped)
+EURNOK H8 h=1: OOS IC -0.0208 hit 0.4983 | optimised net -0.99 gross -0.85 x2 -1.42 | median inner (training) Sharpe +1.15 | {'signal:passive': 10, 'signal:market': 3, 'stops:limit_pullback': 3, 'stops:stop_breakout': 1}
+EURNOK H8 h=6: OOS IC +0.0101 hit 0.5193 | optimised net -0.50 gross -0.31 x2 -0.77 | median inner (training) Sharpe +1.38 | {'stops:limit_pullback': 7, 'signal:passive': 5, 'stops:stop_breakout': 3, 'stops:limit_touch': 1, 'signal:market': 1}
+EURNOK H8 h=24: OOS IC +0.0926 hit 0.5337 | optimised net -0.08 gross -0.00 x2 -0.35 | median inner (training) Sharpe +1.30 | {'signal:passive': 8, 'stops:limit_pullback': 6, 'stops:stop_breakout': 3}
+done EURNOK H8 in 5.8 min

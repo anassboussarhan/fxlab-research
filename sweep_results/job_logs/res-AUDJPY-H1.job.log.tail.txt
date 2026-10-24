@@ -1,0 +1,29 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6649.062713835409 is not greater than 6649.062762529246. Delta is -4.8693837015889585e-05
+Model is not converging.  Current: 6532.406412938728 is not greater than 6532.406419666663. Delta is -6.727935215167236e-06
+Model is not converging.  Current: 6338.269963780599 is not greater than 6338.269973740973. Delta is -9.960373972717207e-06
+Model is not converging.  Current: 6268.2221293937555 is not greater than 6268.222134706802. Delta is -5.313046131050214e-06
+Model is not converging.  Current: 6255.321176714433 is not greater than 6255.321201649021. Delta is -2.493458760000067e-05
+Model is not converging.  Current: 6298.143585007702 is not greater than 6298.1436072563965. Delta is -2.2248694222071208e-05
+Model is not converging.  Current: 6321.367298770832 is not greater than 6321.367305786449. Delta is -7.015616574790329e-06
+Model is not converging.  Current: 6121.798746182683 is not greater than 6121.798750856118. Delta is -4.673434887081385e-06
+Model is not converging.  Current: 6249.043218084731 is not greater than 6249.043223535449. Delta is -5.450718163046986e-06
+Model is not converging.  Current: 6238.780190603992 is not greater than 6238.780194735071. Delta is -4.13107864005724e-06
+Model is not converging.  Current: 6265.568236866857 is not greater than 6265.56823747799. Delta is -6.111331458669156e-07
+Model is not converging.  Current: 6273.7238723964 is not greater than 6273.72387366739. Delta is -1.2709897418972105e-06
+Model is not converging.  Current: 6347.53936279875 is not greater than 6347.539367713321. Delta is -4.914571036351845e-06
+Model is not converging.  Current: 6361.710901308318 is not greater than 6361.710901816416. Delta is -5.080974005977623e-07
+Model is not converging.  Current: 6367.426241803041 is not greater than 6367.426243723116. Delta is -1.9200751921744086e-06
+Model is not converging.  Current: 6519.657408136771 is not greater than 6519.657442919384. Delta is -3.478261351119727e-05
+Model is not converging.  Current: 6241.721882726061 is not greater than 6241.721902153875. Delta is -1.942781364050461e-05
+Model is not converging.  Current: 6173.072388983028 is not greater than 6173.072403731478. Delta is -1.4748449757462367e-05
+Model is not converging.  Current: 6201.115114673343 is not greater than 6201.115118084748. Delta is -3.411405486986041e-06
+  AUDJPY H1: built 267 features in 250s (0 errors, 2 skipped)
+AUDJPY H1 h=1: OOS IC +0.0023 hit 0.5031 | optimised net -0.42 gross -0.24 x2 -0.79 | median inner (training) Sharpe +1.23 | {'signal:passive': 7, 'signal:market': 7, 'stops:limit_pullback': 2, 'stops:market': 1}
+AUDJPY H1 h=6: OOS IC +0.0193 hit 0.4986 | optimised net -0.33 gross -0.03 x2 -0.83 | median inner (training) Sharpe +1.49 | {'signal:market': 7, 'signal:passive': 6, 'stops:limit_pullback': 2, 'stops:stop_breakout': 2}
+AUDJPY H1 h=24: OOS IC -0.0000 hit 0.5024 | optimised net -0.42 gross -0.12 x2 -0.90 | median inner (training) Sharpe +0.99 | {'signal:passive': 8, 'signal:market': 5, 'stops:stop_breakout': 2, 'stops:limit_pullback': 2}
+done AUDJPY H1 in 6.1 min

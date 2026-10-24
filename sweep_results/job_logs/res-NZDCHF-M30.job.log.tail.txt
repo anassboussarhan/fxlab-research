@@ -1,0 +1,34 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6324.204996598838 is not greater than 6324.205096442278. Delta is -9.984343978430843e-05
+Model is not converging.  Current: 6303.213901385118 is not greater than 6303.213938475954. Delta is -3.7090835576236714e-05
+Model is not converging.  Current: 6319.43125013317 is not greater than 6319.431284422071. Delta is -3.428890158829745e-05
+Model is not converging.  Current: 6294.670398175154 is not greater than 6294.670460925559. Delta is -6.275040504988283e-05
+Model is not converging.  Current: 6159.165154375107 is not greater than 6159.165196525877. Delta is -4.2150770241278224e-05
+Model is not converging.  Current: 6154.703673768362 is not greater than 6154.70368730296. Delta is -1.353459811070934e-05
+Model is not converging.  Current: 6168.465326577473 is not greater than 6168.465342804073. Delta is -1.6226599655055907e-05
+Model is not converging.  Current: 6120.069091987638 is not greater than 6120.069119130275. Delta is -2.714263700909214e-05
+Model is not converging.  Current: 6084.74996001261 is not greater than 6084.749974366503. Delta is -1.4353892765939236e-05
+Model is not converging.  Current: 6217.539217903705 is not greater than 6217.539258592773. Delta is -4.0689067645871546e-05
+Model is not converging.  Current: 6126.095740474893 is not greater than 6126.095757873533. Delta is -1.739864001137903e-05
+Model is not converging.  Current: 6115.631948867016 is not greater than 6115.631962030487. Delta is -1.316347061219858e-05
+Model is not converging.  Current: 6121.420656212316 is not greater than 6121.420701424721. Delta is -4.521240498434054e-05
+Model is not converging.  Current: 6153.613568720435 is not greater than 6153.613645336652. Delta is -7.661621657462092e-05
+  NZDCHF M30: built 267 features in 329s (0 errors, 2 skipped)
+NZDCHF M30 h=1: OOS IC +0.0004 hit 0.5020 | optimised net -1.54 gross -1.12 x2 -1.76 | median inner (training) Sharpe +1.49 | {'signal:passive': 10, 'signal:market': 5, 'stops:limit_touch': 1}
+NZDCHF M30 h=6: OOS IC +0.0131 hit 0.5048 | optimised net -0.48 gross -0.37 x2 -1.38 | median inner (training) Sharpe +1.31 | {'signal:passive': 15, 'signal:market': 1}
+NZDCHF M30 h=24: OOS IC +0.0283 hit 0.5097 | optimised net -0.36 gross -0.15 x2 -1.30 | median inner (training) Sharpe +1.29 | {'signal:passive': 13, 'signal:market': 3}
+done NZDCHF M30 in 7.6 min

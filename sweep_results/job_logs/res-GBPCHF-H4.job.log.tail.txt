@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPCHF H4: built 267 features in 89s (0 errors, 2 skipped)
+GBPCHF H4 h=1: OOS IC +0.0029 hit 0.4982 | optimised net -0.20 gross +0.13 x2 -0.57 | median inner (training) Sharpe +1.66 | {'signal:passive': 6, 'signal:market': 5, 'stops:limit_pullback': 3, 'stops:stop_breakout': 2, 'stops:limit_touch': 1}
+GBPCHF H4 h=6: OOS IC +0.0066 hit 0.4928 | optimised net -0.57 gross -0.34 x2 -0.83 | median inner (training) Sharpe +1.14 | {'signal:passive': 5, 'stops:limit_pullback': 5, 'signal:market': 4, 'stops:stop_breakout': 3}
+GBPCHF H4 h=24: OOS IC +0.0031 hit 0.4852 | optimised net -0.38 gross -0.19 x2 -0.62 | median inner (training) Sharpe +1.23 | {'stops:limit_pullback': 7, 'signal:passive': 5, 'stops:stop_breakout': 3, 'signal:market': 2}
+done GBPCHF H4 in 2.5 min

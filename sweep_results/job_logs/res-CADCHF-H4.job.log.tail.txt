@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  CADCHF H4: built 268 features in 196s (0 errors, 1 skipped)
+CADCHF H4 h=1: OOS IC -0.0063 hit 0.4975 | optimised net -0.76 gross -0.57 x2 -1.21 | median inner (training) Sharpe +1.29 | {'signal:passive': 8, 'stops:limit_pullback': 6, 'signal:market': 2}
+CADCHF H4 h=6: OOS IC +0.0005 hit 0.4972 | optimised net -0.41 gross -0.21 x2 -0.86 | median inner (training) Sharpe +1.00 | {'signal:passive': 12, 'signal:market': 2, 'stops:stop_breakout': 1, 'stops:limit_pullback': 1}
+CADCHF H4 h=24: OOS IC +0.0971 hit 0.5242 | optimised net -0.06 gross +0.24 x2 -0.48 | median inner (training) Sharpe +0.48 | {'signal:passive': 7, 'stops:limit_pullback': 5, 'signal:market': 3, 'stops:limit_touch': 1}
+done CADCHF H4 in 4.4 min

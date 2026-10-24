@@ -1,0 +1,14 @@
+Model is not converging.  Current: 6199.936588118706 is not greater than 6199.936612247773. Delta is -2.4129067242029123e-05
+Model is not converging.  Current: 6425.130218243538 is not greater than 6425.130242446014. Delta is -2.420247528789332e-05
+Model is not converging.  Current: 6361.3086966397 is not greater than 6361.308726580347. Delta is -2.9940646527393255e-05
+Model is not converging.  Current: 6172.925347592291 is not greater than 6172.925403542574. Delta is -5.5950283240235876e-05
+Model is not converging.  Current: 6218.006161083107 is not greater than 6218.00625822278. Delta is -9.713967301649973e-05
+Model is not converging.  Current: 6163.8516333104935 is not greater than 6163.851707500225. Delta is -7.418973109452054e-05
+Model is not converging.  Current: 6175.22209257092 is not greater than 6175.222142387467. Delta is -4.9816547289083246e-05
+Model is not converging.  Current: 6172.939275307594 is not greater than 6172.939352135119. Delta is -7.682752584514674e-05
+Model is not converging.  Current: 6178.133975475082 is not greater than 6178.134020720631. Delta is -4.524554969975725e-05
+  CADCHF M30: built 267 features in 190s (0 errors, 2 skipped)
+CADCHF M30 h=1: OOS IC +0.0009 hit 0.5014 | optimised net -0.68 gross -0.53 x2 -1.48 | median inner (training) Sharpe +0.84 | {'signal:passive': 10, 'signal:market': 5, 'stops:limit_pullback': 1}
+CADCHF M30 h=6: OOS IC -0.0087 hit 0.5037 | optimised net -0.63 gross -0.48 x2 -1.41 | median inner (training) Sharpe +1.66 | {'signal:passive': 13, 'signal:market': 2, 'stops:limit_touch': 1}
+CADCHF M30 h=24: OOS IC -0.0307 hit 0.4943 | optimised net -1.26 gross -1.07 x2 -1.81 | median inner (training) Sharpe +1.28 | {'signal:passive': 11, 'signal:market': 4, 'stops:limit_pullback': 1}
+done CADCHF M30 in 4.5 min

@@ -1,0 +1,5 @@
+  USDSEK H1: built 267 features in 227s (0 errors, 2 skipped)
+USDSEK H1 h=1: OOS IC -0.0008 hit 0.5015 | optimised net -0.77 gross -0.62 x2 -1.50 | median inner (training) Sharpe +1.17 | {'signal:passive': 13, 'signal:market': 2, 'stops:limit_pullback': 2}
+USDSEK H1 h=6: OOS IC +0.0118 hit 0.4966 | optimised net -0.39 gross -0.20 x2 -0.97 | median inner (training) Sharpe +1.84 | {'signal:passive': 8, 'signal:market': 5, 'stops:market': 2, 'stops:limit_pullback': 2}
+USDSEK H1 h=24: OOS IC +0.0206 hit 0.5057 | optimised net -0.32 gross -0.13 x2 -0.93 | median inner (training) Sharpe +1.22 | {'signal:passive': 10, 'stops:limit_pullback': 3, 'signal:market': 2, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+done USDSEK H1 in 5.7 min

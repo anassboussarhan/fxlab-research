@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  XAGUSD M5: built 259 features in 559s (0 errors, 10 skipped)
+XAGUSD M5 h=1: OOS IC +0.0040 hit 0.5059 | optimised net +0.46 gross +0.47 x2 -0.58 | median inner (training) Sharpe -10.00 | {'signal:passive': 4, 'signal:market': 4, 'stops:stop_breakout': 3, 'stops:limit_touch': 1, 'stops:market': 1, 'stops:limit_pullback': 1}
+XAGUSD M5 h=6: OOS IC +0.0102 hit 0.5112 | optimised net +0.07 gross +0.12 x2 -0.14 | median inner (training) Sharpe -5.92 | {'signal:passive': 5, 'stops:limit_touch': 4, 'stops:market': 3, 'signal:market': 1, 'stops:limit_pullback': 1}
+XAGUSD M5 h=24: OOS IC +0.0054 hit 0.5060 | optimised net -0.69 gross -0.65 x2 -0.92 | median inner (training) Sharpe +1.20 | {'signal:passive': 10, 'signal:market': 4}
+done XAGUSD M5 in 15.6 min

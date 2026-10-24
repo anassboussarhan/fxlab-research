@@ -1,0 +1,5 @@
+  NZDCAD D1: built 269 features in 76s (0 errors, 0 skipped)
+NZDCAD D1 h=1: OOS IC -0.0412 hit 0.4883 | optimised net -1.14 gross -0.70 x2 -1.69 | median inner (training) Sharpe +1.54 | {'signal:passive': 5, 'stops:limit_pullback': 4, 'signal:market': 1, 'stops:market': 1, 'stops:limit_touch': 1}
+NZDCAD D1 h=6: OOS IC -0.0735 hit 0.4596 | optimised net -0.24 gross +0.03 x2 -0.62 | median inner (training) Sharpe +1.25 | {'stops:limit_pullback': 4, 'signal:passive': 3, 'stops:limit_touch': 3, 'stops:stop_breakout': 1, 'signal:market': 1}
+NZDCAD D1 h=24: OOS IC +0.0042 hit 0.5346 | optimised net -0.16 gross +0.07 x2 -0.57 | median inner (training) Sharpe +1.25 | {'stops:limit_pullback': 6, 'signal:passive': 5, 'signal:market': 1}
+done NZDCAD D1 in 1.9 min

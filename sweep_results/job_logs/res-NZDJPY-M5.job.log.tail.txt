@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDJPY M5: built 258 features in 624s (0 errors, 11 skipped)
+NZDJPY M5 h=1: OOS IC +0.0121 hit 0.5105 | optimised net -0.36 gross -0.34 x2 -0.35 | median inner (training) Sharpe -10.00 | {'signal:market': 5, 'stops:stop_breakout': 4, 'signal:passive': 3, 'stops:limit_pullback': 2, 'stops:limit_touch': 1, 'stops:market': 1}
+NZDJPY M5 h=6: OOS IC +0.0021 hit 0.5091 | optimised net -0.43 gross -0.22 x2 -1.14 | median inner (training) Sharpe +1.27 | {'signal:passive': 11, 'signal:market': 5}
+NZDJPY M5 h=24: OOS IC +0.0047 hit 0.5017 | optimised net -0.20 gross +0.26 x2 -0.74 | median inner (training) Sharpe +1.31 | {'signal:passive': 9, 'signal:market': 6, 'stops:limit_pullback': 1}
+done NZDJPY M5 in 18.2 min

@@ -1,0 +1,5 @@
+  XAUUSD H8: built 269 features in 185s (0 errors, 0 skipped)
+XAUUSD H8 h=1: OOS IC +0.0042 hit 0.5007 | optimised net -0.04 gross +0.23 x2 -0.31 | median inner (training) Sharpe +2.09 | {'stops:stop_breakout': 5, 'signal:market': 4, 'stops:limit_touch': 2, 'signal:passive': 2}
+XAUUSD H8 h=6: OOS IC +0.0337 hit 0.4957 | optimised net -0.74 gross -0.55 x2 -0.92 | median inner (training) Sharpe +1.38 | {'stops:limit_pullback': 5, 'stops:stop_breakout': 3, 'signal:market': 3, 'stops:limit_touch': 1, 'stops:market': 1}
+XAUUSD H8 h=24: OOS IC +0.0416 hit 0.5165 | optimised net -0.43 gross -0.34 x2 -0.54 | median inner (training) Sharpe +0.99 | {'stops:limit_pullback': 6, 'stops:stop_breakout': 3, 'signal:passive': 2, 'stops:limit_touch': 1, 'signal:market': 1}
+done XAUUSD H8 in 4.2 min

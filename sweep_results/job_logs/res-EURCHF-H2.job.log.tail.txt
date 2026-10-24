@@ -1,0 +1,21 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6389.67222429726 is not greater than 6389.672391615931. Delta is -0.00016731867071939632
+Model is not converging.  Current: 6377.348047852284 is not greater than 6377.348224307374. Delta is -0.00017645508978603175
+Model is not converging.  Current: 6743.135820250945 is not greater than 6743.135837693268. Delta is -1.7442323041905183e-05
+Model is not converging.  Current: 6243.540840072065 is not greater than 6243.540848700247. Delta is -8.62818160385359e-06
+Model is not converging.  Current: 6279.192423801113 is not greater than 6279.192448003086. Delta is -2.420197233732324e-05
+Model is not converging.  Current: 6259.580458824396 is not greater than 6259.580461159353. Delta is -2.33495666179806e-06
+  EURCHF H2: built 267 features in 95s (0 errors, 2 skipped)
+EURCHF H2 h=1: OOS IC -0.0002 hit 0.5042 | optimised net -0.57 gross -0.31 x2 -1.22 | median inner (training) Sharpe +0.95 | {'signal:passive': 11, 'signal:market': 3, 'stops:market': 1, 'stops:limit_touch': 1, 'stops:limit_pullback': 1}
+EURCHF H2 h=6: OOS IC -0.0219 hit 0.4939 | optimised net -0.71 gross -0.54 x2 -0.96 | median inner (training) Sharpe +1.25 | {'signal:passive': 9, 'stops:limit_pullback': 5, 'signal:market': 3}
+EURCHF H2 h=24: OOS IC -0.0232 hit 0.5011 | optimised net -0.91 gross -0.63 x2 -1.30 | median inner (training) Sharpe +0.46 | {'signal:passive': 8, 'stops:limit_pullback': 7, 'stops:stop_breakout': 1, 'signal:market': 1}
+done EURCHF H2 in 2.5 min

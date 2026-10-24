@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURUSD H8: built 269 features in 169s (0 errors, 0 skipped)
+EURUSD H8 h=1: OOS IC +0.0084 hit 0.5065 | optimised net +0.13 gross +0.35 x2 -0.11 | median inner (training) Sharpe +1.60 | {'stops:limit_pullback': 13, 'stops:stop_breakout': 4, 'signal:market': 4, 'signal:passive': 3, 'stops:limit_touch': 1}
+EURUSD H8 h=6: OOS IC +0.0149 hit 0.5034 | optimised net -0.10 gross +0.10 x2 -0.31 | median inner (training) Sharpe +1.75 | {'stops:limit_pullback': 14, 'stops:stop_breakout': 4, 'signal:market': 3, 'signal:passive': 3, 'stops:limit_touch': 1}
+EURUSD H8 h=24: OOS IC +0.0611 hit 0.5061 | optimised net +0.18 gross +0.35 x2 -0.00 | median inner (training) Sharpe +1.32 | {'stops:limit_pullback': 13, 'stops:stop_breakout': 5, 'signal:market': 3, 'signal:passive': 2, 'stops:limit_touch': 2}
+done EURUSD H8 in 4.1 min

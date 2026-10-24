@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6269.4520261273 is not greater than 6269.452027227437. Delta is -1.100136614695657e-06
+Model is not converging.  Current: 6271.843651634169 is not greater than 6271.843653514259. Delta is -1.8800901671056636e-06
+Model is not converging.  Current: 6268.345414616061 is not greater than 6268.345415724241. Delta is -1.1081801858381368e-06
+Model is not converging.  Current: 5992.780025162425 is not greater than 5992.780029004077. Delta is -3.841651960101444e-06
+Model is not converging.  Current: 5995.469041601656 is not greater than 5995.469056992868. Delta is -1.539121240057284e-05
+Model is not converging.  Current: 5997.60734124899 is not greater than 5997.607353012298. Delta is -1.1763307156797964e-05
+Model is not converging.  Current: 6027.17543140447 is not greater than 6027.175471910138. Delta is -4.0505668039259035e-05
+Model is not converging.  Current: 6021.548093387038 is not greater than 6021.548111020093. Delta is -1.7633054994803388e-05
+Model is not converging.  Current: 6049.2453462547965 is not greater than 6049.2453476381115. Delta is -1.3833150660502724e-06
+Model is not converging.  Current: 6179.44455563162 is not greater than 6179.444560831976. Delta is -5.200356099521741e-06
+  EURAUD M30: built 267 features in 224s (0 errors, 2 skipped)
+EURAUD M30 h=1: OOS IC +0.0050 hit 0.5030 | optimised net -1.14 gross -0.83 x2 -1.97 | median inner (training) Sharpe +1.24 | {'signal:passive': 9, 'signal:market': 4, 'stops:limit_pullback': 3, 'stops:stop_breakout': 1}
+EURAUD M30 h=6: OOS IC +0.0199 hit 0.5059 | optimised net +0.51 gross +0.75 x2 -0.10 | median inner (training) Sharpe +1.73 | {'signal:passive': 8, 'signal:market': 7, 'stops:stop_breakout': 1, 'stops:limit_pullback': 1}
+EURAUD M30 h=24: OOS IC +0.0433 hit 0.5071 | optimised net +0.02 gross +0.26 x2 -0.47 | median inner (training) Sharpe +0.92 | {'signal:passive': 12, 'signal:market': 3, 'stops:stop_breakout': 2}
+done EURAUD M30 in 5.3 min

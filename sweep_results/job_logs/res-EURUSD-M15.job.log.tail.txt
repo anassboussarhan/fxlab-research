@@ -1,0 +1,40 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURUSD M15: built 259 features in 244s (0 errors, 10 skipped)
+EURUSD M15 h=1: OOS IC +0.0072 hit 0.5030 | optimised net -0.40 gross +0.44 x2 -1.25 | median inner (training) Sharpe +1.37 | {'signal:market': 11, 'signal:passive': 10, 'stops:limit_pullback': 3, 'stops:stop_breakout': 2}
+EURUSD M15 h=6: OOS IC +0.0169 hit 0.5034 | optimised net +0.28 gross +0.76 x2 -0.25 | median inner (training) Sharpe +1.89 | {'signal:passive': 13, 'signal:market': 10, 'stops:limit_pullback': 3}
+EURUSD M15 h=24: OOS IC +0.0296 hit 0.5084 | optimised net -0.34 gross +0.22 x2 -1.01 | median inner (training) Sharpe +1.72 | {'signal:passive': 11, 'signal:market': 9, 'stops:stop_breakout': 4, 'stops:limit_pullback': 2}
+done EURUSD M15 in 8.0 min

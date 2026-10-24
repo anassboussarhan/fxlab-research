@@ -1,0 +1,26 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 5997.17702847498 is not greater than 5997.177046920388. Delta is -1.8445408386469353e-05
+  EURAUD H2: built 267 features in 163s (0 errors, 2 skipped)
+EURAUD H2 h=1: OOS IC +0.0253 hit 0.5043 | optimised net +0.43 gross +0.67 x2 -0.25 | median inner (training) Sharpe +1.42 | {'signal:passive': 7, 'signal:market': 5, 'stops:limit_pullback': 3, 'stops:market': 1, 'stops:stop_breakout': 1}
+EURAUD H2 h=6: OOS IC -0.0014 hit 0.4981 | optimised net -0.40 gross -0.10 x2 -0.92 | median inner (training) Sharpe +1.65 | {'signal:passive': 6, 'stops:limit_pullback': 5, 'stops:stop_breakout': 3, 'signal:market': 3}
+EURAUD H2 h=24: OOS IC +0.0256 hit 0.5105 | optimised net -0.42 gross -0.12 x2 -0.79 | median inner (training) Sharpe +1.08 | {'stops:limit_pullback': 5, 'signal:market': 5, 'signal:passive': 4, 'stops:stop_breakout': 3}
+done EURAUD H2 in 4.3 min

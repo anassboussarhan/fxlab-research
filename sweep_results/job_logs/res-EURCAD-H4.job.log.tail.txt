@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURCAD H4: built 268 features in 251s (0 errors, 1 skipped)
+EURCAD H4 h=1: OOS IC +0.0238 hit 0.5099 | optimised net -0.13 gross +0.12 x2 -0.79 | median inner (training) Sharpe +1.61 | {'signal:passive': 6, 'stops:limit_pullback': 5, 'signal:market': 3, 'stops:stop_breakout': 1, 'stops:market': 1, 'stops:limit_touch': 1}
+EURCAD H4 h=6: OOS IC +0.0140 hit 0.4994 | optimised net -0.46 gross -0.23 x2 -0.75 | median inner (training) Sharpe +1.53 | {'stops:limit_pullback': 7, 'signal:passive': 6, 'signal:market': 3, 'stops:limit_touch': 1}
+EURCAD H4 h=24: OOS IC +0.0374 hit 0.5144 | optimised net -0.44 gross -0.20 x2 -0.70 | median inner (training) Sharpe +1.05 | {'stops:stop_breakout': 6, 'stops:limit_pullback': 6, 'signal:passive': 3, 'signal:market': 1, 'stops:limit_touch': 1}
+done EURCAD H4 in 5.6 min

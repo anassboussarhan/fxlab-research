@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDNOK M15: built 265 features in 317s (0 errors, 4 skipped)
+USDNOK M15 h=1: OOS IC +0.0129 hit 0.5035 | optimised net -0.49 gross -0.46 x2 -0.62 | median inner (training) Sharpe -0.28 | {'signal:passive': 9, 'signal:market': 5, 'stops:limit_pullback': 2, 'stops:stop_breakout': 1}
+USDNOK M15 h=6: OOS IC +0.0226 hit 0.5058 | optimised net +0.03 gross +0.56 x2 -0.74 | median inner (training) Sharpe +1.15 | {'signal:passive': 13, 'signal:market': 3, 'stops:limit_pullback': 1}
+USDNOK M15 h=24: OOS IC +0.0345 hit 0.5059 | optimised net -0.36 gross -0.21 x2 -0.99 | median inner (training) Sharpe +1.55 | {'signal:passive': 14, 'signal:market': 2, 'stops:limit_pullback': 1}
+done USDNOK M15 in 7.7 min

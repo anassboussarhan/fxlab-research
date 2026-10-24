@@ -1,0 +1,5 @@
+  EURSEK H8: built 269 features in 164s (0 errors, 0 skipped)
+EURSEK H8 h=1: OOS IC +0.0262 hit 0.5042 | optimised net +0.23 gross +0.36 x2 -0.22 | median inner (training) Sharpe +1.79 | {'signal:passive': 13, 'signal:market': 2, 'stops:limit_touch': 1, 'stops:limit_pullback': 1}
+EURSEK H8 h=6: OOS IC +0.0512 hit 0.4995 | optimised net -0.10 gross +0.04 x2 -0.48 | median inner (training) Sharpe +1.64 | {'signal:passive': 10, 'stops:limit_pullback': 6, 'signal:market': 1}
+EURSEK H8 h=24: OOS IC +0.0609 hit 0.5291 | optimised net +0.12 gross +0.30 x2 -0.17 | median inner (training) Sharpe +1.77 | {'stops:limit_pullback': 9, 'signal:passive': 6, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+done EURSEK H8 in 3.6 min

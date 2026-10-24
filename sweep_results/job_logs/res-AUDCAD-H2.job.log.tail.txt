@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  AUDCAD H2: built 267 features in 139s (0 errors, 2 skipped)
+AUDCAD H2 h=1: OOS IC +0.0285 hit 0.5031 | optimised net -0.00 gross +0.23 x2 -0.88 | median inner (training) Sharpe +1.61 | {'signal:passive': 8, 'signal:market': 4, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+AUDCAD H2 h=6: OOS IC +0.0294 hit 0.5028 | optimised net -0.39 gross -0.14 x2 -1.12 | median inner (training) Sharpe +1.09 | {'signal:passive': 8, 'signal:market': 3, 'stops:limit_pullback': 2, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+AUDCAD H2 h=24: OOS IC +0.0412 hit 0.5124 | optimised net +0.02 gross +0.37 x2 -0.53 | median inner (training) Sharpe +1.43 | {'stops:limit_pullback': 5, 'signal:passive': 5, 'signal:market': 2, 'stops:market': 1, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+done AUDCAD H2 in 3.7 min

@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPAUD H4: built 268 features in 167s (0 errors, 1 skipped)
+GBPAUD H4 h=1: OOS IC +0.0094 hit 0.5058 | optimised net -0.48 gross -0.05 x2 -1.11 | median inner (training) Sharpe +1.65 | {'signal:market': 5, 'stops:stop_breakout': 4, 'signal:passive': 3, 'stops:limit_pullback': 3, 'stops:limit_touch': 1}
+GBPAUD H4 h=6: OOS IC +0.0362 hit 0.5184 | optimised net +0.26 gross +0.43 x2 +0.04 | median inner (training) Sharpe +1.95 | {'stops:limit_pullback': 7, 'signal:passive': 4, 'signal:market': 3, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+GBPAUD H4 h=24: OOS IC +0.0062 hit 0.5222 | optimised net -0.06 gross +0.16 x2 -0.34 | median inner (training) Sharpe +1.36 | {'stops:limit_pullback': 10, 'signal:market': 3, 'signal:passive': 1, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+done GBPAUD H4 in 3.8 min

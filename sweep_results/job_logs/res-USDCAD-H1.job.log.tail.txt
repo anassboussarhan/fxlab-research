@@ -1,0 +1,12 @@
+Model is not converging.  Current: 6210.6321710420025 is not greater than 6210.6321733176555. Delta is -2.275653059768956e-06
+Model is not converging.  Current: 6089.681810361307 is not greater than 6089.681833108298. Delta is -2.2746990907762665e-05
+Model is not converging.  Current: 6076.040339324586 is not greater than 6076.040367425712. Delta is -2.8101126190449577e-05
+Model is not converging.  Current: 6041.930954463964 is not greater than 6041.930973830961. Delta is -1.9366997548786458e-05
+Model is not converging.  Current: 6057.637813333536 is not greater than 6057.63782740791. Delta is -1.4074374121264555e-05
+Model is not converging.  Current: 6222.627823421079 is not greater than 6222.627830585428. Delta is -7.164348971855361e-06
+Model is not converging.  Current: 6219.793520414846 is not greater than 6219.793527183681. Delta is -6.768835191905964e-06
+  USDCAD H1: built 267 features in 249s (0 errors, 2 skipped)
+USDCAD H1 h=1: OOS IC +0.0146 hit 0.5049 | optimised net -1.03 gross -0.43 x2 -1.79 | median inner (training) Sharpe +1.49 | {'stops:limit_pullback': 6, 'signal:passive': 6, 'signal:market': 5}
+USDCAD H1 h=6: OOS IC +0.0196 hit 0.5066 | optimised net +0.33 gross +0.72 x2 -0.17 | median inner (training) Sharpe +2.11 | {'signal:market': 8, 'signal:passive': 5, 'stops:limit_pullback': 3, 'stops:limit_touch': 1}
+USDCAD H1 h=24: OOS IC -0.0024 hit 0.5000 | optimised net +0.16 gross +0.58 x2 -0.47 | median inner (training) Sharpe +1.33 | {'stops:limit_pullback': 5, 'signal:passive': 5, 'signal:market': 5, 'stops:stop_breakout': 2}
+done USDCAD H1 in 6.2 min

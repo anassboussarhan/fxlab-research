@@ -1,0 +1,10 @@
+Model is not converging.  Current: 6253.438056206157 is not greater than 6253.438103974212. Delta is -4.776805508299731e-05
+Model is not converging.  Current: 6159.91726892231 is not greater than 6159.917391660233. Delta is -0.0001227379234478576
+Model is not converging.  Current: 6180.826018969748 is not greater than 6180.826098465446. Delta is -7.949569862830685e-05
+Model is not converging.  Current: 6219.82835245908 is not greater than 6219.828433337988. Delta is -8.087890819297172e-05
+Model is not converging.  Current: 6210.254557655043 is not greater than 6210.254582860523. Delta is -2.5205480596923735e-05
+  USDCHF H1: built 267 features in 144s (0 errors, 2 skipped)
+USDCHF H1 h=1: OOS IC -0.0031 hit 0.4969 | optimised net -0.12 gross +0.07 x2 -0.39 | median inner (training) Sharpe +0.91 | {'signal:passive': 8, 'signal:market': 5, 'stops:limit_pullback': 3, 'stops:limit_touch': 1}
+USDCHF H1 h=6: OOS IC -0.0029 hit 0.4998 | optimised net -0.84 gross -0.47 x2 -1.40 | median inner (training) Sharpe +1.35 | {'signal:passive': 8, 'signal:market': 6, 'stops:limit_touch': 1, 'stops:limit_pullback': 1, 'stops:market': 1}
+USDCHF H1 h=24: OOS IC -0.0247 hit 0.5053 | optimised net -0.60 gross -0.35 x2 -0.93 | median inner (training) Sharpe +0.58 | {'signal:passive': 8, 'stops:limit_pullback': 4, 'signal:market': 3, 'stops:stop_breakout': 2}
+done USDCHF H1 in 3.6 min

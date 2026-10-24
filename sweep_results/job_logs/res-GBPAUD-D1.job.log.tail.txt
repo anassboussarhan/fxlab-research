@@ -1,0 +1,5 @@
+  GBPAUD D1: built 269 features in 105s (0 errors, 0 skipped)
+GBPAUD D1 h=1: OOS IC -0.0389 hit 0.4831 | optimised net -0.45 gross -0.19 x2 -0.74 | median inner (training) Sharpe +1.89 | {'stops:limit_pullback': 5, 'signal:passive': 4, 'stops:stop_breakout': 1, 'stops:limit_touch': 1, 'signal:market': 1}
+GBPAUD D1 h=6: OOS IC -0.0720 hit 0.4805 | optimised net -1.04 gross -0.82 x2 -1.30 | median inner (training) Sharpe +1.18 | {'stops:limit_pullback': 7, 'stops:limit_touch': 2, 'signal:market': 1, 'stops:stop_breakout': 1, 'signal:passive': 1}
+GBPAUD D1 h=24: OOS IC +0.1115 hit 0.5517 | optimised net -0.42 gross -0.24 x2 -0.63 | median inner (training) Sharpe +0.99 | {'signal:passive': 4, 'stops:limit_pullback': 4, 'stops:limit_touch': 2, 'signal:market': 1, 'stops:stop_breakout': 1}
+done GBPAUD D1 in 2.8 min

@@ -1,0 +1,31 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6068.955160346983 is not greater than 6068.955165116759. Delta is -4.769776751345489e-06
+Model is not converging.  Current: 6106.720098385168 is not greater than 6106.720101477823. Delta is -3.092654878855683e-06
+Model is not converging.  Current: 6124.600047193813 is not greater than 6124.6000507905555. Delta is -3.5967423173133284e-06
+Model is not converging.  Current: 6149.168793817894 is not greater than 6149.168801323915. Delta is -7.506021574954502e-06
+Model is not converging.  Current: 6174.530545919735 is not greater than 6174.530548465309. Delta is -2.5455738068558276e-06
+Model is not converging.  Current: 6162.653133171386 is not greater than 6162.653133991651. Delta is -8.20265086076688e-07
+  EURNZD M30: built 267 features in 190s (0 errors, 2 skipped)
+EURNZD M30 h=1: OOS IC +0.0024 hit 0.5034 | optimised net +0.00 gross +0.50 x2 -0.64 | median inner (training) Sharpe +0.60 | {'signal:passive': 6, 'signal:market': 6, 'stops:limit_pullback': 2, 'stops:limit_touch': 2}
+EURNZD M30 h=6: OOS IC +0.0121 hit 0.5053 | optimised net -1.05 gross -0.51 x2 -2.32 | median inner (training) Sharpe +1.81 | {'signal:passive': 10, 'signal:market': 4, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+EURNZD M30 h=24: OOS IC +0.0461 hit 0.5101 | optimised net -0.02 gross +0.33 x2 -0.73 | median inner (training) Sharpe +1.86 | {'signal:market': 10, 'signal:passive': 6}
+done EURNZD M30 in 4.6 min

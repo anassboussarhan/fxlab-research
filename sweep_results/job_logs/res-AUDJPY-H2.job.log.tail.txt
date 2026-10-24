@@ -1,0 +1,5 @@
+  AUDJPY H2: built 267 features in 162s (0 errors, 2 skipped)
+AUDJPY H2 h=1: OOS IC +0.0030 hit 0.4977 | optimised net -0.58 gross -0.21 x2 -0.96 | median inner (training) Sharpe +1.49 | {'signal:market': 6, 'stops:limit_pullback': 5, 'signal:passive': 2, 'stops:stop_breakout': 2, 'stops:market': 2}
+AUDJPY H2 h=6: OOS IC +0.0077 hit 0.4993 | optimised net -0.53 gross -0.06 x2 -1.04 | median inner (training) Sharpe +1.42 | {'stops:limit_pullback': 7, 'signal:market': 5, 'signal:passive': 4, 'stops:stop_breakout': 1}
+AUDJPY H2 h=24: OOS IC +0.0034 hit 0.4970 | optimised net -0.80 gross -0.57 x2 -1.07 | median inner (training) Sharpe +1.16 | {'stops:limit_pullback': 5, 'signal:market': 4, 'signal:passive': 4, 'stops:stop_breakout': 4}
+done AUDJPY H2 in 4.4 min

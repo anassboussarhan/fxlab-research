@@ -1,0 +1,5 @@
+  GBPCAD D1: built 269 features in 59s (0 errors, 0 skipped)
+GBPCAD D1 h=1: OOS IC -0.0021 hit 0.4984 | optimised net -0.66 gross -0.49 x2 -1.06 | median inner (training) Sharpe +1.61 | {'signal:passive': 4, 'stops:limit_pullback': 4, 'signal:market': 3, 'stops:stop_breakout': 1}
+GBPCAD D1 h=6: OOS IC +0.0253 hit 0.5147 | optimised net -0.62 gross -0.37 x2 -0.90 | median inner (training) Sharpe +1.72 | {'stops:limit_pullback': 4, 'stops:stop_breakout': 3, 'stops:limit_touch': 3, 'signal:passive': 2}
+GBPCAD D1 h=24: OOS IC -0.0488 hit 0.5412 | optimised net -0.06 gross +0.18 x2 -0.33 | median inner (training) Sharpe +0.74 | {'stops:limit_touch': 3, 'signal:passive': 3, 'stops:limit_pullback': 3, 'stops:stop_breakout': 2, 'signal:market': 1}
+done GBPCAD D1 in 1.5 min

@@ -1,0 +1,21 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6131.487682192561 is not greater than 6131.487683706237. Delta is -1.5136756701394916e-06
+  GBPAUD M30: built 267 features in 347s (0 errors, 2 skipped)
+GBPAUD M30 h=1: OOS IC +0.0041 hit 0.5013 | optimised net -1.14 gross -0.95 x2 -1.55 | median inner (training) Sharpe +0.91 | {'signal:passive': 7, 'signal:market': 4, 'stops:limit_pullback': 2, 'stops:stop_breakout': 1, 'stops:market': 1, 'stops:limit_touch': 1}
+GBPAUD M30 h=6: OOS IC -0.0027 hit 0.4990 | optimised net -1.71 gross -1.11 x2 -2.50 | median inner (training) Sharpe +1.44 | {'signal:passive': 10, 'signal:market': 5, 'stops:limit_pullback': 1}
+GBPAUD M30 h=24: OOS IC -0.0074 hit 0.5013 | optimised net -1.06 gross -0.42 x2 -1.88 | median inner (training) Sharpe +1.39 | {'signal:passive': 6, 'signal:market': 5, 'stops:limit_pullback': 4, 'stops:stop_breakout': 1}
+done GBPAUD M30 in 8.1 min

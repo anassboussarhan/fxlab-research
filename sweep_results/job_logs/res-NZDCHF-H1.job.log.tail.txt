@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDCHF H1: built 267 features in 203s (0 errors, 2 skipped)
+NZDCHF H1 h=1: OOS IC +0.0034 hit 0.5017 | optimised net -1.78 gross -0.66 x2 -2.68 | median inner (training) Sharpe +0.98 | {'signal:passive': 8, 'signal:market': 4, 'stops:limit_pullback': 2, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+NZDCHF H1 h=6: OOS IC +0.0254 hit 0.5022 | optimised net +0.09 gross +0.27 x2 -0.57 | median inner (training) Sharpe +1.43 | {'signal:passive': 10, 'signal:market': 5, 'stops:limit_pullback': 1}
+NZDCHF H1 h=24: OOS IC +0.0278 hit 0.5040 | optimised net -0.45 gross -0.17 x2 -1.21 | median inner (training) Sharpe +1.09 | {'signal:passive': 14, 'stops:limit_pullback': 1, 'signal:market': 1}
+done NZDCHF H1 in 5.0 min

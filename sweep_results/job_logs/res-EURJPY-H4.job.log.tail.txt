@@ -1,0 +1,5 @@
+  EURJPY H4: built 267 features in 117s (0 errors, 2 skipped)
+EURJPY H4 h=1: OOS IC -0.0027 hit 0.5048 | optimised net -0.39 gross -0.19 x2 -0.59 | median inner (training) Sharpe +1.66 | {'signal:market': 7, 'stops:stop_breakout': 4, 'stops:limit_pullback': 3, 'signal:passive': 2, 'stops:limit_touch': 1}
+EURJPY H4 h=6: OOS IC +0.0139 hit 0.4981 | optimised net -0.58 gross -0.30 x2 -0.87 | median inner (training) Sharpe +1.61 | {'signal:market': 6, 'stops:stop_breakout': 5, 'stops:limit_pullback': 5, 'signal:passive': 1}
+EURJPY H4 h=24: OOS IC +0.0363 hit 0.5150 | optimised net -0.10 gross +0.13 x2 -0.33 | median inner (training) Sharpe +1.64 | {'stops:limit_pullback': 10, 'stops:stop_breakout': 3, 'signal:market': 2, 'stops:limit_touch': 1, 'signal:passive': 1}
+done EURJPY H4 in 3.5 min

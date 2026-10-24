@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURJPY M15: built 263 features in 552s (0 errors, 6 skipped)
+EURJPY M15 h=1: OOS IC +0.0006 hit 0.5011 | optimised net -0.66 gross -0.32 x2 -1.01 | median inner (training) Sharpe +1.42 | {'signal:market': 8, 'signal:passive': 6, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+EURJPY M15 h=6: OOS IC +0.0031 hit 0.4981 | optimised net +0.00 gross +0.51 x2 -0.62 | median inner (training) Sharpe +1.24 | {'signal:market': 7, 'signal:passive': 7, 'stops:limit_touch': 2, 'stops:stop_breakout': 1}
+EURJPY M15 h=24: OOS IC +0.0051 hit 0.5006 | optimised net -0.92 gross -0.42 x2 -1.61 | median inner (training) Sharpe +1.59 | {'signal:passive': 6, 'signal:market': 5, 'stops:stop_breakout': 3, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+done EURJPY M15 in 13.1 min

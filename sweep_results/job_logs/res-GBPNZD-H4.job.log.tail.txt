@@ -1,0 +1,5 @@
+  GBPNZD H4: built 268 features in 230s (0 errors, 1 skipped)
+GBPNZD H4 h=1: OOS IC +0.0112 hit 0.5113 | optimised net -0.80 gross -0.48 x2 -1.48 | median inner (training) Sharpe +1.58 | {'signal:passive': 8, 'stops:limit_pullback': 4, 'signal:market': 4}
+GBPNZD H4 h=6: OOS IC -0.0281 hit 0.5038 | optimised net -0.32 gross -0.09 x2 -0.60 | median inner (training) Sharpe +1.47 | {'signal:passive': 4, 'signal:market': 4, 'stops:limit_pullback': 4, 'stops:stop_breakout': 3, 'stops:market': 1}
+GBPNZD H4 h=24: OOS IC -0.0408 hit 0.4847 | optimised net -1.13 gross -0.91 x2 -1.46 | median inner (training) Sharpe +1.00 | {'stops:limit_pullback': 8, 'signal:passive': 4, 'stops:stop_breakout': 3, 'stops:limit_touch': 1}
+done GBPNZD H4 in 5.1 min
