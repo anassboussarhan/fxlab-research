@@ -49,6 +49,14 @@ predictability. The trade engine's stop-first rule for bars holding both stop an
 optional M1 path replay. Run 3 re-tested the trade-mode families and the joint optimisation with it: per-stream
 change median 0.00 (mean +0.005, correlation 0.98 with stop-first), still 0 BH/Holm survivors.
 
+### 8.1e Searching for a non-random projection - see `docs/projections.md`
+Linear projections of the currency space (Lo-MacKinlay maximally predictable portfolio, Box-Tiao most
+mean-reverting basket), D1/H4 walk-forward with 20 placebos each: no genuine basket has a robust directional
+forecast (best gross Sharpe 0.46 vs placebo 0.08 +- 0.24, net -0.05; OOS R^2 ~ 0.001). A basket with gross
+Sharpe 1.56 that beat every placebo turned out to be the triangular identity of the crosses (quote noise
+inside the spread, net -11.6). Volatility is the non-random projection (HAR OOS R^2 0.29-0.48) but carries no
+direction; the only directional one is the gotobi calendar effect, still unconfirmed on new data.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
