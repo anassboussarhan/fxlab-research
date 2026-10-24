@@ -1,0 +1,48 @@
+rch/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+{
+ "planned": 28,
+ "skipped_at_planning": 1,
+ "ok": 28,
+ "failed": 0,
+ "not_yet_run": 0
+}
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:49: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS)
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:36: RuntimeWarning: All-NaN slice encountered
+  near = np.nanmin(np.abs(c[:, None] - levels), axis=1) / (a + EPS) if len(c) else np.array([])
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/geometry.py:79: RuntimeWarning: divide by zero encountered in log
+  pen = band_pen(r1, *b1) + band_pen(r2, *b2) + band_pen(r3, *b3) + np.abs(np.log(r4 / t))
+Model is not converging.  Current: 6367.438484649373 is not greater than 6367.4385474217015. Delta is -6.277232841966907e-05
+Model is not converging.  Current: 6301.423148694912 is not greater than 6301.423156589445. Delta is -7.89453315519495e-06
+Model is not converging.  Current: 6328.4948158105535 is not greater than 6328.494822294622. Delta is -6.484068762802053e-06
+Model is not converging.  Current: 6230.531928139577 is not greater than 6230.531928515109. Delta is -3.755321813514456e-07
+Model is not converging.  Current: 6478.825369783894 is not greater than 6478.825381859438. Delta is -1.2075543963874225e-05
+Model is not converging.  Current: 6351.709839409949 is not greater than 6351.709866534075. Delta is -2.7124126063426957e-05
+Model is not converging.  Current: 6266.730892796744 is not greater than 6266.730919772142. Delta is -2.6975398213835433e-05
+Model is not converging.  Current: 6345.678741304217 is not greater than 6345.678759614171. Delta is -1.8309954612050205e-05
+Model is not converging.  Current: 6320.759069518056 is not greater than 6320.759092488892. Delta is -2.297083574376302e-05
+Model is not converging.  Current: 6267.585093115341 is not greater than 6267.585110299878. Delta is -1.7184536773129366e-05
+Model is not converging.  Current: 6257.8395696763355 is not greater than 6257.839578382273. Delta is -8.705937943886966e-06
+Model is not converging.  Current: 6306.49238505341 is not greater than 6306.492386818247. Delta is -1.7648371795075946e-06
+Model is not converging.  Current: 6344.131077172431 is not greater than 6344.131081510517. Delta is -4.3380860006436706e-06
+Model is not converging.  Current: 6275.683754714725 is not greater than 6275.683755710265. Delta is -9.955401765182614e-07
+{
+ "planned": 96,
+ "skipped_at_planning": 1,
+ "ok": 96,
+ "failed": 0,
+ "not_yet_run": 0
+}

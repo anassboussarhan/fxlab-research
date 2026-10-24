@@ -1,0 +1,22 @@
+{'tests': 398, 'median_portfolio_sharpe': -0.5606457813785113, 'share_positive': 0.1407035175879397, 'bh10': 0, 'holm05': 0}
+                  family tf   exec financing  instruments  portfolio_sharpe     p  p_bh  median_instrument_sharpe  share_instruments_positive
+     S.SP.SPECTRAL_CYCLE D1 market      flat            6             0.705 0.022   1.0                     0.059                       0.500
+           S.XA.STAT_ARB D1 market      flat            6             0.634 0.034   1.0                     0.243                       0.667
+     S.MR.STOCH_REVERSAL D1 market      flat            6             0.570 0.051   1.0                     0.303                       0.833
+             S.MR.ZSCORE D1 market      flat            6             0.476 0.086   1.0                    -0.057                       0.500
+     S.FORUM.THREE_DUCKS D1 market     rates           28             0.463 0.052   1.0                    -0.305                       0.250
+           S.RETAIL.GRID D1 market      flat            6             0.452 0.097   1.0                     0.048                       0.500
+     S.RETAIL.MARTINGALE H4 market     rates           28             0.448 0.043   1.0                    -0.192                       0.286
+       S.BO.VOL_BREAKOUT H4 market     rates           28             0.444 0.044   1.0                    -0.035                       0.393
+        S.ST.SR_REVERSAL D1 market      flat            6             0.439 0.104   1.0                     0.053                       0.500
+S.TREND.INDICATOR_SIGNAL H4 market     rates           28             0.407 0.059   1.0                    -0.212                       0.214
+     S.MR.TWAP_REVERSION D1 market     rates           28             0.349 0.111   1.0                    -0.266                       0.286
+S.TREND.INDICATOR_SIGNAL D1 market     rates           28             0.321 0.130   1.0                    -0.207                       0.214
+           S.XA.STAT_ARB H4 market      flat            6             0.316 0.160   1.0                    -0.000                       0.500
+            S.RG.FRACTAL H4 market     rates           28             0.295 0.129   1.0                    -0.378                       0.250
+    S.BO.RANGE_EXPANSION D1 market      flat            6             0.275 0.215   1.0                     0.010                       0.500
+            S.SP.WAVELET D1 market     rates           28             0.255 0.185   1.0                    -0.237                       0.357
+              S.XA.PAIRS D1 market      flat            6             0.250 0.237   1.0                     0.097                       0.500
+      S.XA.RATE_MOMENTUM D1 market     rates           28             0.241 0.199   1.0                    -0.166                       0.464
+          S.MR.BOLLINGER D1 market      flat            6             0.239 0.246   1.0                     0.166                       0.667
+           S.RETAIL.GRID H4 market      flat            6             0.231 0.233   1.0                     0.130                       0.833

@@ -1,0 +1,354 @@
+{
+ "streams_total": 11322,
+ "by_source": {
+  "strategy": 11322
+ },
+ "configurations_tried": 773275,
+ "median_oos_sharpe": -0.406135472940068,
+ "share_positive": 0.17859035506094328,
+ "bh_significant_10pct": 0,
+ "holm_significant_5pct": 0,
+ "survivors_of_predeclared_bar": 0,
+ "best_stream": {
+  "source": "strategy",
+  "campaign": "cloud_joint_D1_EURGBP",
+  "name": "S.XA.LEAD_LAG",
+  "symbol": "EURGBP",
+  "tf": "D1",
+  "exec": "joint",
+  "financing": "rates",
+  "sharpe": 1.3559192446472925,
+  "p": 5.222625060891794e-05,
+  "n_days": 2137,
+  "cost_x2_sharpe": 0.9397964321503365,
+  "n_candidates": 66,
+  "p_bh": 0.29565280469708444,
+  "p_holm": 0.59125338314356
+ },
+ "best_stream_deflated_sharpe": {
+  "strategy": {
+   "name": "S.XA.LEAD_LAG",
+   "symbol": "EURGBP",
+   "tf": "D1",
+   "sharpe": 1.3559192446472925,
+   "dsr": 5.023266346239169e-16
+  }
+ },
+ "top10": [
+  {
+   "source": "strategy",
+   "name": "S.XA.LEAD_LAG",
+   "symbol": "EURGBP",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.3559,
+   "p": 0.0001,
+   "p_bh": 0.2957
+  },
+  {
+   "source": "strategy",
+   "name": "S.MS.LIQUIDITY_FILTERED",
+   "symbol": "AUDJPY",
+   "tf": "H4",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.254,
+   "p": 0.0,
+   "p_bh": 0.2957
+  },
+  {
+   "source": "strategy",
+   "name": "S.BO.RANGE_EXPANSION",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.1641,
+   "p": 0.0037,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.MS.LIQUIDITY_FILTERED",
+   "symbol": "CHFJPY",
+   "tf": "H4",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.0571,
+   "p": 0.0005,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.ST.TRENDLINE_BREAK",
+   "symbol": "NZDJPY",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.0516,
+   "p": 0.0078,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.VOL.EXPANSION",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "rates",
+   "sharpe": 1.0051,
+   "p": 0.0104,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.MR.SHORT_REVERSAL",
+   "symbol": "XAUUSD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "flat",
+   "sharpe": 0.9897,
+   "p": 0.0229,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.RETAIL.PYRAMID",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 0.9769,
+   "p": 0.0124,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.MR.STOCH_REVERSAL",
+   "symbol": "AUDNZD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 0.9755,
+   "p": 0.0067,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.EVT.FOMC_USD",
+   "symbol": "XAGUSD",
+   "tf": "H4",
+   "exec": "joint",
+   "financing": "flat",
+   "sharpe": 0.9628,
+   "p": 0.0121,
+   "p_bh": 1.0
+  }
+ ]
+}
+  source              campaign tf   exec financing  streams  median_sharpe  share_positive  best_sharpe  bh10  holm05
+strategy       cloud_D1_GBPCAD D1 market     rates       24         -0.000           0.458        0.865     0       0
+strategy cloud_joint_D1_EURGBP D1  joint     rates       77         -0.023           0.455        1.356     0       0
+strategy cloud_joint_H4_EURUSD H4  joint     rates       83         -0.029           0.458        0.779     0       0
+strategy cloud_joint_H4_EURJPY H4  joint     rates       83         -0.033           0.446        0.883     0       0
+strategy cloud_joint_H4_AUDUSD H4  joint     rates       83         -0.036           0.446        0.868     0       0
+strategy cloud_joint_D1_EURNOK D1  joint      flat       77         -0.058           0.325        0.783     0       0
+strategy cloud_joint_D1_EURUSD D1  joint     rates       77         -0.060           0.390        0.497     0       0
+strategy cloud_joint_D1_USDNOK D1  joint      flat       77         -0.062           0.260        0.565     0       0
+strategy       cloud_H4_XAUUSD H4 market      flat       25         -0.062           0.360        0.663     0       0
+strategy       cloud_D1_GBPJPY D1 market     rates       24         -0.083           0.375        0.614     0       0
+strategy cloud_joint_H4_XAUUSD H4  joint      flat       83         -0.086           0.277        0.783     0       0
+strategy cloud_joint_D1_EURSEK D1  joint      flat       77         -0.088           0.273        0.482     0       0
+strategy       cloud_D1_EURJPY D1 market     rates       24         -0.091           0.375        0.454     0       0
+strategy cloud_joint_H4_AUDJPY H4  joint     rates       83         -0.103           0.398        1.254     0       0
+strategy       cloud_D1_GBPUSD D1 market     rates       24         -0.105           0.333        0.194     0       0
+strategy cloud_joint_D1_USDJPY D1  joint     rates       77         -0.111           0.364        0.633     0       0
+strategy       cloud_D1_EURNOK D1 market      flat       24         -0.112           0.208        0.292     0       0
+strategy cloud_joint_D1_XAUUSD D1  joint      flat       77         -0.120           0.312        0.990     0       0
+strategy cloud_joint_D1_USDSEK D1  joint      flat       77         -0.128           0.221        0.463     0       0
+strategy cloud_joint_D1_GBPUSD D1  joint     rates       77         -0.129           0.286        0.588     0       0
+strategy       cloud_D1_NZDCAD D1 market     rates       24         -0.130           0.167        0.338     0       0
+strategy cloud_joint_H4_GBPJPY H4  joint     rates       83         -0.143           0.337        0.736     0       0
+strategy cloud_joint_D1_EURCHF D1  joint     rates       77         -0.144           0.338        0.951     0       0
+strategy cloud_joint_D1_EURJPY D1  joint     rates       77         -0.144           0.338        0.740     0       0
+strategy cloud_joint_D1_CHFJPY D1  joint     rates       77         -0.150           0.273        0.828     0       0
+strategy       cloud_H4_GBPCAD H4 market     rates       25         -0.150           0.360        0.520     0       0
+strategy       cloud_D1_CADJPY D1 market     rates       24         -0.154           0.125        0.246     0       0
+strategy cloud_joint_D1_GBPCAD D1  joint     rates       77         -0.155           0.377        0.951     0       0
+strategy       cloud_D1_GBPCHF D1 market     rates       24         -0.156           0.167        0.291     0       0
+strategy       cloud_D1_USDCAD D1 market     rates       24         -0.159           0.375        0.482     0       0
+strategy       cloud_D1_XAUUSD D1 market      flat       24         -0.170           0.292        0.362     0       0
+strategy       cloud_D1_EURUSD D1 market     rates       24         -0.172           0.208        0.340     0       0
+strategy cloud_joint_D1_AUDUSD D1  joint     rates       77         -0.172           0.273        0.426     0       0
+strategy cloud_joint_D1_USDCAD D1  joint     rates       77         -0.181           0.234        0.623     0       0
+strategy cloud_joint_H4_EURAUD H4  joint     rates       83         -0.182           0.289        0.614     0       0
+strategy cloud_joint_D1_EURCAD D1  joint     rates       77         -0.183           0.260        0.787     0       0
+strategy cloud_joint_D1_CADJPY D1  joint     rates       77         -0.184           0.299        0.693     0       0
+strategy cloud_joint_H4_USDJPY H4  joint     rates       83         -0.186           0.301        0.853     0       0
+strategy cloud_joint_D1_GBPJPY D1  joint     rates       77         -0.191           0.299        0.596     0       0
+strategy       cloud_D1_AUDJPY D1 market     rates       24         -0.193           0.208        0.499     0       0
+strategy cloud_joint_D1_EURAUD D1  joint     rates       77         -0.197           0.273        0.636     0       0
+strategy cloud_joint_D1_AUDCAD D1  joint     rates       77         -0.200           0.325        0.763     0       0
+strategy cloud_joint_D1_NZDUSD D1  joint     rates       77         -0.209           0.195        0.837     0       0
+strategy cloud_joint_D1_GBPNZD D1  joint     rates       77         -0.213           0.273        0.792     0       0
+strategy cloud_joint_D1_USDCHF D1  joint     rates       77         -0.215           0.234        0.848     0       0
+strategy cloud_joint_H4_CADJPY H4  joint     rates       83         -0.216           0.229        0.571     0       0
+strategy cloud_joint_H4_NZDJPY H4  joint     rates       83         -0.216           0.241        0.840     0       0
+strategy cloud_joint_D1_NZDCAD D1  joint     rates       77         -0.220           0.286        0.647     0       0
+strategy cloud_joint_D1_AUDJPY D1  joint     rates       77         -0.220           0.260        0.956     0       0
+strategy       cloud_D1_GBPNZD D1 market     rates       24         -0.222           0.292        0.522     0       0
+strategy       cloud_H4_EURUSD H4 market     rates       25         -0.227           0.040        0.052     0       0
+strategy cloud_joint_D1_GBPCHF D1  joint     rates       77         -0.230           0.221        0.402     0       0
+strategy       cloud_H4_AUDJPY H4 market     rates       25         -0.230           0.360        0.581     0       0
+strategy cloud_joint_H4_USDSEK H4  joint      flat       83         -0.234           0.157        0.435     0       0
+strategy       cloud_D1_EURCAD D1 market     rates       24         -0.237           0.292        0.296     0       0
+strategy       cloud_D1_CHFJPY D1 market     rates       24         -0.240           0.208        0.361     0       0
+strategy cloud_joint_D1_EURNZD D1  joint     rates       77         -0.242           0.221        0.423     0       0
+strategy cloud_joint_H4_USDCHF H4  joint     rates       83         -0.249           0.229        0.634     0       0
+strategy       cloud_D1_USDJPY D1 market     rates       24         -0.254           0.208        0.352     0       0
+strategy cloud_joint_H4_GBPUSD H4  joint     rates       83         -0.269           0.217        0.826     0       0
+strategy       cloud_D1_EURNZD D1 market     rates       24         -0.271           0.208        0.455     0       0
+strategy       cloud_D1_USDSEK D1 market      flat       24         -0.274           0.125        0.145     0       0
+strategy cloud_joint_H4_CHFJPY H4  joint     rates       83         -0.275           0.229        1.057     0       0
+strategy cloud_joint_H4_NZDUSD H4  joint     rates       83         -0.282           0.145        0.511     0       0
+strategy       cloud_H4_GBPJPY H4 market     rates       25         -0.285           0.320        0.631     0       0
+strategy       cloud_H4_EURAUD H4 market     rates       25         -0.287           0.360        0.499     0       0
+strategy cloud_joint_D1_NZDCHF D1  joint     rates       77         -0.287           0.273        0.764     0       0
+strategy       cloud_D1_EURAUD D1 market     rates       24         -0.288           0.167        0.746     0       0
+strategy       cloud_H4_NZDJPY H4 market     rates       25         -0.288           0.320        0.759     0       0
+strategy cloud_joint_H4_USDCAD H4  joint     rates       83         -0.289           0.193        0.519     0       0
+strategy       cloud_D1_EURSEK D1 market      flat       24         -0.290           0.125        0.402     0       0
+strategy cloud_joint_D1_CADCHF D1  joint     rates       77         -0.294           0.208        0.513     0       0
+strategy cloud_joint_H4_EURSEK H4  joint      flat       83         -0.295           0.145        0.344     0       0
+strategy       cloud_H4_AUDUSD H4 market     rates       25         -0.296           0.160        0.205     0       0
+strategy cloud_joint_D1_AUDCHF D1  joint     rates       77         -0.296           0.273        0.535     0       0
+strategy cloud_joint_H4_GBPCHF H4  joint     rates       83         -0.301           0.181        0.641     0       0
+strategy       cloud_H4_EURJPY H4 market     rates       25         -0.307           0.200        0.315     0       0
+strategy cloud_joint_H4_EURCAD H4  joint     rates       83         -0.315           0.181        0.589     0       0
+strategy       cloud_D1_AUDCAD D1 market     rates       24         -0.317           0.042        0.015     0       0
+strategy cloud_joint_D1_AUDNZD D1  joint     rates       77         -0.318           0.247        0.976     0       0
+strategy cloud_joint_D1_GBPAUD D1  joint     rates       77         -0.319           0.338        1.164     0       0
+strategy       cloud_D1_AUDUSD D1 market     rates       24         -0.324           0.167        0.355     0       0
+strategy       cloud_H4_USDJPY H4 market     rates       25         -0.324           0.280        0.341     0       0
+strategy cloud_joint_H4_EURGBP H4  joint     rates       83         -0.327           0.096        0.954     0       0
+strategy       cloud_D1_GBPAUD D1 market     rates       24         -0.328           0.250        1.005     0       0
+strategy cloud_joint_H4_AUDCAD H4  joint     rates       83         -0.329           0.229        0.594     0       0
+strategy       cloud_H4_GBPAUD H4 market     rates       25         -0.331           0.320        0.488     0       0
+strategy cloud_joint_H4_NZDCAD H4  joint     rates       83         -0.336           0.157        0.822     0       0
+strategy       cloud_H4_CADJPY H4 market     rates       25         -0.336           0.160        0.373     0       0
+strategy cloud_joint_H4_EURCHF H4  joint     rates       83         -0.339           0.157        0.368     0       0
+strategy       cloud_D1_EURGBP D1 market     rates       24         -0.341           0.083        0.209     0       0
+strategy cloud_joint_D1_XAGUSD D1  joint      flat       77         -0.345           0.169        0.914     0       0
+strategy cloud_joint_H4_USDNOK H4  joint      flat       83         -0.352           0.169        0.494     0       0
+strategy cloud_joint_D1_NZDJPY D1  joint     rates       77         -0.355           0.234        1.052     0       0
+strategy       cloud_D1_USDNOK D1 market      flat       24         -0.357           0.208        0.662     0       0
+strategy cloud_joint_H4_EURNOK H4  joint      flat       83         -0.358           0.181        0.595     0       0
+strategy       cloud_D1_AUDCHF D1 market     rates       24         -0.361           0.167        0.487     0       0
+strategy       cloud_D1_NZDUSD D1 market     rates       24         -0.366           0.125        0.094     0       0
+strategy cloud_joint_H4_GBPCAD H4  joint     rates       83         -0.368           0.169        0.468     0       0
+strategy       cloud_H4_GBPCHF H4 market     rates       25         -0.368           0.200        0.371     0       0
+strategy       cloud_H4_USDSEK H4 market      flat       25         -0.371           0.120        0.546     0       0
+strategy       cloud_H4_USDCHF H4 market     rates       25         -0.372           0.320        0.654     0       0
+strategy       cloud_H4_EURGBP H4 market     rates       25         -0.379           0.200        0.209     0       0
+strategy cloud_joint_H4_GBPAUD H4  joint     rates       83         -0.382           0.265        0.584     0       0
+strategy cloud_joint_H4_GBPNZD H4  joint     rates       83         -0.383           0.241        0.802     0       0
+strategy       cloud_D1_EURCHF D1 market     rates       24         -0.386           0.125        0.198     0       0
+strategy       cloud_D1_XAGUSD D1 market      flat       24         -0.387           0.167        0.697     0       0
+strategy       cloud_H4_GBPNZD H4 market     rates       25         -0.393           0.160        0.069     0       0
+strategy cloud_joint_H4_EURNZD H4  joint     rates       83         -0.400           0.169        0.695     0       0
+strategy       cloud_D1_NZDJPY D1 market     rates       24         -0.402           0.125        0.293     0       0
+strategy       cloud_H4_EURNZD H4 market     rates       25         -0.418           0.040        0.112     0       0
+strategy       cloud_D1_AUDNZD D1 market     rates       24         -0.430           0.167        0.203     0       0
+strategy cloud_joint_H1_EURUSD H1  joint      flat       96         -0.431           0.135        0.550     0       0
+strategy       cloud_D1_USDCHF D1 market     rates       24         -0.431           0.167        0.608     0       0
+strategy       cloud_H4_USDNOK H4 market      flat       25         -0.441           0.120        0.078     0       0
+strategy cloud_joint_H4_AUDNZD H4  joint     rates       83         -0.464           0.145        0.440     0       0
+strategy cloud_joint_H1_GBPJPY H1  joint      flat       96         -0.476           0.177        0.908     0       0
+strategy       cloud_H4_CHFJPY H4 market     rates       25         -0.483           0.160        0.573     0       0
+strategy       cloud_H4_NZDUSD H4 market     rates       25         -0.485           0.080        0.218     0       0
+strategy       cloud_H4_AUDCHF H4 market     rates       25         -0.489           0.080        0.175     0       0
+strategy       cloud_H4_USDCAD H4 market     rates       25         -0.491           0.280        0.526     0       0
+strategy       cloud_D1_NZDCHF D1 market     rates       24         -0.492           0.083        0.367     0       0
+strategy       cloud_H4_GBPUSD H4 market     rates       25         -0.493           0.240        0.399     0       0
+strategy cloud_joint_H1_EURJPY H1  joint      flat       96         -0.494           0.135        0.906     0       0
+strategy       cloud_H4_EURCAD H4 market     rates       25         -0.508           0.160        0.380     0       0
+strategy cloud_joint_H1_AUDJPY H1  joint      flat       96         -0.515           0.125        0.421     0       0
+strategy cloud_joint_H4_CADCHF H4  joint     rates       83         -0.524           0.169        0.605     0       0
+strategy cloud_joint_H4_AUDCHF H4  joint     rates       83         -0.532           0.145        0.758     0       0
+strategy cloud_joint_H1_XAUUSD H1  joint      flat       96         -0.538           0.115        0.671     0       0
+strategy       cloud_H4_EURCHF H4 market     rates       25         -0.546           0.080        0.301     0       0
+strategy cloud_joint_H1_EURAUD H1  joint      flat       96         -0.548           0.135        0.699     0       0
+strategy cloud_joint_H4_XAGUSD H4  joint      flat       83         -0.562           0.120        0.963     0       0
+strategy       cloud_H4_AUDCAD H4 market     rates       25         -0.567           0.040        0.046     0       0
+strategy cloud_joint_H1_AUDUSD H1  joint      flat       96         -0.567           0.083        0.355     0       0
+strategy cloud_joint_H1_USDSEK H1  joint      flat       96         -0.569           0.104        0.589     0       0
+strategy cloud_joint_H1_GBPAUD H1  joint      flat       96         -0.587           0.104        0.525     0       0
+strategy       cloud_D1_CADCHF D1 market     rates       24         -0.590           0.000        0.000     0       0
+strategy       cloud_H4_EURNOK H4 market      flat       25         -0.593           0.120        0.174     0       0
+strategy       cloud_H4_AUDNZD H4 market     rates       25         -0.593           0.120        0.188     0       0
+strategy       cloud_H1_USDJPY H1 market      flat       28         -0.600           0.107        0.181     0       0
+strategy cloud_joint_H1_USDCHF H1  joint      flat       96         -0.620           0.083        0.540     0       0
+strategy cloud_joint_H1_USDJPY H1  joint      flat       96         -0.622           0.167        0.786     0       0
+strategy cloud_joint_H1_USDCAD H1  joint      flat       96         -0.635           0.062        0.665     0       0
+strategy cloud_joint_H4_NZDCHF H4  joint     rates       83         -0.642           0.120        0.664     0       0
+strategy cloud_joint_H1_NZDUSD H1  joint      flat       96         -0.653           0.115        0.524     0       0
+strategy       cloud_H4_NZDCAD H4 market     rates       25         -0.668           0.040        0.203     0       0
+strategy cloud_joint_H1_GBPCHF H1  joint      flat       96         -0.681           0.094        0.384     0       0
+strategy cloud_joint_H1_CADJPY H1  joint      flat       96         -0.684           0.062        0.232     0       0
+strategy cloud_joint_H1_GBPUSD H1  joint      flat       96         -0.692           0.073        0.345     0       0
+strategy cloud_joint_H1_CHFJPY H1  joint      flat       96         -0.697           0.021        0.362     0       0
+strategy cloud_joint_H1_USDNOK H1  joint      flat       96         -0.704           0.042        0.256     0       0
+strategy cloud_joint_H1_EURCAD H1  joint      flat       96         -0.719           0.083        0.426     0       0
+strategy cloud_joint_H1_EURNZD H1  joint      flat       96         -0.725           0.125        0.510     0       0
+strategy       cloud_H4_EURSEK H4 market      flat       25         -0.733           0.040        0.043     0       0
+strategy cloud_joint_H1_GBPNZD H1  joint      flat       96         -0.748           0.073        0.490     0       0
+strategy cloud_joint_H1_GBPCAD H1  joint      flat       96         -0.749           0.094        0.423     0       0
+strategy cloud_joint_H1_EURGBP H1  joint      flat       96         -0.777           0.052        0.565     0       0
+strategy       cloud_H4_NZDCHF H4 market     rates       25         -0.788           0.040        0.051     0       0
+strategy       cloud_H1_GBPUSD H1 market      flat       28         -0.797           0.179        0.414     0       0
+strategy       cloud_H1_EURJPY H1 market      flat       28         -0.797           0.107        0.567     0       0
+strategy cloud_joint_H1_EURCHF H1  joint      flat       96         -0.798           0.021        0.484     0       0
+strategy cloud_joint_H1_NZDJPY H1  joint      flat       96         -0.802           0.042        0.437     0       0
+strategy cloud_joint_H1_EURSEK H1  joint      flat       96         -0.804           0.042        0.638     0       0
+strategy       cloud_H4_XAGUSD H4 market      flat       25         -0.808           0.080        0.240     0       0
+strategy       cloud_H1_USDCHF H1 market      flat       28         -0.809           0.143        0.575     0       0
+strategy       cloud_H1_EURUSD H1 market      flat       28         -0.810           0.071        0.598     0       0
+strategy cloud_joint_H1_EURNOK H1  joint      flat       96         -0.847           0.031        0.383     0       0
+strategy       cloud_H4_CADCHF H4 market     rates       25         -0.863           0.080        0.233     0       0
+strategy       cloud_H1_GBPAUD H1 market      flat       28         -0.864           0.071        0.426     0       0
+strategy       cloud_H1_AUDJPY H1 market      flat       28         -0.899           0.000       -0.139     0       0
+strategy cloud_joint_H1_AUDNZD H1  joint      flat       96         -0.954           0.062        0.364     0       0
+strategy       cloud_H1_AUDUSD H1 market      flat       28         -0.966           0.143        0.433     0       0
+strategy       cloud_H1_USDCAD H1 market      flat       28         -0.971           0.036        0.053     0       0
+strategy       cloud_H1_GBPJPY H1 market      flat       28         -0.972           0.179        0.390     0       0
+strategy       cloud_H1_EURAUD H1 market      flat       28         -0.973           0.179        0.292     0       0
+strategy cloud_joint_H1_NZDCHF H1  joint      flat       96         -0.989           0.031        0.244     0       0
+strategy cloud_joint_H1_CADCHF H1  joint      flat       96         -0.992           0.062        0.572     0       0
+strategy cloud_joint_H1_AUDCAD H1  joint      flat       96         -1.016           0.156        0.688     0       0
+strategy cloud_joint_H1_NZDCAD H1  joint      flat       96         -1.033           0.031        0.620     0       0
+strategy       cloud_H1_XAUUSD H1 market      flat       28         -1.064           0.107        0.571     0       0
+strategy cloud_joint_H1_AUDCHF H1  joint      flat       96         -1.070           0.094        0.712     0       0
+strategy       cloud_H1_EURCAD H1 market      flat       28         -1.113           0.071        0.271     0       0
+strategy       cloud_H1_NZDUSD H1 market      flat       28         -1.143           0.071        0.013     0       0
+strategy       cloud_H1_EURGBP H1 market      flat       28         -1.157           0.071        0.306     0       0
+strategy       cloud_H1_GBPCHF H1 market      flat       28         -1.238           0.036        0.170     0       0
+strategy       cloud_H1_GBPCAD H1 market      flat       28         -1.257           0.036        0.186     0       0
+strategy       cloud_H1_CHFJPY H1 market      flat       28         -1.305           0.107        0.195     0       0
+strategy cloud_joint_H1_XAGUSD H1  joint      flat       96         -1.340           0.062        0.662     0       0
+strategy       cloud_H1_USDSEK H1 market      flat       28         -1.370           0.071        0.377     0       0
+strategy       cloud_H1_NZDJPY H1 market      flat       28         -1.372           0.036        0.062     0       0
+strategy       cloud_H1_EURNZD H1 market      flat       28         -1.379           0.000       -0.065     0       0
+strategy       cloud_H1_CADJPY H1 market      flat       28         -1.447           0.000       -0.050     0       0
+strategy       cloud_H1_AUDCAD H1 market      flat       28         -1.579           0.107        0.354     0       0
+strategy       cloud_H1_USDNOK H1 market      flat       28         -1.616           0.000       -0.090     0       0
+strategy       cloud_H1_GBPNZD H1 market      flat       28         -1.655           0.000        0.000     0       0
+strategy       cloud_H1_EURSEK H1 market      flat       28         -1.701           0.000        0.000     0       0
+strategy       cloud_H1_AUDNZD H1 market      flat       28         -1.703           0.000       -0.209     0       0
+strategy       cloud_H1_AUDCHF H1 market      flat       28         -1.774           0.107        0.151     0       0
+strategy       cloud_H1_EURCHF H1 market      flat       28         -2.027           0.000        0.000     0       0
+strategy       cloud_H1_EURNOK H1 market      flat       28         -2.038           0.000       -0.078     0       0
+strategy       cloud_H1_CADCHF H1 market      flat       28         -2.127           0.036        0.284     0       0
+strategy       cloud_H1_NZDCHF H1 market      flat       28         -2.149           0.000       -0.149     0       0
+strategy       cloud_H1_NZDCAD H1 market      flat       28         -2.207           0.000       -0.153     0       0
+strategy       cloud_H1_XAGUSD H1 market      flat       28         -3.629           0.000        0.000     0       0

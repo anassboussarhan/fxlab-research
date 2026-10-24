@@ -1,0 +1,149 @@
+{
+ "streams_total": 11322,
+ "by_source": {
+  "strategy": 11322
+ },
+ "configurations_tried": 773275,
+ "median_oos_sharpe": -0.406135472940068,
+ "share_positive": 0.17859035506094328,
+ "bh_significant_10pct": 0,
+ "holm_significant_5pct": 0,
+ "survivors_of_predeclared_bar": 0,
+ "best_stream": {
+  "source": "strategy",
+  "campaign": "cloud_joint_D1_EURGBP",
+  "name": "S.XA.LEAD_LAG",
+  "symbol": "EURGBP",
+  "tf": "D1",
+  "exec": "joint",
+  "financing": "rates",
+  "sharpe": 1.3559192446472925,
+  "p": 5.222625060891794e-05,
+  "n_days": 2137,
+  "cost_x2_sharpe": 0.9397964321503365,
+  "n_candidates": 66,
+  "p_bh": 0.29565280469708444,
+  "p_holm": 0.59125338314356
+ },
+ "best_stream_deflated_sharpe": {
+  "strategy": {
+   "name": "S.XA.LEAD_LAG",
+   "symbol": "EURGBP",
+   "tf": "D1",
+   "sharpe": 1.3559192446472925,
+   "dsr": 5.023266346239169e-16
+  }
+ },
+ "top10": [
+  {
+   "source": "strategy",
+   "name": "S.XA.LEAD_LAG",
+   "symbol": "EURGBP",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.3559,
+   "p": 0.0001,
+   "p_bh": 0.2957
+  },
+  {
+   "source": "strategy",
+   "name": "S.MS.LIQUIDITY_FILTERED",
+   "symbol": "AUDJPY",
+   "tf": "H4",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.254,
+   "p": 0.0,
+   "p_bh": 0.2957
+  },
+  {
+   "source": "strategy",
+   "name": "S.BO.RANGE_EXPANSION",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.1641,
+   "p": 0.0037,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.MS.LIQUIDITY_FILTERED",
+   "symbol": "CHFJPY",
+   "tf": "H4",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.0571,
+   "p": 0.0005,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.ST.TRENDLINE_BREAK",
+   "symbol": "NZDJPY",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 1.0516,
+   "p": 0.0078,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.VOL.EXPANSION",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "market",
+   "financing": "rates",
+   "sharpe": 1.0051,
+   "p": 0.0104,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.MR.SHORT_REVERSAL",
+   "symbol": "XAUUSD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "flat",
+   "sharpe": 0.9897,
+   "p": 0.0229,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.RETAIL.PYRAMID",
+   "symbol": "GBPAUD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 0.9769,
+   "p": 0.0124,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.MR.STOCH_REVERSAL",
+   "symbol": "AUDNZD",
+   "tf": "D1",
+   "exec": "joint",
+   "financing": "rates",
+   "sharpe": 0.9755,
+   "p": 0.0067,
+   "p_bh": 1.0
+  },
+  {
+   "source": "strategy",
+   "name": "S.EVT.FOMC_USD",
+   "symbol": "XAGUSD",
+   "tf": "H4",
+   "exec": "joint",
+   "financing": "flat",
+   "sharpe": 0.9628,
+   "p": 0.0121,
+   "p_bh": 1.0
+  }
+ ]
+}
