@@ -98,6 +98,15 @@ Run 3 (`ci/sweep3_config.json`, branch `results3`) re-runs, with this resolution
   intraday breakouts (opening range +0.12, London breakout +0.14), which remain negative.
 The stop-first rule was not what kept the sweep negative.
 
+## Run 10: mid-bar fill fix (branch `results10`, run 40119113917)
+The parameter optimiser exposed a look-ahead in the trade engine: a pending limit or stop entry that filled
+mid-bar could be credited with that bar's high/low (take-profit, partial, trailing stop, breakeven) although those
+extremes may have come before the fill. Now only the stop can trigger on such a bar (a fill at the bar's open is
+unaffected). Re-run of run 3 with the fix: joint streams median change 0.00, mean -0.025 (H1), -0.055 (H4),
+-0.038 (D1), correlation 0.92 with the pre-fix results; medians D1 -0.23, H4 -0.34, H1 -0.71; 0 BH/Holm
+survivors. Joint optimisation still beats the standard walk-forward in 59% of family x pair x timeframe cases
+(median +0.11 Sharpe; run 2 pre-fix: 60%, +0.13), by losing less rather than by making money.
+
 ## Where retail "winners" come from
 
 - **Survivorship and short track records** of negatively skewed systems (grid, martingale, zone recovery).

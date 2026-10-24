@@ -27,12 +27,14 @@ evaluations, not return streams.
   Bollinger / z-score mean reversion ~0.5, p ~0.07-0.09).
 * Feature rules vs placebo columns: 0.86% of real rules exceed OOS Sharpe 0.5 against 0.20% of placebo rules -
   a fatter right tail, but nothing survives correction.
-* **Joint optimisation of parameters x entry x exit per pair** (H1/H4/D1, 96 families x 34 pairs, 761,156
-  candidates simulated): median OOS Sharpe -0.38 (D1 -0.19, H4 -0.29, H1 -0.71), 18% positive; better than the
-  standard walk-forward of the same family/pair/timeframe in 60% of cases (median +0.13 Sharpe, mostly by losing
-  less: pullback limits were chosen in 49% of folds), yet **0** BH/Holm survivors (best q = 0.36: lead-lag
-  EURGBP D1 1.33, liquidity-filtered AUDJPY H4 1.21). The deflation-benchmark abstention traded only 3.9% of
-  folds: the best in-sample combination rarely beat what luck produces with ~100 candidates.
+* **Joint optimisation of parameters x entry x exit per pair** (H1/H4/D1, 96 families x 34 pairs, ~762,000
+  candidates simulated). Figures from run 10, after the trade-engine fix of 2026-10-24 (a pending limit/stop
+  entry that filled mid-bar could be credited a take-profit, trailing or breakeven from that bar's earlier
+  extremes); run 2 (pre-fix) in brackets: median OOS Sharpe -0.41 [-0.38] (D1 -0.23 [-0.19], H4 -0.34 [-0.29],
+  H1 -0.71 [-0.71]), 16% positive [18%]; better than the standard walk-forward of the same family/pair/timeframe
+  in 59% of cases [60%] (median +0.11 [+0.13] Sharpe, mostly by losing less: pullback limits were chosen in 46%
+  of folds), and **0** BH/Holm survivors. The deflation-benchmark abstention traded only 4.5% of folds: the best
+  in-sample combination rarely beat what luck produces with ~100 candidates.
 * Round-4 families (famous traders, forum methods, esoteric): every family's median OOS Sharpe is negative
   (lunar -0.24, Turtle -0.53, Connors RSI2 -0.96, Raschke 80-20 -2.4, round numbers -3.2).
 * Gotobi USDJPY remains the strongest consistent lead on the same 2010-2018 data: H1 1.05 (0.36 at 2x costs),
@@ -47,7 +49,9 @@ zone recovery (net -0.50; 52-61% of months positive, worst month -98%, 34% of ru
 the theory: management reshapes the distribution (win rate, skew) but cannot create expectancy without
 predictability. The trade engine's stop-first rule for bars holding both stop and target was replaced by an
 optional M1 path replay. Run 3 re-tested the trade-mode families and the joint optimisation with it: per-stream
-change median 0.00 (mean +0.005, correlation 0.98 with stop-first), still 0 BH/Holm survivors.
+change median 0.00 (mean +0.005, correlation 0.98 with stop-first), still 0 BH/Holm survivors. Run 10 repeated
+run 3 after the mid-bar-fill fix: joint streams change by a median of 0.00 and a mean of -0.03 to -0.06 Sharpe
+(correlation 0.92); trade-mode families with market entries are unchanged; still 0 survivors.
 
 ### 8.1e Searching for a non-random projection - see `docs/projections.md`
 Linear projections of the currency space (Lo-MacKinlay maximally predictable portfolio, Box-Tiao most
