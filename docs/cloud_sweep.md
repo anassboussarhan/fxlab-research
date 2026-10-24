@@ -90,3 +90,19 @@ It has the same jobs and the same matrices, except that models are off. Its own 
 
 - Rate-differential financing applies to the vector (market-entry, own-exit) engine. The trade engine charges the flat swap.
 - A joint stream's selection searches about 100 to 200 candidates per pair, timeframe and family, so its OOS Sharpe has to clear the program-wide BH and Holm corrections and the DSR before it counts.
+
+## Follow-up runs
+
+Each follow-up run has its own config (`ci/sweepN_config.json`), trigger file (`ci/RUNN`), concurrency group and
+results branch (`resultsN`). Development data only (2007-2018, EURUSD to 2022), 34 pairs.
+
+| Run | GitHub run | What it does | Write-up |
+|---|---|---|---|
+| 3 | 40040589503 | trade-mode families and the joint optimisation with M1 replay of same-bar stop/target ambiguity (H1/H4/D1) | `docs/no_prediction.md` |
+| 4 + 5 | 40089114354, 40089996931 | projection lab, waves 1 and 2 (20 projections x 14 timeframes) | `docs/projection_lab.md` |
+| 6 + 7 | 40098535811, 40110483807 | feature predictability lab (out-of-sample IC of every feature column, 10 timeframes) | `docs/feature_predictability.md` |
+| 8 | 40117414725 | edge harvest with 86 fixed policies; superseded (ran before the mid-bar-fill fix of the trade engine) | - |
+| 9 | 40119113962 | edge harvest with every management lever optimised by TPE (M5-D1, 3 horizons) | `docs/edge_harvest.md` |
+| 10 | 40119113917 | run 3 repeated after the mid-bar-fill fix | `docs/no_prediction.md` |
+| 11 | 40139466942 | optimised management of RANDOM entries: bracket, martingale, pyramid, grid, zone recovery, hedged grid (13 timeframes) | `docs/random_entry_opt.md` |
+| 12 | 40141201668 | the "smart" execution family for random entries (limit/stop entries, sessions, filters, stop-and-reverse, flat before rollover); merges run 11 into one ranking | `docs/random_entry_opt.md` |

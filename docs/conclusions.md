@@ -79,6 +79,22 @@ predicted move of significant tests is 2-10% of the round-trip cost at M5-H1; th
 are about cost-sized, concentrated in EURSEK/EURNOK, and none survived as trading rules after program-wide
 correction.
 
+### 8.1h Harvesting the feature edge with optimised management - see `docs/edge_harvest.md`
+Ridge composite of the top-30 features per fold, with every trade-management lever searched continuously by TPE
+on a pseudo-out-of-sample slice of each training window:
+- threshold, exit, sizing, pyramiding;
+- passive execution;
+- stop, target, trailing, breakeven, partial, time exit;
+- entry order type.
+
+Run 9: 34 pairs x M5-D1 x 3 horizons, 816 streams.
+- Median training Sharpe +1.41 against a test median of -0.36 (rank correlation 0.14).
+- 17% of streams positive; 0 BH survivors; best USDNOK D1 +1.07 (t 2.9, q = 1.0).
+- Best equal-weight portfolio: D1 h = 6, +0.07 (t 0.26).
+- D1 comes closest (median -0.07 to -0.17; SEK/NOK pairs +0.09, metals +0.19), but nothing is significant.
+
+Optimising everything mostly fits noise.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
