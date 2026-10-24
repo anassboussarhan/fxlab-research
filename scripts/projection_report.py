@@ -22,8 +22,9 @@ from scipy import stats as st  # noqa: E402
 from fxlab.config import RESULTS_DIR  # noqa: E402
 from fxlab.validation.stats import benjamini_hochberg  # noqa: E402
 
-IN = RESULTS_DIR / "reports" / "projection_lab"
-OUT = RESULTS_DIR / "reports" / "projection_lab_summary"
+from pathlib import Path  # noqa: E402
+IN = Path(os.environ.get("PR_IN", RESULTS_DIR / "reports" / "projection_lab"))
+OUT = Path(os.environ.get("PR_OUT", RESULTS_DIR / "reports" / "projection_lab_summary"))
 TF_ORDER = ["M1", "M2", "M3", "M5", "M10", "M15", "M30", "H1", "H2", "H4", "H6", "H8", "H12", "D1", "TICK60", "VOLA60"]
 
 
@@ -54,7 +55,10 @@ def main():
     g["tf_order"] = g["tf"].map({t: i for i, t in enumerate(TF_ORDER)})
     g.sort_values(["tf_order", "median_t"], ascending=[True, False]).drop(columns="tf_order").to_csv(
         OUT / "by_tf_projection.csv", index=False)
-    t = df.groupby("tf").agg(**agg).reset_index()
+    t = df.groupby("tf").agg(**agg, non_random_rows=("non_random", "sum"),
+                             best_edge_over_cost_non_random=("edge_over_cost",
+                                                             lambda x: float(x[df.loc[x.index, "non_random"]].max())
+                                                             if df.loc[x.index, "non_random"].any() else np.nan)).reset_index()
     t["tf_order"] = t["tf"].map({x: i for i, x in enumerate(TF_ORDER)})
     t = t.sort_values("tf_order").drop(columns="tf_order")
     t.to_csv(OUT / "by_tf.csv", index=False)

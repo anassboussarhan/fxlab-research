@@ -57,6 +57,15 @@ Sharpe 1.56 that beat every placebo turned out to be the triangular identity of 
 inside the spread, net -11.6). Volatility is the non-random projection (HAR OOS R^2 0.29-0.48) but carries no
 direction; the only directional one is the gotobi calendar effect, still unconfirmed on new data.
 
+### 8.1f Projection lab: where the price is not random - see `docs/projection_lab.md`
+20 mathematical projections (ordinal patterns, Markov contexts, simplex projection, directional-change time, cycle
+phase, fractional differencing, clock, visibility graph, path signature, record times) x 34 pairs x 14 timeframes
+(9,520 tests, BH-corrected, against sign-randomised surrogates): the price is NOT random at short horizons -
+86% of M1 tests and 83% of M5 tests are significant (median t 25 / 15, hit rate ~51.5-52%; mostly short-term mean
+reversion, lag-1 autocorrelation -0.01 to -0.04) - but the predictable move is 0.5-2% of the round-trip cost.
+The structure fades with the timeframe (35% at H1, 4% at H4, 0.3% at D1) faster than moves grow relative to
+costs; the best non-random test reaches 0.61 of its cost. 0 of 9,520 are tradable.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
