@@ -122,6 +122,17 @@ Results:
 A grid fill error found on the way: limit orders were filled at mid without paying the spread. It produced all
 five apparent BH survivors (AUDNZD M5 grid +3.5); it was fixed and the grid re-run in run 14.
 
+### 8.1j Random entries with pooled, robust choice of the mean-reversion harvest - see `docs/random_entry_pool.md`
+Run 15 tests 321 shared grid/bracket candidates (with calm- or range-market gates) on 34 pairs x H1-D1, under six
+selection rules declared in advance (a-priori, per pair, pooled across pairs, top-10 ensemble, pooled with a
+training filter, pooled on the more mean-reverting pairs).
+- **0 of 36 portfolio tests survive BH**, at full costs and at half costs. The best is D1 pooled at +0.25
+  (t 0.9), positive in only 3 of 9 years.
+- Before costs the mean reversion is real: pooled grid H1 +1.03 (t 3.7); H4 on the mean-reverting pairs +1.09
+  (t 3.5).
+- It would pay only at roughly one third of the modelled costs.
+- Random entries cannot win at retail costs on this data.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
