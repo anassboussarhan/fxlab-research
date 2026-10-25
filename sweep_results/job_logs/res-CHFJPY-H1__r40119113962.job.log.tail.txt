@@ -1,0 +1,21 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6416.627309663134 is not greater than 6416.6273794559875. Delta is -6.979285353736486e-05
+Model is not converging.  Current: 6162.033938580655 is not greater than 6162.033940067101. Delta is -1.4864463082631119e-06
+Model is not converging.  Current: 6448.341266701229 is not greater than 6448.341292405254. Delta is -2.5704024665174074e-05
+Model is not converging.  Current: 6400.109488989446 is not greater than 6400.109506353442. Delta is -1.7363996448693797e-05
+Model is not converging.  Current: 6345.374833476392 is not greater than 6345.374849870545. Delta is -1.6394153135479428e-05
+Model is not converging.  Current: 6320.600247087205 is not greater than 6320.600254149534. Delta is -7.062328222673386e-06
+  CHFJPY H1: built 267 features in 244s (0 errors, 2 skipped)
+CHFJPY H1 h=1: OOS IC +0.0014 hit 0.5039 | optimised net -0.08 gross +0.11 x2 -0.59 | median inner (training) Sharpe +1.21 | {'signal:passive': 10, 'signal:market': 4, 'stops:limit_pullback': 3}
+CHFJPY H1 h=6: OOS IC +0.0005 hit 0.5013 | optimised net -1.05 gross -0.87 x2 -1.39 | median inner (training) Sharpe +1.47 | {'signal:passive': 8, 'signal:market': 4, 'stops:limit_pullback': 3, 'stops:market': 1, 'stops:stop_breakout': 1}
+CHFJPY H1 h=24: OOS IC +0.0141 hit 0.4993 | optimised net -0.17 gross +0.11 x2 -0.64 | median inner (training) Sharpe +1.36 | {'signal:passive': 6, 'stops:limit_pullback': 5, 'signal:market': 4, 'stops:stop_breakout': 2}
+done CHFJPY H1 in 6.0 min

@@ -1,0 +1,7 @@
+AUDJPY H6 bracket    : WF single-trader median -0.29 (gross -0.04) | expected stream -0.80 t=-2.5 gross -0.15 | train median +0.28 | hindsight in-sample +0.02 re-randomised -0.14 (deflation bench nan) | 9s
+AUDJPY H6 martingale : WF single-trader median +0.09 (gross +0.16) | expected stream +0.17 t=+0.5 gross +0.26 | train median +0.45 | hindsight in-sample +0.32 re-randomised +0.02 (deflation bench nan) | 6s
+AUDJPY H6 pyramid    : WF single-trader median -0.55 (gross -0.33) | expected stream -0.99 t=-3.2 gross -0.62 | train median +0.18 | hindsight in-sample +0.16 re-randomised +0.02 (deflation bench nan) | 5s
+AUDJPY H6 grid       : WF single-trader median -0.14 (gross -0.08) | expected stream -0.33 t=-1.0 gross -0.24 | train median +1.16 | hindsight in-sample +0.44 re-randomised +0.10 (deflation bench nan) | 7s
+AUDJPY H6 zone       : WF single-trader median -0.02 (gross +0.18) | expected stream -0.21 t=-0.7 gross +0.10 | train median +0.52 | hindsight in-sample +0.25 re-randomised +0.07 (deflation bench nan) | 5s
+AUDJPY H6 hedged_grid: WF single-trader median -0.61 (gross -0.26) | expected stream -0.61 t=-1.9 gross -0.26 | train median +0.77 | hindsight in-sample +0.50 re-randomised +0.50 (deflation bench nan) | 4s
+done AUDJPY H6 in 0.6 min

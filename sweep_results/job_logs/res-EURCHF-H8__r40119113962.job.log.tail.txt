@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURCHF H8: built 269 features in 144s (0 errors, 0 skipped)
+EURCHF H8 h=1: OOS IC +0.0136 hit 0.5180 | optimised net -0.51 gross -0.25 x2 -0.88 | median inner (training) Sharpe +1.36 | {'stops:limit_pullback': 7, 'signal:passive': 5, 'signal:market': 3, 'stops:stop_breakout': 2}
+EURCHF H8 h=6: OOS IC -0.0175 hit 0.4995 | optimised net -0.40 gross +0.06 x2 -0.86 | median inner (training) Sharpe +1.40 | {'stops:limit_pullback': 13, 'signal:passive': 2, 'stops:stop_breakout': 1, 'signal:market': 1}
+EURCHF H8 h=24: OOS IC +0.0223 hit 0.5014 | optimised net -0.48 gross -0.08 x2 -0.91 | median inner (training) Sharpe +1.02 | {'stops:limit_pullback': 9, 'signal:passive': 4, 'stops:stop_breakout': 3, 'stops:limit_touch': 1}
+done EURCHF H8 in 3.4 min

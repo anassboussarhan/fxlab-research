@@ -1,0 +1,42 @@
+
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6262.10990018976 is not greater than 6262.109907128313. Delta is -6.938553269719705e-06
+Model is not converging.  Current: 6218.039888739303 is not greater than 6218.040011384976. Delta is -0.00012264567340025678
+Model is not converging.  Current: 6167.580910448286 is not greater than 6167.580960129196. Delta is -4.968090979673434e-05
+Model is not converging.  Current: 6220.066409469325 is not greater than 6220.066460242464. Delta is -5.0773139264492784e-05
+Model is not converging.  Current: 6161.002572612094 is not greater than 6161.002575051674. Delta is -2.4395803848165087e-06
+Model is not converging.  Current: 6270.759691186062 is not greater than 6270.759786865859. Delta is -9.567979668645421e-05
+Model is not converging.  Current: 6240.6524584960125 is not greater than 6240.6526063267975. Delta is -0.0001478307849538396
+Model is not converging.  Current: 6199.253298454806 is not greater than 6199.253386929903. Delta is -8.847509707265999e-05
+Model is not converging.  Current: 6203.654279042657 is not greater than 6203.654375031736. Delta is -9.598907854524441e-05
+Model is not converging.  Current: 6249.5479553315545 is not greater than 6249.54802841512. Delta is -7.308356543944683e-05
+Model is not converging.  Current: 6287.8323640719 is not greater than 6287.832417532708. Delta is -5.3460807976080105e-05
+Model is not converging.  Current: 6400.559487019208 is not greater than 6400.55956315252. Delta is -7.613331217726227e-05
+Model is not converging.  Current: 6261.350632992313 is not greater than 6261.350649691568. Delta is -1.669925495662028e-05
+Model is not converging.  Current: 6338.438002772857 is not greater than 6338.438009009779. Delta is -6.236922672542278e-06
+Model is not converging.  Current: 6377.337239088683 is not greater than 6377.337256249463. Delta is -1.7160779862024356e-05
+Model is not converging.  Current: 6330.692009630914 is not greater than 6330.692044263504. Delta is -3.463258963165572e-05
+Model is not converging.  Current: 6304.1561519924435 is not greater than 6304.156171184677. Delta is -1.919223359436728e-05
+Model is not converging.  Current: 6260.157852765923 is not greater than 6260.157853336043. Delta is -5.701203917851672e-07
+  USDJPY M30: built 267 features in 233s (0 errors, 2 skipped)
+USDJPY M30 h=1: OOS IC +0.0098 hit 0.5026 | optimised net -0.25 gross +0.08 x2 -0.59 | median inner (training) Sharpe +1.61 | {'signal:market': 9, 'signal:passive': 6, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+USDJPY M30 h=6: OOS IC +0.0032 hit 0.4970 | optimised net -0.66 gross +0.04 x2 -1.37 | median inner (training) Sharpe +1.82 | {'signal:market': 9, 'signal:passive': 4, 'stops:limit_pullback': 2, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+USDJPY M30 h=24: OOS IC -0.0216 hit 0.4920 | optimised net -0.74 gross -0.29 x2 -1.27 | median inner (training) Sharpe +1.07 | {'signal:market': 7, 'signal:passive': 6, 'stops:limit_pullback': 2, 'stops:stop_breakout': 2}
+done USDJPY M30 in 5.5 min

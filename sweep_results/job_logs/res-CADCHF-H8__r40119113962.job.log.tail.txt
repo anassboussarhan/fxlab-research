@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  CADCHF H8: built 269 features in 194s (0 errors, 0 skipped)
+CADCHF H8 h=1: OOS IC +0.0081 hit 0.4962 | optimised net -0.10 gross +0.12 x2 -0.47 | median inner (training) Sharpe +1.31 | {'signal:passive': 6, 'stops:stop_breakout': 3, 'signal:market': 3, 'stops:limit_pullback': 2, 'stops:market': 1}
+CADCHF H8 h=6: OOS IC +0.0168 hit 0.5079 | optimised net +0.15 gross +0.45 x2 -0.25 | median inner (training) Sharpe +1.23 | {'signal:passive': 7, 'signal:market': 4, 'stops:stop_breakout': 2, 'stops:limit_pullback': 2}
+CADCHF H8 h=24: OOS IC +0.1678 hit 0.5265 | optimised net -0.39 gross -0.09 x2 -0.77 | median inner (training) Sharpe +0.78 | {'stops:limit_pullback': 7, 'stops:stop_breakout': 3, 'signal:passive': 3, 'stops:market': 1, 'signal:market': 1}
+done CADCHF H8 in 4.4 min

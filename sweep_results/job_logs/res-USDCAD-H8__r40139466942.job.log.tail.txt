@@ -1,0 +1,7 @@
+USDCAD H8 bracket    : WF single-trader median -0.44 (gross -0.11) | expected stream -0.91 t=-2.9 gross -0.19 | train median +0.36 | hindsight in-sample +0.07 re-randomised -0.05 (deflation bench nan) | 5s
+USDCAD H8 martingale : WF single-trader median +0.19 (gross +0.30) | expected stream +0.24 t=+0.7 gross +0.68 | train median +0.51 | hindsight in-sample +0.32 re-randomised +0.17 (deflation bench nan) | 3s
+USDCAD H8 pyramid    : WF single-trader median -0.31 (gross -0.10) | expected stream -0.37 t=-1.2 gross -0.07 | train median +0.38 | hindsight in-sample +0.08 re-randomised -0.15 (deflation bench nan) | 2s
+USDCAD H8 grid       : WF single-trader median -0.12 (gross -0.02) | expected stream -0.19 t=-0.6 gross -0.01 | train median +1.26 | hindsight in-sample +0.38 re-randomised +0.19 (deflation bench nan) | 6s
+USDCAD H8 zone       : WF single-trader median -0.03 (gross +0.14) | expected stream -0.09 t=-0.3 gross +0.05 | train median +0.42 | hindsight in-sample +0.39 re-randomised +0.13 (deflation bench nan) | 2s
+USDCAD H8 hedged_grid: WF single-trader median -0.68 (gross -0.43) | expected stream -0.68 t=-2.2 gross -0.43 | train median +0.69 | hindsight in-sample +0.88 re-randomised +0.88 (deflation bench nan) | 2s
+done USDCAD H8 in 0.4 min

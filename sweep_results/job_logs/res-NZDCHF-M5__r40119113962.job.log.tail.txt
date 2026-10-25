@@ -1,0 +1,40 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  NZDCHF M5: built 258 features in 533s (0 errors, 11 skipped)
+NZDCHF M5 h=1: OOS IC +0.0163 hit 0.5110 | optimised net +0.00 gross +0.00 x2 +0.00 | median inner (training) Sharpe -10.00 | {'signal:market': 5, 'stops:stop_breakout': 4, 'stops:market': 2, 'signal:passive': 2, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+NZDCHF M5 h=6: OOS IC +0.0122 hit 0.5107 | optimised net -0.92 gross -0.56 x2 -1.68 | median inner (training) Sharpe +1.01 | {'signal:passive': 8, 'signal:market': 6, 'stops:market': 1, 'stops:limit_pullback': 1}
+NZDCHF M5 h=24: OOS IC +0.0175 hit 0.5089 | optimised net +0.08 gross +0.19 x2 -0.30 | median inner (training) Sharpe +1.37 | {'signal:passive': 12, 'signal:market': 4}
+done NZDCHF M5 in 19.7 min

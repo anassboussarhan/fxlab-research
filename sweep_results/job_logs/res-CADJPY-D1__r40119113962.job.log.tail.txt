@@ -1,0 +1,5 @@
+  CADJPY D1: built 269 features in 110s (0 errors, 0 skipped)
+CADJPY D1 h=1: OOS IC -0.0110 hit 0.4924 | optimised net -0.28 gross -0.02 x2 -0.61 | median inner (training) Sharpe +1.14 | {'signal:passive': 8, 'stops:limit_touch': 4, 'stops:limit_pullback': 3, 'stops:market': 1, 'signal:market': 1}
+CADJPY D1 h=6: OOS IC +0.0796 hit 0.5014 | optimised net +0.12 gross +0.28 x2 -0.06 | median inner (training) Sharpe +1.04 | {'stops:limit_pullback': 11, 'signal:passive': 3, 'signal:market': 3}
+CADJPY D1 h=24: OOS IC -0.0112 hit 0.4889 | optimised net -0.32 gross -0.15 x2 -0.53 | median inner (training) Sharpe +0.92 | {'stops:limit_pullback': 6, 'signal:passive': 4, 'stops:limit_touch': 3, 'signal:market': 2, 'stops:market': 1, 'stops:stop_breakout': 1}
+done CADJPY D1 in 3.3 min

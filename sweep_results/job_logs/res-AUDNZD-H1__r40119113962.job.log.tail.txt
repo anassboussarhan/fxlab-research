@@ -1,0 +1,37 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6169.044766005502 is not greater than 6169.0447665067295. Delta is -5.012270776205696e-07
+Model is not converging.  Current: 6247.826140755151 is not greater than 6247.826180806274. Delta is -4.0051123505691066e-05
+  AUDNZD H1: built 267 features in 133s (0 errors, 2 skipped)
+AUDNZD H1 h=1: OOS IC +0.0137 hit 0.5083 | optimised net -0.45 gross -0.20 x2 -0.85 | median inner (training) Sharpe +1.46 | {'signal:passive': 11, 'signal:market': 4, 'stops:limit_pullback': 2}
+AUDNZD H1 h=6: OOS IC +0.0259 hit 0.5120 | optimised net +0.09 gross +0.53 x2 -0.97 | median inner (training) Sharpe +1.40 | {'signal:passive': 11, 'signal:market': 2, 'stops:limit_pullback': 2, 'stops:market': 1, 'stops:limit_touch': 1}
+AUDNZD H1 h=24: OOS IC +0.0052 hit 0.5027 | optimised net +0.03 gross +0.35 x2 -0.77 | median inner (training) Sharpe +1.25 | {'signal:passive': 8, 'stops:limit_pullback': 5, 'signal:market': 3, 'stops:stop_breakout': 1}
+done AUDNZD H1 in 3.3 min

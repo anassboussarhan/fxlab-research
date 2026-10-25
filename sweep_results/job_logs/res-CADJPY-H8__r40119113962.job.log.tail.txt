@@ -1,0 +1,5 @@
+  CADJPY H8: built 269 features in 114s (0 errors, 0 skipped)
+CADJPY H8 h=1: OOS IC +0.0236 hit 0.5092 | optimised net -0.17 gross +0.12 x2 -0.51 | median inner (training) Sharpe +1.78 | {'stops:stop_breakout': 5, 'signal:market': 5, 'signal:passive': 4, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+CADJPY H8 h=6: OOS IC +0.0451 hit 0.5068 | optimised net -0.25 gross -0.06 x2 -0.44 | median inner (training) Sharpe +1.66 | {'signal:market': 6, 'stops:limit_pullback': 6, 'stops:stop_breakout': 2, 'signal:passive': 2, 'stops:limit_touch': 1}
+CADJPY H8 h=24: OOS IC +0.0288 hit 0.4970 | optimised net -0.22 gross -0.08 x2 -0.40 | median inner (training) Sharpe +1.00 | {'stops:limit_pullback': 8, 'stops:stop_breakout': 4, 'signal:passive': 3, 'signal:market': 2}
+done CADJPY H8 in 2.6 min

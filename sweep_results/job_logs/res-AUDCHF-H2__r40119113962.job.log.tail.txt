@@ -1,0 +1,21 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6136.911300801777 is not greater than 6136.911324846399. Delta is -2.404462247795891e-05
+  AUDCHF H2: built 267 features in 139s (0 errors, 2 skipped)
+AUDCHF H2 h=1: OOS IC +0.0086 hit 0.5070 | optimised net -0.11 gross +0.11 x2 -1.05 | median inner (training) Sharpe +1.98 | {'signal:passive': 9, 'signal:market': 4, 'stops:stop_breakout': 1, 'stops:limit_touch': 1, 'stops:limit_pullback': 1}
+AUDCHF H2 h=6: OOS IC +0.0163 hit 0.5099 | optimised net -0.39 gross -0.03 x2 -0.96 | median inner (training) Sharpe +1.54 | {'signal:passive': 5, 'stops:limit_pullback': 5, 'signal:market': 5, 'stops:limit_touch': 1}
+AUDCHF H2 h=24: OOS IC +0.0273 hit 0.5094 | optimised net -0.55 gross -0.27 x2 -1.04 | median inner (training) Sharpe +1.47 | {'stops:limit_pullback': 7, 'signal:passive': 6, 'signal:market': 2, 'stops:stop_breakout': 1}
+done AUDCHF H2 in 3.7 min

@@ -1,0 +1,49 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6230.987754158541 is not greater than 6230.987762713653. Delta is -8.555111890018452e-06
+Model is not converging.  Current: 6192.178577698042 is not greater than 6192.178600394318. Delta is -2.2696275664202403e-05
+Model is not converging.  Current: 6190.933566325877 is not greater than 6190.933610170415. Delta is -4.384453768579988e-05
+Model is not converging.  Current: -426.7294140187727 is not greater than -426.57410047672045. Delta is -0.1553135420522267
+  AUDNZD M30: built 267 features in 314s (0 errors, 2 skipped)
+AUDNZD M30 h=1: OOS IC +0.0072 hit 0.5028 | optimised net -0.66 gross -0.38 x2 -0.97 | median inner (training) Sharpe -0.03 | {'signal:passive': 8, 'signal:market': 5, 'stops:stop_breakout': 2, 'stops:limit_touch': 1, 'stops:limit_pullback': 1}
+AUDNZD M30 h=6: OOS IC +0.0191 hit 0.5067 | optimised net +0.06 gross +0.36 x2 -1.11 | median inner (training) Sharpe +2.05 | {'signal:passive': 12, 'signal:market': 5}
+AUDNZD M30 h=24: OOS IC +0.0184 hit 0.5033 | optimised net +0.15 gross +0.34 x2 -1.01 | median inner (training) Sharpe +1.70 | {'signal:passive': 11, 'signal:market': 5, 'stops:limit_pullback': 1}
+done AUDNZD M30 in 8.0 min

@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDCHF H4: built 267 features in 76s (0 errors, 2 skipped)
+USDCHF H4 h=1: OOS IC +0.0012 hit 0.4953 | optimised net -0.23 gross +0.08 x2 -0.52 | median inner (training) Sharpe +1.76 | {'stops:limit_pullback': 5, 'signal:market': 4, 'stops:limit_touch': 3, 'stops:stop_breakout': 3, 'signal:passive': 2}
+USDCHF H4 h=6: OOS IC +0.0194 hit 0.5077 | optimised net -0.44 gross -0.24 x2 -0.71 | median inner (training) Sharpe +1.48 | {'signal:passive': 7, 'signal:market': 5, 'stops:limit_pullback': 4, 'stops:stop_breakout': 1}
+USDCHF H4 h=24: OOS IC +0.0454 hit 0.5021 | optimised net -0.25 gross -0.07 x2 -0.50 | median inner (training) Sharpe +1.78 | {'stops:limit_pullback': 11, 'signal:passive': 4, 'stops:stop_breakout': 2}
+done USDCHF H4 in 2.1 min

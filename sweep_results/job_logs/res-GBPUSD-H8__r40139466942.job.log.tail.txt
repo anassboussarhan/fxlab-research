@@ -1,0 +1,7 @@
+GBPUSD H8 bracket    : WF single-trader median -0.30 (gross -0.09) | expected stream -0.58 t=-1.9 gross -0.23 | train median +0.38 | hindsight in-sample +0.30 re-randomised +0.05 (deflation bench nan) | 10s
+GBPUSD H8 martingale : WF single-trader median +0.01 (gross +0.05) | expected stream -0.22 t=-0.7 gross +0.05 | train median +0.46 | hindsight in-sample +0.31 re-randomised +0.04 (deflation bench nan) | 6s
+GBPUSD H8 pyramid    : WF single-trader median -0.47 (gross -0.31) | expected stream -0.66 t=-2.1 gross -0.45 | train median +0.18 | hindsight in-sample +0.13 re-randomised -0.08 (deflation bench nan) | 5s
+GBPUSD H8 grid       : WF single-trader median -0.13 (gross -0.04) | expected stream -0.23 t=-0.7 gross -0.08 | train median +0.89 | hindsight in-sample +0.50 re-randomised +0.43 (deflation bench nan) | 8s
+GBPUSD H8 zone       : WF single-trader median -0.05 (gross +0.06) | expected stream -0.16 t=-0.5 gross +0.03 | train median +0.57 | hindsight in-sample +0.30 re-randomised +0.11 (deflation bench nan) | 5s
+GBPUSD H8 hedged_grid: WF single-trader median -0.46 (gross -0.20) | expected stream -0.46 t=-1.5 gross -0.20 | train median +0.63 | hindsight in-sample +0.37 re-randomised +0.37 (deflation bench nan) | 4s
+done GBPUSD H8 in 0.7 min

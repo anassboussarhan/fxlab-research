@@ -1,0 +1,7 @@
+EURAUD D1 bracket    : WF single-trader median -0.39 (gross -0.11) | expected stream -0.79 t=-2.3 gross -0.26 | train median +0.49 | hindsight in-sample +0.13 re-randomised -0.02 (deflation bench nan) | 10s
+EURAUD D1 martingale : WF single-trader median +0.01 (gross -0.00) | expected stream -0.40 t=-1.2 gross -0.22 | train median +0.44 | hindsight in-sample +0.43 re-randomised +0.20 (deflation bench nan) | 6s
+EURAUD D1 pyramid    : WF single-trader median -0.25 (gross -0.02) | expected stream -0.37 t=-1.1 gross -0.05 | train median +0.35 | hindsight in-sample +0.09 re-randomised +0.08 (deflation bench nan) | 5s
+EURAUD D1 grid       : WF single-trader median +0.16 (gross +0.24) | expected stream +0.13 t=+0.4 gross +0.24 | train median +0.83 | hindsight in-sample +0.47 re-randomised +0.37 (deflation bench nan) | 8s
+EURAUD D1 zone       : WF single-trader median -0.15 (gross +0.04) | expected stream -0.30 t=-0.9 gross +0.15 | train median +0.64 | hindsight in-sample +0.43 re-randomised +0.20 (deflation bench nan) | 4s
+EURAUD D1 hedged_grid: WF single-trader median -0.09 (gross +0.56) | expected stream -0.09 t=-0.3 gross +0.56 | train median +0.86 | hindsight in-sample +0.45 re-randomised +0.45 (deflation bench nan) | 4s
+done EURAUD D1 in 0.6 min

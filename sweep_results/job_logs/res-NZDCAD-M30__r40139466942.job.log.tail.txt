@@ -1,0 +1,7 @@
+NZDCAD M30 bracket    : WF single-trader median -0.77 (gross -0.12) | expected stream -1.20 t=-3.4 gross -0.18 | train median -0.17 | hindsight in-sample -0.64 re-randomised -0.75 (deflation bench nan) | 8s
+NZDCAD M30 martingale : WF single-trader median -0.30 (gross -0.02) | expected stream -1.18 t=-3.3 gross +0.06 | train median +0.22 | hindsight in-sample +0.07 re-randomised -0.45 (deflation bench nan) | 6s
+NZDCAD M30 pyramid    : WF single-trader median -1.10 (gross -0.53) | expected stream -1.78 t=-5.0 gross -0.88 | train median -0.35 | hindsight in-sample -0.37 re-randomised -0.61 (deflation bench nan) | 6s
+NZDCAD M30 grid       : WF single-trader median -0.15 (gross +0.64) | expected stream -0.22 t=-0.6 gross +0.98 | train median +1.88 | hindsight in-sample +0.86 re-randomised +0.88 (deflation bench nan) | 13s
+NZDCAD M30 zone       : WF single-trader median -0.63 (gross -0.05) | expected stream -1.40 t=-3.9 gross -0.62 | train median -0.14 | hindsight in-sample -0.21 re-randomised -0.36 (deflation bench nan) | 6s
+NZDCAD M30 hedged_grid: WF single-trader median -1.24 (gross -0.03) | expected stream -1.24 t=-3.5 gross -0.03 | train median -0.12 | hindsight in-sample -0.01 re-randomised -0.01 (deflation bench nan) | 3s
+done NZDCAD M30 in 0.7 min

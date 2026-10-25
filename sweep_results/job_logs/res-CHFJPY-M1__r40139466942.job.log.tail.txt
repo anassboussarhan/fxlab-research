@@ -1,0 +1,7 @@
+CHFJPY M1 bracket    : WF single-trader median -0.24 (gross +0.22) | expected stream -0.36 t=-1.0 gross +0.47 | train median -0.13 | hindsight in-sample -0.03 re-randomised -0.19 (deflation bench nan) | 191s
+CHFJPY M1 martingale : WF single-trader median -0.28 (gross -0.03) | expected stream -0.88 t=-2.6 gross -0.23 | train median -0.16 | hindsight in-sample -0.17 re-randomised -0.41 (deflation bench nan) | 172s
+CHFJPY M1 pyramid    : WF single-trader median -1.05 (gross -0.23) | expected stream -3.18 t=-9.2 gross -0.63 | train median -0.97 | hindsight in-sample -1.14 re-randomised -1.00 (deflation bench nan) | 172s
+CHFJPY M1 grid       : WF single-trader median -0.04 (gross +0.16) | expected stream -0.20 t=-0.6 gross +0.40 | train median +1.71 | hindsight in-sample +1.47 re-randomised +0.70 (deflation bench nan) | 171s
+CHFJPY M1 zone       : WF single-trader median -1.07 (gross +0.14) | expected stream -1.64 t=-4.7 gross +0.00 | train median -1.08 | hindsight in-sample -0.63 re-randomised -1.20 (deflation bench nan) | 219s
+CHFJPY M1 hedged_grid: WF single-trader median -9.57 (gross -0.37) | expected stream -9.57 t=-27.8 gross -0.37 | train median -7.85 | hindsight in-sample -7.38 re-randomised -7.38 (deflation bench nan) | 62s
+done CHFJPY M1 in 16.5 min

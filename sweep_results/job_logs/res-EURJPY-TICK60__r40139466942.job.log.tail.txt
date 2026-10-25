@@ -1,0 +1,7 @@
+EURJPY TICK60 bracket    : WF single-trader median +0.18 (gross +0.41) | expected stream +0.22 t=+0.6 gross +0.50 | train median +0.31 | hindsight in-sample +0.30 re-randomised +0.04 (deflation bench nan) | 11s
+EURJPY TICK60 martingale : WF single-trader median -0.02 (gross +0.07) | expected stream -0.26 t=-0.8 gross +0.12 | train median +0.45 | hindsight in-sample +0.32 re-randomised -0.17 (deflation bench nan) | 9s
+EURJPY TICK60 pyramid    : WF single-trader median -0.21 (gross +0.01) | expected stream -0.30 t=-0.9 gross +0.04 | train median +0.39 | hindsight in-sample +0.08 re-randomised +0.01 (deflation bench nan) | 7s
+EURJPY TICK60 grid       : WF single-trader median -0.06 (gross -0.01) | expected stream -0.15 t=-0.4 gross -0.05 | train median +1.06 | hindsight in-sample +0.19 re-randomised -0.11 (deflation bench nan) | 10s
+EURJPY TICK60 zone       : WF single-trader median +0.08 (gross +0.28) | expected stream +0.14 t=+0.4 gross +0.42 | train median +0.69 | hindsight in-sample +0.43 re-randomised +0.05 (deflation bench nan) | 7s
+EURJPY TICK60 hedged_grid: WF single-trader median -0.37 (gross +0.00) | expected stream -0.37 t=-1.1 gross +0.00 | train median +0.73 | hindsight in-sample +0.31 re-randomised +0.31 (deflation bench nan) | 4s
+done EURJPY TICK60 in 0.8 min

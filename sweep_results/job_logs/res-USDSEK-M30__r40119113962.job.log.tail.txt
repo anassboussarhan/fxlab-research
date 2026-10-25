@@ -1,0 +1,5 @@
+  USDSEK M30: built 267 features in 207s (0 errors, 2 skipped)
+USDSEK M30 h=1: OOS IC +0.0081 hit 0.5035 | optimised net -0.44 gross -0.09 x2 -1.19 | median inner (training) Sharpe +1.00 | {'signal:passive': 7, 'signal:market': 7, 'stops:limit_pullback': 1, 'stops:market': 1, 'stops:limit_touch': 1}
+USDSEK M30 h=6: OOS IC +0.0144 hit 0.5054 | optimised net -0.08 gross +0.08 x2 -0.95 | median inner (training) Sharpe +1.67 | {'signal:passive': 12, 'signal:market': 5}
+USDSEK M30 h=24: OOS IC +0.0415 hit 0.5137 | optimised net +0.87 gross +1.15 x2 +0.11 | median inner (training) Sharpe +1.75 | {'signal:passive': 12, 'signal:market': 3, 'stops:stop_breakout': 1, 'stops:limit_pullback': 1}
+done USDSEK M30 in 5.0 min

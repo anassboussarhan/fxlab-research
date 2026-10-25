@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPJPY H4: built 267 features in 118s (0 errors, 2 skipped)
+GBPJPY H4 h=1: OOS IC +0.0061 hit 0.5055 | optimised net -0.28 gross -0.08 x2 -0.57 | median inner (training) Sharpe +2.08 | {'signal:market': 7, 'stops:limit_pullback': 4, 'signal:passive': 3, 'stops:limit_touch': 2, 'stops:stop_breakout': 1}
+GBPJPY H4 h=6: OOS IC +0.0096 hit 0.5000 | optimised net +0.15 gross +0.39 x2 -0.13 | median inner (training) Sharpe +1.47 | {'signal:market': 5, 'stops:stop_breakout': 5, 'stops:limit_pullback': 3, 'signal:passive': 3, 'stops:limit_touch': 1}
+GBPJPY H4 h=24: OOS IC -0.0647 hit 0.4872 | optimised net -0.49 gross -0.35 x2 -0.68 | median inner (training) Sharpe +1.68 | {'stops:limit_pullback': 7, 'signal:passive': 4, 'stops:stop_breakout': 4, 'signal:market': 2}
+done GBPJPY H4 in 3.5 min

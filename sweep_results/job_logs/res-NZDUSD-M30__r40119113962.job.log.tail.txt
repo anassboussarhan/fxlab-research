@@ -1,0 +1,48 @@
+optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6256.60652421589 is not greater than 6256.606525051674. Delta is -8.357837941730395e-07
+Model is not converging.  Current: 6396.463142446644 is not greater than 6396.463170407852. Delta is -2.7961207706539426e-05
+Model is not converging.  Current: 6238.88094897268 is not greater than 6238.880980211992. Delta is -3.1239312193065416e-05
+Model is not converging.  Current: 6133.6362336812 is not greater than 6133.636261469249. Delta is -2.7788049010268878e-05
+Model is not converging.  Current: 6193.019232408583 is not greater than 6193.019232572425. Delta is -1.6384183254558593e-07
+Model is not converging.  Current: 6141.429754447601 is not greater than 6141.429849565493. Delta is -9.511789176031016e-05
+Model is not converging.  Current: 6106.650858572124 is not greater than 6106.650950326138. Delta is -9.175401373795466e-05
+Model is not converging.  Current: 6123.597084393243 is not greater than 6123.59718194286. Delta is -9.754961683938745e-05
+Model is not converging.  Current: 6399.593624429201 is not greater than 6399.593673569541. Delta is -4.914034070679918e-05
+Model is not converging.  Current: 6150.19836074232 is not greater than 6150.198361979256. Delta is -1.2369364412734285e-06
+Model is not converging.  Current: 6011.286850504512 is not greater than 6011.286866226284. Delta is -1.5721771887911018e-05
+Model is not converging.  Current: 6030.49211948084 is not greater than 6030.492136277328. Delta is -1.679648812569212e-05
+Model is not converging.  Current: 6065.19586530664 is not greater than 6065.19589196844. Delta is -2.666179989319062e-05
+  NZDUSD M30: built 267 features in 221s (0 errors, 2 skipped)
+NZDUSD M30 h=1: OOS IC +0.0092 hit 0.5001 | optimised net -0.24 gross +0.38 x2 -0.71 | median inner (training) Sharpe +1.19 | {'signal:passive': 7, 'signal:market': 4, 'stops:limit_touch': 2, 'stops:market': 2, 'stops:stop_breakout': 1, 'stops:limit_pullback': 1}
+NZDUSD M30 h=6: OOS IC +0.0104 hit 0.5024 | optimised net -0.86 gross -0.54 x2 -1.43 | median inner (training) Sharpe +1.79 | {'signal:passive': 11, 'signal:market': 3, 'stops:limit_pullback': 3}
+NZDUSD M30 h=24: OOS IC +0.0157 hit 0.4996 | optimised net -0.61 gross -0.23 x2 -1.16 | median inner (training) Sharpe +1.31 | {'signal:passive': 6, 'signal:market': 5, 'stops:limit_pullback': 4, 'stops:stop_breakout': 2}
+done NZDUSD M30 in 5.2 min

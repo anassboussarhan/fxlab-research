@@ -1,0 +1,5 @@
+  GBPUSD D1: built 269 features in 66s (0 errors, 0 skipped)
+GBPUSD D1 h=1: OOS IC +0.0007 hit 0.4982 | optimised net -0.96 gross -0.61 x2 -1.34 | median inner (training) Sharpe +1.78 | {'stops:limit_pullback': 7, 'signal:passive': 5, 'stops:limit_touch': 2, 'signal:market': 2, 'stops:stop_breakout': 1}
+GBPUSD D1 h=6: OOS IC -0.0246 hit 0.4868 | optimised net -0.36 gross -0.14 x2 -0.63 | median inner (training) Sharpe +1.47 | {'stops:limit_pullback': 8, 'stops:stop_breakout': 3, 'signal:market': 2, 'signal:passive': 2, 'stops:limit_touch': 2}
+GBPUSD D1 h=24: OOS IC -0.0343 hit 0.5359 | optimised net -0.06 gross +0.24 x2 -0.31 | median inner (training) Sharpe +1.35 | {'stops:limit_pullback': 8, 'stops:limit_touch': 4, 'stops:market': 2, 'signal:market': 1, 'signal:passive': 1, 'stops:stop_breakout': 1}
+done GBPUSD D1 in 1.8 min

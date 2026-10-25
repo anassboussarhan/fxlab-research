@@ -1,0 +1,23 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6084.032294309747 is not greater than 6084.032309476516. Delta is -1.516676911705872e-05
+Model is not converging.  Current: 6055.7972872766395 is not greater than 6055.797289069638. Delta is -1.7929987734532915e-06
+Model is not converging.  Current: 6054.242650891403 is not greater than 6054.242673318697. Delta is -2.242729351564776e-05
+  GBPNZD M30: built 267 features in 332s (0 errors, 2 skipped)
+GBPNZD M30 h=1: OOS IC +0.0053 hit 0.5044 | optimised net -0.99 gross -0.79 x2 -2.20 | median inner (training) Sharpe +0.78 | {'signal:passive': 12, 'signal:market': 4}
+GBPNZD M30 h=6: OOS IC +0.0112 hit 0.5061 | optimised net -1.25 gross -1.11 x2 -1.93 | median inner (training) Sharpe +1.67 | {'signal:passive': 12, 'signal:market': 2, 'stops:limit_pullback': 2}
+GBPNZD M30 h=24: OOS IC +0.0097 hit 0.5040 | optimised net -0.30 gross +0.22 x2 -1.30 | median inner (training) Sharpe +1.10 | {'signal:passive': 9, 'signal:market': 6, 'stops:limit_pullback': 1}
+done GBPNZD M30 in 7.6 min

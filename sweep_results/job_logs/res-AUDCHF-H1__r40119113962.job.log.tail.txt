@@ -1,0 +1,47 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6238.672618140419 is not greater than 6238.672620828274. Delta is -2.6878551580011845e-06
+Model is not converging.  Current: 6183.28122258131 is not greater than 6183.281229409544. Delta is -6.828233381384052e-06
+  AUDCHF H1: built 267 features in 205s (0 errors, 2 skipped)
+AUDCHF H1 h=1: OOS IC +0.0092 hit 0.5039 | optimised net +0.12 gross +0.20 x2 -0.10 | median inner (training) Sharpe +1.05 | {'signal:passive': 13, 'signal:market': 2, 'stops:limit_pullback': 1}
+AUDCHF H1 h=6: OOS IC +0.0258 hit 0.4996 | optimised net +0.07 gross +0.24 x2 -0.49 | median inner (training) Sharpe +1.47 | {'signal:passive': 12, 'signal:market': 4}
+AUDCHF H1 h=24: OOS IC +0.0283 hit 0.4984 | optimised net +0.00 gross +0.21 x2 -0.61 | median inner (training) Sharpe +1.48 | {'signal:passive': 12, 'signal:market': 1, 'stops:limit_pullback': 1, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+done AUDCHF H1 in 5.1 min

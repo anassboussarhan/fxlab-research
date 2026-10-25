@@ -1,0 +1,7 @@
+EURUSD M30 bracket    : WF single-trader median +0.20 (gross +0.41) | expected stream +0.28 t=+1.0 gross +0.51 | train median +0.19 | hindsight in-sample +0.07 re-randomised +0.04 (deflation bench nan) | 21s
+EURUSD M30 martingale : WF single-trader median -0.14 (gross -0.02) | expected stream -0.53 t=-1.9 gross -0.07 | train median +0.44 | hindsight in-sample +0.16 re-randomised -0.01 (deflation bench nan) | 17s
+EURUSD M30 pyramid    : WF single-trader median -0.22 (gross +0.07) | expected stream -0.31 t=-1.1 gross +0.08 | train median +0.21 | hindsight in-sample +0.14 re-randomised -0.24 (deflation bench nan) | 16s
+EURUSD M30 grid       : WF single-trader median -0.00 (gross +0.12) | expected stream -0.01 t=-0.0 gross +0.21 | train median +1.65 | hindsight in-sample -0.13 re-randomised -0.14 (deflation bench nan) | 20s
+EURUSD M30 zone       : WF single-trader median -0.03 (gross +0.30) | expected stream +0.04 t=+0.1 gross +0.65 | train median +0.69 | hindsight in-sample +0.27 re-randomised +0.02 (deflation bench nan) | 16s
+EURUSD M30 hedged_grid: WF single-trader median -0.52 (gross -0.05) | expected stream -0.52 t=-1.9 gross -0.05 | train median +0.61 | hindsight in-sample +0.09 re-randomised +0.09 (deflation bench nan) | 7s
+done EURUSD M30 in 1.7 min

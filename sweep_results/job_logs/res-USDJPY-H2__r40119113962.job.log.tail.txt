@@ -1,0 +1,32 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6379.482086681427 is not greater than 6379.482102904508. Delta is -1.6223080820054747e-05
+Model is not converging.  Current: 6291.811718323529 is not greater than 6291.8117729540545. Delta is -5.46305254829349e-05
+Model is not converging.  Current: 6187.078012296208 is not greater than 6187.078081094433. Delta is -6.879822558403248e-05
+Model is not converging.  Current: 6166.312843563758 is not greater than 6166.312901659812. Delta is -5.8096054090128746e-05
+Model is not converging.  Current: 6243.2834045213995 is not greater than 6243.283439738624. Delta is -3.521722464938648e-05
+Model is not converging.  Current: 6238.389603103766 is not greater than 6238.389647180109. Delta is -4.407634332892485e-05
+Model is not converging.  Current: 6243.182607995496 is not greater than 6243.182625466469. Delta is -1.7470973034505732e-05
+  USDJPY H2: built 267 features in 168s (0 errors, 2 skipped)
+USDJPY H2 h=1: OOS IC +0.0044 hit 0.5015 | optimised net -1.05 gross -0.64 x2 -1.47 | median inner (training) Sharpe +1.57 | {'stops:stop_breakout': 7, 'signal:market': 4, 'signal:passive': 3, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+USDJPY H2 h=6: OOS IC -0.0076 hit 0.4921 | optimised net -0.62 gross -0.26 x2 -0.98 | median inner (training) Sharpe +1.40 | {'signal:market': 8, 'stops:stop_breakout': 4, 'signal:passive': 3, 'stops:limit_pullback': 2}
+USDJPY H2 h=24: OOS IC +0.0021 hit 0.4973 | optimised net -0.44 gross -0.05 x2 -0.82 | median inner (training) Sharpe +1.21 | {'signal:market': 8, 'stops:stop_breakout': 5, 'stops:limit_pullback': 3, 'signal:passive': 1}
+done USDJPY H2 in 4.5 min

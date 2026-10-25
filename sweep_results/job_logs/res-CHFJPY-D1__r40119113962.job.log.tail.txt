@@ -1,0 +1,5 @@
+  CHFJPY D1: built 269 features in 61s (0 errors, 0 skipped)
+CHFJPY D1 h=1: OOS IC +0.0405 hit 0.5101 | optimised net -0.30 gross -0.16 x2 -0.60 | median inner (training) Sharpe +1.76 | {'signal:passive': 7, 'stops:limit_pullback': 4, 'stops:limit_touch': 2, 'stops:stop_breakout': 2, 'signal:market': 2}
+CHFJPY D1 h=6: OOS IC +0.0646 hit 0.5179 | optimised net +0.14 gross +0.26 x2 -0.03 | median inner (training) Sharpe +1.80 | {'signal:passive': 7, 'stops:limit_pullback': 6, 'stops:stop_breakout': 3, 'signal:market': 1}
+CHFJPY D1 h=24: OOS IC +0.0769 hit 0.4792 | optimised net +0.02 gross +0.21 x2 -0.30 | median inner (training) Sharpe +1.47 | {'signal:passive': 7, 'stops:limit_pullback': 4, 'signal:market': 2, 'stops:market': 2, 'stops:stop_breakout': 2}
+done CHFJPY D1 in 1.6 min

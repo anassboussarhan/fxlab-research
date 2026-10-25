@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6190.827403190466 is not greater than 6190.827430201598. Delta is -2.701113226066809e-05
+Model is not converging.  Current: 6225.699968872037 is not greater than 6225.699985662979. Delta is -1.679094202700071e-05
+Model is not converging.  Current: 6344.7036134724185 is not greater than 6344.703628940604. Delta is -1.546818566566799e-05
+Model is not converging.  Current: 6331.022953178723 is not greater than 6331.0230176203. Delta is -6.444157770602033e-05
+Model is not converging.  Current: 6207.6918735732725 is not greater than 6207.691899819682. Delta is -2.6246409106533974e-05
+Model is not converging.  Current: 6331.327057850597 is not greater than 6331.32706195032. Delta is -4.099722900718916e-06
+Model is not converging.  Current: 6348.368457723968 is not greater than 6348.3684650557825. Delta is -7.33181423129281e-06
+Model is not converging.  Current: 6331.240358792868 is not greater than 6331.2403607712085. Delta is -1.9783401512540877e-06
+Model is not converging.  Current: 6360.571338495671 is not greater than 6360.571349242589. Delta is -1.0746918633230962e-05
+Model is not converging.  Current: 6294.806904689107 is not greater than 6294.806940195154. Delta is -3.55060474248603e-05
+  GBPCHF M30: built 267 features in 289s (0 errors, 2 skipped)
+GBPCHF M30 h=1: OOS IC +0.0032 hit 0.5030 | optimised net -2.57 gross -0.13 x2 -3.43 | median inner (training) Sharpe +1.32 | {'signal:passive': 7, 'stops:limit_pullback': 5, 'signal:market': 3, 'stops:market': 1, 'stops:limit_touch': 1}
+GBPCHF M30 h=6: OOS IC +0.0040 hit 0.5027 | optimised net -0.92 gross -0.45 x2 -2.14 | median inner (training) Sharpe +1.19 | {'signal:passive': 12, 'signal:market': 2, 'stops:limit_pullback': 2, 'stops:market': 1}
+GBPCHF M30 h=24: OOS IC +0.0173 hit 0.5042 | optimised net -0.18 gross +0.23 x2 -0.67 | median inner (training) Sharpe +0.92 | {'signal:market': 9, 'signal:passive': 6, 'stops:limit_pullback': 2}
+done GBPCHF M30 in 7.4 min

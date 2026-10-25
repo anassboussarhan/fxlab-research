@@ -1,0 +1,21 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6417.7188884982415 is not greater than 6417.718897278835. Delta is -8.780593816481996e-06
+Model is not converging.  Current: 6387.444020449978 is not greater than 6387.444037534082. Delta is -1.7084104001696687e-05
+Model is not converging.  Current: 6308.614052974584 is not greater than 6308.614061302079. Delta is -8.327494469995145e-06
+Model is not converging.  Current: 6280.261090473676 is not greater than 6280.261103757484. Delta is -1.3283808584674262e-05
+Model is not converging.  Current: 6287.103212010245 is not greater than 6287.103227720121. Delta is -1.5709875697211828e-05
+Model is not converging.  Current: 6289.91616709243 is not greater than 6289.916182237742. Delta is -1.5145311408559792e-05
+Model is not converging.  Current: 6271.89273281012 is not greater than 6271.892772891451. Delta is -4.008133146271575e-05
+Model is not converging.  Current: 6447.614873457701 is not greater than 6447.614882496653. Delta is -9.038952157425229e-06
+Model is not converging.  Current: 6403.487680602511 is not greater than 6403.487795154171. Delta is -0.00011455165986262728
+Model is not converging.  Current: 6505.438460678582 is not greater than 6505.438664486915. Delta is -0.00020380833302624524
+Model is not converging.  Current: 6465.758517299944 is not greater than 6465.758569550826. Delta is -5.225088170845993e-05
+  USDCHF M30: built 267 features in 306s (0 errors, 2 skipped)
+USDCHF M30 h=1: OOS IC +0.0007 hit 0.5038 | optimised net -0.42 gross -0.06 x2 -0.81 | median inner (training) Sharpe +1.67 | {'signal:passive': 10, 'signal:market': 4, 'stops:limit_pullback': 3}
+USDCHF M30 h=6: OOS IC +0.0020 hit 0.5009 | optimised net -0.79 gross -0.42 x2 -1.34 | median inner (training) Sharpe +1.50 | {'signal:market': 8, 'signal:passive': 6, 'stops:limit_pullback': 3}
+USDCHF M30 h=24: OOS IC -0.0125 hit 0.5029 | optimised net -0.49 gross -0.17 x2 -1.00 | median inner (training) Sharpe +1.56 | {'signal:passive': 9, 'signal:market': 4, 'stops:stop_breakout': 2, 'stops:limit_pullback': 2}
+done USDCHF M30 in 7.1 min

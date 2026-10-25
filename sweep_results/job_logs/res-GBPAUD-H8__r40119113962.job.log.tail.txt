@@ -1,0 +1,5 @@
+  GBPAUD H8: built 269 features in 94s (0 errors, 0 skipped)
+GBPAUD H8 h=1: OOS IC -0.0083 hit 0.4986 | optimised net -0.65 gross -0.39 x2 -0.88 | median inner (training) Sharpe +1.74 | {'stops:limit_pullback': 5, 'signal:market': 5, 'signal:passive': 2, 'stops:market': 2, 'stops:limit_touch': 1}
+GBPAUD H8 h=6: OOS IC -0.0344 hit 0.4986 | optimised net -0.37 gross -0.16 x2 -0.64 | median inner (training) Sharpe +1.13 | {'signal:market': 4, 'stops:limit_pullback': 4, 'stops:stop_breakout': 4, 'signal:passive': 2, 'stops:limit_touch': 1}
+GBPAUD H8 h=24: OOS IC -0.0155 hit 0.5106 | optimised net -0.09 gross +0.08 x2 -0.26 | median inner (training) Sharpe +1.65 | {'stops:limit_pullback': 6, 'stops:stop_breakout': 6, 'stops:limit_touch': 2, 'signal:market': 1}
+done GBPAUD H8 in 2.2 min

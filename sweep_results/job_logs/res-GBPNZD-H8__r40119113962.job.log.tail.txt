@@ -1,0 +1,5 @@
+  GBPNZD H8: built 269 features in 195s (0 errors, 0 skipped)
+GBPNZD H8 h=1: OOS IC -0.0060 hit 0.5034 | optimised net -0.69 gross -0.35 x2 -1.04 | median inner (training) Sharpe +1.57 | {'signal:market': 6, 'stops:limit_pullback': 5, 'stops:stop_breakout': 2, 'signal:passive': 1, 'stops:limit_touch': 1}
+GBPNZD H8 h=6: OOS IC -0.0151 hit 0.4977 | optimised net -0.41 gross -0.21 x2 -0.64 | median inner (training) Sharpe +0.85 | {'stops:limit_pullback': 5, 'stops:stop_breakout': 5, 'signal:passive': 2, 'signal:market': 2, 'stops:limit_touch': 1}
+GBPNZD H8 h=24: OOS IC -0.0234 hit 0.5033 | optimised net -0.53 gross -0.32 x2 -0.74 | median inner (training) Sharpe +1.12 | {'stops:limit_pullback': 5, 'stops:stop_breakout': 5, 'signal:market': 2, 'stops:limit_touch': 1, 'stops:market': 1, 'signal:passive': 1}
+done GBPNZD H8 in 4.5 min

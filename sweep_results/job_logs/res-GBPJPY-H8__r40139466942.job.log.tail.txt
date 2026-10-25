@@ -1,0 +1,7 @@
+GBPJPY H8 bracket    : WF single-trader median -0.18 (gross +0.00) | expected stream -0.31 t=-1.0 gross +0.05 | train median +0.50 | hindsight in-sample +0.25 re-randomised -0.01 (deflation bench nan) | 5s
+GBPJPY H8 martingale : WF single-trader median +0.07 (gross +0.19) | expected stream +0.32 t=+1.0 gross +0.49 | train median +0.52 | hindsight in-sample +0.31 re-randomised +0.17 (deflation bench nan) | 3s
+GBPJPY H8 pyramid    : WF single-trader median -0.22 (gross -0.02) | expected stream -0.27 t=-0.8 gross +0.02 | train median +0.46 | hindsight in-sample +0.11 re-randomised -0.02 (deflation bench nan) | 2s
+GBPJPY H8 grid       : WF single-trader median -0.06 (gross -0.02) | expected stream -0.05 t=-0.2 gross -0.00 | train median +1.35 | hindsight in-sample +0.38 re-randomised +0.06 (deflation bench nan) | 5s
+GBPJPY H8 zone       : WF single-trader median -0.16 (gross +0.06) | expected stream -0.31 t=-1.0 gross -0.28 | train median +0.55 | hindsight in-sample +0.26 re-randomised +0.13 (deflation bench nan) | 2s
+GBPJPY H8 hedged_grid: WF single-trader median -0.40 (gross -0.10) | expected stream -0.40 t=-1.3 gross -0.10 | train median +0.60 | hindsight in-sample +0.46 re-randomised +0.46 (deflation bench nan) | 2s
+done GBPJPY H8 in 0.4 min

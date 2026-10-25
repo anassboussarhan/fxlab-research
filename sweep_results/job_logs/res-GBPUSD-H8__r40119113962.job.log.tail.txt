@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPUSD H8: built 269 features in 288s (0 errors, 0 skipped)
+GBPUSD H8 h=1: OOS IC +0.0066 hit 0.4969 | optimised net -0.20 gross +0.14 x2 -0.54 | median inner (training) Sharpe +1.42 | {'signal:market': 10, 'stops:limit_pullback': 5, 'stops:stop_breakout': 1, 'stops:market': 1}
+GBPUSD H8 h=6: OOS IC +0.0170 hit 0.5111 | optimised net -0.03 gross +0.19 x2 -0.26 | median inner (training) Sharpe +1.37 | {'stops:limit_pullback': 9, 'stops:stop_breakout': 4, 'signal:market': 3, 'stops:limit_touch': 1}
+GBPUSD H8 h=24: OOS IC +0.0531 hit 0.5501 | optimised net +0.21 gross +0.36 x2 +0.06 | median inner (training) Sharpe +1.57 | {'stops:limit_pullback': 11, 'stops:stop_breakout': 4, 'signal:market': 1, 'stops:limit_touch': 1}
+done GBPUSD H8 in 6.2 min

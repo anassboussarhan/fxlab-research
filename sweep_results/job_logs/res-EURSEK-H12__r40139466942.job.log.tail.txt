@@ -1,0 +1,7 @@
+EURSEK H12 bracket    : WF single-trader median -0.28 (gross -0.12) | expected stream -0.51 t=-1.6 gross -0.09 | train median +0.18 | hindsight in-sample -0.09 re-randomised -0.47 (deflation bench nan) | 9s
+EURSEK H12 martingale : WF single-trader median -0.23 (gross -0.06) | expected stream -0.28 t=-0.9 gross +0.04 | train median +0.34 | hindsight in-sample +0.45 re-randomised -0.04 (deflation bench nan) | 6s
+EURSEK H12 pyramid    : WF single-trader median -0.47 (gross -0.32) | expected stream -0.68 t=-2.2 gross -0.46 | train median -0.15 | hindsight in-sample +0.03 re-randomised -0.15 (deflation bench nan) | 5s
+EURSEK H12 grid       : WF single-trader median +0.50 (gross +0.55) | expected stream +0.89 t=+2.8 gross +1.00 | train median +1.09 | hindsight in-sample +0.68 re-randomised +0.20 (deflation bench nan) | 9s
+EURSEK H12 zone       : WF single-trader median +0.06 (gross +0.22) | expected stream +0.00 t=+0.0 gross +0.38 | train median +0.25 | hindsight in-sample +0.18 re-randomised +0.05 (deflation bench nan) | 4s
+EURSEK H12 hedged_grid: WF single-trader median -0.72 (gross -0.27) | expected stream -0.72 t=-2.3 gross -0.27 | train median +0.16 | hindsight in-sample +0.46 re-randomised +0.46 (deflation bench nan) | 4s
+done EURSEK H12 in 0.6 min

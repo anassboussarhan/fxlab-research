@@ -1,0 +1,16 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6181.747315514695 is not greater than 6181.747338351365. Delta is -2.283666981384158e-05
+  CHFJPY H4: built 267 features in 116s (0 errors, 2 skipped)
+CHFJPY H4 h=1: OOS IC -0.0128 hit 0.4920 | optimised net -0.77 gross -0.47 x2 -1.09 | median inner (training) Sharpe +1.59 | {'signal:market': 7, 'stops:limit_pullback': 6, 'stops:stop_breakout': 2, 'signal:passive': 2}
+CHFJPY H4 h=6: OOS IC +0.0299 hit 0.5016 | optimised net +0.09 gross +0.40 x2 -0.22 | median inner (training) Sharpe +1.19 | {'signal:market': 6, 'stops:limit_pullback': 6, 'stops:stop_breakout': 2, 'signal:passive': 2, 'stops:market': 1}
+CHFJPY H4 h=24: OOS IC +0.0412 hit 0.5110 | optimised net +0.15 gross +0.33 x2 -0.20 | median inner (training) Sharpe +1.36 | {'stops:limit_pullback': 7, 'signal:passive': 7, 'stops:stop_breakout': 2, 'stops:limit_touch': 1}
+done CHFJPY H4 in 3.4 min

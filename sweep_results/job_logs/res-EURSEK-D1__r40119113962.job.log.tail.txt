@@ -1,0 +1,5 @@
+  EURSEK D1: built 269 features in 79s (0 errors, 0 skipped)
+EURSEK D1 h=1: OOS IC +0.0391 hit 0.4925 | optimised net +0.05 gross +0.12 x2 -0.63 | median inner (training) Sharpe +1.73 | {'signal:passive': 14, 'stops:limit_pullback': 1}
+EURSEK D1 h=6: OOS IC +0.1271 hit 0.5252 | optimised net +0.65 gross +0.72 x2 +0.21 | median inner (training) Sharpe +1.47 | {'signal:passive': 11, 'stops:limit_pullback': 2, 'signal:market': 2}
+EURSEK D1 h=24: OOS IC +0.0523 hit 0.5102 | optimised net +0.16 gross +0.23 x2 -0.17 | median inner (training) Sharpe +1.31 | {'signal:passive': 12, 'stops:limit_pullback': 3}
+done EURSEK D1 in 2.1 min

@@ -1,0 +1,5 @@
+  USDSEK M15: built 265 features in 551s (0 errors, 4 skipped)
+USDSEK M15 h=1: OOS IC +0.0067 hit 0.5047 | optimised net -0.65 gross -0.54 x2 -0.89 | median inner (training) Sharpe +0.90 | {'signal:market': 8, 'signal:passive': 7, 'stops:market': 1, 'stops:limit_touch': 1}
+USDSEK M15 h=6: OOS IC +0.0161 hit 0.5077 | optimised net +0.05 gross +0.23 x2 -0.85 | median inner (training) Sharpe +1.39 | {'signal:passive': 9, 'signal:market': 7, 'stops:stop_breakout': 1}
+USDSEK M15 h=24: OOS IC +0.0274 hit 0.5121 | optimised net +0.31 gross +0.57 x2 -0.22 | median inner (training) Sharpe +2.00 | {'signal:passive': 12, 'signal:market': 4, 'stops:limit_pullback': 1}
+done USDSEK M15 in 12.8 min

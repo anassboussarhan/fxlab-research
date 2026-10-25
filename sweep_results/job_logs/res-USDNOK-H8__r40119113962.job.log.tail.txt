@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDNOK H8: built 269 features in 249s (0 errors, 0 skipped)
+USDNOK H8 h=1: OOS IC +0.0054 hit 0.5063 | optimised net +0.10 gross +0.26 x2 -0.32 | median inner (training) Sharpe +1.59 | {'signal:passive': 8, 'signal:market': 4, 'stops:limit_pullback': 3, 'stops:limit_touch': 2}
+USDNOK H8 h=6: OOS IC +0.0396 hit 0.5007 | optimised net +0.15 gross +0.30 x2 -0.08 | median inner (training) Sharpe +2.00 | {'signal:passive': 7, 'signal:market': 5, 'stops:limit_pullback': 4, 'stops:limit_touch': 1}
+USDNOK H8 h=24: OOS IC +0.0512 hit 0.5110 | optimised net +0.11 gross +0.26 x2 -0.10 | median inner (training) Sharpe +1.30 | {'signal:passive': 7, 'signal:market': 5, 'stops:limit_pullback': 3, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+done USDNOK H8 in 5.5 min

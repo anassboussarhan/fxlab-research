@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  XAUUSD H2: built 267 features in 126s (0 errors, 2 skipped)
+XAUUSD H2 h=1: OOS IC -0.0074 hit 0.4967 | optimised net -1.37 gross -0.90 x2 -1.87 | median inner (training) Sharpe +2.11 | {'signal:market': 7, 'signal:passive': 2, 'stops:stop_breakout': 2, 'stops:limit_pullback': 1, 'stops:limit_touch': 1}
+XAUUSD H2 h=6: OOS IC +0.0040 hit 0.4990 | optimised net -0.98 gross -0.59 x2 -1.35 | median inner (training) Sharpe +1.80 | {'signal:market': 7, 'stops:limit_pullback': 3, 'stops:stop_breakout': 3}
+XAUUSD H2 h=24: OOS IC +0.0147 hit 0.4963 | optimised net +0.20 gross +0.42 x2 -0.08 | median inner (training) Sharpe +1.79 | {'stops:limit_pullback': 5, 'stops:stop_breakout': 3, 'signal:passive': 2, 'signal:market': 2, 'stops:limit_touch': 1}
+done XAUUSD H2 in 3.3 min

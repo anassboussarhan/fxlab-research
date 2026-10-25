@@ -1,0 +1,21 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6237.048881740497 is not greater than 6237.06265501345. Delta is -0.013773272953585547
+  EURSEK H4: built 268 features in 122s (0 errors, 1 skipped)
+EURSEK H4 h=1: OOS IC +0.0065 hit 0.5124 | optimised net -0.11 gross +0.10 x2 -1.07 | median inner (training) Sharpe +1.21 | {'signal:passive': 14, 'stops:limit_pullback': 2, 'signal:market': 1}
+EURSEK H4 h=6: OOS IC +0.0524 hit 0.5196 | optimised net +0.22 gross +0.38 x2 -0.15 | median inner (training) Sharpe +1.43 | {'signal:passive': 9, 'signal:market': 4, 'stops:limit_pullback': 3, 'stops:stop_breakout': 1}
+EURSEK H4 h=24: OOS IC +0.0308 hit 0.5110 | optimised net -0.01 gross +0.17 x2 -0.50 | median inner (training) Sharpe +1.25 | {'signal:passive': 9, 'stops:limit_pullback': 4, 'signal:market': 2, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+done EURSEK H4 in 2.7 min

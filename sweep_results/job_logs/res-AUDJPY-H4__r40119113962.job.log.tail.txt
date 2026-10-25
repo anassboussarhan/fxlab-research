@@ -1,0 +1,5 @@
+  AUDJPY H4: built 267 features in 73s (0 errors, 2 skipped)
+AUDJPY H4 h=1: OOS IC +0.0115 hit 0.5052 | optimised net -0.16 gross +0.17 x2 -0.56 | median inner (training) Sharpe +1.64 | {'stops:limit_pullback': 8, 'signal:passive': 3, 'signal:market': 3, 'stops:market': 2, 'stops:stop_breakout': 1}
+AUDJPY H4 h=6: OOS IC +0.0139 hit 0.4994 | optimised net -0.46 gross -0.24 x2 -0.69 | median inner (training) Sharpe +1.22 | {'stops:limit_pullback': 6, 'stops:stop_breakout': 4, 'signal:market': 4, 'signal:passive': 3}
+AUDJPY H4 h=24: OOS IC +0.0249 hit 0.5192 | optimised net -0.68 gross -0.37 x2 -0.97 | median inner (training) Sharpe +1.09 | {'stops:limit_pullback': 6, 'signal:market': 3, 'stops:limit_touch': 3, 'stops:stop_breakout': 3, 'signal:passive': 1, 'stops:market': 1}
+done AUDJPY H4 in 2.0 min

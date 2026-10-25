@@ -1,0 +1,11 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6190.164146773808 is not greater than 6190.164178308682. Delta is -3.153487341478467e-05
+  NZDJPY H2: built 267 features in 141s (0 errors, 2 skipped)
+NZDJPY H2 h=1: OOS IC -0.0045 hit 0.4992 | optimised net -0.81 gross -0.55 x2 -1.42 | median inner (training) Sharpe +0.81 | {'signal:passive': 8, 'stops:limit_pullback': 3, 'signal:market': 3, 'stops:stop_breakout': 2}
+NZDJPY H2 h=6: OOS IC +0.0001 hit 0.4943 | optimised net -0.79 gross -0.53 x2 -1.43 | median inner (training) Sharpe +1.33 | {'signal:passive': 8, 'stops:limit_pullback': 4, 'signal:market': 3, 'stops:stop_breakout': 1}
+NZDJPY H2 h=24: OOS IC -0.0345 hit 0.4955 | optimised net -0.96 gross -0.62 x2 -1.50 | median inner (training) Sharpe +0.84 | {'stops:limit_pullback': 10, 'signal:passive': 4, 'stops:stop_breakout': 1, 'signal:market': 1}
+done NZDJPY H2 in 3.9 min

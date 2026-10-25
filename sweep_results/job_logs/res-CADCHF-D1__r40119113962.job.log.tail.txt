@@ -1,0 +1,5 @@
+  CADCHF D1: built 269 features in 93s (0 errors, 0 skipped)
+CADCHF D1 h=1: OOS IC +0.0076 hit 0.4993 | optimised net +0.06 gross +0.27 x2 -0.41 | median inner (training) Sharpe +1.67 | {'signal:passive': 8, 'stops:limit_pullback': 3, 'signal:market': 1}
+CADCHF D1 h=6: OOS IC +0.1031 hit 0.5342 | optimised net +0.37 gross +0.52 x2 -0.10 | median inner (training) Sharpe +1.50 | {'signal:passive': 8, 'stops:limit_pullback': 2, 'stops:stop_breakout': 1, 'signal:market': 1}
+CADCHF D1 h=24: OOS IC +0.1151 hit 0.5452 | optimised net +0.46 gross +0.72 x2 +0.13 | median inner (training) Sharpe +1.29 | {'signal:passive': 6, 'stops:market': 3, 'stops:limit_pullback': 2, 'signal:market': 1}
+done CADCHF D1 in 2.4 min

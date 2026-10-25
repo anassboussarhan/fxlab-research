@@ -1,0 +1,20 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  AUDCAD H4: built 269 features in 348s (0 errors, 0 skipped)
+AUDCAD H4 h=1: OOS IC +0.0139 hit 0.5023 | optimised net -0.29 gross +0.38 x2 -1.03 | median inner (training) Sharpe +1.48 | {'signal:passive': 6, 'signal:market': 5, 'stops:limit_pullback': 3, 'stops:market': 1}
+AUDCAD H4 h=6: OOS IC +0.0309 hit 0.5068 | optimised net -0.06 gross +0.21 x2 -0.53 | median inner (training) Sharpe +1.35 | {'signal:passive': 8, 'stops:limit_pullback': 4, 'signal:market': 2, 'stops:limit_touch': 1}
+AUDCAD H4 h=24: OOS IC +0.0801 hit 0.5165 | optimised net -0.73 gross -0.38 x2 -1.17 | median inner (training) Sharpe +1.43 | {'stops:limit_pullback': 7, 'signal:passive': 3, 'signal:market': 2, 'stops:stop_breakout': 2, 'stops:limit_touch': 1}
+done AUDCAD H4 in 7.0 min

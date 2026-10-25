@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURCHF H4: built 267 features in 64s (0 errors, 2 skipped)
+EURCHF H4 h=1: OOS IC -0.0049 hit 0.4979 | optimised net -0.83 gross -0.61 x2 -1.16 | median inner (training) Sharpe +1.71 | {'signal:passive': 10, 'stops:limit_pullback': 7}
+EURCHF H4 h=6: OOS IC -0.0173 hit 0.5041 | optimised net -0.54 gross -0.11 x2 -1.08 | median inner (training) Sharpe +1.16 | {'signal:passive': 8, 'stops:limit_pullback': 6, 'signal:market': 2, 'stops:stop_breakout': 1}
+EURCHF H4 h=24: OOS IC -0.0564 hit 0.4973 | optimised net -0.76 gross -0.43 x2 -1.13 | median inner (training) Sharpe +1.42 | {'stops:limit_pullback': 9, 'signal:passive': 4, 'stops:stop_breakout': 3, 'signal:market': 1}
+done EURCHF H4 in 1.8 min

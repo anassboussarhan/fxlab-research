@@ -1,0 +1,7 @@
+AUDCAD M1 bracket    : WF single-trader median -1.33 (gross -0.45) | expected stream -2.15 t=-5.9 gross -0.53 | train median -0.71 | hindsight in-sample -0.15 re-randomised -0.15 (deflation bench nan) | 147s
+AUDCAD M1 martingale : WF single-trader median -0.95 (gross -0.02) | expected stream -3.01 t=-8.2 gross -0.23 | train median -0.34 | hindsight in-sample -0.29 re-randomised -0.55 (deflation bench nan) | 133s
+AUDCAD M1 pyramid    : WF single-trader median -2.03 (gross -0.62) | expected stream -6.81 t=-18.7 gross -1.91 | train median -1.67 | hindsight in-sample -1.07 re-randomised -1.55 (deflation bench nan) | 135s
+AUDCAD M1 grid       : WF single-trader median +0.12 (gross +0.53) | expected stream +0.36 t=+1.0 gross +1.49 | train median +1.62 | hindsight in-sample +0.15 re-randomised -0.31 (deflation bench nan) | 137s
+AUDCAD M1 zone       : WF single-trader median -1.24 (gross +0.43) | expected stream -2.50 t=-6.9 gross +0.05 | train median -1.21 | hindsight in-sample -0.74 re-randomised -1.23 (deflation bench nan) | 171s
+AUDCAD M1 hedged_grid: WF single-trader median -13.60 (gross -0.65) | expected stream -13.60 t=-37.3 gross -0.65 | train median -12.93 | hindsight in-sample -11.14 re-randomised -11.14 (deflation bench nan) | 48s
+done AUDCAD M1 in 12.9 min

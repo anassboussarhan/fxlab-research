@@ -1,0 +1,7 @@
+EURJPY M15 bracket    : WF single-trader median +0.07 (gross +0.27) | expected stream -0.02 t=-0.0 gross +0.32 | train median +0.29 | hindsight in-sample +0.19 re-randomised -0.15 (deflation bench nan) | 22s
+EURJPY M15 martingale : WF single-trader median -0.09 (gross -0.01) | expected stream -0.41 t=-1.2 gross -0.17 | train median +0.47 | hindsight in-sample +0.09 re-randomised -0.36 (deflation bench nan) | 19s
+EURJPY M15 pyramid    : WF single-trader median -0.19 (gross +0.00) | expected stream -0.48 t=-1.4 gross -0.15 | train median +0.19 | hindsight in-sample +0.12 re-randomised -0.17 (deflation bench nan) | 17s
+EURJPY M15 grid       : WF single-trader median -0.27 (gross -0.15) | expected stream -0.51 t=-1.5 gross -0.29 | train median +1.79 | hindsight in-sample +0.13 re-randomised -0.20 (deflation bench nan) | 19s
+EURJPY M15 zone       : WF single-trader median -0.03 (gross +0.33) | expected stream -0.15 t=-0.4 gross +0.87 | train median +0.48 | hindsight in-sample +0.39 re-randomised -0.17 (deflation bench nan) | 17s
+EURJPY M15 hedged_grid: WF single-trader median -0.83 (gross -0.11) | expected stream -0.83 t=-2.4 gross -0.11 | train median +0.33 | hindsight in-sample -0.03 re-randomised -0.03 (deflation bench nan) | 7s
+done EURJPY M15 in 1.7 min

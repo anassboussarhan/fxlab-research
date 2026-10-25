@@ -1,0 +1,5 @@
+  AUDCAD D1: built 269 features in 94s (0 errors, 0 skipped)
+AUDCAD D1 h=1: OOS IC +0.0089 hit 0.4850 | optimised net -0.50 gross -0.22 x2 -0.83 | median inner (training) Sharpe +1.30 | {'signal:passive': 4, 'signal:market': 4, 'stops:limit_pullback': 2, 'stops:stop_breakout': 1}
+AUDCAD D1 h=6: OOS IC +0.0459 hit 0.5039 | optimised net +0.07 gross +0.26 x2 -0.54 | median inner (training) Sharpe +1.04 | {'stops:limit_pullback': 5, 'signal:passive': 4, 'stops:stop_breakout': 2}
+AUDCAD D1 h=24: OOS IC +0.1551 hit 0.5270 | optimised net -0.08 gross +0.16 x2 -0.38 | median inner (training) Sharpe +0.46 | {'signal:passive': 7, 'stops:limit_pullback': 3, 'stops:limit_touch': 1}
+done AUDCAD D1 in 2.4 min

@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURAUD H4: built 267 features in 68s (0 errors, 2 skipped)
+EURAUD H4 h=1: OOS IC +0.0157 hit 0.5084 | optimised net -0.84 gross -0.48 x2 -1.26 | median inner (training) Sharpe +1.52 | {'signal:market': 7, 'signal:passive': 5, 'stops:stop_breakout': 2, 'stops:market': 1, 'stops:limit_pullback': 1, 'stops:limit_touch': 1}
+EURAUD H4 h=6: OOS IC -0.0030 hit 0.5043 | optimised net -0.49 gross -0.27 x2 -0.77 | median inner (training) Sharpe +0.87 | {'stops:limit_pullback': 5, 'signal:passive': 4, 'stops:stop_breakout': 4, 'signal:market': 3, 'stops:limit_touch': 1}
+EURAUD H4 h=24: OOS IC +0.0516 hit 0.4972 | optimised net -0.89 gross -0.71 x2 -1.14 | median inner (training) Sharpe +1.70 | {'stops:limit_pullback': 9, 'signal:passive': 5, 'stops:stop_breakout': 2, 'signal:market': 1}
+done EURAUD H4 in 1.9 min

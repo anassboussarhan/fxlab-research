@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  XAUUSD M15: built 267 features in 500s (0 errors, 2 skipped)
+XAUUSD M15 h=1: OOS IC +0.0008 hit 0.5019 | optimised net -2.27 gross +0.16 x2 -3.33 | median inner (training) Sharpe +1.27 | {'signal:market': 6, 'signal:passive': 6, 'stops:market': 1, 'stops:limit_touch': 1}
+XAUUSD M15 h=6: OOS IC -0.0017 hit 0.5002 | optimised net -0.69 gross -0.20 x2 -1.53 | median inner (training) Sharpe +1.19 | {'signal:market': 7, 'signal:passive': 5, 'stops:stop_breakout': 1, 'stops:limit_pullback': 1}
+XAUUSD M15 h=24: OOS IC +0.0013 hit 0.5030 | optimised net -0.38 gross -0.08 x2 -0.86 | median inner (training) Sharpe +1.73 | {'signal:market': 6, 'signal:passive': 5, 'stops:stop_breakout': 3}
+done XAUUSD M15 in 11.1 min

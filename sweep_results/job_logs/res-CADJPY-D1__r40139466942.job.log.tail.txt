@@ -1,0 +1,7 @@
+CADJPY D1 bracket    : WF single-trader median -0.39 (gross -0.19) | expected stream -0.95 t=-2.8 gross -0.41 | train median +0.20 | hindsight in-sample +0.06 re-randomised +0.14 (deflation bench nan) | 7s
+CADJPY D1 martingale : WF single-trader median +0.26 (gross +0.40) | expected stream +0.09 t=+0.3 gross +0.10 | train median +0.38 | hindsight in-sample +0.39 re-randomised +0.17 (deflation bench nan) | 4s
+CADJPY D1 pyramid    : WF single-trader median -0.55 (gross -0.24) | expected stream -0.79 t=-2.3 gross -0.34 | train median +0.15 | hindsight in-sample -0.07 re-randomised +0.03 (deflation bench nan) | 3s
+CADJPY D1 grid       : WF single-trader median -0.01 (gross +0.09) | expected stream +0.01 t=+0.0 gross +0.15 | train median +0.96 | hindsight in-sample +0.55 re-randomised +0.35 (deflation bench nan) | 7s
+CADJPY D1 zone       : WF single-trader median +0.19 (gross +0.36) | expected stream +0.17 t=+0.5 gross +0.27 | train median +0.51 | hindsight in-sample +0.32 re-randomised +0.12 (deflation bench nan) | 3s
+CADJPY D1 hedged_grid: WF single-trader median -0.82 (gross -0.03) | expected stream -0.82 t=-2.4 gross -0.03 | train median +0.29 | hindsight in-sample +0.63 re-randomised +0.63 (deflation bench nan) | 3s
+done CADJPY D1 in 0.5 min

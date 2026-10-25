@@ -1,0 +1,7 @@
+EURSEK D1 bracket    : WF single-trader median -0.44 (gross -0.06) | expected stream -0.85 t=-2.3 gross +0.05 | train median -0.03 | hindsight in-sample -0.03 re-randomised -0.45 (deflation bench nan) | 8s
+EURSEK D1 martingale : WF single-trader median -0.17 (gross +0.16) | expected stream -0.61 t=-1.7 gross +0.08 | train median +0.40 | hindsight in-sample +0.38 re-randomised +0.20 (deflation bench nan) | 5s
+EURSEK D1 pyramid    : WF single-trader median -0.66 (gross -0.35) | expected stream -0.98 t=-2.7 gross -0.55 | train median -0.38 | hindsight in-sample -0.04 re-randomised -0.03 (deflation bench nan) | 4s
+EURSEK D1 grid       : WF single-trader median +0.11 (gross +0.19) | expected stream +0.08 t=+0.2 gross +0.21 | train median +0.92 | hindsight in-sample +0.78 re-randomised +0.54 (deflation bench nan) | 9s
+EURSEK D1 zone       : WF single-trader median -0.24 (gross +0.22) | expected stream -0.46 t=-1.2 gross +0.56 | train median +0.37 | hindsight in-sample +0.20 re-randomised +0.18 (deflation bench nan) | 4s
+EURSEK D1 hedged_grid: WF single-trader median -1.67 (gross -0.78) | expected stream -1.67 t=-4.6 gross -0.78 | train median -0.24 | hindsight in-sample +0.10 re-randomised +0.10 (deflation bench nan) | 3s
+done EURSEK D1 in 0.6 min

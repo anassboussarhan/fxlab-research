@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURNZD H8: built 269 features in 137s (0 errors, 0 skipped)
+EURNZD H8 h=1: OOS IC +0.0249 hit 0.5042 | optimised net -0.56 gross -0.19 x2 -0.99 | median inner (training) Sharpe +1.27 | {'signal:market': 5, 'stops:limit_pullback': 4, 'stops:stop_breakout': 2, 'signal:passive': 2, 'stops:limit_touch': 2}
+EURNZD H8 h=6: OOS IC +0.0149 hit 0.4868 | optimised net -0.35 gross -0.11 x2 -0.60 | median inner (training) Sharpe +1.18 | {'stops:limit_pullback': 6, 'signal:market': 4, 'stops:stop_breakout': 3, 'stops:limit_touch': 1, 'signal:passive': 1}
+EURNZD H8 h=24: OOS IC -0.0451 hit 0.4920 | optimised net -0.31 gross -0.17 x2 -0.48 | median inner (training) Sharpe +0.75 | {'stops:limit_pullback': 6, 'signal:passive': 4, 'stops:stop_breakout': 3, 'signal:market': 2}
+done EURNZD H8 in 3.2 min

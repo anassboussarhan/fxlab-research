@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURNOK H2: built 267 features in 148s (0 errors, 2 skipped)
+EURNOK H2 h=1: OOS IC -0.0002 hit 0.5005 | optimised net -0.41 gross -0.25 x2 -0.88 | median inner (training) Sharpe +1.34 | {'signal:passive': 12, 'stops:limit_touch': 2, 'stops:limit_pullback': 2, 'signal:market': 1}
+EURNOK H2 h=6: OOS IC -0.0168 hit 0.5052 | optimised net -0.58 gross -0.37 x2 -1.24 | median inner (training) Sharpe +0.76 | {'signal:passive': 10, 'signal:market': 4, 'stops:limit_pullback': 2, 'stops:stop_breakout': 1}
+EURNOK H2 h=24: OOS IC +0.0463 hit 0.5215 | optimised net -0.19 gross -0.09 x2 -0.58 | median inner (training) Sharpe +1.13 | {'signal:passive': 13, 'stops:limit_pullback': 3, 'stops:stop_breakout': 1}
+done EURNOK H2 in 3.9 min

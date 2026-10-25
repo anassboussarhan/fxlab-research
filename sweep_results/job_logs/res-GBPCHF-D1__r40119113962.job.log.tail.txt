@@ -1,0 +1,5 @@
+  GBPCHF D1: built 269 features in 110s (0 errors, 0 skipped)
+GBPCHF D1 h=1: OOS IC -0.0041 hit 0.5059 | optimised net +0.53 gross +0.74 x2 +0.16 | median inner (training) Sharpe +1.69 | {'signal:passive': 7, 'stops:limit_pullback': 6, 'signal:market': 3, 'stops:limit_touch': 1}
+GBPCHF D1 h=6: OOS IC -0.0070 hit 0.5146 | optimised net +0.25 gross +0.35 x2 -0.00 | median inner (training) Sharpe +1.16 | {'signal:passive': 6, 'stops:limit_pullback': 5, 'stops:limit_touch': 2, 'stops:stop_breakout': 2, 'signal:market': 2}
+GBPCHF D1 h=24: OOS IC -0.0393 hit 0.4719 | optimised net -0.46 gross -0.22 x2 -0.72 | median inner (training) Sharpe +0.34 | {'stops:limit_pullback': 4, 'signal:market': 4, 'signal:passive': 3, 'stops:limit_touch': 3, 'stops:stop_breakout': 2, 'stops:market': 1}
+done GBPCHF D1 in 3.1 min

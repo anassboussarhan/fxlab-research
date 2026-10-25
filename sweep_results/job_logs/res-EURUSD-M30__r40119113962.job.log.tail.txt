@@ -1,0 +1,34 @@
+atures/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6204.467128558778 is not greater than 6204.467135207571. Delta is -6.648792805208359e-06
+Model is not converging.  Current: 6343.614397878494 is not greater than 6343.614399435014. Delta is -1.5565201465506107e-06
+Model is not converging.  Current: 6336.633751874266 is not greater than 6336.633753656419. Delta is -1.7821530491346493e-06
+Model is not converging.  Current: 6315.163682934168 is not greater than 6315.1637466176235. Delta is -6.368345566443168e-05
+Model is not converging.  Current: 6352.9405954858985 is not greater than 6352.940616850775. Delta is -2.1364876374718733e-05
+Model is not converging.  Current: 6077.170605025243 is not greater than 6077.170611230732. Delta is -6.205488716659602e-06
+Model is not converging.  Current: 6173.543382405431 is not greater than 6173.543383816139. Delta is -1.4107081369729713e-06
+Model is not converging.  Current: 6181.014387525263 is not greater than 6181.0143896974305. Delta is -2.1721671146224253e-06
+Model is not converging.  Current: 6149.634131057877 is not greater than 6149.634135090291. Delta is -4.032413926324807e-06
+Model is not converging.  Current: 6386.064200918621 is not greater than 6386.064281018889. Delta is -8.010026795091107e-05
+Model is not converging.  Current: 6377.498235230071 is not greater than 6377.498308197135. Delta is -7.296706371562323e-05
+Model is not converging.  Current: 6394.815483834652 is not greater than 6394.815540766775. Delta is -5.693212278856663e-05
+Model is not converging.  Current: -489.0667663904457 is not greater than -489.03209450448213. Delta is -0.03467188596357573
+Model is not converging.  Current: 6470.075319722799 is not greater than 6470.075387166617. Delta is -6.744381789758336e-05
+Model is not converging.  Current: 6513.114208966546 is not greater than 6513.11429684504. Delta is -8.78784940141486e-05
+Model is not converging.  Current: 6519.42343372105 is not greater than 6519.423555692693. Delta is -0.00012197164323879406
+Model is not converging.  Current: 6298.408622734588 is not greater than 6298.408686091973. Delta is -6.335738544294145e-05
+Model is not converging.  Current: 6362.826428456605 is not greater than 6362.82643640941. Delta is -7.952805390232243e-06
+Model is not converging.  Current: 6215.974498490068 is not greater than 6215.974500399761. Delta is -1.9096933101536706e-06
+Model is not converging.  Current: 6374.984682476433 is not greater than 6374.984749830187. Delta is -6.735375427524559e-05
+Model is not converging.  Current: 6131.010588126429 is not greater than 6131.010600045138. Delta is -1.1918708878511097e-05
+Model is not converging.  Current: 6129.592872439519 is not greater than 6129.59294734062. Delta is -7.490110147045925e-05
+Model is not converging.  Current: 6135.478215255231 is not greater than 6135.478269456215. Delta is -5.420098386821337e-05
+Model is not converging.  Current: 6166.755784098668 is not greater than 6166.755785948342. Delta is -1.8496739357942715e-06
+  EURUSD M30: built 267 features in 570s (0 errors, 2 skipped)
+EURUSD M30 h=1: OOS IC +0.0101 hit 0.5026 | optimised net -0.23 gross +0.18 x2 -0.81 | median inner (training) Sharpe +1.76 | {'signal:passive': 9, 'signal:market': 7, 'stops:limit_pullback': 6, 'stops:limit_touch': 3, 'stops:market': 1}
+EURUSD M30 h=6: OOS IC +0.0245 hit 0.5060 | optimised net +0.08 gross +0.50 x2 -0.41 | median inner (training) Sharpe +1.94 | {'signal:market': 13, 'signal:passive': 10, 'stops:limit_pullback': 3}
+EURUSD M30 h=24: OOS IC +0.0386 hit 0.5045 | optimised net -0.10 gross +0.44 x2 -0.72 | median inner (training) Sharpe +1.41 | {'signal:market': 11, 'signal:passive': 7, 'stops:limit_pullback': 5, 'stops:stop_breakout': 2, 'stops:limit_touch': 1}
+done EURUSD M30 in 13.5 min

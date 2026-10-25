@@ -1,0 +1,7 @@
+AUDJPY TICK60 bracket    : WF single-trader median -0.44 (gross -0.09) | expected stream -0.67 t=-1.9 gross -0.12 | train median +0.23 | hindsight in-sample +0.04 re-randomised -0.11 (deflation bench nan) | 12s
+AUDJPY TICK60 martingale : WF single-trader median +0.05 (gross +0.09) | expected stream -0.57 t=-1.7 gross -0.28 | train median +0.48 | hindsight in-sample +0.32 re-randomised -0.07 (deflation bench nan) | 8s
+AUDJPY TICK60 pyramid    : WF single-trader median -0.45 (gross -0.15) | expected stream -0.65 t=-1.9 gross -0.16 | train median +0.27 | hindsight in-sample +0.01 re-randomised -0.26 (deflation bench nan) | 7s
+AUDJPY TICK60 grid       : WF single-trader median -0.09 (gross -0.00) | expected stream -0.23 t=-0.7 gross -0.08 | train median +2.10 | hindsight in-sample +0.04 re-randomised -0.30 (deflation bench nan) | 11s
+AUDJPY TICK60 zone       : WF single-trader median +0.07 (gross +0.24) | expected stream +0.14 t=+0.4 gross +0.57 | train median +0.56 | hindsight in-sample +0.34 re-randomised +0.02 (deflation bench nan) | 7s
+AUDJPY TICK60 hedged_grid: WF single-trader median +0.10 (gross +0.52) | expected stream +0.10 t=+0.3 gross +0.52 | train median +0.86 | hindsight in-sample +0.15 re-randomised +0.15 (deflation bench nan) | 4s
+done AUDJPY TICK60 in 0.9 min

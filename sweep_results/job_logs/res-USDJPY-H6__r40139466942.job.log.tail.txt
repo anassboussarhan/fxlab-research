@@ -1,0 +1,7 @@
+USDJPY H6 bracket    : WF single-trader median +0.45 (gross +0.55) | expected stream +0.45 t=+1.4 gross +0.59 | train median +0.35 | hindsight in-sample +0.19 re-randomised -0.23 (deflation bench nan) | 9s
+USDJPY H6 martingale : WF single-trader median +0.04 (gross +0.21) | expected stream +0.00 t=+0.0 gross +0.28 | train median +0.42 | hindsight in-sample +0.44 re-randomised -0.08 (deflation bench nan) | 6s
+USDJPY H6 pyramid    : WF single-trader median -0.35 (gross -0.16) | expected stream -0.51 t=-1.6 gross -0.24 | train median +0.19 | hindsight in-sample +0.07 re-randomised -0.14 (deflation bench nan) | 5s
+USDJPY H6 grid       : WF single-trader median -0.11 (gross -0.03) | expected stream -0.23 t=-0.7 gross -0.13 | train median +1.18 | hindsight in-sample +0.21 re-randomised +0.06 (deflation bench nan) | 7s
+USDJPY H6 zone       : WF single-trader median -0.02 (gross +0.07) | expected stream -0.04 t=-0.1 gross +0.04 | train median +0.50 | hindsight in-sample +0.19 re-randomised +0.02 (deflation bench nan) | 5s
+USDJPY H6 hedged_grid: WF single-trader median -0.67 (gross -0.35) | expected stream -0.67 t=-2.1 gross -0.35 | train median +0.81 | hindsight in-sample +0.76 re-randomised +0.76 (deflation bench nan) | 4s
+done USDJPY H6 in 0.6 min

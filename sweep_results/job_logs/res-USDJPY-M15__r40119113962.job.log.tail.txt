@@ -1,0 +1,25 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  USDJPY M15: built 262 features in 543s (0 errors, 7 skipped)
+USDJPY M15 h=1: OOS IC +0.0051 hit 0.5042 | optimised net -1.25 gross -0.89 x2 -1.64 | median inner (training) Sharpe +1.50 | {'signal:passive': 12, 'signal:market': 4, 'stops:limit_touch': 1}
+USDJPY M15 h=6: OOS IC +0.0072 hit 0.5091 | optimised net -0.93 gross -0.39 x2 -1.66 | median inner (training) Sharpe +1.56 | {'signal:market': 7, 'signal:passive': 5, 'stops:market': 2, 'stops:limit_touch': 1, 'stops:stop_breakout': 1, 'stops:limit_pullback': 1}
+USDJPY M15 h=24: OOS IC -0.0088 hit 0.5000 | optimised net -0.58 gross +0.11 x2 -1.35 | median inner (training) Sharpe +1.47 | {'signal:market': 7, 'signal:passive': 4, 'stops:stop_breakout': 3, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+done USDJPY M15 in 12.9 min

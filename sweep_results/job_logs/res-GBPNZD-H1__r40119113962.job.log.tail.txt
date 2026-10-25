@@ -1,0 +1,10 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  GBPNZD H1: built 267 features in 200s (0 errors, 2 skipped)
+GBPNZD H1 h=1: OOS IC +0.0112 hit 0.5057 | optimised net -0.17 gross +0.12 x2 -0.97 | median inner (training) Sharpe +1.27 | {'signal:passive': 10, 'signal:market': 3, 'stops:limit_pullback': 2, 'stops:market': 1}
+GBPNZD H1 h=6: OOS IC +0.0183 hit 0.5111 | optimised net -0.30 gross -0.02 x2 -1.29 | median inner (training) Sharpe +1.58 | {'signal:passive': 9, 'signal:market': 4, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+GBPNZD H1 h=24: OOS IC +0.0240 hit 0.5124 | optimised net -0.26 gross +0.00 x2 -0.87 | median inner (training) Sharpe +1.30 | {'signal:passive': 9, 'stops:limit_pullback': 4, 'signal:market': 2, 'stops:stop_breakout': 1}
+done GBPNZD H1 in 5.0 min

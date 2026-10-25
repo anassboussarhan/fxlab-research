@@ -1,0 +1,5 @@
+  AUDJPY H8: built 269 features in 164s (0 errors, 0 skipped)
+AUDJPY H8 h=1: OOS IC -0.0057 hit 0.4972 | optimised net -0.68 gross -0.47 x2 -0.88 | median inner (training) Sharpe +1.63 | {'signal:market': 6, 'stops:stop_breakout': 5, 'stops:limit_pullback': 5, 'signal:passive': 1}
+AUDJPY H8 h=6: OOS IC -0.0525 hit 0.4943 | optimised net -0.53 gross -0.37 x2 -0.71 | median inner (training) Sharpe +1.66 | {'stops:limit_pullback': 8, 'stops:stop_breakout': 5, 'signal:passive': 2, 'signal:market': 2}
+AUDJPY H8 h=24: OOS IC -0.0972 hit 0.4719 | optimised net -0.69 gross -0.53 x2 -0.84 | median inner (training) Sharpe +1.31 | {'stops:limit_pullback': 9, 'stops:stop_breakout': 4, 'stops:limit_touch': 2, 'signal:market': 1, 'signal:passive': 1}
+done AUDJPY H8 in 3.7 min

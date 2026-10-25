@@ -1,0 +1,14 @@
+Model is not converging.  Current: 6072.100950647053 is not greater than 6072.100967059291. Delta is -1.6412238437624183e-05
+Model is not converging.  Current: 6138.352871167637 is not greater than 6138.352886172855. Delta is -1.5005217392172199e-05
+Model is not converging.  Current: 6201.30690202668 is not greater than 6201.306910609647. Delta is -8.582966984249651e-06
+Model is not converging.  Current: 6156.7485095727125 is not greater than 6156.748515091875. Delta is -5.519162186828908e-06
+Model is not converging.  Current: 6159.222459488884 is not greater than 6159.22246198094. Delta is -2.492056410119403e-06
+Model is not converging.  Current: 6183.0077678370835 is not greater than 6183.0077698355535. Delta is -1.998469997488428e-06
+Model is not converging.  Current: 6130.885909271831 is not greater than 6130.885940883366. Delta is -3.161153472319711e-05
+Model is not converging.  Current: 6117.760826586592 is not greater than 6117.760830896504. Delta is -4.309911673772149e-06
+Model is not converging.  Current: 6218.627463470357 is not greater than 6218.627477452502. Delta is -1.3982144992041867e-05
+  EURCAD H1: built 267 features in 120s (0 errors, 2 skipped)
+EURCAD H1 h=1: OOS IC +0.0129 hit 0.5057 | optimised net -0.62 gross -0.30 x2 -1.50 | median inner (training) Sharpe +1.52 | {'signal:passive': 10, 'stops:limit_pullback': 4, 'signal:market': 2, 'stops:stop_breakout': 1}
+EURCAD H1 h=6: OOS IC +0.0218 hit 0.5041 | optimised net -0.12 gross +0.28 x2 -0.86 | median inner (training) Sharpe +1.97 | {'signal:passive': 9, 'signal:market': 4, 'stops:limit_pullback': 2, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+EURCAD H1 h=24: OOS IC +0.0286 hit 0.5057 | optimised net -0.68 gross -0.22 x2 -1.31 | median inner (training) Sharpe +1.62 | {'signal:passive': 9, 'stops:stop_breakout': 3, 'signal:market': 3, 'stops:limit_pullback': 2}
+done EURCAD H1 in 3.0 min

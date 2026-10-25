@@ -1,0 +1,5 @@
+  AUDCAD H8: built 269 features in 128s (0 errors, 0 skipped)
+AUDCAD H8 h=1: OOS IC +0.0033 hit 0.5009 | optimised net -0.73 gross -0.37 x2 -1.22 | median inner (training) Sharpe +1.58 | {'stops:limit_pullback': 8, 'signal:passive': 3, 'signal:market': 2, 'stops:limit_touch': 1}
+AUDCAD H8 h=6: OOS IC +0.0157 hit 0.4997 | optimised net -0.36 gross -0.03 x2 -0.68 | median inner (training) Sharpe +1.50 | {'stops:limit_pullback': 7, 'signal:market': 3, 'signal:passive': 2, 'stops:stop_breakout': 1, 'stops:limit_touch': 1}
+AUDCAD H8 h=24: OOS IC -0.0306 hit 0.4851 | optimised net -1.05 gross -0.80 x2 -1.31 | median inner (training) Sharpe +0.68 | {'stops:limit_pullback': 9, 'signal:passive': 3, 'signal:market': 1, 'stops:stop_breakout': 1}
+done AUDCAD H8 in 2.9 min

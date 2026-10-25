@@ -1,0 +1,5 @@
+  USDNOK H1: built 267 features in 224s (0 errors, 2 skipped)
+USDNOK H1 h=1: OOS IC +0.0161 hit 0.5058 | optimised net +0.16 gross +0.40 x2 -0.18 | median inner (training) Sharpe +1.57 | {'signal:passive': 8, 'signal:market': 7, 'stops:limit_pullback': 2}
+USDNOK H1 h=6: OOS IC +0.0231 hit 0.5084 | optimised net +0.64 gross +0.89 x2 -0.25 | median inner (training) Sharpe +2.09 | {'signal:passive': 12, 'signal:market': 3, 'stops:limit_pullback': 1, 'stops:market': 1}
+USDNOK H1 h=24: OOS IC +0.0346 hit 0.5057 | optimised net +0.15 gross +0.32 x2 -0.44 | median inner (training) Sharpe +1.46 | {'signal:passive': 12, 'stops:limit_pullback': 3, 'signal:market': 2}
+done USDNOK H1 in 5.5 min

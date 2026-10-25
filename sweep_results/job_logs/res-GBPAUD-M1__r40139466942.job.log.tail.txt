@@ -1,0 +1,7 @@
+GBPAUD M1 bracket    : WF single-trader median -0.12 (gross +0.13) | expected stream -0.24 t=-0.7 gross +0.23 | train median -0.06 | hindsight in-sample -0.34 re-randomised -0.40 (deflation bench nan) | 144s
+GBPAUD M1 martingale : WF single-trader median -0.27 (gross -0.25) | expected stream -0.99 t=-2.8 gross -0.44 | train median -0.20 | hindsight in-sample -0.31 re-randomised -0.67 (deflation bench nan) | 131s
+GBPAUD M1 pyramid    : WF single-trader median -1.40 (gross -0.35) | expected stream -4.45 t=-12.5 gross -0.88 | train median -1.04 | hindsight in-sample -1.08 re-randomised -1.04 (deflation bench nan) | 127s
+GBPAUD M1 grid       : WF single-trader median -0.03 (gross +0.23) | expected stream +0.01 t=+0.0 gross +1.03 | train median +1.56 | hindsight in-sample +1.26 re-randomised +0.54 (deflation bench nan) | 126s
+GBPAUD M1 zone       : WF single-trader median -1.32 (gross +0.32) | expected stream -1.95 t=-5.5 gross -0.01 | train median -1.14 | hindsight in-sample -0.65 re-randomised -0.97 (deflation bench nan) | 171s
+GBPAUD M1 hedged_grid: WF single-trader median -8.85 (gross -0.26) | expected stream -8.85 t=-24.9 gross -0.26 | train median -8.20 | hindsight in-sample -6.93 re-randomised -6.93 (deflation bench nan) | 45s
+done GBPAUD M1 in 12.4 min

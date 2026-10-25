@@ -1,0 +1,12 @@
+Model is not converging.  Current: 6328.539966397884 is not greater than 6328.539967114602. Delta is -7.167182047851384e-07
+Model is not converging.  Current: 6346.952191461291 is not greater than 6346.952202016716. Delta is -1.0555425433267374e-05
+Model is not converging.  Current: 6234.250133914802 is not greater than 6234.250146864188. Delta is -1.2949385563842952e-05
+Model is not converging.  Current: 6297.217247822193 is not greater than 6297.217281141993. Delta is -3.331980042275973e-05
+Model is not converging.  Current: 6396.442759714257 is not greater than 6396.44277568666. Delta is -1.5972403161867987e-05
+Model is not converging.  Current: 6417.753680911018 is not greater than 6417.753740487033. Delta is -5.9576014791673515e-05
+Model is not converging.  Current: 6410.605983865393 is not greater than 6410.606082829709. Delta is -9.89643158391118e-05
+  EURGBP H1: built 267 features in 244s (0 errors, 2 skipped)
+EURGBP H1 h=1: OOS IC +0.0094 hit 0.5054 | optimised net -0.27 gross +0.00 x2 -0.89 | median inner (training) Sharpe +1.81 | {'signal:passive': 10, 'signal:market': 3, 'stops:limit_pullback': 2, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+EURGBP H1 h=6: OOS IC +0.0141 hit 0.5043 | optimised net -0.94 gross -0.51 x2 -1.47 | median inner (training) Sharpe +1.43 | {'signal:passive': 8, 'signal:market': 4, 'stops:limit_pullback': 3, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+EURGBP H1 h=24: OOS IC -0.0206 hit 0.4924 | optimised net -1.21 gross -0.76 x2 -1.82 | median inner (training) Sharpe +1.12 | {'stops:limit_pullback': 8, 'signal:passive': 7, 'stops:stop_breakout': 1, 'signal:market': 1}
+done EURGBP H1 in 6.1 min

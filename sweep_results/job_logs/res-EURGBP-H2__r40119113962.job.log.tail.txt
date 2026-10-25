@@ -1,0 +1,16 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6229.886395510287 is not greater than 6229.8864167164975. Delta is -2.1206210476520937e-05
+  EURGBP H2: built 267 features in 165s (0 errors, 2 skipped)
+EURGBP H2 h=1: OOS IC -0.0005 hit 0.4968 | optimised net -0.62 gross -0.30 x2 -1.25 | median inner (training) Sharpe +1.24 | {'signal:passive': 10, 'stops:limit_pullback': 4, 'signal:market': 2, 'stops:stop_breakout': 1}
+EURGBP H2 h=6: OOS IC +0.0065 hit 0.4975 | optimised net -1.00 gross -0.65 x2 -1.35 | median inner (training) Sharpe +1.26 | {'signal:passive': 7, 'signal:market': 5, 'stops:market': 2, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+EURGBP H2 h=24: OOS IC +0.0025 hit 0.4971 | optimised net -0.16 gross +0.30 x2 -0.67 | median inner (training) Sharpe +0.91 | {'signal:market': 5, 'stops:limit_pullback': 4, 'stops:stop_breakout': 4, 'signal:passive': 3, 'stops:limit_touch': 1}
+done EURGBP H2 in 4.4 min

@@ -1,0 +1,7 @@
+AUDUSD H1 bracket    : WF single-trader median -0.37 (gross -0.01) | expected stream -0.48 t=-1.4 gross +0.21 | train median +0.19 | hindsight in-sample -0.13 re-randomised -0.21 (deflation bench nan) | 12s
+AUDUSD H1 martingale : WF single-trader median -0.01 (gross +0.16) | expected stream -0.20 t=-0.6 gross +0.26 | train median +0.48 | hindsight in-sample +0.33 re-randomised -0.16 (deflation bench nan) | 9s
+AUDUSD H1 pyramid    : WF single-trader median -0.64 (gross -0.39) | expected stream -0.99 t=-2.9 gross -0.63 | train median +0.18 | hindsight in-sample -0.11 re-randomised -0.36 (deflation bench nan) | 7s
+AUDUSD H1 grid       : WF single-trader median -0.13 (gross -0.04) | expected stream -0.23 t=-0.7 gross -0.07 | train median +2.07 | hindsight in-sample +0.46 re-randomised +0.20 (deflation bench nan) | 11s
+AUDUSD H1 zone       : WF single-trader median -0.16 (gross +0.19) | expected stream -0.20 t=-0.6 gross +0.33 | train median +0.63 | hindsight in-sample +0.35 re-randomised +0.09 (deflation bench nan) | 8s
+AUDUSD H1 hedged_grid: WF single-trader median -0.73 (gross -0.30) | expected stream -0.73 t=-2.1 gross -0.30 | train median +0.75 | hindsight in-sample +0.50 re-randomised +0.50 (deflation bench nan) | 5s
+done AUDUSD H1 in 0.9 min

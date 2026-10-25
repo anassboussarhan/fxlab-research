@@ -1,0 +1,8 @@
+Model is not converging.  Current: 6311.280262805416 is not greater than 6311.295810520183. Delta is -0.015547714767308207
+Model is not converging.  Current: 6336.783355885075 is not greater than 6336.786359799819. Delta is -0.00300391474411299
+Model is not converging.  Current: 6337.738792202434 is not greater than 6337.73923219352. Delta is -0.0004399910867505241
+  EURNOK M30: built 267 features in 303s (0 errors, 2 skipped)
+EURNOK M30 h=1: OOS IC +0.0107 hit 0.5034 | optimised net -0.70 gross -0.42 x2 -1.00 | median inner (training) Sharpe +0.82 | {'signal:market': 8, 'signal:passive': 7, 'stops:stop_breakout': 2}
+EURNOK M30 h=6: OOS IC -0.0054 hit 0.5047 | optimised net -0.43 gross -0.14 x2 -0.83 | median inner (training) Sharpe +1.10 | {'signal:passive': 13, 'signal:market': 2, 'stops:limit_touch': 1, 'stops:limit_pullback': 1}
+EURNOK M30 h=24: OOS IC -0.0097 hit 0.5009 | optimised net -0.85 gross -0.51 x2 -1.34 | median inner (training) Sharpe +1.23 | {'signal:passive': 11, 'signal:market': 5, 'stops:limit_pullback': 1}
+done EURNOK M30 in 7.7 min

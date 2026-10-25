@@ -1,0 +1,7 @@
+EURNOK M5 bracket    : WF single-trader median -1.85 (gross -0.59) | expected stream -2.93 t=-8.5 gross -0.73 | train median -0.14 | hindsight in-sample +0.09 re-randomised -0.14 (deflation bench nan) | 28s
+EURNOK M5 martingale : WF single-trader median -0.27 (gross +0.06) | expected stream -0.88 t=-2.6 gross +0.11 | train median -0.31 | hindsight in-sample -0.55 re-randomised -0.94 (deflation bench nan) | 26s
+EURNOK M5 pyramid    : WF single-trader median -0.96 (gross -0.23) | expected stream -2.48 t=-7.2 gross -0.86 | train median -0.98 | hindsight in-sample -0.52 re-randomised -0.86 (deflation bench nan) | 25s
+EURNOK M5 grid       : WF single-trader median -0.09 (gross +0.21) | expected stream -0.12 t=-0.4 gross +0.36 | train median +1.15 | hindsight in-sample +0.33 re-randomised +0.01 (deflation bench nan) | 32s
+EURNOK M5 zone       : WF single-trader median -2.24 (gross +0.23) | expected stream -2.96 t=-8.6 gross -0.02 | train median -1.10 | hindsight in-sample -0.70 re-randomised -1.32 (deflation bench nan) | 29s
+EURNOK M5 hedged_grid: WF single-trader median -3.57 (gross -0.28) | expected stream -3.57 t=-10.4 gross -0.28 | train median -2.89 | hindsight in-sample -2.67 re-randomised -2.67 (deflation bench nan) | 9s
+done EURNOK M5 in 2.5 min

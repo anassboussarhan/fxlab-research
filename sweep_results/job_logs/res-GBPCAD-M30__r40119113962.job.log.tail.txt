@@ -1,0 +1,7 @@
+Model is not converging.  Current: 6236.677577509353 is not greater than 6236.677587093175. Delta is -9.583822247805074e-06
+Model is not converging.  Current: 6168.768432245865 is not greater than 6168.7684381520185. Delta is -5.90615309192799e-06
+  GBPCAD M30: built 267 features in 330s (0 errors, 2 skipped)
+GBPCAD M30 h=1: OOS IC +0.0069 hit 0.5036 | optimised net -1.08 gross -0.59 x2 -2.03 | median inner (training) Sharpe +0.36 | {'signal:passive': 7, 'signal:market': 4, 'stops:limit_pullback': 2, 'stops:stop_breakout': 1, 'stops:market': 1, 'stops:limit_touch': 1}
+GBPCAD M30 h=6: OOS IC +0.0061 hit 0.5044 | optimised net -0.78 gross -0.34 x2 -1.43 | median inner (training) Sharpe +1.95 | {'signal:passive': 10, 'signal:market': 5, 'stops:limit_pullback': 1}
+GBPCAD M30 h=24: OOS IC +0.0412 hit 0.5085 | optimised net -0.42 gross -0.07 x2 -1.26 | median inner (training) Sharpe +1.55 | {'signal:passive': 10, 'stops:limit_pullback': 2, 'signal:market': 2, 'stops:market': 1, 'stops:stop_breakout': 1}
+done GBPCAD M30 in 7.7 min

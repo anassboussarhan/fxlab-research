@@ -1,0 +1,5 @@
+  EURNOK D1: built 269 features in 61s (0 errors, 0 skipped)
+EURNOK D1 h=1: OOS IC -0.0031 hit 0.4961 | optimised net -0.04 gross +0.01 x2 -0.42 | median inner (training) Sharpe +1.30 | {'signal:passive': 14, 'stops:limit_pullback': 1}
+EURNOK D1 h=6: OOS IC +0.0511 hit 0.5308 | optimised net -0.47 gross -0.34 x2 -0.78 | median inner (training) Sharpe +1.70 | {'signal:passive': 12, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+EURNOK D1 h=24: OOS IC +0.0302 hit 0.5018 | optimised net -0.25 gross -0.14 x2 -0.56 | median inner (training) Sharpe +1.16 | {'signal:passive': 10, 'stops:limit_touch': 2, 'stops:limit_pullback': 1, 'stops:market': 1, 'stops:stop_breakout': 1}
+done EURNOK D1 in 1.5 min

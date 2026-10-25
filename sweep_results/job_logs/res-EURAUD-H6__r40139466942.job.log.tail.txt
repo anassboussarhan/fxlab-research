@@ -1,0 +1,7 @@
+EURAUD H6 bracket    : WF single-trader median -0.11 (gross +0.18) | expected stream -0.11 t=-0.4 gross +0.38 | train median +0.38 | hindsight in-sample +0.30 re-randomised +0.15 (deflation bench nan) | 9s
+EURAUD H6 martingale : WF single-trader median -0.15 (gross -0.11) | expected stream -0.33 t=-1.1 gross +0.13 | train median +0.45 | hindsight in-sample +0.37 re-randomised +0.13 (deflation bench nan) | 6s
+EURAUD H6 pyramid    : WF single-trader median -0.15 (gross +0.01) | expected stream -0.23 t=-0.7 gross -0.02 | train median +0.45 | hindsight in-sample +0.25 re-randomised -0.11 (deflation bench nan) | 5s
+EURAUD H6 grid       : WF single-trader median -0.19 (gross -0.11) | expected stream -0.34 t=-1.1 gross -0.21 | train median +1.01 | hindsight in-sample +0.57 re-randomised +0.43 (deflation bench nan) | 8s
+EURAUD H6 zone       : WF single-trader median +0.09 (gross +0.29) | expected stream +0.12 t=+0.4 gross +0.45 | train median +0.54 | hindsight in-sample +0.33 re-randomised +0.02 (deflation bench nan) | 5s
+EURAUD H6 hedged_grid: WF single-trader median -0.31 (gross -0.06) | expected stream -0.31 t=-1.0 gross -0.06 | train median +0.96 | hindsight in-sample +0.68 re-randomised +0.68 (deflation bench nan) | 4s
+done EURAUD H6 in 0.6 min

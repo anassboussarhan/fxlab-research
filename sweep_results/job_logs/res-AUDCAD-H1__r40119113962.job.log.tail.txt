@@ -1,0 +1,26 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6207.534673454394 is not greater than 6207.534676648352. Delta is -3.1939580367179587e-06
+  AUDCAD H1: built 267 features in 111s (0 errors, 2 skipped)
+AUDCAD H1 h=1: OOS IC +0.0166 hit 0.5094 | optimised net -0.15 gross +0.08 x2 -1.46 | median inner (training) Sharpe +2.20 | {'signal:passive': 10, 'signal:market': 3, 'stops:limit_touch': 1, 'stops:limit_pullback': 1}
+AUDCAD H1 h=6: OOS IC +0.0277 hit 0.5091 | optimised net -0.03 gross +0.32 x2 -1.65 | median inner (training) Sharpe +1.73 | {'signal:passive': 10, 'signal:market': 3, 'stops:limit_pullback': 1, 'stops:limit_touch': 1}
+AUDCAD H1 h=24: OOS IC +0.0245 hit 0.5060 | optimised net -0.65 gross -0.22 x2 -1.35 | median inner (training) Sharpe +1.68 | {'signal:passive': 8, 'stops:limit_pullback': 3, 'signal:market': 3, 'stops:stop_breakout': 1}
+done AUDCAD H1 in 2.7 min

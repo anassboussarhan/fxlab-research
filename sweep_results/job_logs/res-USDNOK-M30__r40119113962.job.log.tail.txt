@@ -1,0 +1,5 @@
+  USDNOK M30: built 267 features in 271s (0 errors, 2 skipped)
+USDNOK M30 h=1: OOS IC +0.0078 hit 0.5017 | optimised net -0.77 gross -0.17 x2 -1.37 | median inner (training) Sharpe +1.15 | {'signal:passive': 7, 'signal:market': 5, 'stops:limit_touch': 2, 'stops:market': 1, 'stops:limit_pullback': 1, 'stops:stop_breakout': 1}
+USDNOK M30 h=6: OOS IC +0.0165 hit 0.5013 | optimised net -0.25 gross +0.06 x2 -0.77 | median inner (training) Sharpe +1.83 | {'signal:market': 8, 'signal:passive': 6, 'stops:limit_pullback': 2, 'stops:market': 1}
+USDNOK M30 h=24: OOS IC +0.0147 hit 0.4973 | optimised net -0.47 gross -0.19 x2 -1.09 | median inner (training) Sharpe +2.09 | {'signal:passive': 10, 'signal:market': 3, 'stops:limit_touch': 2, 'stops:limit_pullback': 2}
+done USDNOK M30 in 6.5 min

@@ -1,0 +1,32 @@
+.246825997301. Delta is -3.0097388844296802e-05
+Model is not converging.  Current: 6422.1624616192585 is not greater than 6422.162478364188. Delta is -1.6744929780543316e-05
+Model is not converging.  Current: 6379.220572939031 is not greater than 6379.220578066184. Delta is -5.127153599460144e-06
+Model is not converging.  Current: 6274.343179104635 is not greater than 6274.3432005132945. Delta is -2.1408659449662082e-05
+Model is not converging.  Current: 6280.259888760131 is not greater than 6280.259931749519. Delta is -4.298938802094199e-05
+Model is not converging.  Current: 6342.41456248781 is not greater than 6342.4145812865245. Delta is -1.8798714336298872e-05
+Model is not converging.  Current: 6305.834496457613 is not greater than 6305.83450270352. Delta is -6.2459075707010925e-06
+Model is not converging.  Current: 6269.254412313288 is not greater than 6269.254417335642. Delta is -5.022353434469551e-06
+Model is not converging.  Current: 6249.234821331434 is not greater than 6249.234827613671. Delta is -6.28223642706871e-06
+Model is not converging.  Current: 6210.907793618237 is not greater than 6210.9077951074205. Delta is -1.4891838873154484e-06
+Model is not converging.  Current: 6428.131219189126 is not greater than 6428.131229957636. Delta is -1.0768510037451051e-05
+Model is not converging.  Current: 6388.763990815895 is not greater than 6388.763991805269. Delta is -9.89373802440241e-07
+Model is not converging.  Current: 6354.381847372131 is not greater than 6354.381848370829. Delta is -9.98697942122817e-07
+Model is not converging.  Current: 6267.459423714727 is not greater than 6267.459524425621. Delta is -0.0001007108940029866
+Model is not converging.  Current: 6319.4391856112425 is not greater than 6319.439189258628. Delta is -3.6473857107921503e-06
+Model is not converging.  Current: 6292.803606209963 is not greater than 6292.803619727909. Delta is -1.3517946172214579e-05
+Model is not converging.  Current: 6240.294388998581 is not greater than 6240.294401512859. Delta is -1.2514277841546573e-05
+Model is not converging.  Current: 6157.090966875576 is not greater than 6157.090968629784. Delta is -1.7542079149279743e-06
+Model is not converging.  Current: 6198.924566802198 is not greater than 6198.9245675003895. Delta is -6.981917977100238e-07
+Model is not converging.  Current: 6451.448653079824 is not greater than 6451.448758827832. Delta is -0.00010574800762697123
+Model is not converging.  Current: 6312.648661957474 is not greater than 6312.648737754535. Delta is -7.57970610720804e-05
+Model is not converging.  Current: 6235.5916738449105 is not greater than 6235.591742274676. Delta is -6.842976563348202e-05
+Model is not converging.  Current: 6188.655439852072 is not greater than 6188.6554582301305. Delta is -1.8378058484813664e-05
+Model is not converging.  Current: 6259.2138675250635 is not greater than 6259.21387934318. Delta is -1.1818116945505608e-05
+Model is not converging.  Current: 6241.93129002857 is not greater than 6241.931323242676. Delta is -3.321410531498259e-05
+Model is not converging.  Current: 6363.749704899548 is not greater than 6363.749755199621. Delta is -5.030007287132321e-05
+Model is not converging.  Current: 6380.739357912374 is not greater than 6380.739400799729. Delta is -4.288735544832889e-05
+  AUDJPY M30: built 267 features in 350s (0 errors, 2 skipped)
+AUDJPY M30 h=1: OOS IC +0.0054 hit 0.5000 | optimised net -0.74 gross -0.07 x2 -1.39 | median inner (training) Sharpe +1.33 | {'signal:market': 10, 'signal:passive': 5, 'stops:market': 1, 'stops:limit_pullback': 1}
+AUDJPY M30 h=6: OOS IC +0.0142 hit 0.5010 | optimised net -0.42 gross +0.13 x2 -1.02 | median inner (training) Sharpe +1.56 | {'signal:market': 7, 'signal:passive': 5, 'stops:limit_pullback': 3, 'stops:market': 2}
+AUDJPY M30 h=24: OOS IC +0.0192 hit 0.5054 | optimised net -0.35 gross +0.02 x2 -1.10 | median inner (training) Sharpe +0.95 | {'signal:passive': 9, 'signal:market': 6, 'stops:stop_breakout': 2}
+done AUDJPY M30 in 8.9 min

@@ -1,0 +1,15 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURGBP H8: built 269 features in 157s (0 errors, 0 skipped)
+EURGBP H8 h=1: OOS IC +0.0081 hit 0.4987 | optimised net -0.43 gross -0.03 x2 -0.80 | median inner (training) Sharpe +1.51 | {'stops:limit_pullback': 6, 'stops:market': 3, 'signal:passive': 3, 'stops:stop_breakout': 2, 'signal:market': 2, 'stops:limit_touch': 1}
+EURGBP H8 h=6: OOS IC +0.0163 hit 0.5011 | optimised net -0.82 gross -0.55 x2 -1.15 | median inner (training) Sharpe +1.12 | {'stops:limit_pullback': 7, 'signal:passive': 4, 'signal:market': 4, 'stops:stop_breakout': 2}
+EURGBP H8 h=24: OOS IC -0.0693 hit 0.4793 | optimised net -0.55 gross -0.15 x2 -0.98 | median inner (training) Sharpe +1.08 | {'stops:limit_pullback': 6, 'stops:stop_breakout': 5, 'signal:market': 3, 'stops:market': 1, 'signal:passive': 1, 'stops:limit_touch': 1}
+done EURGBP H8 in 3.7 min

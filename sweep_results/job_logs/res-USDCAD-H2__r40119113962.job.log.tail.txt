@@ -1,0 +1,18 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+Model is not converging.  Current: 6245.969823588458 is not greater than 6245.969826734261. Delta is -3.1458030207431875e-06
+Model is not converging.  Current: 6139.754987456707 is not greater than 6139.75498869965. Delta is -1.2429436537786387e-06
+Model is not converging.  Current: 6147.078002709579 is not greater than 6147.078008051481. Delta is -5.341902578948066e-06
+  USDCAD H2: built 267 features in 92s (0 errors, 2 skipped)
+USDCAD H2 h=1: OOS IC +0.0212 hit 0.5047 | optimised net -0.41 gross -0.02 x2 -0.90 | median inner (training) Sharpe +1.58 | {'stops:limit_pullback': 6, 'signal:passive': 5, 'signal:market': 4, 'stops:limit_touch': 1, 'stops:stop_breakout': 1}
+USDCAD H2 h=6: OOS IC +0.0163 hit 0.4969 | optimised net -0.33 gross +0.08 x2 -0.77 | median inner (training) Sharpe +1.39 | {'stops:limit_pullback': 9, 'signal:market': 5, 'signal:passive': 2, 'stops:stop_breakout': 1}
+USDCAD H2 h=24: OOS IC -0.0030 hit 0.4954 | optimised net -0.28 gross +0.13 x2 -0.69 | median inner (training) Sharpe +1.22 | {'stops:limit_pullback': 5, 'stops:stop_breakout': 5, 'signal:passive': 3, 'signal:market': 3, 'stops:limit_touch': 1}
+done USDCAD H2 in 2.5 min

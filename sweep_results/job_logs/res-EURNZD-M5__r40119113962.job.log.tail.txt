@@ -1,0 +1,30 @@
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 9. The message is:
+Iteration limit reached
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 4. The message is:
+Inequality constraints incompatible
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+/home/runner/work/fxlab-research/fxlab-research/fxlab/features/econometric.py:104: ConvergenceWarning: The optimizer returned code 8. The message is:
+Positive directional derivative for linesearch
+See scipy.optimize.fmin_slsqp for code meaning.
+
+  res = am.fit(disp="off", options={"maxiter": 200})
+  EURNZD M5: built 258 features in 447s (0 errors, 11 skipped)
+EURNZD M5 h=1: OOS IC +0.0169 hit 0.5104 | optimised net -0.36 gross -0.36 x2 -0.36 | median inner (training) Sharpe -10.00 | {'signal:market': 5, 'stops:stop_breakout': 4, 'stops:market': 2, 'signal:passive': 2, 'stops:limit_pullback': 2, 'stops:limit_touch': 1}
+EURNZD M5 h=6: OOS IC +0.0115 hit 0.5097 | optimised net -0.34 gross -0.20 x2 -1.12 | median inner (training) Sharpe +1.65 | {'signal:passive': 8, 'signal:market': 6, 'stops:limit_pullback': 2}
+EURNZD M5 h=24: OOS IC +0.0168 hit 0.5049 | optimised net +0.23 gross +0.32 x2 -0.19 | median inner (training) Sharpe +1.35 | {'signal:passive': 11, 'signal:market': 4, 'stops:stop_breakout': 1}
+done EURNZD M5 in 14.1 min

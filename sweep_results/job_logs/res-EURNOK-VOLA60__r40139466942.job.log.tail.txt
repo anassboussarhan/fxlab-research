@@ -1,0 +1,7 @@
+EURNOK VOLA60 bracket    : WF single-trader median -0.10 (gross +0.15) | expected stream -0.18 t=-0.5 gross +0.37 | train median +0.15 | hindsight in-sample +0.01 re-randomised -0.16 (deflation bench nan) | 6s
+EURNOK VOLA60 martingale : WF single-trader median -0.11 (gross -0.02) | expected stream -0.51 t=-1.5 gross -0.27 | train median +0.40 | hindsight in-sample +0.25 re-randomised -0.08 (deflation bench nan) | 4s
+EURNOK VOLA60 pyramid    : WF single-trader median -0.67 (gross -0.45) | expected stream -0.94 t=-2.7 gross -0.59 | train median +0.05 | hindsight in-sample -0.20 re-randomised -0.44 (deflation bench nan) | 4s
+EURNOK VOLA60 grid       : WF single-trader median -0.43 (gross -0.34) | expected stream -0.55 t=-1.6 gross -0.43 | train median +1.33 | hindsight in-sample +0.55 re-randomised +0.31 (deflation bench nan) | 5s
+EURNOK VOLA60 zone       : WF single-trader median -0.07 (gross +0.12) | expected stream -0.50 t=-1.5 gross -0.20 | train median +0.26 | hindsight in-sample +0.07 re-randomised -0.04 (deflation bench nan) | 4s
+EURNOK VOLA60 hedged_grid: WF single-trader median -0.72 (gross -0.07) | expected stream -0.72 t=-2.1 gross -0.07 | train median +0.19 | hindsight in-sample -0.03 re-randomised -0.03 (deflation bench nan) | 3s
+done EURNOK VOLA60 in 0.5 min

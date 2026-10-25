@@ -1,0 +1,36 @@
+{
+ "streams": 816,
+ "pairs": 34,
+ "tfs": [
+  "M5",
+  "M15",
+  "M30",
+  "H1",
+  "H2",
+  "H4",
+  "H8",
+  "D1"
+ ],
+ "median_net_sharpe": -0.3568759930020293,
+ "share_net_positive": 0.17401960784313725,
+ "median_gross_sharpe": -0.07282376161423743,
+ "bh_survivors_q10": 0,
+ "best_stream": [
+  {
+   "pair": "USDNOK",
+   "tf": "D1",
+   "h": 6,
+   "net_sharpe": 1.0670539173270788,
+   "p_bh": 1.0
+  }
+ ],
+ "best_portfolio": [
+  {
+   "portfolio": "D1 h=6",
+   "streams": 34,
+   "sharpe": 0.07477907434654954,
+   "t": 0.26462788699906087,
+   "ann_return": 0.0024205155204981565
+  }
+ ]
+}
