@@ -1,0 +1,7 @@
+GBPCAD D1 bracket    : WF single-trader median +0.19 (gross +0.40) | expected stream +0.19 t=+0.5 gross +0.71 | train median +0.20 | hindsight in-sample +0.37 re-randomised +0.02 (deflation bench nan) | 7s
+GBPCAD D1 martingale : WF single-trader median -0.19 (gross +0.09) | expected stream -0.47 t=-1.1 gross -0.04 | train median +0.40 | hindsight in-sample +0.31 re-randomised +0.26 (deflation bench nan) | 4s
+GBPCAD D1 pyramid    : WF single-trader median +0.02 (gross +0.26) | expected stream +0.10 t=+0.2 gross +0.43 | train median +0.11 | hindsight in-sample +0.34 re-randomised +0.16 (deflation bench nan) | 3s
+GBPCAD D1 grid       : WF single-trader median -0.37 (gross -0.29) | expected stream -0.76 t=-1.9 gross -0.64 | train median +1.30 | hindsight in-sample +0.25 re-randomised +0.07 (deflation bench nan) | 7s
+GBPCAD D1 zone       : WF single-trader median +0.03 (gross +0.34) | expected stream -0.02 t=-0.1 gross +0.56 | train median +0.53 | hindsight in-sample +0.35 re-randomised +0.11 (deflation bench nan) | 3s
+GBPCAD D1 hedged_grid: WF single-trader median -1.17 (gross -0.74) | expected stream -1.17 t=-2.9 gross -0.74 | train median +0.21 | hindsight in-sample +0.28 re-randomised +0.28 (deflation bench nan) | 3s
+done GBPCAD D1 in 0.5 min

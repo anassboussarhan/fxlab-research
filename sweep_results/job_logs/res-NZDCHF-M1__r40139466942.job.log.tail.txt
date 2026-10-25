@@ -1,0 +1,7 @@
+NZDCHF M1 bracket    : WF single-trader median -1.62 (gross -0.72) | expected stream -2.59 t=-7.3 gross -1.07 | train median -0.88 | hindsight in-sample -0.76 re-randomised -0.96 (deflation bench nan) | 134s
+NZDCHF M1 martingale : WF single-trader median -0.81 (gross +0.04) | expected stream -2.03 t=-5.7 gross -0.01 | train median -0.61 | hindsight in-sample -0.21 re-randomised -0.76 (deflation bench nan) | 121s
+NZDCHF M1 pyramid    : WF single-trader median -2.00 (gross -0.36) | expected stream -6.40 t=-18.0 gross -1.50 | train median -1.59 | hindsight in-sample -1.73 re-randomised -1.74 (deflation bench nan) | 121s
+NZDCHF M1 grid       : WF single-trader median -0.34 (gross -0.13) | expected stream -1.10 t=-3.1 gross -0.44 | train median +1.39 | hindsight in-sample +1.08 re-randomised +0.51 (deflation bench nan) | 119s
+NZDCHF M1 zone       : WF single-trader median -1.46 (gross +0.35) | expected stream -3.61 t=-10.2 gross +0.63 | train median -1.23 | hindsight in-sample -0.66 re-randomised -1.12 (deflation bench nan) | 151s
+NZDCHF M1 hedged_grid: WF single-trader median -16.01 (gross -0.25) | expected stream -16.01 t=-45.1 gross -0.25 | train median -13.75 | hindsight in-sample -11.23 re-randomised -11.23 (deflation bench nan) | 41s
+done NZDCHF M1 in 11.5 min

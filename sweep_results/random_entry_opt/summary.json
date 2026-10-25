@@ -1,0 +1,175 @@
+{
+ "cells": 3094,
+ "pairs": 34,
+ "tfs": [
+  "M1",
+  "M5",
+  "M15",
+  "M30",
+  "H1",
+  "H2",
+  "H4",
+  "H6",
+  "H8",
+  "H12",
+  "D1",
+  "TICK60",
+  "VOLA60"
+ ],
+ "families": [
+  "bracket",
+  "grid",
+  "hedged_grid",
+  "martingale",
+  "pyramid",
+  "smart",
+  "zone"
+ ],
+ "bh_survivors_q10": 5,
+ "share_cells_single_trader_positive": 0.18034906270200388,
+ "share_cells_expected_stream_positive": 0.13671622495151906,
+ "share_cells_t_above_1.645": 0.00808015513897867,
+ "best_tf_family": {
+  "tf": "D1",
+  "family": "grid",
+  "pairs": 34,
+  "median_single_trader": 0.07189185399898522,
+  "share_pairs_positive": 0.6176470588235294,
+  "median_gross": 0.177169283994833,
+  "median_expected_stream": 0.07877355281833431,
+  "median_expected_gross": 0.21961433701647248,
+  "median_t": 0.2219500596074507,
+  "bh_survivors": 0,
+  "median_train": 0.8908740234298198,
+  "median_trades_per_fold": 21.534007352941174,
+  "median_hindsight_in_sample": 0.6287618427582292,
+  "median_hindsight_rerandomised": 0.40144556473541526,
+  "portfolio_sharpe": 0.19187639273394508,
+  "portfolio_t": 0.6795325594703818,
+  "portfolio_p_bh": 1.0
+ },
+ "median_single_trader_all": -0.26369347550252487,
+ "median_gross_all": 0.025933302601278584,
+ "median_train_all": 0.36106273440682846,
+ "hindsight": {
+  "median_in_sample": 0.22410649807394656,
+  "median_rerandomised": -0.03434373069151975,
+  "share_rerandomised_positive": 0.4592760180995475
+ },
+ "portfolio_bh_survivors_q10": 0,
+ "best_portfolio": [
+  {
+   "tf": "M5",
+   "family": "grid",
+   "streams": 34,
+   "portfolio_sharpe": 0.4590577820676685,
+   "portfolio_t": 1.6260079267206797,
+   "portfolio_ann_return": 0.0006622548680752516,
+   "aligned_by": "dates",
+   "portfolio_p": 0.051973984558256144,
+   "portfolio_p_bh": 1.0
+  }
+ ],
+ "top_cells_by_t": [
+  {
+   "pair": "AUDNZD",
+   "tf": "M5",
+   "family": "grid",
+   "single_trader_median": 1.7930399950447748,
+   "expected_stream_sharpe": 3.4570974169505457,
+   "t": 10.02420691183357,
+   "p": 1.8717159192289354e-23,
+   "p_bh": 5.791089054094326e-20
+  },
+  {
+   "pair": "AUDNZD",
+   "tf": "M1",
+   "family": "grid",
+   "single_trader_median": 1.694961660876328,
+   "expected_stream_sharpe": 3.1546438971698016,
+   "t": 9.147212052322528,
+   "p": 6.499868807656688e-20,
+   "p_bh": 1.0055297045444896e-16
+  },
+  {
+   "pair": "NZDCAD",
+   "tf": "M5",
+   "family": "grid",
+   "single_trader_median": 0.9442560276748313,
+   "expected_stream_sharpe": 1.7792421453245353,
+   "t": 5.014278034219479,
+   "p": 2.88886241174755e-07,
+   "p_bh": 0.0002979380100648973
+  },
+  {
+   "pair": "EURSEK",
+   "tf": "H1",
+   "family": "grid",
+   "single_trader_median": 0.8738350354895386,
+   "expected_stream_sharpe": 1.3719427088030645,
+   "t": 3.982634859640043,
+   "p": 3.5189880054741095e-05,
+   "p_bh": 0.021822210782010167
+  },
+  {
+   "pair": "AUDNZD",
+   "tf": "M15",
+   "family": "grid",
+   "single_trader_median": 0.8827301739798912,
+   "expected_stream_sharpe": 1.3733399865616043,
+   "t": 3.982139501793851,
+   "p": 3.526536971882703e-05,
+   "p_bh": 0.021822210782010167
+  },
+  {
+   "pair": "EURSEK",
+   "tf": "H12",
+   "family": "grid",
+   "single_trader_median": 0.5036193704221192,
+   "expected_stream_sharpe": 0.8941603694249705,
+   "t": 2.844930660754673,
+   "p": 0.0022382277730139295,
+   "p_bh": 0.997716695610045
+  },
+  {
+   "pair": "EURSEK",
+   "tf": "H2",
+   "family": "grid",
+   "single_trader_median": 0.6120834667193176,
+   "expected_stream_sharpe": 0.9220036185686722,
+   "t": 2.8423812147072387,
+   "p": 0.0022572775918779297,
+   "p_bh": 0.997716695610045
+  },
+  {
+   "pair": "GBPCAD",
+   "tf": "H8",
+   "family": "grid",
+   "single_trader_median": 0.6083889717771711,
+   "expected_stream_sharpe": 0.8416894550037666,
+   "t": 2.5147961248153146,
+   "p": 0.005988621201222394,
+   "p_bh": 1.0
+  },
+  {
+   "pair": "EURSEK",
+   "tf": "TICK60",
+   "family": "grid",
+   "single_trader_median": 0.2859559823163579,
+   "expected_stream_sharpe": 0.7992618838687945,
+   "t": 2.317541432694114,
+   "p": 0.010283115564823343,
+   "p_bh": 1.0
+  },
+  {
+   "pair": "EURNZD",
+   "tf": "M30",
+   "family": "grid",
+   "single_trader_median": 0.5163399097144667,
+   "expected_stream_sharpe": 0.8199529300964432,
+   "t": 2.3096802576119555,
+   "p": 0.010502106799487163,
+   "p_bh": 1.0
+  }
+ ]
+}

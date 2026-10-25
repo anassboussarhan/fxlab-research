@@ -1,0 +1,7 @@
+EURAUD M5 bracket    : WF single-trader median -0.66 (gross -0.20) | expected stream -0.88 t=-2.6 gross -0.23 | train median +0.32 | hindsight in-sample -0.18 re-randomised -0.38 (deflation bench nan) | 45s
+EURAUD M5 martingale : WF single-trader median -0.31 (gross -0.31) | expected stream -0.69 t=-2.0 gross -0.52 | train median +0.24 | hindsight in-sample +0.03 re-randomised -0.29 (deflation bench nan) | 41s
+EURAUD M5 pyramid    : WF single-trader median -0.09 (gross +0.44) | expected stream -0.10 t=-0.3 gross +0.66 | train median -0.04 | hindsight in-sample +0.31 re-randomised -0.26 (deflation bench nan) | 41s
+EURAUD M5 grid       : WF single-trader median -0.18 (gross +0.69) | expected stream -0.42 t=-1.2 gross +1.09 | train median +2.06 | hindsight in-sample +1.47 re-randomised +0.53 (deflation bench nan) | 42s
+EURAUD M5 zone       : WF single-trader median -0.38 (gross +0.31) | expected stream -1.41 t=-4.1 gross +0.42 | train median -0.16 | hindsight in-sample -0.36 re-randomised -0.53 (deflation bench nan) | 44s
+EURAUD M5 hedged_grid: WF single-trader median -2.68 (gross -0.75) | expected stream -2.68 t=-7.8 gross -0.75 | train median -0.67 | hindsight in-sample -0.09 re-randomised -0.09 (deflation bench nan) | 15s
+done EURAUD M5 in 3.8 min

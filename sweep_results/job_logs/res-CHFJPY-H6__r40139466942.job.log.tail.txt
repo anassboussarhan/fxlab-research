@@ -1,0 +1,7 @@
+CHFJPY H6 bracket    : WF single-trader median -0.32 (gross -0.05) | expected stream -0.67 t=-2.1 gross -0.01 | train median +0.24 | hindsight in-sample +0.36 re-randomised +0.14 (deflation bench nan) | 5s
+CHFJPY H6 martingale : WF single-trader median -0.07 (gross +0.06) | expected stream -0.56 t=-1.8 gross +0.23 | train median +0.43 | hindsight in-sample +0.21 re-randomised -0.21 (deflation bench nan) | 3s
+CHFJPY H6 pyramid    : WF single-trader median +0.04 (gross +0.22) | expected stream +0.08 t=+0.2 gross +0.31 | train median +0.19 | hindsight in-sample +0.29 re-randomised +0.12 (deflation bench nan) | 2s
+CHFJPY H6 grid       : WF single-trader median -0.18 (gross -0.08) | expected stream -0.45 t=-1.4 gross -0.23 | train median +1.54 | hindsight in-sample +0.50 re-randomised +0.27 (deflation bench nan) | 5s
+CHFJPY H6 zone       : WF single-trader median +0.01 (gross +0.28) | expected stream -0.06 t=-0.2 gross +0.47 | train median +0.48 | hindsight in-sample +0.26 re-randomised +0.14 (deflation bench nan) | 2s
+CHFJPY H6 hedged_grid: WF single-trader median -0.34 (gross +0.10) | expected stream -0.34 t=-1.1 gross +0.10 | train median +0.55 | hindsight in-sample +0.48 re-randomised +0.48 (deflation bench nan) | 2s
+done CHFJPY H6 in 0.3 min

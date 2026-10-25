@@ -1,0 +1,7 @@
+EURAUD VOLA60 bracket    : WF single-trader median -0.07 (gross +0.22) | expected stream -0.07 t=-0.2 gross +0.46 | train median +0.41 | hindsight in-sample -0.14 re-randomised -0.15 (deflation bench nan) | 11s
+EURAUD VOLA60 martingale : WF single-trader median +0.05 (gross +0.18) | expected stream +0.15 t=+0.4 gross +0.41 | train median +0.52 | hindsight in-sample +0.10 re-randomised -0.13 (deflation bench nan) | 9s
+EURAUD VOLA60 pyramid    : WF single-trader median -0.09 (gross +0.21) | expected stream -0.09 t=-0.3 gross +0.32 | train median +0.60 | hindsight in-sample +0.34 re-randomised +0.20 (deflation bench nan) | 8s
+EURAUD VOLA60 grid       : WF single-trader median -0.33 (gross -0.26) | expected stream -0.50 t=-1.4 gross -0.38 | train median +1.56 | hindsight in-sample +0.43 re-randomised +0.18 (deflation bench nan) | 9s
+EURAUD VOLA60 zone       : WF single-trader median +0.07 (gross +0.23) | expected stream +0.03 t=+0.1 gross +0.29 | train median +0.56 | hindsight in-sample +0.39 re-randomised +0.18 (deflation bench nan) | 7s
+EURAUD VOLA60 hedged_grid: WF single-trader median -0.30 (gross +0.09) | expected stream -0.30 t=-0.9 gross +0.09 | train median +0.86 | hindsight in-sample +0.59 re-randomised +0.59 (deflation bench nan) | 4s
+done EURAUD VOLA60 in 0.8 min

@@ -1,0 +1,7 @@
+CADJPY H4 bracket    : WF single-trader median -0.42 (gross -0.13) | expected stream -0.80 t=-2.6 gross -0.11 | train median +0.35 | hindsight in-sample +0.09 re-randomised -0.15 (deflation bench nan) | 10s
+CADJPY H4 martingale : WF single-trader median +0.03 (gross +0.11) | expected stream -0.14 t=-0.4 gross +0.25 | train median +0.42 | hindsight in-sample +0.43 re-randomised +0.22 (deflation bench nan) | 7s
+CADJPY H4 pyramid    : WF single-trader median -0.41 (gross -0.12) | expected stream -0.59 t=-1.9 gross -0.18 | train median +0.25 | hindsight in-sample +0.05 re-randomised -0.12 (deflation bench nan) | 5s
+CADJPY H4 grid       : WF single-trader median +0.02 (gross +0.10) | expected stream +0.11 t=+0.3 gross +0.23 | train median +1.23 | hindsight in-sample +0.46 re-randomised +0.38 (deflation bench nan) | 7s
+CADJPY H4 zone       : WF single-trader median -0.05 (gross +0.12) | expected stream -0.18 t=-0.6 gross +0.17 | train median +0.43 | hindsight in-sample +0.24 re-randomised -0.07 (deflation bench nan) | 5s
+CADJPY H4 hedged_grid: WF single-trader median -0.66 (gross -0.33) | expected stream -0.66 t=-2.1 gross -0.33 | train median +0.72 | hindsight in-sample +0.48 re-randomised +0.48 (deflation bench nan) | 4s
+done CADJPY H4 in 0.7 min

@@ -1,0 +1,7 @@
+XAUUSD M1 bracket    : WF single-trader median -0.37 (gross +0.03) | expected stream -0.66 t=-1.7 gross +0.10 | train median -0.13 | hindsight in-sample +0.16 re-randomised -0.21 (deflation bench nan) | 127s
+XAUUSD M1 martingale : WF single-trader median -0.60 (gross -0.13) | expected stream -2.03 t=-5.3 gross -0.48 | train median -0.11 | hindsight in-sample -0.27 re-randomised -0.74 (deflation bench nan) | 114s
+XAUUSD M1 pyramid    : WF single-trader median -1.03 (gross -0.05) | expected stream -2.94 t=-7.7 gross +0.03 | train median -0.48 | hindsight in-sample -0.33 re-randomised -0.76 (deflation bench nan) | 114s
+XAUUSD M1 grid       : WF single-trader median -0.41 (gross -0.27) | expected stream -1.38 t=-3.6 gross -0.76 | train median +1.34 | hindsight in-sample +1.03 re-randomised +0.61 (deflation bench nan) | 116s
+XAUUSD M1 zone       : WF single-trader median -1.03 (gross +0.40) | expected stream -0.44 t=-1.2 gross +0.01 | train median -1.16 | hindsight in-sample -0.69 re-randomised -1.16 (deflation bench nan) | 140s
+XAUUSD M1 hedged_grid: WF single-trader median -6.69 (gross +0.31) | expected stream -6.69 t=-17.6 gross +0.31 | train median -6.33 | hindsight in-sample -5.00 re-randomised -5.00 (deflation bench nan) | 40s
+done XAUUSD M1 in 10.9 min

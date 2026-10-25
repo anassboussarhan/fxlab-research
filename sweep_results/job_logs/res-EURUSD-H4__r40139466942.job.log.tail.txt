@@ -1,0 +1,7 @@
+EURUSD H4 bracket    : WF single-trader median +0.01 (gross +0.15) | expected stream -0.03 t=-0.1 gross +0.21 | train median +0.35 | hindsight in-sample +0.06 re-randomised -0.04 (deflation bench nan) | 14s
+EURUSD H4 martingale : WF single-trader median +0.06 (gross +0.14) | expected stream +0.02 t=+0.1 gross +0.11 | train median +0.46 | hindsight in-sample +0.21 re-randomised -0.12 (deflation bench nan) | 10s
+EURUSD H4 pyramid    : WF single-trader median -0.42 (gross -0.28) | expected stream -0.58 t=-2.2 gross -0.38 | train median +0.19 | hindsight in-sample +0.25 re-randomised -0.12 (deflation bench nan) | 8s
+EURUSD H4 grid       : WF single-trader median -0.05 (gross +0.03) | expected stream -0.20 t=-0.8 gross -0.02 | train median +0.87 | hindsight in-sample +0.34 re-randomised +0.03 (deflation bench nan) | 12s
+EURUSD H4 zone       : WF single-trader median -0.08 (gross +0.05) | expected stream -0.31 t=-1.2 gross -0.05 | train median +0.61 | hindsight in-sample +0.26 re-randomised -0.03 (deflation bench nan) | 7s
+EURUSD H4 hedged_grid: WF single-trader median -0.31 (gross -0.07) | expected stream -0.31 t=-1.2 gross -0.07 | train median +0.74 | hindsight in-sample +0.57 re-randomised +0.57 (deflation bench nan) | 5s
+done EURUSD H4 in 1.0 min

@@ -1,0 +1,7 @@
+AUDNZD VOLA60 bracket    : WF single-trader median -0.48 (gross -0.11) | expected stream -0.76 t=-2.2 gross -0.16 | train median +0.06 | hindsight in-sample -0.07 re-randomised -0.18 (deflation bench nan) | 11s
+AUDNZD VOLA60 martingale : WF single-trader median -0.09 (gross +0.03) | expected stream -0.53 t=-1.5 gross -0.09 | train median +0.37 | hindsight in-sample +0.23 re-randomised -0.09 (deflation bench nan) | 8s
+AUDNZD VOLA60 pyramid    : WF single-trader median -0.45 (gross -0.04) | expected stream -0.62 t=-1.8 gross -0.02 | train median +0.06 | hindsight in-sample -0.06 re-randomised -0.26 (deflation bench nan) | 7s
+AUDNZD VOLA60 grid       : WF single-trader median +0.27 (gross +1.95) | expected stream +0.41 t=+1.2 gross +2.91 | train median +2.43 | hindsight in-sample +1.09 re-randomised +0.86 (deflation bench nan) | 10s
+AUDNZD VOLA60 zone       : WF single-trader median -0.08 (gross +0.43) | expected stream -0.22 t=-0.6 gross +1.07 | train median +0.23 | hindsight in-sample +0.05 re-randomised -0.35 (deflation bench nan) | 7s
+AUDNZD VOLA60 hedged_grid: WF single-trader median -0.77 (gross -0.08) | expected stream -0.77 t=-2.2 gross -0.08 | train median +0.33 | hindsight in-sample +0.09 re-randomised +0.09 (deflation bench nan) | 4s
+done AUDNZD VOLA60 in 0.8 min

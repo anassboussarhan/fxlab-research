@@ -1,0 +1,7 @@
+EURJPY H4 bracket    : WF single-trader median +0.07 (gross +0.21) | expected stream +0.02 t=+0.1 gross +0.20 | train median +0.42 | hindsight in-sample +0.25 re-randomised +0.09 (deflation bench nan) | 8s
+EURJPY H4 martingale : WF single-trader median -0.08 (gross +0.06) | expected stream -0.36 t=-1.1 gross -0.09 | train median +0.48 | hindsight in-sample +0.28 re-randomised -0.05 (deflation bench nan) | 5s
+EURJPY H4 pyramid    : WF single-trader median -0.19 (gross -0.04) | expected stream -0.32 t=-1.0 gross -0.13 | train median +0.16 | hindsight in-sample +0.21 re-randomised +0.04 (deflation bench nan) | 4s
+EURJPY H4 grid       : WF single-trader median -0.39 (gross -0.35) | expected stream -0.70 t=-2.2 gross -0.64 | train median +1.28 | hindsight in-sample +0.18 re-randomised +0.04 (deflation bench nan) | 7s
+EURJPY H4 zone       : WF single-trader median +0.07 (gross +0.27) | expected stream -0.46 t=-1.4 gross -0.31 | train median +0.59 | hindsight in-sample +0.33 re-randomised +0.17 (deflation bench nan) | 4s
+EURJPY H4 hedged_grid: WF single-trader median -0.68 (gross -0.48) | expected stream -0.68 t=-2.2 gross -0.48 | train median +0.85 | hindsight in-sample +0.66 re-randomised +0.66 (deflation bench nan) | 3s
+done EURJPY H4 in 0.6 min

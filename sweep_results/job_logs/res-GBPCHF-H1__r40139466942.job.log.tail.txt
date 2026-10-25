@@ -1,0 +1,7 @@
+GBPCHF H1 bracket    : WF single-trader median -0.79 (gross -0.34) | expected stream -1.74 t=-5.1 gross -0.70 | train median +0.10 | hindsight in-sample -0.01 re-randomised -0.03 (deflation bench nan) | 11s
+GBPCHF H1 martingale : WF single-trader median -0.25 (gross -0.19) | expected stream -0.91 t=-2.7 gross -0.49 | train median +0.41 | hindsight in-sample +0.17 re-randomised -0.05 (deflation bench nan) | 8s
+GBPCHF H1 pyramid    : WF single-trader median -0.49 (gross -0.19) | expected stream -0.69 t=-2.0 gross -0.21 | train median +0.17 | hindsight in-sample -0.06 re-randomised -0.09 (deflation bench nan) | 7s
+GBPCHF H1 grid       : WF single-trader median -0.15 (gross -0.04) | expected stream +0.02 t=+0.0 gross +0.16 | train median +1.84 | hindsight in-sample +0.15 re-randomised +0.08 (deflation bench nan) | 11s
+GBPCHF H1 zone       : WF single-trader median -0.06 (gross +0.40) | expected stream -0.28 t=-0.8 gross +0.85 | train median +0.41 | hindsight in-sample +0.08 re-randomised -0.06 (deflation bench nan) | 8s
+GBPCHF H1 hedged_grid: WF single-trader median -0.96 (gross -0.48) | expected stream -0.96 t=-2.8 gross -0.48 | train median +0.76 | hindsight in-sample +0.34 re-randomised +0.34 (deflation bench nan) | 4s
+done GBPCHF H1 in 0.9 min

@@ -1,0 +1,7 @@
+AUDCHF H4 bracket    : WF single-trader median -0.43 (gross +0.02) | expected stream -1.08 t=-3.3 gross +0.12 | train median +0.28 | hindsight in-sample -0.03 re-randomised -0.20 (deflation bench nan) | 6s
+AUDCHF H4 martingale : WF single-trader median -0.04 (gross +0.03) | expected stream +0.06 t=+0.2 gross +0.18 | train median +0.42 | hindsight in-sample +0.28 re-randomised +0.02 (deflation bench nan) | 4s
+AUDCHF H4 pyramid    : WF single-trader median -0.63 (gross -0.22) | expected stream -0.95 t=-2.9 gross -0.36 | train median +0.02 | hindsight in-sample -0.09 re-randomised -0.31 (deflation bench nan) | 3s
+AUDCHF H4 grid       : WF single-trader median -0.43 (gross -0.36) | expected stream -0.44 t=-1.4 gross -0.35 | train median +1.09 | hindsight in-sample +0.43 re-randomised +0.10 (deflation bench nan) | 4s
+AUDCHF H4 zone       : WF single-trader median -0.12 (gross +0.08) | expected stream -0.30 t=-0.9 gross +0.05 | train median +0.42 | hindsight in-sample +0.28 re-randomised -0.10 (deflation bench nan) | 3s
+AUDCHF H4 hedged_grid: WF single-trader median -0.60 (gross -0.03) | expected stream -0.60 t=-1.8 gross -0.03 | train median +0.73 | hindsight in-sample +0.47 re-randomised +0.47 (deflation bench nan) | 2s
+done AUDCHF H4 in 0.4 min

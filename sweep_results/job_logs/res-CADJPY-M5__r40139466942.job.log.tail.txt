@@ -1,0 +1,7 @@
+CADJPY M5 bracket    : WF single-trader median -0.32 (gross +0.03) | expected stream -0.38 t=-1.1 gross +0.04 | train median +0.07 | hindsight in-sample -0.27 re-randomised -0.52 (deflation bench nan) | 43s
+CADJPY M5 martingale : WF single-trader median -0.23 (gross -0.02) | expected stream -0.62 t=-1.8 gross -0.16 | train median +0.12 | hindsight in-sample -0.04 re-randomised -0.22 (deflation bench nan) | 39s
+CADJPY M5 pyramid    : WF single-trader median -0.42 (gross +0.03) | expected stream -0.88 t=-2.6 gross -0.06 | train median -0.15 | hindsight in-sample -0.47 re-randomised -0.56 (deflation bench nan) | 38s
+CADJPY M5 grid       : WF single-trader median -0.33 (gross -0.14) | expected stream -0.60 t=-1.7 gross -0.28 | train median +1.76 | hindsight in-sample +1.40 re-randomised +0.39 (deflation bench nan) | 40s
+CADJPY M5 zone       : WF single-trader median -1.26 (gross +0.32) | expected stream -2.45 t=-7.1 gross +0.32 | train median -0.25 | hindsight in-sample -0.52 re-randomised -0.78 (deflation bench nan) | 43s
+CADJPY M5 hedged_grid: WF single-trader median -2.35 (gross -0.21) | expected stream -2.35 t=-6.8 gross -0.21 | train median -1.22 | hindsight in-sample -0.38 re-randomised -0.38 (deflation bench nan) | 14s
+done CADJPY M5 in 3.7 min

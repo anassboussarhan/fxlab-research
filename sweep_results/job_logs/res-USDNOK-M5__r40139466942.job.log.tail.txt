@@ -1,0 +1,7 @@
+USDNOK M5 bracket    : WF single-trader median -0.01 (gross +0.43) | expected stream +0.07 t=+0.2 gross +0.65 | train median -0.19 | hindsight in-sample +0.21 re-randomised -0.15 (deflation bench nan) | 41s
+USDNOK M5 martingale : WF single-trader median -0.23 (gross -0.11) | expected stream -0.63 t=-1.8 gross -0.34 | train median +0.02 | hindsight in-sample -0.34 re-randomised -0.55 (deflation bench nan) | 37s
+USDNOK M5 pyramid    : WF single-trader median -0.58 (gross -0.17) | expected stream -1.13 t=-3.3 gross -0.29 | train median -0.66 | hindsight in-sample -0.58 re-randomised -0.57 (deflation bench nan) | 36s
+USDNOK M5 grid       : WF single-trader median +0.04 (gross +0.37) | expected stream +0.19 t=+0.6 gross +0.93 | train median +1.29 | hindsight in-sample +0.30 re-randomised +0.05 (deflation bench nan) | 41s
+USDNOK M5 zone       : WF single-trader median -0.85 (gross +0.31) | expected stream -1.70 t=-4.9 gross +0.08 | train median -0.77 | hindsight in-sample -0.59 re-randomised -1.07 (deflation bench nan) | 41s
+USDNOK M5 hedged_grid: WF single-trader median -3.00 (gross -0.55) | expected stream -3.00 t=-8.7 gross -0.55 | train median -2.04 | hindsight in-sample -1.81 re-randomised -1.81 (deflation bench nan) | 14s
+done USDNOK M5 in 3.5 min

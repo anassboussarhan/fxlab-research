@@ -1,0 +1,7 @@
+USDJPY H4 bracket    : WF single-trader median -0.37 (gross -0.18) | expected stream -0.50 t=-1.6 gross -0.25 | train median +0.30 | hindsight in-sample +0.16 re-randomised -0.13 (deflation bench nan) | 9s
+USDJPY H4 martingale : WF single-trader median +0.04 (gross +0.00) | expected stream +0.11 t=+0.4 gross +0.30 | train median +0.41 | hindsight in-sample +0.34 re-randomised -0.02 (deflation bench nan) | 7s
+USDJPY H4 pyramid    : WF single-trader median -0.38 (gross -0.17) | expected stream -0.53 t=-1.7 gross -0.24 | train median +0.23 | hindsight in-sample +0.14 re-randomised -0.14 (deflation bench nan) | 5s
+USDJPY H4 grid       : WF single-trader median -0.23 (gross -0.18) | expected stream -0.38 t=-1.2 gross -0.29 | train median +0.94 | hindsight in-sample +1.31 re-randomised +0.45 (deflation bench nan) | 8s
+USDJPY H4 zone       : WF single-trader median -0.24 (gross -0.11) | expected stream -0.01 t=-0.0 gross +0.10 | train median +0.47 | hindsight in-sample +0.28 re-randomised +0.09 (deflation bench nan) | 5s
+USDJPY H4 hedged_grid: WF single-trader median -0.38 (gross -0.12) | expected stream -0.38 t=-1.2 gross -0.12 | train median +0.61 | hindsight in-sample +0.53 re-randomised +0.53 (deflation bench nan) | 4s
+done USDJPY H4 in 0.7 min

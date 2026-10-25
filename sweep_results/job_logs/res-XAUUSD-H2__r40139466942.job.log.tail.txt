@@ -1,0 +1,7 @@
+XAUUSD H2 bracket    : WF single-trader median +0.48 (gross +0.59) | expected stream +0.55 t=+1.4 gross +0.68 | train median +0.56 | hindsight in-sample +0.52 re-randomised +0.11 (deflation bench nan) | 6s
+XAUUSD H2 martingale : WF single-trader median -0.09 (gross +0.25) | expected stream -0.17 t=-0.4 gross +0.36 | train median +0.47 | hindsight in-sample +0.59 re-randomised +0.13 (deflation bench nan) | 4s
+XAUUSD H2 pyramid    : WF single-trader median -0.03 (gross +0.21) | expected stream +0.02 t=+0.1 gross +0.37 | train median +0.52 | hindsight in-sample +0.70 re-randomised -0.04 (deflation bench nan) | 3s
+XAUUSD H2 grid       : WF single-trader median -0.03 (gross -0.01) | expected stream -0.15 t=-0.4 gross -0.10 | train median +1.21 | hindsight in-sample +0.55 re-randomised +0.21 (deflation bench nan) | 5s
+XAUUSD H2 zone       : WF single-trader median +0.22 (gross +0.45) | expected stream +0.27 t=+0.7 gross +0.64 | train median +0.72 | hindsight in-sample +0.56 re-randomised +0.26 (deflation bench nan) | 3s
+XAUUSD H2 hedged_grid: WF single-trader median -0.43 (gross -0.14) | expected stream -0.43 t=-1.1 gross -0.14 | train median +0.89 | hindsight in-sample +0.71 re-randomised +0.71 (deflation bench nan) | 2s
+done XAUUSD H2 in 0.4 min

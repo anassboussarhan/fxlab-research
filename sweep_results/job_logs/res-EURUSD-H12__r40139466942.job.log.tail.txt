@@ -1,0 +1,7 @@
+EURUSD H12 bracket    : WF single-trader median -0.02 (gross +0.11) | expected stream -0.08 t=-0.3 gross +0.14 | train median +0.38 | hindsight in-sample +0.05 re-randomised -0.06 (deflation bench nan) | 9s
+EURUSD H12 martingale : WF single-trader median -0.09 (gross +0.05) | expected stream -0.30 t=-1.2 gross -0.08 | train median +0.38 | hindsight in-sample +0.27 re-randomised +0.06 (deflation bench nan) | 6s
+EURUSD H12 pyramid    : WF single-trader median -0.26 (gross -0.13) | expected stream -0.36 t=-1.4 gross -0.19 | train median +0.20 | hindsight in-sample +0.11 re-randomised -0.05 (deflation bench nan) | 5s
+EURUSD H12 grid       : WF single-trader median -0.12 (gross -0.01) | expected stream -0.16 t=-0.6 gross -0.02 | train median +0.73 | hindsight in-sample +0.23 re-randomised +0.02 (deflation bench nan) | 10s
+EURUSD H12 zone       : WF single-trader median -0.18 (gross -0.10) | expected stream -0.56 t=-2.2 gross -0.43 | train median +0.59 | hindsight in-sample +0.27 re-randomised +0.14 (deflation bench nan) | 5s
+EURUSD H12 hedged_grid: WF single-trader median -0.52 (gross -0.15) | expected stream -0.52 t=-2.0 gross -0.15 | train median +0.56 | hindsight in-sample +0.57 re-randomised +0.57 (deflation bench nan) | 4s
+done EURUSD H12 in 0.7 min

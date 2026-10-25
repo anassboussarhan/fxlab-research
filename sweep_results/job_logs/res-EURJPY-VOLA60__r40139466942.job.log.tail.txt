@@ -1,0 +1,7 @@
+EURJPY VOLA60 bracket    : WF single-trader median +0.20 (gross +0.27) | expected stream +0.20 t=+0.6 gross +0.31 | train median +0.52 | hindsight in-sample +0.17 re-randomised -0.07 (deflation bench nan) | 9s
+EURJPY VOLA60 martingale : WF single-trader median +0.18 (gross +0.19) | expected stream -0.12 t=-0.3 gross +0.09 | train median +0.56 | hindsight in-sample +0.34 re-randomised +0.12 (deflation bench nan) | 7s
+EURJPY VOLA60 pyramid    : WF single-trader median -0.17 (gross +0.10) | expected stream -0.31 t=-0.9 gross +0.10 | train median +0.37 | hindsight in-sample +0.11 re-randomised -0.11 (deflation bench nan) | 6s
+EURJPY VOLA60 grid       : WF single-trader median -0.69 (gross -0.63) | expected stream -0.89 t=-2.6 gross -0.81 | train median +1.73 | hindsight in-sample +0.12 re-randomised +0.05 (deflation bench nan) | 9s
+EURJPY VOLA60 zone       : WF single-trader median +0.12 (gross +0.40) | expected stream +0.12 t=+0.3 gross +0.53 | train median +0.71 | hindsight in-sample +0.42 re-randomised +0.21 (deflation bench nan) | 6s
+EURJPY VOLA60 hedged_grid: WF single-trader median -0.71 (gross -0.39) | expected stream -0.71 t=-2.1 gross -0.39 | train median +0.60 | hindsight in-sample +0.83 re-randomised +0.83 (deflation bench nan) | 3s
+done EURJPY VOLA60 in 0.7 min

@@ -1,0 +1,7 @@
+NZDCAD TICK60 bracket    : WF single-trader median -0.53 (gross +0.06) | expected stream -0.93 t=-2.6 gross -0.00 | train median -0.06 | hindsight in-sample -0.02 re-randomised -0.04 (deflation bench nan) | 10s
+NZDCAD TICK60 martingale : WF single-trader median -0.11 (gross +0.27) | expected stream -0.58 t=-1.6 gross +0.42 | train median +0.26 | hindsight in-sample +0.33 re-randomised -0.02 (deflation bench nan) | 8s
+NZDCAD TICK60 pyramid    : WF single-trader median -0.63 (gross -0.23) | expected stream -0.99 t=-2.8 gross -0.38 | train median -0.21 | hindsight in-sample -0.17 re-randomised -0.40 (deflation bench nan) | 7s
+NZDCAD TICK60 grid       : WF single-trader median -0.20 (gross +0.10) | expected stream -0.30 t=-0.8 gross +0.26 | train median +1.81 | hindsight in-sample +1.60 re-randomised +0.51 (deflation bench nan) | 10s
+NZDCAD TICK60 zone       : WF single-trader median -0.35 (gross +0.13) | expected stream -0.94 t=-2.6 gross +0.37 | train median +0.09 | hindsight in-sample -0.11 re-randomised -0.22 (deflation bench nan) | 7s
+NZDCAD TICK60 hedged_grid: WF single-trader median -0.53 (gross +0.32) | expected stream -0.53 t=-1.5 gross +0.32 | train median +0.44 | hindsight in-sample +0.10 re-randomised +0.10 (deflation bench nan) | 4s
+done NZDCAD TICK60 in 0.8 min

@@ -1,0 +1,7 @@
+USDCHF M1 bracket    : WF single-trader median -0.26 (gross +0.18) | expected stream -0.67 t=-1.9 gross +0.23 | train median -0.18 | hindsight in-sample -0.14 re-randomised -0.31 (deflation bench nan) | 159s
+USDCHF M1 martingale : WF single-trader median -0.03 (gross -0.12) | expected stream -0.28 t=-0.8 gross -0.08 | train median -0.07 | hindsight in-sample -0.38 re-randomised -0.69 (deflation bench nan) | 140s
+USDCHF M1 pyramid    : WF single-trader median -0.81 (gross +0.01) | expected stream -2.32 t=-6.8 gross -0.12 | train median -0.90 | hindsight in-sample -0.84 re-randomised -1.11 (deflation bench nan) | 141s
+USDCHF M1 grid       : WF single-trader median -0.27 (gross -0.11) | expected stream -0.86 t=-2.5 gross -0.32 | train median +0.90 | hindsight in-sample +0.86 re-randomised +0.31 (deflation bench nan) | 143s
+USDCHF M1 zone       : WF single-trader median -1.02 (gross +0.37) | expected stream -2.16 t=-6.3 gross -0.45 | train median -1.20 | hindsight in-sample -0.68 re-randomised -1.11 (deflation bench nan) | 183s
+USDCHF M1 hedged_grid: WF single-trader median -9.60 (gross -0.86) | expected stream -9.60 t=-27.9 gross -0.86 | train median -7.92 | hindsight in-sample -6.50 re-randomised -6.50 (deflation bench nan) | 51s
+done USDCHF M1 in 13.6 min

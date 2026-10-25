@@ -1,0 +1,7 @@
+NZDUSD M15 bracket    : WF single-trader median -0.49 (gross -0.15) | expected stream -0.84 t=-2.4 gross -0.14 | train median -0.07 | hindsight in-sample -0.02 re-randomised -0.17 (deflation bench nan) | 20s
+NZDUSD M15 martingale : WF single-trader median -0.20 (gross -0.03) | expected stream -0.13 t=-0.4 gross -0.00 | train median +0.23 | hindsight in-sample +0.02 re-randomised -0.18 (deflation bench nan) | 18s
+NZDUSD M15 pyramid    : WF single-trader median -0.58 (gross -0.23) | expected stream -1.08 t=-3.1 gross -0.47 | train median -0.10 | hindsight in-sample -0.19 re-randomised -0.39 (deflation bench nan) | 16s
+NZDUSD M15 grid       : WF single-trader median -0.31 (gross -0.12) | expected stream -0.50 t=-1.4 gross -0.19 | train median +1.88 | hindsight in-sample +0.29 re-randomised +0.13 (deflation bench nan) | 20s
+NZDUSD M15 zone       : WF single-trader median -0.19 (gross +0.29) | expected stream -0.38 t=-1.1 gross +0.46 | train median +0.08 | hindsight in-sample +0.03 re-randomised -0.18 (deflation bench nan) | 18s
+NZDUSD M15 hedged_grid: WF single-trader median -0.53 (gross +0.43) | expected stream -0.53 t=-1.5 gross +0.43 | train median -0.30 | hindsight in-sample -0.19 re-randomised -0.19 (deflation bench nan) | 7s
+done NZDUSD M15 in 1.7 min

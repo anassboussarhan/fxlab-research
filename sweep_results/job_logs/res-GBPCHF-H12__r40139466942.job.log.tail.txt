@@ -1,0 +1,7 @@
+GBPCHF H12 bracket    : WF single-trader median -0.28 (gross -0.01) | expected stream -0.62 t=-2.0 gross +0.04 | train median +0.36 | hindsight in-sample +0.10 re-randomised +0.10 (deflation bench nan) | 7s
+GBPCHF H12 martingale : WF single-trader median -0.03 (gross +0.01) | expected stream +0.18 t=+0.6 gross +0.33 | train median +0.49 | hindsight in-sample +0.42 re-randomised +0.15 (deflation bench nan) | 4s
+GBPCHF H12 pyramid    : WF single-trader median -0.64 (gross -0.44) | expected stream -0.81 t=-2.6 gross -0.53 | train median +0.29 | hindsight in-sample +0.15 re-randomised -0.04 (deflation bench nan) | 3s
+GBPCHF H12 grid       : WF single-trader median -0.13 (gross -0.08) | expected stream -0.27 t=-0.9 gross -0.19 | train median +1.04 | hindsight in-sample +0.40 re-randomised +0.31 (deflation bench nan) | 7s
+GBPCHF H12 zone       : WF single-trader median +0.15 (gross +0.32) | expected stream +0.21 t=+0.7 gross +0.36 | train median +0.50 | hindsight in-sample +0.28 re-randomised +0.06 (deflation bench nan) | 3s
+GBPCHF H12 hedged_grid: WF single-trader median +0.30 (gross +0.66) | expected stream +0.30 t=+1.0 gross +0.66 | train median +0.46 | hindsight in-sample +0.63 re-randomised +0.63 (deflation bench nan) | 3s
+done GBPCHF H12 in 0.5 min

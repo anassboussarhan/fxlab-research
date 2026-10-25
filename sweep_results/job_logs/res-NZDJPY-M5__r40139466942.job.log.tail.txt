@@ -1,0 +1,7 @@
+NZDJPY M5 bracket    : WF single-trader median -0.59 (gross -0.11) | expected stream -1.14 t=-3.2 gross -0.28 | train median -0.21 | hindsight in-sample -0.17 re-randomised -0.32 (deflation bench nan) | 36s
+NZDJPY M5 martingale : WF single-trader median -0.29 (gross -0.09) | expected stream -0.97 t=-2.7 gross -0.61 | train median +0.24 | hindsight in-sample -0.12 re-randomised -0.30 (deflation bench nan) | 33s
+NZDJPY M5 pyramid    : WF single-trader median -0.46 (gross +0.04) | expected stream -0.79 t=-2.2 gross +0.01 | train median -0.50 | hindsight in-sample -0.15 re-randomised -0.54 (deflation bench nan) | 32s
+NZDJPY M5 grid       : WF single-trader median -0.28 (gross +0.08) | expected stream -0.69 t=-1.9 gross -0.03 | train median +1.67 | hindsight in-sample +1.75 re-randomised +0.34 (deflation bench nan) | 34s
+NZDJPY M5 zone       : WF single-trader median -0.65 (gross +0.22) | expected stream -1.26 t=-3.6 gross -0.21 | train median -0.71 | hindsight in-sample -0.64 re-randomised -1.01 (deflation bench nan) | 36s
+NZDJPY M5 hedged_grid: WF single-trader median -2.36 (gross +0.29) | expected stream -2.36 t=-6.6 gross +0.29 | train median -1.62 | hindsight in-sample -1.96 re-randomised -1.96 (deflation bench nan) | 12s
+done NZDJPY M5 in 3.1 min
