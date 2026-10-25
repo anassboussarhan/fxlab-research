@@ -96,9 +96,9 @@ def _dbn_to_series(doc):
 
 def dbnomics_series(ccy, var):
     """(series, source id) from DBnomics. Candidates: OECD MEI (subjects and measures of MEI[var], monthly and
-    quarterly) and IMF IFS (monthly, quarterly). Choice, in this order: a monthly series starting by 2004-01 (enough
-    history for 36-month changes before the FX sample starts in 2007), then a quarterly one starting by 2004-01, then
-    the series starting earliest; ties keep the listed order (MEI before IFS)."""
+    quarterly) and IMF IFS (monthly, quarterly). Choice, in this order: an MEI monthly series starting by 2004-01
+    (enough history for 36-month changes before the FX sample starts in 2007), an MEI quarterly one, the same two
+    for IFS, then the series starting earliest."""
     import urllib.parse
     errs, cands = [], []
     locs = MEI_LOC.get(ccy, [ISO[ccy][0]])
@@ -131,10 +131,11 @@ def dbnomics_series(ccy, var):
     if not cands:
         raise RuntimeError("; ".join(errs) or "no candidates")
     early = pd.Timestamp("2004-01-01")
-    for want in ("M", "Q"):
-        for c in cands:
-            if c[2] == want and c[0].index[0] <= early:
-                return c[0], c[1]
+    for src in ("OECD/MEI", "IMF/IFS"):          # official OECD series first: IFS monthly series for countries that
+        for want in ("M", "Q"):                   # publish quarterly (e.g. Australian IP) may be interpolated
+            for c in cands:
+                if src in c[1] and c[2] == want and c[0].index[0] <= early:
+                    return c[0], c[1]
     c = min(cands, key=lambda c: c[0].index[0])
     return c[0], c[1]
 
