@@ -1,0 +1,20 @@
+                net           gross          
+              count      mean count      mean
+test                                         
+C1             2913 -0.000042  2913 -0.000029
+C2             2913 -0.000223  2913 -0.000223
+F1              700  0.000345   700  0.000557
+F1_control     1538 -0.000203  1538  0.000009
+F2              800 -0.000147   800  0.000095
+F2_control     1956 -0.000243  1956 -0.000002
+F3              800 -0.000004   800  0.000206
+F3_control     1957 -0.000027  1957  0.000183
+K_ny           2314 -0.000438  2314 -0.000063
+K_on           2319 -0.000501  2319 -0.000092
+L1             2904 -0.000488  2904 -0.000281
+M1              134  0.000781   134  0.000981
+M2              134  0.000501   134  0.000699
+P_dol            88 -0.001346    88 -0.000899
+P_dol_control  1650 -0.000458  1650 -0.000013
+W1             2893 -0.000176  2893  0.000023
+{"pair": "USDJPY", "start": "2007-03-30", "end": "2018-06-17", "bars_by_utc_hour": {"1": 173955, "2": 173658, "3": 173280, "4": 173328, "5": 173716, "6": 174087, "7": 174221, "8": 174023, "9": 173940, "10": 173818, "11": 173943, "12": 174082, "13": 174068, "14": 174165, "15": 174131, "16": 173937, "17": 173409, "18": 173397, "19": 173328, "20": 172734, "21": 166569, "22": 171114, "23": 172790}, "gotobi_rows": 7751, "equity_foreign": "yahoo:^N225", "equity_us": "yahoo:^GSPC", "month_end_rows": 268, "local_hours_rows": 2904, "carry_rows": 5826, "around_clock_rows": 4633, "fomc_source": {"2007": "parsed 8; not in fallback: []; fallback not parsed: []", "2008": "parsed 8; not in fallback: []; fallback not parsed: []", "2009": "parsed 8; not in fallback: []; fallback not parsed: []", "2010": "parsed 8; not in fallback: []; fallback not parsed: []", "2011": "parsed 8; not in fallback: []; fallback not parsed: []", "2012": "parsed 8; not in fallback: []; fallback not parsed: []", "2013": "parsed 8; not in fallback: []; fallback not parsed: []", "2014": "parsed 8; not in fallback: []; fallback not parsed: []", "2015": "parsed 8; not in fallback: []; fallback not parsed: []", "2016": "parsed 8; not in fallback: []; fallback not parsed: []", "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']", "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']"}, "fomc_rows": 1738, "fix_reversal_rows": 2893, "errors": {}, "seconds": 76.7, "alt_files": ["eq_USD.csv", "VIXCLS.csv", "eq_JPY.csv"]}

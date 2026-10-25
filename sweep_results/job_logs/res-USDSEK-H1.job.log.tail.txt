@@ -1,0 +1,12 @@
+                net           gross          
+              count      mean count      mean
+test                                         
+K_ny           1988 -0.001138  1988  0.000078
+K_on           1992 -0.001160  1992  0.000133
+L1             2497 -0.000485  2497  0.000198
+M1              114  0.000487   114  0.001007
+M2              114  0.000775   114  0.001247
+P_dol            76  0.000431    76  0.002210
+P_dol_control  1419 -0.001755  1419 -0.000049
+W1             2496 -0.000469  2496  0.000019
+{"pair": "USDSEK", "start": "2008-09-29", "end": "2018-06-18", "bars_by_utc_hour": {"1": 148760, "2": 148430, "3": 148358, "4": 148393, "5": 148882, "6": 149499, "7": 149752, "8": 149664, "9": 149734, "10": 149657, "11": 149741, "12": 149772, "13": 149793, "14": 149870, "15": 149775, "16": 149651, "17": 149389, "18": 149157, "19": 149045, "20": 148611, "21": 142803, "22": 144534, "23": 146840}, "equity_foreign": "yahoo:^OMX", "equity_us": "yahoo:^GSPC", "month_end_rows": 228, "local_hours_rows": 2497, "around_clock_rows": 3980, "fomc_source": {"2008": "parsed 8; not in fallback: []; fallback not parsed: []", "2009": "parsed 8; not in fallback: []; fallback not parsed: []", "2010": "parsed 8; not in fallback: []; fallback not parsed: []", "2011": "parsed 8; not in fallback: []; fallback not parsed: []", "2012": "parsed 8; not in fallback: []; fallback not parsed: []", "2013": "parsed 8; not in fallback: []; fallback not parsed: []", "2014": "parsed 8; not in fallback: []; fallback not parsed: []", "2015": "parsed 8; not in fallback: []; fallback not parsed: []", "2016": "parsed 8; not in fallback: []; fallback not parsed: []", "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']", "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']"}, "fomc_rows": 1495, "fix_reversal_rows": 2496, "errors": {}, "seconds": 10.4, "alt_files": ["eq_USD.csv", "eq_SEK.csv"]}

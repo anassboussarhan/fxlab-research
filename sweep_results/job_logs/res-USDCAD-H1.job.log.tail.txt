@@ -1,0 +1,13 @@
+                net           gross          
+              count      mean count      mean
+test                                         
+C1             2915 -0.000122  2915 -0.000107
+C2             2915 -0.000184  2915 -0.000175
+K_ny           2323 -0.000586  2323 -0.000080
+K_on           2326 -0.000589  2326 -0.000042
+M1              134 -0.000244   134  0.000048
+M2              134 -0.000175   134  0.000102
+P_dol            87  0.001703    87  0.002258
+P_dol_control  1658 -0.000605  1658 -0.000028
+W1             2895 -0.000254  2895  0.000028
+{"pair": "USDCAD", "start": "2007-03-30", "end": "2018-06-06", "bars_by_utc_hour": {"1": 174678, "2": 174566, "3": 174550, "4": 174557, "5": 174603, "6": 174673, "7": 174711, "8": 174463, "9": 174429, "10": 174428, "11": 174453, "12": 174430, "13": 174371, "14": 174378, "15": 174377, "16": 174362, "17": 174308, "18": 174409, "19": 174458, "20": 174405, "21": 173363, "22": 173892, "23": 174488}, "equity_foreign": "yahoo:^GSPTSE", "equity_us": "yahoo:^GSPC", "month_end_rows": 268, "local_hours_rows": 0, "carry_rows": 5830, "around_clock_rows": 4649, "fomc_source": {"2007": "parsed 8; not in fallback: []; fallback not parsed: []", "2008": "parsed 8; not in fallback: []; fallback not parsed: []", "2009": "parsed 8; not in fallback: []; fallback not parsed: []", "2010": "parsed 8; not in fallback: []; fallback not parsed: []", "2011": "parsed 8; not in fallback: []; fallback not parsed: []", "2012": "parsed 8; not in fallback: []; fallback not parsed: []", "2013": "parsed 8; not in fallback: []; fallback not parsed: []", "2014": "parsed 8; not in fallback: []; fallback not parsed: []", "2015": "parsed 8; not in fallback: []; fallback not parsed: []", "2016": "parsed 8; not in fallback: []; fallback not parsed: []", "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']", "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']"}, "fomc_rows": 1745, "fix_reversal_rows": 2895, "errors": {}, "seconds": 71.2, "alt_files": ["eq_CAD.csv", "eq_USD.csv", "VIXCLS.csv"]}

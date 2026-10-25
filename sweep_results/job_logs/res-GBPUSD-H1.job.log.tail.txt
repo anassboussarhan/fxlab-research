@@ -1,0 +1,14 @@
+                net           gross          
+              count      mean count      mean
+test                                         
+C1             2917 -0.000002  2917  0.000007
+C2             2917 -0.000129  2917 -0.000130
+K_ny           2325 -0.000204  2325  0.000168
+K_on           2325 -0.000221  2325  0.000174
+L1             2907 -0.000081  2907  0.000114
+M1              134 -0.000559   134 -0.000367
+M2              134 -0.000027   134  0.000158
+P_dol            87  0.001503    87  0.001944
+P_dol_control  1662 -0.000406  1662  0.000049
+W1             2896 -0.000232  2896 -0.000035
+{"pair": "GBPUSD", "start": "2007-03-30", "end": "2018-06-06", "bars_by_utc_hour": {"1": 174723, "2": 174678, "3": 174647, "4": 174630, "5": 174695, "6": 174734, "7": 174754, "8": 174528, "9": 174512, "10": 174528, "11": 174468, "12": 174406, "13": 174375, "14": 174368, "15": 174408, "16": 174351, "17": 174316, "18": 174394, "19": 174465, "20": 174434, "21": 173946, "22": 174349, "23": 174568}, "equity_foreign": "yahoo:^FTSE", "equity_us": "yahoo:^GSPC", "month_end_rows": 268, "local_hours_rows": 2907, "carry_rows": 5834, "around_clock_rows": 4650, "fomc_source": {"2007": "parsed 8; not in fallback: []; fallback not parsed: []", "2008": "parsed 8; not in fallback: []; fallback not parsed: []", "2009": "parsed 8; not in fallback: []; fallback not parsed: []", "2010": "parsed 8; not in fallback: []; fallback not parsed: []", "2011": "parsed 8; not in fallback: []; fallback not parsed: []", "2012": "parsed 8; not in fallback: []; fallback not parsed: []", "2013": "parsed 8; not in fallback: []; fallback not parsed: []", "2014": "parsed 8; not in fallback: []; fallback not parsed: []", "2015": "parsed 8; not in fallback: []; fallback not parsed: []", "2016": "parsed 8; not in fallback: []; fallback not parsed: []", "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']", "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']"}, "fomc_rows": 1749, "fix_reversal_rows": 2896, "errors": {}, "seconds": 74.9, "alt_files": ["eq_GBP.csv", "eq_USD.csv", "VIXCLS.csv"]}
