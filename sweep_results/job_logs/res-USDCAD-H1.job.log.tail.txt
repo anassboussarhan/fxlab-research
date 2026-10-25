@@ -1,0 +1,18 @@
+{
+ "pair": "USDCAD",
+ "ccy": "CAD",
+ "series": {},
+ "errors": {
+  "CAD_ip": "CANPROINDMISMEI: The read operation timed out; CANPROINDQISMEI: The read operation timed out",
+  "CAD_cpi": "CPALTT01CAM661S: The read operation timed out; CPALTT01CAM661N: The read operation timed out; CPALTT01CAQ661S: The read operation timed out; CPALTT01CAQ661N: The read operation timed out",
+  "CAD_unemp": "LRHUTTTTCAM156S: The read operation timed out; LRUNTTTTCAM156S: The read operation timed out; LRHUTTTTCAQ156S: The read operation timed out; LRUNTTTTCAQ156S: The read operation timed out",
+  "CAD_retail": "SLRTTO01CAM661S: The read operation timed out; SLRTTO02CAM661S: The read operation timed out; SLRTTO01CAQ661S: The read operation timed out; SLRTTO02CAQ661S: The read operation timed out",
+  "CAD_ppi": "PIEAMP01CAM661N: The read operation timed out; PITGIG01CAM661N: The read operation timed out; PIEATI01CAM661N: The read operation timed out; PIEAMP01CAQ661N: The read operation timed out",
+  "USD_ip": "USAPROINDMISMEI: The read operation timed out; USAPROINDQISMEI: The read operation timed out",
+  "USD_cpi": "CPALTT01USM661S: The read operation timed out; CPALTT01USM661N: The read operation timed out; CPALTT01USQ661S: The read operation timed out; CPALTT01USQ661N: The read operation timed out",
+  "USD_unemp": "UNRATE: The read operation timed out; LRHUTTTTUSM156S: The read operation timed out; LRUNTTTTUSM156S: The read operation timed out; LRHUTTTTUSQ156S: The read operation timed out; LRUNTTTTUSQ156S: The read operation timed out",
+  "USD_retail": "SLRTTO01USM661S: The read operation timed out; SLRTTO02USM661S: The read operation timed out; SLRTTO01USQ661S: The read operation timed out; SLRTTO02USQ661S: The read operation timed out",
+  "USD_ppi": "PIEAMP01USM661N: The read operation timed out; PITGIG01USM661N: The read operation timed out; PIEATI01USM661N: The read operation timed out; PIEAMP01USQ661N: The read operation timed out"
+ },
+ "seconds": 2227.0
+}

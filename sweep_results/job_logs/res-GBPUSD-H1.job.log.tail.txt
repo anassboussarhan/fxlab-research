@@ -1,0 +1,18 @@
+{
+ "pair": "GBPUSD",
+ "ccy": "GBP",
+ "series": {},
+ "errors": {
+  "GBP_ip": "GBRPROINDMISMEI: The read operation timed out; GBRPROINDQISMEI: The read operation timed out",
+  "GBP_cpi": "CPALTT01GBM661S: The read operation timed out; CPALTT01GBM661N: The read operation timed out; CPALTT01GBQ661S: The read operation timed out; CPALTT01GBQ661N: The read operation timed out",
+  "GBP_unemp": "LRHUTTTTGBM156S: The read operation timed out; LRUNTTTTGBM156S: The read operation timed out; LRHUTTTTGBQ156S: The read operation timed out; LRUNTTTTGBQ156S: The read operation timed out",
+  "GBP_retail": "SLRTTO01GBM661S: The read operation timed out; SLRTTO02GBM661S: The read operation timed out; SLRTTO01GBQ661S: The read operation timed out; SLRTTO02GBQ661S: The read operation timed out",
+  "GBP_ppi": "PIEAMP01GBM661N: The read operation timed out; PITGIG01GBM661N: The read operation timed out; PIEATI01GBM661N: The read operation timed out; PIEAMP01GBQ661N: The read operation timed out",
+  "USD_ip": "USAPROINDMISMEI: The read operation timed out; USAPROINDQISMEI: The read operation timed out",
+  "USD_cpi": "CPALTT01USM661S: The read operation timed out; CPALTT01USM661N: The read operation timed out; CPALTT01USQ661S: The read operation timed out; CPALTT01USQ661N: The read operation timed out",
+  "USD_unemp": "UNRATE: The read operation timed out; LRHUTTTTUSM156S: The read operation timed out; LRUNTTTTUSM156S: The read operation timed out; LRHUTTTTUSQ156S: The read operation timed out; LRUNTTTTUSQ156S: The read operation timed out",
+  "USD_retail": "SLRTTO01USM661S: The read operation timed out; SLRTTO02USM661S: The read operation timed out; SLRTTO01USQ661S: The read operation timed out; SLRTTO02USQ661S: The read operation timed out",
+  "USD_ppi": "PIEAMP01USM661N: The read operation timed out; PITGIG01USM661N: The read operation timed out; PIEATI01USM661N: The read operation timed out; PIEAMP01USQ661N: The read operation timed out"
+ },
+ "seconds": 2228.7
+}

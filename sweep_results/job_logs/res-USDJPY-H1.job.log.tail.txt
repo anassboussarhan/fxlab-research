@@ -1,0 +1,18 @@
+{
+ "pair": "USDJPY",
+ "ccy": "JPY",
+ "series": {},
+ "errors": {
+  "JPY_ip": "JPNPROINDMISMEI: The read operation timed out; JPNPROINDQISMEI: The read operation timed out",
+  "JPY_cpi": "CPALTT01JPM661S: The read operation timed out; CPALTT01JPM661N: The read operation timed out; CPALTT01JPQ661S: The read operation timed out; CPALTT01JPQ661N: The read operation timed out",
+  "JPY_unemp": "LRHUTTTTJPM156S: The read operation timed out; LRUNTTTTJPM156S: The read operation timed out; LRHUTTTTJPQ156S: The read operation timed out; LRUNTTTTJPQ156S: The read operation timed out",
+  "JPY_retail": "SLRTTO01JPM661S: The read operation timed out; SLRTTO02JPM661S: The read operation timed out; SLRTTO01JPQ661S: The read operation timed out; SLRTTO02JPQ661S: The read operation timed out",
+  "JPY_ppi": "PIEAMP01JPM661N: The read operation timed out; PITGIG01JPM661N: The read operation timed out; PIEATI01JPM661N: The read operation timed out; PIEAMP01JPQ661N: The read operation timed out",
+  "USD_ip": "USAPROINDMISMEI: The read operation timed out; USAPROINDQISMEI: The read operation timed out",
+  "USD_cpi": "CPALTT01USM661S: The read operation timed out; CPALTT01USM661N: The read operation timed out; CPALTT01USQ661S: The read operation timed out; CPALTT01USQ661N: The read operation timed out",
+  "USD_unemp": "UNRATE: The read operation timed out; LRHUTTTTUSM156S: The read operation timed out; LRUNTTTTUSM156S: The read operation timed out; LRHUTTTTUSQ156S: The read operation timed out; LRUNTTTTUSQ156S: The read operation timed out",
+  "USD_retail": "SLRTTO01USM661S: The read operation timed out; SLRTTO02USM661S: The read operation timed out; SLRTTO01USQ661S: The read operation timed out; SLRTTO02USQ661S: The read operation timed out",
+  "USD_ppi": "PIEAMP01USM661N: The read operation timed out; PITGIG01USM661N: The read operation timed out; PIEATI01USM661N: The read operation timed out; PIEAMP01USQ661N: The read operation timed out"
+ },
+ "seconds": 2227.6
+}
