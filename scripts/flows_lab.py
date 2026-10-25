@@ -45,8 +45,19 @@ per trade). The number of bars per UTC hour is stored for every pair.
 Execution: entries and exits at the open of the M1 bar of the stated local time (first bar within 5 minutes,
 otherwise no trade): buy at ask + slippage, sell at bid - slippage (slippage 0.25 x spread + 0.1 pip), commission
 0.35 bp per side. Gross (mid, no costs) is reported alongside.
-External data (fetched on the GitHub runner, cached in data/alt/): FRED VIXCLS and EVZCLS (fallback: Cboe CSV);
-equity indices from Yahoo Finance (fallback: Stooq).
+External data (fetched on the GitHub runner, cached in data/alt/): FRED VIXCLS and EVZCLS (fallbacks: FRED text
+file, Yahoo ^VIX / ^EVZ, Cboe CSV); equity indices from Yahoo Finance (fallback: Stooq).
+
+RUN 19 ADDITIONS (same tests, nothing re-tuned):
+  * swap: every trade records the 17:00 New York rollovers it is held through (Wednesday x3) and two swap charges,
+    the platform's flat 0.5 pip per night and the point-in-time rate differential minus a 0.75% p.a. mark-up
+    (rate data exist for USD EUR GBP JPY CHF CAD AUD NZD; SEK / NOK use the flat charge). The registered net
+    excludes swap; the report adds both versions.
+  * placebo rows for the random-date test of the month-end rule (M1_placebo / M2_placebo: the same rule on every
+    other business day, signal over the trailing month); Gotobi and FOMC already have controls on all other days.
+  * random timing (B1-B6): on each event, 16 entry minutes drawn uniformly in the pre-event window, the edge's
+    direction, exit at the event (B1 Gotobi, B3 month-end, B5 FOMC) or with a random bracket (B2, B4, B6);
+    coin-flip-direction controls at the same entry minutes (*_control).
 Usage: python scripts/flows_lab.py --pair USDJPY [--out DIR]"""
 from __future__ import annotations
 
@@ -94,36 +105,86 @@ def _cache(name):
     return os.path.join(ALT, name)
 
 
+FRED_SOURCES = []                  # (series, source) actually used, for the metadata
+
+
+def _fred_csv(series, timeout):
+    t = _get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}&cosd=2005-01-01&coed={DEV_END}",
+             timeout=timeout)
+    d = pd.read_csv(io.StringIO(t))
+    d.columns = ["date", "value"]
+    d["value"] = pd.to_numeric(d["value"], errors="coerce")
+    return d.dropna().set_index("date")["value"]
+
+
+def _fred_txt(series, timeout):
+    """FRED's plain-text download (header block, then 'DATE  VALUE' lines)."""
+    t = _get(f"https://fred.stlouisfed.org/data/{series}.txt", timeout=timeout)
+    rows = []
+    started = False
+    for line in t.splitlines():
+        p = line.split()
+        if not started:
+            started = len(p) >= 2 and p[0].upper() == "DATE"
+            continue
+        if len(p) >= 2:
+            try:
+                rows.append((p[0], float(p[1])))
+            except ValueError:
+                pass
+    return pd.Series([v for _, v in rows], index=[d for d, _ in rows], dtype=float)
+
+
+def _yahoo(sym):
+    subprocess.run([sys.executable, "-m", "pip", "install", "-q", "yfinance"], check=False,
+                   stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, timeout=300)
+    import yfinance as yf
+    h = yf.download(sym, start="2005-01-01", end="2026-01-01", progress=False, auto_adjust=False)
+    c = h["Close"]
+    c = c.iloc[:, 0] if isinstance(c, pd.DataFrame) else c
+    c = c.dropna()
+    c.index = pd.to_datetime(c.index).tz_localize(None) if getattr(c.index, "tz", None) else pd.to_datetime(c.index)
+    return c
+
+
+def _cboe(cb, timeout):
+    t = _get(f"https://cdn.cboe.com/api/global/us_indices/daily_prices/{cb}_History.csv", timeout=timeout)
+    d = pd.read_csv(io.StringIO(t))
+    d.columns = [c.strip().upper() for c in d.columns]
+    return d.set_index("DATE")["CLOSE"].astype(float)
+
+
 def fred(series):
-    """Daily FRED series (fallback: Cboe history CSV for VIX / EVZ), cut at DEV_END."""
+    """Daily FRED series, cut at DEV_END. Sources tried in order (run 19: the EVZ download timed out in run 17):
+    FRED CSV (3 attempts, 120 s), FRED text file, Yahoo Finance (^VIX / ^EVZ), Cboe history CSV."""
     path = _cache(f"{series}.csv")
     if not os.path.exists(path):
-        s, err = None, []
-        try:
-            t = _get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={series}")
-            d = pd.read_csv(io.StringIO(t))
-            d.columns = ["date", "value"]
-            d["value"] = pd.to_numeric(d["value"], errors="coerce")
-            s = d.dropna().set_index("date")["value"]
-        except Exception as ex:                                         # noqa: BLE001
-            err.append(f"fred: {ex}")
-        if s is None or len(s) < 100:
-            cb = {"VIXCLS": "VIX", "EVZCLS": "EVZ"}.get(series)
-            if cb:
-                try:
-                    t = _get(f"https://cdn.cboe.com/api/global/us_indices/daily_prices/{cb}_History.csv")
-                    d = pd.read_csv(io.StringIO(t))
-                    d.columns = [c.strip().upper() for c in d.columns]
-                    s = d.set_index("DATE")["CLOSE"].astype(float)
-                except Exception as ex:                                 # noqa: BLE001
-                    err.append(f"cboe: {ex}")
+        s, src, err = None, None, []
+        alt = {"VIXCLS": ("^VIX", "VIX"), "EVZCLS": ("^EVZ", "EVZ")}.get(series)
+        tries = [(f"fred_csv_{k}", lambda k=k: _fred_csv(series, 120)) for k in range(3)]
+        tries.append(("fred_txt", lambda: _fred_txt(series, 120)))
+        if alt:
+            tries.append((f"yahoo:{alt[0]}", lambda: _yahoo(alt[0])))
+            tries.append((f"cboe:{alt[1]}", lambda: _cboe(alt[1], 120)))
+        for name, fn in tries:
+            try:
+                x = fn()
+                if x is not None and len(x) >= 100:
+                    s, src = x, name
+                    break
+                err.append(f"{name}: only {0 if x is None else len(x)} rows")
+            except Exception as ex:                                     # noqa: BLE001
+                err.append(f"{name}: {str(ex)[:100]}")
+                time.sleep(5)
         if s is None:
             raise RuntimeError(f"{series}: no source worked: {err}")
         s.index = pd.to_datetime(s.index, errors="coerce")
         s = s[s.index.notna()].sort_index()
         s = s[s.index <= DEV_END]
-        s.rename("value").to_csv(path)
-    s = pd.read_csv(path, index_col=0, parse_dates=True)["value"]
+        pd.DataFrame({"value": s, "source": src}).to_csv(path)
+    d = pd.read_csv(path, index_col=0, parse_dates=True)
+    FRED_SOURCES.append((series, str(d["source"].iloc[0]) if "source" in d else "cache"))
+    s = d["value"]
     return s[s.index <= DEV_END]
 
 
@@ -168,13 +229,20 @@ def equity(ccy):
 class Book:
     """M1 bid/ask path of one pair with price lookups at local times."""
 
-    def __init__(self, m1, pip):
+    def __init__(self, m1, pip, pair=None):
         from fxlab.execution.costs import BASE
         self.m = m1
         self.idx = m1.index
         self.bo, self.ao = m1["bid_o"].to_numpy(), m1["ask_o"].to_numpy()
         self.pip = pip
         self.sf, self.sp, self.comm = BASE.slip_spread_frac, BASE.slip_fixed_pips, BASE.commission_bps_per_side * 1e-4
+        self.swap_pips = BASE.swap_pips_per_night
+        self.rd = None                                  # point-in-time rate differential base - quote, by UTC day
+        if pair is not None:
+            from fxlab.data.rates import has_rates, rate_diff
+            if has_rates(pair):
+                days = pd.date_range(m1.index[0].floor("D"), m1.index[-1].floor("D"), freq="D")
+                self.rd = rate_diff(pair, days)
 
     def at(self, ts_utc, tol_min=5):
         """Index of the first M1 bar at or after ts (within tol minutes), else -1."""
@@ -183,11 +251,45 @@ class Book:
             return i
         return -1
 
+    @staticmethod
+    def rollovers(t0, t1):
+        """Swap nights charged for a position held from t0 to t1 (UTC): every weekday 17:00 New York instant strictly
+        inside (t0, t1), the Wednesday one counted three times (spot value date skips the weekend). A position opened
+        or closed at the open of the 17:00 bar itself is treated as flat over that rollover."""
+        a, b = t0.tz_convert("America/New_York"), t1.tz_convert("America/New_York")
+        n, day = 0, a.normalize()
+        while day <= b.normalize():
+            if day.weekday() < 5:
+                inst = day + pd.Timedelta(hours=17)
+                if a < inst < b:
+                    n += 3 if day.weekday() == 2 else 1
+            day += pd.Timedelta(days=1)
+        return n
+
+    def swaps(self, i, j, d, mid):
+        """(nights, flat swap, rate swap) as returns of the position; flat = the platform default of 0.5 pip per night
+        charged on either side, rate = (d x (r_base - r_quote) - 0.75% mark-up) / 365 per night (NaN without rates)."""
+        n = self.rollovers(self.idx[i], self.idx[j])
+        if n == 0:
+            return 0, 0.0, 0.0
+        flat = -n * self.swap_pips * self.pip / mid
+        rate = np.nan
+        if self.rd is not None:
+            v = self.rd.asof(self.idx[i].floor("D"))                    # both UTC-aware
+            if v is not None and np.isfinite(v):
+                from fxlab.data.rates import SWAP_MARKUP_PA
+                rate = n * (d * v - SWAP_MARKUP_PA) / 365.0
+        return n, flat, rate
+
     def trade(self, t_in, t_out, d, tol_min=5):
-        """Return of a position d (+1 long the pair, -1 short) from t_in to t_out (UTC): (net, gross) or None."""
+        """Position d (+1 long the pair, -1 short) from t_in to t_out (UTC), or None. Returns (net without swap,
+        gross mid return, entry delay min, exit delay min, swap nights, flat swap, rate swap)."""
         i, j = self.at(t_in, tol_min), self.at(t_out, tol_min)
         if i < 0 or j < 0 or j <= i:
             return None
+        return self.trade_ij(i, j, d, t_in, t_out)
+
+    def trade_ij(self, i, j, d, t_in=None, t_out=None):
         bi, ai, bj, aj = self.bo[i], self.ao[i], self.bo[j], self.ao[j]
         if not (np.isfinite([bi, ai, bj, aj]).all() and ai >= bi > 0 and aj >= bj > 0):
             return None
@@ -198,9 +300,120 @@ class Book:
             net = (bj - sj) / (ai + si) - 1.0
         else:
             net = 1.0 - (aj + sj) / (bi - si)
-        delay_in = (self.idx[i] - t_in).total_seconds() / 60
-        delay_out = (self.idx[j] - t_out).total_seconds() / 60
-        return net - 2 * self.comm, d * (mj / mi - 1.0), delay_in, delay_out
+        delay_in = (self.idx[i] - t_in).total_seconds() / 60 if t_in is not None else 0.0
+        delay_out = (self.idx[j] - t_out).total_seconds() / 60 if t_out is not None else 0.0
+        n, flat, rate = self.swaps(i, j, d, mi)
+        return net - 2 * self.comm, d * (mj / mi - 1.0), delay_in, delay_out, n, flat, rate
+
+    def _hl(self):
+        if not hasattr(self, "bh"):
+            m = self.m
+            self.bh, self.bl = m["bid_h"].to_numpy(), m["bid_l"].to_numpy()
+            self.ah, self.al = m["ask_h"].to_numpy(), m["ask_l"].to_numpy()
+            self.mo = 0.5 * (self.bo + self.ao)
+            self.mh, self.ml = 0.5 * (self.bh + self.ah), 0.5 * (self.bl + self.al)
+
+    def avg_range(self):
+        """Mean daily mid high-low range of the previous 20 FX trading days, indexed by trading day (known at the
+        start of that day)."""
+        if not hasattr(self, "_rng"):
+            from fxlab.validation.metrics import trading_day
+            self._hl()
+            td = trading_day(self.idx)
+            h = pd.Series(self.mh, index=self.idx).groupby(td).max()
+            lo = pd.Series(self.ml, index=self.idx).groupby(td).min()
+            self._rng = (h - lo).rolling(20, min_periods=10).mean().shift(1)
+        return self._rng
+
+    @staticmethod
+    def _first_exit(E, TP, SL, lo, hi, op, d):
+        """First bar where the stop (checked first) or the target is touched: (offset, stop?) or (-1, None)."""
+        hit_sl = (lo <= SL) if d > 0 else (hi >= SL)
+        hit_tp = (hi >= TP) if d > 0 else (lo <= TP)
+        ks = np.flatnonzero(hit_sl | hit_tp)
+        if not len(ks):
+            return -1, None
+        return int(ks[0]), bool(hit_sl[ks[0]])
+
+    def bracket(self, i, j, d, tp, sl):
+        """Market entry at the open of bar i, take-profit tp and stop sl (price distances from the fill), time exit
+        at the open of bar j. The stop wins when both are touched in one bar; a gap through the stop exits at that
+        bar's open; the target is a limit order filled at its price on its own side of the quote (sell limits need
+        the bid high, buy limits the ask low). Gross: the same rule on the mid path without costs."""
+        self._hl()
+        bi, ai = self.bo[i], self.ao[i]
+        if not (np.isfinite([bi, ai, self.bo[j], self.ao[j]]).all() and ai >= bi > 0):
+            return None
+        si = self.sf * (ai - bi) + self.sp * self.pip
+        mi = 0.5 * (ai + bi)
+        if d > 0:
+            E = ai + si
+            k, stop = self._first_exit(E, E + tp, E - sl, self.bl[i:j], self.bh[i:j], self.bo[i:j], d)
+        else:
+            E = bi - si
+            k, stop = self._first_exit(E, E - tp, E + sl, self.al[i:j], self.ah[i:j], self.ao[i:j], d)
+        if k < 0:
+            kx = j
+            sj = self.sf * (self.ao[j] - self.bo[j]) + self.sp * self.pip
+            px = self.bo[j] - sj if d > 0 else self.ao[j] + sj
+        else:
+            kx = i + k
+            sk = self.sf * (self.ao[kx] - self.bo[kx]) + self.sp * self.pip
+            if stop:
+                px = min(E - sl, self.bo[kx]) - sk if d > 0 else max(E + sl, self.ao[kx]) + sk
+            else:
+                px = E + tp if d > 0 else E - tp
+        net = (px / E - 1.0) if d > 0 else (1.0 - px / E)
+        km, stopm = self._first_exit(mi, mi + d * tp, mi - d * sl, self.ml[i:j], self.mh[i:j], self.mo[i:j], d)
+        if km < 0:
+            pm = self.mo[j]
+        else:
+            pm = (min(mi - sl, self.mo[i + km]) if d > 0 else max(mi + sl, self.mo[i + km])) if stopm else mi + d * tp
+        n, flat, rate = self.swaps(i, kx, d, mi)
+        return net - 2 * self.comm, d * (pm / mi - 1.0), 0.0, 0.0, n, flat, rate
+
+
+SEEDS = 16                      # run 19 random-timing draws per event
+BRACKET = (0.1, 0.2, 0.4)       # take-profit / stop distances, x the mean daily range of the previous 20 days
+
+
+def random_window(book, names, pair, day, w0, w1, t_exit, side, tol_exit=5, **kw):
+    """Run-19 random-timing rows for one event: SEEDS entry bars drawn uniformly from the bars in [w0, w1), exit at
+    t_exit. For each draw: the edge's direction and a coin-flip direction (control) at the same entry bar, each with a
+    time exit (names[0]) and with a random bracket (names[1]; take-profit and stop each drawn from BRACKET x the
+    previous 20 days' mean range). Draws are deterministic per (pair, day, seed)."""
+    import zlib
+    from fxlab.validation.metrics import trading_day
+    i0, i1 = int(book.idx.searchsorted(w0)), int(book.idx.searchsorted(w1))
+    j = book.at(t_exit, tol_exit)
+    if j < 0 or i1 - i0 < 30 or j < i1:
+        return []
+    rg_s = book.avg_range()
+    td = trading_day(pd.DatetimeIndex([book.idx[i0]]))[0]
+    rg = float(rg_s.get(td, np.nan))
+    out = []
+    key = [zlib.crc32(pair.encode()), int(pd.Timestamp(day).toordinal())]
+    for s in range(SEEDS):
+        rng = np.random.default_rng([19, s] + key)
+        i = int(rng.integers(i0, i1))
+        coin = 1.0 if rng.random() < 0.5 else -1.0
+        tpm, slm = float(rng.choice(BRACKET)), float(rng.choice(BRACKET))
+        lead = (book.idx[j] - book.idx[i]).total_seconds() / 60
+        for suffix, d in (("", side), ("_control", coin)):
+            r = book.trade_ij(i, j, d)
+            if r is not None:
+                out.append(rec(names[0] + suffix, day, r, seed=s, lead_min=lead, **kw))
+            if np.isfinite(rg) and rg > 0:
+                r = book.bracket(i, j, d, tpm * rg, slm * rg)
+                if r is not None:
+                    out.append(rec(names[1] + suffix, day, r, seed=s, lead_min=lead, tp_mult=tpm, sl_mult=slm, **kw))
+    return out
+
+
+def rec(test, day, r, **kw):
+    """Result row of one trade from Book.trade."""
+    return {"test": test, "day": day, "net": r[0], "gross": r[1], "delay_in": r[2], "delay_out": r[3],
+            "nights": r[4], "swap_flat": r[5], "swap_rate": r[6], **kw}
 
 
 def local_ts(day, tz, hh, mm):
@@ -271,8 +484,10 @@ def gotobi(book, start, end):
                 continue                            # Monday 03:00 JST precedes the weekly open
             r = book.trade(t_in, t_out, side, tol_min=65)     # 09:55 JST falls in the missing 00:00-01:00 UTC hour
             if r is not None:
-                rows.append({"test": name if g else name + "_control", "day": d, "net": r[0], "gross": r[1],
-                             "delay_in": r[2], "delay_out": r[3]})
+                rows.append(rec(name if g else name + "_control", d, r))
+        if g:                                               # run 19: random entry minute 03:00-09:00 JST -> fix
+            rows += random_window(book, ("B1", "B2"), "USDJPY", d, local_ts(d, "Asia/Tokyo", 3, 0),
+                                  local_ts(d, "Asia/Tokyo", 9, 0), local_ts(d, "Asia/Tokyo", 9, 55), +1.0, tol_exit=65)
     return rows
 
 
@@ -298,7 +513,34 @@ def month_end(book, pair, start, end):
         for name, t_in in (("M1", local_ts(d, "Europe/London", 8, 0)), ("M2", local_ts(p, "Europe/London", 16, 0))):
             r = book.trade(t_in, local_ts(d, "Europe/London", 16, 0), side)
             if r is not None:
-                rows.append({"test": name, "day": d, "net": r[0], "gross": r[1], "signal": float(sig)})
+                rows.append(rec(name, d, r, signal=float(sig)))
+        # run 19: random entry minute in the 24 h before the fix (16:00 London previous business day -> 15:30)
+        rows += random_window(book, ("B3", "B4"), pair, d, local_ts(p, "Europe/London", 16, 0),
+                              local_ts(d, "Europe/London", 15, 30), local_ts(d, "Europe/London", 16, 0), side,
+                              ccy=foreign, signal=float(sig))
+    # run 19 placebo for the random-date test: the same rule on every other business day, with the signal over the
+    # trailing calendar month up to the previous business day (the month-end signal is month-to-date, the same span)
+    ends = set(month_end_days(start, end))
+    fi, ui = eq_f.index.to_numpy(), eq_u.index.to_numpy()
+    fv, uv = eq_f.to_numpy(), eq_u.to_numpy()
+
+    def ret_between(ix, v, a_, b_):
+        ia, ib = np.searchsorted(ix, np.datetime64(a_), "right") - 1, np.searchsorted(ix, np.datetime64(b_), "right") - 1
+        return v[ib] / v[ia] - 1.0 if ia >= 0 and ib > ia else np.nan
+    for d in pd.bdate_range(start, end):
+        if d in ends:
+            continue
+        p = prev_bday(d)
+        a0 = d - pd.DateOffset(months=1)
+        sig = ret_between(fi, fv, a0, p) - ret_between(ui, uv, a0, p)
+        if not np.isfinite(sig) or sig == 0:
+            continue
+        side_foreign = -1.0 if sig > 0 else 1.0
+        side = side_foreign if base == foreign else -side_foreign
+        for name, t_in in (("M1", local_ts(d, "Europe/London", 8, 0)), ("M2", local_ts(p, "Europe/London", 16, 0))):
+            r = book.trade(t_in, local_ts(d, "Europe/London", 16, 0), side)
+            if r is not None:
+                rows.append(rec(name + "_placebo", d, r, signal=float(sig)))
     return rows, {"equity_foreign": src_f, "equity_us": src_u}
 
 
@@ -313,9 +555,9 @@ def local_hours(book, pair, start, end):
     for d in pd.bdate_range(start, end):
         r = book.trade(local_ts(d, tz, h0, m0), local_ts(d, tz, h1, m1_), side, tol_min=65)
         if r is not None:
-            rows.append({"test": "L1", "day": d, "net": r[0], "gross": r[1]})
+            rows.append(rec("L1", d, r))
             if pair == "EURUSD":
-                rows.append({"test": "L2", "day": d, "net": r[0], "gross": r[1]})
+                rows.append(rec("L2", d, r))
     return rows
 
 
@@ -359,7 +601,7 @@ def vrp(bars, book, start, end):
         t_out = local_ts((m + 1).start_time, "America/New_York", 17, 5)
         res = book.trade(t_in, t_out, side, tol_min=4 * 1440)
         if res is not None:
-            rows.append({"test": "V2", "day": t0, "net": res[0], "gross": res[1], "z": float(z)})
+            rows.append(rec("V2", t0, res, z=float(z)))
     return rows
 
 
@@ -448,11 +690,11 @@ def around_clock(book, pair, start, end):
         p = prev_bday(d)
         r = book.trade(local_ts(d, "America/New_York", 8, 30), local_ts(d, "America/New_York", 17, 0), long_f)
         if r is not None:
-            rows.append({"test": "K_ny", "day": d, "net": r[0], "gross": r[1], "ccy": foreign})
+            rows.append(rec("K_ny", d, r, ccy=foreign))
         r = book.trade(local_ts(p, "America/New_York", 17, 0), local_ts(d, "America/New_York", 8, 30), -long_f,
                        tol_min=65)
         if r is not None:
-            rows.append({"test": "K_on", "day": d, "net": r[0], "gross": r[1], "ccy": foreign})
+            rows.append(rec("K_on", d, r, ccy=foreign))
     return rows
 
 
@@ -475,8 +717,11 @@ def fomc(book, pair, start, end, meta):
         if r is None:
             continue
         diff_f = float(rd[k] * long_f) if np.isfinite(rd[k]) else np.nan        # foreign - USD rate
-        rows.append({"test": "P_dol" if d in F else "P_dol_control", "day": d, "net": r[0], "gross": r[1],
-                     "ccy": foreign, "rate_diff_foreign": diff_f})
+        rows.append(rec("P_dol" if d in F else "P_dol_control", d, r, ccy=foreign, rate_diff_foreign=diff_f))
+        if d in F:                                          # run 19: random entry 17:00 ET previous day -> 16:30 ET
+            rows += random_window(book, ("B5", "B6"), pair, d, local_ts(p, "America/New_York", 17, 0),
+                                  local_ts(d, "America/New_York", 16, 30), local_ts(d, "America/New_York", 17, 0),
+                                  long_f, tol_exit=65, ccy=foreign, rate_diff_foreign=diff_f)
     return rows
 
 
@@ -492,7 +737,7 @@ def fix_reversal(book, pair, start, end):
         side = -1.0 if m1 > m0 else 1.0
         r = book.trade(local_ts(d, "Europe/London", 16, 1), local_ts(d, "Europe/London", 16, 30), side)
         if r is not None:
-            rows.append({"test": "W1", "day": d, "net": r[0], "gross": r[1]})
+            rows.append(rec("W1", d, r))
     return rows
 
 
@@ -513,7 +758,7 @@ def main():
         print(f"{a.pair}: skipped (not in the flows universe)")
         return
     m1 = load_m1(a.pair, a.start, a.end, columns=["bid_o", "bid_h", "bid_l", "bid_c", "ask_o", "ask_h", "ask_l", "ask_c"])
-    book = Book(m1, instrument(a.pair).pip)
+    book = Book(m1, instrument(a.pair).pip, a.pair)
     start, end = str(m1.index[0].date()), str(min(m1.index[-1], pd.Timestamp(DEV_END, tz="UTC")).date())
     rows, meta, errors = [], {"pair": a.pair, "start": start, "end": end}, {}
     jobs = []
@@ -545,6 +790,7 @@ def main():
             errors[name] = repr(ex)[:500]
             print(f"{a.pair} {name}: ERROR {ex}", flush=True)
     meta["errors"] = errors
+    meta["external_sources"] = sorted(set(FRED_SOURCES))
     meta["seconds"] = round(time.time() - t0, 1)
     R = pd.DataFrame(rows)
     if len(R):
