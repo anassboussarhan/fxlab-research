@@ -95,10 +95,12 @@ def _dbn_to_series(doc):
 
 
 def dbnomics_series(ccy, var):
-    """(series, source id) from DBnomics: OECD MEI by dimension query (monthly before quarterly, measures in the
-    preferred order), then IMF IFS."""
+    """(series, source id) from DBnomics. Candidates: OECD MEI (subjects and measures of MEI[var], monthly and
+    quarterly) and IMF IFS (monthly, quarterly). Choice, in this order: a monthly series starting by 2004-01 (enough
+    history for 36-month changes before the FX sample starts in 2007), then a quarterly one starting by 2004-01, then
+    the series starting earliest; ties keep the listed order (MEI before IFS)."""
     import urllib.parse
-    errs = []
+    errs, cands = [], []
     locs = MEI_LOC.get(ccy, [ISO[ccy][0]])
     for subj, measures in MEI.get(var, []):
         dims = json.dumps({"LOCATION": locs, "SUBJECT": [subj]})
@@ -111,25 +113,30 @@ def dbnomics_series(ccy, var):
         for loc in locs:
             for freq in ("M", "Q"):
                 for meas in measures:
-                    d = byc.get(f"{loc}.{subj}.{meas}.{freq}")
-                    if d is None:
-                        continue
-                    try:
-                        return _dbn_to_series(d), f"dbnomics:OECD/MEI/{loc}.{subj}.{meas}.{freq}"
-                    except Exception as ex:                               # noqa: BLE001
-                        errs.append(f"{loc}.{subj}.{meas}.{freq}: {str(ex)[:40]}")
-        errs.append(f"MEI {subj}: no usable series among {sorted(byc)[:8]}")
+                    code = f"{loc}.{subj}.{meas}.{freq}"
+                    if code in byc:
+                        try:
+                            cands.append((_dbn_to_series(byc[code]), f"dbnomics:OECD/MEI/{code}", freq))
+                        except Exception as ex:                           # noqa: BLE001
+                            errs.append(f"{code}: {str(ex)[:40]}")
     if var in IFS:
         for freq in ("M", "Q"):
             code = f"{freq}.{IFS_AREA[ccy]}.{IFS[var]}"
             try:
                 docs = _dbn_docs(f"{DBN}/IMF/IFS/{code}?observations=1")
                 if docs:
-                    return _dbn_to_series(docs[0]), f"dbnomics:IMF/IFS/{code}"
-                errs.append(f"IFS {code}: no docs")
+                    cands.append((_dbn_to_series(docs[0]), f"dbnomics:IMF/IFS/{code}", freq))
             except Exception as ex:                                       # noqa: BLE001
                 errs.append(f"IFS {code}: {str(ex)[:60]}")
-    raise RuntimeError("; ".join(errs))
+    if not cands:
+        raise RuntimeError("; ".join(errs) or "no candidates")
+    early = pd.Timestamp("2004-01-01")
+    for want in ("M", "Q"):
+        for c in cands:
+            if c[2] == want and c[0].index[0] <= early:
+                return c[0], c[1]
+    c = min(cands, key=lambda c: c[0].index[0])
+    return c[0], c[1]
 
 
 def _get(url, timeout=60):
