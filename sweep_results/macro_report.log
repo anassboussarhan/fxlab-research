@@ -1,0 +1,60 @@
+              test  primary  months  net_mean_bp  net_sharpe  net_t  net_share_years_positive  gross_mean_bp  gross_sharpe  gross_t  gross_share_years_positive    first     last      p   p_bh
+0               EM     True     135       25.054       0.392  1.315                     0.583         27.395         0.429    1.439                       0.583  2007-04  2018-06  0.094  0.377
+1               OG     True     135       -0.486      -0.009 -0.030                     0.500          3.022         0.056    0.189                       0.500  2007-04  2018-06  0.512  0.666
+2               TR     True     135        3.903       0.066  0.222                     0.500          6.388         0.109    0.364                       0.583  2007-04  2018-06  0.412  0.666
+3               ML     True      99       -5.193      -0.150 -0.430                     0.444         -5.068        -0.146   -0.419                       0.444  2010-04  2018-06  0.666  0.666
+4            carry    False     135       -1.301      -0.017 -0.058                     0.500         -1.095        -0.015   -0.049                       0.500  2007-04  2018-06    NaN    NaN
+5  fx_momentum_12m    False     123        2.914       0.043  0.137                     0.545          5.767         0.085    0.272                       0.545  2008-04  2018-06    NaN    NaN
+6         value_5y    False      99       -3.967      -0.079 -0.226                     0.333         -2.499        -0.050   -0.142                       0.556  2010-04  2018-06    NaN    NaN
+7    OG_timeseries    False     135       -2.822      -0.053 -0.179                     0.417         -2.020        -0.038   -0.128                       0.417      NaN      NaN    NaN    NaN
+    ccy     var                                       sid       first        last     n
+0   AUD     cpi     dbnomics:OECD/MEI/AUS.CPALTT01.IXOB.Q  1948-07-01  2023-10-01   302
+1   AUD      ip   dbnomics:OECD/MEI/AUS.PRINTO01.IXOBSA.Q  1974-07-01  2023-07-01   197
+2   AUD     ppi     dbnomics:OECD/MEI/AUS.PIEAMP01.IXOB.Q  1968-07-01  2023-01-01   219
+3   AUD  retail   dbnomics:OECD/MEI/AUS.SLRTTO01.IXOBSA.Q  1983-07-01  2023-07-01   161
+4   AUD   unemp     dbnomics:OECD/MEI/AUS.LRHUTTTT.STSA.M  1978-02-01  2023-12-01   551
+5   CAD     cpi     dbnomics:OECD/MEI/CAN.CPALTT01.IXOB.M  1914-01-01  2023-12-01  1320
+6   CAD      ip   dbnomics:OECD/MEI/CAN.PRINTO01.IXOBSA.M  1961-01-01  2023-10-01   754
+7   CAD     ppi     dbnomics:OECD/MEI/CAN.PIEAMP01.IXOB.M  1956-01-01  2022-12-01   804
+8   CAD  retail   dbnomics:OECD/MEI/CAN.SLRTTO01.IXOBSA.M  1991-01-01  2023-10-01   394
+9   CAD   unemp     dbnomics:OECD/MEI/CAN.LRHUTTTT.STSA.M  1955-01-01  2023-12-01   828
+10  CHF     cpi     dbnomics:OECD/MEI/CHE.CPALTT01.IXOB.M  1955-01-01  2023-12-01   828
+11  CHF      ip   dbnomics:OECD/MEI/CHE.PRINTO01.IXOBSA.Q  1959-01-01  2023-07-01   259
+12  CHF     ppi     dbnomics:OECD/MEI/CHE.PIEAMP01.IXOB.M  2002-06-01  2022-12-01   247
+13  CHF  retail   dbnomics:OECD/MEI/CHE.SLRTTO01.IXOBSA.M  1955-01-01  2023-11-01   827
+14  CHF   unemp     dbnomics:OECD/MEI/CHE.LRHUTTTT.STSA.Q  1999-04-01  2023-07-01    66
+15  EUR     cpi    dbnomics:OECD/MEI/EA20.CPALTT01.IXOB.M  1990-01-01  2023-12-01   408
+16  EUR      ip  dbnomics:OECD/MEI/EA19.PRINTO01.IXOBSA.M  1975-07-01  2023-10-01   580
+17  EUR     ppi    dbnomics:OECD/MEI/EA19.PIEAMP01.IXOB.M  2000-01-01  2022-12-01   276
+18  EUR  retail  dbnomics:OECD/MEI/EA19.SLRTTO01.IXOBSA.M  1995-01-01  2023-10-01   346
+19  EUR   unemp    dbnomics:OECD/MEI/EA20.LRHUTTTT.STSA.M  1990-07-01  2023-12-01   402
+20  GBP     cpi     dbnomics:OECD/MEI/GBR.CPALTT01.IXOB.M  1955-01-01  2023-12-01   828
+21  GBP      ip   dbnomics:OECD/MEI/GBR.PRINTO01.IXOBSA.M  1948-01-01  2023-11-01   911
+22  GBP     ppi             dbnomics:IMF/IFS/M.GB.PPPI_IX  1957-01-01  2022-12-01   792
+23  GBP  retail   dbnomics:OECD/MEI/GBR.SLRTTO01.IXOBSA.M  1957-01-01  2023-12-01   804
+24  GBP   unemp     dbnomics:OECD/MEI/GBR.LRHUTTTT.STSA.M  1983-01-01  2023-10-01   490
+25  JPY     cpi     dbnomics:OECD/MEI/JPN.CPALTT01.IXOB.M  1955-01-01  2021-06-01   798
+26  JPY      ip   dbnomics:OECD/MEI/JPN.PRINTO01.IXOBSA.M  1955-01-01  2023-11-01   827
+27  JPY     ppi             dbnomics:IMF/IFS/M.JP.PPPI_IX  1960-01-01  2018-12-01   708
+28  JPY  retail   dbnomics:OECD/MEI/JPN.SLRTTO01.IXOBSA.M  1955-01-01  2023-10-01   826
+29  JPY   unemp     dbnomics:OECD/MEI/JPN.LRHUTTTT.STSA.M  1955-01-01  2023-12-01   828
+30  NOK     cpi     dbnomics:OECD/MEI/NOR.CPALTT01.IXOB.M  1955-01-01  2023-12-01   828
+31  NOK      ip   dbnomics:OECD/MEI/NOR.PRINTO01.IXOBSA.M  1955-01-01  2023-11-01   827
+32  NOK     ppi     dbnomics:OECD/MEI/NOR.PIEAMP01.IXOB.M  1977-01-01  2023-01-01   553
+33  NOK  retail   dbnomics:OECD/MEI/NOR.SLRTTO01.IXOBSA.M  1960-01-01  2023-11-01   767
+34  NOK   unemp     dbnomics:OECD/MEI/NOR.LRHUTTTT.STSA.M  1989-01-01  2023-12-01   420
+35  NZD     cpi     dbnomics:OECD/MEI/NZL.CPALTT01.IXOB.Q  1914-04-01  2023-10-01   412
+36  NZD      ip   dbnomics:OECD/MEI/NZL.PRINTO01.IXOBSA.Q  1977-04-01  2023-07-01   186
+37  NZD     ppi     dbnomics:OECD/MEI/NZL.PIEAMP01.IXOB.Q  1960-01-01  2022-07-01   251
+38  NZD  retail   dbnomics:OECD/MEI/NZL.SLRTTO01.IXOBSA.Q  1963-01-01  2023-04-01   242
+39  NZD   unemp     dbnomics:OECD/MEI/NZL.LRHUTTTT.STSA.Q  1986-01-01  2023-07-01   151
+40  SEK     cpi     dbnomics:OECD/MEI/SWE.CPALTT01.IXOB.M  1955-01-01  2023-12-01   828
+41  SEK      ip   dbnomics:OECD/MEI/SWE.PRINTO01.IXOBSA.M  1959-01-01  2023-11-01   779
+42  SEK     ppi     dbnomics:OECD/MEI/SWE.PIEAMP01.IXOB.M  1982-01-01  2023-02-01   494
+43  SEK  retail   dbnomics:OECD/MEI/SWE.SLRTTO01.IXOBSA.M  1960-01-01  2023-09-01   765
+44  SEK   unemp     dbnomics:OECD/MEI/SWE.LRHUTTTT.STSA.M  1983-01-01  2023-12-01   492
+45  USD     cpi     dbnomics:OECD/MEI/USA.CPALTT01.IXOB.M  1955-01-01  2023-12-01   828
+46  USD      ip   dbnomics:OECD/MEI/USA.PRINTO01.IXOBSA.M  1919-01-01  2023-11-01  1259
+47  USD     ppi     dbnomics:OECD/MEI/USA.PIEAMP01.IXOB.M  1947-01-01  2022-12-01   912
+48  USD  retail   dbnomics:OECD/MEI/USA.SLRTTO01.IXOBSA.M  1955-01-01  2023-11-01   827
+49  USD   unemp     dbnomics:OECD/MEI/USA.LRHUTTTT.STSA.M  1955-01-01  2024-01-01   829

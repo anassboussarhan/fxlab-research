@@ -1,0 +1,68 @@
+{
+ "pair": "AUDUSD",
+ "ccy": "AUD",
+ "series": {
+  "AUD_ip": {
+   "sid": "dbnomics:OECD/MEI/AUS.PRINTO01.IXOBSA.Q",
+   "first": "1974-07-01",
+   "last": "2023-07-01",
+   "n": 197
+  },
+  "AUD_cpi": {
+   "sid": "dbnomics:OECD/MEI/AUS.CPALTT01.IXOB.Q",
+   "first": "1948-07-01",
+   "last": "2023-10-01",
+   "n": 302
+  },
+  "AUD_unemp": {
+   "sid": "dbnomics:OECD/MEI/AUS.LRHUTTTT.STSA.M",
+   "first": "1978-02-01",
+   "last": "2023-12-01",
+   "n": 551
+  },
+  "AUD_retail": {
+   "sid": "dbnomics:OECD/MEI/AUS.SLRTTO01.IXOBSA.Q",
+   "first": "1983-07-01",
+   "last": "2023-07-01",
+   "n": 161
+  },
+  "AUD_ppi": {
+   "sid": "dbnomics:OECD/MEI/AUS.PIEAMP01.IXOB.Q",
+   "first": "1968-07-01",
+   "last": "2023-01-01",
+   "n": 219
+  },
+  "USD_ip": {
+   "sid": "dbnomics:OECD/MEI/USA.PRINTO01.IXOBSA.M",
+   "first": "1919-01-01",
+   "last": "2023-11-01",
+   "n": 1259
+  },
+  "USD_cpi": {
+   "sid": "dbnomics:OECD/MEI/USA.CPALTT01.IXOB.M",
+   "first": "1955-01-01",
+   "last": "2023-12-01",
+   "n": 828
+  },
+  "USD_unemp": {
+   "sid": "dbnomics:OECD/MEI/USA.LRHUTTTT.STSA.M",
+   "first": "1955-01-01",
+   "last": "2024-01-01",
+   "n": 829
+  },
+  "USD_retail": {
+   "sid": "dbnomics:OECD/MEI/USA.SLRTTO01.IXOBSA.M",
+   "first": "1955-01-01",
+   "last": "2023-11-01",
+   "n": 827
+  },
+  "USD_ppi": {
+   "sid": "dbnomics:OECD/MEI/USA.PIEAMP01.IXOB.M",
+   "first": "1947-01-01",
+   "last": "2022-12-01",
+   "n": 912
+  }
+ },
+ "errors": {},
+ "seconds": 28.4
+}
