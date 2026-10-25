@@ -164,8 +164,12 @@ def main():
     from fxlab.data.instruments import get as instrument
     t0 = time.time()
     os.makedirs(a.out, exist_ok=True)
-    bars = FS.cached_bars(a.pair, a.tf, a.start, a.end)
-    m1 = load_m1(a.pair, a.start, a.end, columns=M1_PATH_COLUMNS)
+    if a.tf == "M1":                             # the bars are the M1 path itself: no intrabar replay below M1
+        bars = load_m1(a.pair, a.start, a.end, columns=["bid_o", "bid_h", "bid_l", "bid_c", "ask_o", "ask_h", "ask_l", "ask_c"])
+        m1 = None
+    else:
+        bars = FS.cached_bars(a.pair, a.tf, a.start, a.end)
+        m1 = load_m1(a.pair, a.start, a.end, columns=M1_PATH_COLUMNS)
     X = Pool(bars, instrument(a.pair).pip, m1)
     del m1
     D = X.D
