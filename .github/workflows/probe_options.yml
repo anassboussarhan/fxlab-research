@@ -1,0 +1,47 @@
+name: probe-options-data
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/PROBE_OPTIONS", "ci/probe_options.py"]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Probe free options-chain sources
+        run: python ci/probe_options.py 2>&1 | tee probe_options.log
+      - name: Try a dolt clone of the options database (size and time only)
+        continue-on-error: true
+        run: |
+          mkdir -p probe_results/options
+          df -h / | tee probe_results/options/disk.txt
+          curl -sSL https://github.com/dolthub/dolt/releases/latest/download/install.sh -o /tmp/install.sh
+          sudo bash /tmp/install.sh
+          dolt version | tee -a probe_results/options/disk.txt
+          dolt config --global --add user.email probe@example.com
+          dolt config --global --add user.name probe
+          mkdir -p /tmp/dclone && cd /tmp/dclone
+          ( timeout 1800 dolt clone post-no-preference/options > /tmp/clone.log 2>&1; echo "exit $?" >> /tmp/clone.log ) &
+          for i in $(seq 1 30); do sleep 60; echo "min $i $(du -sh /tmp/dclone 2>/dev/null | cut -f1)" | tee -a $GITHUB_WORKSPACE/probe_results/options/clone_progress.txt; grep -q '^exit' /tmp/clone.log && break; done
+          cat /tmp/clone.log | tail -20 | tee -a $GITHUB_WORKSPACE/probe_results/options/clone_progress.txt
+          if [ -d /tmp/dclone/options ]; then cd /tmp/dclone/options && dolt sql -q "SELECT act_symbol, COUNT(DISTINCT date) d, MIN(date), MAX(date), COUNT(*) n FROM option_chain WHERE act_symbol IN ('SPY','QQQ','IWM','GLD','TLT','EEM','DIA','AAPL') GROUP BY act_symbol" -r csv | tee $GITHUB_WORKSPACE/probe_results/options/clone_symbols.csv; fi
+      - name: Publish to the probe-options branch
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r probe_results /tmp/pub/ && cp probe_options.log /tmp/pub/probe_results/options/ || true
+          git checkout --orphan probe-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/probe_results .
+          git add -f probe_results
+          git commit -qm "Options data probe (run ${{ github.run_id }})"
+          git push -f origin HEAD:probe-options
