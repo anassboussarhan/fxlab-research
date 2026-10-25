@@ -1,0 +1,29 @@
+tables 200 Success  42.9s [{'Tables_in_options': 'option_chain'}, {'Tables_in_options': 'volatility_history'}]
+describe_option_chain 200 Success  54.1s [{'Field': 'date', 'Type': 'date', 'Null': 'NO', 'Key': 'PRI', 'Default': None, 'Extra': ''}, {'Field': 'act_symbol', 'Type': 'varchar(64)', 'Null': 'NO', 'Key': 'PRI', 'Default': None, 'Extra': ''}, {'Field': 'expiration', 'Type': 'date', 'Null': 'NO', 'Key': 'PRI', 'Default': None, 'Extra': ''}]
+sample_option_chain 200 Success  2.1s [{'date': '2019-02-09', 'act_symbol': 'A', 'expiration': '2019-02-15', 'strike': '65.00', 'call_put': 'Call', 'bid': '10.50', 'ask': '11.25', 'vol': '0.2705', 'delta': '1.0000', 'gamma': '0.0000', 'theta': '-0.0046', 'vega': '0.0000', 'rho': '0.0124'}, {'date': '2019-02-09', 'act_symbol': 'A', 'expiration': '2019-02-15', 'strike': '65.00', 'call_put': 'Put', 'bid': '0.00', 'ask': '0.03', 'vol': '0
+describe_volatility_history 200 Success  53.1s [{'Field': 'date', 'Type': 'date', 'Null': 'NO', 'Key': 'PRI', 'Default': None, 'Extra': ''}, {'Field': 'act_symbol', 'Type': 'varchar(64)', 'Null': 'NO', 'Key': 'PRI', 'Default': None, 'Extra': ''}, {'Field': 'hv_current', 'Type': 'decimal(5,4)', 'Null': 'YES', 'Key': '', 'Default': None, 'Extra': ''}]
+sample_volatility_history 200 Success  8.7s [{'date': '2019-02-09', 'act_symbol': 'A', 'hv_current': '0.2418', 'hv_week_ago': '0.3048', 'hv_month_ago': '0.3433', 'hv_year_high': '0.4045', 'hv_year_high_date': '2019-01-03', 'hv_year_low': '0.1174', 'hv_year_low_date': '2018-10-03', 'iv_current': '0.2673', 'iv_week_ago': '0.2487', 'iv_month_ago': '0.2898', 'iv_year_high': '0.3610', 'iv_year_high_date': '2018-12-24', 'iv_year_low': '0.1647', '
+spy_first 200 Success  48.0s [{'date': '2019-02-09', 'act_symbol': 'SPY', 'expiration': '2019-02-22', 'strike': '230.00', 'call_put': 'Call', 'bid': '40.37', 'ask': '40.80', 'vol': '0.3551', 'delta': '0.9908', 'gamma': '0.0013', 'theta': '-0.0266', 'vega': '0.0127', 'rho': '0.0872'}, {'date': '2019-02-09', 'act_symbol': 'SPY', 'expiration': '2019-02-22', 'strike': '230.00', 'call_put': 'Put', 'bid': '0.02', 'ask': '0.03', 'vo
+spy_last 200 Success  16.4s [{'date': '2026-10-23', 'act_symbol': 'SPY', 'expiration': '2026-12-18', 'strike': '990.00', 'call_put': 'Put', 'bid': '228.04', 'ask': '230.86', 'vol': '0.2211', 'delta': '-1.0000', 'gamma': '0.0000', 'theta': '0.0000', 'vega': '0.0000', 'rho': '0.0000'}, {'date': '2026-10-23', 'act_symbol': 'SPY', 'expiration': '2026-12-18', 'strike': '990.00', 'call_put': 'Call', 'bid': '0.01', 'ask': '0.03', '
+spy_dates_2019 200 Success  52.7s [{'date': '2019-02-09'}, {'date': '2019-02-16'}, {'date': '2019-02-23'}]
+spy_dates_2023 200 Error query error: context deadline exceeded 54.3s []
+spy_one_day 200 Error query error: context deadline exceeded 54.4s []
+spy_expiries_one_day 200 Error query error: context deadline exceeded 54.3s []
+has_QQQ 200 Error query error: context deadline exceeded 54.3s []
+has_IWM 200 Error query error: context deadline exceeded 54.3s []
+has_GLD 200 Error query error: context deadline exceeded 54.3s []
+has_TLT 200 Error query error: context deadline exceeded 54.3s []
+has_AAPL 200 Error query error: context deadline exceeded 54.3s []
+has_XSP 200 Error query error: context deadline exceeded 54.3s []
+has_SPX 200 Error query error: context deadline exceeded 54.3s []
+vol_spy_first 200 Success  2.3s [{'date': '2019-02-09', 'act_symbol': 'SPY', 'hv_current': '0.1589', 'hv_week_ago': '0.2515', 'hv_month_ago': '0.2907', 'hv_year_high': '0.2923', 'hv_year_high_date': '2019-01-04', 'hv_year_low': '0.0590', 'hv_year_low_date': '2018-10-03', 'iv_current': '0.1288', 'iv_week_ago': '0.1335', 'iv_month_ago': '0.1765', 'iv_year_high': '0.3157', 'iv_year_high_date': '2018-12-24', 'iv_year_low': '0.0806',
+HF spy options 200 []
+HF options chain 200 []
+HF option chain 200 ['CodyJiang/nvda-option-chains']
+HF spx options 200 []
+HF options eod 200 []
+URL https://www.dolthub.com/repositories/post-no-preference/options 200 10079 0.3s
+URL https://historicaloptiondata.com/free-data/ 200 256725 0.1s
+URL https://www.optionsdx.com/ 200 215926 8.5s
+URL https://datashop.cboe.com/ 200 49414 0.2s
+URL https://www.cboe.com/us/options/market_statistics/historical_data/ 200 625235 0.2s

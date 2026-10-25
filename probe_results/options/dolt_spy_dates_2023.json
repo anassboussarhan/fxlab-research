@@ -1,0 +1,15 @@
+{
+ "name": "spy_dates_2023",
+ "query": "SELECT DISTINCT date FROM option_chain WHERE act_symbol='SPY' AND date >= '2023-01-01' AND date < '2023-04-01' ORDER BY date LIMIT 200",
+ "http": 200,
+ "seconds": 54.3,
+ "status": "Error",
+ "message": "query error: context deadline exceeded",
+ "schema": [
+  {
+   "columnName": "date",
+   "columnType": "date"
+  }
+ ],
+ "rows": []
+}

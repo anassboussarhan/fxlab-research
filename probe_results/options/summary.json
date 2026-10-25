@@ -1,0 +1,690 @@
+[
+ {
+  "name": "tables",
+  "query": "SHOW TABLES",
+  "http": 200,
+  "seconds": 42.9,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "Tables_in_options",
+    "columnType": "longtext"
+   }
+  ]
+ },
+ {
+  "name": "describe_option_chain",
+  "query": "DESCRIBE `option_chain`",
+  "http": 200,
+  "seconds": 54.1,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "Field",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Type",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Null",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Key",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Default",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Extra",
+    "columnType": "varchar(25000)"
+   }
+  ]
+ },
+ {
+  "name": "sample_option_chain",
+  "query": "SELECT * FROM `option_chain` LIMIT 5",
+  "http": 200,
+  "seconds": 2.1,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "act_symbol",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "expiration",
+    "columnType": "date"
+   },
+   {
+    "columnName": "strike",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "call_put",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "bid",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "ask",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "vol",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "delta",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "gamma",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "theta",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "vega",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "rho",
+    "columnType": "decimal(5,4)"
+   }
+  ]
+ },
+ {
+  "name": "describe_volatility_history",
+  "query": "DESCRIBE `volatility_history`",
+  "http": 200,
+  "seconds": 53.1,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "Field",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Type",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Null",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Key",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Default",
+    "columnType": "varchar(25000)"
+   },
+   {
+    "columnName": "Extra",
+    "columnType": "varchar(25000)"
+   }
+  ]
+ },
+ {
+  "name": "sample_volatility_history",
+  "query": "SELECT * FROM `volatility_history` LIMIT 5",
+  "http": 200,
+  "seconds": 8.7,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "act_symbol",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "hv_current",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_week_ago",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_month_ago",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_year_high",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_year_high_date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "hv_year_low",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_year_low_date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "iv_current",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_week_ago",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_month_ago",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_year_high",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_year_high_date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "iv_year_low",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_year_low_date",
+    "columnType": "date"
+   }
+  ]
+ },
+ {
+  "name": "spy_first",
+  "query": "SELECT * FROM option_chain WHERE act_symbol='SPY' ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 48.0,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "act_symbol",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "expiration",
+    "columnType": "date"
+   },
+   {
+    "columnName": "strike",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "call_put",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "bid",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "ask",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "vol",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "delta",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "gamma",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "theta",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "vega",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "rho",
+    "columnType": "decimal(5,4)"
+   }
+  ]
+ },
+ {
+  "name": "spy_last",
+  "query": "SELECT * FROM option_chain WHERE act_symbol='SPY' ORDER BY date DESC LIMIT 3",
+  "http": 200,
+  "seconds": 16.4,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "act_symbol",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "expiration",
+    "columnType": "date"
+   },
+   {
+    "columnName": "strike",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "call_put",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "bid",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "ask",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "vol",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "delta",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "gamma",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "theta",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "vega",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "rho",
+    "columnType": "decimal(5,4)"
+   }
+  ]
+ },
+ {
+  "name": "spy_dates_2019",
+  "query": "SELECT DISTINCT date FROM option_chain WHERE act_symbol='SPY' AND date < '2020-01-01' ORDER BY date LIMIT 200",
+  "http": 200,
+  "seconds": 52.7,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   }
+  ]
+ },
+ {
+  "name": "spy_dates_2023",
+  "query": "SELECT DISTINCT date FROM option_chain WHERE act_symbol='SPY' AND date >= '2023-01-01' AND date < '2023-04-01' ORDER BY date LIMIT 200",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   }
+  ]
+ },
+ {
+  "name": "spy_one_day",
+  "query": "SELECT * FROM option_chain WHERE act_symbol='SPY' AND date = (SELECT MIN(date) FROM option_chain WHERE act_symbol='SPY' AND date >= '2023-03-01') LIMIT 200",
+  "http": 200,
+  "seconds": 54.4,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "act_symbol",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "expiration",
+    "columnType": "date"
+   },
+   {
+    "columnName": "strike",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "call_put",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "bid",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "ask",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "vol",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "delta",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "gamma",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "theta",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "vega",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "rho",
+    "columnType": "decimal(5,4)"
+   }
+  ]
+ },
+ {
+  "name": "spy_expiries_one_day",
+  "query": "SELECT expiration, COUNT(*) n, MIN(strike), MAX(strike) FROM option_chain WHERE act_symbol='SPY' AND date = (SELECT MIN(date) FROM option_chain WHERE act_symbol='SPY' AND date >= '2023-03-01') GROUP BY expiration ORDER BY expiration",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "expiration",
+    "columnType": "date"
+   },
+   {
+    "columnName": "n",
+    "columnType": "bigint"
+   },
+   {
+    "columnName": "MIN(strike)",
+    "columnType": "decimal(7,2)"
+   },
+   {
+    "columnName": "MAX(strike)",
+    "columnType": "decimal(7,2)"
+   }
+  ]
+ },
+ {
+  "name": "has_QQQ",
+  "query": "SELECT date, COUNT(*) n FROM option_chain WHERE act_symbol='QQQ' AND date >= '2023-03-01' GROUP BY date ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "n",
+    "columnType": "bigint"
+   }
+  ]
+ },
+ {
+  "name": "has_IWM",
+  "query": "SELECT date, COUNT(*) n FROM option_chain WHERE act_symbol='IWM' AND date >= '2023-03-01' GROUP BY date ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "n",
+    "columnType": "bigint"
+   }
+  ]
+ },
+ {
+  "name": "has_GLD",
+  "query": "SELECT date, COUNT(*) n FROM option_chain WHERE act_symbol='GLD' AND date >= '2023-03-01' GROUP BY date ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "n",
+    "columnType": "bigint"
+   }
+  ]
+ },
+ {
+  "name": "has_TLT",
+  "query": "SELECT date, COUNT(*) n FROM option_chain WHERE act_symbol='TLT' AND date >= '2023-03-01' GROUP BY date ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "n",
+    "columnType": "bigint"
+   }
+  ]
+ },
+ {
+  "name": "has_AAPL",
+  "query": "SELECT date, COUNT(*) n FROM option_chain WHERE act_symbol='AAPL' AND date >= '2023-03-01' GROUP BY date ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "n",
+    "columnType": "bigint"
+   }
+  ]
+ },
+ {
+  "name": "has_XSP",
+  "query": "SELECT date, COUNT(*) n FROM option_chain WHERE act_symbol='XSP' AND date >= '2023-03-01' GROUP BY date ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "n",
+    "columnType": "bigint"
+   }
+  ]
+ },
+ {
+  "name": "has_SPX",
+  "query": "SELECT date, COUNT(*) n FROM option_chain WHERE act_symbol='SPX' AND date >= '2023-03-01' GROUP BY date ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 54.3,
+  "status": "Error",
+  "message": "query error: context deadline exceeded",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "n",
+    "columnType": "bigint"
+   }
+  ]
+ },
+ {
+  "name": "vol_spy_first",
+  "query": "SELECT * FROM volatility_history WHERE act_symbol='SPY' ORDER BY date LIMIT 3",
+  "http": 200,
+  "seconds": 2.3,
+  "status": "Success",
+  "message": "",
+  "schema": [
+   {
+    "columnName": "date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "act_symbol",
+    "columnType": "varchar(64)"
+   },
+   {
+    "columnName": "hv_current",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_week_ago",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_month_ago",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_year_high",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_year_high_date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "hv_year_low",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "hv_year_low_date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "iv_current",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_week_ago",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_month_ago",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_year_high",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_year_high_date",
+    "columnType": "date"
+   },
+   {
+    "columnName": "iv_year_low",
+    "columnType": "decimal(5,4)"
+   },
+   {
+    "columnName": "iv_year_low_date",
+    "columnType": "date"
+   }
+  ]
+ },
+ {
+  "name": "url",
+  "url": "https://www.dolthub.com/repositories/post-no-preference/options",
+  "http": 200,
+  "bytes": 10079
+ },
+ {
+  "name": "url",
+  "url": "https://historicaloptiondata.com/free-data/",
+  "http": 200,
+  "bytes": 256725
+ },
+ {
+  "name": "url",
+  "url": "https://www.optionsdx.com/",
+  "http": 200,
+  "bytes": 215926
+ },
+ {
+  "name": "url",
+  "url": "https://datashop.cboe.com/",
+  "http": 200,
+  "bytes": 49414
+ },
+ {
+  "name": "url",
+  "url": "https://www.cboe.com/us/options/market_statistics/historical_data/",
+  "http": 200,
+  "bytes": 625235
+ }
+]

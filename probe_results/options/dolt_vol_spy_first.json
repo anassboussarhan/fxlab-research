@@ -1,0 +1,130 @@
+{
+ "name": "vol_spy_first",
+ "query": "SELECT * FROM volatility_history WHERE act_symbol='SPY' ORDER BY date LIMIT 3",
+ "http": 200,
+ "seconds": 2.3,
+ "status": "Success",
+ "message": "",
+ "schema": [
+  {
+   "columnName": "date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "act_symbol",
+   "columnType": "varchar(64)"
+  },
+  {
+   "columnName": "hv_current",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_week_ago",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_month_ago",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_year_high",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_year_high_date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "hv_year_low",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_year_low_date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "iv_current",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_week_ago",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_month_ago",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_year_high",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_year_high_date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "iv_year_low",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_year_low_date",
+   "columnType": "date"
+  }
+ ],
+ "rows": [
+  {
+   "date": "2019-02-09",
+   "act_symbol": "SPY",
+   "hv_current": "0.1589",
+   "hv_week_ago": "0.2515",
+   "hv_month_ago": "0.2907",
+   "hv_year_high": "0.2923",
+   "hv_year_high_date": "2019-01-04",
+   "hv_year_low": "0.0590",
+   "hv_year_low_date": "2018-10-03",
+   "iv_current": "0.1288",
+   "iv_week_ago": "0.1335",
+   "iv_month_ago": "0.1765",
+   "iv_year_high": "0.3157",
+   "iv_year_high_date": "2018-12-24",
+   "iv_year_low": "0.0806",
+   "iv_year_low_date": "2018-08-07"
+  },
+  {
+   "date": "2019-02-16",
+   "act_symbol": "SPY",
+   "hv_current": "0.1394",
+   "hv_week_ago": "0.1589",
+   "hv_month_ago": "0.2802",
+   "hv_year_high": "0.2923",
+   "hv_year_high_date": "2019-01-04",
+   "hv_year_low": "0.0590",
+   "hv_year_low_date": "2018-10-03",
+   "iv_current": "0.1276",
+   "iv_week_ago": "0.1288",
+   "iv_month_ago": "0.1554",
+   "iv_year_high": "0.3157",
+   "iv_year_high_date": "2018-12-24",
+   "iv_year_low": "0.0806",
+   "iv_year_low_date": "2018-08-07"
+  },
+  {
+   "date": "2019-02-23",
+   "act_symbol": "SPY",
+   "hv_current": "0.1091",
+   "hv_week_ago": "0.1394",
+   "hv_month_ago": "0.2674",
+   "hv_year_high": "0.2923",
+   "hv_year_high_date": "2019-01-04",
+   "hv_year_low": "0.0590",
+   "hv_year_low_date": "2018-10-03",
+   "iv_current": "0.1137",
+   "iv_week_ago": "0.1276",
+   "iv_month_ago": "0.1678",
+   "iv_year_high": "0.3157",
+   "iv_year_high_date": "2018-12-24",
+   "iv_year_low": "0.0806",
+   "iv_year_low_date": "2018-08-07"
+  }
+ ]
+}

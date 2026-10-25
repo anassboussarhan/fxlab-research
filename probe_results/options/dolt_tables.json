@@ -1,0 +1,22 @@
+{
+ "name": "tables",
+ "query": "SHOW TABLES",
+ "http": 200,
+ "seconds": 42.9,
+ "status": "Success",
+ "message": "",
+ "schema": [
+  {
+   "columnName": "Tables_in_options",
+   "columnType": "longtext"
+  }
+ ],
+ "rows": [
+  {
+   "Tables_in_options": "option_chain"
+  },
+  {
+   "Tables_in_options": "volatility_history"
+  }
+ ]
+}

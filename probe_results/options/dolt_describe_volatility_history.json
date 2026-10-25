@@ -1,0 +1,164 @@
+{
+ "name": "describe_volatility_history",
+ "query": "DESCRIBE `volatility_history`",
+ "http": 200,
+ "seconds": 53.1,
+ "status": "Success",
+ "message": "",
+ "schema": [
+  {
+   "columnName": "Field",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Type",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Null",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Key",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Default",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Extra",
+   "columnType": "varchar(25000)"
+  }
+ ],
+ "rows": [
+  {
+   "Field": "date",
+   "Type": "date",
+   "Null": "NO",
+   "Key": "PRI",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "act_symbol",
+   "Type": "varchar(64)",
+   "Null": "NO",
+   "Key": "PRI",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "hv_current",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "hv_week_ago",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "hv_month_ago",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "hv_year_high",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "hv_year_high_date",
+   "Type": "date",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "hv_year_low",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "hv_year_low_date",
+   "Type": "date",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "iv_current",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "iv_week_ago",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "iv_month_ago",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "iv_year_high",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "iv_year_high_date",
+   "Type": "date",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "iv_year_low",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "iv_year_low_date",
+   "Type": "date",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  }
+ ]
+}

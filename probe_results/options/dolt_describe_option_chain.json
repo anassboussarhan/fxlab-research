@@ -1,0 +1,140 @@
+{
+ "name": "describe_option_chain",
+ "query": "DESCRIBE `option_chain`",
+ "http": 200,
+ "seconds": 54.1,
+ "status": "Success",
+ "message": "",
+ "schema": [
+  {
+   "columnName": "Field",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Type",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Null",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Key",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Default",
+   "columnType": "varchar(25000)"
+  },
+  {
+   "columnName": "Extra",
+   "columnType": "varchar(25000)"
+  }
+ ],
+ "rows": [
+  {
+   "Field": "date",
+   "Type": "date",
+   "Null": "NO",
+   "Key": "PRI",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "act_symbol",
+   "Type": "varchar(64)",
+   "Null": "NO",
+   "Key": "PRI",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "expiration",
+   "Type": "date",
+   "Null": "NO",
+   "Key": "PRI",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "strike",
+   "Type": "decimal(7,2)",
+   "Null": "NO",
+   "Key": "PRI",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "call_put",
+   "Type": "varchar(64)",
+   "Null": "NO",
+   "Key": "PRI",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "bid",
+   "Type": "decimal(7,2)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "ask",
+   "Type": "decimal(7,2)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "vol",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "delta",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "gamma",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "theta",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "vega",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  },
+  {
+   "Field": "rho",
+   "Type": "decimal(5,4)",
+   "Null": "YES",
+   "Key": "",
+   "Default": null,
+   "Extra": ""
+  }
+ ]
+}

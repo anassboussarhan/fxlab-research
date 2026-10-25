@@ -1,0 +1,19 @@
+{
+ "name": "has_TLT",
+ "query": "SELECT date, COUNT(*) n FROM option_chain WHERE act_symbol='TLT' AND date >= '2023-03-01' GROUP BY date ORDER BY date LIMIT 3",
+ "http": 200,
+ "seconds": 54.3,
+ "status": "Error",
+ "message": "query error: context deadline exceeded",
+ "schema": [
+  {
+   "columnName": "date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "n",
+   "columnType": "bigint"
+  }
+ ],
+ "rows": []
+}

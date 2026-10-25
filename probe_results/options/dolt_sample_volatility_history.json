@@ -1,0 +1,166 @@
+{
+ "name": "sample_volatility_history",
+ "query": "SELECT * FROM `volatility_history` LIMIT 5",
+ "http": 200,
+ "seconds": 8.7,
+ "status": "Success",
+ "message": "",
+ "schema": [
+  {
+   "columnName": "date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "act_symbol",
+   "columnType": "varchar(64)"
+  },
+  {
+   "columnName": "hv_current",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_week_ago",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_month_ago",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_year_high",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_year_high_date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "hv_year_low",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "hv_year_low_date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "iv_current",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_week_ago",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_month_ago",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_year_high",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_year_high_date",
+   "columnType": "date"
+  },
+  {
+   "columnName": "iv_year_low",
+   "columnType": "decimal(5,4)"
+  },
+  {
+   "columnName": "iv_year_low_date",
+   "columnType": "date"
+  }
+ ],
+ "rows": [
+  {
+   "date": "2019-02-09",
+   "act_symbol": "A",
+   "hv_current": "0.2418",
+   "hv_week_ago": "0.3048",
+   "hv_month_ago": "0.3433",
+   "hv_year_high": "0.4045",
+   "hv_year_high_date": "2019-01-03",
+   "hv_year_low": "0.1174",
+   "hv_year_low_date": "2018-10-03",
+   "iv_current": "0.2673",
+   "iv_week_ago": "0.2487",
+   "iv_month_ago": "0.2898",
+   "iv_year_high": "0.3610",
+   "iv_year_high_date": "2018-12-24",
+   "iv_year_low": "0.1647",
+   "iv_year_low_date": "2018-08-31"
+  },
+  {
+   "date": "2019-02-09",
+   "act_symbol": "AAL",
+   "hv_current": "0.4745",
+   "hv_week_ago": "0.5612",
+   "hv_month_ago": "0.6403",
+   "hv_year_high": "0.6428",
+   "hv_year_high_date": "2019-01-07",
+   "hv_year_low": "0.2363",
+   "hv_year_low_date": "2018-03-28",
+   "iv_current": "0.3453",
+   "iv_week_ago": "0.3481",
+   "iv_month_ago": "0.5038",
+   "iv_year_high": "0.6498",
+   "iv_year_high_date": "2018-12-24",
+   "iv_year_low": "0.2761",
+   "iv_year_low_date": "2018-03-16"
+  },
+  {
+   "date": "2019-02-09",
+   "act_symbol": "AAP",
+   "hv_current": "0.3112",
+   "hv_week_ago": "0.3174",
+   "hv_month_ago": "0.2733",
+   "hv_year_high": "0.4491",
+   "hv_year_high_date": "2018-04-02",
+   "hv_year_low": "0.1543",
+   "hv_year_low_date": "2018-07-17",
+   "iv_current": "0.4431",
+   "iv_week_ago": "0.3986",
+   "iv_month_ago": "0.3255",
+   "iv_year_high": "0.6006",
+   "iv_year_high_date": "2019-02-09",
+   "iv_year_low": "0.2223",
+   "iv_year_low_date": "2018-08-24"
+  },
+  {
+   "date": "2019-02-09",
+   "act_symbol": "AAPL",
+   "hv_current": "0.4373",
+   "hv_week_ago": "0.5048",
+   "hv_month_ago": "0.5061",
+   "hv_year_high": "0.5162",
+   "hv_year_high_date": "2019-01-04",
+   "hv_year_low": "0.1134",
+   "hv_year_low_date": "2018-06-22",
+   "iv_current": "0.2280",
+   "iv_week_ago": "0.2285",
+   "iv_month_ago": "0.3371",
+   "iv_year_high": "0.4552",
+   "iv_year_high_date": "2018-12-24",
+   "iv_year_low": "0.1592",
+   "iv_year_low_date": "2018-05-25"
+  },
+  {
+   "date": "2019-02-09",
+   "act_symbol": "ABBV",
+   "hv_current": "0.3718",
+   "hv_week_ago": "0.4075",
+   "hv_month_ago": "0.3512",
+   "hv_year_high": "0.5371",
+   "hv_year_high_date": "2018-05-03",
+   "hv_year_low": "0.1774",
+   "hv_year_low_date": "2018-09-12",
+   "iv_current": "0.2393",
+   "iv_week_ago": "0.2420",
+   "iv_month_ago": "0.3483",
+   "iv_year_high": "0.4489",
+   "iv_year_high_date": "2018-12-24",
+   "iv_year_low": "0.1923",
+   "iv_year_low_date": "2018-08-27"
+  }
+ ]
+}
