@@ -1,0 +1,21 @@
+vol_symbols exit 0 rows 2343
+spy_dates exit 0 rows 1299
+spy_all exit 0 rows 142957
+dia_all exit 0 rows 151354
+spy_vol exit 0 rows 3282
+chain_symbols exit 124 rows 0
+total 6760
+drwxr-xr-x 2 runner runner    4096 Oct 25 19:18 .
+drwxr-xr-x 3 runner runner    4096 Oct 25 18:47 ..
+-rw-r--r-- 1 runner runner       0 Oct 25 18:52 chain_symbols.csv
+-rw-r--r-- 1 runner runner       0 Oct 25 18:52 chain_symbols.err
+-rw-r--r-- 1 runner runner 3168419 Oct 25 18:52 dia_all.csv.gz
+-rw-r--r-- 1 runner runner       0 Oct 25 18:52 dia_all.err
+-rw-r--r-- 1 runner runner 3223800 Oct 25 18:52 spy_all.csv.gz
+-rw-r--r-- 1 runner runner       0 Oct 25 18:51 spy_all.err
+-rw-r--r-- 1 runner runner   40110 Oct 25 18:51 spy_dates.csv
+-rw-r--r-- 1 runner runner       0 Oct 25 18:49 spy_dates.err
+-rw-r--r-- 1 runner runner  399590 Oct 25 18:52 spy_vol.csv
+-rw-r--r-- 1 runner runner       0 Oct 25 18:52 spy_vol.err
+-rw-r--r-- 1 runner runner   72201 Oct 25 18:49 vol_symbols.csv
+-rw-r--r-- 1 runner runner       0 Oct 25 18:49 vol_symbols.err
