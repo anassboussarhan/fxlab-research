@@ -1,0 +1,7 @@
+EURCAD TICK60 bracket    : WF single-trader median -0.70 (gross -0.41) | expected stream -1.25 t=-3.6 gross -0.71 | train median +0.05 | hindsight in-sample +0.02 re-randomised -0.18 (deflation bench nan) | 11s
+EURCAD TICK60 martingale : WF single-trader median -0.12 (gross -0.22) | expected stream -0.77 t=-2.2 gross -0.47 | train median +0.40 | hindsight in-sample +0.15 re-randomised -0.13 (deflation bench nan) | 8s
+EURCAD TICK60 pyramid    : WF single-trader median -0.44 (gross -0.09) | expected stream -0.50 t=-1.5 gross +0.00 | train median +0.15 | hindsight in-sample -0.01 re-randomised -0.16 (deflation bench nan) | 7s
+EURCAD TICK60 grid       : WF single-trader median -0.06 (gross +0.06) | expected stream -0.12 t=-0.4 gross +0.08 | train median +1.55 | hindsight in-sample +0.32 re-randomised -0.39 (deflation bench nan) | 9s
+EURCAD TICK60 zone       : WF single-trader median -0.12 (gross +0.10) | expected stream -0.54 t=-1.6 gross -0.36 | train median +0.49 | hindsight in-sample +0.34 re-randomised -0.09 (deflation bench nan) | 7s
+EURCAD TICK60 hedged_grid: WF single-trader median -0.03 (gross +0.50) | expected stream -0.03 t=-0.1 gross +0.50 | train median +0.65 | hindsight in-sample +0.33 re-randomised +0.33 (deflation bench nan) | 4s
+done EURCAD TICK60 in 0.8 min

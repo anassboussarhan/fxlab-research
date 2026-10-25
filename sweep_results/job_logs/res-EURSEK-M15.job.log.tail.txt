@@ -1,0 +1,7 @@
+EURSEK M15 bracket    : WF single-trader median -1.26 (gross -0.44) | expected stream -2.45 t=-7.1 gross -0.75 | train median -0.15 | hindsight in-sample -0.03 re-randomised -0.21 (deflation bench nan) | 15s
+EURSEK M15 martingale : WF single-trader median -0.31 (gross -0.06) | expected stream -1.10 t=-3.2 gross -0.42 | train median +0.16 | hindsight in-sample -0.11 re-randomised -0.53 (deflation bench nan) | 14s
+EURSEK M15 pyramid    : WF single-trader median -1.05 (gross -0.53) | expected stream -1.75 t=-5.1 gross -0.90 | train median -0.48 | hindsight in-sample -0.43 re-randomised -0.52 (deflation bench nan) | 13s
+EURSEK M15 grid       : WF single-trader median +0.42 (gross +0.95) | expected stream +0.70 t=+2.0 gross +1.68 | train median +1.51 | hindsight in-sample +1.04 re-randomised +0.97 (deflation bench nan) | 21s
+EURSEK M15 zone       : WF single-trader median -0.58 (gross +0.11) | expected stream -1.81 t=-5.3 gross -0.07 | train median -0.33 | hindsight in-sample -0.19 re-randomised -0.40 (deflation bench nan) | 14s
+EURSEK M15 hedged_grid: WF single-trader median -1.96 (gross -0.36) | expected stream -1.96 t=-5.7 gross -0.36 | train median -0.54 | hindsight in-sample -0.76 re-randomised -0.76 (deflation bench nan) | 6s
+done EURSEK M15 in 1.4 min

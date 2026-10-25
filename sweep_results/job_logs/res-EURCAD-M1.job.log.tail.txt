@@ -1,0 +1,7 @@
+EURCAD M1 bracket    : WF single-trader median -0.38 (gross +0.02) | expected stream -0.64 t=-1.8 gross -0.05 | train median -0.34 | hindsight in-sample -0.21 re-randomised -0.61 (deflation bench nan) | 174s
+EURCAD M1 martingale : WF single-trader median -0.44 (gross -0.06) | expected stream -1.42 t=-4.1 gross -0.33 | train median -0.16 | hindsight in-sample -0.55 re-randomised -0.93 (deflation bench nan) | 157s
+EURCAD M1 pyramid    : WF single-trader median -1.07 (gross -0.15) | expected stream -3.48 t=-10.1 gross -0.48 | train median -1.16 | hindsight in-sample -0.59 re-randomised -0.82 (deflation bench nan) | 161s
+EURCAD M1 grid       : WF single-trader median -0.31 (gross +0.82) | expected stream -0.86 t=-2.5 gross +2.05 | train median +1.18 | hindsight in-sample +0.74 re-randomised +0.35 (deflation bench nan) | 169s
+EURCAD M1 zone       : WF single-trader median -1.34 (gross +0.63) | expected stream -1.86 t=-5.4 gross +0.17 | train median -1.18 | hindsight in-sample -0.73 re-randomised -1.25 (deflation bench nan) | 205s
+EURCAD M1 hedged_grid: WF single-trader median -9.65 (gross -0.00) | expected stream -9.65 t=-28.0 gross -0.00 | train median -9.05 | hindsight in-sample -7.23 re-randomised -7.23 (deflation bench nan) | 59s
+done EURCAD M1 in 15.4 min

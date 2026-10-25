@@ -1,0 +1,7 @@
+EURSEK M5 bracket    : WF single-trader median -1.16 (gross -0.38) | expected stream -1.57 t=-4.6 gross -0.51 | train median -0.21 | hindsight in-sample -0.15 re-randomised -0.24 (deflation bench nan) | 41s
+EURSEK M5 martingale : WF single-trader median -0.38 (gross +0.11) | expected stream -0.81 t=-2.4 gross +0.32 | train median -0.10 | hindsight in-sample -0.52 re-randomised -0.72 (deflation bench nan) | 36s
+EURSEK M5 pyramid    : WF single-trader median -1.12 (gross -0.55) | expected stream -2.09 t=-6.1 gross -0.96 | train median -0.75 | hindsight in-sample -0.89 re-randomised -1.30 (deflation bench nan) | 35s
+EURSEK M5 grid       : WF single-trader median +0.42 (gross +1.21) | expected stream +0.65 t=+1.9 gross +2.06 | train median +1.34 | hindsight in-sample +0.87 re-randomised +0.39 (deflation bench nan) | 41s
+EURSEK M5 zone       : WF single-trader median -1.24 (gross +0.10) | expected stream -2.72 t=-7.9 gross +0.27 | train median -1.01 | hindsight in-sample -0.68 re-randomised -1.27 (deflation bench nan) | 41s
+EURSEK M5 hedged_grid: WF single-trader median -3.67 (gross -0.31) | expected stream -3.67 t=-10.7 gross -0.31 | train median -2.88 | hindsight in-sample -2.34 re-randomised -2.34 (deflation bench nan) | 14s
+done EURSEK M5 in 3.5 min

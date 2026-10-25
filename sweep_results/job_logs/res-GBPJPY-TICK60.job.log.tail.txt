@@ -1,0 +1,7 @@
+GBPJPY TICK60 bracket    : WF single-trader median -0.33 (gross -0.00) | expected stream -0.55 t=-1.6 gross -0.04 | train median +0.46 | hindsight in-sample +0.40 re-randomised -0.04 (deflation bench nan) | 11s
+GBPJPY TICK60 martingale : WF single-trader median +0.09 (gross +0.23) | expected stream +0.15 t=+0.5 gross +0.63 | train median +0.46 | hindsight in-sample +0.39 re-randomised -0.12 (deflation bench nan) | 9s
+GBPJPY TICK60 pyramid    : WF single-trader median -0.08 (gross +0.22) | expected stream -0.01 t=-0.0 gross +0.39 | train median +0.47 | hindsight in-sample +0.27 re-randomised -0.00 (deflation bench nan) | 8s
+GBPJPY TICK60 grid       : WF single-trader median +0.13 (gross +0.19) | expected stream +0.12 t=+0.4 gross +0.18 | train median +2.00 | hindsight in-sample +0.79 re-randomised +0.40 (deflation bench nan) | 9s
+GBPJPY TICK60 zone       : WF single-trader median +0.01 (gross +0.24) | expected stream -0.16 t=-0.5 gross +0.17 | train median +0.56 | hindsight in-sample +0.40 re-randomised +0.01 (deflation bench nan) | 7s
+GBPJPY TICK60 hedged_grid: WF single-trader median -0.54 (gross -0.24) | expected stream -0.54 t=-1.6 gross -0.24 | train median +0.65 | hindsight in-sample +0.47 re-randomised +0.47 (deflation bench nan) | 4s
+done GBPJPY TICK60 in 0.9 min

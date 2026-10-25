@@ -1,0 +1,7 @@
+EURUSD M15 bracket    : WF single-trader median +0.12 (gross +0.32) | expected stream +0.10 t=+0.3 gross +0.37 | train median +0.22 | hindsight in-sample +0.06 re-randomised +0.04 (deflation bench nan) | 25s
+EURUSD M15 martingale : WF single-trader median -0.12 (gross -0.04) | expected stream -0.40 t=-1.4 gross -0.14 | train median +0.38 | hindsight in-sample +0.22 re-randomised -0.14 (deflation bench nan) | 21s
+EURUSD M15 pyramid    : WF single-trader median -0.29 (gross -0.03) | expected stream -0.45 t=-1.6 gross -0.03 | train median +0.13 | hindsight in-sample -0.10 re-randomised -0.21 (deflation bench nan) | 20s
+EURUSD M15 grid       : WF single-trader median -0.15 (gross -0.02) | expected stream -0.27 t=-1.0 gross -0.03 | train median +1.83 | hindsight in-sample +0.56 re-randomised +0.02 (deflation bench nan) | 23s
+EURUSD M15 zone       : WF single-trader median +0.08 (gross +0.46) | expected stream -0.12 t=-0.4 gross +0.56 | train median +0.58 | hindsight in-sample +0.29 re-randomised +0.04 (deflation bench nan) | 22s
+EURUSD M15 hedged_grid: WF single-trader median -0.96 (gross -0.29) | expected stream -0.96 t=-3.4 gross -0.29 | train median +0.56 | hindsight in-sample +0.01 re-randomised +0.01 (deflation bench nan) | 8s
+done EURUSD M15 in 2.0 min

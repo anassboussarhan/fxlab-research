@@ -1,0 +1,7 @@
+EURGBP M30 bracket    : WF single-trader median -0.01 (gross +0.23) | expected stream -0.01 t=-0.0 gross +0.26 | train median +0.01 | hindsight in-sample -0.12 re-randomised -0.55 (deflation bench nan) | 11s
+EURGBP M30 martingale : WF single-trader median -0.02 (gross +0.09) | expected stream -0.25 t=-0.7 gross +0.29 | train median +0.31 | hindsight in-sample +0.06 re-randomised -0.30 (deflation bench nan) | 9s
+EURGBP M30 pyramid    : WF single-trader median -0.57 (gross -0.16) | expected stream -0.91 t=-2.6 gross -0.30 | train median -0.06 | hindsight in-sample -0.21 re-randomised -0.63 (deflation bench nan) | 8s
+EURGBP M30 grid       : WF single-trader median -0.24 (gross -0.14) | expected stream -0.58 t=-1.7 gross -0.39 | train median +1.52 | hindsight in-sample +0.91 re-randomised +0.24 (deflation bench nan) | 10s
+EURGBP M30 zone       : WF single-trader median -0.49 (gross +0.15) | expected stream -1.00 t=-2.9 gross +0.16 | train median +0.25 | hindsight in-sample +0.02 re-randomised -0.23 (deflation bench nan) | 8s
+EURGBP M30 hedged_grid: WF single-trader median -1.21 (gross -0.32) | expected stream -1.21 t=-3.5 gross -0.32 | train median +0.27 | hindsight in-sample -0.07 re-randomised -0.07 (deflation bench nan) | 4s
+done EURGBP M30 in 0.9 min

@@ -1,0 +1,7 @@
+EURGBP H6 bracket    : WF single-trader median -0.44 (gross -0.16) | expected stream -1.04 t=-3.3 gross -0.44 | train median +0.12 | hindsight in-sample +0.01 re-randomised -0.19 (deflation bench nan) | 5s
+EURGBP H6 martingale : WF single-trader median -0.04 (gross +0.20) | expected stream -0.61 t=-1.9 gross -0.22 | train median +0.39 | hindsight in-sample +0.33 re-randomised +0.09 (deflation bench nan) | 3s
+EURGBP H6 pyramid    : WF single-trader median -0.55 (gross -0.31) | expected stream -0.75 t=-2.4 gross -0.44 | train median -0.04 | hindsight in-sample -0.21 re-randomised -0.35 (deflation bench nan) | 2s
+EURGBP H6 grid       : WF single-trader median +0.08 (gross +0.17) | expected stream +0.19 t=+0.6 gross +0.33 | train median +1.08 | hindsight in-sample +0.44 re-randomised +0.09 (deflation bench nan) | 5s
+EURGBP H6 zone       : WF single-trader median +0.01 (gross +0.19) | expected stream +0.01 t=+0.0 gross +0.36 | train median +0.39 | hindsight in-sample +0.25 re-randomised +0.07 (deflation bench nan) | 2s
+EURGBP H6 hedged_grid: WF single-trader median +0.04 (gross +0.37) | expected stream +0.04 t=+0.1 gross +0.37 | train median +0.30 | hindsight in-sample +0.23 re-randomised +0.23 (deflation bench nan) | 2s
+done EURGBP H6 in 0.3 min

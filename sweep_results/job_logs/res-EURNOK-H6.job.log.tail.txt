@@ -1,0 +1,7 @@
+EURNOK H6 bracket    : WF single-trader median -0.53 (gross -0.16) | expected stream -1.25 t=-4.0 gross -0.36 | train median +0.34 | hindsight in-sample +0.07 re-randomised -0.05 (deflation bench nan) | 9s
+EURNOK H6 martingale : WF single-trader median -0.24 (gross -0.08) | expected stream -0.60 t=-1.9 gross -0.01 | train median +0.51 | hindsight in-sample +0.32 re-randomised +0.20 (deflation bench nan) | 6s
+EURNOK H6 pyramid    : WF single-trader median -0.84 (gross -0.67) | expected stream -1.19 t=-3.8 gross -0.93 | train median +0.10 | hindsight in-sample -0.11 re-randomised -0.33 (deflation bench nan) | 5s
+EURNOK H6 grid       : WF single-trader median +0.16 (gross +0.21) | expected stream +0.22 t=+0.7 gross +0.31 | train median +1.05 | hindsight in-sample +0.72 re-randomised +0.61 (deflation bench nan) | 9s
+EURNOK H6 zone       : WF single-trader median -0.23 (gross -0.00) | expected stream -0.74 t=-2.4 gross -0.48 | train median +0.27 | hindsight in-sample +0.05 re-randomised -0.10 (deflation bench nan) | 5s
+EURNOK H6 hedged_grid: WF single-trader median -0.31 (gross +0.21) | expected stream -0.31 t=-1.0 gross +0.21 | train median +0.40 | hindsight in-sample +0.57 re-randomised +0.57 (deflation bench nan) | 4s
+done EURNOK H6 in 0.7 min

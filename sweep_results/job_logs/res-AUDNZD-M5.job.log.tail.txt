@@ -1,0 +1,7 @@
+AUDNZD M5 bracket    : WF single-trader median -1.14 (gross -0.44) | expected stream -1.75 t=-5.1 gross -0.66 | train median -0.31 | hindsight in-sample -0.11 re-randomised -0.24 (deflation bench nan) | 41s
+AUDNZD M5 martingale : WF single-trader median -0.15 (gross +0.16) | expected stream -1.10 t=-3.2 gross +0.17 | train median +0.04 | hindsight in-sample -0.12 re-randomised -0.55 (deflation bench nan) | 35s
+AUDNZD M5 pyramid    : WF single-trader median -0.88 (gross -0.28) | expected stream -2.32 t=-6.7 gross -0.59 | train median -0.80 | hindsight in-sample -0.74 re-randomised -0.87 (deflation bench nan) | 35s
+AUDNZD M5 grid       : WF single-trader median +1.79 (gross +5.04) | expected stream +3.46 t=+10.0 gross +8.77 | train median +2.61 | hindsight in-sample +2.06 re-randomised +1.89 (deflation bench nan) | 52s
+AUDNZD M5 zone       : WF single-trader median -0.87 (gross +0.19) | expected stream -2.10 t=-6.1 gross -0.28 | train median -0.90 | hindsight in-sample -0.42 re-randomised -0.85 (deflation bench nan) | 41s
+AUDNZD M5 hedged_grid: WF single-trader median -3.76 (gross -0.32) | expected stream -3.76 t=-10.9 gross -0.32 | train median -2.69 | hindsight in-sample -2.32 re-randomised -2.32 (deflation bench nan) | 14s
+done AUDNZD M5 in 3.7 min

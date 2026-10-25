@@ -1,0 +1,7 @@
+EURNZD H2 bracket    : WF single-trader median -0.22 (gross -0.07) | expected stream -0.64 t=-1.9 gross -0.10 | train median +0.34 | hindsight in-sample +0.25 re-randomised -0.20 (deflation bench nan) | 8s
+EURNZD H2 martingale : WF single-trader median +0.00 (gross -0.01) | expected stream -0.52 t=-1.6 gross -0.48 | train median +0.44 | hindsight in-sample +0.14 re-randomised -0.12 (deflation bench nan) | 5s
+EURNZD H2 pyramid    : WF single-trader median -0.67 (gross -0.37) | expected stream -0.94 t=-2.8 gross -0.53 | train median +0.43 | hindsight in-sample +0.16 re-randomised -0.19 (deflation bench nan) | 4s
+EURNZD H2 grid       : WF single-trader median -0.27 (gross -0.19) | expected stream -0.22 t=-0.7 gross -0.11 | train median +1.62 | hindsight in-sample +0.41 re-randomised +0.16 (deflation bench nan) | 7s
+EURNZD H2 zone       : WF single-trader median -0.17 (gross +0.07) | expected stream -0.62 t=-1.9 gross -0.21 | train median +0.40 | hindsight in-sample +0.07 re-randomised -0.12 (deflation bench nan) | 4s
+EURNZD H2 hedged_grid: WF single-trader median -0.50 (gross +0.03) | expected stream -0.50 t=-1.5 gross +0.03 | train median +0.75 | hindsight in-sample +0.37 re-randomised +0.37 (deflation bench nan) | 3s
+done EURNZD H2 in 0.6 min

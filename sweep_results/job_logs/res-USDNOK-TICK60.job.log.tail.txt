@@ -1,0 +1,7 @@
+USDNOK TICK60 bracket    : WF single-trader median +0.04 (gross +0.20) | expected stream +0.05 t=+0.2 gross +0.44 | train median +0.18 | hindsight in-sample +0.25 re-randomised +0.12 (deflation bench nan) | 11s
+USDNOK TICK60 martingale : WF single-trader median -0.03 (gross +0.15) | expected stream -0.36 t=-1.1 gross +0.24 | train median +0.36 | hindsight in-sample +0.37 re-randomised +0.07 (deflation bench nan) | 9s
+USDNOK TICK60 pyramid    : WF single-trader median -0.41 (gross -0.22) | expected stream -0.68 t=-2.0 gross -0.39 | train median -0.08 | hindsight in-sample -0.10 re-randomised -0.45 (deflation bench nan) | 7s
+USDNOK TICK60 grid       : WF single-trader median -0.01 (gross +0.06) | expected stream +0.05 t=+0.1 gross +0.18 | train median +1.81 | hindsight in-sample +0.65 re-randomised +0.19 (deflation bench nan) | 12s
+USDNOK TICK60 zone       : WF single-trader median -0.07 (gross +0.27) | expected stream -0.28 t=-0.8 gross +0.36 | train median +0.34 | hindsight in-sample +0.22 re-randomised +0.07 (deflation bench nan) | 7s
+USDNOK TICK60 hedged_grid: WF single-trader median +0.01 (gross +0.45) | expected stream +0.01 t=+0.0 gross +0.45 | train median +0.46 | hindsight in-sample +0.44 re-randomised +0.44 (deflation bench nan) | 4s
+done USDNOK TICK60 in 0.9 min

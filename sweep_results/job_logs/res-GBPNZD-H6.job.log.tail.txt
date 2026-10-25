@@ -1,0 +1,7 @@
+GBPNZD H6 bracket    : WF single-trader median -0.32 (gross -0.13) | expected stream -0.79 t=-2.4 gross -0.31 | train median +0.25 | hindsight in-sample +0.21 re-randomised -0.10 (deflation bench nan) | 8s
+GBPNZD H6 martingale : WF single-trader median +0.14 (gross +0.19) | expected stream +0.24 t=+0.7 gross +0.53 | train median +0.54 | hindsight in-sample +0.44 re-randomised +0.10 (deflation bench nan) | 6s
+GBPNZD H6 pyramid    : WF single-trader median -0.55 (gross -0.37) | expected stream -0.80 t=-2.4 gross -0.57 | train median +0.14 | hindsight in-sample +0.16 re-randomised -0.20 (deflation bench nan) | 4s
+GBPNZD H6 grid       : WF single-trader median -0.33 (gross -0.25) | expected stream -0.56 t=-1.7 gross -0.41 | train median +1.65 | hindsight in-sample +0.16 re-randomised -0.04 (deflation bench nan) | 8s
+GBPNZD H6 zone       : WF single-trader median +0.01 (gross +0.31) | expected stream -0.03 t=-0.1 gross +0.12 | train median +0.58 | hindsight in-sample +0.27 re-randomised +0.08 (deflation bench nan) | 4s
+GBPNZD H6 hedged_grid: WF single-trader median -0.07 (gross +0.24) | expected stream -0.07 t=-0.2 gross +0.24 | train median +0.93 | hindsight in-sample +0.72 re-randomised +0.72 (deflation bench nan) | 4s
+done GBPNZD H6 in 0.6 min

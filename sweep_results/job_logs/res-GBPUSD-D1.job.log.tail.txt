@@ -1,0 +1,7 @@
+GBPUSD D1 bracket    : WF single-trader median -0.40 (gross -0.19) | expected stream -0.84 t=-2.4 gross -0.33 | train median +0.29 | hindsight in-sample +0.21 re-randomised +0.14 (deflation bench nan) | 5s
+GBPUSD D1 martingale : WF single-trader median +0.15 (gross +0.19) | expected stream +0.15 t=+0.4 gross +0.31 | train median +0.52 | hindsight in-sample +0.35 re-randomised +0.18 (deflation bench nan) | 3s
+GBPUSD D1 pyramid    : WF single-trader median -0.40 (gross -0.20) | expected stream -0.54 t=-1.6 gross -0.26 | train median +0.14 | hindsight in-sample -0.02 re-randomised -0.19 (deflation bench nan) | 2s
+GBPUSD D1 grid       : WF single-trader median +0.10 (gross +0.21) | expected stream +0.18 t=+0.5 gross +0.35 | train median +0.84 | hindsight in-sample +0.64 re-randomised +0.59 (deflation bench nan) | 6s
+GBPUSD D1 zone       : WF single-trader median +0.12 (gross +0.32) | expected stream +0.19 t=+0.6 gross +0.47 | train median +0.51 | hindsight in-sample +0.30 re-randomised +0.05 (deflation bench nan) | 2s
+GBPUSD D1 hedged_grid: WF single-trader median -0.53 (gross -0.19) | expected stream -0.53 t=-1.5 gross -0.19 | train median +0.56 | hindsight in-sample +0.56 re-randomised +0.56 (deflation bench nan) | 2s
+done GBPUSD D1 in 0.4 min

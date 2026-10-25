@@ -1,0 +1,7 @@
+GBPNZD D1 bracket    : WF single-trader median -0.43 (gross -0.14) | expected stream -0.87 t=-2.1 gross -0.32 | train median +0.24 | hindsight in-sample +0.35 re-randomised -0.06 (deflation bench nan) | 6s
+GBPNZD D1 martingale : WF single-trader median -0.24 (gross -0.07) | expected stream -0.92 t=-2.2 gross -0.47 | train median +0.42 | hindsight in-sample +0.46 re-randomised +0.07 (deflation bench nan) | 3s
+GBPNZD D1 pyramid    : WF single-trader median -0.44 (gross -0.14) | expected stream -0.49 t=-1.2 gross -0.07 | train median +0.23 | hindsight in-sample +0.18 re-randomised -0.18 (deflation bench nan) | 3s
+GBPNZD D1 grid       : WF single-trader median -0.51 (gross -0.43) | expected stream -0.55 t=-1.3 gross -0.44 | train median +0.90 | hindsight in-sample +0.79 re-randomised +0.58 (deflation bench nan) | 7s
+GBPNZD D1 zone       : WF single-trader median +0.16 (gross +0.43) | expected stream +0.09 t=+0.2 gross +0.51 | train median +0.49 | hindsight in-sample +0.32 re-randomised +0.16 (deflation bench nan) | 3s
+GBPNZD D1 hedged_grid: WF single-trader median -0.73 (gross -0.18) | expected stream -0.73 t=-1.8 gross -0.18 | train median +0.64 | hindsight in-sample +0.84 re-randomised +0.84 (deflation bench nan) | 2s
+done GBPNZD D1 in 0.4 min

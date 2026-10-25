@@ -1,0 +1,7 @@
+NZDUSD H4 bracket    : WF single-trader median -0.29 (gross -0.05) | expected stream -0.66 t=-2.1 gross +0.01 | train median +0.20 | hindsight in-sample +0.26 re-randomised -0.06 (deflation bench nan) | 10s
+NZDUSD H4 martingale : WF single-trader median +0.05 (gross +0.09) | expected stream -0.03 t=-0.1 gross +0.33 | train median +0.46 | hindsight in-sample +0.47 re-randomised -0.05 (deflation bench nan) | 6s
+NZDUSD H4 pyramid    : WF single-trader median -0.53 (gross -0.35) | expected stream -0.90 t=-2.9 gross -0.64 | train median +0.09 | hindsight in-sample +0.07 re-randomised -0.27 (deflation bench nan) | 5s
+NZDUSD H4 grid       : WF single-trader median -0.36 (gross -0.25) | expected stream -0.50 t=-1.6 gross -0.37 | train median +1.48 | hindsight in-sample +0.35 re-randomised +0.13 (deflation bench nan) | 9s
+NZDUSD H4 zone       : WF single-trader median -0.03 (gross +0.13) | expected stream -0.46 t=-1.5 gross -0.22 | train median +0.44 | hindsight in-sample +0.28 re-randomised +0.04 (deflation bench nan) | 5s
+NZDUSD H4 hedged_grid: WF single-trader median -0.55 (gross -0.22) | expected stream -0.55 t=-1.8 gross -0.22 | train median +0.61 | hindsight in-sample +0.81 re-randomised +0.81 (deflation bench nan) | 4s
+done NZDUSD H4 in 0.7 min

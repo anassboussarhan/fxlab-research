@@ -1,0 +1,7 @@
+USDCAD M1 bracket    : WF single-trader median -1.15 (gross -0.22) | expected stream -1.75 t=-5.1 gross -0.25 | train median -0.17 | hindsight in-sample -0.03 re-randomised -0.19 (deflation bench nan) | 160s
+USDCAD M1 martingale : WF single-trader median -0.27 (gross -0.11) | expected stream -0.86 t=-2.5 gross -0.31 | train median -0.02 | hindsight in-sample -0.19 re-randomised -0.51 (deflation bench nan) | 140s
+USDCAD M1 pyramid    : WF single-trader median -0.83 (gross -0.05) | expected stream -3.54 t=-10.3 gross -0.35 | train median -1.00 | hindsight in-sample -0.89 re-randomised -0.71 (deflation bench nan) | 143s
+USDCAD M1 grid       : WF single-trader median -0.19 (gross +0.01) | expected stream -0.49 t=-1.4 gross +0.37 | train median +0.73 | hindsight in-sample +0.73 re-randomised +0.44 (deflation bench nan) | 144s
+USDCAD M1 zone       : WF single-trader median -1.03 (gross +0.40) | expected stream -2.00 t=-5.8 gross +0.64 | train median -1.14 | hindsight in-sample -0.70 re-randomised -0.94 (deflation bench nan) | 186s
+USDCAD M1 hedged_grid: WF single-trader median -9.25 (gross -0.36) | expected stream -9.25 t=-26.9 gross -0.36 | train median -9.82 | hindsight in-sample -7.36 re-randomised -7.36 (deflation bench nan) | 51s
+done USDCAD M1 in 13.7 min

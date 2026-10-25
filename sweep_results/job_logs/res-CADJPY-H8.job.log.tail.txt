@@ -1,0 +1,7 @@
+CADJPY H8 bracket    : WF single-trader median -0.23 (gross +0.10) | expected stream -0.36 t=-1.1 gross +0.10 | train median +0.44 | hindsight in-sample +0.18 re-randomised -0.11 (deflation bench nan) | 10s
+CADJPY H8 martingale : WF single-trader median -0.06 (gross -0.02) | expected stream -0.44 t=-1.4 gross -0.53 | train median +0.39 | hindsight in-sample +0.39 re-randomised +0.24 (deflation bench nan) | 6s
+CADJPY H8 pyramid    : WF single-trader median -0.44 (gross -0.21) | expected stream -0.67 t=-2.1 gross -0.34 | train median +0.20 | hindsight in-sample -0.04 re-randomised -0.25 (deflation bench nan) | 5s
+CADJPY H8 grid       : WF single-trader median -0.10 (gross +0.01) | expected stream -0.15 t=-0.5 gross +0.04 | train median +1.05 | hindsight in-sample +0.52 re-randomised +0.28 (deflation bench nan) | 8s
+CADJPY H8 zone       : WF single-trader median -0.06 (gross +0.09) | expected stream -0.37 t=-1.2 gross -0.05 | train median +0.48 | hindsight in-sample +0.23 re-randomised +0.11 (deflation bench nan) | 5s
+CADJPY H8 hedged_grid: WF single-trader median -0.44 (gross +0.09) | expected stream -0.44 t=-1.4 gross +0.09 | train median +0.55 | hindsight in-sample +0.53 re-randomised +0.53 (deflation bench nan) | 4s
+done CADJPY H8 in 0.7 min

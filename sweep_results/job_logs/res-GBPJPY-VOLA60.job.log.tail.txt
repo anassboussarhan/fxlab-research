@@ -1,0 +1,7 @@
+GBPJPY VOLA60 bracket    : WF single-trader median -0.22 (gross +0.10) | expected stream -0.39 t=-1.1 gross +0.19 | train median +0.59 | hindsight in-sample +0.33 re-randomised +0.12 (deflation bench nan) | 11s
+GBPJPY VOLA60 martingale : WF single-trader median -0.05 (gross -0.08) | expected stream -0.30 t=-0.9 gross -0.61 | train median +0.52 | hindsight in-sample +0.23 re-randomised -0.12 (deflation bench nan) | 9s
+GBPJPY VOLA60 pyramid    : WF single-trader median +0.03 (gross +0.30) | expected stream +0.05 t=+0.1 gross +0.42 | train median +0.48 | hindsight in-sample +0.24 re-randomised +0.21 (deflation bench nan) | 8s
+GBPJPY VOLA60 grid       : WF single-trader median -0.03 (gross +0.04) | expected stream -0.35 t=-1.0 gross -0.20 | train median +1.63 | hindsight in-sample +0.29 re-randomised +0.04 (deflation bench nan) | 10s
+GBPJPY VOLA60 zone       : WF single-trader median +0.01 (gross +0.35) | expected stream -0.01 t=-0.0 gross +0.76 | train median +0.60 | hindsight in-sample +0.24 re-randomised -0.06 (deflation bench nan) | 7s
+GBPJPY VOLA60 hedged_grid: WF single-trader median -0.36 (gross +0.03) | expected stream -0.36 t=-1.0 gross +0.03 | train median +0.85 | hindsight in-sample +0.66 re-randomised +0.66 (deflation bench nan) | 4s
+done GBPJPY VOLA60 in 0.9 min

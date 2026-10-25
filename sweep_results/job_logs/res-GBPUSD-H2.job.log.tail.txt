@@ -1,0 +1,7 @@
+GBPUSD H2 bracket    : WF single-trader median -0.34 (gross -0.03) | expected stream -0.60 t=-1.8 gross -0.09 | train median +0.36 | hindsight in-sample +0.19 re-randomised -0.11 (deflation bench nan) | 9s
+GBPUSD H2 martingale : WF single-trader median -0.14 (gross -0.06) | expected stream -0.61 t=-1.9 gross -0.37 | train median +0.41 | hindsight in-sample +0.22 re-randomised -0.02 (deflation bench nan) | 5s
+GBPUSD H2 pyramid    : WF single-trader median -0.39 (gross -0.17) | expected stream -0.55 t=-1.7 gross -0.23 | train median +0.17 | hindsight in-sample +0.02 re-randomised -0.37 (deflation bench nan) | 5s
+GBPUSD H2 grid       : WF single-trader median -0.04 (gross +0.06) | expected stream -0.07 t=-0.2 gross +0.13 | train median +1.99 | hindsight in-sample +0.38 re-randomised +0.13 (deflation bench nan) | 8s
+GBPUSD H2 zone       : WF single-trader median -0.08 (gross +0.13) | expected stream -0.55 t=-1.7 gross -0.39 | train median +0.52 | hindsight in-sample +0.31 re-randomised -0.14 (deflation bench nan) | 4s
+GBPUSD H2 hedged_grid: WF single-trader median -0.45 (gross -0.20) | expected stream -0.45 t=-1.4 gross -0.20 | train median +0.80 | hindsight in-sample +0.67 re-randomised +0.67 (deflation bench nan) | 3s
+done GBPUSD H2 in 0.6 min

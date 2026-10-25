@@ -1,0 +1,7 @@
+AUDNZD D1 bracket    : WF single-trader median -0.41 (gross -0.06) | expected stream -0.95 t=-2.6 gross -0.25 | train median -0.02 | hindsight in-sample +0.00 re-randomised -0.21 (deflation bench nan) | 6s
+AUDNZD D1 martingale : WF single-trader median -0.23 (gross +0.14) | expected stream -0.84 t=-2.3 gross -0.28 | train median +0.30 | hindsight in-sample +0.42 re-randomised +0.15 (deflation bench nan) | 3s
+AUDNZD D1 pyramid    : WF single-trader median -0.28 (gross +0.20) | expected stream -0.46 t=-1.2 gross +0.21 | train median -0.05 | hindsight in-sample -0.12 re-randomised -0.25 (deflation bench nan) | 3s
+AUDNZD D1 grid       : WF single-trader median +0.43 (gross +0.54) | expected stream +0.57 t=+1.6 gross +0.73 | train median +0.85 | hindsight in-sample +0.77 re-randomised +0.56 (deflation bench nan) | 7s
+AUDNZD D1 zone       : WF single-trader median -0.40 (gross -0.01) | expected stream -0.58 t=-1.6 gross -0.21 | train median +0.28 | hindsight in-sample +0.09 re-randomised -0.01 (deflation bench nan) | 3s
+AUDNZD D1 hedged_grid: WF single-trader median -0.40 (gross +0.36) | expected stream -0.40 t=-1.1 gross +0.36 | train median +0.02 | hindsight in-sample -0.24 re-randomised -0.24 (deflation bench nan) | 2s
+done AUDNZD D1 in 0.4 min

@@ -1,0 +1,7 @@
+USDJPY M5 bracket    : WF single-trader median -0.10 (gross +0.26) | expected stream -0.25 t=-0.7 gross +0.26 | train median +0.28 | hindsight in-sample -0.09 re-randomised -0.21 (deflation bench nan) | 38s
+USDJPY M5 martingale : WF single-trader median -0.24 (gross -0.05) | expected stream -0.75 t=-2.2 gross -0.07 | train median +0.24 | hindsight in-sample -0.01 re-randomised -0.20 (deflation bench nan) | 33s
+USDJPY M5 pyramid    : WF single-trader median -0.53 (gross -0.03) | expected stream -0.80 t=-2.3 gross +0.01 | train median -0.07 | hindsight in-sample -0.09 re-randomised -0.11 (deflation bench nan) | 34s
+USDJPY M5 grid       : WF single-trader median -0.23 (gross -0.04) | expected stream -0.52 t=-1.5 gross -0.11 | train median +1.61 | hindsight in-sample +1.22 re-randomised +0.67 (deflation bench nan) | 35s
+USDJPY M5 zone       : WF single-trader median -0.29 (gross +0.35) | expected stream -0.41 t=-1.2 gross +0.44 | train median +0.08 | hindsight in-sample -0.08 re-randomised -0.33 (deflation bench nan) | 38s
+USDJPY M5 hedged_grid: WF single-trader median -1.91 (gross -0.46) | expected stream -1.91 t=-5.5 gross -0.46 | train median -0.67 | hindsight in-sample -0.48 re-randomised -0.48 (deflation bench nan) | 12s
+done USDJPY M5 in 3.2 min

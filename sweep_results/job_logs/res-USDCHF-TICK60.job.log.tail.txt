@@ -1,0 +1,7 @@
+USDCHF TICK60 bracket    : WF single-trader median -0.15 (gross +0.10) | expected stream -0.39 t=-1.1 gross +0.19 | train median +0.28 | hindsight in-sample +0.25 re-randomised +0.07 (deflation bench nan) | 6s
+USDCHF TICK60 martingale : WF single-trader median -0.19 (gross -0.04) | expected stream -0.78 t=-2.3 gross -0.39 | train median +0.39 | hindsight in-sample +0.17 re-randomised -0.34 (deflation bench nan) | 5s
+USDCHF TICK60 pyramid    : WF single-trader median -0.44 (gross -0.09) | expected stream -0.58 t=-1.7 gross -0.10 | train median +0.49 | hindsight in-sample +0.29 re-randomised -0.21 (deflation bench nan) | 4s
+USDCHF TICK60 grid       : WF single-trader median -0.06 (gross +0.09) | expected stream -0.05 t=-0.2 gross +0.50 | train median +1.88 | hindsight in-sample +0.43 re-randomised +0.25 (deflation bench nan) | 6s
+USDCHF TICK60 zone       : WF single-trader median -0.07 (gross +0.40) | expected stream -0.38 t=-1.1 gross -0.24 | train median +0.60 | hindsight in-sample +0.19 re-randomised -0.11 (deflation bench nan) | 4s
+USDCHF TICK60 hedged_grid: WF single-trader median -0.08 (gross +0.35) | expected stream -0.08 t=-0.2 gross +0.35 | train median +0.49 | hindsight in-sample +0.30 re-randomised +0.30 (deflation bench nan) | 3s
+done USDCHF TICK60 in 0.5 min

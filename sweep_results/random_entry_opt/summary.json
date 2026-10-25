@@ -1,0 +1,48 @@
+{
+ "cells": 2652,
+ "pairs": 34,
+ "tfs": [
+  "M1",
+  "M5",
+  "M15",
+  "M30",
+  "H1",
+  "H2",
+  "H4",
+  "H6",
+  "H8",
+  "H12",
+  "D1",
+  "TICK60",
+  "VOLA60"
+ ],
+ "families": [
+  "bracket",
+  "grid",
+  "hedged_grid",
+  "martingale",
+  "pyramid",
+  "zone"
+ ],
+ "bh_survivors_q10": 5,
+ "share_cells_single_trader_positive": 0.193815987933635,
+ "best_tf_family": {
+  "tf": "D1",
+  "family": "grid",
+  "pairs": 34,
+  "median_single_trader": 0.07189185399898522,
+  "share_pairs_positive": 0.6176470588235294,
+  "median_gross": 0.177169283994833,
+  "median_expected_stream": 0.07877355281833431,
+  "median_t": 0.2219500596074507,
+  "bh_survivors": 0,
+  "median_train": 0.8908740234298198,
+  "median_hindsight_in_sample": 0.6287618427582292,
+  "median_hindsight_rerandomised": 0.40144556473541526,
+  "streams": 34,
+  "portfolio_sharpe": -0.3502519816932682,
+  "portfolio_t": -0.7774428826933917
+ },
+ "median_single_trader_all": -0.24357217867408734,
+ "median_gross_all": 0.03545259687946768
+}

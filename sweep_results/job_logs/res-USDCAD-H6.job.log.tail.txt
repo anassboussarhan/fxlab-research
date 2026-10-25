@@ -1,0 +1,7 @@
+USDCAD H6 bracket    : WF single-trader median -0.33 (gross +0.07) | expected stream -0.54 t=-1.7 gross +0.02 | train median +0.39 | hindsight in-sample +0.06 re-randomised -0.07 (deflation bench nan) | 9s
+USDCAD H6 martingale : WF single-trader median -0.15 (gross -0.16) | expected stream -0.34 t=-1.1 gross -0.29 | train median +0.51 | hindsight in-sample +0.42 re-randomised +0.20 (deflation bench nan) | 6s
+USDCAD H6 pyramid    : WF single-trader median -0.70 (gross -0.51) | expected stream -0.97 t=-3.1 gross -0.71 | train median +0.26 | hindsight in-sample -0.00 re-randomised -0.20 (deflation bench nan) | 5s
+USDCAD H6 grid       : WF single-trader median -0.09 (gross +0.04) | expected stream -0.20 t=-0.6 gross +0.04 | train median +1.29 | hindsight in-sample +0.36 re-randomised -0.08 (deflation bench nan) | 8s
+USDCAD H6 zone       : WF single-trader median +0.04 (gross +0.23) | expected stream -0.01 t=-0.0 gross +0.48 | train median +0.44 | hindsight in-sample +0.25 re-randomised -0.02 (deflation bench nan) | 5s
+USDCAD H6 hedged_grid: WF single-trader median +0.31 (gross +0.66) | expected stream +0.31 t=+1.0 gross +0.66 | train median +0.75 | hindsight in-sample +0.52 re-randomised +0.52 (deflation bench nan) | 4s
+done USDCAD H6 in 0.6 min
