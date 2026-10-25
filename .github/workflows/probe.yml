@@ -3,7 +3,7 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["ci/PROBE", "ci/probe.py"]
+    paths: ["ci/PROBE", "ci/probe.py", "ci/probe_macro.py"]
 permissions:
   contents: write
 jobs:
@@ -17,6 +17,10 @@ jobs:
           python-version: "3.11"
       - name: Probe free statistics sources
         run: python ci/probe.py
+      - name: Fetch the macro-lab series from DBnomics
+        run: |
+          pip install -q numpy pandas
+          python ci/probe_macro.py
       - name: Publish to the probe branch
         run: |
           git config user.name "fxlab-sweep"
