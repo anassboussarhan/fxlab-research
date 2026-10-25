@@ -685,7 +685,7 @@ def portfolios(R):
 
 def stage_cycles(a, X, vix):
     syms = [s for s in a.symbols.split(",") if s] or sorted(
-        f.split("_", 1)[1].split(".")[0] for f in os.listdir(a.chain) if f.startswith("chain_"))
+        f[len("chain_"):-len(".parquet")] for f in os.listdir(a.chain) if f.startswith("chain_") and f.endswith(".parquet"))
     if a.group:
         i, n = map(int, a.group.split("/"))
         syms = syms[i::n]
