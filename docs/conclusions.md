@@ -133,6 +133,9 @@ training filter, pooled on the more mean-reverting pairs).
 - It would pay only at roughly one third of the modelled costs.
 - Random entries cannot win at retail costs on this data.
 
+Run 16 extends this to M1-M30, H2, tick and volatility bars: 0 of 78 tests survive, and every fast timeframe is
+still negative at half costs. Grids make up to +1.2 Sharpe gross at M1-M5, far below their costs.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.

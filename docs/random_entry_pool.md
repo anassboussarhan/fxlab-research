@@ -95,9 +95,35 @@ Gross (no costs):
   The median single trader is often positive even where the average over traders loses (H1 pooled_mr: median
   trader +1.06, expectancy -1.94). This is the "most grid traders win for years" trap. Only the expectancy counts.
 
+## Run 16: the faster timeframes (M1-M30, H2, tick and volatility bars; run 40195407249, branch `results16`)
+
+The same candidates and rules, merged with run 15: 78 portfolio tests over 13 timeframes.
+
+Portfolio Sharpe of the expected-value stream, full costs:
+
+| Timeframe | apriori | per_pair | pooled | pooled_top10 | pooled_filter | pooled_mr |
+|---|---|---|---|---|---|---|
+| M1 | -23.2 | -4.32 | -5.16 | -6.58 | -3.34 | -7.48 |
+| M5 | -12.5 | -2.61 | -1.26 | -3.47 | -0.97 | -2.37 |
+| M15 | -6.88 | -1.44 | -1.13 | -4.11 | -1.05 | -1.49 |
+| M30 | -4.73 | -2.07 | -1.28 | -3.85 | -1.27 | -1.56 |
+| H2 | -2.20 | -1.01 | -1.40 | -1.20 | -1.38 | -1.38 |
+| TICK60 | -2.96 | -1.40 | -1.48 | -2.87 | -1.37 | -1.91 |
+| VOLA60 | -2.93 | -1.35 | -2.42 | -3.35 | -2.33 | -2.79 |
+
+- **0 of 78 tests survive BH**, at full costs and at half costs. The best is still D1 pooled (+0.25, t 0.9).
+- **At half costs every fast timeframe is still negative:** M5 -0.41 at best, M1 -1.66 at best.
+- **Before costs there is mean reversion at the fast timeframes too.**
+  - The a-priori grid makes +0.96 gross at M5 (t 3.4) and +0.73 at M30 (t 2.6).
+  - Pooled over the most mean-reverting pairs, M1 makes +1.16 (t 3.4) and tick bars +0.86 (t 2.5).
+  - The costs are many times larger than this edge.
+  - The pooled rules, which select on net training results, choose rarely-trading candidates, so their gross
+    results are close to zero.
+
 ## Conclusion
 
-Random entries cannot win at retail costs on this data, even with robust, pooled parameter choice. The one
+Random entries cannot win at retail costs on this data, on any of 13 timeframes from M1 to D1, even with
+robust, pooled parameter choice. The one
 exploitable property, short-swing mean reversion, is significant before costs at H1-H4. Paying it out would need
 trading costs of roughly a third of a normal ECN retail account (spread, slippage, commission and swap), which is
 market-maker or prime-broker territory.
