@@ -95,6 +95,8 @@ def main():
     ap.add_argument("--projections-set", default="", help="wave2 = only the second-wave projections")
     ap.add_argument("--random-entry-opt-only", action="store_true",
                     help="run only scripts/random_entry_opt.py (optimised management of random entries)")
+    ap.add_argument("--random-entry-pool-only", action="store_true",
+                    help="run only scripts/random_entry_pool.py (shared candidate set for pooled selection)")
     ap.add_argument("--reo-families", default="", help="families for --random-entry-opt-only (default: the script's)")
     ap.add_argument("--reo-tag", default="", help="output-file suffix for --random-entry-opt-only")
     ap.add_argument("--edge-harvest-opt-only", action="store_true",
@@ -117,6 +119,12 @@ def main():
         sh([PY, "scripts/random_entry_opt.py", "--pair", a.pair, "--tf", a.tf, "--start", START, "--end", END,
             "--out", os.path.join(out, "random_entry_opt")] + extra, log, timeout=int((a.budget_min - 5) * 60))
         json.dump({"pair": a.pair, "tf": a.tf, "part": "random_entry_opt", "streams_exported": 0,
+                   "minutes": round((time.time() - t0) / 60, 1)}, open(os.path.join(out, "job.json"), "w"))
+        return
+    if a.random_entry_pool_only:
+        sh([PY, "scripts/random_entry_pool.py", "--pair", a.pair, "--tf", a.tf, "--start", START, "--end", END,
+            "--out", os.path.join(out, "random_entry_pool")], log, timeout=int((a.budget_min - 5) * 60))
+        json.dump({"pair": a.pair, "tf": a.tf, "part": "random_entry_pool", "streams_exported": 0,
                    "minutes": round((time.time() - t0) / 60, 1)}, open(os.path.join(out, "job.json"), "w"))
         return
     if a.edge_harvest_opt_only:
