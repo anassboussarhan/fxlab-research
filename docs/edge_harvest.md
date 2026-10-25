@@ -108,6 +108,31 @@ Equal weight across the 34 pairs per timeframe and horizon:
 Cheaper execution was chosen wherever it was available, but saving part of the spread does not make up for a
 forecast whose predicted move is a few percent of the cost.
 
+### The parameter values chosen
+
+These come from run 13 (40145929636, branch `results13`), which re-collected run 9 with the chosen values per
+fold (`sweep_results/edge_harvest_opt/params.csv`). There are 509-570 folds per timeframe and horizon.
+
+| Lever | M5-H1 | H2-D1 |
+|---|---|---|
+| stop/target mode instead of signal-managed | 5-47% of folds (mostly 12-35%) | 29-72% |
+| entry threshold (x round-trip cost), median | 0.3-3.4 | 1.0-2.6 |
+| signal mode: passive execution | 39-70% | 49-82% (highest at D1, ~80%) |
+| signal mode: forecast-proportional sizing / pyramiding | 22-57% / 48-58% | 30-52% / 52-73% |
+| stops mode: ATR stop, median (interquartile range) | 1.3-4.9 (0.8-6.5) | 1.4-3.3 (0.7-5.5) |
+| stops mode: target used, median R | 26-55%, 0.4-2.7 | 46-57%, 1.0-2.0 |
+| stops mode: trailing used, median ATR | 23-49%, 2.1-5.7 | 37-61%, 1.5-3.2 |
+| stops mode: breakeven / partial / time exit used | 34-68% / 33-50% / 33-62% | 45-59% / 45-56% / 44-54% |
+| stops mode entry: pullback limit / breakout stop / market | 21-66% / 12-46% / 1-22% | 50-72% / 15-31% / 0-10% |
+
+Three things stand out:
+- **No consistent choice.** Every optional lever is switched on in roughly half the folds, and the interquartile
+  ranges of the ATR stop span most of the search range. That is what fitting noise looks like: no setting is
+  reliably better, so the choice flips from fold to fold.
+- **The only consistent preferences are cheaper fills:** passive or limit execution and pullback entries.
+- **Why that is not enough:** cheaper fills reduce the cost but cannot make up for a forecast that is smaller
+  than it.
+
 ## Conclusion
 
 Optimising every lever lifts the training Sharpe to about +1.4, but not the out-of-sample one. The

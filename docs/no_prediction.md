@@ -107,6 +107,24 @@ unaffected). Re-run of run 3 with the fix: joint streams median change 0.00, mea
 survivors. Joint optimisation still beats the standard walk-forward in 59% of family x pair x timeframe cases
 (median +0.11 Sharpe; run 2 pre-fix: 60%, +0.13), by losing less rather than by making money.
 
+## Runs 11-14: every management parameter optimised - see `docs/random_entry_opt.md`
+Tests 1 and 2 used fixed settings. Runs 11-14 optimise every parameter of seven families, plus the entry rate,
+inside each walk-forward fold:
+- bracket;
+- martingale / anti-martingale;
+- pyramid;
+- averaging-down grid;
+- zone recovery;
+- hedged grid;
+- limit/stop entries with trading hours, filters, stop-and-reverse and flat before rollover.
+
+They then test with new random entries on 34 pairs x 13 timeframes (3,094 cells).
+
+Result: 0 significant cells, median net Sharpe -0.28.
+- The best is an averaging-down grid on D1: single-trader median +0.10, but an expectancy of about zero (+0.02;
+  34-pair portfolio t 1.0).
+- Martingale and zone recovery approach zero only by risking the account.
+
 ## Where retail "winners" come from
 
 - **Survivorship and short track records** of negatively skewed systems (grid, martingale, zone recovery).

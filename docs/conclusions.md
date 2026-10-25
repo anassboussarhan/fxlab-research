@@ -95,6 +95,33 @@ Run 9: 34 pairs x M5-D1 x 3 horizons, 816 streams.
 
 Optimising everything mostly fits noise.
 
+### 8.1i Best management of random entries, fully optimised - see `docs/random_entry_opt.md`
+Seven families with every parameter and the entry rate optimised by TPE per walk-forward fold, and tested with new
+random entries (runs 11-14: 34 pairs x 13 timeframes x 7 families = 3,094 cells):
+- bracket;
+- martingale / anti-martingale;
+- pyramid;
+- averaging-down grid;
+- zone recovery;
+- hedged grid;
+- "smart": limit/stop entries, trading-hour window, volatility and spread filters, stop-and-reverse, flat before
+  rollover.
+
+Results:
+- Median net Sharpe -0.28; 16% of cells positive; **0** BH survivors (cells and portfolios); 0.6% of cells with
+  t > 1.645 (5% by chance).
+- Best: an averaging-down grid on D1 (median single-trader +0.10, 62% of pairs positive, no ruin). But its
+  expectancy (average over random traders) is +0.02 and the 34-pair portfolio +0.29 (t 1.0, p 0.15). It is the
+  best of 91 timeframe x family combinations and fails the survival bar.
+- Martingale and zone recovery come close to zero only by risking the account: half the account lost in 79-100%
+  and 9-38% of cells.
+- Momentum-type management (pyramid, trailing) loses even before costs. Mean-reversion-type management is slightly
+  positive before costs.
+- Every family is worst at M1-M5.
+
+A grid fill error found on the way: limit orders were filled at mid without paying the spread. It produced all
+five apparent BH survivors (AUDNZD M5 grid +3.5); it was fixed and the grid re-run in run 14.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.

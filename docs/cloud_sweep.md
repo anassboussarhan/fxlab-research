@@ -106,3 +106,5 @@ results branch (`resultsN`). Development data only (2007-2018, EURUSD to 2022), 
 | 10 | 40119113917 | run 3 repeated after the mid-bar-fill fix | `docs/no_prediction.md` |
 | 11 | 40139466942 | optimised management of RANDOM entries: bracket, martingale, pyramid, grid, zone recovery, hedged grid (13 timeframes) | `docs/random_entry_opt.md` |
 | 12 | 40141201668 | the "smart" execution family for random entries (limit/stop entries, sessions, filters, stop-and-reverse, flat before rollover); merges run 11 into one ranking | `docs/random_entry_opt.md` |
+| 13 | 40145929636 | collect only: re-aggregates runs 9, 11 and 12 with the chosen parameter values (edge harvest) and tail risk / year-by-year results (random entries) | `docs/edge_harvest.md`, `docs/random_entry_opt.md` |
+| 14 | 40152143260 | re-run of the random-entry grid after the limit-fill fix (limit orders pay the spread); merges runs 11-12 - the final random-entry ranking | `docs/random_entry_opt.md` |
