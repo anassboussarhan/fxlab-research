@@ -99,6 +99,8 @@ def main():
                     help="run only scripts/macro_lab.py (monthly FX and macro series for the macro strategies)")
     ap.add_argument("--flows-only", action="store_true",
                     help="run only scripts/flows_lab.py (flow, calendar and option-implied effects)")
+    ap.add_argument("--lit2-only", action="store_true",
+                    help="run only scripts/lit2_lab.py (round-2 literature tests: metals fixes, gold sessions, FX factors)")
     ap.add_argument("--random-entry-pool-only", action="store_true",
                     help="run only scripts/random_entry_pool.py (shared candidate set for pooled selection)")
     ap.add_argument("--reo-families", default="", help="families for --random-entry-opt-only (default: the script's)")
@@ -135,6 +137,12 @@ def main():
         sh([PY, "scripts/flows_lab.py", "--pair", a.pair, "--start", START, "--end", END,
             "--out", os.path.join(out, "flows")], log, timeout=int((a.budget_min - 5) * 60))
         json.dump({"pair": a.pair, "tf": a.tf, "part": "flows", "streams_exported": 0,
+                   "minutes": round((time.time() - t0) / 60, 1)}, open(os.path.join(out, "job.json"), "w"))
+        return
+    if a.lit2_only:
+        sh([PY, "scripts/lit2_lab.py", "--pair", a.pair, "--start", START, "--end", END,
+            "--out", os.path.join(out, "lit2")], log, timeout=int((a.budget_min - 5) * 60))
+        json.dump({"pair": a.pair, "tf": a.tf, "part": "lit2", "streams_exported": 0,
                    "minutes": round((time.time() - t0) / 60, 1)}, open(os.path.join(out, "job.json"), "w"))
         return
     if a.random_entry_pool_only:

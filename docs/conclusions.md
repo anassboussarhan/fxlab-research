@@ -161,6 +161,19 @@ costs, and swap from run 19. Two survive Benjamini-Hochberg over the 17 tests.
   - Gotobi random-time entries make +0.41 bp (t 0.5); random timing keeps half the gross move.
   - Take-profit / stop brackets make every version negative.
 
+### 8.1l Macro fundamentals - see `docs/macro_lab.md`
+Runs 18, 20 and 21 test four published macro designs: monthly long/short of 9 currencies vs USD, 2007-2018, with
+costs and carry.
+- Run 18 fetched no data (FRED timed out on the runner). Run 20 fetched all 50 OECD / IMF series from DBnomics.
+- **None survives** (BH q >= 0.38).
+  - Economic momentum: +25 bp a month, t 1.32. It made +52 bp in 2007-2012 and -3 bp in 2013-2018; correlation
+    with carry 0.71.
+  - Output gap: -0.5 bp, t -0.03.
+  - Taylor rule: +3.9 bp, t 0.22.
+- **The elastic net set every coefficient to zero in all 149 monthly fits**, so it never trades. Runs 18 and 20 had
+  reported -5.2 bp for it; that number was an artefact of ranking a constant forecast in a fixed order, fixed in
+  run 21.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
