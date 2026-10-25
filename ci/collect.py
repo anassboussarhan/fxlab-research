@@ -52,7 +52,7 @@ def main():
             m.execute("INSERT INTO folds SELECT * FROM s.folds WHERE id NOT IN (SELECT DISTINCT id FROM folds)")
             m.execute("DETACH s")
             m.close()
-        for sub in ("edge_harvest", "edge_harvest_opt", "random_entry_opt", "random_entry_pool"):
+        for sub in ("edge_harvest", "edge_harvest_opt", "random_entry_opt", "random_entry_pool", "flows"):
             for x in glob.glob(os.path.join(d, sub, "*")):
                 os.makedirs(os.path.join(res, "reports", sub), exist_ok=True)
                 shutil.copy(x, os.path.join(res, "reports", sub, os.path.basename(x)))
@@ -69,7 +69,7 @@ def main():
     os.makedirs(out, exist_ok=True)
     for script in ("program_report.py", "family_portfolios.py", "feature_scan_report.py", "joint_report.py",
                    "projection_report.py", "feature_ic_report.py", "edge_harvest_report.py",
-                   "random_entry_opt_report.py", "random_entry_pool_report.py"):
+                   "random_entry_opt_report.py", "random_entry_pool_report.py", "flows_report.py"):
         with open(os.path.join(out, script.replace(".py", ".log")), "w") as f:
             subprocess.run([PY, os.path.join("scripts", script)], cwd=ROOT, stdout=f, stderr=subprocess.STDOUT)
     with open(os.path.join(out, "edge_harvest_opt_report.log"), "w") as f:
@@ -81,7 +81,8 @@ def main():
                      ("results/reports/edge_harvest_summary", "edge_harvest"),
                      ("results/reports/edge_harvest_opt_summary", "edge_harvest_opt"),
                      ("results/reports/random_entry_opt_summary", "random_entry_opt"),
-                     ("results/reports/random_entry_pool_summary", "random_entry_pool")):
+                     ("results/reports/random_entry_pool_summary", "random_entry_pool"),
+                     ("results/reports/flows_summary", "flows")):
         if os.path.isdir(os.path.join(ROOT, src)):
             shutil.copytree(os.path.join(ROOT, src), os.path.join(out, dst), dirs_exist_ok=True)
     fs = os.path.join(ROOT, "results", "reports", "feature_scan")
