@@ -93,6 +93,22 @@ def main():
         return
     streams = load_streams(files)
     C = pd.DataFrame(rows)
+    # tail risk of the expected-value stream (returns are fractions of starting equity, summed): max drawdown,
+    # worst day, skew, ruin (cumulative loss of half the account at some point), share of calendar years positive
+    risk = []
+    for (pair, tf, fam), s in streams.items():
+        x = s.dropna().astype(float)
+        if len(x) < 20:
+            continue
+        cum = x.cumsum()
+        r = {"pair": pair, "tf": tf, "family": fam, "max_drawdown": float((cum - cum.cummax().clip(lower=0)).min()),
+             "worst_day": float(x.min()), "skew": float(x.skew()), "ruin50": bool(cum.min() <= -0.5)}
+        if isinstance(x.index, pd.DatetimeIndex):
+            yr = x.groupby(x.index.year).sum()
+            r["share_years_positive"] = float((yr > 0).mean())
+        risk.append(r)
+    if risk:
+        C = C.merge(pd.DataFrame(risk), on=["pair", "tf", "family"], how="left")
     C["p"] = st.t.sf(C.t, df=np.maximum(C.days - 1, 1))
     C["p_bh"] = benjamini_hochberg(C.p.to_numpy())
     C["o"] = C.tf.map({t: i for i, t in enumerate(TF_ORDER)})
@@ -105,9 +121,14 @@ def main():
                median_train=("train_median", "median"), median_trades_per_fold=("test_trades_per_fold", "median"),
                median_hindsight_in_sample=("hindsight_in_sample", "median"),
                median_hindsight_rerandomised=("hindsight_rerandomised", "median"))
+    if "max_drawdown" in C:
+        agg.update(median_max_drawdown=("max_drawdown", "median"), worst_max_drawdown=("max_drawdown", "min"),
+                   share_ruin50=("ruin50", "mean"), median_skew=("skew", "median"))
+    if "share_years_positive" in C:
+        agg["median_share_years_positive"] = ("share_years_positive", "median")
     R = C.groupby(["tf", "family"]).agg(**agg).reset_index()
     # equal-weight portfolio across instruments of the expected-value streams, on common trading days
-    port = []
+    port, pser = [], {}
     for (tf, fam) in R[["tf", "family"]].itertuples(index=False):
         S = {k[0]: v for k, v in streams.items() if k[1] == tf and k[2] == fam}
         if not S:
@@ -120,6 +141,7 @@ def main():
             M = pd.Series(np.mean([x.to_numpy()[:L] for x in S.values()], axis=0))
             aligned = "start"
         sh, t = sharpe_t(M)
+        pser[(tf, fam)] = M
         port.append({"tf": tf, "family": fam, "streams": len(S), "portfolio_sharpe": sh, "portfolio_t": t,
                      "portfolio_ann_return": float(M.mean() * 260), "aligned_by": aligned})
     PF = pd.DataFrame(port)
@@ -136,6 +158,15 @@ def main():
     F.to_csv(OUT / "best_tf_by_family.csv", index=False)
     if len(PF):
         PF.sort_values("portfolio_sharpe", ascending=False).to_csv(OUT / "portfolios.csv", index=False)
+    yrs = []                                     # year by year: the 10 best-ranked timeframe x family portfolios
+    for tf, fam in R.head(10)[["tf", "family"]].itertuples(index=False):
+        M = pser.get((tf, fam))
+        if M is None or not isinstance(M.index, pd.DatetimeIndex):
+            continue
+        for y, g in M.groupby(M.index.year):
+            yrs.append({"tf": tf, "family": fam, "year": int(y), "return": float(g.sum()), "sharpe": sharpe_t(g)[0]})
+    if yrs:
+        pd.DataFrame(yrs).to_csv(OUT / "years.csv", index=False)
     P = pd.DataFrame(prm)
     if len(P):
         num = [c for c in P.select_dtypes("number").columns if c not in ("h0", "width")]

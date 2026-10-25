@@ -34,7 +34,7 @@ def sharpe(d):
 
 def main():
     OUT.mkdir(parents=True, exist_ok=True)
-    rows, choices, daily = [], [], {}
+    rows, choices, daily, prm = [], [], {}, []
     for f in sorted(glob.glob(str(IN / "*.json"))):
         J = json.load(open(f))
         P = J.get("policy_grid", [])
@@ -50,6 +50,7 @@ def main():
             for sel in H["selection"]:
                 if "params" in sel:                                  # optimised version (edge_harvest_opt.py)
                     p = dict(sel["params"]); p["kind"] = p.get("mode")
+                    prm.append({"tf": J["tf"], "h": int(h), "inner_sharpe": sel.get("inner_sharpe"), **sel["params"]})
                 else:
                     p = P[sel["policy"]] if sel["policy"] < len(P) else {}
                 choices.append({"tf": J["tf"], "h": int(h), "kind": p.get("kind"), "exec": p.get("exec", p.get("entry")),
@@ -84,6 +85,42 @@ def main():
         CC = C.groupby(["tf", "label"]).size().unstack(fill_value=0)
         CC = CC.div(CC.sum(1), axis=0)
         CC.to_csv(OUT / "choices.csv")
+    # optimised version: which parameter values were chosen (per timeframe and horizon, over pairs x folds)
+    if prm:
+        Q = pd.DataFrame(prm)
+        out_rows = []
+        for (tf, h), g in Q.groupby(["tf", "h"]):
+            r = {"tf": tf, "h": h, "folds": len(g), "share_stops_mode": float((g["mode"] == "stops").mean())}
+
+            def qs(col, gg, name=None):
+                name = name or col
+                if col in gg and gg[col].notna().any():
+                    x = gg[col].dropna().astype(float)
+                    r.update({f"{name}_q25": float(x.quantile(.25)), f"{name}_median": float(x.median()),
+                              f"{name}_q75": float(x.quantile(.75))})
+            qs("theta", g)
+            def share(gg, col, val):
+                return float((gg[col] == val).mean()) if col in gg and len(gg) else 0.0
+            s = g[g["mode"] == "signal"]
+            if len(s):
+                r.update({"signal_share_passive": share(s, "exec", "passive"),
+                          "signal_share_prop_size": share(s, "size", "prop"),
+                          "signal_share_pyramid": share(s, "pyramid", True),
+                          "signal_share_hold_exit": share(s, "exit", "hold")})
+            k = g[g["mode"] == "stops"]
+            if len(k):
+                qs("sl_atr", k)
+                for col, name in (("tp_r", "tp_r"), ("trail_atr", "trail_atr"), ("be_r", "be_r"),
+                                  ("partial_r", "partial_r"), ("max_hold", "max_hold")):
+                    r[f"stops_share_{name}"] = float(k[col].notna().mean()) if col in k else 0.0
+                    if col in k and k[col].notna().any():
+                        r[f"{name}_median"] = float(k[col].dropna().astype(float).median())
+                for e in ("market", "limit_touch", "limit_pullback", "stop_breakout"):
+                    r[f"stops_entry_{e}"] = share(k, "entry", e)
+            out_rows.append(r)
+        PR = pd.DataFrame(out_rows)
+        PR["o"] = PR.tf.map({t: i for i, t in enumerate(TF_ORDER)})
+        PR.sort_values(["o", "h"]).drop(columns="o").to_csv(OUT / "params.csv", index=False)
     # diversified / hedged portfolios: equal weight across instruments
     port = []
     if daily:
