@@ -17,6 +17,9 @@ unit traded; Benjamini-Hochberg over the four):
 Diagnostics (not in the BH family): carry, 12-month FX momentum, 5-year value, the output-gap time-series version.
 Macro data are revised, not real-time vintages; each series is used only from 2 months (monthly) or 5 months
 (quarterly) after its observation date.
+Run 21 fix: a month whose signal cannot rank the currencies (fewer distinct values than needed, or zero spread - the
+elastic net returns a constant forecast when it shrinks every coefficient to zero) is held flat. Runs 18 and 20
+ranked such ties in an arbitrary fixed order, which made the ML result an artefact. ml_fits.csv records each fit.
 Writes results/reports/macro_summary/{tests.csv, monthly.csv, coverage.csv, summary.json}."""
 from __future__ import annotations
 
@@ -102,6 +105,14 @@ def portfolio(signal, ret, spr, n_side=3, ts_mode=False):
         if r is None:
             continue
         s = s[r.notna()]
+        if not ts_mode and len(s) >= 2 * n_side and (s.nunique() < 2 * n_side or s.std() == 0):
+            # the signal exists but cannot rank the currencies (e.g. a constant forecast): flat this month (run 21)
+            w_full = pd.Series(0.0, index=signal.columns)
+            turn = (w_full - w_prev).abs()
+            cost = float((turn * ((0.5 + SLIP_FRAC) * spr.loc[t].reindex(signal.columns).fillna(spr.loc[t].median()) + COMM)).sum())
+            gross[t1], net[t1] = 0.0, -cost
+            w_prev = w_full
+            continue
         if ts_mode:
             if len(s) < 3:
                 continue
@@ -206,6 +217,7 @@ def main():
     Pn[fcols] = Pn.groupby("t")[fcols].transform(lambda x: (x - x.mean()) / x.std() if x.std() > 0 else x * 0)
     Pn[fcols] = Pn[fcols].fillna(0.0)
     first = months[0] + 36
+    fits = []
     for t in months:
         if t < first:
             continue
@@ -215,7 +227,13 @@ def main():
         sc = StandardScaler().fit(tr[fcols])
         m = ElasticNetCV(l1_ratio=[0.1, 0.5, 0.9], cv=5, alphas=30, max_iter=5000).fit(sc.transform(tr[fcols]), tr.y)
         te = Pn[Pn.t == t]
-        ML.loc[t, te.c.to_numpy()] = m.predict(sc.transform(te[fcols]))
+        pred = m.predict(sc.transform(te[fcols]))
+        ML.loc[t, te.c.to_numpy()] = pred
+        fits.append({"month": str(t), "alpha": float(m.alpha_), "l1_ratio": float(m.l1_ratio_),
+                     "nonzero": int((np.abs(m.coef_) > 0).sum()), "forecast_sd": float(np.std(pred)),
+                     **{f"coef_{k}": float(v) for k, v in zip(fcols, m.coef_)}})
+    FITS = pd.DataFrame(fits)
+    FITS.to_csv(OUT / "ml_fits.csv", index=False)
     tests = {"EM": EM, "OG": OG, "TR": TR, "ML": ML}
     diag = {"carry": carry, "fx_momentum_12m": MOM12, "value_5y": VAL}
     rows, monthly = [], {}
@@ -242,7 +260,14 @@ def main():
     M.index = M.index.astype(str)
     M.to_csv(OUT / "monthly.csv")
     summ = {"currencies": ccys, "months": [str(months[0]), str(months[-1])], "bh_survivors_q10": int((P.p_bh < 0.10).sum()),
-            "tests": T.to_dict("records"), "coverage_rows": int(len(cov))}
+            "tests": T.to_dict("records"), "coverage_rows": int(len(cov)),
+            "ml_fits": int(len(FITS)), "ml_months_all_coefficients_zero": int((FITS.nonzero == 0).sum()) if len(FITS) else None,
+            "ml_feature_selected_share": {k: float((FITS[f"coef_{k}"] != 0).mean()) for k in fcols} if len(FITS) else {}}
+    # the inputs (monthly FX series and macro series) are small: publish them with the summary
+    import shutil
+    (OUT / "inputs").mkdir(exist_ok=True)
+    for f in glob.glob(str(IN / "fx_*.csv")) + glob.glob(str(IN / "macro_*_*.csv")):
+        shutil.copy(f, OUT / "inputs" / os.path.basename(f))
     json.dump(summ, open(OUT / "summary.json", "w"), indent=1, default=str)
     pd.set_option("display.width", 250)
     print(T.round(3).to_string())
