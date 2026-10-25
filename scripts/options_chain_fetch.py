@@ -20,7 +20,7 @@ MAP = {"call_put": "cp", "type": "cp", "option_type": "cp", "put_call": "cp", "v
 
 
 def norm(f):
-    C = pd.read_csv(f, low_memory=False)
+    C = pd.read_csv(f, low_memory=False) if isinstance(f, str) else f
     C.columns = [c.strip().lower() for c in C.columns]
     C = C.rename(columns={c: MAP[c] for c in C.columns if c in MAP})
     need = ["date", "expiration", "strike", "cp", "bid", "ask"]
@@ -40,17 +40,22 @@ def norm(f):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--raw", required=True)
+    ap.add_argument("--raw", default="")
+    ap.add_argument("--combined", default="", help="one CSV holding every symbol (act_symbol column)")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     meta = {}
-    for f in sorted(os.listdir(a.raw)):
-        if not (f.startswith("raw_") and f.endswith(".csv")):
-            continue
-        sym = f[4:-4]
+    if a.combined:
+        ALL = pd.read_csv(a.combined, low_memory=False, dtype={"act_symbol": "category", "call_put": "category"})
+        items = [(str(k), g.drop(columns="act_symbol")) for k, g in ALL.groupby("act_symbol", observed=True)]
+        del ALL
+    else:
+        items = [(f[4:-4], os.path.join(a.raw, f)) for f in sorted(os.listdir(a.raw))
+                 if f.startswith("raw_") and f.endswith(".csv")]
+    for sym, src in items:
         try:
-            C = norm(os.path.join(a.raw, f))
+            C = norm(src.copy() if not isinstance(src, str) else src)
         except Exception as ex:                                  # noqa: BLE001
             meta[sym] = {"error": str(ex)[:300]}
             continue

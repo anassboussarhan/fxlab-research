@@ -26,7 +26,7 @@ def main():
     cols, meta = {}, {}
     for sym in [s for s in a.symbols.split(",") if s]:
         try:
-            t = yf.Ticker(sym)
+            t = yf.Ticker(sym.replace(".", "-"))
             h = t.history(start=a.start, end="2026-01-01", auto_adjust=False, actions=True)
             h.index = pd.to_datetime(h.index).tz_localize(None).normalize()
             h = h[h.index <= END]

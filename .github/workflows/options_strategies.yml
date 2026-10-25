@@ -1,7 +1,8 @@
 name: options-strategies
-# Options strategy lab: many structures x underlyings x management x filters on real end-of-day option quotes
-# (DoltHub post-no-preference/options, free), cut at 2025-12-31, plus the calibrated synthetic layer for the long
-# history and the capital-provider simulation of the best structures. Results to branch options-strategies.
+# Options strategy lab on every covered underlying: 19 structures x 7/30/45 days x 5 management rules x 5 filters
+# on real end-of-day option quotes (DoltHub post-no-preference/options, free), cut at 2025-12-31; plus stock
+# portfolios, the calibrated synthetic long-history layer (SPY, DIA) and the capital-provider simulation of the
+# best combinations. Results to branch options-strategies.
 on:
   workflow_dispatch:
   push:
@@ -10,11 +11,12 @@ on:
 permissions:
   contents: write
 env:
-  SYMBOLS: SPY,QQQ,IWM,DIA,GLD,SLV,TLT,EEM,XLE,USO,AAPL,MSFT,AMZN,NVDA,TSLA
+  # index ETFs (those absent from the database are skipped) and the S&P 100 (current members: survivorship bias)
+  SYMBOLS: SPY,DIA,QQQ,IWM,GLD,SLV,TLT,EEM,XLE,XLF,AAPL,ABBV,ABT,ACN,ADBE,AIG,AMD,AMGN,AMT,AMZN,AVGO,AXP,BA,BAC,BK,BKNG,BLK,BMY,BRK.B,C,CAT,CHTR,CL,CMCSA,COF,COP,COST,CRM,CSCO,CVS,CVX,DE,DHR,DIS,DUK,EMR,F,FDX,GD,GE,GILD,GM,GOOG,GOOGL,GS,HD,HON,IBM,INTC,INTU,ISRG,JNJ,JPM,KHC,KO,LIN,LLY,LMT,LOW,MA,MCD,MDLZ,MDT,MET,META,MMM,MO,MRK,MS,MSFT,NEE,NFLX,NKE,NOW,NVDA,ORCL,PEP,PFE,PG,PLTR,PM,PYPL,QCOM,RTX,SBUX,SCHW,SO,SPG,T,TGT,TMO,TMUS,TSLA,TXN,UBER,UNH,UNP,UPS,USB,V,VZ,WFC,WMT,XOM
 jobs:
   data:
     runs-on: ubuntu-latest
-    timeout-minutes: 240
+    timeout-minutes: 300
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -25,37 +27,50 @@ jobs:
         run: |
           sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
           df -h /
-      - name: Install dolt and clone the options database
+      - name: Install dolt and clone the options and earnings databases
         run: |
           curl -sSL https://github.com/dolthub/dolt/releases/latest/download/install.sh -o /tmp/install.sh
           sudo bash /tmp/install.sh
           dolt config --global --add user.email ci@example.com
           dolt config --global --add user.name ci
           mkdir -p /tmp/d && cd /tmp/d
-          time dolt clone post-no-preference/options
-          du -sh /tmp/d/options
-      - name: Export the chains of the chosen underlyings (dates <= 2025-12-31)
+          time dolt clone post-no-preference/options > /tmp/clone.log 2>&1; tail -1 /tmp/clone.log
+          time dolt clone post-no-preference/earnings > /tmp/clone_e.log 2>&1 || true; tail -1 /tmp/clone_e.log
+          du -sh /tmp/d/*
+      - name: Export the chains in one scan (dates <= 2025-12-31)
         run: |
-          mkdir -p raw chains
+          mkdir -p chains
+          LIST=$(echo $SYMBOLS | sed "s/,/','/g")
           cd /tmp/d/options
-          dolt sql -q "DESCRIBE option_chain" -r csv | tee $GITHUB_WORKSPACE/chains/schema.csv
-          for s in ${SYMBOLS//,/ }; do
-            dolt sql -q "SELECT * FROM option_chain WHERE act_symbol='$s' AND date <= '2025-12-31'" -r csv > $GITHUB_WORKSPACE/raw/raw_$s.csv
-            echo "$s $(wc -l < $GITHUB_WORKSPACE/raw/raw_$s.csv) rows"
-          done
+          dolt sql -q "DESCRIBE option_chain" -r csv > $GITHUB_WORKSPACE/chains/schema.csv
+          time dolt sql -q "SELECT * FROM option_chain WHERE date <= '2025-12-31' AND act_symbol IN ('$LIST')" -r csv > /tmp/raw_all.csv
+          ls -la /tmp/raw_all.csv; wc -l /tmp/raw_all.csv
+      - name: Export earnings dates
+        continue-on-error: true
+        run: |
+          cd /tmp/d/earnings
+          dolt sql -q "SHOW TABLES" -r csv | tee $GITHUB_WORKSPACE/chains/earnings_tables.csv
+          dolt sql -q "SELECT act_symbol, date FROM earnings_calendar WHERE date <= '2026-03-31'" -r csv > $GITHUB_WORKSPACE/chains/earnings.csv
+          wc -l $GITHUB_WORKSPACE/chains/earnings.csv
       - name: Normalise chains and fetch closes
         run: |
-          python scripts/options_chain_fetch.py --raw raw --out chains
-          python scripts/options_closes_fetch.py --symbols $SYMBOLS --out chains/closes.csv
+          python scripts/options_chain_fetch.py --combined /tmp/raw_all.csv --out chains | tail -5
+          rm -f /tmp/raw_all.csv
+          python scripts/options_closes_fetch.py --symbols $SYMBOLS --out chains/closes.csv > /tmp/closes.log 2>&1; tail -3 /tmp/closes.log
+          ls chains | head; du -sh chains
       - uses: actions/upload-artifact@v4
         with:
           name: chains
           path: chains
           retention-days: 5
-  lab:
+  cycles:
     needs: data
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -67,30 +82,78 @@ jobs:
         with:
           name: chains
           path: chains
-      - name: Real-quote lab
+      - name: Cycles for symbol group ${{ matrix.group }} of 12
         run: |
           mkdir -p out
-          python scripts/options_strategy_lab.py --chain chains --closes chains/closes.csv --out out 2>&1 | tee out/log_lab.txt
-      - name: Synthetic long-history layer (model)
+          python scripts/options_strategy_lab.py --stage cycles --chain chains --closes chains/closes.csv --group ${{ matrix.group }}/12 --out out 2>&1 | tee out/log_cycles_${{ matrix.group }}.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cycles-${{ matrix.group }}
+          path: out
+          retention-days: 5
+  combine:
+    needs: cycles
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: cycles-*
+          path: parts
+      - uses: actions/download-artifact@v4
+        with:
+          name: chains
+          path: chains
+      - name: "Combine - statistics, multiple testing, walk-forward, stock portfolios"
+        run: |
+          mkdir -p out
+          python scripts/options_strategy_lab.py --stage combine --inputs $(ls -d parts/* | paste -sd, -) --out out 2>&1 | tee out/log_combine.txt
+      - name: Synthetic long-history layer (model, SPY / DIA)
         continue-on-error: true
         run: |
           mkdir -p out/synth
-          python scripts/options_synth.py --chain chains --closes chains/closes.csv --real out/cycles.csv.gz --out out/synth 2>&1 | tee out/synth/log_synth.txt
-      - name: Capital-provider simulation of the best structures
+          python scripts/options_synth.py --chain chains --closes chains/closes.csv --real out/cycles_all.csv.gz --out out/synth 2>&1 | tee out/synth/log_synth.txt
+      - name: Capital-provider simulation of the best combinations
         continue-on-error: true
         run: python scripts/options_strategy_prop.py --daily out/daily_mtm_top30.csv --out out/prop_top30.csv 2>&1 | tee out/log_prop.txt
-      - name: Publish to the options-strategies branch
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: combined
+          path: out
+          retention-days: 5
+      - name: Publish summaries to the options-strategies branch
         if: always()
         run: |
           git config user.name "fxlab-sweep"
           git config user.email "fxlab-sweep@users.noreply.github.com"
-          mkdir -p /tmp/pub && cp -r out /tmp/pub/options_strategies
-          cp chains/chain_meta.json chains/closes_meta.json chains/schema.csv /tmp/pub/options_strategies/ 2>/dev/null || true
+          P=/tmp/pub/options_strategies && mkdir -p $P
+          cd out
+          python - <<'EOF'
+          import pandas as pd, os
+          if os.path.exists("combos.csv"):
+              T = pd.read_csv("combos.csv")
+              T[T.fill == 0.75].to_csv("/tmp/pub/options_strategies/combos_primary.csv.gz", index=False)
+              T[T.fill != 0.75].to_csv("/tmp/pub/options_strategies/combos_fill_sensitivity.csv.gz", index=False)
+          EOF
+          cp summary.json walkforward_*.csv top30_drawdowns.csv daily_mtm_top30.csv prop_top30.csv log_*.txt $P/ 2>/dev/null || true
+          mkdir -p $P/synth && cp synth/*.json synth/*.txt synth/validation_model_vs_real.csv $P/synth/ 2>/dev/null || true
+          for f in synth/combos_synth.csv synth/combos_synth_pre2019.csv; do [ -f $f ] && gzip -c $f > $P/synth/$(basename $f).gz; done
+          cp ../chains/chain_meta.json ../chains/closes_meta.json ../chains/schema.csv ../chains/earnings_tables.csv $P/ 2>/dev/null || true
+          cp ../parts/*/meta_*.json ../parts/*/log_cycles_*.txt $P/ 2>/dev/null || true
+          cd ..
           git checkout --orphan os-tmp
           git rm -rq --cached . || true
           rm -rf ./* .github .gitignore || true
           cp -r /tmp/pub/options_strategies .
           echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > options_strategies/RUN.txt
+          du -sh options_strategies
           git add -f options_strategies
           git commit -qm "Options strategy lab (run ${{ github.run_id }})"
           git push -f origin HEAD:options-strategies

@@ -256,6 +256,8 @@ def build_position(bk, d, struct, dte, S):
     if not cand:
         return None
     front = min(cand, key=lambda e: abs((e - tgt).days))
+    if front > END:                          # every position must expire inside the development data
+        return None
     back = None
     if any(len(l) > 3 and l[3] == "back" for l in struct):
         later = [e for e in exps if 21 <= (e - front).days <= 45]
@@ -550,7 +552,7 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
                                                    for l in legs)})
                         rows.append(r)
                         if keep_mtm and f == PRIMARY_FILL:
-                            mtm[(sym, name, dte, mg, d)] = mtm_series(bk, d, legs, T, r["exit"], S)
+                            mtm[(sym, name, dte, mg, str(pd.Timestamp(d).date()))] = mtm_series(bk, d, legs, T, r["exit"], S)
     R = pd.DataFrame(rows)
     meta = {"weekly_expiries": has_weekly, "chain_dates": int(len(bk.dates)), "entries_skipped_price_mismatch": n_mismatch,
             "first": str(pd.Timestamp(bk.dates[0]).date()), "last": str(pd.Timestamp(bk.dates[-1]).date())}
@@ -712,7 +714,10 @@ def stage_cycles(a, X, vix):
         print(sym, json.dumps(m, default=str), len(R), flush=True)
         if len(R):
             R.to_csv(os.path.join(a.out, f"cycles_{sym}.csv.gz"), index=False)
-            pd.to_pickle(mtm, os.path.join(a.out, f"mtm_{sym}.pkl"))
+            comp = {k: (v.index.values.astype("datetime64[D]").astype(np.int32), v.to_numpy(np.float32))
+                    for k, v in mtm.items()}
+            pd.to_pickle(comp, os.path.join(a.out, f"mtm_{sym}.pkl"))
+            del comp, mtm
     with open(os.path.join(a.out, f"meta_{(a.group or 'all').replace('/', 'of')}.json"), "w") as fh:
         json.dump(meta, fh, indent=1, default=str)
 
@@ -723,7 +728,11 @@ def _member_mtm(R, MTM, r):
         return None
     g = R[(R.symbol == r.symbol) & (R.struct == r.struct) & (R.dte == r.dte) & (R.mgmt == r.mgmt) &
           (R.fill == PRIMARY_FILL) & flag(R, r["filter"])]
-    parts = [MTM[k] for k in ((r.symbol, r.struct, r.dte, r.mgmt, d) for d in g.entry) if k in MTM]
+    if r.symbol not in MTM:
+        return None
+    M = MTM[r.symbol]
+    parts = [pd.Series(M[k][1], index=pd.to_datetime(M[k][0].astype("datetime64[D]")))
+             for k in ((r.symbol, r.struct, int(r.dte), r.mgmt, str(pd.Timestamp(d).date())) for d in g.entry) if k in M]
     return pd.concat(parts, axis=1).sum(axis=1).sort_index() if parts else None
 
 
@@ -736,7 +745,7 @@ def stage_combine(a):
             if f.startswith("cycles_") and f.endswith(".csv.gz"):
                 Rs.append(pd.read_csv(p, parse_dates=["entry", "exit", "expiry"]))
             elif f.startswith("mtm_") and f.endswith(".pkl"):
-                MTM.update(pd.read_pickle(p))
+                MTM[f[4:-4]] = p                                 # loaded lazily, only for the best combinations
             elif f.startswith("meta_") and f.endswith(".json"):
                 meta.update(json.load(open(p)))
     R = pd.concat(Rs, ignore_index=True)
@@ -789,6 +798,8 @@ def stage_combine(a):
     for _, r in best.iterrows():
         if len(daily) >= 30:
             break
+        if isinstance(MTM.get(r.symbol), str):
+            MTM[r.symbol] = pd.read_pickle(MTM[r.symbol])
         sser = _member_mtm(R, MTM, r)
         if sser is None:
             continue
