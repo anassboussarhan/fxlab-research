@@ -92,3 +92,27 @@ def test_bh_and_nw():
     assert q[0] <= q[1] <= q[2] and np.isnan(q[3])
     x = np.r_[np.ones(20), -np.ones(20)] * 0.01 + 0.002
     assert np.isfinite(L.nw_t(x))
+
+
+def test_split_day_is_a_corporate_action():
+    idx = pd.bdate_range("2024-01-01", periods=30)
+    raw = pd.Series(np.r_[np.full(15, 1000.0), np.full(15, 100.0)], index=idx)      # 10-for-1 split on day 16
+    adj = pd.Series(100.0, index=idx)
+    u = L.Underlying(raw, adj)
+    assert list(u.events) == [idx[15]]
+    assert u.has_event(idx[10], idx[20]) and not u.has_event(idx[16], idx[29])
+
+
+def test_mark_to_market_adds_up_to_realised():
+    path = list(np.linspace(100, 90, 55))
+    C, und, exp = _chain(path=path)
+    bk = L.Book(C, und)
+    d = pd.Timestamp("2024-01-31")
+    S0 = float(und.px(d))
+    for name in ("SP30", "IC16_05", "CC30"):
+        legs, front = L.build_position(bk, d, L.STRUCTS[name], 45, S0)
+        T = L.cycle_paths(bk, d, legs, front)
+        for mg in ("H", "T50"):
+            r = L.evaluate(bk, d, legs, front, T, mg, 0.75)
+            inc = L.mtm_series(bk, d, legs, T, r["exit"], S0, r["pnl"])
+            assert abs(inc.sum() - r["pnl"]) < 1e-9

@@ -30,12 +30,12 @@ def main():
             h = t.history(start=a.start, end="2026-01-01", auto_adjust=False, actions=True)
             h.index = pd.to_datetime(h.index).tz_localize(None).normalize()
             h = h[h.index <= END]
-            spl = h["Stock Splits"].replace(0, 1.0).fillna(1.0)
+            spl = (h["Stock Splits"] if "Stock Splits" in h.columns else pd.Series(0.0, index=h.index)).replace(0, 1.0).fillna(1.0)
             later = spl[::-1].cumprod()[::-1].shift(-1).fillna(1.0)     # product of splits strictly after each day
             cols[f"{sym}_raw"] = h["Close"] * later
             cols[f"{sym}_adj"] = h["Adj Close"]
             meta[sym] = {"first": str(h.index[0].date()), "last": str(h.index[-1].date()), "n": int(len(h)),
-                         "splits": {str(d.date()): float(v) for d, v in h["Stock Splits"][h["Stock Splits"] > 0].items()}}
+                         "splits": {str(d.date()): float(v) for d, v in spl[spl != 1.0].items()}}
         except Exception as ex:                                          # noqa: BLE001
             meta[sym] = {"error": str(ex)[:200]}
     for k, s in VOL.items():

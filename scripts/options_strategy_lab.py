@@ -141,6 +141,14 @@ class Underlying:
     def __init__(self, raw, adj):
         self.raw = raw.dropna()
         self.adj = adj.reindex(self.raw.index).ffill()
+        # corporate-action days: the traded price and the total-return price move apart by more than 3% in a day
+        # (splits, reverse splits, special dividends, spin-offs that Yahoo adjusts); option contracts are
+        # re-written on those days, so a position spanning one cannot be valued from the quoted strikes
+        gap = (np.log(self.raw).diff() - np.log(self.adj).diff()).abs()
+        self.events = pd.DatetimeIndex(gap[gap > 0.03].index)
+
+    def has_event(self, d0, d1):
+        return bool(((self.events > d0) & (self.events <= d1)).any())
 
     def px(self, d):
         s = self.raw.loc[:d]
@@ -256,6 +264,8 @@ def build_position(bk, d, struct, dte, S):
     front = min(cand, key=lambda e: abs((e - tgt).days))
     if front > END:                          # every position must expire inside the development data
         return None
+    if bk.und.has_event(d, front):           # split / spin-off / special dividend during the position
+        return None
     back = None
     if any(len(l) > 3 and l[3] == "back" for l in struct):
         later = [e for e in exps if 14 <= (e - front).days <= 45]
@@ -285,6 +295,25 @@ def build_position(bk, d, struct, dte, S):
             if cp == "C" and max(lo) <= min(sh):
                 return None
     return legs, front
+
+
+def strike_parity_breaks(bk, d, legs, front, tol=0.05):
+    """Contract re-written during the position (corporate action, bad data): on two or more snapshot dates the
+    underlying implied by put-call parity at a leg's own strike differs from the close by more than 5%."""
+    for kind, cp, e, k, q in legs:
+        if kind != "O" or e != front:
+            continue
+        C, P = bk.path(e, "C", k, d, front), bk.path(e, "P", k, d, front)
+        j = C[["mid"]].join(P[["mid"]], lsuffix="_c", rsuffix="_p", how="inner")
+        if len(j) < 2:
+            continue
+        Sx = np.array([bk.und.px(t) for t in j.index])
+        imp = k + j.mid_c.to_numpy() - j.mid_p.to_numpy()
+        with np.errstate(all="ignore"):
+            bad = np.abs(np.log(np.where(imp > 0, imp, np.nan) / Sx)) > tol
+        if np.nansum(bad) >= 2:
+            return True
+    return False
 
 
 def cycle_paths(bk, d, legs, front):
@@ -373,17 +402,27 @@ def evaluate(bk, d, legs, front, T, mgmt, f):
             "days": int((exit_d - d).days)}
 
 
-def mtm_series(bk, d, legs, T, exit_d, S0):
-    """Daily mark-to-market at mid (P&L increments per share / S0) from entry to exit, for portfolio statistics."""
+def mtm_series(bk, d, legs, T, exit_d, S0, pnl, f=PRIMARY_FILL):
+    """Daily P&L increments (per unit of notional) from entry to exit that add up to the realised P&L: marked at
+    mid on every snapshot, the entry day carries the entry spread and commission, the exit day ends exactly at
+    the realised P&L (execution or settlement)."""
     opt = [(i, l) for i, l in enumerate(legs) if l[0] == "O"]
     U = T.loc[:exit_d]
-    v = pd.Series(0.0, index=U.index)
+    row0 = T.iloc[0]
+    entry_cf = sum(-q * (row0[f"m{i}"] + np.sign(q) * f * row0[f"h{i}"]) for i, (_, cp, e, k, q) in opt)
+    comm = COMM * sum(abs(l[4]) for _, l in opt)
+    v = pd.Series(entry_cf - comm, index=U.index)
     for i, (_, cp, e, k, q) in opt:
         v = v + q * U[f"m{i}"].ffill()
     for (_, _, _, _, q) in [l for l in legs if l[0] == "S"]:
         adj = bk.und.adj.reindex(U.index).ffill()
-        v = v + q * S0 * adj / adj.iloc[0]
-    return v.diff().fillna(0.0) / S0
+        v = v + q * S0 * (adj / adj.iloc[0] - 1 - STK_COST)
+    v = v / S0
+    v.loc[pd.Timestamp(exit_d)] = pnl                  # realised value on the exit / expiry date
+    v = v.sort_index()
+    inc = v.diff()
+    inc.iloc[0] = v.iloc[0]
+    return inc
 
 
 # ----------------------------------------------------------------------------------------------- statistics
@@ -501,8 +540,9 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
     dtes = dtes or (DTES + (WEEKLY_DTE,))
     has_weekly = False
     rows, mtm = [], {}
-    ivmed = bk.atm_iv.rolling(252, min_periods=120).median()
+    ivmed = bk.atm_iv.rolling("365D", min_periods=20).median() if len(bk.atm_iv) else bk.atm_iv
     n_mismatch = 0
+    n_parity_break = 0
     for dte in dtes:
         for d in entry_dates(bk, dte):
             S = und.px(d)
@@ -524,6 +564,9 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
                 if bp is None:
                     continue
                 legs, front = bp
+                if type(bk) is Book and strike_parity_breaks(bk, d, legs, front):
+                    n_parity_break += 1
+                    continue
                 if dte == WEEKLY_DTE:
                     has_weekly = True
                 if earnings is not None and len(earnings):
@@ -550,9 +593,11 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
                                                    for l in legs)})
                         rows.append(r)
                         if keep_mtm and f == PRIMARY_FILL:
-                            mtm[(sym, name, dte, mg, str(pd.Timestamp(d).date()))] = mtm_series(bk, d, legs, T, r["exit"], S)
+                            mtm[(sym, name, dte, mg, str(pd.Timestamp(d).date()))] = mtm_series(
+                                bk, d, legs, T, r["exit"], S, r["pnl"])
     R = pd.DataFrame(rows)
     meta = {"weekly_expiries": has_weekly, "chain_dates": int(len(bk.dates)), "entries_skipped_price_mismatch": n_mismatch,
+            "positions_skipped_parity_break": n_parity_break, "corporate_action_days": [str(x.date()) for x in und.events],
             "first": str(pd.Timestamp(bk.dates[0]).date()), "last": str(pd.Timestamp(bk.dates[-1]).date())}
     return R, meta, mtm
 
@@ -603,8 +648,9 @@ def table(R):
     return pd.DataFrame(out)
 
 
-def walk_forward(R, T, family, min_cycles=24):
-    """Each year: pick the best-Sharpe combination on cycles that ended before the year, trade it in that year."""
+def walk_forward(R, T, family, min_cycles=24, criterion="sharpe"):
+    """Each year: pick the best combination on cycles that ended before the year, trade it in that year.
+    criterion "sharpe" = long-run Sharpe; "t" = Newey-West t of the mean (favours longer, steadier records)."""
     P = R[R.fill == PRIMARY_FILL].copy()
     P["key"] = P.symbol + "|" + P.struct + "|" + P.dte.astype(str) + "|" + P.mgmt
     years = sorted(P.entry.dt.year.unique())
@@ -618,7 +664,8 @@ def walk_forward(R, T, family, min_cycles=24):
                 if not family(g.iloc[0]) or len(g) < min_cycles:
                     continue
                 per_year = 52.0 if g.dte.iloc[0] == WEEKLY_DTE else 12.0
-                sr = _sr(g.sort_values("entry").pnl, per_year)
+                x = g.sort_values("entry").pnl
+                sr = _sr(x, per_year) if criterion == "sharpe" else nw_t(x.to_numpy())
                 if np.isfinite(sr) and sr > best_sr:
                     best, best_sr, best_flt = key, sr, flt
         if best is None:
@@ -720,12 +767,16 @@ def stage_cycles(a, X, vix):
         json.dump(meta, fh, indent=1, default=str)
 
 
-def _member_mtm(R, MTM, r):
-    """Daily mark-to-market of a combination; pseudo-underlyings average their members' series per entry."""
+def _member_mtm(R, MTM, r, year=None):
+    """Daily mark-to-market of a combination (optionally only positions entered in one year)."""
     if r.symbol in ("EW", "XSQ5", "XSQ1", "GS_LS"):
         return None
     g = R[(R.symbol == r.symbol) & (R.struct == r.struct) & (R.dte == r.dte) & (R.mgmt == r.mgmt) &
           (R.fill == PRIMARY_FILL) & flag(R, r["filter"])]
+    if year is not None:
+        g = g[g.entry.dt.year == year]
+    if isinstance(MTM.get(r.symbol), str):
+        MTM[r.symbol] = pd.read_pickle(MTM[r.symbol])
     if r.symbol not in MTM:
         return None
     M = MTM[r.symbol]
@@ -773,12 +824,12 @@ def stage_combine(a):
             "single_stocks": lambda r: r.symbol not in INDEX_ETFS and r.symbol not in ("EW", "XSQ5", "XSQ1", "GS_LS"),
             "stock_portfolios": lambda r: r.symbol in ("EW", "XSQ5", "XSQ1", "GS_LS")}
     wf = {}
-    for name, fam in fams.items():
-        picks, O = walk_forward(RA, T, fam)
-        picks.to_csv(os.path.join(a.out, f"walkforward_{name}.csv"), index=False)
+    for (name, fam), crit in itertools.product(fams.items(), ("sharpe", "t")):
+        picks, O = walk_forward(RA, T, fam, criterion=crit)
+        picks.to_csv(os.path.join(a.out, f"walkforward_{name}_{crit}.csv"), index=False)
         if len(O):
             m = O.groupby(O.entry.dt.to_period("M")).pnl.sum()
-            wf[name] = {"oos_cycles": int(len(O)), "oos_months": int(len(m)), "oos_mean_cycle": float(O.pnl.mean()),
+            wf[f"{name}|{crit}"] = {"oos_cycles": int(len(O)), "oos_months": int(len(m)), "oos_mean_cycle": float(O.pnl.mean()),
                         "oos_mean_month": float(m.mean()), "oos_t_nw_month": nw_t(m.to_numpy()),
                         "oos_sharpe_month": _sr(m.to_numpy(), 12.0), "oos_worst_cycle": float(O.pnl.min()),
                         "oos_win": float((O.pnl > 0).mean()), "years": picks.year.tolist(),
@@ -791,18 +842,30 @@ def stage_combine(a):
                           "top_decile_is_mean_oos_sharpe": float(top_is.sharpe_oos.mean()),
                           "all_mean_oos_sharpe": float(Z.sharpe_oos.mean()),
                           "top_decile_is_share_oos_positive": float((top_is.mean_oos > 0).mean())})
-    # daily mark-to-market (overlapping positions summed) of the 30 best primary combinations with a series
+    # daily mark-to-market (overlapping positions summed), for the provider simulation:
+    #   WF|family|criterion  the walk-forward strategy itself (each year the combination picked on earlier years);
+    #   the 20 combinations with the highest t over the full sample among those with 48+ cycles (in sample).
     daily, dd_rows = {}, []
-    for _, r in best.iterrows():
-        if len(daily) >= 30:
+    for key_wf in wf:
+        name, crit = key_wf.split("|")
+        P = pd.read_csv(os.path.join(a.out, f"walkforward_{name}_{crit}.csv"))
+        parts = []
+        for _, pk in P.iterrows():
+            sym, st_, dte, mg = pk.pick.split("|")
+            ser = _member_mtm(R, MTM, pd.Series({"symbol": sym, "struct": st_, "dte": int(dte), "mgmt": mg,
+                                                 "filter": pk["filter"]}), year=int(pk.year))
+            if ser is not None:
+                parts.append(ser)
+        if parts:
+            daily[f"WF|{name}|{crit}"] = pd.concat(parts).groupby(level=0).sum().sort_index()
+    robust = T[prim & (T.cycles >= 48)].sort_values("t_nw", ascending=False)
+    for _, r in robust.iterrows():
+        if sum(not k.startswith("WF|") for k in daily) >= 20:
             break
-        if isinstance(MTM.get(r.symbol), str):
-            MTM[r.symbol] = pd.read_pickle(MTM[r.symbol])
         sser = _member_mtm(R, MTM, r)
-        if sser is None:
-            continue
-        key = f"{r.symbol}|{r.struct}|{r.dte}|{r.mgmt}|{r['filter']}"
-        daily[key] = sser
+        if sser is not None:
+            daily[f"{r.symbol}|{r.struct}|{r.dte}|{r.mgmt}|{r['filter']}"] = sser
+    for key, sser in daily.items():
         eq = sser.cumsum()
         dd_rows.append({"combo": key, "days": int(len(sser)), "sum": float(sser.sum()),
                         "daily_sharpe_ann": float(sser.mean() / sser.std() * math.sqrt(252)) if sser.std() > 0 else np.nan,
