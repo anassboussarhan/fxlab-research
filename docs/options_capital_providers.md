@@ -49,11 +49,11 @@ on the worst in-market day.
 | Provider | Size | Pass | Paid at least once | Mean paid | Mean fees | **Mean net** | Median net | 90th pct net | Breached within 3 years |
 |---|---|---|---|---|---|---|---|---|---|
 | Options Funding Growth $50k | 0.1% | 25% | 23% | $169 | $7,718 | -$7,549 | -$9,000 | -$4,439 | 12% |
-| | 0.2% | 42% | 41% | $900 | $5,602 | -$4,701 | -$4,500 | -$963 | 43% |
+| | 0.2% | 48% | 46% | $1,721 | $4,171 | -$2,450 | -$2,625 | +$2,001 | 58% |
 | | 0.3% | 59% | 58% | $2,800 | $2,954 | -$155 | -$1,476 | +$6,490 | 72% |
 | | 0.5% | 57% | 53% | $3,988 | $1,690 | **+$2,298** | -$500 | +$10,548 | 87% |
 | Imperial Elite $50k | 0.1% | 25% | 23% | $190 | $357 | -$167 | -$357 | +$557 | 12% |
-| | 0.2% | 44% | 41% | $964 | $357 | +$607 | -$357 | +$3,143 | 29% |
+| | 0.2% | 49% | 46% | $1,301 | $357 | +$944 | -$357 | +$3,143 | 47% |
 | | 0.3% | 60% | 59% | $1,629 | $357 | **+$1,272** | **+$1,036** | +$3,143 | 65% |
 | | 0.5% | 61% | 56% | $1,727 | $357 | +$1,370 | +$1,385 | +$3,143 | 58% |
 
@@ -66,7 +66,7 @@ What the simulation shows:
 1. **The fee model decides it.**
    - The same edge loses money on a monthly subscription at small sizes. Slow premium accrual takes 1-3 years to
      reach +10%, and the fees pile up.
-   - On a one-time-fee provider it is positive at every size from 0.2%. At 0.3% it is paid 59% of the time, with a
+   - On a one-time-fee provider it is positive at every size from 0.15%. At 0.3% it is paid 59% of the time, with a
      median of +$1,036 per $357.
 2. **Imperial's 7% sim-funded withdrawal cap** limits the payout to about $3,143 per account before the live
    review, which is where its 90th percentile sits. Beyond that is the unknown live stage.
