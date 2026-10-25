@@ -7,14 +7,26 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["ci/OPTIONS_STRATEGIES"]
+    paths: ["ci/OPTIONS_STRATEGIES", "ci/OPTIONS_STRATEGIES_CHAINS"]
 permissions:
   contents: write
+  actions: read
 env:
   # index ETFs (those absent from the database are skipped) and the S&P 100 (current members: survivorship bias)
   SYMBOLS: SPY,DIA,QQQ,IWM,GLD,SLV,TLT,EEM,XLE,XLF,AAPL,ABBV,ABT,ACN,ADBE,AIG,AMD,AMGN,AMT,AMZN,AVGO,AXP,BA,BAC,BK,BKNG,BLK,BMY,BRK.B,C,CAT,CHTR,CL,CMCSA,COF,COP,COST,CRM,CSCO,CVS,CVX,DE,DHR,DIS,DUK,EMR,F,FDX,GD,GE,GILD,GM,GOOG,GOOGL,GS,HD,HON,IBM,INTC,INTU,ISRG,JNJ,JPM,KHC,KO,LIN,LLY,LMT,LOW,MA,MCD,MDLZ,MDT,MET,META,MMM,MO,MRK,MS,MSFT,NEE,NFLX,NKE,NOW,NVDA,ORCL,PEP,PFE,PG,PLTR,PM,PYPL,QCOM,RTX,SBUX,SCHW,SO,SPG,T,TGT,TMO,TMUS,TSLA,TXN,UBER,UNH,UNP,UPS,USB,V,VZ,WFC,WMT,XOM
 jobs:
+  prep:
+    runs-on: ubuntu-latest
+    outputs:
+      chains_run: ${{ steps.r.outputs.chains_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        name: Reuse the chains of an earlier run if ci/OPTIONS_STRATEGIES_CHAINS names one
+        run: echo "chains_run=$(cat ci/OPTIONS_STRATEGIES_CHAINS 2>/dev/null | tr -d '[:space:]')" >> $GITHUB_OUTPUT
   data:
+    needs: prep
+    if: needs.prep.outputs.chains_run == ''
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
@@ -37,14 +49,23 @@ jobs:
           time dolt clone post-no-preference/options > /tmp/clone.log 2>&1; tail -1 /tmp/clone.log
           time dolt clone post-no-preference/earnings > /tmp/clone_e.log 2>&1 || true; tail -1 /tmp/clone_e.log
           du -sh /tmp/d/*
-      - name: Export the chains in one scan (dates <= 2025-12-31)
+      - name: Export the chains, one query per symbol, 4 copies of the database in parallel (dates <= 2025-12-31)
         run: |
-          mkdir -p chains
-          LIST=$(echo $SYMBOLS | sed "s/,/','/g")
-          cd /tmp/d/options
-          dolt sql -q "DESCRIBE option_chain" -r csv > $GITHUB_WORKSPACE/chains/schema.csv
-          time dolt sql -q "SELECT * FROM option_chain WHERE date <= '2025-12-31' AND act_symbol IN ('$LIST')" -r csv > /tmp/raw_all.csv
-          ls -la /tmp/raw_all.csv; wc -l /tmp/raw_all.csv
+          mkdir -p chains /tmp/raw
+          cd /tmp/d/options && dolt sql -q "DESCRIBE option_chain" -r csv > $GITHUB_WORKSPACE/chains/schema.csv
+          for i in 1 2 3; do cp -r /tmp/d/options /tmp/d/options_$i; done
+          mv /tmp/d/options /tmp/d/options_0
+          df -h /
+          echo $SYMBOLS | tr ',' '\n' > /tmp/syms.txt
+          for i in 0 1 2 3; do
+            ( cd /tmp/d/options_$i
+              awk -v i=$i 'NR % 4 == i' /tmp/syms.txt | while read s; do
+                dolt sql -q "SELECT * FROM option_chain WHERE act_symbol='$s' AND date <= '2025-12-31'" -r csv > /tmp/raw/raw_$s.csv 2> /tmp/raw/err_$s.txt
+                echo "$s $(wc -l < /tmp/raw/raw_$s.csv) $(date -u +%T)"
+              done ) &
+          done
+          wait
+          du -sh /tmp/raw
       - name: Export earnings dates
         continue-on-error: true
         run: |
@@ -54,8 +75,8 @@ jobs:
           wc -l $GITHUB_WORKSPACE/chains/earnings.csv
       - name: Normalise chains and fetch closes
         run: |
-          python scripts/options_chain_fetch.py --combined /tmp/raw_all.csv --out chains | tail -5
-          rm -f /tmp/raw_all.csv
+          find /tmp/raw -name 'raw_*.csv' -size -200c -delete
+          python scripts/options_chain_fetch.py --raw /tmp/raw --out chains | cut -c1-200 | tail -5
           python scripts/options_closes_fetch.py --symbols $SYMBOLS --out chains/closes.csv > /tmp/closes.log 2>&1; tail -3 /tmp/closes.log
           ls chains | head; du -sh chains
       - uses: actions/upload-artifact@v4
@@ -64,7 +85,8 @@ jobs:
           path: chains
           retention-days: 5
   cycles:
-    needs: data
+    needs: [prep, data]
+    if: always() && (needs.data.result == 'success' || needs.prep.outputs.chains_run != '')
     runs-on: ubuntu-latest
     timeout-minutes: 340
     strategy:
@@ -82,6 +104,8 @@ jobs:
         with:
           name: chains
           path: chains
+          run-id: ${{ needs.prep.outputs.chains_run || github.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: Cycles for symbol group ${{ matrix.group }} of 12
         run: |
           mkdir -p out
@@ -92,7 +116,7 @@ jobs:
           path: out
           retention-days: 5
   combine:
-    needs: cycles
+    needs: [prep, cycles]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 300
@@ -110,6 +134,8 @@ jobs:
         with:
           name: chains
           path: chains
+          run-id: ${{ needs.prep.outputs.chains_run || github.run_id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - name: "Combine - statistics, multiple testing, walk-forward, stock portfolios"
         run: |
           mkdir -p out

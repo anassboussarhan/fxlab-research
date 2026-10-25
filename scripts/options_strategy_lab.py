@@ -23,15 +23,19 @@ STRUCTURES (legs: call/put, target |delta| or "atm", quantity; S = the underlyin
   PCAL                      put calendar: short front ATM put, long the next expiry's ATM put (same strike)
   LP30, LSTRD               controls: long 30-delta put, long ATM straddle (buying premium)
   STK                       benchmark: long the underlying over the same cycle
-ENTRY: once per standard monthly expiration (third Friday), on the first chain date at or after expiration
-  minus DTE calendar days (DTE 30 and 45); weekly entries (DTE 7) where weekly expirations exist.
+ENTRY: once a month (on the first chain date at or after the third Friday minus DTE calendar days; DTE 30 and 45,
+  into the listed expiry 20-42 / 35-57 days out) and every week (DTE 14: the expiry 9-18 days out). The database
+  lists about three expiries per date (about 2, 4 and 6-8 weeks), not always standard monthlies, and 10-27 strikes
+  per expiry, so legs are matched to the nearest listed delta within 0.08.
 MANAGEMENT: H hold to expiration; T50 take profit at 50% of the credit (or of the debit); D21 close at 21 days to
   expiration; T50D21 both; T50SL2 take profit at 50%, stop when the loss reaches 2x the credit. D21 and T50D21
-  are not run on weekly (7-day) entries.
+  are not run on the 14-day weekly entries.
   Decisions use the closing quotes of each later chain date (end-of-day; no intraday stops).
 FILTERS at entry: ALL; CONT (VIX < VIX3M); IVHI (the underlying's ATM implied volatility above its trailing
   252-day median); VRP (ATM implied volatility above the underlying's realised volatility of the past 21 days);
   NOERN (single stocks: no earnings announcement between entry and expiration; DoltHub post-no-preference/earnings).
+  Snapshots: weekly in 2019, about three a week (Mon / Wed / Fri) 2020-2023, daily from 2024, so management is
+  checked on those closes.
 FILLS: options at mid +- f x half-spread (buying pays more, selling receives less); f = 0.75 primary (effective
   spread about 75% of quoted, Muravyev & Pearson 2020), 1.0 (at the quote) and 0.4 (patient limit orders) as
   sensitivities; commission USD 0.65 per contract per leg (0.0065 per share); underlying 1 bp per side.
@@ -65,7 +69,7 @@ STK_COST = 1e-4                    # 1 bp per side on the underlying
 FILLS = (0.75, 1.0, 0.4)
 PRIMARY_FILL = 0.75
 DTES = (30, 45)
-WEEKLY_DTE = 7
+WEEKLY_DTE = 14                    # weekly entries into the nearest (about two-week) expiry
 MGMT = ("H", "T50", "D21", "T50D21", "T50SL2")
 FILTERS = ("ALL", "CONT", "IVHI", "VRP", "NOERN")
 SPLIT = pd.Timestamp("2023-01-01")       # in-sample / out-of-sample split of the real-quote years (both <= 2025)
@@ -243,16 +247,10 @@ def build_position(bk, d, struct, dte, S):
         return None
     days = np.array([(e - d).days for e in exps])
     tgt = d + pd.Timedelta(days=dte)
-    if dte == WEEKLY_DTE:
-        cand = [e for e, dd in zip(exps, days) if 5 <= dd <= 9]
-    else:
-        exps_t = [pd.Timestamp(e) for e in exps]
-        fri = [e for e in exps_t if 15 <= e.day <= 21 and e.weekday() == 4]
-        fri_months = {(e.year, e.month) for e in fri}
-        thu = [e for e in exps_t if 15 <= e.day <= 21 and e.weekday() == 3 and (e.year, e.month) not in fri_months
-               and (e + pd.Timedelta(days=1)).day <= 21]          # third Friday a holiday (Good Friday)
-        monthly = fri + thu
-        cand = [e for e in monthly if abs((e - tgt).days) <= 10]
+    # the database lists about three expiries per date (about 2, 4 and 6-8 weeks out, not always the standard
+    # monthly): take the listed expiry nearest the target
+    lo, hi = (9, 18) if dte == WEEKLY_DTE else (dte - 10, dte + 12)
+    cand = [e for e, dd in zip(exps, days) if lo <= dd <= hi]
     if not cand:
         return None
     front = min(cand, key=lambda e: abs((e - tgt).days))
@@ -260,7 +258,7 @@ def build_position(bk, d, struct, dte, S):
         return None
     back = None
     if any(len(l) > 3 and l[3] == "back" for l in struct):
-        later = [e for e in exps if 21 <= (e - front).days <= 45]
+        later = [e for e in exps if 14 <= (e - front).days <= 45]
         if not later:
             return None
         back = min(later, key=lambda e: abs((e - front).days - 28))
