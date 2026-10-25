@@ -30,7 +30,8 @@ MANAGEMENT: H hold to expiration; T50 take profit at 50% of the credit (or of th
   are not run on weekly (7-day) entries.
   Decisions use the closing quotes of each later chain date (end-of-day; no intraday stops).
 FILTERS at entry: ALL; CONT (VIX < VIX3M); IVHI (the underlying's ATM implied volatility above its trailing
-  252-day median); VRP (ATM implied volatility above the underlying's realised volatility of the past 21 days).
+  252-day median); VRP (ATM implied volatility above the underlying's realised volatility of the past 21 days);
+  NOERN (single stocks: no earnings announcement between entry and expiration; DoltHub post-no-preference/earnings).
 FILLS: options at mid +- f x half-spread (buying pays more, selling receives less); f = 0.75 primary (effective
   spread about 75% of quoted, Muravyev & Pearson 2020), 1.0 (at the quote) and 0.4 (patient limit orders) as
   sensitivities; commission USD 0.65 per contract per leg (0.0065 per share); underlying 1 bp per side.
@@ -66,7 +67,7 @@ PRIMARY_FILL = 0.75
 DTES = (30, 45)
 WEEKLY_DTE = 7
 MGMT = ("H", "T50", "D21", "T50D21", "T50SL2")
-FILTERS = ("ALL", "CONT", "IVHI", "VRP")
+FILTERS = ("ALL", "CONT", "IVHI", "VRP", "NOERN")
 SPLIT = pd.Timestamp("2023-01-01")       # in-sample / out-of-sample split of the real-quote years (both <= 2025)
 
 # (kind, target, qty, expiry) ; kind in P, C, S ; target |delta| or "atm" ; expiry "front" or "back"
@@ -425,9 +426,9 @@ def lr_sd(x, lag=1):
     return math.sqrt(s) if s > 0 else np.nan
 
 
-def _sr(x, per_year):
+def _sr(x, per_year, min_n=12):
     x = np.asarray(x, float)
-    if len(x) < 8:
+    if len(x) < min_n:
         return np.nan
     sd = lr_sd(x)
     return float(x.mean() / sd * math.sqrt(per_year)) if sd and np.isfinite(sd) else np.nan
@@ -482,19 +483,20 @@ def deflated_sharpe(sr_best, n_trials, n_obs, skew, kurt, sr_var):
 
 # ----------------------------------------------------------------------------------------------- main loop
 def entry_dates(bk, dte):
-    if dte == WEEKLY_DTE:
-        fr = [d for d in bk.dates if pd.Timestamp(d).weekday() == 4]
-        return [pd.Timestamp(d) for d in fr]
+    ds = pd.DatetimeIndex(bk.dates)
+    if dte == WEEKLY_DTE:                    # the last Friday (or Saturday-stamped Friday close) of each week
+        fs = ds[ds.weekday >= 4]
+        return list(pd.Series(fs, index=fs).groupby(fs.to_period("W-SUN")).max())
     out = []
-    for e in third_fridays(bk.dates[0], bk.dates[-1] + np.timedelta64(70, "D")):
+    for e in third_fridays(ds[0], ds[-1] + pd.Timedelta(days=70)):
         tgt = e - pd.Timedelta(days=dte)
-        nxt = bk.dates[bk.dates >= np.datetime64(tgt)]
-        if len(nxt) and (pd.Timestamp(nxt[0]) - tgt).days <= 4 and pd.Timestamp(nxt[0]) < e:
-            out.append(pd.Timestamp(nxt[0]))
+        nxt = ds[ds >= tgt]
+        if len(nxt) and (nxt[0] - tgt).days <= 7 and nxt[0] < e:     # 7 days: the chain is weekly before 2021
+            out.append(nxt[0])
     return out
 
 
-def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None):
+def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
     """Every structure x entry date x management x fill on one underlying's book (real or synthetic)."""
     dtes = dtes or (DTES + (WEEKLY_DTE,))
     has_weekly = False
@@ -524,6 +526,10 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None):
                 legs, front = bp
                 if dte == WEEKLY_DTE:
                     has_weekly = True
+                if earnings is not None and len(earnings):
+                    flt["NOERN"] = not bool(((earnings > d) & (earnings <= front)).any())
+                else:
+                    flt["NOERN"] = None
                 T = cycle_paths(bk, d, legs, front)
                 for mg in MGMT:
                     if name == "STK" and mg != "H":
@@ -537,7 +543,8 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None):
                         if r is None:
                             continue
                         r.update({"symbol": sym, "struct": name, "dte": dte, "mgmt": mg, "fill": f, "entry": d,
-                                  "expiry": front, "und_ret": und.tr(d, r["exit"]),
+                                  "expiry": front, "und_ret": und.tr(d, r["exit"]), "iv_entry": iv,
+                                  "rv21_entry": und.rv21(d),
                                   **{f"f_{k}": v for k, v in flt.items()},
                                   "legs": ";".join(f"{l[1]}{l[3]:g}x{l[4]}" if l[0] == "O" else f"Sx{l[4]}"
                                                    for l in legs)})
@@ -552,21 +559,31 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None):
 
 def trim_chain(C, und, max_dte=100, lo=0.6, hi=1.4):
     """Keep what any structure can use: expiries within 100 days, strikes within 60-140% of the underlying."""
-    S = und.raw.reindex(C.date.unique()).rename("S")
+    dts = pd.DatetimeIndex(sorted(C.date.unique()))
+    S = pd.Series([und.px(d) for d in dts], index=dts, name="S")
     C = C.merge(S, left_on="date", right_index=True, how="inner")
     keep = ((C.expiration - C.date).dt.days <= max_dte) & (C.strike >= lo * C.S) & (C.strike <= hi * C.S)
     return C[keep].drop(columns="S")
 
 
-def run_symbol(sym, chain_dir, und, vix, keep_mtm=True):
+def run_symbol(sym, chain_dir, und, vix, keep_mtm=True, earnings=None):
     C = load_chain(chain_dir, sym)
     if C.empty:
         return pd.DataFrame(), {}, {}
     n0 = len(C)
     C = trim_chain(C, und)
-    R, meta, mtm = run_book(sym, Book(C, und), und, vix, keep_mtm)
+    R, meta, mtm = run_book(sym, Book(C, und), und, vix, keep_mtm, earnings=earnings)
     meta.update({"rows_loaded": int(n0), "rows_used": int(len(C))})
     return R, meta, mtm
+
+
+def flag(df, flt):
+    c = f"f_{flt}"
+    if c not in df.columns:
+        return pd.Series(False, index=df.index)
+    return df[c].map(lambda v: bool(v) if isinstance(v, (bool, np.bool_)) or (isinstance(v, (int, float)) and
+                                                                            np.isfinite(v)) else
+                     (str(v).lower() == "true")).astype(bool)
 
 
 def table(R):
@@ -575,7 +592,9 @@ def table(R):
     for (sym, s, dte, mg, f), g in R.groupby(["symbol", "struct", "dte", "mgmt", "fill"]):
         per_year = 52.0 if dte == WEEKLY_DTE else 12.0
         for flt in FILTERS:
-            h = g[g[f"f_{flt}"]]
+            if flt == "NOERN" and (f"f_{flt}" not in g.columns or g[f"f_{flt}"].isna().all()):
+                continue
+            h = g[flag(g, flt)]
             if len(h) < 8:
                 continue
             out.append({"symbol": sym, "struct": s, "dte": dte, "mgmt": mg, "filter": flt, "fill": f,
@@ -594,7 +613,7 @@ def walk_forward(R, T, family, min_cycles=24):
         hist = P[P.exit < pd.Timestamp(f"{y}-01-01")]
         best, best_sr, best_flt = None, -np.inf, None
         for flt in FILTERS:
-            H = hist[hist[f"f_{flt}"]]
+            H = hist[flag(hist, flt)]
             for key, g in H.groupby("key"):
                 if not family(g.iloc[0]) or len(g) < min_cycles:
                     continue
@@ -604,7 +623,7 @@ def walk_forward(R, T, family, min_cycles=24):
                     best, best_sr, best_flt = key, sr, flt
         if best is None:
             continue
-        nxt = P[(P.key == best) & (P.entry.dt.year == y) & P[f"f_{best_flt}"]]
+        nxt = P[(P.key == best) & (P.entry.dt.year == y) & flag(P, best_flt)]
         picks.append({"year": int(y), "pick": best, "filter": best_flt, "in_sample_sharpe": float(best_sr),
                       "oos_cycles": int(len(nxt)), "oos_sum": float(nxt.pnl.sum()), "oos_mean": float(nxt.pnl.mean())
                       if len(nxt) else np.nan})
@@ -613,54 +632,142 @@ def walk_forward(R, T, family, min_cycles=24):
     return pd.DataFrame(picks), O
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--chain", required=True)
-    ap.add_argument("--closes", required=True, help="CSV of daily closes: date, <SYM>_raw, <SYM>_adj, VIX, VIX3M")
-    ap.add_argument("--symbols", default="")
-    ap.add_argument("--out", required=True)
-    a = ap.parse_args()
-    os.makedirs(a.out, exist_ok=True)
-    X = pd.read_csv(a.closes, parse_dates=["date"]).set_index("date").sort_index()
-    X = X[X.index <= END]
-    vix = X[["VIX", "VIX3M"]].dropna()
+INDEX_ETFS = {"SPY", "DIA", "QQQ", "IWM"}
+AGG_KEYS = ["struct", "dte", "mgmt", "fill", "entry"]
+
+
+def _agg(h, sym):
+    g = h.groupby(AGG_KEYS).agg(pnl=("pnl", "mean"), und_ret=("und_ret", "mean"), credit=("credit", "mean"),
+                                days=("days", "mean"), early=("early", "mean"), n_names=("pnl", "size"),
+                                exit=("exit", "max"), expiry=("expiry", "max")).reset_index()
+    g["symbol"] = sym
+    return g[g.n_names >= 5]
+
+
+def portfolios(R):
+    """Pseudo-underlyings built from the single-stock cycles (one position per name, equal weight per entry):
+      EW     every stock that passes the filter;
+      XSQ5   the fifth of stocks with the largest implied-minus-realised volatility at entry (Goyal & Saretto 2009);
+      XSQ1   the fifth with the smallest;
+      GS_LS  struct GSLS: short ATM straddles on XSQ5 and long ATM straddles on XSQ1 (their long-short)."""
+    S = R[~R.symbol.isin(INDEX_ETFS)]
+    if S.symbol.nunique() < 10:
+        return pd.DataFrame()
+    out = []
+    for flt in FILTERS:
+        g = _agg(S[flag(S, flt)], "EW")
+        for F in FILTERS:
+            g[f"f_{F}"] = F == flt
+        out.append(g)
+    S2 = S.assign(spread=S.iv_entry - S.rv21_entry).dropna(subset=["spread"])
+    S2["q"] = S2.groupby(AGG_KEYS).spread.rank(pct=True)
+    for sym, sel in (("XSQ5", S2.q > 0.8), ("XSQ1", S2.q <= 0.2)):
+        g = _agg(S2[sel], sym)
+        for F in FILTERS:
+            g[f"f_{F}"] = F == "ALL"
+        out.append(g)
+    top = _agg(S2[(S2.q > 0.8) & (S2.struct == "STRD")], "GS_LS").set_index(["dte", "mgmt", "fill", "entry"])
+    bot = _agg(S2[(S2.q <= 0.2) & (S2.struct == "LSTRD")], "GS_LS").set_index(["dte", "mgmt", "fill", "entry"])
+    j = top.join(bot[["pnl", "und_ret", "credit"]], rsuffix="_b", how="inner")
+    if len(j):
+        j["pnl"] = j.pnl + j.pnl_b
+        j["und_ret"] = j.und_ret - j.und_ret_b
+        j["credit"] = j.credit + j.credit_b
+        j = j.drop(columns=["pnl_b", "und_ret_b", "credit_b"]).reset_index()
+        j["struct"] = "GSLS"
+        for F in FILTERS:
+            j[f"f_{F}"] = F == "ALL"
+        out.append(j)
+    P = pd.concat(out, ignore_index=True)
+    P["early"] = P.early > 0.5
+    return P
+
+
+def stage_cycles(a, X, vix):
     syms = [s for s in a.symbols.split(",") if s] or sorted(
         f.split("_", 1)[1].split(".")[0] for f in os.listdir(a.chain) if f.startswith("chain_"))
-    allR, meta, MTM = [], {}, {}
+    if a.group:
+        i, n = map(int, a.group.split("/"))
+        syms = syms[i::n]
+    meta = {}
+    ern = None
+    ef = os.path.join(a.chain, "earnings.csv")
+    if os.path.exists(ef):
+        E = pd.read_csv(ef)
+        E.columns = [c.lower() for c in E.columns]
+        E["date"] = pd.to_datetime(E["date"], errors="coerce")
+        ern = {k: pd.DatetimeIndex(sorted(v.dropna())) for k, v in E.groupby("act_symbol").date}
     for sym in syms:
-        if f"{sym}_raw" not in X.columns:
+        if f"{sym}_raw" not in X.columns or not X[f"{sym}_raw"].notna().any():
             meta[sym] = {"error": "no closes"}
             continue
-        und = Underlying(X[f"{sym}_raw"], X[f"{sym}_adj"])
-        R, m, mtm = run_symbol(sym, a.chain, und, vix, keep_mtm=True)
+        try:
+            und = Underlying(X[f"{sym}_raw"], X[f"{sym}_adj"])
+            R, m, mtm = run_symbol(sym, a.chain, und, vix, keep_mtm=True,
+                                   earnings=(ern or {}).get(sym) if sym not in INDEX_ETFS else None)
+        except Exception as ex:                                         # noqa: BLE001
+            meta[sym] = {"error": repr(ex)[:300]}
+            continue
         meta[sym] = m
-        print(sym, m, len(R), flush=True)
+        print(sym, json.dumps(m, default=str), len(R), flush=True)
         if len(R):
-            allR.append(R)
-            MTM.update(mtm)
-    R = pd.concat(allR, ignore_index=True)
-    R.to_csv(os.path.join(a.out, "cycles.csv.gz"), index=False)
-    T = table(R)
+            R.to_csv(os.path.join(a.out, f"cycles_{sym}.csv.gz"), index=False)
+            pd.to_pickle(mtm, os.path.join(a.out, f"mtm_{sym}.pkl"))
+    with open(os.path.join(a.out, f"meta_{(a.group or 'all').replace('/', 'of')}.json"), "w") as fh:
+        json.dump(meta, fh, indent=1, default=str)
+
+
+def _member_mtm(R, MTM, r):
+    """Daily mark-to-market of a combination; pseudo-underlyings average their members' series per entry."""
+    if r.symbol in ("EW", "XSQ5", "XSQ1", "GS_LS"):
+        return None
+    g = R[(R.symbol == r.symbol) & (R.struct == r.struct) & (R.dte == r.dte) & (R.mgmt == r.mgmt) &
+          (R.fill == PRIMARY_FILL) & flag(R, r["filter"])]
+    parts = [MTM[k] for k in ((r.symbol, r.struct, r.dte, r.mgmt, d) for d in g.entry) if k in MTM]
+    return pd.concat(parts, axis=1).sum(axis=1).sort_index() if parts else None
+
+
+def stage_combine(a):
+    dirs = [d for d in a.inputs.split(",") if d]
+    Rs, MTM, meta = [], {}, {}
+    for d in dirs:
+        for f in sorted(os.listdir(d)):
+            p = os.path.join(d, f)
+            if f.startswith("cycles_") and f.endswith(".csv.gz"):
+                Rs.append(pd.read_csv(p, parse_dates=["entry", "exit", "expiry"]))
+            elif f.startswith("mtm_") and f.endswith(".pkl"):
+                MTM.update(pd.read_pickle(p))
+            elif f.startswith("meta_") and f.endswith(".json"):
+                meta.update(json.load(open(p)))
+    R = pd.concat(Rs, ignore_index=True)
+    R = R[R.entry <= END]
+    for c in [c for c in R.columns if c.startswith("f_") and c != "f_NOERN"] + ["early"]:
+        R[c] = R[c].astype(bool)
+    P = portfolios(R)
+    RA = pd.concat([R, P], ignore_index=True) if len(P) else R
+    RA.to_csv(os.path.join(a.out, "cycles_all.csv.gz"), index=False)
+    T = table(RA)
     prim = T.fill == PRIMARY_FILL
     T.loc[prim, "bh_q_mean"] = bh(T.loc[prim, "p_one_sided"])
     T.loc[prim, "bh_q_alpha"] = bh(T.loc[prim, "p_alpha"])
     n_trials = int(prim.sum())
-    best = T[prim].sort_values("sharpe", ascending=False)
+    best = T[prim & (T.cycles >= 24)].sort_values("sharpe", ascending=False)
     if len(best):
         b = best.iloc[0]
         per = 52.0 if b.dte == WEEKLY_DTE else 12.0
-        sr_pp = b.sharpe / math.sqrt(per)
         sr_var = float((T.loc[prim, "sharpe"] / np.sqrt(np.where(T.loc[prim, "dte"] == WEEKLY_DTE, 52, 12))).var())
-        T.loc[best.index[0], "deflated_sharpe_prob"] = deflated_sharpe(sr_pp, n_trials, int(b["cycles"]), b["skew"],
-                                                                       b["kurt"], sr_var)
+        T.loc[best.index[0], "deflated_sharpe_prob"] = deflated_sharpe(b.sharpe / math.sqrt(per), n_trials,
+                                                                       int(b["cycles"]), b["skew"], b["kurt"], sr_var)
     T.to_csv(os.path.join(a.out, "combos.csv"), index=False)
     fams = {"all": lambda r: True,
             "defined_risk": lambda r: r.struct in DEFINED_RISK,
             "short_premium_defined": lambda r: r.struct in DEFINED_RISK and r.struct in SHORT_PREMIUM,
-            "SPY_QQQ": lambda r: r.symbol in ("SPY", "QQQ")}
+            "index_etfs": lambda r: r.symbol in INDEX_ETFS,
+            "single_stocks": lambda r: r.symbol not in INDEX_ETFS and r.symbol not in ("EW", "XSQ5", "XSQ1", "GS_LS"),
+            "stock_portfolios": lambda r: r.symbol in ("EW", "XSQ5", "XSQ1", "GS_LS")}
     wf = {}
     for name, fam in fams.items():
-        picks, O = walk_forward(R, T, fam)
+        picks, O = walk_forward(RA, T, fam)
         picks.to_csv(os.path.join(a.out, f"walkforward_{name}.csv"), index=False)
         if len(O):
             m = O.groupby(O.entry.dt.to_period("M")).pnl.sum()
@@ -669,26 +776,22 @@ def main():
                         "oos_sharpe_month": _sr(m.to_numpy(), 12.0), "oos_worst_cycle": float(O.pnl.min()),
                         "oos_win": float((O.pnl > 0).mean()), "years": picks.year.tolist(),
                         "picks": picks.pick.tolist()}
-    # does in-sample rank predict out-of-sample rank? (primary fill, no filter)
     Z = T[prim & (T["filter"] == "ALL")].dropna(subset=["sharpe_is", "sharpe_oos"])
-    rank_stab = {"combos": int(len(Z)),
-                 "spearman_is_oos": float(st.spearmanr(Z.sharpe_is, Z.sharpe_oos)[0]) if len(Z) > 10 else np.nan}
+    rank_stab = {"combos": int(len(Z))}
     if len(Z) > 10:
         top_is = Z.sort_values("sharpe_is", ascending=False).head(max(1, len(Z) // 10))
-        rank_stab.update({"top_decile_is_mean_oos_sharpe": float(top_is.sharpe_oos.mean()),
+        rank_stab.update({"spearman_is_oos": float(st.spearmanr(Z.sharpe_is, Z.sharpe_oos)[0]),
+                          "top_decile_is_mean_oos_sharpe": float(top_is.sharpe_oos.mean()),
                           "all_mean_oos_sharpe": float(Z.sharpe_oos.mean()),
                           "top_decile_is_share_oos_positive": float((top_is.mean_oos > 0).mean())})
-    # daily mark-to-market portfolio (one new position per cycle, overlapping positions summed) of the 30 best
-    # primary combinations by Sharpe, any filter: max drawdown, worst day, daily Sharpe; saved for the prop sim
-    top = T[prim & (T.cycles >= 24)].sort_values("sharpe", ascending=False).head(30)
+    # daily mark-to-market (overlapping positions summed) of the 30 best primary combinations with a series
     daily, dd_rows = {}, []
-    for _, r in top.iterrows():
-        g = R[(R.symbol == r.symbol) & (R.struct == r.struct) & (R.dte == r.dte) & (R.mgmt == r.mgmt) &
-              (R.fill == PRIMARY_FILL) & R[f"f_{r['filter']}"]]
-        parts = [MTM[(r.symbol, r.struct, r.dte, r.mgmt, d)] for d in g.entry if (r.symbol, r.struct, r.dte, r.mgmt, d) in MTM]
-        if not parts:
+    for _, r in best.iterrows():
+        if len(daily) >= 30:
+            break
+        sser = _member_mtm(R, MTM, r)
+        if sser is None:
             continue
-        sser = pd.concat(parts, axis=1).sum(axis=1).sort_index()
         key = f"{r.symbol}|{r.struct}|{r.dte}|{r.mgmt}|{r['filter']}"
         daily[key] = sser
         eq = sser.cumsum()
@@ -705,11 +808,33 @@ def main():
             "best_primary": best.head(25).to_dict("records") if len(best) else []}
     with open(os.path.join(a.out, "summary.json"), "w") as fh:
         json.dump(summ, fh, indent=1, default=str)
-    print(json.dumps({k: v for k, v in summ.items() if k != "best_primary"}, indent=1, default=str))
+    print(json.dumps({k: v for k, v in summ.items() if k not in ("best_primary", "meta")}, indent=1, default=str))
     pd.set_option("display.width", 250)
     cols = ["symbol", "struct", "dte", "mgmt", "filter", "cycles", "mean", "t_nw", "sharpe", "win_rate", "worst",
-            "alpha", "t_alpha", "bh_q_mean", "bh_q_alpha"]
+            "alpha", "t_alpha", "bh_q_mean", "bh_q_alpha", "sharpe_is", "sharpe_oos"]
     print(best[cols].head(40).round(4).to_string())
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--stage", choices=("cycles", "combine", "both"), default="both")
+    ap.add_argument("--chain", default="")
+    ap.add_argument("--closes", default="", help="CSV of daily closes: date, <SYM>_raw, <SYM>_adj, VIX, VIX3M")
+    ap.add_argument("--symbols", default="")
+    ap.add_argument("--group", default="", help="i/n: take every n-th symbol starting at i (parallel jobs)")
+    ap.add_argument("--inputs", default="", help="combine: comma-separated directories of cycles_*.csv.gz")
+    ap.add_argument("--out", required=True)
+    a = ap.parse_args()
+    os.makedirs(a.out, exist_ok=True)
+    if a.stage in ("cycles", "both"):
+        X = pd.read_csv(a.closes, parse_dates=["date"]).set_index("date").sort_index()
+        X = X[X.index <= END]
+        vix = X[["VIX", "VIX3M"]].dropna()
+        stage_cycles(a, X, vix)
+    if a.stage in ("combine", "both"):
+        if not a.inputs:
+            a.inputs = a.out
+        stage_combine(a)
 
 
 if __name__ == "__main__":
