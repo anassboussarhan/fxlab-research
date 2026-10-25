@@ -1,0 +1,7 @@
+GBPNZD VOLA60 bracket    : WF single-trader median -0.53 (gross -0.02) | expected stream -0.95 t=-2.7 gross -0.16 | train median +0.07 | hindsight in-sample -0.13 re-randomised -0.29 (deflation bench nan) | 8s
+GBPNZD VOLA60 martingale : WF single-trader median -0.07 (gross +0.08) | expected stream -0.57 t=-1.6 gross -0.01 | train median +0.50 | hindsight in-sample +0.21 re-randomised +0.03 (deflation bench nan) | 6s
+GBPNZD VOLA60 pyramid    : WF single-trader median -0.52 (gross -0.24) | expected stream -0.78 t=-2.2 gross -0.35 | train median +0.16 | hindsight in-sample -0.10 re-randomised -0.34 (deflation bench nan) | 5s
+GBPNZD VOLA60 grid       : WF single-trader median +0.07 (gross +0.47) | expected stream +0.15 t=+0.4 gross +0.79 | train median +1.50 | hindsight in-sample +0.54 re-randomised +0.02 (deflation bench nan) | 8s
+GBPNZD VOLA60 zone       : WF single-trader median -0.15 (gross +0.05) | expected stream -0.37 t=-1.1 gross +0.01 | train median +0.39 | hindsight in-sample +0.31 re-randomised +0.06 (deflation bench nan) | 5s
+GBPNZD VOLA60 hedged_grid: WF single-trader median -0.44 (gross +0.11) | expected stream -0.44 t=-1.2 gross +0.11 | train median +0.77 | hindsight in-sample +0.82 re-randomised +0.82 (deflation bench nan) | 3s
+done GBPNZD VOLA60 in 0.6 min

@@ -1,0 +1,7 @@
+USDCHF H8 bracket    : WF single-trader median -0.29 (gross +0.11) | expected stream -0.48 t=-1.5 gross +0.35 | train median +0.37 | hindsight in-sample +0.27 re-randomised +0.11 (deflation bench nan) | 10s
+USDCHF H8 martingale : WF single-trader median -0.08 (gross -0.01) | expected stream -0.37 t=-1.2 gross -0.24 | train median +0.45 | hindsight in-sample +0.10 re-randomised -0.17 (deflation bench nan) | 7s
+USDCHF H8 pyramid    : WF single-trader median -0.38 (gross -0.15) | expected stream -0.46 t=-1.5 gross -0.17 | train median +0.45 | hindsight in-sample +0.30 re-randomised +0.15 (deflation bench nan) | 5s
+USDCHF H8 grid       : WF single-trader median -0.04 (gross +0.14) | expected stream -0.05 t=-0.1 gross +0.29 | train median +0.66 | hindsight in-sample +0.31 re-randomised +0.17 (deflation bench nan) | 8s
+USDCHF H8 zone       : WF single-trader median +0.08 (gross +0.24) | expected stream +0.16 t=+0.5 gross +0.44 | train median +0.48 | hindsight in-sample +0.28 re-randomised +0.08 (deflation bench nan) | 5s
+USDCHF H8 hedged_grid: WF single-trader median -0.63 (gross -0.37) | expected stream -0.63 t=-2.0 gross -0.37 | train median +0.56 | hindsight in-sample +0.46 re-randomised +0.46 (deflation bench nan) | 4s
+done USDCHF H8 in 0.7 min

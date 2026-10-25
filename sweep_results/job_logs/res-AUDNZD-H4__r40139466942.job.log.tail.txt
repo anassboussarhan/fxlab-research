@@ -1,0 +1,7 @@
+AUDNZD H4 bracket    : WF single-trader median -0.52 (gross -0.17) | expected stream -0.70 t=-2.2 gross -0.19 | train median +0.12 | hindsight in-sample +0.14 re-randomised -0.21 (deflation bench nan) | 10s
+AUDNZD H4 martingale : WF single-trader median -0.15 (gross -0.01) | expected stream -0.34 t=-1.1 gross +0.03 | train median +0.38 | hindsight in-sample +0.25 re-randomised +0.10 (deflation bench nan) | 7s
+AUDNZD H4 pyramid    : WF single-trader median -0.42 (gross -0.12) | expected stream -0.65 t=-2.1 gross -0.18 | train median +0.08 | hindsight in-sample +0.03 re-randomised -0.14 (deflation bench nan) | 5s
+AUDNZD H4 grid       : WF single-trader median +0.24 (gross +0.54) | expected stream +0.48 t=+1.5 gross +1.02 | train median +1.65 | hindsight in-sample +1.41 re-randomised +0.48 (deflation bench nan) | 8s
+AUDNZD H4 zone       : WF single-trader median -0.11 (gross +0.21) | expected stream -0.26 t=-0.8 gross +0.25 | train median +0.40 | hindsight in-sample +0.30 re-randomised -0.03 (deflation bench nan) | 5s
+AUDNZD H4 hedged_grid: WF single-trader median -0.03 (gross +0.44) | expected stream -0.03 t=-0.1 gross +0.44 | train median +0.72 | hindsight in-sample +0.43 re-randomised +0.43 (deflation bench nan) | 4s
+done AUDNZD H4 in 0.7 min

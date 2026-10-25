@@ -1,0 +1,7 @@
+XAGUSD H1 bracket    : WF single-trader median -0.84 (gross +0.10) | expected stream -1.32 t=-3.5 gross +0.11 | train median +0.48 | hindsight in-sample +0.32 re-randomised -0.86 (deflation bench nan) | 8s
+XAGUSD H1 martingale : WF single-trader median -0.25 (gross +0.22) | expected stream -1.20 t=-3.2 gross +0.03 | train median +0.37 | hindsight in-sample +0.05 re-randomised -0.21 (deflation bench nan) | 6s
+XAGUSD H1 pyramid    : WF single-trader median -0.16 (gross +0.32) | expected stream -0.21 t=-0.6 gross +0.41 | train median +0.51 | hindsight in-sample +0.32 re-randomised -0.08 (deflation bench nan) | 5s
+XAGUSD H1 grid       : WF single-trader median -0.17 (gross -0.01) | expected stream -0.52 t=-1.4 gross -0.07 | train median +1.43 | hindsight in-sample +0.48 re-randomised -0.02 (deflation bench nan) | 7s
+XAGUSD H1 zone       : WF single-trader median -0.39 (gross +0.28) | expected stream -0.98 t=-2.6 gross +0.68 | train median -0.00 | hindsight in-sample +0.03 re-randomised -0.28 (deflation bench nan) | 5s
+XAGUSD H1 hedged_grid: WF single-trader median -1.50 (gross -0.35) | expected stream -1.50 t=-4.0 gross -0.35 | train median +0.24 | hindsight in-sample +0.41 re-randomised +0.41 (deflation bench nan) | 3s
+done XAGUSD H1 in 0.6 min

@@ -1,0 +1,7 @@
+EURGBP M5 bracket    : WF single-trader median -0.14 (gross +0.18) | expected stream -0.27 t=-0.8 gross +0.23 | train median -0.11 | hindsight in-sample -0.28 re-randomised -0.61 (deflation bench nan) | 43s
+EURGBP M5 martingale : WF single-trader median -0.00 (gross +0.16) | expected stream -0.33 t=-1.0 gross +0.38 | train median +0.23 | hindsight in-sample -0.05 re-randomised -0.51 (deflation bench nan) | 38s
+EURGBP M5 pyramid    : WF single-trader median -0.28 (gross +0.27) | expected stream -0.57 t=-1.7 gross +0.28 | train median -0.27 | hindsight in-sample -0.30 re-randomised -0.48 (deflation bench nan) | 38s
+EURGBP M5 grid       : WF single-trader median +0.00 (gross +0.17) | expected stream -0.43 t=-1.2 gross +0.12 | train median +1.41 | hindsight in-sample +1.23 re-randomised +0.51 (deflation bench nan) | 39s
+EURGBP M5 zone       : WF single-trader median -0.57 (gross +0.31) | expected stream -1.84 t=-5.3 gross +0.07 | train median -0.36 | hindsight in-sample -0.40 re-randomised -0.96 (deflation bench nan) | 43s
+EURGBP M5 hedged_grid: WF single-trader median -1.52 (gross +0.58) | expected stream -1.52 t=-4.4 gross +0.58 | train median -1.44 | hindsight in-sample -1.41 re-randomised -1.41 (deflation bench nan) | 14s
+done EURGBP M5 in 3.6 min

@@ -1,0 +1,7 @@
+EURCHF H4 bracket    : WF single-trader median -0.43 (gross -0.14) | expected stream -0.72 t=-2.3 gross -0.19 | train median +0.16 | hindsight in-sample +0.21 re-randomised +0.05 (deflation bench nan) | 7s
+EURCHF H4 martingale : WF single-trader median +0.04 (gross +0.22) | expected stream -0.01 t=-0.0 gross +0.36 | train median +0.37 | hindsight in-sample +0.31 re-randomised -0.03 (deflation bench nan) | 5s
+EURCHF H4 pyramid    : WF single-trader median -0.32 (gross -0.02) | expected stream -0.45 t=-1.4 gross -0.02 | train median +0.26 | hindsight in-sample +0.09 re-randomised -0.05 (deflation bench nan) | 4s
+EURCHF H4 grid       : WF single-trader median -0.05 (gross +0.09) | expected stream -0.52 t=-1.6 gross -0.29 | train median +1.11 | hindsight in-sample +0.45 re-randomised +0.15 (deflation bench nan) | 9s
+EURCHF H4 zone       : WF single-trader median -0.13 (gross +0.21) | expected stream -0.52 t=-1.7 gross -0.13 | train median +0.31 | hindsight in-sample +0.29 re-randomised +0.14 (deflation bench nan) | 4s
+EURCHF H4 hedged_grid: WF single-trader median -0.60 (gross -0.13) | expected stream -0.60 t=-1.9 gross -0.13 | train median +0.39 | hindsight in-sample +0.45 re-randomised +0.45 (deflation bench nan) | 3s
+done EURCHF H4 in 0.5 min

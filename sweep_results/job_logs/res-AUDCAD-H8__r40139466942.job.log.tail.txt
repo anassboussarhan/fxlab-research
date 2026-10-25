@@ -1,0 +1,7 @@
+AUDCAD H8 bracket    : WF single-trader median -0.55 (gross -0.18) | expected stream -1.11 t=-3.2 gross -0.18 | train median +0.02 | hindsight in-sample +0.34 re-randomised -0.10 (deflation bench nan) | 7s
+AUDCAD H8 martingale : WF single-trader median -0.11 (gross +0.09) | expected stream -0.54 t=-1.6 gross +0.07 | train median +0.37 | hindsight in-sample +0.36 re-randomised +0.18 (deflation bench nan) | 4s
+AUDCAD H8 pyramid    : WF single-trader median -0.61 (gross -0.34) | expected stream -0.83 t=-2.4 gross -0.47 | train median -0.08 | hindsight in-sample -0.34 re-randomised -0.56 (deflation bench nan) | 3s
+AUDCAD H8 grid       : WF single-trader median -0.45 (gross -0.33) | expected stream -0.59 t=-1.7 gross -0.39 | train median +1.09 | hindsight in-sample +0.68 re-randomised +0.44 (deflation bench nan) | 6s
+AUDCAD H8 zone       : WF single-trader median -0.17 (gross +0.12) | expected stream -0.20 t=-0.6 gross +0.11 | train median +0.40 | hindsight in-sample +0.21 re-randomised +0.01 (deflation bench nan) | 3s
+AUDCAD H8 hedged_grid: WF single-trader median -0.61 (gross +0.02) | expected stream -0.61 t=-1.8 gross +0.02 | train median +0.28 | hindsight in-sample +0.30 re-randomised +0.30 (deflation bench nan) | 2s
+done AUDCAD H8 in 0.4 min

@@ -1,0 +1,7 @@
+CHFJPY M15 bracket    : WF single-trader median +0.01 (gross +0.42) | expected stream -0.20 t=-0.6 gross +0.46 | train median +0.25 | hindsight in-sample +0.11 re-randomised -0.04 (deflation bench nan) | 21s
+CHFJPY M15 martingale : WF single-trader median -0.08 (gross +0.04) | expected stream -0.11 t=-0.3 gross -0.06 | train median +0.45 | hindsight in-sample -0.09 re-randomised -0.26 (deflation bench nan) | 18s
+CHFJPY M15 pyramid    : WF single-trader median -0.12 (gross +0.17) | expected stream -0.14 t=-0.4 gross +0.28 | train median +0.18 | hindsight in-sample +0.24 re-randomised +0.17 (deflation bench nan) | 17s
+CHFJPY M15 grid       : WF single-trader median +0.19 (gross +0.40) | expected stream +0.28 t=+0.8 gross +0.70 | train median +1.73 | hindsight in-sample +1.40 re-randomised +1.20 (deflation bench nan) | 19s
+CHFJPY M15 zone       : WF single-trader median -0.22 (gross +0.30) | expected stream -0.63 t=-1.8 gross +0.49 | train median +0.13 | hindsight in-sample -0.06 re-randomised -0.08 (deflation bench nan) | 17s
+CHFJPY M15 hedged_grid: WF single-trader median -0.54 (gross +0.06) | expected stream -0.54 t=-1.6 gross +0.06 | train median +0.12 | hindsight in-sample +0.10 re-randomised +0.10 (deflation bench nan) | 7s
+done CHFJPY M15 in 1.7 min

@@ -1,0 +1,7 @@
+GBPAUD TICK60 bracket    : WF single-trader median -0.48 (gross -0.18) | expected stream -1.04 t=-2.9 gross -0.33 | train median +0.30 | hindsight in-sample +0.45 re-randomised +0.22 (deflation bench nan) | 11s
+GBPAUD TICK60 martingale : WF single-trader median -0.13 (gross +0.21) | expected stream -0.10 t=-0.3 gross +0.53 | train median +0.54 | hindsight in-sample +0.39 re-randomised +0.11 (deflation bench nan) | 8s
+GBPAUD TICK60 pyramid    : WF single-trader median -0.06 (gross +0.20) | expected stream -0.09 t=-0.3 gross +0.23 | train median +0.50 | hindsight in-sample +0.34 re-randomised +0.09 (deflation bench nan) | 7s
+GBPAUD TICK60 grid       : WF single-trader median -0.41 (gross -0.33) | expected stream -0.76 t=-2.1 gross -0.60 | train median +2.13 | hindsight in-sample +0.42 re-randomised +0.17 (deflation bench nan) | 9s
+GBPAUD TICK60 zone       : WF single-trader median -0.22 (gross +0.06) | expected stream -0.39 t=-1.1 gross -0.00 | train median +0.50 | hindsight in-sample +0.31 re-randomised -0.02 (deflation bench nan) | 7s
+GBPAUD TICK60 hedged_grid: WF single-trader median -0.27 (gross +0.39) | expected stream -0.27 t=-0.8 gross +0.39 | train median +0.83 | hindsight in-sample +0.71 re-randomised +0.71 (deflation bench nan) | 4s
+done GBPAUD TICK60 in 0.8 min

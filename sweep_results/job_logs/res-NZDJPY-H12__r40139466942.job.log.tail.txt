@@ -1,0 +1,7 @@
+NZDJPY H12 bracket    : WF single-trader median -0.37 (gross -0.15) | expected stream -0.96 t=-2.8 gross -0.36 | train median +0.26 | hindsight in-sample -0.11 re-randomised -0.16 (deflation bench nan) | 5s
+NZDJPY H12 martingale : WF single-trader median +0.20 (gross +0.21) | expected stream -0.25 t=-0.7 gross +0.19 | train median +0.46 | hindsight in-sample +0.49 re-randomised +0.23 (deflation bench nan) | 3s
+NZDJPY H12 pyramid    : WF single-trader median -0.29 (gross -0.07) | expected stream -0.41 t=-1.2 gross -0.07 | train median +0.15 | hindsight in-sample +0.01 re-randomised -0.20 (deflation bench nan) | 3s
+NZDJPY H12 grid       : WF single-trader median -0.12 (gross -0.04) | expected stream -0.18 t=-0.5 gross -0.05 | train median +0.94 | hindsight in-sample +0.32 re-randomised +0.06 (deflation bench nan) | 5s
+NZDJPY H12 zone       : WF single-trader median -0.01 (gross +0.16) | expected stream -0.20 t=-0.6 gross +0.21 | train median +0.47 | hindsight in-sample +0.32 re-randomised +0.09 (deflation bench nan) | 3s
+NZDJPY H12 hedged_grid: WF single-trader median -0.41 (gross +0.02) | expected stream -0.41 t=-1.2 gross +0.02 | train median +0.46 | hindsight in-sample +0.63 re-randomised +0.63 (deflation bench nan) | 2s
+done NZDJPY H12 in 0.4 min

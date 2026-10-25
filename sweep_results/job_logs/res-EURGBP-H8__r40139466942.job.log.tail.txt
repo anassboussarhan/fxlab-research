@@ -1,0 +1,7 @@
+EURGBP H8 bracket    : WF single-trader median -0.61 (gross -0.32) | expected stream -1.53 t=-4.9 gross -0.75 | train median +0.21 | hindsight in-sample +0.07 re-randomised -0.25 (deflation bench nan) | 11s
+EURGBP H8 martingale : WF single-trader median +0.02 (gross +0.13) | expected stream -0.24 t=-0.8 gross +0.20 | train median +0.37 | hindsight in-sample +0.44 re-randomised +0.03 (deflation bench nan) | 6s
+EURGBP H8 pyramid    : WF single-trader median -0.63 (gross -0.25) | expected stream -0.93 t=-3.0 gross -0.40 | train median -0.02 | hindsight in-sample -0.23 re-randomised -0.46 (deflation bench nan) | 5s
+EURGBP H8 grid       : WF single-trader median +0.33 (gross +0.43) | expected stream +0.41 t=+1.3 gross +0.60 | train median +0.79 | hindsight in-sample +0.43 re-randomised +0.24 (deflation bench nan) | 8s
+EURGBP H8 zone       : WF single-trader median -0.13 (gross +0.12) | expected stream -0.26 t=-0.8 gross +0.23 | train median +0.42 | hindsight in-sample +0.18 re-randomised +0.06 (deflation bench nan) | 5s
+EURGBP H8 hedged_grid: WF single-trader median -0.64 (gross -0.15) | expected stream -0.64 t=-2.1 gross -0.15 | train median +0.43 | hindsight in-sample +0.32 re-randomised +0.32 (deflation bench nan) | 4s
+done EURGBP H8 in 0.7 min

@@ -1,0 +1,7 @@
+GBPUSD M30 bracket    : WF single-trader median -0.27 (gross +0.09) | expected stream -0.21 t=-0.6 gross +0.43 | train median +0.27 | hindsight in-sample -0.02 re-randomised -0.20 (deflation bench nan) | 15s
+GBPUSD M30 martingale : WF single-trader median -0.33 (gross -0.10) | expected stream -0.80 t=-2.3 gross -0.36 | train median +0.46 | hindsight in-sample +0.18 re-randomised -0.25 (deflation bench nan) | 13s
+GBPUSD M30 pyramid    : WF single-trader median -0.52 (gross -0.19) | expected stream -0.86 t=-2.5 gross -0.34 | train median +0.13 | hindsight in-sample -0.03 re-randomised -0.37 (deflation bench nan) | 11s
+GBPUSD M30 grid       : WF single-trader median -0.12 (gross -0.06) | expected stream -0.20 t=-0.6 gross -0.12 | train median +1.58 | hindsight in-sample +0.40 re-randomised +0.07 (deflation bench nan) | 15s
+GBPUSD M30 zone       : WF single-trader median +0.07 (gross +0.43) | expected stream -0.32 t=-0.9 gross +0.34 | train median +0.45 | hindsight in-sample +0.15 re-randomised -0.11 (deflation bench nan) | 11s
+GBPUSD M30 hedged_grid: WF single-trader median +0.04 (gross +0.55) | expected stream +0.04 t=+0.1 gross +0.55 | train median +0.62 | hindsight in-sample -0.01 re-randomised -0.01 (deflation bench nan) | 6s
+done GBPUSD M30 in 1.2 min

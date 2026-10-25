@@ -1,0 +1,7 @@
+AUDUSD D1 bracket    : WF single-trader median -0.36 (gross +0.02) | expected stream -0.64 t=-1.9 gross +0.04 | train median +0.28 | hindsight in-sample +0.12 re-randomised -0.12 (deflation bench nan) | 9s
+AUDUSD D1 martingale : WF single-trader median -0.15 (gross +0.15) | expected stream -0.47 t=-1.4 gross +0.08 | train median +0.40 | hindsight in-sample +0.32 re-randomised +0.14 (deflation bench nan) | 6s
+AUDUSD D1 pyramid    : WF single-trader median -0.46 (gross -0.22) | expected stream -0.71 t=-2.0 gross -0.36 | train median +0.15 | hindsight in-sample -0.07 re-randomised -0.34 (deflation bench nan) | 4s
+AUDUSD D1 grid       : WF single-trader median -0.32 (gross -0.24) | expected stream -0.55 t=-1.6 gross -0.40 | train median +0.72 | hindsight in-sample +0.51 re-randomised +0.38 (deflation bench nan) | 9s
+AUDUSD D1 zone       : WF single-trader median -0.00 (gross +0.18) | expected stream -0.16 t=-0.5 gross +0.02 | train median +0.50 | hindsight in-sample +0.25 re-randomised +0.01 (deflation bench nan) | 4s
+AUDUSD D1 hedged_grid: WF single-trader median -0.71 (gross -0.23) | expected stream -0.71 t=-2.0 gross -0.23 | train median +0.30 | hindsight in-sample +0.70 re-randomised +0.70 (deflation bench nan) | 4s
+done AUDUSD D1 in 0.6 min

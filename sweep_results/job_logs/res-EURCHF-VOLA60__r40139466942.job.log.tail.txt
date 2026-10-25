@@ -1,0 +1,7 @@
+EURCHF VOLA60 bracket    : WF single-trader median -0.56 (gross +0.01) | expected stream -0.96 t=-2.8 gross -0.10 | train median +0.28 | hindsight in-sample +0.14 re-randomised +0.08 (deflation bench nan) | 8s
+EURCHF VOLA60 martingale : WF single-trader median +0.12 (gross +0.30) | expected stream -0.33 t=-1.0 gross +0.43 | train median +0.52 | hindsight in-sample +0.27 re-randomised -0.03 (deflation bench nan) | 6s
+EURCHF VOLA60 pyramid    : WF single-trader median -0.28 (gross +0.05) | expected stream -0.42 t=-1.2 gross +0.03 | train median +0.29 | hindsight in-sample +0.27 re-randomised -0.12 (deflation bench nan) | 6s
+EURCHF VOLA60 grid       : WF single-trader median -0.16 (gross -0.06) | expected stream -0.24 t=-0.7 gross -0.13 | train median +1.71 | hindsight in-sample +0.24 re-randomised -0.00 (deflation bench nan) | 8s
+EURCHF VOLA60 zone       : WF single-trader median -0.11 (gross +0.23) | expected stream -0.39 t=-1.1 gross +0.17 | train median +0.37 | hindsight in-sample +0.15 re-randomised -0.10 (deflation bench nan) | 6s
+EURCHF VOLA60 hedged_grid: WF single-trader median -0.57 (gross -0.15) | expected stream -0.57 t=-1.7 gross -0.15 | train median +0.49 | hindsight in-sample +0.64 re-randomised +0.64 (deflation bench nan) | 3s
+done EURCHF VOLA60 in 0.6 min

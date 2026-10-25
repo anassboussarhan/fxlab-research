@@ -1,0 +1,7 @@
+USDSEK H6 bracket    : WF single-trader median +0.38 (gross +0.49) | expected stream +0.47 t=+1.5 gross +0.64 | train median +0.45 | hindsight in-sample +0.42 re-randomised +0.08 (deflation bench nan) | 10s
+USDSEK H6 martingale : WF single-trader median -0.05 (gross +0.07) | expected stream -0.68 t=-2.2 gross -0.25 | train median +0.56 | hindsight in-sample +0.41 re-randomised +0.24 (deflation bench nan) | 7s
+USDSEK H6 pyramid    : WF single-trader median -0.27 (gross -0.13) | expected stream -0.40 t=-1.3 gross -0.19 | train median -0.02 | hindsight in-sample +0.19 re-randomised -0.07 (deflation bench nan) | 5s
+USDSEK H6 grid       : WF single-trader median -0.05 (gross +0.01) | expected stream -0.09 t=-0.3 gross +0.00 | train median +1.10 | hindsight in-sample +0.43 re-randomised +0.31 (deflation bench nan) | 10s
+USDSEK H6 zone       : WF single-trader median -0.13 (gross +0.10) | expected stream -0.22 t=-0.7 gross +0.18 | train median +0.39 | hindsight in-sample +0.21 re-randomised +0.09 (deflation bench nan) | 5s
+USDSEK H6 hedged_grid: WF single-trader median -0.92 (gross -0.66) | expected stream -0.92 t=-2.9 gross -0.66 | train median +0.86 | hindsight in-sample +0.58 re-randomised +0.58 (deflation bench nan) | 4s
+done USDSEK H6 in 0.7 min

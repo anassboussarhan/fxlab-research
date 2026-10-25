@@ -1,0 +1,7 @@
+EURCHF M30 bracket    : WF single-trader median -0.46 (gross +0.06) | expected stream -0.89 t=-2.6 gross -0.01 | train median +0.12 | hindsight in-sample +0.14 re-randomised +0.13 (deflation bench nan) | 14s
+EURCHF M30 martingale : WF single-trader median -0.14 (gross +0.04) | expected stream -0.29 t=-0.9 gross +0.20 | train median +0.38 | hindsight in-sample +0.01 re-randomised -0.35 (deflation bench nan) | 12s
+EURCHF M30 pyramid    : WF single-trader median -0.37 (gross +0.01) | expected stream -0.54 t=-1.6 gross -0.02 | train median +0.30 | hindsight in-sample +0.29 re-randomised -0.08 (deflation bench nan) | 11s
+EURCHF M30 grid       : WF single-trader median -0.15 (gross +0.30) | expected stream -0.20 t=-0.6 gross +0.41 | train median +1.57 | hindsight in-sample +0.53 re-randomised +0.40 (deflation bench nan) | 17s
+EURCHF M30 zone       : WF single-trader median -0.17 (gross +0.09) | expected stream -0.27 t=-0.8 gross -0.04 | train median +0.25 | hindsight in-sample +0.19 re-randomised -0.15 (deflation bench nan) | 11s
+EURCHF M30 hedged_grid: WF single-trader median -0.52 (gross +0.31) | expected stream -0.52 t=-1.5 gross +0.31 | train median +0.44 | hindsight in-sample +0.36 re-randomised +0.36 (deflation bench nan) | 5s
+done EURCHF M30 in 1.2 min

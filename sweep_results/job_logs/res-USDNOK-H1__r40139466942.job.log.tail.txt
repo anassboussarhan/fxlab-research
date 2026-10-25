@@ -1,0 +1,7 @@
+USDNOK H1 bracket    : WF single-trader median -0.33 (gross +0.04) | expected stream -0.59 t=-1.7 gross +0.12 | train median +0.12 | hindsight in-sample +0.18 re-randomised +0.04 (deflation bench nan) | 8s
+USDNOK H1 martingale : WF single-trader median +0.09 (gross +0.15) | expected stream -0.41 t=-1.2 gross -0.05 | train median +0.34 | hindsight in-sample +0.42 re-randomised +0.03 (deflation bench nan) | 6s
+USDNOK H1 pyramid    : WF single-trader median -0.74 (gross -0.54) | expected stream -1.22 t=-3.5 gross -0.90 | train median -0.31 | hindsight in-sample -0.28 re-randomised -0.51 (deflation bench nan) | 5s
+USDNOK H1 grid       : WF single-trader median -0.10 (gross -0.01) | expected stream -0.11 t=-0.3 gross +0.05 | train median +1.35 | hindsight in-sample +0.57 re-randomised -0.05 (deflation bench nan) | 9s
+USDNOK H1 zone       : WF single-trader median +0.06 (gross +0.37) | expected stream -0.03 t=-0.1 gross +0.54 | train median +0.36 | hindsight in-sample +0.15 re-randomised -0.14 (deflation bench nan) | 5s
+USDNOK H1 hedged_grid: WF single-trader median -0.18 (gross +0.19) | expected stream -0.18 t=-0.5 gross +0.19 | train median +0.41 | hindsight in-sample +0.40 re-randomised +0.40 (deflation bench nan) | 3s
+done USDNOK H1 in 0.7 min

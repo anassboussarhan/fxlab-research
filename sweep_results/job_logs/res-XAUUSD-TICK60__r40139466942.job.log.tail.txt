@@ -1,0 +1,7 @@
+XAUUSD TICK60 bracket    : WF single-trader median +0.31 (gross +0.47) | expected stream +0.30 t=+0.8 gross +0.50 | train median +0.69 | hindsight in-sample +0.06 re-randomised +0.01 (deflation bench nan) | 9s
+XAUUSD TICK60 martingale : WF single-trader median +0.10 (gross +0.14) | expected stream +0.09 t=+0.2 gross +0.21 | train median +0.59 | hindsight in-sample +0.44 re-randomised +0.10 (deflation bench nan) | 6s
+XAUUSD TICK60 pyramid    : WF single-trader median +0.23 (gross +0.45) | expected stream +0.25 t=+0.7 gross +0.54 | train median +0.69 | hindsight in-sample +0.54 re-randomised +0.15 (deflation bench nan) | 6s
+XAUUSD TICK60 grid       : WF single-trader median -0.08 (gross -0.02) | expected stream -0.28 t=-0.7 gross -0.09 | train median +1.68 | hindsight in-sample +0.19 re-randomised -0.16 (deflation bench nan) | 8s
+XAUUSD TICK60 zone       : WF single-trader median +0.08 (gross +0.36) | expected stream +0.01 t=+0.0 gross +0.53 | train median +0.82 | hindsight in-sample +0.33 re-randomised +0.20 (deflation bench nan) | 6s
+XAUUSD TICK60 hedged_grid: WF single-trader median +0.01 (gross +0.44) | expected stream +0.01 t=+0.0 gross +0.44 | train median +0.80 | hindsight in-sample +0.63 re-randomised +0.63 (deflation bench nan) | 4s
+done XAUUSD TICK60 in 0.7 min
