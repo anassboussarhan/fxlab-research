@@ -1,0 +1,71 @@
+name: gotobi-oos
+# Gotobi out of sample 2019-2025: USDJPY ticks downloaded directly from Dukascopy (free), built into M1 bid/ask
+# bars, then scripts/gotobi_oos.py (rules fixed before the download). Development data only: ends 2025-12-31.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/GOTOBI_OOS"]
+permissions:
+  contents: write
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        year: [2019, 2020, 2021, 2022, 2023, 2024, 2025]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow
+      - name: Download USDJPY ${{ matrix.year }} from Dukascopy
+        run: |
+          python -m fxlab.data.acquire_dukascopy --pairs USDJPY --start ${{ matrix.year }}-01-01 --end ${{ matrix.year }}-12-31T23:59:59
+          ls -la data/m1/USDJPY/ && tail -1 data/manifests/acquisition.jsonl | cut -c1-600
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m1-USDJPY-${{ matrix.year }}
+          path: |
+            data/m1/USDJPY/USDJPY_${{ matrix.year }}.parquet
+            data/manifests/acquisition.jsonl
+          retention-days: 30
+  analyse:
+    needs: download
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow scipy holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: m1-USDJPY-*
+          path: dl/
+      - name: Place the bars
+        run: |
+          mkdir -p data/m1/USDJPY results/reports/gotobi_oos
+          find dl -name 'USDJPY_*.parquet' -exec cp {} data/m1/USDJPY/ \;
+          cat dl/*/data/manifests/acquisition.jsonl > results/reports/gotobi_oos/acquisition.jsonl 2>/dev/null || true
+          ls -la data/m1/USDJPY
+      - run: python scripts/gotobi_oos.py --out results/reports/gotobi_oos 2>&1 | tee results/reports/gotobi_oos/log.txt
+      - name: Publish to the gotobi-oos branch (summaries only, no price data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          rm -f results/reports/gotobi_oos/trades.parquet
+          mkdir -p /tmp/pub && cp -r results/reports/gotobi_oos /tmp/pub/
+          git checkout --orphan gotobi-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/gotobi_oos .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > gotobi_oos/RUN.txt
+          git add -f gotobi_oos
+          git commit -qm "Gotobi out of sample 2019-2025 (run ${{ github.run_id }})"
+          git push -f origin HEAD:gotobi-oos
