@@ -199,6 +199,17 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
   360,000 day traders), and 97% of persistent Brazilian day traders lose. The skilled minority wins through speed
   and reaction.
 
+### 8.1o Break-even costs - see `docs/breakeven.md`
+- Leverage does not change any conclusion: it scales the edge, the costs and the risk alike.
+- Cheaper execution:
+  - **Gotobi:** a raw-ECN account (spread + 0.7 bp) raises its net to +4.0 bp, t 3.4; IBKR (spread + 0.4 bp) to
+    +4.3 bp, t 3.7. It earns almost all of it in 2011-2018 (t 4.5).
+  - **FOMC-day, pre-FOMC and month-end effects** pass BH at lower costs only because of 2007-2010; since 2011 they
+    are near zero at every cost level.
+  - **EUR/USD local trading hours** becomes significant since 2011 only at institutional costs (+1.6 bp a day,
+    t 2.3).
+- Fix reversals, metals fixes, gold sessions and random-entry grids stay negative at retail-ECN and IBKR costs.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
