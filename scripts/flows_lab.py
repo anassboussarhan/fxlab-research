@@ -176,6 +176,13 @@ def fred(series):
             except Exception as ex:                                     # noqa: BLE001
                 err.append(f"{name}: {str(ex)[:100]}")
                 time.sleep(5)
+        manual = os.path.join(ROOT, "data", "alt_manual", f"{series}_monthend.csv")
+        if s is None and os.path.exists(manual):
+            # month-end closes read from the FRED page in the research session (see the file header); enough for
+            # the monthly tests V1 / V2, which only use the last close before each month
+            x = pd.read_csv(manual, comment="#", parse_dates=["date"]).set_index("date")["value"]
+            s, src = x, "manual_monthend:" + os.path.basename(manual)
+            err.append("used the manual month-end file")
         if s is None:
             raise RuntimeError(f"{series}: no source worked: {err}")
         s.index = pd.to_datetime(s.index, errors="coerce")

@@ -40,7 +40,9 @@ DESC = {"F1": "Gotobi: long USDJPY 03:00 -> fix (10:00 JST in this data)",
         "M1": "month-end London fix, equity-hedging signal, 08:00 -> 16:00 London",
         "M2": "month-end London fix, equity-hedging signal, 24 h into the fix",
         "L1": "local trading hours: short each currency in its home session (8 currencies)",
-        "L2": "local trading hours, EURUSD", "V1": "sell 1-month EURUSD variance at EVZ (0.5 vol pt cost)",
+        "L2": "local trading hours, EURUSD",
+        "V1": "sell 1-month EURUSD variance at EVZ (0.5 vol pt cost); returns are vol points / 100, so mean_bp / 100 "
+              "= vol points",
         "V2": "volatility-risk-premium direction signal, EURUSD", "C1": "carry, only when VIX is calm (7 pairs)",
         "C2": "carry, always (7 pairs)", "K1": "long foreign currencies in New York hours (9)",
         "K2": "short foreign currencies overnight (9)", "K3": "both legs, EUR / GBP / CHF",
@@ -240,7 +242,16 @@ def main():
             continue
         for col in ("net_sw", "gross"):
             r = permutation(series[ev_name][col], series[co_name][col], strata)
-            perm_rows.append({"test": ev_name, "control": co_name, "column": col, **r})
+            # Welch t of the difference in means: the permutation assumes event and control days are exchangeable,
+            # which overstates significance when event days are more volatile (FOMC days are ~1.4x)
+            a_, b_ = series[ev_name][col].dropna(), series[co_name][col].dropna()
+            wt = float(st.ttest_ind(a_, b_, equal_var=False).statistic)
+            ya, yb = a_.groupby(a_.index.year).mean(), b_.groupby(b_.index.year).mean()
+            dy = (ya - yb).dropna()
+            perm_rows.append({"test": ev_name, "control": co_name, "column": col, **r,
+                              "sd_ratio_event_control": float(a_.std() / b_.std()), "welch_t": wt,
+                              "welch_p_one_sided": float(st.t.sf(wt, df=min(len(a_), len(b_)) - 1)),
+                              "years_event_better": int((dy > 0).sum()), "years": int(len(dy))})
     PM = pd.DataFrame(perm_rows)
     PM.to_csv(OUT / "permutation.csv", index=False)
     long = [S.assign(test=k).reset_index() for k, S in series.items() if S is not None and len(S)]

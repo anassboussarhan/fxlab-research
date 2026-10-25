@@ -136,6 +136,31 @@ training filter, pooled on the more mean-reverting pairs).
 Run 16 extends this to M1-M30, H2, tick and volatility bars: 0 of 78 tests survive, and every fast timeframe is
 still negative at half costs. Grids make up to +1.2 Sharpe gross at M1-M5, far below their costs.
 
+### 8.1k Flow, calendar and option-implied effects from the literature - see `docs/flows_lab.md`
+Runs 17 and 19 test 17 published effects in their stated form on the 9 USD pairs, with real bid/ask M1 data,
+costs, and swap from run 19. Two survive Benjamini-Hochberg over the 17 tests.
+- **Gotobi (USD/JPY, 03:00 Tokyo to the fix): +3.41 bp per trade, t 2.88, Sharpe 0.91, 700 trades 2007-2018,
+  q 0.017** (rate-based swap).
+  - With the flat 0.5 pip per night swap: +2.76 bp, q 0.084.
+  - It beats the same trade on random days of the same weekday and year (Welch t 4.0, 10 of 12 years).
+  - It lost in 2007-2009 and was positive in every year from 2010 to 2018.
+  - All events fall inside the papers' sample period.
+- **Selling one-month EUR/USD variance at EVZ: +1.31 vol points a month after 0.5 vol point cost, t 5.4, Sharpe
+  2.1, 82 months (2008-2014).**
+  - This is the variance risk premium: negatively skewed, with a worst month of -6.6 vol points.
+  - It needs options, and the sample ends in 2014 because EVZ was read by hand from the FRED page (the runner
+    could not download it).
+- The rest:
+  - FOMC days: real until 2010 (t 2.4-3.0), weak since (t 0.15-0.2).
+  - Month-end London fix with the equity-hedging signal: real before costs (t 2.5), t 1.4 after.
+  - Fix reversal, around-the-clock and local trading hours: positive gross in some cases, deeply negative after
+    costs.
+  - VIX-filtered carry: about zero.
+  - The VRP signal for spot direction: t 0.4.
+- Random entries inside the event windows, in the edge direction, do not win: 0 of 6 survive.
+  - Gotobi random-time entries make +0.41 bp (t 0.5); random timing keeps half the gross move.
+  - Take-profit / stop brackets make every version negative.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
@@ -168,6 +193,14 @@ still negative at half costs. Grids make up to +1.2 Sharpe gross at M1-M5, far b
 * **Scope run locally:** round 1: H1 for all 14 instruments, M15/H4 for EURUSD, models on EURUSD H1 (horizons 1, 5, 20). Round 2 added H4/D1/H8 for all 14, H2 for 7, M30 for 4, M15 for 2, M5 for EURUSD (partial), tick/volatility bars for 4, H6/H12 for one family, the all-feature scan on 14 x H1/H4/D1 and all-feature ML on 7 x H1. Still not run: M1-M10, model horizons 2/3/10/30/50/100, the all-feature scan below H1, Optuna re-optimisation and cross-market model transfer (2 CPUs, 8 GB).
 * **Excluded experiments:** S.ML.RL_POLICY on M15 (compute) and S.XA.CARRY_FILTER (data), recorded in the manifests. No experiment failed (0 of 1,305).
 * **Simplifications:** a reduced TFT (no static covariates or multi-horizon decoder); discrete-action SAC; Kelly sizing on portfolio streams only; intrabar ambiguity resolved stop-first (conservative).
+* **Hour-0 data gap:** the M1 store has no bars between 00:00 and 01:00 UTC (09:00-10:00 Tokyo) for most pairs.
+  On the runner, 8 of the 9 USD pairs lack that hour; only EUR/USD has it. Locally, 12 of 14 instruments lack it;
+  only EUR/USD and XAG/USD have it. Every strategy that needs that hour shifts to
+  the next bar (the Gotobi exit is 10:00 JST, not the 09:55 fix), and features or bars spanning midnight UTC miss
+  one hour a day.
+* **External data on the runner:** FRED stopped answering the GitHub runner (run 19: VIX came from Yahoo). EVZ
+  could not be downloaded from any source, so its month-end values (2007-11 to 2014-09) were read from the FRED
+  page in the session and cross-checked three times (`data/alt_manual/EVZCLS_monthend.csv`).
 * **Statistical caveat:** the DSR uses the cross-sectional variance of OOS Sharpe across all configurations; with many strongly negative strategies this variance is large, which makes DSR conservative. Conclusions do not depend on it: BH-adjusted p-values, White RC and SPA all agree.
 
 ## 10. What would change the conclusion

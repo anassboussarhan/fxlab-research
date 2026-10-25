@@ -110,3 +110,6 @@ results branch (`resultsN`). Development data only (2007-2018, EURUSD to 2022), 
 | 14 | 40152143260 | re-run of the random-entry grid after the limit-fill fix (limit orders pay the spread); merges runs 11-12 - the final random-entry ranking | `docs/random_entry_opt.md` |
 | 15 | 40191195490 | random entries, mean-reversion harvest with pooled robust selection: 321 shared candidates x 34 pairs x H1-D1, six pre-declared selection rules, full / half / zero costs | `docs/random_entry_pool.md` |
 | 16 | 40195407249 | run 15 extended to M1, M5, M15, M30, H2, tick and volatility bars; merges run 15 (78 tests over 13 timeframes) | `docs/random_entry_pool.md` |
+| 17 | 40205212178 | flows and options lab: 17 registered tests of published flow, calendar and option-implied effects (Gotobi, month-end fix, local hours, around the clock, FOMC days, fix reversal, EVZ variance, VRP signal, VIX-filtered carry) on the 9 USD pairs | `docs/flows_lab.md` |
+| 18 | 40206036189 | macro lab: economic momentum, output gap, Taylor-rule fundamentals and elastic net, 9 currencies vs USD, monthly | `docs/macro_lab.md` |
+| 19 | 40207062071 | run 17 repeated with swap on overnight trades, EVZ download fallbacks, random-date tests and random entry timing inside the event windows | `docs/flows_lab.md` |
