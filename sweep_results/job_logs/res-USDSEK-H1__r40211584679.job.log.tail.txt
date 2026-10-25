@@ -1,0 +1,68 @@
+{
+ "pair": "USDSEK",
+ "ccy": "SEK",
+ "series": {
+  "SEK_ip": {
+   "sid": "dbnomics:OECD/MEI/SWE.PRINTO01.IXOBSA.M",
+   "first": "1959-01-01",
+   "last": "2023-11-01",
+   "n": 779
+  },
+  "SEK_cpi": {
+   "sid": "dbnomics:OECD/MEI/SWE.CPALTT01.IXOB.M",
+   "first": "1955-01-01",
+   "last": "2023-12-01",
+   "n": 828
+  },
+  "SEK_unemp": {
+   "sid": "dbnomics:OECD/MEI/SWE.LRHUTTTT.STSA.M",
+   "first": "1983-01-01",
+   "last": "2023-12-01",
+   "n": 492
+  },
+  "SEK_retail": {
+   "sid": "dbnomics:OECD/MEI/SWE.SLRTTO01.IXOBSA.M",
+   "first": "1960-01-01",
+   "last": "2023-09-01",
+   "n": 765
+  },
+  "SEK_ppi": {
+   "sid": "dbnomics:OECD/MEI/SWE.PIEAMP01.IXOB.M",
+   "first": "1982-01-01",
+   "last": "2023-02-01",
+   "n": 494
+  },
+  "USD_ip": {
+   "sid": "dbnomics:OECD/MEI/USA.PRINTO01.IXOBSA.M",
+   "first": "1919-01-01",
+   "last": "2023-11-01",
+   "n": 1259
+  },
+  "USD_cpi": {
+   "sid": "dbnomics:OECD/MEI/USA.CPALTT01.IXOB.M",
+   "first": "1955-01-01",
+   "last": "2023-12-01",
+   "n": 828
+  },
+  "USD_unemp": {
+   "sid": "dbnomics:OECD/MEI/USA.LRHUTTTT.STSA.M",
+   "first": "1955-01-01",
+   "last": "2024-01-01",
+   "n": 829
+  },
+  "USD_retail": {
+   "sid": "dbnomics:OECD/MEI/USA.SLRTTO01.IXOBSA.M",
+   "first": "1955-01-01",
+   "last": "2023-11-01",
+   "n": 827
+  },
+  "USD_ppi": {
+   "sid": "dbnomics:OECD/MEI/USA.PIEAMP01.IXOB.M",
+   "first": "1947-01-01",
+   "last": "2022-12-01",
+   "n": 912
+  }
+ },
+ "errors": {},
+ "seconds": 38.3
+}
