@@ -159,3 +159,45 @@ def test_symmetric_bracket_is_unbiased(RO):
         G.append(np.mean([b.sum() for b in bg]))
     G = np.array(G)
     assert abs(G.mean()) < 3.5 * G.std(ddof=1) / np.sqrt(len(G)) + 1e-3
+
+
+def _grid_bars(mid, sp):
+    """Bar arrays (bid/ask OHLC) for a mid path of bar closes: each bar opens at the previous close."""
+    c = np.asarray(mid, float)
+    o = np.r_[c[0], c[:-1]]
+    h = np.maximum(o, c); l = np.minimum(o, c)
+    hs = sp / 2
+    return (o - hs, h - hs, l - hs, c - hs, o + hs, h + hs, l + hs, c + hs)
+
+
+def test_grid_cannot_trade_quote_noise_inside_the_spread(RO):
+    """Mid oscillating +-0.5 pip around 1.0 with a 2-pip spread. A grid with 0.3-pip steps and a 0.3-pip target
+    would harvest the oscillation if its limit orders were filled at mid; buy limits must wait for the ASK and the
+    take-profit for the BID, so nothing inside the spread can fill them. With zero spread the same grid does trade
+    (and gains on this mean-reverting path), so the test is not vacuous."""
+    n = 400
+    mid = 1.0 + 0.00005 * np.where(np.arange(n) % 2 == 0, 1.0, -1.0)
+    z = np.zeros(n); atr = np.full(n, 0.0001); ent = np.ones(n, np.int8)
+    m1o = np.zeros(n + 1, np.int64); d1 = np.zeros(1)
+    args = (atr, z, ent, 0.3, 5, 2.0, 0.3, 50.0, 0.0, 0.0, 0.0001, 0.0, 0.0, m1o, d1, d1, d1, d1, False)
+    b0, n0 = RO._grid(*_grid_bars(mid, 0.0), *args)
+    b2, n2 = RO._grid(*_grid_bars(mid, 0.0002), *args)
+    assert n0 > 20 and b0.sum() > 0                       # frictionless: the grid cycles and gains
+    assert n2 == 1 and b2.sum() < 0                       # 2-pip spread: one basket that never fills an add or target
+
+
+def test_grid_gap_through_the_stop_exits_at_the_open(RO):
+    """Long basket from 1.0000 (ATR 0.001, step 1 ATR, 2 levels, stop 1 ATR beyond the last level = 0.9980); the
+    next bar opens at 0.9900: the basket is closed at that open, not at the stop level."""
+    mid = np.array([1.0, 1.0, 1.0, 0.99, 0.99, 0.99])
+    bo, bh, bl, bc, ao, ah, al, ac = (x.copy() for x in _grid_bars(mid, 0.0))
+    for x in (bo, ao):
+        x[3] = 0.99                                       # the gap: bar 3 opens at 0.99 after closing at 1.0
+    for x in (bh, ah):
+        x[3] = 0.99
+    n = len(mid); atr = np.full(n, 0.001); ent = np.array([0, 1, 0, 0, 0, 0], np.int8)
+    m1o = np.zeros(n + 1, np.int64); d1 = np.zeros(1)
+    b, ntr = RO._grid(bo, bh, bl, bc, ao, ah, al, ac, atr, np.zeros(n), ent, 1.0, 2, 1.0, 5.0, 1.0, 0.0, 0.0, 0.0001,
+                      0.0, 0.0, m1o, d1, d1, d1, d1, False)
+    w = 1.0 / 2.0                                          # first of two equal levels
+    assert ntr == 1 and abs(b[3] - w * (0.99 / 1.0 - 1.0)) < 1e-12 and b[4] == 0.0 and b[5] == 0.0

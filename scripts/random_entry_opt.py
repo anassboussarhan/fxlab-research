@@ -424,9 +424,16 @@ def _pyramid(bo, bh, bl, bc, ao, ah, al, ac, atr, roll, ent, add_atr, N, give_at
 @njit(cache=False)
 def _grid(bo, bh, bl, bc, ao, ah, al, ac, atr, roll, ent, step_atr, N, g, tp_atr, sl_atr, slip_frac, slip_pips, pip,
           comm, swap_pips, m1o, mbh, mbl, mah, mal, use_m1):
-    """Averaging-down grid with resting limit adds (filled at the level), basket take-profit (limit, at the level)
-    and basket stop (market). Size of level k = g^k, normalised so all N levels = 1 notional. Inside a bar the
-    order of events is unknown: when more than one level lies in the bar's range the M1 path is replayed
+    """Averaging-down grid with resting limit adds, a basket take-profit (limit) and a basket stop (market). Size of
+    level k = g^k, normalised so all N levels = 1 notional; positions are marked at mid.
+    Limit orders trade on their own side of the quote, like any retail limit order: a long basket's adds are buy
+    limits that fill when the ASK trades strictly below the level (at the level), its take-profit a sell limit
+    that fills when the BID reaches the level; a short basket mirrors this (adds when the bid trades strictly above,
+    take-profit when the ask reaches it). So limit fills pay the spread (no slippage) and quote noise inside the
+    spread cannot fill them. The stop is a market order: mid trigger, half spread + slippage.
+    (Before 2026-10-25 the limit orders were triggered and filled at mid, which let them skip the spread - see
+    docs/random_entry_opt.md.)
+    Inside a bar the order of events is unknown: when any level lies in the bar's range the M1 path is replayed
     (use_m1); within one sub-bar (or without M1) adds come first, then the stop, and no take-profit on a bar segment
     in which an add filled (pessimistic)."""
     n = len(bo)
@@ -450,11 +457,15 @@ def _grid(bo, bh, bl, bc, ao, ah, al, ac, atr, roll, ent, step_atr, N, g, tp_atr
             ntr += 1
         if w == 0.0:
             continue
-        lo_b = 0.5 * (bl[j] + al[j]); hi_b = 0.5 * (bh[j] + ah[j])
+        if (d > 0 and mo <= stop) or (d < 0 and mo >= stop):                 # gapped through the stop: out at the open
+            bar[j] -= w * ((hs + slip) / mo + comm)
+            w = 0.0
+            continue
+        lo_b = 0.5 * (bl[j] + al[j]); hi_b = 0.5 * (bh[j] + ah[j])            # mid extremes: stop trigger
         if d > 0:
-            nlev = (1 if (lev < N and lo_b < nxt) else 0) + (1 if lo_b <= stop else 0) + (1 if hi_b >= tpl else 0)
+            nlev = (1 if (lev < N and al[j] < nxt) else 0) + (1 if lo_b <= stop else 0) + (1 if bh[j] >= tpl else 0)
         else:
-            nlev = (1 if (lev < N and hi_b > nxt) else 0) + (1 if hi_b >= stop else 0) + (1 if lo_b <= tpl else 0)
+            nlev = (1 if (lev < N and bh[j] > nxt) else 0) + (1 if hi_b >= stop else 0) + (1 if al[j] <= tpl else 0)
         rep = use_m1 and nlev >= 1 and m1o[j + 1] > m1o[j]     # any level in range: replay (post-add targets move)
         q0 = m1o[j] if rep else 0
         q1 = m1o[j + 1] if rep else 1
@@ -462,11 +473,11 @@ def _grid(bo, bh, bl, bc, ao, ah, al, ac, atr, roll, ent, step_atr, N, g, tp_atr
         closed = False
         for q in range(q0, q1):
             if rep:
-                lo = 0.5 * (mbl[q] + mal[q]); hi = 0.5 * (mbh[q] + mah[q])
+                lo = 0.5 * (mbl[q] + mal[q]); hi = 0.5 * (mbh[q] + mah[q]); alo = mal[q]; bhi = mbh[q]
             else:
-                lo = lo_b; hi = hi_b
+                lo = lo_b; hi = hi_b; alo = al[j]; bhi = bh[j]
             filled_add = False
-            while lev < N and ((d > 0 and lo < nxt) or (d < 0 and hi > nxt)):
+            while lev < N and ((d > 0 and alo < nxt) or (d < 0 and bhi > nxt)):
                 size = g ** lev / tot
                 bar[j] += w * d * (nxt / ref - 1.0)
                 ref = nxt
@@ -480,7 +491,7 @@ def _grid(bo, bh, bl, bc, ao, ah, al, ac, atr, roll, ent, step_atr, N, g, tp_atr
                 bar[j] += w * d * (stop / ref - 1.0) - w * ((hs + slip) / stop + comm)
                 w = 0.0; closed = True
                 break
-            if not filled_add and ((d > 0 and hi >= tpl) or (d < 0 and lo <= tpl)):
+            if not filled_add and ((d > 0 and bhi >= tpl) or (d < 0 and alo <= tpl)):
                 bar[j] += w * d * (tpl / ref - 1.0) - w * comm
                 w = 0.0; closed = True
                 break
@@ -608,6 +619,8 @@ class Data:
         self.n = len(bars)
         self.pip = pip
         self.m1o, self.mbh, self.mbl, self.mah, self.mal, self.use_m1 = _m1_path(bars, m1)
+        # mid M1 path (gross runs of the grid: bid = ask = mid)
+        self.mmh = 0.5 * (self.mbh + self.mah); self.mml = 0.5 * (self.mbl + self.mal)
         self.Amid = (self.mo, mid["high"].to_numpy(), mid["low"].to_numpy(), self.mc,
                      self.mo, mid["high"].to_numpy(), mid["low"].to_numpy(), self.mc)
         # smart-execution inputs. hour: UTC hour of each bar's open (the entry bar). vr_prev / sr_prev: volatility
@@ -693,8 +706,9 @@ def run_family(fam, P, D, e, i0, i1, gross=False, costs=None, allow=None):
     elif fam == "pyramid":
         bar, ntr = _pyramid(*A, at, ro, e, P["add"], P["N"], P["give"], P["stop"], slip_frac, slip_pips, D.pip, comm, swap)
     elif fam == "grid":
+        m1a = (D.mmh, D.mml, D.mmh, D.mml) if gross else (D.mbh, D.mbl, D.mah, D.mal)
         bar, ntr = _grid(*A, at, ro, e, P["step"], P["N"], P["g"], P["tp"], P["sl"], slip_frac, slip_pips, D.pip, comm, swap,
-                         D.m1o[w0:i1 + 1], D.mbh, D.mbl, D.mah, D.mal, D.use_m1)
+                         D.m1o[w0:i1 + 1], *m1a, D.use_m1)
     else:
         mc = D.mc[sl_]
         if fam == "zone":

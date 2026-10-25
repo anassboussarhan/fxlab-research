@@ -7,8 +7,12 @@ out-of-sample Sharpe. Significance: one-sided t of the expected-value stream (me
 Benjamini-Hochberg over all instrument x timeframe x family cells. Portfolios: equal weight across instruments on
 common trading days (streams written without dates by older versions borrow the calendar of a dated stream of
 the same instrument and timeframe - every family shares the walk-forward span - or are aligned by their start).
+Re-runs: when the same instrument x timeframe x family appears in several files, the file that sorts last wins
+(<pair>_<tf>.json < <pair>_<tf>_<tag>.json), so a tagged re-run of a family supersedes the original; the source
+file is recorded in cells.csv. Ruin (the expected stream losing half the account at some point) is reported, and
+the summary also names the best timeframe x family among those with ruin in at most 10% of instruments.
 Writes results/reports/random_entry_opt_summary/{cells.csv, ranking.csv, by_tf.csv, best_tf_by_family.csv,
-portfolios.csv, params.csv, choices.csv, summary.json}."""
+portfolios.csv, params.csv, choices.csv, years.csv, summary.json}."""
 from __future__ import annotations
 
 import glob
@@ -39,8 +43,9 @@ def sharpe_t(d):
     return float(d.mean() / d.std() * np.sqrt(260)), float(d.mean() / d.std() * np.sqrt(len(d)))
 
 
-def load_streams(files):
-    """{(pair, tf, family): daily Series}; dateless series borrow a dated calendar of the same pair x tf."""
+def load_streams(files, keep):
+    """{(pair, tf, family): daily Series} from the files that won (keep: key -> file); dateless series borrow a
+    dated calendar of the same pair x tf."""
     raw, cal = {}, {}
     for f in files:
         dp = f[:-5] + "_daily.parquet"
@@ -51,7 +56,9 @@ def load_streams(files):
         if isinstance(D.index, pd.DatetimeIndex):
             cal.setdefault((J["pair"], J["tf"]), D.index)
         for fam in D.columns:
-            raw[(J["pair"], J["tf"], fam)] = D[fam]
+            k = (J["pair"], J["tf"], fam)
+            if keep.get(k) == f:
+                raw[k] = D[fam]
     out = {}
     for k, s in raw.items():
         if not isinstance(s.index, pd.DatetimeIndex):
@@ -66,32 +73,36 @@ def main():
     OUT.mkdir(parents=True, exist_ok=True)
     rows, prm = [], []
     files = sorted(glob.glob(str(IN / "*.json")))
-    for f in files:
+    cells = {}
+    for f in files:                                         # later (tagged) files supersede earlier ones
         J = json.load(open(f))
         for fam, R in J.get("families", {}).items():
-            w, h = R["wf"], R["hindsight"]
-            sel = R["selection"]
-            rows.append({"pair": J["pair"], "tf": J["tf"], "family": fam,
-                         "single_trader_median": w["single_trader_median_sharpe"],
-                         "single_trader_share_positive": float(np.mean(np.array(w["single_trader_sharpes"]) > 0)),
-                         "single_trader_gross": w["single_trader_median_gross"],
-                         "expected_stream_sharpe": w["expected_stream_sharpe"], "t": w["expected_stream_t"],
-                         "expected_stream_gross": w["expected_stream_gross_sharpe"], "days": w["days"],
-                         "ann_return": w["expected_stream_ann_return"], "train_median": w["median_train_sharpe"],
-                         "test_trades_per_fold": float(np.mean([s.get("test_trades_mean", np.nan) for s in sel])),
-                         "hindsight_in_sample": h["in_sample_best"], "hindsight_rerandomised": h["rerandomised"],
-                         "seconds": R.get("seconds")})
-            for s in sel:
-                p = {k: v for k, v in s["params"].items()}
-                p.update({"tf": J["tf"], "family": fam, "session": "h0" in p, "uses_tp": "tp" in p and p.get("tp", 0) > 0,
-                          "uses_trail": "trail" in p, "uses_be": "be" in p, "uses_part": "part" in p,
-                          "uses_time": "tmax" in p})
-                prm.append(p)
+            cells[(J["pair"], J["tf"], fam)] = (f, J, R)
+    keep = {k: v[0] for k, v in cells.items()}
+    for (pair, tf, fam), (f, J, R) in sorted(cells.items()):
+        w, h = R["wf"], R["hindsight"]
+        sel = R["selection"]
+        rows.append({"pair": J["pair"], "tf": J["tf"], "family": fam, "source": os.path.basename(f),
+                     "single_trader_median": w["single_trader_median_sharpe"],
+                     "single_trader_share_positive": float(np.mean(np.array(w["single_trader_sharpes"]) > 0)),
+                     "single_trader_gross": w["single_trader_median_gross"],
+                     "expected_stream_sharpe": w["expected_stream_sharpe"], "t": w["expected_stream_t"],
+                     "expected_stream_gross": w["expected_stream_gross_sharpe"], "days": w["days"],
+                     "ann_return": w["expected_stream_ann_return"], "train_median": w["median_train_sharpe"],
+                     "test_trades_per_fold": float(np.mean([s.get("test_trades_mean", np.nan) for s in sel])),
+                     "hindsight_in_sample": h["in_sample_best"], "hindsight_rerandomised": h["rerandomised"],
+                     "seconds": R.get("seconds")})
+        for s in sel:
+            p = {k: v for k, v in s["params"].items()}
+            p.update({"tf": J["tf"], "family": fam, "session": "h0" in p, "uses_tp": "tp" in p and p.get("tp", 0) > 0,
+                      "uses_trail": "trail" in p, "uses_be": "be" in p, "uses_part": "part" in p,
+                      "uses_time": "tmax" in p})
+            prm.append(p)
     if not rows:
         json.dump({"cells": 0}, open(OUT / "summary.json", "w"))
         print("no results")
         return
-    streams = load_streams(files)
+    streams = load_streams(files, keep)
     C = pd.DataFrame(rows)
     # tail risk of the expected-value stream (returns are fractions of starting equity, summed): max drawdown,
     # worst day, skew, ruin (cumulative loss of half the account at some point), share of calendar years positive
@@ -183,6 +194,8 @@ def main():
             ch.append(r)
         pd.DataFrame(ch).to_csv(OUT / "choices.csv", index=False)
     best = R.iloc[0].to_dict()
+    ok = R[R.share_ruin50 <= 0.10] if "share_ruin50" in R else R
+    best_safe = ok.iloc[0].to_dict() if len(ok) else None
     top = C.sort_values("t", ascending=False).head(10)[["pair", "tf", "family", "single_trader_median",
                                                          "expected_stream_sharpe", "t", "p", "p_bh"]]
     summ = {"cells": int(len(C)), "pairs": int(C.pair.nunique()), "tfs": [t for t in TF_ORDER if t in set(C.tf)],
@@ -190,7 +203,9 @@ def main():
             "share_cells_single_trader_positive": float((C.single_trader_median > 0).mean()),
             "share_cells_expected_stream_positive": float((C.expected_stream_sharpe > 0).mean()),
             "share_cells_t_above_1.645": float((C.t > 1.645).mean()),
-            "best_tf_family": best, "median_single_trader_all": float(C.single_trader_median.median()),
+            "best_tf_family": best, "best_tf_family_ruin_at_most_10pct": best_safe,
+            "superseded_cells": int(sum(1 for f in files for fam in json.load(open(f)).get("families", {})) - len(C)),
+            "median_single_trader_all": float(C.single_trader_median.median()),
             "median_gross_all": float(C.single_trader_gross.median()),
             "median_train_all": float(C.train_median.median()),
             "hindsight": {"median_in_sample": float(C.hindsight_in_sample.median()),
