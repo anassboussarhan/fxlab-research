@@ -115,3 +115,4 @@ results branch (`resultsN`). Development data only (2007-2018, EURUSD to 2022), 
 | 19 | 40207062071 | run 17 repeated with swap on overnight trades, EVZ download fallbacks, random-date tests and random entry timing inside the event windows | `docs/flows_lab.md` |
 | 20 | 40211584679 | run 18 repeated with the macro series from DBnomics (OECD MEI / IMF IFS mirrors; all 50 series fetched) | `docs/macro_lab.md` |
 | 21 | 40212676021 | collect only: re-scores run 20 with the macro-report fix (a constant elastic-net forecast is held flat, not ranked in a fixed order), records every fit, publishes the inputs | `docs/macro_lab.md` |
+| 22 | 40213570596 | round-2 literature tests: silver / gold fixes, gold Asian vs Western hours, gold seasonality, dollar carry, dollar- and carry-factor momentum, weekly momentum (11 registered tests) | `docs/lit2_lab.md` |

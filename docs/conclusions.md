@@ -174,6 +174,31 @@ costs and carry.
   reported -5.2 bp for it; that number was an artefact of ranking a constant forecast in a fixed order, fixed in
   run 21.
 
+### 8.1m Round-2 literature tests - see `docs/lit2_lab.md`
+Run 22 tests 11 further published effects; **0 of 11 survive**.
+- Real before costs but too small after them:
+  - the silver fix decline: +3.6 bp a day gross, t 5.1; +6.2 bp before the 2014 auction, +1.3 after; about 26 bp
+    of silver costs;
+  - the gold AM fix: gross t 3.6, mostly before the 2015 auction;
+  - gold rising in Asian hours: +2.4 bp, t 2.2, against 4-7 bp of gold costs.
+- Gold PM fix and seasonality: nothing in 2011-2018.
+- Dollar carry, carry-factor momentum and weekly momentum: about zero or negative.
+- Dollar-factor momentum: +25 bp a month, t 1.2, positive only until 2010.
+
+### 8.1n Prop firms: skill or variance? - see `docs/prop_firms.md`
+- **Reported outcomes:** 14% of over 300,000 prop-challenge accounts pass and 7% are ever paid (FPFX); 1-2% are
+  paid at The Funded Trader.
+- **No-edge simulation:** a trader with no edge, on real EUR/USD bid/ask data, under FTMO's published 2-step rules,
+  passes 1-17% of the time and is paid 0.5-7% of the time; the boldest bets do best. The industry's payout rate is
+  therefore consistent with no skill.
+  - In this model a bold no-edge trader has a small positive expected value per challenge (+$156 to +$554 on
+    $585), because the loss is capped at the fee. About 93% still lose the fee, and real firms' extra rules are
+    not modelled.
+- **With the Gotobi edge** (3x leverage): paid 50% of the time, +$3,142 per challenge on average.
+- **The academic data on individual traders:** fewer than 1% are persistently profitable (Taiwan; about 1,000 of
+  360,000 day traders), and 97% of persistent Brazilian day traders lose. The skilled minority wins through speed
+  and reaction.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
