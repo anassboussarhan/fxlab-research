@@ -1,0 +1,30 @@
+$^EVZ: possibly delisted; no timezone found
+
+1 Failed download:
+['^EVZ']: possibly delisted; no timezone found
+EURUSD vrp: ERROR EVZCLS: no source worked: ['fred_csv_0: The read operation timed out', 'fred_csv_1: The read operation timed out', 'fred_csv_2: The read operation timed out', 'fred_txt: The read operation timed out', 'yahoo:^EVZ: only 0 rows', 'cboe:EVZ: HTTP Error 403: Forbidden']
+                net               gross          
+              count          mean count      mean
+test                                             
+B3             2816  2.718861e-05  2816  0.000182
+B3_control     2816 -1.333738e-04  2816  0.000021
+B4             2816 -1.483128e-04  2816 -0.000002
+B4_control     2816 -1.175168e-04  2816  0.000028
+B5             1888  9.940035e-04  1888  0.001233
+B5_control     1888  1.249477e-04  1888  0.000364
+B6             1888  2.929174e-05  1888  0.000187
+B6_control     1888 -1.009070e-04  1888  0.000056
+C1             3982 -2.720637e-05  3982 -0.000024
+C2             3982 -1.815632e-08  3982 -0.000007
+K_ny           3166 -1.494062e-04  3166  0.000102
+K_on           3164 -1.418208e-04  3164  0.000119
+L1             3963  2.032646e-05  3963  0.000183
+L2             3963  2.032646e-05  3963  0.000183
+M1              176 -2.017210e-05   176  0.000130
+M1_placebo     3767 -2.232918e-04  3767 -0.000075
+M2              176  3.167946e-04   176  0.000461
+M2_placebo     3745 -9.240950e-05  3745  0.000052
+P_dol           118  1.588791e-03   118  0.001899
+P_dol_control  2260 -3.530052e-04  2260 -0.000042
+W1             3954 -1.244686e-04  3954  0.000022
+{"pair": "EURUSD", "start": "2007-03-30", "end": "2022-07-08", "bars_by_utc_hour": {"0": 235556, "1": 237960, "2": 237818, "3": 237708, "4": 237477, "5": 237843, "6": 238106, "7": 238147, "8": 237760, "9": 237716, "10": 237720, "11": 237736, "12": 237722, "13": 237693, "14": 237718, "15": 237679, "16": 237671, "17": 237597, "18": 237610, "19": 237627, "20": 237269, "21": 234486, "22": 235469, "23": 236539}, "equity_foreign": "yahoo:^STOXX50E", "equity_us": "yahoo:^GSPC", "month_end_rows": 19128, "local_hours_rows": 7926, "carry_rows": 7964, "around_clock_rows": 6330, "fomc_source": {"2007": "parsed 8; not in fallback: []; fallback not parsed: []", "2008": "parsed 8; not in fallback: []; fallback not parsed: []", "2009": "parsed 8; not in fallback: []; fallback not parsed: []", "2010": "parsed 8; not in fallback: []; fallback not parsed: []", "2011": "parsed 8; not in fallback: []; fallback not parsed: []", "2012": "parsed 8; not in fallback: []; fallback not parsed: []", "2013": "parsed 8; not in fallback: []; fallback not parsed: []", "2014": "parsed 8; not in fallback: []; fallback not parsed: []", "2015": "parsed 8; not in fallback: []; fallback not parsed: []", "2016": "parsed 8; not in fallback: []; fallback not parsed: []", "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']", "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']", "2019": "parsed 8; not in fallback: []; fallback not parsed: []", "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []", "2021": "fetch failed: HTTP Error 404: Not Found", "2022": "fetch failed: HTTP Error 404: Not Found"}, "fomc_rows": 9930, "fix_reversal_rows": 3954, "errors": {"vrp": "RuntimeError(\"EVZCLS: no source worked: ['fred_csv_0: The read operation timed out', 'fred_csv_1: The read operation timed out', 'fred_csv_2: The read operation timed out', 'fred_txt: The read operation timed out', 'yahoo:^EVZ: only 0 rows', 'cboe:EVZ: HTTP Error 403: Forbidden']\")"}, "external_sources": [["VIXCLS", "yahoo:^VIX"]], "seconds": 1024.1, "alt_files": ["eq_USD.csv", "eq_EUR.csv", "VIXCLS.csv"]}

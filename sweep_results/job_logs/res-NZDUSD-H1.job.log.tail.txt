@@ -1,0 +1,24 @@
+                net           gross          
+              count      mean count      mean
+test                                         
+B3             2144  0.000381  2144  0.000891
+B3_control     2144 -0.000413  2144  0.000097
+B4             2144 -0.000237  2144  0.000260
+B4_control     2144 -0.000482  2144  0.000046
+B5             1392  0.001325  1392  0.002204
+B5_control     1392 -0.000554  1392  0.000326
+B6             1392 -0.000388  1392  0.000145
+B6_control     1392 -0.000567  1392  0.000004
+C1             2914  0.000043  2914  0.000034
+C2             2914  0.000102  2914  0.000049
+K_ny           2319 -0.000902  2319  0.000016
+K_on           2323 -0.001014  2323 -0.000044
+L1             2904 -0.000447  2904  0.000225
+M1              134 -0.000062   134  0.000440
+M1_placebo     2772 -0.000426  2772  0.000047
+M2              134  0.001076   134  0.001548
+M2_placebo     2762 -0.000271  2762  0.000184
+P_dol            87  0.002073    87  0.003252
+P_dol_control  1655 -0.001258  1655 -0.000100
+W1             2895 -0.000500  2895 -0.000013
+{"pair": "NZDUSD", "start": "2007-03-30", "end": "2018-06-06", "bars_by_utc_hour": {"1": 174564, "2": 174465, "3": 174459, "4": 174410, "5": 174491, "6": 174538, "7": 174563, "8": 174335, "9": 174322, "10": 174262, "11": 174354, "12": 174340, "13": 174286, "14": 174352, "15": 174356, "16": 174288, "17": 174217, "18": 174276, "19": 174232, "20": 174098, "21": 172502, "22": 173396, "23": 174207}, "equity_foreign": "yahoo:^NZ50", "equity_us": "yahoo:^GSPC", "month_end_rows": 14378, "local_hours_rows": 2904, "carry_rows": 5828, "around_clock_rows": 4642, "fomc_source": {"2007": "parsed 8; not in fallback: []; fallback not parsed: []", "2008": "parsed 8; not in fallback: []; fallback not parsed: []", "2009": "parsed 8; not in fallback: []; fallback not parsed: []", "2010": "parsed 8; not in fallback: []; fallback not parsed: []", "2011": "parsed 8; not in fallback: []; fallback not parsed: []", "2012": "parsed 8; not in fallback: []; fallback not parsed: []", "2013": "parsed 8; not in fallback: []; fallback not parsed: []", "2014": "parsed 8; not in fallback: []; fallback not parsed: []", "2015": "parsed 8; not in fallback: []; fallback not parsed: []", "2016": "parsed 8; not in fallback: []; fallback not parsed: []", "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']", "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']"}, "fomc_rows": 7310, "fix_reversal_rows": 2895, "errors": {}, "external_sources": [["VIXCLS", "yahoo:^VIX"]], "seconds": 526.9, "alt_files": ["eq_USD.csv", "VIXCLS.csv", "eq_NZD.csv"]}
