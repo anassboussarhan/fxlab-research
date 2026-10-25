@@ -1,0 +1,35 @@
+name: options-lab
+# Can retail options selling be profitable? S&P 500 short variance at the VIX and the Cboe options-strategy indices,
+# free Yahoo data fetched on the runner, cut at 2025-12-31 (scripts/options_lab.py).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/OPTIONS_LAB"]
+permissions:
+  contents: write
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy yfinance
+      - run: python scripts/options_lab.py --out results/reports/options_lab 2>&1 | tee results/reports/options_lab_log.txt
+      - name: Publish to the options-lab branch
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r results/reports/options_lab /tmp/pub/ && cp results/reports/options_lab_log.txt /tmp/pub/options_lab/log.txt
+          rm -f /tmp/pub/options_lab/daily_closes.csv
+          git checkout --orphan options-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/options_lab .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > options_lab/RUN.txt
+          git add -f options_lab
+          git commit -qm "Options lab (run ${{ github.run_id }})"
+          git push -f origin HEAD:options-lab
