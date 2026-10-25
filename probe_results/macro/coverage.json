@@ -1,0 +1,402 @@
+[
+ {
+  "ccy": "USD",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/USA.PRINTO01.IXOBSA.M",
+  "first": "1919-01-01",
+  "last": "2023-11-01",
+  "n": 1259
+ },
+ {
+  "ccy": "USD",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/USA.CPALTT01.IXOB.M",
+  "first": "1955-01-01",
+  "last": "2023-12-01",
+  "n": 828
+ },
+ {
+  "ccy": "USD",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/USA.LRHUTTTT.STSA.M",
+  "first": "1955-01-01",
+  "last": "2024-01-01",
+  "n": 829
+ },
+ {
+  "ccy": "USD",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/USA.SLRTTO01.IXOBSA.M",
+  "first": "1955-01-01",
+  "last": "2023-11-01",
+  "n": 827
+ },
+ {
+  "ccy": "USD",
+  "var": "ppi",
+  "sid": "dbnomics:OECD/MEI/USA.PIEAMP01.IXOB.M",
+  "first": "1947-01-01",
+  "last": "2022-12-01",
+  "n": 912
+ },
+ {
+  "ccy": "AUD",
+  "var": "ip",
+  "sid": "dbnomics:IMF/IFS/M.AU.AIP_IX",
+  "first": "2000-01-01",
+  "last": "2021-01-01",
+  "n": 253
+ },
+ {
+  "ccy": "AUD",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/AUS.CPALTT01.IXOB.Q",
+  "first": "1948-07-01",
+  "last": "2023-10-01",
+  "n": 302
+ },
+ {
+  "ccy": "AUD",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/AUS.LRHUTTTT.STSA.M",
+  "first": "1978-02-01",
+  "last": "2023-12-01",
+  "n": 551
+ },
+ {
+  "ccy": "AUD",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/AUS.SLRTTO01.IXOBSA.Q",
+  "first": "1983-07-01",
+  "last": "2023-07-01",
+  "n": 161
+ },
+ {
+  "ccy": "AUD",
+  "var": "ppi",
+  "sid": "dbnomics:IMF/IFS/M.AU.PPPI_IX",
+  "first": "2001-01-01",
+  "last": "2021-02-01",
+  "n": 242
+ },
+ {
+  "ccy": "CAD",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/CAN.PRINTO01.IXOBSA.M",
+  "first": "1961-01-01",
+  "last": "2023-10-01",
+  "n": 754
+ },
+ {
+  "ccy": "CAD",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/CAN.CPALTT01.IXOB.M",
+  "first": "1914-01-01",
+  "last": "2023-12-01",
+  "n": 1320
+ },
+ {
+  "ccy": "CAD",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/CAN.LRHUTTTT.STSA.M",
+  "first": "1955-01-01",
+  "last": "2023-12-01",
+  "n": 828
+ },
+ {
+  "ccy": "CAD",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/CAN.SLRTTO01.IXOBSA.M",
+  "first": "1991-01-01",
+  "last": "2023-10-01",
+  "n": 394
+ },
+ {
+  "ccy": "CAD",
+  "var": "ppi",
+  "sid": "dbnomics:OECD/MEI/CAN.PIEAMP01.IXOB.M",
+  "first": "1956-01-01",
+  "last": "2022-12-01",
+  "n": 804
+ },
+ {
+  "ccy": "CHF",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/CHE.PRINTO01.IXOBSA.Q",
+  "first": "1959-01-01",
+  "last": "2023-07-01",
+  "n": 259
+ },
+ {
+  "ccy": "CHF",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/CHE.CPALTT01.IXOB.M",
+  "first": "1955-01-01",
+  "last": "2023-12-01",
+  "n": 828
+ },
+ {
+  "ccy": "CHF",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/CHE.LRHUTTTT.STSA.Q",
+  "first": "1999-04-01",
+  "last": "2023-07-01",
+  "n": 66
+ },
+ {
+  "ccy": "CHF",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/CHE.SLRTTO01.IXOBSA.M",
+  "first": "1955-01-01",
+  "last": "2023-11-01",
+  "n": 827
+ },
+ {
+  "ccy": "CHF",
+  "var": "ppi",
+  "sid": "dbnomics:OECD/MEI/CHE.PIEAMP01.IXOB.M",
+  "first": "2002-06-01",
+  "last": "2022-12-01",
+  "n": 247
+ },
+ {
+  "ccy": "EUR",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/EA19.PRINTO01.IXOBSA.M",
+  "first": "1975-07-01",
+  "last": "2023-10-01",
+  "n": 580
+ },
+ {
+  "ccy": "EUR",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/EA20.CPALTT01.IXOB.M",
+  "first": "1990-01-01",
+  "last": "2023-12-01",
+  "n": 408
+ },
+ {
+  "ccy": "EUR",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/EA20.LRHUTTTT.STSA.M",
+  "first": "1990-07-01",
+  "last": "2023-12-01",
+  "n": 402
+ },
+ {
+  "ccy": "EUR",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/EA19.SLRTTO01.IXOBSA.M",
+  "first": "1995-01-01",
+  "last": "2023-10-01",
+  "n": 346
+ },
+ {
+  "ccy": "EUR",
+  "var": "ppi",
+  "sid": "dbnomics:OECD/MEI/EA19.PIEAMP01.IXOB.M",
+  "first": "2000-01-01",
+  "last": "2022-12-01",
+  "n": 276
+ },
+ {
+  "ccy": "GBP",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/GBR.PRINTO01.IXOBSA.M",
+  "first": "1948-01-01",
+  "last": "2023-11-01",
+  "n": 911
+ },
+ {
+  "ccy": "GBP",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/GBR.CPALTT01.IXOB.M",
+  "first": "1955-01-01",
+  "last": "2023-12-01",
+  "n": 828
+ },
+ {
+  "ccy": "GBP",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/GBR.LRHUTTTT.STSA.M",
+  "first": "1983-01-01",
+  "last": "2023-10-01",
+  "n": 490
+ },
+ {
+  "ccy": "GBP",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/GBR.SLRTTO01.IXOBSA.M",
+  "first": "1957-01-01",
+  "last": "2023-12-01",
+  "n": 804
+ },
+ {
+  "ccy": "GBP",
+  "var": "ppi",
+  "sid": "dbnomics:IMF/IFS/M.GB.PPPI_IX",
+  "first": "1957-01-01",
+  "last": "2022-12-01",
+  "n": 792
+ },
+ {
+  "ccy": "JPY",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/JPN.PRINTO01.IXOBSA.M",
+  "first": "1955-01-01",
+  "last": "2023-11-01",
+  "n": 827
+ },
+ {
+  "ccy": "JPY",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/JPN.CPALTT01.IXOB.M",
+  "first": "1955-01-01",
+  "last": "2021-06-01",
+  "n": 798
+ },
+ {
+  "ccy": "JPY",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/JPN.LRHUTTTT.STSA.M",
+  "first": "1955-01-01",
+  "last": "2023-12-01",
+  "n": 828
+ },
+ {
+  "ccy": "JPY",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/JPN.SLRTTO01.IXOBSA.M",
+  "first": "1955-01-01",
+  "last": "2023-10-01",
+  "n": 826
+ },
+ {
+  "ccy": "JPY",
+  "var": "ppi",
+  "sid": "dbnomics:IMF/IFS/M.JP.PPPI_IX",
+  "first": "1960-01-01",
+  "last": "2018-12-01",
+  "n": 708
+ },
+ {
+  "ccy": "NOK",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/NOR.PRINTO01.IXOBSA.M",
+  "first": "1955-01-01",
+  "last": "2023-11-01",
+  "n": 827
+ },
+ {
+  "ccy": "NOK",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/NOR.CPALTT01.IXOB.M",
+  "first": "1955-01-01",
+  "last": "2023-12-01",
+  "n": 828
+ },
+ {
+  "ccy": "NOK",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/NOR.LRHUTTTT.STSA.M",
+  "first": "1989-01-01",
+  "last": "2023-12-01",
+  "n": 420
+ },
+ {
+  "ccy": "NOK",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/NOR.SLRTTO01.IXOBSA.M",
+  "first": "1960-01-01",
+  "last": "2023-11-01",
+  "n": 767
+ },
+ {
+  "ccy": "NOK",
+  "var": "ppi",
+  "sid": "dbnomics:OECD/MEI/NOR.PIEAMP01.IXOB.M",
+  "first": "1977-01-01",
+  "last": "2023-01-01",
+  "n": 553
+ },
+ {
+  "ccy": "NZD",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/NZL.PRINTO01.IXOBSA.Q",
+  "first": "1977-04-01",
+  "last": "2023-07-01",
+  "n": 186
+ },
+ {
+  "ccy": "NZD",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/NZL.CPALTT01.IXOB.Q",
+  "first": "1914-04-01",
+  "last": "2023-10-01",
+  "n": 412
+ },
+ {
+  "ccy": "NZD",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/NZL.LRHUTTTT.STSA.Q",
+  "first": "1986-01-01",
+  "last": "2023-07-01",
+  "n": 151
+ },
+ {
+  "ccy": "NZD",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/NZL.SLRTTO01.IXOBSA.Q",
+  "first": "1963-01-01",
+  "last": "2023-04-01",
+  "n": 242
+ },
+ {
+  "ccy": "NZD",
+  "var": "ppi",
+  "sid": "dbnomics:OECD/MEI/NZL.PIEAMP01.IXOB.Q",
+  "first": "1960-01-01",
+  "last": "2022-07-01",
+  "n": 251
+ },
+ {
+  "ccy": "SEK",
+  "var": "ip",
+  "sid": "dbnomics:OECD/MEI/SWE.PRINTO01.IXOBSA.M",
+  "first": "1959-01-01",
+  "last": "2023-11-01",
+  "n": 779
+ },
+ {
+  "ccy": "SEK",
+  "var": "cpi",
+  "sid": "dbnomics:OECD/MEI/SWE.CPALTT01.IXOB.M",
+  "first": "1955-01-01",
+  "last": "2023-12-01",
+  "n": 828
+ },
+ {
+  "ccy": "SEK",
+  "var": "unemp",
+  "sid": "dbnomics:OECD/MEI/SWE.LRHUTTTT.STSA.M",
+  "first": "1983-01-01",
+  "last": "2023-12-01",
+  "n": 492
+ },
+ {
+  "ccy": "SEK",
+  "var": "retail",
+  "sid": "dbnomics:OECD/MEI/SWE.SLRTTO01.IXOBSA.M",
+  "first": "1960-01-01",
+  "last": "2023-09-01",
+  "n": 765
+ },
+ {
+  "ccy": "SEK",
+  "var": "ppi",
+  "sid": "dbnomics:OECD/MEI/SWE.PIEAMP01.IXOB.M",
+  "first": "1982-01-01",
+  "last": "2023-02-01",
+  "n": 494
+ }
+]
