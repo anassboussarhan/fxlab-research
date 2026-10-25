@@ -10,28 +10,34 @@ permissions:
   contents: write
 jobs:
   download:
+    # one job per month (the yearly jobs hit the 2-hour limit: Dukascopy serves about one hourly file a second)
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 100
     strategy:
       fail-fast: false
+      max-parallel: 12
       matrix:
         year: [2019, 2020, 2021, 2022, 2023, 2024, 2025]
+        month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
       - run: pip install -q polars numpy pandas pyarrow
-      - name: Download USDJPY ${{ matrix.year }} from Dukascopy
+      - name: Download USDJPY ${{ matrix.year }}-${{ matrix.month }} from Dukascopy
         run: |
-          python -m fxlab.data.acquire_dukascopy --pairs USDJPY --start ${{ matrix.year }}-01-01 --end ${{ matrix.year }}-12-31T23:59:59
-          ls -la data/m1/USDJPY/ && tail -1 data/manifests/acquisition.jsonl | cut -c1-600
+          S=$(printf "%04d-%02d-01" ${{ matrix.year }} ${{ matrix.month }})
+          E=$(date -u -d "$S +1 month" +%Y-%m-%d)
+          python -m fxlab.data.acquire_dukascopy --pairs USDJPY --start ${S}T00:00:00 --end ${E}T00:00:00
+          M=$(printf "%02d" ${{ matrix.month }})
+          mkdir -p part && mv data/m1/USDJPY/USDJPY_${{ matrix.year }}.parquet part/USDJPY_${{ matrix.year }}_$M.parquet
+          tail -1 data/manifests/acquisition.jsonl > part/manifest_${{ matrix.year }}_$M.jsonl
+          ls -la part && cut -c1-400 part/manifest_*.jsonl
       - uses: actions/upload-artifact@v4
         with:
-          name: m1-USDJPY-${{ matrix.year }}
-          path: |
-            data/m1/USDJPY/USDJPY_${{ matrix.year }}.parquet
-            data/manifests/acquisition.jsonl
+          name: m1-USDJPY-${{ matrix.year }}-${{ matrix.month }}
+          path: part
           retention-days: 30
   analyse:
     needs: download
@@ -48,11 +54,20 @@ jobs:
         with:
           pattern: m1-USDJPY-*
           path: dl/
-      - name: Place the bars
+      - name: Place the bars (months joined into one file per year)
         run: |
           mkdir -p data/m1/USDJPY results/reports/gotobi_oos
-          find dl -name 'USDJPY_*.parquet' -exec cp {} data/m1/USDJPY/ \;
-          cat dl/*/data/manifests/acquisition.jsonl > results/reports/gotobi_oos/acquisition.jsonl 2>/dev/null || true
+          cat $(find dl -name 'manifest_*.jsonl' | sort) > results/reports/gotobi_oos/acquisition.jsonl 2>/dev/null || true
+          python - <<'EOF'
+          import glob, os, polars as pl
+          fs = sorted(glob.glob("dl/**/USDJPY_*_*.parquet", recursive=True))
+          years = sorted({os.path.basename(f).split("_")[1] for f in fs})
+          for y in years:
+              parts = [pl.read_parquet(f) for f in fs if os.path.basename(f).split("_")[1] == y]
+              df = pl.concat(parts).unique(subset=["ts"]).sort("ts")
+              df.write_parquet(f"data/m1/USDJPY/USDJPY_{y}.parquet", compression="zstd")
+              print(y, len(parts), "months", df.height, "minutes")
+          EOF
           ls -la data/m1/USDJPY
       - run: python scripts/gotobi_oos.py --out results/reports/gotobi_oos 2>&1 | tee results/reports/gotobi_oos/log.txt
       - name: Publish to the gotobi-oos branch (summaries only, no price data)
