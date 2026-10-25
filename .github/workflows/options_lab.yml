@@ -18,7 +18,9 @@ jobs:
         with:
           python-version: "3.11"
       - run: pip install -q numpy pandas scipy yfinance
-      - run: python scripts/options_lab.py --out results/reports/options_lab 2>&1 | tee results/reports/options_lab_log.txt
+      - run: |
+          mkdir -p results/reports/options_lab
+          python scripts/options_lab.py --out results/reports/options_lab 2>&1 | tee results/reports/options_lab_log.txt
       - name: Publish to the options-lab branch
         run: |
           git config user.name "fxlab-sweep"
