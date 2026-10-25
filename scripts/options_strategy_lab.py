@@ -174,6 +174,82 @@ class Book:
         self.by_day = {d: g for d, g in C.groupby("date")}
         self.key = C.set_index(["expiration", "cp", "strike", "date"])[["bid", "ask", "mid", "half"]].sort_index()
         self.atm_iv = self._atm_iv_series()
+        self.surf = self._surfaces() if "iv" in C.columns else {}
+        self.n_listed = 0
+        self.n_modeled = 0
+
+    def _surfaces(self):
+        """Per snapshot date and expiry: the forward (put-call parity at the strike nearest the close) and, per
+        call / put, the listed strikes' log-moneyness, implied vol and half-spread. The database lists a
+        different set of strikes on each snapshot, so a contract held is often unquoted on a later date; it is
+        then valued from that date's own smile (Black-76 on the forward, vol and half-spread interpolated in
+        log-moneyness, flat beyond the listed range)."""
+        out = {}
+        for (d, e), g in self.C.groupby(["date", "expiration"]):
+            S = self.und.px(d)
+            P = g[g.cp == "P"].set_index("strike").mid
+            Cc = g[g.cp == "C"].set_index("strike").mid
+            ks = P.index.intersection(Cc.index)
+            F = S
+            if len(ks) and np.isfinite(S):
+                k0 = ks[np.argmin(np.abs(ks - S))]
+                try:
+                    Fx = float(k0 + Cc.loc[k0] - P.loc[k0])
+                    if 0.8 * S < Fx < 1.2 * S:
+                        F = Fx
+                except (TypeError, ValueError):
+                    pass
+            if not np.isfinite(F) or F <= 0:
+                continue
+            for cp in ("P", "C"):
+                h = g[(g.cp == cp) & (g.iv > 0)].sort_values("strike")
+                if len(h) >= 2:
+                    out[(d, e, cp)] = (F, np.log(h.strike.to_numpy() / F), h.iv.to_numpy(float), h.half.to_numpy(float))
+        return out
+
+    def model(self, d, e, cp, k):
+        s = self.surf.get((d, e, cp))
+        if s is None:
+            return None
+        F, x, iv, half = s
+        T = (e - d).days / 365.0
+        if T <= 0:
+            return None
+        xk = math.log(k / F)
+        v = float(np.interp(xk, x, iv))
+        sd = v * math.sqrt(T)
+        d1 = (math.log(F / k) + 0.5 * sd * sd) / sd
+        n1, n2 = 0.5 * (1 + math.erf(d1 / math.sqrt(2))), 0.5 * (1 + math.erf((d1 - sd) / math.sqrt(2)))
+        price = F * n1 - k * n2 if cp == "C" else k * (1 - n2) - F * (1 - n1)
+        return max(price, 0.0), max(float(np.interp(xk, x, half)), 0.005)
+
+    def model_check(self, n=3000, seed=7):
+        """Leave-one-out accuracy of the smile valuation on listed quotes (each removed from its own smile)."""
+        rng = np.random.default_rng(seed)
+        keys = [k for k, v in self.surf.items() if len(v[1]) >= 4]
+        if not keys:
+            return {}
+        err, err_s = [], []
+        for _ in range(n):
+            d, e, cp = keys[rng.integers(len(keys))]
+            F, x, iv, half = self.surf[(d, e, cp)]
+            j = int(rng.integers(1, len(x) - 1))                     # interior strikes only
+            k = F * math.exp(x[j])
+            self.surf[(d, e, cp)] = (F, np.delete(x, j), np.delete(iv, j), np.delete(half, j))
+            m = self.model(d, e, cp, k)
+            self.surf[(d, e, cp)] = (F, x, iv, half)
+            q = self.quote(e, cp, round(k, 2), d) or self.quote(e, cp, k, d)
+            if m is None or q is None:
+                continue
+            err.append(m[0] - q[0])
+            err_s.append((m[0] - q[0]) / F)
+        if not err:
+            return {}
+        err, err_s = np.array(err), np.array(err_s)
+        return {"n": int(len(err)), "median_abs_error_per_share": float(np.median(np.abs(err))),
+                "median_abs_error_pct_of_underlying": float(np.median(np.abs(err_s)) * 100),
+                "p90_abs_error_pct_of_underlying": float(np.quantile(np.abs(err_s), 0.9) * 100),
+                "mean_error_pct_of_underlying": float(err_s.mean() * 100)}
 
     def _atm_iv_series(self):
         if "iv" not in self.C.columns:
@@ -240,12 +316,33 @@ class Book:
         except KeyError:
             return None
 
-    def path(self, exp, cp, k, d0, d1):
+    def path(self, exp, cp, k, d0, d1, listed_only=False):
+        """Quotes of one contract from d0 to d1 (before expiry): listed where quoted, otherwise valued from that
+        date's smile."""
         try:
             s = self.key.loc[(exp, cp, k)]
+            s = s.loc[(s.index >= d0) & (s.index <= d1), ["mid", "half"]]
         except KeyError:
-            return pd.DataFrame(columns=["mid", "half"])
-        return s.loc[(s.index >= d0) & (s.index <= d1), ["mid", "half"]]
+            s = pd.DataFrame(columns=["mid", "half"])
+        if not self.surf or listed_only:
+            return s
+        days = self.dates[(self.dates >= np.datetime64(d0)) & (self.dates <= np.datetime64(d1)) &
+                          (self.dates < np.datetime64(exp))]
+        have = set(s.index)
+        add = {}
+        for t in days:
+            t = pd.Timestamp(t)
+            if t in have:
+                continue
+            m = self.model(t, exp, cp, k)
+            if m is not None:
+                add[t] = m
+        self.n_listed += len(have)
+        self.n_modeled += len(add)
+        if add:
+            s = pd.concat([s, pd.DataFrame(list(add.values()), index=pd.DatetimeIndex(list(add.keys())),
+                                           columns=["mid", "half"])]).sort_index()
+        return s
 
 
 def build_position(bk, d, struct, dte, S):
@@ -303,7 +400,7 @@ def strike_parity_breaks(bk, d, legs, front, tol=0.05):
     for kind, cp, e, k, q in legs:
         if kind != "O" or e != front:
             continue
-        C, P = bk.path(e, "C", k, d, front), bk.path(e, "P", k, d, front)
+        C, P = bk.path(e, "C", k, d, front, listed_only=True), bk.path(e, "P", k, d, front, listed_only=True)
         j = C[["mid"]].join(P[["mid"]], lsuffix="_c", rsuffix="_p", how="inner")
         if len(j) < 2:
             continue
@@ -597,7 +694,8 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
                                 bk, d, legs, T, r["exit"], S, r["pnl"])
     R = pd.DataFrame(rows)
     meta = {"weekly_expiries": has_weekly, "chain_dates": int(len(bk.dates)), "entries_skipped_price_mismatch": n_mismatch,
-            "positions_skipped_parity_break": n_parity_break, "corporate_action_days": [str(x.date()) for x in und.events],
+            "positions_skipped_parity_break": n_parity_break,
+            "path_points_listed": int(getattr(bk, "n_listed", 0)), "path_points_valued_from_smile": int(getattr(bk, "n_modeled", 0)), "corporate_action_days": [str(x.date()) for x in und.events],
             "first": str(pd.Timestamp(bk.dates[0]).date()), "last": str(pd.Timestamp(bk.dates[-1]).date())}
     return R, meta, mtm
 
@@ -617,8 +715,9 @@ def run_symbol(sym, chain_dir, und, vix, keep_mtm=True, earnings=None):
         return pd.DataFrame(), {}, {}
     n0 = len(C)
     C = trim_chain(C, und)
-    R, meta, mtm = run_book(sym, Book(C, und), und, vix, keep_mtm, earnings=earnings)
-    meta.update({"rows_loaded": int(n0), "rows_used": int(len(C))})
+    bk = Book(C, und)
+    R, meta, mtm = run_book(sym, bk, und, vix, keep_mtm, earnings=earnings)
+    meta.update({"rows_loaded": int(n0), "rows_used": int(len(C)), "smile_valuation_check": bk.model_check()})
     return R, meta, mtm
 
 
