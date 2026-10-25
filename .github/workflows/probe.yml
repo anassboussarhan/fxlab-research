@@ -1,16 +1,31 @@
-name: probe-dukascopy
+name: probe-sources
 on:
   workflow_dispatch:
   push:
     branches: [main]
-    paths: ["ci/PROBE"]
+    paths: ["ci/PROBE", "ci/probe.py"]
+permissions:
+  contents: write
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
-      - run: python ci/probe_dukascopy.py
+          python-version: "3.11"
+      - name: Probe free statistics sources
+        run: python ci/probe.py
+      - name: Publish to the probe branch
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r probe_results /tmp/pub/
+          git checkout --orphan probe-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/probe_results .
+          git add -f probe_results
+          git commit -qm "Source probe (run ${{ github.run_id }})"
+          git push -f origin HEAD:probe
