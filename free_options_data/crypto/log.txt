@@ -1,0 +1,35 @@
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:568: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  quotes.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:220: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.rename(columns=ctx.isins, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:224: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.sort_index(level=0, axis=1, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:568: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  quotes.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:220: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.rename(columns=ctx.isins, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:224: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.sort_index(level=0, axis=1, inplace=True)
+{
+ "BTC": {
+  "dvol_first": "2021-03-24",
+  "dvol_n": 1745,
+  "spot_first": "2018-01-01"
+ },
+ "ETH": {
+  "dvol_first": "2021-03-24",
+  "dvol_n": 1745,
+  "spot_first": "2018-01-01"
+ }
+}
+                                     test   n  mean_vp   t_nw  p_one_sided  sharpe  months_positive  worst_vp worst_month   y2021   y2022   y2023   y2024    y2025  gross_mean_vp  gross_t  mean_K  mean_rv   bh_q
+0           C1 BTC short variance at DVOL  57    3.508  1.758        0.039   0.783            0.667   -50.046  2021-05-01  85.859  49.954  31.362  22.696   10.077          5.508    2.760  61.180   53.325  0.158
+1  C3 BTC only when DVOL > past 30-day RV  42    2.315  0.963        0.168   0.470            0.619   -50.046  2021-05-01  79.278  27.460  -2.164 -17.223    9.887          4.315    1.794     NaN      NaN  0.336
+2           C2 ETH short variance at DVOL  57   -1.999 -0.511        0.695  -0.231            0.596  -163.942  2021-05-01   5.207  13.105  26.450 -11.330 -147.394          0.001    0.000  75.154   71.493  0.695
+3  C4 ETH only when DVOL > past 30-day RV  34   -2.123 -0.399        0.655  -0.218            0.588  -163.942  2021-05-01 -53.178   5.859  10.693 -14.706  -20.838         -0.123   -0.023     NaN      NaN  0.695
