@@ -1,0 +1,28 @@
+Traceback (most recent call last):
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/untested_options_lab.py", line 621, in <module>
+    main()
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/untested_options_lab.py", line 617, in main
+    stage_symbols(a) if a.stage == "symbols" else stage_combine(a)
+    ^^^^^^^^^^^^^^^^
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/untested_options_lab.py", line 412, in stage_symbols
+    t0 = monthly_schedule(bk, struct)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/untested_options_lab.py", line 315, in monthly_schedule
+    for d in L.entry_dates(bk, 45):
+             ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/options_strategy_lab.py", line 948, in entry_dates
+    for e in third_fridays(ds[0], ds[-1] + pd.Timedelta(days=70)):
+                           ~~^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/pandas/core/indexes/datetimelike.py", line 1439, in __getitem__
+    result = super().__getitem__(key)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/pandas/core/indexes/base.py", line 5697, in __getitem__
+    return maybe_unbox_numpy_scalar(getitem(key), object_with_dtype=self)
+                                    ^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/pandas/core/arrays/datetimelike.py", line 380, in __getitem__
+    result = cast("Self | DTScalarOrNaT", super().__getitem__(key))
+                                          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/pandas/core/arrays/_mixins.py", line 391, in __getitem__
+    result = self._ndarray[key]
+             ~~~~~~~~~~~~~^^^^^
+IndexError: index 0 is out of bounds for axis 0 with size 0
