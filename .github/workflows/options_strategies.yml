@@ -21,11 +21,20 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       chains_run: ${{ steps.r.outputs.chains_run }}
+      struct_set: ${{ steps.r.outputs.struct_set }}
+      merge_run: ${{ steps.r.outputs.merge_run }}
+      merge_run2: ${{ steps.r.outputs.merge_run2 }}
+      branch: ${{ steps.r.outputs.branch }}
     steps:
       - uses: actions/checkout@v4
       - id: r
-        name: Reuse the chains of an earlier run if ci/OPTIONS_STRATEGIES_CHAINS names one
-        run: echo "chains_run=$(cat ci/OPTIONS_STRATEGIES_CHAINS 2>/dev/null | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+        name: Reuse the chains of an earlier run (ci/OPTIONS_STRATEGIES_CHAINS); structure batch (ci/OPTIONS_STRATEGIES_SET); run whose cycles to merge (ci/OPTIONS_STRATEGIES_MERGE)
+        run: |
+          echo "chains_run=$(head -1 ci/OPTIONS_STRATEGIES_CHAINS 2>/dev/null | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+          echo "struct_set=$(head -1 ci/OPTIONS_STRATEGIES_SET 2>/dev/null | tr -d '[:space:]' || true)" >> $GITHUB_OUTPUT
+          echo "merge_run=$(sed -n 1p ci/OPTIONS_STRATEGIES_MERGE 2>/dev/null | tr -d '[:space:]' || true)" >> $GITHUB_OUTPUT
+          echo "merge_run2=$(sed -n 2p ci/OPTIONS_STRATEGIES_MERGE 2>/dev/null | tr -d '[:space:]' || true)" >> $GITHUB_OUTPUT
+          b=$(head -1 ci/OPTIONS_STRATEGIES_BRANCH 2>/dev/null | tr -d '[:space:]' || true); echo "branch=${b:-options-strategies-v3}" >> $GITHUB_OUTPUT
   data:
     needs: prep
     if: needs.prep.outputs.chains_run == ''
@@ -88,7 +97,7 @@ jobs:
           retention-days: 5
   cycles:
     needs: [prep, data]
-    if: always() && (needs.data.result == 'success' || needs.prep.outputs.chains_run != '')
+    if: always() && needs.prep.outputs.struct_set != 'mergeonly' && (needs.data.result == 'success' || needs.prep.outputs.chains_run != '')
     runs-on: ubuntu-latest
     timeout-minutes: 340
     strategy:
@@ -111,6 +120,7 @@ jobs:
       - name: Cycles for symbol group ${{ matrix.group }} of 20
         env:
           OPT_SENS_FILLS: "0"
+          OPT_STRUCT_SET: ${{ needs.prep.outputs.struct_set || 'all' }}
         run: |
           mkdir -p out
           python -W ignore scripts/options_strategy_lab.py --stage cycles --chain chains --closes chains/closes.csv --group ${{ matrix.group }}/20 --out out 2>&1 | tee out/log_cycles_${{ matrix.group }}.txt
@@ -131,9 +141,26 @@ jobs:
           python-version: "3.11"
       - run: pip install -q numpy pandas scipy pyarrow
       - uses: actions/download-artifact@v4
+        continue-on-error: true
         with:
           pattern: cycles-*
           path: parts
+      - name: Cycles of the run to merge (other structure batches)
+        if: needs.prep.outputs.merge_run != ''
+        uses: actions/download-artifact@v4
+        with:
+          pattern: cycles-*
+          path: parts_merge
+          run-id: ${{ needs.prep.outputs.merge_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Cycles of a second run to merge
+        if: needs.prep.outputs.merge_run2 != ''
+        uses: actions/download-artifact@v4
+        with:
+          pattern: cycles-*
+          path: parts_merge2
+          run-id: ${{ needs.prep.outputs.merge_run2 }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
       - uses: actions/download-artifact@v4
         with:
           name: chains
@@ -143,8 +170,12 @@ jobs:
       - name: "Combine - statistics, multiple testing, walk-forward, stock portfolios"
         run: |
           mkdir -p out
-          python -W ignore scripts/options_strategy_lab.py --stage combine --inputs $(ls -d parts/* | paste -sd, -) --out out 2>&1 | tee out/log_combine.txt
+          free -g; du -sh parts parts_merge parts_merge2 2>/dev/null || true
+          ls -d parts/* parts_merge/* parts_merge2/* 2>/dev/null | tee out/inputs.txt | wc -l
+          OPT_CYCLES_ALL=index python -W ignore scripts/options_strategy_lab.py --stage combine --inputs $(ls -d parts/* parts_merge/* parts_merge2/* 2>/dev/null | paste -sd, -) --out out 2>&1 | tee out/log_combine.txt
+          python scripts/options_strategy_verdicts.py --combos out/combos.csv --out out/verdicts 2>&1 | tee out/log_verdicts.txt || true
       - name: Synthetic long-history layer (model, SPY / DIA)
+        if: needs.prep.outputs.struct_set != 'batch3'
         continue-on-error: true
         run: |
           mkdir -p out/synth
@@ -173,10 +204,13 @@ jobs:
               T[T.fill != 0.75].to_csv("/tmp/pub/options_strategies/combos_fill_sensitivity.csv.gz", index=False)
           EOF
           cp summary.json walkforward_*.csv top30_drawdowns.csv daily_mtm_top30.csv prop_top30.csv log_*.txt $P/ 2>/dev/null || true
+          mkdir -p $P/verdicts && cp verdicts/*.csv $P/verdicts/ 2>/dev/null || true
           mkdir -p $P/synth && cp synth/*.json synth/*.txt synth/validation_model_vs_real.csv $P/synth/ 2>/dev/null || true
           for f in synth/combos_synth.csv synth/combos_synth_pre2019.csv; do [ -f $f ] && gzip -c $f > $P/synth/$(basename $f).gz; done
           cp ../chains/chain_meta.json ../chains/closes_meta.json ../chains/schema.csv ../chains/earnings_tables.csv $P/ 2>/dev/null || true
           cp ../parts/*/meta_*.json ../parts/*/log_cycles_*.txt $P/ 2>/dev/null || true
+          mkdir -p $P/merged_run $P/merged_run2 && cp ../parts_merge/*/meta_*.json $P/merged_run/ 2>/dev/null || true
+          cp ../parts_merge2/*/meta_*.json $P/merged_run2/ 2>/dev/null || true; cp inputs.txt $P/ 2>/dev/null || true
           cd ..
           git checkout --orphan os-tmp
           git rm -rq --cached . || true
@@ -186,4 +220,4 @@ jobs:
           du -sh options_strategies
           git add -f options_strategies
           git commit -qm "Options strategy lab (run ${{ github.run_id }})"
-          git push -f origin HEAD:options-strategies-v3
+          git push -f origin HEAD:${{ needs.prep.outputs.branch }}

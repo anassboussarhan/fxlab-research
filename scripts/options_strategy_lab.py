@@ -156,7 +156,46 @@ NEW_STRUCTS = {
     "CDIAG": [("C", 0.30, -1, "front"), ("C", "atm", 1, "back")],
     "DDIAG": [("P", 0.30, -1, "front"), ("P", "atm", 1, "back"), ("C", 0.30, -1, "front"), ("C", "atm", 1, "back")],
 }
-STRUCTS = {**BASE_STRUCTS, **NEW_STRUCTS}
+# Third batch: the remaining named variants (fixed definitions, nothing tuned)
+NEW3_STRUCTS = {
+    "BIGLZ": [("P", "atm", -1), ("C", "atm", -1), ("C", 0.16, 1)],      # big lizard: short straddle + long call
+    "RBIGLZ": [("P", "atm", -1), ("C", "atm", -1), ("P", 0.16, 1)],     # reverse big lizard
+    "CLAD": [("C", "atm", 1), ("C", 0.30, -1), ("C", 0.16, -1)],        # bull call ladder
+    "PLAD": [("P", "atm", 1), ("P", 0.30, -1), ("P", 0.16, -1)],        # bear put ladder
+    "SCLAD": [("C", "atm", -1), ("C", 0.30, 1), ("C", 0.16, 1)],        # short call ladder
+    "SPLAD": [("P", "atm", -1), ("P", 0.30, 1), ("P", 0.16, 1)],        # short put ladder
+    "ZEBRAC": [("C", 0.70, 2), ("C", "atm", -1)],                       # zero-extrinsic back ratio (call ZEBRA)
+    "ZEBRAP": [("P", 0.70, 2), ("P", "atm", -1)],
+    "IALB": [("P", 0.10, -1), ("P", 0.05, 1), ("C", 0.10, -1), ("C", 0.05, 1)],     # iron albatross (wide)
+    "UIC": [("P", 0.30, -1), ("P", 0.16, 1), ("C", 0.16, -1), ("C", 0.05, 1)],       # unbalanced iron condor
+    "BWBC": [("C", 0.40, 1), ("C", 0.25, -2), ("C", 0.10, 1)],          # broken-wing call butterfly
+    "BWCOND": [("P", 0.45, 1), ("P", 0.35, -1), ("P", 0.25, -1), ("P", 0.10, 1)],   # broken-wing put condor
+    "SCFLY": [("C", 0.70, -1), ("C", "atm", 2), ("C", 0.30, -1)],       # short call butterfly
+    "SPFLY": [("P", 0.70, -1), ("P", "atm", 2), ("P", 0.30, -1)],       # short put butterfly
+    "SCCOND": [("C", 0.80, -1), ("C", 0.60, 1), ("C", 0.40, 1), ("C", 0.20, -1)],   # short call condor
+    "SPCOND": [("P", 0.80, -1), ("P", 0.60, 1), ("P", 0.40, 1), ("P", 0.20, -1)],   # short put condor
+    "PXTREE": [("P", "atm", 1), ("P", 0.30, -3), ("P", 0.16, 2)],       # Christmas-tree put butterfly 1-3-2
+    "CPUT": [("S", None, -1), ("P", 0.30, -1)],                         # covered put (short stock + short put)
+    "SYNP": [("S", None, -1), ("C", "atm", 1)],                         # synthetic put (short stock + long call)
+    "SEAGB": [("P", "atm", 1), ("P", 0.25, -1), ("C", 0.25, -1)],       # bearish seagull
+    "CRCAL": [("C", "atm", -2, "front"), ("C", "atm", 1, "back")],      # call ratio calendar 2:1
+    "PRCAL": [("P", "atm", -2, "front"), ("P", "atm", 1, "back")],      # put ratio calendar 2:1
+    "CRDIAG": [("C", 0.30, -2, "front"), ("C", "atm", 1, "back")],      # call ratio diagonal
+    "STRCAL": [("P", "atm", -1, "front"), ("C", "atm", -1, "front"),
+               ("P", "atm", 1, "back"), ("C", "atm", 1, "back")],      # calendar straddle (unhedged)
+    "STGCAL": [("P", 0.25, -1, "front"), ("P", ("same", 0), 1, "back"),
+               ("C", 0.25, -1, "front"), ("C", ("same", 2), 1, "back")],  # calendar strangle (= DCAL at 25d)
+    "RCCAL": [("C", "atm", 1, "front"), ("C", "atm", -1, "back")],      # reverse call calendar
+    "STRIPG": [("P", 0.25, 2), ("C", 0.25, 1)],                         # strip strangle
+    "STRAPG": [("P", 0.25, 1), ("C", 0.25, 2)],                         # strap strangle
+    "CSTRD": [("S", None, 1), ("P", "atm", -1), ("C", "atm", -1)],      # covered short straddle
+    "SSTRD": [("S", None, 1), ("P", "atm", 2)],                         # synthetic long straddle
+}
+STRUCTS = {**BASE_STRUCTS, **NEW_STRUCTS, **NEW3_STRUCTS}
+# which structures a cycles job computes: all (default), or one batch (CI runs the batches separately and merges)
+STRUCT_SETS = {"all": STRUCTS, "base": BASE_STRUCTS, "batch2": {**BASE_STRUCTS, **NEW_STRUCTS},
+               "batch3": NEW3_STRUCTS}
+STRUCT_SET = os.environ.get("OPT_STRUCT_SET", "all")
 WHEEL = "WHEEL"          # the wheel: sell 30-delta puts; once assigned, sell 30-delta calls until called away
 # ROLL: when the underlying closes beyond a short strike, close and re-open the same structure in the listed expiry
 # nearest the original days-to-expiry from that date (roll out and away), at most twice; option-only structures
@@ -169,10 +208,14 @@ DEFINED_RISK = {"PCS30_16", "PCS20_05", "CCS30_16", "IC16_05", "IC30_16", "IFLY1
                 "COLL30",
                 "LC30", "LCATM", "LC80", "PP30", "PPATM", "COLL16", "BCS", "BPS", "LSTRG25", "LSTRG16", "STRIP",
                 "STRAP", "LGUTS", "LCFLY", "LPFLY", "BWB", "LIC", "LIFLY", "CCOND", "PCOND", "XTREE", "DFLY", "PBSP",
-                "CBSP", "CCAL", "DCAL", "PDIAG", "CDIAG", "DDIAG"}
+                "CBSP", "CCAL", "DCAL", "PDIAG", "CDIAG", "DDIAG",
+                "SCLAD", "SPLAD", "ZEBRAC", "ZEBRAP", "IALB", "UIC", "BWBC", "BWCOND", "SCFLY", "SPFLY", "SCCOND",
+                "SPCOND", "PXTREE", "SYNP", "STRCAL", "STGCAL", "STRIPG", "STRAPG", "SSTRD"}
 SHORT_PREMIUM = {"SP30", "SP16", "SP50", "PCS30_16", "PCS20_05", "CCS30_16", "STRG16", "STRD", "IC16_05",
                  "IC30_16", "IFLY16", "PRAT", "CC30", "BW50",
-                 "SC16", "SC30", "CSTRG", "SGUTS", "BWB", "CRAT", "JADE", "RJADE", "RREV", WHEEL}
+                 "SC16", "SC30", "CSTRG", "SGUTS", "BWB", "CRAT", "JADE", "RJADE", "RREV", WHEEL,
+                 "BIGLZ", "RBIGLZ", "SCLAD", "SPLAD", "IALB", "UIC", "BWBC", "SCFLY", "SPFLY", "SCCOND", "SPCOND",
+                 "CPUT", "CRCAL", "PRCAL", "RCCAL", "CSTRD"}
 
 
 # ----------------------------------------------------------------------------------------------- data
@@ -772,7 +815,7 @@ def evaluate(bk, d, legs, front, T, mgmt, f):
     pnl = entry_cf + exit_val - comm - comm_close
     for (_, _, _, _, q) in stk:
         r = bk.und.tr(d, exit_d)
-        pnl += q * S0 * (r - 2 * STK_COST)
+        pnl += q * S0 * r - abs(q) * S0 * 2 * STK_COST        # a short stock leg pays costs (and dividends) too
     return {"pnl": pnl / S0, "credit": credit / S0, "exit": exit_d, "early": closed_early,
             "days": int((exit_d - d).days)}
 
@@ -791,7 +834,7 @@ def mtm_series(bk, d, legs, T, exit_d, S0, pnl, f=PRIMARY_FILL):
         v = v + q * U[f"m{i}"].ffill()
     for (_, _, _, _, q) in [l for l in legs if l[0] == "S"]:
         adj = bk.und.adj.reindex(U.index).ffill()
-        v = v + q * S0 * (adj / adj.iloc[0] - 1 - STK_COST)
+        v = v + q * S0 * (adj / adj.iloc[0] - 1) - abs(q) * S0 * STK_COST
     v = v / S0
     v.loc[pd.Timestamp(exit_d)] = pnl                  # realised value on the exit / expiry date
     v = v.sort_index()
@@ -1133,7 +1176,8 @@ def run_symbol(sym, chain_dir, und, vix, keep_mtm=True, earnings=None):
     n0 = len(C)
     C = trim_chain(C, und)
     bk = Book(C, und)
-    R, meta, mtm = run_book(sym, bk, und, vix, keep_mtm, earnings=earnings)
+    R, meta, mtm = run_book(sym, bk, und, vix, keep_mtm, earnings=earnings, structs=STRUCT_SETS[STRUCT_SET],
+                            wheel=STRUCT_SET in ("all", "batch2"))
     meta.update({"rows_loaded": int(n0), "rows_used": int(len(C)), "iv_repaired_expiry_days": int(bk.n_iv_repaired),
                  "smile_valuation_check": bk.model_check(),
                  "across_expiry_valuation_check": bk.term_check()})
@@ -1144,9 +1188,14 @@ def flag(df, flt):
     c = f"f_{flt}"
     if c not in df.columns:
         return pd.Series(False, index=df.index)
-    return df[c].map(lambda v: bool(v) if isinstance(v, (bool, np.bool_)) or (isinstance(v, (int, float)) and
-                                                                            np.isfinite(v)) else
-                     (str(v).lower() == "true")).astype(bool)
+    x = df[c]
+    if x.dtype == bool:
+        return x
+    if pd.api.types.is_numeric_dtype(x):
+        return x.fillna(0).astype(float).ne(0)
+    return x.map(lambda v: bool(v) if isinstance(v, (bool, np.bool_)) or (isinstance(v, (int, float)) and
+                                                                         np.isfinite(v)) else
+                 (str(v).lower() == "true")).astype(bool)
 
 
 def per_year_of(struct, dte, mean_days):
@@ -1168,9 +1217,10 @@ def table_parallel(R, workers=None):
     """table() per symbol in forked worker processes; R is sorted by symbol and each worker slices its rows."""
     import multiprocessing as mp
     workers = workers or max(1, (os.cpu_count() or 1))
-    if not R.symbol.is_monotonic_increasing:
+    sym = R.symbol.cat.codes.to_numpy() if isinstance(R.symbol.dtype, pd.CategoricalDtype) else R.symbol.to_numpy()
+    if not (sym[1:] >= sym[:-1]).all():
         R = R.sort_values("symbol", kind="stable").reset_index(drop=True)
-    sym = R.symbol.to_numpy()
+        sym = R.symbol.cat.codes.to_numpy() if isinstance(R.symbol.dtype, pd.CategoricalDtype) else R.symbol.to_numpy()
     cut = np.r_[0, np.flatnonzero(sym[1:] != sym[:-1]) + 1, len(R)]
     spans = list(zip(cut[:-1], cut[1:]))
     if workers == 1 or len(spans) < 2:
@@ -1188,7 +1238,7 @@ def table_parallel(R, workers=None):
 def table(R):
     """One row per combination (symbol, struct, dte, mgmt, filter, fill)."""
     out = []
-    for (sym, s, dte, mg, f), g in R.groupby(["symbol", "struct", "dte", "mgmt", "fill"]):
+    for (sym, s, dte, mg, f), g in R.groupby(["symbol", "struct", "dte", "mgmt", "fill"], observed=True):
         per_year = per_year_of(s, dte, g.days.mean())
         for flt in FILTERS:
             if flt == "NOERN" and (f"f_{flt}" not in g.columns or g[f"f_{flt}"].isna().all()):
@@ -1207,7 +1257,7 @@ def wf_frame(R):
     booleans, cycles per year, sorted by key and entry."""
     P = R[R.fill == PRIMARY_FILL].copy()
     kcols = ["symbol", "struct", "dte", "mgmt"]
-    P["kid"] = P.groupby(kcols, sort=True).ngroup()
+    P["kid"] = P.groupby(kcols, sort=True, observed=True).ngroup()
     lab = P.drop_duplicates("kid").set_index("kid")[kcols]
     labels = (lab.symbol.astype(str) + "|" + lab.struct.astype(str) + "|" + lab.dte.astype(str) + "|" +
               lab.mgmt.astype(str))
@@ -1286,7 +1336,7 @@ AGG_KEYS = ["struct", "dte", "mgmt", "fill", "entry"]
 
 
 def _agg(h, sym):
-    g = h.groupby(AGG_KEYS).agg(pnl=("pnl", "mean"), und_ret=("und_ret", "mean"), credit=("credit", "mean"),
+    g = h.groupby(AGG_KEYS, observed=True).agg(pnl=("pnl", "mean"), und_ret=("und_ret", "mean"), credit=("credit", "mean"),
                                 days=("days", "mean"), early=("early", "mean"), n_names=("pnl", "size"),
                                 exit=("exit", "max"), expiry=("expiry", "max")).reset_index()
     g["symbol"] = sym
@@ -1309,7 +1359,7 @@ def portfolios(R):
             g[f"f_{F}"] = F == flt
         out.append(g)
     S2 = S.assign(spread=S.iv_entry - S.rv21_entry).dropna(subset=["spread"])
-    S2["q"] = S2.groupby(AGG_KEYS).spread.rank(pct=True)
+    S2["q"] = S2.groupby(AGG_KEYS, observed=True).spread.rank(pct=True)
     for sym, sel in (("XSQ5", S2.q > 0.8), ("XSQ1", S2.q <= 0.2)):
         g = _agg(S2[sel], sym)
         for F in FILTERS:
@@ -1377,8 +1427,11 @@ def _member_mtm(R, MTM, r, year=None):
           (R.fill == PRIMARY_FILL) & flag(R, r["filter"])]
     if year is not None:
         g = g[g.entry.dt.year == year]
-    if isinstance(MTM.get(r.symbol), str):
-        MTM[r.symbol] = pd.read_pickle(MTM[r.symbol])
+    if isinstance(MTM.get(r.symbol), list):                  # one pickle per run that computed this symbol
+        merged = {}
+        for path in MTM[r.symbol]:
+            merged.update(pd.read_pickle(path))
+        MTM[r.symbol] = merged
     if r.symbol not in MTM:
         return None
     M = MTM[r.symbol]
@@ -1387,28 +1440,62 @@ def _member_mtm(R, MTM, r, year=None):
     return pd.concat(parts, axis=1).sum(axis=1).sort_index() if parts else None
 
 
+PORTFOLIOS = ["EW", "XSQ5", "XSQ1", "GS_LS"]
+
+
+def _compact(df, dtypes):
+    """Categorical text columns and numeric NOERN flags: the combined cycles of several runs (15M+ rows) fit in
+    memory only this way."""
+    for c, dt in dtypes.items():
+        if c in df.columns:
+            df[c] = df[c].astype(str).astype(dt) if df[c].dtype != dt else df[c]
+    if "f_NOERN" in df.columns and not pd.api.types.is_numeric_dtype(df["f_NOERN"]):
+        df["f_NOERN"] = df["f_NOERN"].map({True: 1.0, False: 0.0, "True": 1.0, "False": 0.0}).astype(float)
+    for c in [c for c in df.columns if c.startswith("f_") and c != "f_NOERN"] + ["early"]:
+        if c in df.columns:
+            df[c] = df[c].fillna(False).astype(bool)
+    return df
+
+
 def stage_combine(a):
     dirs = [d for d in a.inputs.split(",") if d]
-    Rs, MTM, meta = [], {}, {}
+    files, MTM, meta = [], {}, {}
     for d in dirs:
         for f in sorted(os.listdir(d)):
             p = os.path.join(d, f)
-            if f.startswith("cycles_") and f.endswith(".csv.gz"):
-                Rs.append(pd.read_csv(p, parse_dates=["entry", "exit", "expiry"], usecols=lambda c: c != "legs"))
+            if f.startswith("cycles_") and f.endswith(".csv.gz") and f != "cycles_all.csv.gz":
+                files.append(p)
             elif f.startswith("mtm_") and f.endswith(".pkl"):
-                MTM[f[4:-4]] = p                                 # loaded lazily, only for the best combinations
+                MTM.setdefault(f[4:-4], []).append(p)            # loaded lazily, only for the best combinations
             elif f.startswith("meta_") and f.endswith(".json"):
-                meta.update(json.load(open(p)))
+                for k, v in json.load(open(p)).items():
+                    meta[k] = {**meta.get(k, {}), **v} if isinstance(v, dict) else v
+    syms = sorted({os.path.basename(p)[len("cycles_"):-len(".csv.gz")] for p in files}) + PORTFOLIOS
+    dtypes = {"symbol": pd.CategoricalDtype(sorted(set(syms))),
+              "struct": pd.CategoricalDtype(list(STRUCTS) + ["GSLS", WHEEL]),
+              "mgmt": pd.CategoricalDtype(list(MGMT))}
+    Rs = []
+    for p in files:
+        x = pd.read_csv(p, parse_dates=["entry", "exit", "expiry"], usecols=lambda c: c not in ("legs", "wheel_state"))
+        Rs.append(_compact(x, dtypes))
     R = pd.concat(Rs, ignore_index=True)
     del Rs
     R = R[R.entry <= END]
-    for c in [c for c in R.columns if c.startswith("f_") and c != "f_NOERN"] + ["early"]:
-        R[c] = R[c].fillna(False).astype(bool)
+    R = _compact(R, dtypes)
     P = portfolios(R)
+    if len(P):
+        P = _compact(P, dtypes)
+        if "f_NOERN" in P.columns:
+            P["f_NOERN"] = P["f_NOERN"].astype(float)
     RA = pd.concat([R, P], ignore_index=True) if len(P) else R
+    del R, P
+    RA = _compact(RA, dtypes)
     RA = RA.sort_values("symbol", kind="stable").reset_index(drop=True)
     print("cycles", len(RA), "memory GB", round(RA.memory_usage(deep=True).sum() / 1e9, 2), flush=True)
-    RA.to_csv(os.path.join(a.out, "cycles_all.csv.gz"), index=False)
+    if os.environ.get("OPT_CYCLES_ALL", "full") == "index":    # the synthetic-layer validation needs SPY / DIA only
+        RA[RA.symbol.isin(list(INDEX_ETFS) + PORTFOLIOS)].to_csv(os.path.join(a.out, "cycles_all.csv.gz"), index=False)
+    else:
+        RA.to_csv(os.path.join(a.out, "cycles_all.csv.gz"), index=False)
     T = table_parallel(RA)
     print("combinations", len(T), flush=True)
     prim = T.fill == PRIMARY_FILL
@@ -1461,7 +1548,7 @@ def stage_combine(a):
         parts = []
         for _, pk in P.iterrows():
             sym, st_, dte, mg = pk.pick.split("|")
-            ser = _member_mtm(R, MTM, pd.Series({"symbol": sym, "struct": st_, "dte": int(dte), "mgmt": mg,
+            ser = _member_mtm(RA, MTM, pd.Series({"symbol": sym, "struct": st_, "dte": int(dte), "mgmt": mg,
                                                  "filter": pk["filter"]}), year=int(pk.year))
             if ser is not None:
                 parts.append(ser)
@@ -1471,7 +1558,7 @@ def stage_combine(a):
     for _, r in robust.iterrows():
         if sum(not k.startswith("WF|") for k in daily) >= 20:
             break
-        sser = _member_mtm(R, MTM, r)
+        sser = _member_mtm(RA, MTM, r)
         if sser is not None:
             daily[f"{r.symbol}|{r.struct}|{r.dte}|{r.mgmt}|{r['filter']}"] = sser
     for key, sser in daily.items():
