@@ -1,0 +1,93 @@
+name: options-edges
+# Eight options edges from the literature (delta-hedged index variance premium, Vasquez, Cao-Han, Cremers-Weinbaum,
+# Xing-Zhang-Zhao, earnings straddles) on the real quotes exported by options-strategies, cut at 2025-12-31
+# (scripts/options_edges_lab.py). Results to branch options-edges.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/OPTIONS_EDGES"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  prep:
+    runs-on: ubuntu-latest
+    outputs:
+      chains_run: ${{ steps.r.outputs.chains_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        run: echo "chains_run=$(head -1 ci/OPTIONS_EDGES | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+  symbols:
+    needs: prep
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [0, 1, 2, 3, 4, 5, 6, 7]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow pytest
+      - run: python -m pytest -q tests/test_options_edges_lab.py tests/test_options_strategy_lab.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: chains
+          path: chains
+          run-id: ${{ needs.prep.outputs.chains_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Symbols group ${{ matrix.group }} of 8
+        run: |
+          mkdir -p out
+          python scripts/options_edges_lab.py --stage symbols --chain chains --closes chains/closes.csv --group ${{ matrix.group }}/8 --out out 2>&1 | grep -v Warning | tee out/log_symbols_${{ matrix.group }}.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: edges-${{ matrix.group }}
+          path: out
+          retention-days: 5
+  combine:
+    needs: [prep, symbols]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: edges-*
+          path: parts
+      - uses: actions/download-artifact@v4
+        with:
+          name: chains
+          path: chains
+          run-id: ${{ needs.prep.outputs.chains_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Combine the eight tests
+        run: |
+          mkdir -p out
+          python scripts/options_edges_lab.py --stage combine --inputs $(ls -d parts/* | paste -sd, -) --closes chains/closes.csv --out out 2>&1 | tee out/log_combine.txt
+          cp parts/*/meta_*.json parts/*/log_symbols_*.txt out/ 2>/dev/null || true
+          mkdir -p out/raw && cp parts/*/positions_*.csv.gz parts/*/signals_*.csv.gz out/raw/ 2>/dev/null || true
+          du -sh out
+      - name: Publish to the options-edges branch
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r out /tmp/pub/options_edges
+          git checkout --orphan oe-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/options_edges .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > options_edges/RUN.txt
+          git add -f options_edges
+          git commit -qm "Options edges (run ${{ github.run_id }})"
+          git push -f origin HEAD:options-edges
