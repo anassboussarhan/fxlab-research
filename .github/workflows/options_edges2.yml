@@ -1,0 +1,102 @@
+name: options-edges2
+# Second batch of options edges (scripts/options_edges2_lab.py): SPY / DIA hedged risk reversals and 10-delta puts,
+# dispersion, weekend effect, FOMC and CPI event trades, hedged calendar straddles, variance strips, and the
+# box-spread diagnostic, on the real quotes exported by options-strategies, cut at 2025-12-31.
+# First line of ci/OPTIONS_EDGES2 = the run id whose `chains` artifact is reused. Results to branch options-edges2.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/OPTIONS_EDGES2"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  prep:
+    runs-on: ubuntu-latest
+    outputs:
+      chains_run: ${{ steps.r.outputs.chains_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        run: echo "chains_run=$(head -1 ci/OPTIONS_EDGES2 | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+  symbols:
+    needs: prep
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow pytest
+      - run: python -m pytest -q tests/test_options_edges_lab.py tests/test_options_strategy_lab.py tests/test_options_edges2_lab.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: chains
+          path: chains
+          run-id: ${{ needs.prep.outputs.chains_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: CPI release dates (BLS archive)
+        continue-on-error: true
+        run: mkdir -p out && python ci/fetch_cpi_dates.py out/cpi_dates.csv
+      - name: Symbols group ${{ matrix.group }} of 10
+        run: |
+          mkdir -p out
+          python -W ignore scripts/options_edges2_lab.py --stage symbols --chain chains --closes chains/closes.csv --cpi out/cpi_dates.csv --group ${{ matrix.group }}/10 --out out 2>&1 | tee out/log2_symbols_${{ matrix.group }}.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: edges2-${{ matrix.group }}
+          path: out
+          retention-days: 5
+  combine:
+    needs: [prep, symbols]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow yfinance
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: edges2-*
+          path: parts
+      - name: 13-week T-bill (Yahoo ^IRX) for the box-spread check
+        continue-on-error: true
+        run: |
+          mkdir -p out
+          python - <<'PY'
+          import yfinance as yf, pandas as pd
+          h = yf.download("^IRX", start="2018-12-01", end="2026-01-01", progress=False, auto_adjust=False)
+          c = h["Close"]; c = c.iloc[:, 0] if isinstance(c, pd.DataFrame) else c
+          pd.DataFrame({"date": pd.to_datetime(c.index).tz_localize(None) if getattr(c.index, "tz", None) else c.index, "IRX": c.to_numpy()}).dropna().to_csv("out/rates.csv", index=False)
+          print(len(c))
+          PY
+      - name: Combine the second batch
+        run: |
+          mkdir -p out
+          python -W ignore scripts/options_edges2_lab.py --stage combine --inputs $(ls -d parts/* | paste -sd, -) --rates out/rates.csv --out out 2>&1 | tee out/log2_combine.txt
+          cp parts/*/meta2_*.json parts/*/log2_symbols_*.txt out/ 2>/dev/null || true
+          cp parts/edges2-0/cpi_dates.csv out/ 2>/dev/null || true
+          du -sh out
+      - name: Publish to the options-edges2 branch
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r out /tmp/pub/options_edges2
+          git checkout --orphan oe2-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/options_edges2 .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > options_edges2/RUN.txt
+          git add -f options_edges2
+          git commit -qm "Options edges, second batch (run ${{ github.run_id }})"
+          git push -f origin HEAD:options-edges2
