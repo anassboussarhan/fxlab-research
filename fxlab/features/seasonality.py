@@ -134,8 +134,8 @@ def _first_fridays(start, end):
 def f_nfp(df):
     idx = df.index
     ev = _first_fridays(idx.min().tz_localize(None), idx.max().tz_localize(None))
-    ev_ns = ev.asi8
-    t = idx.asi8
+    ev_ns = ev.as_unit("ns").asi8                 # explicit ns: M1 indexes load as ms/us under pandas >= 2
+    t = idx.as_unit("ns").asi8
     pos = np.searchsorted(ev_ns, t)
     nxt = np.where(pos < len(ev_ns), (ev_ns[np.clip(pos, 0, len(ev_ns) - 1)] - t) / 3.6e12, np.nan)
     prv = np.where(pos > 0, (t - ev_ns[np.clip(pos - 1, 0, len(ev_ns) - 1)]) / 3.6e12, np.nan)
@@ -151,8 +151,9 @@ def f_dst(df):
     ld_off = idx.tz_convert("Europe/London").map(lambda x: x.utcoffset().total_seconds() / 3600)
     ny_off, ld_off = np.asarray(ny_off, float), np.asarray(ld_off, float)
     change = (pd.Series(ny_off).diff().fillna(0) != 0) | (pd.Series(ld_off).diff().fillna(0) != 0)
-    last = pd.Series(np.where(change, idx.asi8, np.nan)).ffill().to_numpy()
-    since = (idx.asi8 - last) / 8.64e13
+    ns = idx.as_unit("ns").asi8
+    last = pd.Series(np.where(change, ns, np.nan)).ffill().to_numpy()
+    since = (ns - last) / 8.64e13
     return pd.DataFrame({"ny_ldn_gap": ld_off - ny_off, "us_dst": (ny_off == -4).astype(float),
                          "uk_dst": (ld_off == 1).astype(float), "days_since_change": since}, index=idx)
 
