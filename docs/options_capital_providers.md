@@ -1,6 +1,9 @@
 # Options capital providers, and the best edge on the best provider
 
-The question is the best edge on the best capital provider, for options. Rules were checked from public pages on
+The question is the best edge on the best capital provider, for options. **Update:** the real-quote test of 118,216 option
+strategies (`docs/options_strategies.md`) finds the SPY premium after costs about zero in 2019-2025, and the
+walk-forward strategies lose on Options Funding and roughly break even on Imperial. The simulation below uses the
+variance-swap proxy, which has no bid/ask, and is more favourable than listed options. Rules were checked from public pages on
 2026-10-25 and change often, so verify them in writing before buying anything.
 - Simulation: `scripts/options_prop_sim.py`.
 - Results: `docs/options_prop_sim.csv`.
