@@ -230,6 +230,18 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
 - A 1994-2018 model calibrated on the quotes shows a small positive premium for SPY short puts and strangles (alpha
   t about 2), crash-exposed.
 
+### 8.1q Gotobi out of sample, 2019-2025 - see `docs/gotobi_oos.md`
+- The pre-registered test on new data (USD/JPY from Dukascopy, 2019-2025, rules unchanged) is **confirmed**:
+  - +2.13 bp a trade after costs and swap, t 2.05, 413 trades;
+  - 5 of 7 years positive;
+  - the same window on random non-Gotobi days: p = 0.004;
+  - raw-ECN costs: +2.46 bp, t 2.37.
+- It is about 60% of the 2007-2018 effect, slightly negative in 2024 (-0.08 bp) and 2025 (-0.88 bp), and it needs
+  the exit at the 09:55 JST fix: at 10:00 it keeps +0.52 bp, t 0.49.
+- On FTMO rules the 2019-2025 trades pay at 6x leverage: passed 62%, paid 61%, mean net +$4,013, median +$2,928.
+  At 3x they are too slow; at 10x and above the daily loss limit fails them.
+- It is the only edge in the project that passed a pre-registered out-of-sample test.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.

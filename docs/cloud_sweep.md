@@ -119,3 +119,4 @@ results branch (`resultsN`). Development data only (2007-2018, EURUSD to 2022), 
 | 23 | 40227329852 | options strategy lab on real quotes (DoltHub), 108 underlyings x 19 structures x 3 maturities x 5 management x 5 filters. **Contaminated:** a position spanning AVGO's split was settled at the post-split price, and the IV filter started only in mid-2020; superseded | - |
 | 24 | 40235889856 | run 23 with corporate-action and parity checks; superseded (unlisted strikes were left unvalued, so management rules rarely fired and daily marks were flat) | - |
 | 25 | 40244024631 | run 24 with unlisted contracts valued from each day's smile: the final options strategy results, walk-forward selection, 1994-2018 model layer, provider simulation | `docs/options_strategies.md` |
+| 26 | 40227329900 | Gotobi out of sample 2019-2025: USD/JPY from Dukascopy (84 monthly download jobs), the run-17 rules unchanged | `docs/gotobi_oos.md` |

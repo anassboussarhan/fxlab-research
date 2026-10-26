@@ -89,7 +89,7 @@ What the simulation shows:
      0.3%.
    - Trade only in contango months, with SPY defined-risk spreads, and buy the challenge when the VIX curve is in
      contango.
-2. **FX:** Gotobi on an FTMO-type account, if the 2019-2025 out-of-sample test confirms it (`docs/gotobi_oos.md`).
+2. **FX:** Gotobi on an FTMO-type account. The 2019-2025 out-of-sample test confirmed it (+2.1 bp a trade after costs, t 2.05), smaller than before and fading in 2024-2025; it needs about 6x leverage on FTMO rules (`docs/gotobi_oos.md`).
 3. **Later, with a track record:** T3 Trading Group (real capital, licensed) or a fund. A verified record is what
    moves you from simulated payouts to real capital.
 

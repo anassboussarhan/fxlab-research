@@ -260,7 +260,7 @@ published rules from `docs/options_capital_providers.md`:
    - filters add at most a few hundredths;
    - buying options (long puts, long straddles) loses before considering their hedge value.
 5. **On a prop provider,** the edge that survives is too small to beat a monthly fee and roughly pays a one-time
-   fee. The best FX candidate remains Gotobi (`docs/gotobi_oos.md`, out-of-sample test pending).
+   fee. The best FX candidate remains Gotobi, which passed its 2019-2025 out-of-sample test (`docs/gotobi_oos.md`).
 
 **Limitations:**
 - Seven years of quotes, with sparse snapshots and strikes. Unlisted contracts are valued from the day's smile
