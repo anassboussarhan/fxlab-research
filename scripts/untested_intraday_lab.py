@@ -180,26 +180,41 @@ def tokyo_tests(res, bk=None, bk2=None):
     start, end = str(bk.idx[0].date()), str(bk.idx[-1].date())
     hol = FL.jp_holidays(range(bk.idx[0].year, bk.idx[-1].year + 1))
     G = FL.gotobi_days(start, end, hol)
-    res["I1 USDJPY post-fix short 09:55-10:30 Tokyo"] = (timed(bk, G, lambda d: (jst(d, 9, 55), jst(d, 10, 30)), -1), 62)
-    res["I2 USDJPY Nakane long 07:30-09:55 Tokyo"] = (
-        timed(bk, G, lambda d: (jst(d, 7, 30), jst(d, 9, 55)), +1, tol_out=65), 62)
-    rng = bk.avg_range()
-    from fxlab.validation.metrics import trading_day
-    out = {}
-    for d in G:
-        t0, t1 = jst(d - pd.Timedelta(days=1), 23, 0), jst(d, 9, 53)
-        i, j = bk.at(t0, 10), bk.at(t1, 65)
-        if i < 0 or j < 0 or j <= i:
-            continue
-        td = trading_day(pd.DatetimeIndex([bk.idx[i]]))[0]
-        rg = float(rng.get(td, np.nan))
-        if not np.isfinite(rg) or rg <= 0:
-            continue
-        r = bk.bracket(i, j, +1, 1e9, 0.5 * rg)
-        if r is not None:
-            out[d] = rec(r)
-    res["I3 USDJPY Gotobi overnight 23:00-09:53 Tokyo, 0.5-range stop"] = (frame(out), 62)
     Gs = set(G)
+    # control days (added after the first pass, rules unchanged): Tokyo business days that are not Gotobi days,
+    # Tuesday-Friday, so a calendar-free intraday pattern of USD/JPY is not mistaken for the Gotobi effect
+    C = [d for d in pd.bdate_range(start, end) if d not in Gs and d not in hol and d.weekday() != 0]
+    rng = bk.avg_range()
+
+    def i3(days):
+        from fxlab.validation.metrics import trading_day
+        out = {}
+        for d in days:
+            t0, t1 = jst(d - pd.Timedelta(days=1), 23, 0), jst(d, 9, 53)
+            i, j = bk.at(t0, 10), bk.at(t1, 65)
+            if i < 0 or j < 0 or j <= i:
+                continue
+            td = trading_day(pd.DatetimeIndex([bk.idx[i]]))[0]
+            rg = float(rng.get(td, np.nan))
+            if not np.isfinite(rg) or rg <= 0:
+                continue
+            r = bk.bracket(i, j, +1, 1e9, 0.5 * rg)
+            if r is not None:
+                out[d] = rec(r)
+        return frame(out)
+
+    spec = (("I1 USDJPY post-fix short 09:55-10:30 Tokyo", lambda days: timed(
+                bk, days, lambda d: (jst(d, 9, 55), jst(d, 10, 30)), -1)),
+            ("I2 USDJPY Nakane long 07:30-09:55 Tokyo", lambda days: timed(
+                bk, days, lambda d: (jst(d, 7, 30), jst(d, 9, 55)), +1, tol_out=65)),
+            ("I3 USDJPY Gotobi overnight 23:00-09:53 Tokyo, 0.5-range stop", i3))
+    for name, fn in spec:
+        ev, ctl = fn(G), fn(C)
+        res[name] = (ev, 62)
+        res[name.split()[0] + "c control: same trade on non-Gotobi Tue-Fri days"] = (ctl, 190)
+        if len(ev) > 10 and len(ctl) > 10:
+            res[name.split()[0] + " Gotobi minus control (Welch t)"] = float(
+                st.ttest_ind(ev.net, ctl.net, equal_var=False).statistic)
     days = set()
     for h in sorted(hol):
         if h.weekday() >= 5 or not (pd.Timestamp(start) <= h <= pd.Timestamp(end)):
@@ -209,8 +224,12 @@ def tokyo_tests(res, bk=None, bk2=None):
             d += pd.Timedelta(days=1)
         if d not in Gs and d.weekday() != 0:
             days.add(d)
-    res["I5 USDJPY day after a Japanese holiday 03:00-09:55 Tokyo"] = (
-        timed(bk, sorted(days), lambda d: (jst(d, 3, 0), jst(d, 9, 55)), +1, tol_out=65), 12)
+    f1 = lambda dd: timed(bk, dd, lambda d: (jst(d, 3, 0), jst(d, 9, 55)), +1, tol_out=65)  # noqa: E731
+    ev, ctl = f1(sorted(days)), f1([d for d in C if d not in days])
+    res["I5 USDJPY day after a Japanese holiday 03:00-09:55 Tokyo"] = (ev, 12)
+    res["I5c control: same trade on non-Gotobi, non-holiday-follow Tue-Fri days"] = (ctl, 190)
+    if len(ev) > 10 and len(ctl) > 10:
+        res["I5 holiday minus control (Welch t)"] = float(st.ttest_ind(ev.net, ctl.net, equal_var=False).statistic)
     wd = list(pd.bdate_range(start, end))
     res["I6a long USDJPY 00:00-07:00 UTC (JPY weak at home)"] = (
         timed(bk, wd, lambda d: (utc(d, 0), utc(d, 7)), +1, tol_in=65), 252)
