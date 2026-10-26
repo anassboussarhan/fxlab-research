@@ -1,0 +1,11 @@
+/home/runner/work/fxlab-research/fxlab-research/scripts/options_edges_lab.py:532: Pandas4Warning: Sorting by default when concatenating all DatetimeIndex is deprecated.  In the future, pandas will respect the default of `sort=False`. Specify `sort=True` or `sort=False` to silence this message. If you see this warnings when not directly calling concat, report a bug to pandas.
+  pd.concat({k: v for k, v in series.items()}, axis=1).to_csv(os.path.join(a.out, "series.csv"))
+                                          test    n     mean     t_nw   sharpe  win_rate    worst years_positive  mean_2019_2022  t_2019_2022  mean_2023_2025  t_2023_2025     bh_q
+0       H1 SPY delta-hedged short ATM straddle   82  0.00268  1.73983  0.70616   0.67073 -0.05554            5/7         0.00337      1.59365         0.00175      0.79817  0.16390
+1                       H2 H1 in contango only   78  0.00192  1.23986  0.51840   0.65385 -0.05554            5/7         0.00242      1.14922         0.00125      0.55279  0.28670
+2  H3 SPY delta-hedged short 25-delta strangle   74  0.00225  1.73948  0.73401   0.66216 -0.04886            5/7         0.00338      2.23159         0.00048      0.21784  0.16390
+3          H4 Vasquez IV term slope, straddles   82 -0.00011 -0.04396 -0.01708   0.52439 -0.06169            3/7         0.00114      0.32578        -0.00179     -0.49655  0.82805
+4   H5 Cao-Han idiosyncratic vol, delta-hedged   82 -0.00537 -3.96267 -1.56893   0.31707 -0.04016            0/7        -0.00602     -2.84725        -0.00451     -3.16278  1.00000
+5        H6 Cremers-Weinbaum IV spread, stocks  352 -0.00098 -1.48444 -0.59637   0.42330 -0.02895            1/7        -0.00086     -0.87190        -0.00113     -1.39391  1.00000
+6             H7 Xing-Zhang-Zhao smirk, stocks  352  0.00113  1.05075  0.41602   0.50568 -0.07826            4/7         0.00021      0.17216         0.00233      1.22661  0.29337
+7         H8 Gao-Xing-Zhang earnings straddles   72 -0.01361 -5.52487 -2.20147   0.22222 -0.08307            1/6        -0.01852     -5.23105        -0.00871     -2.86569  1.00000

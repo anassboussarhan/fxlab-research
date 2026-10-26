@@ -1,0 +1,226 @@
+{
+ "ABT": {
+  "chain_dates": 1101,
+  "positions": 401,
+  "signals": 353,
+  "earnings_trades": 23,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6272,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.1686742484681859,
+   "p90_abs_error_pct_of_underlying": 0.7021121610988541,
+   "mean_error_pct_of_underlying": 0.08550815933247136
+  }
+ },
+ "AVGO": {
+  "chain_dates": 1097,
+  "positions": 405,
+  "signals": 353,
+  "earnings_trades": 22,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6420,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.15850541206247556,
+   "p90_abs_error_pct_of_underlying": 0.6634901617677356,
+   "mean_error_pct_of_underlying": -0.010321092746218535
+  }
+ },
+ "BRK.B": {
+  "chain_dates": 1007,
+  "positions": 357,
+  "signals": 321,
+  "earnings_trades": 21,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 5568,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.11375206718067941,
+   "p90_abs_error_pct_of_underlying": 0.38266006637062194,
+   "mean_error_pct_of_underlying": 0.01803589843725399
+  }
+ },
+ "COST": {
+  "chain_dates": 1099,
+  "positions": 407,
+  "signals": 353,
+  "earnings_trades": 18,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6464,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.12596084145860106,
+   "p90_abs_error_pct_of_underlying": 0.4011416237588699,
+   "mean_error_pct_of_underlying": -0.003553879471668712
+  }
+ },
+ "DIS": {
+  "chain_dates": 1099,
+  "positions": 397,
+  "signals": 352,
+  "earnings_trades": 23,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6160,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.17646002968747018,
+   "p90_abs_error_pct_of_underlying": 0.6697279489093794,
+   "mean_error_pct_of_underlying": 0.03692110248255255
+  }
+ },
+ "GM": {
+  "chain_dates": 1096,
+  "positions": 401,
+  "signals": 352,
+  "earnings_trades": 24,
+  "iv_repaired_expiry_days": 4,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6340,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.19718432814582457,
+   "p90_abs_error_pct_of_underlying": 0.7871625576768244,
+   "mean_error_pct_of_underlying": 0.11926821254174033
+  }
+ },
+ "INTU": {
+  "chain_dates": 1097,
+  "positions": 408,
+  "signals": 351,
+  "earnings_trades": 24,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6468,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.14650790076122006,
+   "p90_abs_error_pct_of_underlying": 0.49539604685799093,
+   "mean_error_pct_of_underlying": 0.031005799739091518
+  }
+ },
+ "LMT": {
+  "chain_dates": 1098,
+  "positions": 409,
+  "signals": 351,
+  "earnings_trades": 23,
+  "iv_repaired_expiry_days": 2,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6472,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.17867292175034455,
+   "p90_abs_error_pct_of_underlying": 0.5677558124884481,
+   "mean_error_pct_of_underlying": 0.017014921340108506
+  }
+ },
+ "MMM": {
+  "chain_dates": 1098,
+  "positions": 397,
+  "signals": 353,
+  "earnings_trades": 23,
+  "iv_repaired_expiry_days": 1,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6236,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.19144278672249473,
+   "p90_abs_error_pct_of_underlying": 0.7315123453760458,
+   "mean_error_pct_of_underlying": 0.07114737848772634
+  }
+ },
+ "NOW": {
+  "chain_dates": 1052,
+  "positions": 355,
+  "signals": 309,
+  "earnings_trades": 23,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6096,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.16292799871555122,
+   "p90_abs_error_pct_of_underlying": 0.6383611129553319,
+   "mean_error_pct_of_underlying": 0.028855511756563708
+  }
+ },
+ "PYPL": {
+  "chain_dates": 1095,
+  "positions": 408,
+  "signals": 352,
+  "earnings_trades": 23,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6444,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.19925025654539616,
+   "p90_abs_error_pct_of_underlying": 0.9303405324525043,
+   "mean_error_pct_of_underlying": 0.053639922033196244
+  }
+ },
+ "T": {
+  "chain_dates": 1093,
+  "positions": 391,
+  "signals": 350,
+  "earnings_trades": 23,
+  "iv_repaired_expiry_days": 31,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6086,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.25159939540048537,
+   "p90_abs_error_pct_of_underlying": 2.3920243317180727,
+   "mean_error_pct_of_underlying": 0.33549264361757797
+  }
+ },
+ "UNP": {
+  "chain_dates": 1097,
+  "positions": 409,
+  "signals": 352,
+  "earnings_trades": 24,
+  "iv_repaired_expiry_days": 0,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6462,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.16076299893604154,
+   "p90_abs_error_pct_of_underlying": 0.5149119568639153,
+   "mean_error_pct_of_underlying": 0.05130901737752775
+  }
+ },
+ "XLF": {
+  "chain_dates": 1090,
+  "positions": 396,
+  "signals": 352,
+  "earnings_trades": 0,
+  "iv_repaired_expiry_days": 82,
+  "hedge_delta_fallbacks": 0,
+  "hedge_deltas": 6180,
+  "path_points_unvalued": 0,
+  "across_expiry_check": {
+   "n": 800,
+   "median_abs_error_pct_of_underlying": 0.19565550286092412,
+   "p90_abs_error_pct_of_underlying": 1.346809184485512,
+   "mean_error_pct_of_underlying": 0.18830567728862108
+  }
+ }
+}
