@@ -1,0 +1,89 @@
+name: untested-options
+# Options mechanics not yet tested (scripts/untested_options_lab.py): continuous tastytrade books with same-day
+# redeployment, rolling the untested side, VIX-based allocation, and earnings premium selling, on the real quotes
+# exported by options-strategies (run id in ci/UNTESTED_OPTIONS), cut at 2025-12-31. Results to branch untested-options.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/UNTESTED_OPTIONS"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  prep:
+    runs-on: ubuntu-latest
+    outputs:
+      chains_run: ${{ steps.r.outputs.chains_run }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        run: echo "chains_run=$(head -1 ci/UNTESTED_OPTIONS | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+  symbols:
+    needs: prep
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow pytest
+      - run: python -m pytest -q tests/test_untested_options_lab.py tests/test_options_strategy_lab.py
+      - uses: actions/download-artifact@v4
+        with:
+          name: chains
+          path: chains
+          run-id: ${{ needs.prep.outputs.chains_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Symbols group ${{ matrix.group }} of 16 (the 4 ETFs are spread over groups by the symbol order)
+        run: |
+          mkdir -p out
+          python -W ignore scripts/untested_options_lab.py --stage symbols --chain chains --group ${{ matrix.group }}/16 --out out 2>&1 | tee out/log_symbols_${{ matrix.group }}.txt
+          cp chains/closes.csv out/closes.csv 2>/dev/null || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: uo-${{ matrix.group }}
+          path: out
+          retention-days: 30
+  combine:
+    needs: [prep, symbols]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: uo-*
+          path: parts
+      - name: Combine
+        run: |
+          mkdir -p out
+          C=$(ls parts/*/closes.csv | head -1)
+          python -W ignore scripts/untested_options_lab.py --stage combine --inputs $(ls -d parts/* | paste -sd, -) --closes $C --out out 2>&1 | tee out/log_combine.txt
+          cp parts/*/meta_*.json parts/*/log_symbols_*.txt out/ 2>/dev/null || true
+          du -sh out
+      - name: Publish to the untested-options branch
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r out /tmp/pub/untested_options
+          find /tmp/pub -size +95M -delete
+          git checkout --orphan uo-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/untested_options .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > untested_options/RUN.txt
+          git add -f untested_options
+          git commit -qm "Untested options mechanics (run ${{ github.run_id }})"
+          git push -f origin HEAD:untested-options
