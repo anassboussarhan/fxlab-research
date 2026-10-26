@@ -21,7 +21,7 @@ jobs:
     timeout-minutes: 330
     strategy:
       fail-fast: false
-      max-parallel: 16
+      max-parallel: 8
       matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
     steps:
       - uses: actions/checkout@v4
@@ -33,7 +33,7 @@ jobs:
         env:
           PYTHONUNBUFFERED: "1"
         run: |
-          ARGS="--pairs ${{ matrix.sym }} --start ${{ matrix.start }} --end ${{ matrix.end }} --suffix _${{ matrix.tag }} --workers 4"
+          ARGS="--pairs ${{ matrix.sym }} --start ${{ matrix.start }} --end ${{ matrix.end }} --suffix _${{ matrix.tag }} --workers 3"
           if [ -n "${{ matrix.hours }}" ]; then ARGS="$ARGS --hours ${{ matrix.hours }}"; fi
           if [ -n "${{ matrix.weekdays }}" ]; then ARGS="$ARGS --weekdays ${{ matrix.weekdays }}"; fi
           if [ -n "${{ matrix.dates }}" ]; then python ci/intraday_dates.py ${{ matrix.dates }} > dates.txt; ARGS="$ARGS --dates-file dates.txt"; wc -l dates.txt; fi
