@@ -118,6 +118,8 @@ results branch (`resultsN`). Development data only (2007-2018, EURUSD to 2022), 
 | 22 | 40213570596 | round-2 literature tests: silver / gold fixes, gold Asian vs Western hours, gold seasonality, dollar carry, dollar- and carry-factor momentum, weekly momentum (11 registered tests) | `docs/lit2_lab.md` |
 | 23 | 40227329852 | options strategy lab on real quotes (DoltHub), 108 underlyings x 19 structures x 3 maturities x 5 management x 5 filters. **Contaminated:** a position spanning AVGO's split was settled at the post-split price, and the IV filter started only in mid-2020; superseded | - |
 | 24 | 40235889856 | run 23 with corporate-action and parity checks; superseded (unlisted strikes were left unvalued, so management rules rarely fired and daily marks were flat) | - |
-| 25 | 40244024631 | run 24 with unlisted contracts valued from each day's smile: the final options strategy results, walk-forward selection, 1994-2018 model layer, provider simulation | `docs/options_strategies.md` |
+| 25 | 40244024631 | run 24 with unlisted contracts valued from each day's smile; superseded by run 28 (held expiries absent from a snapshot kept stale marks) | - |
 | 26 | 40227329900 | Gotobi out of sample 2019-2025: USD/JPY from Dukascopy (84 monthly download jobs), the run-17 rules unchanged | `docs/gotobi_oos.md` |
 | 27 | 40301779747 | options edges from the literature: delta-hedged SPY straddle / contango / strangle, Vasquez, Cao-Han, Cremers-Weinbaum, Xing-Zhang-Zhao, earnings straddles; held expiries valued across listed expiries (runs 40300348392 / 40300593069 superseded: crude hedge deltas) | `docs/options_edges.md` |
+| 28 | 40301779312 | run 25 repeated with held expiries valued across the day's listed expiries: the final options strategy results (management rules, walk-forward, provider simulation) | `docs/options_strategies.md` |
+| 29 | 40305837180 | free data: crypto variance premium from Deribit DVOL | `docs/crypto_vrp.md` |

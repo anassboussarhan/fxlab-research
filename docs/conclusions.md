@@ -211,22 +211,21 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
 - Fix reversals, metals fixes, gold sessions and random-entry grids stay negative at retail-ECN and IBKR costs.
 
 ### 8.1p Options strategies on real quotes - see `docs/options_strategies.md`
-- Correction pending: the management-rule and provider-simulation results used stale marks on dates the database
-  did not list the held expiry. They are being re-run; the hold-to-expiry results stand.
 - Real end-of-day option quotes (DoltHub, free), 2019-2025, 106 underlyings (SPY, DIA, XLF, XLE, S&P 100 stocks)
   plus stock portfolios.
-- Tested: 19 structures x 14 / 30 / 45 days x 5 management rules x 5 entry filters = 118,216 combinations, at
-  bid/ask-based fills.
+- Tested: 19 structures x 14 / 30 / 45 days x 5 management rules x 5 entry filters = 118,222 combinations, at
+  bid/ask-based fills (final run 40301779312, held expiries valued across the day's listed expiries).
 - **Optimising everything does not survive out of sample.**
   - The in-sample best have Sharpe 7-20.
-  - Choosing the best on earlier years and trading the next year (2021-2025) gave out-of-sample Sharpe 0.79 (t 1.2)
-    for all combinations and 0.06 for defined-risk ones.
-  - Index ETFs only: 1.34 (t 2.1), with equity-exposed short puts / covered calls picked in rising years.
+  - Choosing the best on earlier years and trading the next year (2021-2025) gave out-of-sample Sharpe 0.38 (t 0.6)
+    for all combinations and -0.23 for defined-risk ones.
+  - Index ETFs only: 1.90 (t 3.15), with equity-exposed SPY short puts / covered calls picked in rising years.
 - **On SPY the premium after costs is about zero:** alpha against SPY's own return has |t| < 2 in 24 of 27
   hold-to-expiry structure / maturity rows (two above +2, one below -2), as chance would give.
 - **On single stocks every short-premium structure has negative alpha after costs** (t -1.7 to -15), including the
   IV-minus-RV sort and the Goyal-Saretto long-short.
-- **The 50% take-profit, 21-day exit and 2x stop lower Sharpe;** entry filters change it by a few hundredths.
+- **The 50% take-profit, 21-day exit and 2x stop lower Sharpe** (by 0.1, 1.0 and 0.5 on average); entry filters
+  change it by a few hundredths.
 - **On the providers,** the walk-forward strategies lose on Options Funding (monthly fee) at every size and are
   near break-even on Imperial (one-time fee; the median account loses the fee).
 - A 1994-2018 model calibrated on the quotes shows a small positive premium for SPY short puts and strangles (alpha

@@ -5,16 +5,15 @@ best capital provider.
 - Scripts: `scripts/options_strategy_lab.py` (engine, statistics, walk-forward), `scripts/options_synth.py`
   (long-history model), `scripts/options_strategy_prop.py` (provider rules), `scripts/options_strategy_report.py`
   (tables).
-- Workflow `options-strategies`, final run 40244024631. Full outputs are on branch `options-strategies`; the
-  tables are in `docs/options_strategies/`.
+- Workflow `options-strategies`, final run 40301779312 (supersedes 40244024631). Full outputs are on branch
+  `options-strategies`; the tables are in `docs/options_strategies/`.
 - Development data only: every quote after 2025-12-31 is dropped and every position must expire by then.
 
-> **Correction (2026-10-26).** The database lists a different set of *expiries* on each snapshot, and a held
-> expiry was quoted on only about 28% of later dates. On the other dates its marks were carried forward. So the
-> management-rule comparison (section 3.4), the daily marks and drawdowns, and the provider simulation (3.6) rest
-> on stale marks, and are being re-run with held expiries valued across the day's listed expiries (run after
-> 40244024631). Hold-to-expiry results (sections 3.1-3.3, 3.5) settle on the underlying at expiry and are not
-> affected.
+> **Corrected (2026-10-26).** The database lists a different set of *expiries* on each snapshot, and a held
+> expiry was quoted on only about 28% of later dates. In run 40244024631 its marks were carried forward on the
+> other dates. Run 40301779312 values it across the day's listed expiries (total implied variance interpolated in
+> time at the same log-moneyness; median error 0.06% of the underlying on SPY). This changed the management rules,
+> the walk-forward, the daily marks and the provider simulation. Hold-to-expiry results are identical.
 
 ## 1. Data
 
@@ -70,7 +69,7 @@ It has end-of-day bid, ask, implied volatility and greeks from February 2019.
 | Fills (3) | 0.75 (primary), 1.0, 0.4 |
 | Products | 106 single underlyings, plus stock portfolios built from them: all stocks at equal weight (EW); the fifth of stocks with the largest IV minus realised vol (XSQ5) and the smallest (XSQ1); and their Goyal-Saretto long-short (short straddles on XSQ5, long straddles on XSQ1) |
 
-That makes **118,216 combinations** at the primary fill.
+That makes **118,222 combinations** at the primary fill.
 
 **Statistics:**
 - Per combination:
@@ -92,33 +91,35 @@ The best in-sample combinations look spectacular. Out of sample, the same select
 mostly not significant.
 
 - **In sample:** the best had Sharpes of 7-20 with no losing cycle. Examples:
-  - JPM short 16-delta put, 45 days, take profit 50%, IV > RV filter: 56 cycles, worst cycle +0.14%;
+  - JPM short 16-delta put, 45 days, take profit 50%, IV > RV filter: 56 cycles, worst cycle +0.12%;
   - V, the same put without a filter: 81 cycles.
-- **Benjamini-Hochberg** leaves 2,603 combinations significant on the mean and 1,025 on alpha.
+- **Benjamini-Hochberg** leaves 1,401 combinations significant on the mean and 718 on alpha.
 
 Walk-forward, choosing on earlier years and trading 2021-2025:
 
 | Family (selection criterion) | Out-of-sample months | Mean per month | t | Sharpe | Worst cycle |
 |---|---|---|---|---|---|
-| Everything (Sharpe) | 28 | +0.58% | 1.21 | 0.79 | -9.3% |
+| Everything (Sharpe) | 28 | +0.28% | 0.58 | 0.38 | -9.3% |
 | Everything (t) | 37 | +0.26% | 0.39 | 0.22 | -20.2% |
-| Defined risk only (either) | 29 | +0.04% | 0.10 | 0.06 | -9.3% |
-| Index ETFs only (either) | 30 | +0.71% | 2.12 | 1.34 | -4.6% |
-| Stock portfolios (Sharpe) | 57 | +0.52% | 1.43 | 0.66 | -6.8% |
+| Defined risk only (Sharpe) | 32 | -0.17% | -0.38 | -0.23 | -9.3% |
+| Defined risk only (t) | 31 | +0.07% | 0.15 | 0.10 | -9.3% |
+| Index ETFs only (either) | 33 | +0.83% | 3.15 | 1.90 | -4.0% |
+| Stock portfolios (Sharpe) | 59 | +0.52% | 1.57 | 0.71 | -5.2% |
 
 Notes on the table:
 - Months are months with a position. The mean is in units of underlying notional.
-- **How much the picks overstated themselves:** their in-sample Sharpes were 5-22, e.g. AMD 20/5 put spreads
-  (2021-2022, about 17-22), then AVGO short puts (2023-2025). Out of sample in 2023-2025, filters such as "IV > RV"
-  left only 3-8 cycles a year.
-- **The index-ETF family** picked:
-  - an SPY covered call (2021);
-  - a DIA short put (2022);
-  - SPY short 16-delta puts (2023-2025).
+- **How much the picks overstated themselves:** their in-sample Sharpes were 5-19, e.g. CVS short puts (2021),
+  AMD 20/5 put spreads (2022), then AVGO short puts (2023-2025). Out of sample in 2023-2025, filters such as
+  "IV > RV" left only 3-8 cycles a year.
+- **The index-ETF family** picked only SPY:
+  - a covered call (2021);
+  - 16-delta short puts with a 50% take-profit (2022);
+  - a 20/5 put spread (2023);
+  - 16-delta short puts held to expiry (2024-2025).
 
-  These are equity-exposed positions in mostly rising years.
-- **Rank persistence:** across 23,613 combinations, the in-sample (2019-2022) and out-of-sample (2023-2025) Sharpes
-  have a rank correlation of 0.60. The top in-sample decile averaged 0.58 out of sample, against -0.24 for all.
+  These are equity-exposed positions in mostly rising years (beta 0.16-0.78 in section 3.2).
+- **Rank persistence:** across 23,619 combinations, the in-sample (2019-2022) and out-of-sample (2023-2025) Sharpes
+  have a rank correlation of 0.61. The top in-sample decile averaged 0.62 out of sample, against -0.38 for all.
   What persists is the *kind* of structure (below), not the specific "best" one.
 
 ### 3.2 On SPY the option premium after costs is about zero: the returns are equity beta
@@ -181,10 +182,10 @@ Change in Sharpe against holding to expiry, for the same combination:
 
 | Rule | ETFs / portfolios: mean | Stocks: mean | Share of combinations that improved |
 |---|---|---|---|
-| Take profit 50% | -0.08 | -0.04 | 25-31% |
-| Close at 21 days | -0.59 | -0.42 | 22-26% |
-| Both | -0.61 | -0.44 | 20-25% |
-| Take profit 50% + 2x stop | -0.27 | -0.17 | 20-29% |
+| Take profit 50% | -0.12 | -0.08 | 32-35% |
+| Close at 21 days | -1.11 | -0.90 | 6-9% |
+| Both | -1.07 | -0.87 | 6-11% |
+| Take profit 50% + 2x stop | -0.65 | -0.44 | 20-24% |
 
 The popular rules (50% take-profit, 21-day exit, 2x stop) lower risk-adjusted returns on average. Holding to expiry
 is the best default here.
@@ -193,15 +194,15 @@ Change in Sharpe from each entry filter against no filter:
 
 | Filter | Mean | Share that improved |
 |---|---|---|
-| IV > RV | +0.06 | 51% |
-| Contango | +0.03 | 55% |
-| IV above its median | +0.03 | 47% |
-| No earnings before expiry | -0.00 | 45% |
+| IV > RV | +0.03 | 48% |
+| Contango | +0.01 | 53% |
+| IV above its median | -0.01 | 45% |
+| No earnings before expiry | -0.02 | 44% |
 
 **Fills** (median mean P&L per cycle across products, at fills 0.4 / 0.75 / 1.0, in bp of notional):
-- short put 30 delta: 20 / 16 / 12;
-- iron condor 16/5: -20 / -30 / -39;
-- straddle: -15 / -30 / -37.
+- short put 30 delta: 12 / 8 / 2;
+- iron condor 16/5: -22 / -33 / -46;
+- straddle: -25 / -39 / -50.
 
 Execution matters, but no fill assumption turns the delta-neutral structures positive.
 
@@ -238,23 +239,26 @@ published rules from `docs/options_capital_providers.md`:
 
 | Strategy | Options Funding Growth (monthly fee): mean net per account | Imperial Elite (USD 357 once): mean / median net | Imperial pass rate |
 |---|---|---|---|
-| Index ETFs walk-forward | -$1,183 to -$7,724 | -$357 to +$464 / -$357 | 0-48% |
-| Everything walk-forward (Sharpe) | -$985 to -$3,079 | +$55 to +$729 / -$357 | 38-66% |
-| Defined-risk walk-forward | -$1,342 to -$3,690 | -$315 to -$357 / -$357 | 0-38% |
+| Index ETFs walk-forward | -$2,262 to -$5,401 | -$357 to -$206 / -$357 | 3-24% |
+| Everything walk-forward (Sharpe) | -$230 to -$2,864 | $0 to +$850 / -$357 | 35-41% |
+| Defined-risk walk-forward | -$1,263 to -$2,733 | -$357 / -$357 | 0-3% |
 
 - **On the monthly-fee provider** every walk-forward strategy loses at every size.
-- **On the one-time-fee provider** the mean is near break-even to slightly positive, but the median account just
-  loses the fee.
-- **The in-sample best combinations** pass 100% of the time on these rules (`prop_in_sample_best.csv`). That is
-  what selection on the same data shows, and section 3.1 shows it does not carry forward.
+- **On the one-time-fee provider** the mean is at best slightly positive, and the median account just loses the
+  fee.
+- **The index-ETF walk-forward** has the best out-of-sample Sharpe (1.90) but rarely passes: its equity-like
+  drawdowns (worst day -6.2% of notional) hit the trailing limits before the slow gains reach the target.
+- **The in-sample best combinations** pass 63% of the time on Imperial's rules (median; up to 100%,
+  `prop_in_sample_best.csv`). That is what selection on the same data shows, and section 3.1 shows it does not
+  carry forward.
 
 ## 4. Conclusions
 
 1. **No options edge survives costs and out-of-sample selection on 2019-2025 real quotes,** beyond what equity
    exposure pays.
-   - Optimising 118,216 combinations finds Sharpe 7-20 in sample. Picking that way, year by year, gave out-of-sample
-     Sharpes of 0.06-0.79 (not significant).
-   - The only significant family was index ETFs (1.34, t 2.1), whose picks were equity-exposed short puts and
+   - Optimising 118,222 combinations finds Sharpe 7-20 in sample. Picking that way, year by year, gave out-of-sample
+     Sharpes of -0.23 to 0.38 for all and for defined-risk combinations (not significant).
+   - The only significant family was index ETFs (1.90, t 3.15), whose picks were equity-exposed SPY short puts and
      covered calls in rising years.
 2. **Index (SPY) premium is the only place with a premium at all.**
    - Real quotes 2019-2025: SPY alphas are about zero.
