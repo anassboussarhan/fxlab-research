@@ -1,0 +1,55 @@
+name: missed-edges
+# Edges the project had not tested (scripts/missed_edges_lab.py, M1-M16, parameters fixed in advance): cross-asset
+# time-series momentum, equity overnight / turn-of-month / pre-holiday / pre-FOMC, the VIX futures roll (SVXY),
+# EUR/USD variance at EVZ to 2025, earnings drift / momentum / low volatility on the S&P 100, BTC / ETH cash-and-carry
+# funding, FX daily mean reversion on 2019-2025. Free data (Yahoo, Deribit, DoltHub earnings via the chains
+# artifact named on line 1 of ci/MISSED_EDGES). Cut at 2025-12-31. Results to branch missed-edges.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/MISSED_EDGES"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        run: echo "chains_run=$(head -1 ci/MISSED_EDGES | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow yfinance
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: chains
+          path: chains
+          run-id: ${{ steps.r.outputs.chains_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Data (Yahoo, Deribit)
+        run: |
+          mkdir -p data out
+          python scripts/missed_edges_lab.py --stage data --out data 2>&1 | grep -v Warning | tee out/log_data.txt
+      - name: Tests
+        run: |
+          python -W ignore scripts/missed_edges_lab.py --stage tests --data data --closes chains/closes.csv --earnings chains/earnings.csv --out out 2>&1 | tee out/log_tests.txt
+          cp data/data_meta.json out/ 2>/dev/null || true
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r out /tmp/pub/missed_edges
+          git checkout --orphan me-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/missed_edges .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > missed_edges/RUN.txt
+          git add -f missed_edges
+          git commit -qm "Missed edges (run ${{ github.run_id }})"
+          git push -f origin HEAD:missed-edges
