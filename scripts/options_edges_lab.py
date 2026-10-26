@@ -131,6 +131,42 @@ def option_position(bk, d, front, legs, hedge, hedge_cost, und):
     return {"pnl": pnl / S0, "premium": premium / S0, "hedge_cost": cost / S0, "days": int((front - d).days)}
 
 
+def hedged_daily(bk, d, front, legs, hedge_cost, und):
+    """Daily P&L increments (per unit of notional at entry) of a delta-hedged option position: options marked at
+    mid on each snapshot (listed or smile), the hedge at the close, entry spread and costs on the day they occur;
+    the increments add up to option_position's realised P&L."""
+    r = option_position(bk, d, front, legs, True, hedge_cost, und)
+    if r is None:
+        return None
+    S0 = und.px(d)
+    days = [pd.Timestamp(t) for t in bk.dates if np.datetime64(d) <= t < np.datetime64(front)]
+    paths = {(cp, k): bk.path(front, cp, k, d, front).reindex(days).ffill() for cp, k, q in legs}
+    marks, held, stock, cost = [], 0.0, 0.0, 0.0
+    cash = -sum(q * (paths[(cp, k)].mid.iloc[0] + np.sign(q) * FILL * paths[(cp, k)].half.iloc[0]) for cp, k, q in legs)
+    cash -= COMM * sum(abs(q) for _, _, q in legs)
+    for i, t in enumerate(days):
+        St = und.px(t)
+        if i > 0:
+            a0, a1 = und.adj.loc[:days[i - 1]].iloc[-1], und.adj.loc[:t].iloc[-1]
+            stock += held * und.px(days[i - 1]) * (a1 / a0 - 1.0)
+        dl = 0.0
+        for cp, k, q in legs:
+            x = smile_delta(bk, t, front, cp, k)
+            if x is None:
+                x = (1.0 if St > k else 0.0) if cp == "C" else (-1.0 if St < k else 0.0)
+            dl += q * x
+        cost += abs(-dl - held) * St * hedge_cost
+        held = -dl
+        opt = sum(q * paths[(cp, k)].mid.iloc[i] for cp, k, q in legs)
+        marks.append((t, (cash + opt + stock - cost) / S0))
+    s = pd.Series(dict(marks))
+    s.loc[pd.Timestamp(front)] = r["pnl"]
+    s = s.sort_index()
+    inc = s.diff()
+    inc.iloc[0] = s.iloc[0]
+    return inc
+
+
 def atm_strike(bk, d, e, S):
     g = bk.by_day[d]
     g = g[g.expiration == e]
@@ -157,7 +193,7 @@ def run_symbol(sym, chain_dir, und, spy_ret, vix, earn):
     C = L.trim_chain(C, und)
     bk = L.Book(C, und)
     hc = 1e-4 if sym in ("SPY", "DIA") else 3e-4
-    pos, sig, ern = [], [], []
+    pos, sig, ern, daily = [], [], [], []
     # monthly positions (about 30 days)
     for d in L.entry_dates(bk, 30):
         S = und.px(d)
@@ -171,6 +207,11 @@ def run_symbol(sym, chain_dir, und, spy_ret, vix, earn):
         vv = vix.loc[:d]
         cont = bool(len(vv) and vv.iloc[-1, 0] < vv.iloc[-1, 1])
         base = {"symbol": sym, "entry": d, "expiry": e, "contango": cont}
+        if k is not None and sym in ("SPY", "DIA"):
+            inc = hedged_daily(bk, d, e, [("P", k, -1), ("C", k, -1)], hc, und)
+            if inc is not None:
+                daily.append(pd.DataFrame({"symbol": sym, "kind": "short_straddle_hedged", "entry": d,
+                                           "contango": cont, "day": inc.index, "inc": inc.to_numpy()}))
         if k is not None:
             straddle = [("P", k, -1), ("C", k, -1)]
             long_ = [(cp, kk, -q) for cp, kk, q in straddle]
@@ -252,6 +293,8 @@ def run_symbol(sym, chain_dir, und, spy_ret, vix, earn):
             ern.append({"symbol": sym, "earnings": E, "entry": d0, "exit": d1, "expiry": e,
                         "pnl": pnl / S0, "premium": val0 / S0, "ret_on_premium": pnl / val0 if val0 > 0 else np.nan})
     meta = {"chain_dates": int(len(bk.dates)), "positions": len(pos), "signals": len(sig), "earnings_trades": len(ern)}
+    if daily:
+        meta["daily"] = pd.concat(daily, ignore_index=True)
     return pd.DataFrame(pos), pd.DataFrame(sig), pd.DataFrame(ern), meta
 
 
@@ -260,8 +303,8 @@ def stage_symbols(a):
     X = X[X.index <= END]
     vix = X[["VIX", "VIX3M"]].dropna()
     spy_ret = np.log(X["SPY_adj"].dropna()).diff().dropna()
-    syms = sorted(f[len("chain_"):-len(".parquet")] for f in os.listdir(a.chain)
-                  if f.startswith("chain_") and f.endswith(".parquet"))
+    syms = [x for x in a.symbols.split(",") if x] or sorted(f[len("chain_"):-len(".parquet")] for f in os.listdir(a.chain)
+                                                       if f.startswith("chain_") and f.endswith(".parquet"))
     if a.group:
         i, n = map(int, a.group.split("/"))
         syms = syms[i::n]
@@ -286,6 +329,8 @@ def stage_symbols(a):
         if out is None:
             continue
         p, s, r, m = out
+        if "daily" in m:
+            m.pop("daily").to_csv(os.path.join(a.out, f"daily_{sym}.csv.gz"), index=False)
         meta[sym] = m
         print(sym, m, flush=True)
         P.append(p), S.append(s), R.append(r)
@@ -440,6 +485,46 @@ def stage_combine(a):
                       "trades": int(len(R)), "mean_per_trade": float(R.pnl.mean()),
                       "mean_ret_on_premium": float(R.ret_on_premium.mean()),
                       "median_ret_on_premium": float(R.ret_on_premium.median())})
+    # provider simulation of the delta-hedged SPY books (daily marks), Options Funding Growth and Imperial Elite
+    dly = []
+    for d in dirs:
+        for f in os.listdir(d):
+            if f.startswith("daily_") and f.endswith(".csv.gz"):
+                dly.append(pd.read_csv(os.path.join(d, f), parse_dates=["entry", "day"]))
+    if dly:
+        from options_prop_sim import run as prop_run
+        Dd = pd.concat(dly, ignore_index=True)
+        Dd = Dd[Dd.day <= END]
+        books = {}
+        for sym in ("SPY", "DIA"):
+            g = Dd[(Dd.symbol == sym) & (Dd.kind == "short_straddle_hedged")]
+            if len(g):
+                books[f"{sym} hedged short straddle"] = g.groupby("day").inc.sum()
+                books[f"{sym} hedged short straddle, contango"] = g[g.contango.astype(bool)].groupby("day").inc.sum()
+        rows = []
+        bdays = pd.bdate_range("2019-02-01", END)
+        for name, ser in books.items():
+            x = ser.reindex(bdays).fillna(0.0)
+            first = x.ne(0).idxmax()
+            x = x.loc[first:]
+            sd = x.std()
+            starts = pd.date_range(x.index[0] + pd.offsets.MonthBegin(1), x.index[-1] - pd.DateOffset(months=30), freq="MS")
+            idx = [i for i in (x.index.get_indexer([t], method="bfill")[0] for t in starts) if i >= 0]
+            eq = x.cumsum()
+            for tgt in (0.004, 0.006, 0.008, 0.010):
+                lam = min(tgt / sd, 4.0) if sd > 0 else 0.0
+                for prov in ("OF", "IMP"):
+                    Rr = pd.DataFrame([prop_run(x, lam, prov, i) for i in idx])
+                    net = Rr.paid - Rr.fees
+                    rows.append({"book": name, "provider": prov, "daily_sd_target": tgt, "notional_per_account": lam,
+                                 "book_sum": float(x.sum()), "book_max_drawdown": float((eq - eq.cummax()).min()),
+                                 "worst_day_account": float(x.min() * lam), "starts": int(len(Rr)),
+                                 "pass_rate": float(Rr.passed.mean()), "paid_rate": float((Rr.paid > 0).mean()),
+                                 "mean_net": float(net.mean()), "median_net": float(net.median()),
+                                 "p10_net": float(net.quantile(0.1)), "p90_net": float(net.quantile(0.9)),
+                                 "breach_rate": float(Rr.breach.mean())})
+        pd.DataFrame(rows).to_csv(os.path.join(a.out, "prop_hedged_spy.csv"), index=False)
+        pd.DataFrame(books).to_csv(os.path.join(a.out, "daily_books.csv"))
     T = pd.DataFrame(tests)
     T["bh_q"] = L.bh(T.p_one_sided.to_numpy())
     T.to_csv(os.path.join(a.out, "tests.csv"), index=False)
@@ -463,6 +548,7 @@ def main():
     ap.add_argument("--chain", default="")
     ap.add_argument("--closes", required=True)
     ap.add_argument("--group", default="")
+    ap.add_argument("--symbols", default="")
     ap.add_argument("--inputs", default="")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()

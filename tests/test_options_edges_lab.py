@@ -33,3 +33,15 @@ def test_hedging_reduces_the_spread_of_outcomes_on_a_trend():
     un = E.option_position(bk, d, exp, legs, False, 1e-4, und)
     he = E.option_position(bk, d, exp, legs, True, 1e-4, und)
     assert he["pnl"] > un["pnl"]               # the short straddle loses on the trend; the hedge recovers most
+
+
+def test_hedged_daily_adds_up_to_realised():
+    path = list(np.linspace(100, 90, 55))
+    C, und, exp = _chain(path=path)
+    bk = L.Book(C, und)
+    d = pd.Timestamp("2024-01-31")
+    k = E.atm_strike(bk, d, exp, float(und.px(d)))
+    legs = [("P", k, -1), ("C", k, -1)]
+    r = E.option_position(bk, d, exp, legs, True, 1e-4, und)
+    inc = E.hedged_daily(bk, d, exp, legs, 1e-4, und)
+    assert abs(inc.sum() - r["pnl"]) < 1e-9
