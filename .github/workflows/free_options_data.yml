@@ -1,0 +1,60 @@
+name: free-options-data
+# Free option data beyond DoltHub: (1) Deribit DVOL (crypto implied vol, public API) -> crypto variance premium test;
+# (2) the Kaggle SPY end-of-day chains 2010-2023 if KAGGLE_USERNAME / KAGGLE_KEY secrets are set (free account).
+# Results to branch free-options-data.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FREE_OPTIONS_DATA"]
+permissions:
+  contents: write
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow yfinance kaggle
+      - name: Crypto variance premium (Deribit DVOL)
+        continue-on-error: true
+        run: |
+          mkdir -p out/crypto
+          python scripts/crypto_vrp_lab.py --out out/crypto 2>&1 | tee out/crypto/log.txt
+      - name: Kaggle SPY end-of-day option chains 2010-2023 (needs the free-account secrets)
+        continue-on-error: true
+        env:
+          KAGGLE_USERNAME: ${{ secrets.KAGGLE_USERNAME }}
+          KAGGLE_KEY: ${{ secrets.KAGGLE_KEY }}
+        run: |
+          mkdir -p out/kaggle
+          if [ -z "$KAGGLE_USERNAME" ]; then echo "no Kaggle secrets set" | tee out/kaggle/status.txt; exit 0; fi
+          kaggle datasets files dudesurfin/spy-options-eod-volatility-surface-2010-2023 | tee out/kaggle/files.txt
+          mkdir -p /tmp/k && kaggle datasets download -d dudesurfin/spy-options-eod-volatility-surface-2010-2023 -p /tmp/k --unzip
+          ls -la /tmp/k | tee -a out/kaggle/files.txt
+          python - <<'EOF'
+          import glob, pandas as pd, json
+          info = {}
+          for f in sorted(glob.glob("/tmp/k/**/*.parquet", recursive=True))[:3]:
+              df = pd.read_parquet(f)
+              info[f] = {"rows": len(df), "columns": list(df.columns)[:60], "head": df.head(3).astype(str).to_dict("records")}
+          json.dump(info, open("out/kaggle/schema.json", "w"), indent=1, default=str)
+          print(json.dumps(info, indent=1, default=str)[:5000])
+          EOF
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r out /tmp/pub/free_options_data
+          git checkout --orphan fod-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/free_options_data .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > free_options_data/RUN.txt
+          git add -f free_options_data
+          git commit -qm "Free options data (run ${{ github.run_id }})"
+          git push -f origin HEAD:free-options-data
