@@ -1,0 +1,31 @@
+name: preserve-chains
+# Re-upload the real option-chain export (run id in ci/PRESERVE_CHAINS) with 90-day retention, so later tests do not
+# depend on the original 5-day artifact.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/PRESERVE_CHAINS"]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        run: echo "run=$(head -1 ci/PRESERVE_CHAINS | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+      - uses: actions/download-artifact@v4
+        with:
+          name: chains
+          path: chains
+          run-id: ${{ steps.r.outputs.run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: du -sh chains && ls chains | head -20 && ls chains | wc -l
+      - uses: actions/upload-artifact@v4
+        with:
+          name: chains
+          path: chains
+          retention-days: 90
