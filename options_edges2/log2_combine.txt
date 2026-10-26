@@ -1,0 +1,60 @@
+                                                                           test    n     mean     t_nw   sharpe  win_rate    worst years_positive  mean_2019_2022  t_2019_2022  mean_2023_2025  t_2023_2025     bh_q
+0                E1 SPY delta-hedged risk reversal (sell 25d put, buy 25d call)   74 -0.00199 -2.73252 -1.08396   0.29730 -0.03235            1/7        -0.00091     -1.11376        -0.00367     -2.97358  1.00000
+1                                             E2 DIA delta-hedged risk reversal   70 -0.00270 -4.94358 -1.87375   0.28571 -0.01844            0/7        -0.00230     -2.90964        -0.00327     -4.81165  1.00000
+2                                        E3 SPY delta-hedged short 10-delta put   82  0.00053  0.85221  0.32200   0.86585 -0.03647            6/7         0.00099      1.50268        -0.00009     -0.07771  0.47303
+3                                        E4 DIA delta-hedged short 10-delta put   82  0.00046  0.83193  0.29409   0.79268 -0.03385            5/7         0.00050      0.64431         0.00041      0.52795  0.47303
+4         E5 Dispersion: short SPY hedged straddle, long hedged stock straddles   82 -0.00187 -2.22428 -0.73294   0.35366 -0.04651            1/7        -0.00223     -1.84642        -0.00140     -1.24355  1.00000
+5   E6 Weekend effect SPY: sell hedged straddle Friday, buy back next day (net)  262  0.00052  1.78222  0.80071   0.71374 -0.05088            5/6         0.00049      0.87081         0.00054      3.42386  0.17433
+6                                  E7 Weekend effect stocks (equal weight, net)  267 -0.00637 -8.94646 -4.96316   0.04494 -0.11014            0/6        -0.00861     -6.42842        -0.00414    -13.59109  1.00000
+7             E8 Weekend minus weekday one-day P&L, SPY hedged straddle (gross)   56  0.00077  1.52736  1.49237   0.62500 -0.00649            2/2             NaN          NaN         0.00077      1.52736  0.22168
+8        E9 FOMC: sell SPY hedged straddle before the statement, buy back after   52 -0.00149 -2.04675 -0.76811   0.38462 -0.02154            2/7        -0.00105     -1.13473        -0.00209     -1.78921  1.00000
+9          E10 CPI: sell SPY hedged straddle before the release, buy back after   81 -0.00025 -0.46866 -0.17305   0.60494 -0.02062            4/7        -0.00056     -0.69702         0.00015      0.22929  1.00000
+10              E11 SPY delta-hedged calendar straddle (short front, long back)   82  0.00029  0.41215  0.15561   0.54878 -0.03022            5/7        -0.00017     -0.15283         0.00091      1.13409  0.68023
+11                                       E12 DIA delta-hedged calendar straddle   82 -0.00283 -3.61035 -1.32470   0.32927 -0.03911            1/7        -0.00308     -2.91606        -0.00249     -2.19247  1.00000
+12                                   E13 SPY short variance strip, delta-hedged   82  0.00060  2.02247  0.74233   0.80488 -0.01626            6/7         0.00085      2.38569         0.00026      0.53035  0.15095
+13                                   E14 DIA short variance strip, delta-hedged   78  0.00072  2.49715  0.92266   0.78205 -0.01371            6/7         0.00104      2.34777         0.00032      1.03317  0.08764
+{
+ "dispersion_premium_matched": {
+  "n": 82,
+  "mean": -9.276588993393226e-05,
+  "t_nw": -0.10246886190636255,
+  "p_one_sided": 0.5408077363378568,
+  "sharpe": -0.03952439762151365,
+  "win_rate": 0.524390243902439,
+  "worst": -0.03167552387243509,
+  "years_positive": "5/7",
+  "mean_2019_2022": -7.130158477051788e-05,
+  "t_2019_2022": -0.05845489792455084,
+  "mean_2023_2025": -0.0001215893854390884,
+  "t_2023_2025": -0.09032320657535715,
+  "y2019": 0.01451691456119742,
+  "y2020": 0.0036440709814736447,
+  "y2021": 0.005554429619061935,
+  "y2022": -0.02706658964594734,
+  "y2023": 0.006844547925261368,
+  "y2024": 0.01622352395178393,
+  "y2025": -0.02732370036741339
+ },
+ "box_spreads": {
+  "DIA": {
+   "boxes": 20972,
+   "snapshots": 1081,
+   "share_boxes_buy_below_tbill_pv": 0.00038146099561319857,
+   "share_boxes_sell_above_tbill_pv": 0.0037669273316803357,
+   "share_days_any_buy_arb": 0.0009250693802035153,
+   "share_days_any_sell_arb": 0.02682701202590194,
+   "median_buy_edge_bp_of_width": -612.5695604699098,
+   "median_implied_rate_mid_minus_tbill_bp": -339.013462812472
+  },
+  "SPY": {
+   "boxes": 20720,
+   "snapshots": 1074,
+   "share_boxes_buy_below_tbill_pv": 4.826254826254826e-05,
+   "share_boxes_sell_above_tbill_pv": 0.08532818532818533,
+   "share_days_any_buy_arb": 0.000931098696461825,
+   "share_days_any_sell_arb": 0.35288640595903165,
+   "median_buy_edge_bp_of_width": -203.15865799230386,
+   "median_implied_rate_mid_minus_tbill_bp": -149.06086217100906
+  }
+ }
+}
