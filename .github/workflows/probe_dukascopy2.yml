@@ -7,10 +7,10 @@ on:
 jobs:
   probe:
     runs-on: ubuntu-latest
-    timeout-minutes: 25
+    timeout-minutes: 40
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
-      - run: python ci/probe_dukascopy2.py
+      - run: python -u ci/probe_dukascopy2.py

@@ -29,6 +29,10 @@ REC = struct.Struct(">IIIff")
 
 
 def digits(pair: str) -> int:
+    """Price decimals of Dukascopy's integer points: 3 for JPY quotes, metals and index CFDs (names containing
+    "IDX", e.g. USA500IDXUSD), 5 otherwise. Index scale verified by ci/probe_dukascopy2.py."""
+    if "IDX" in pair:
+        return 3
     return 3 if pair.endswith("JPY") or pair.startswith(("XAU", "XAG")) else 5
 
 
@@ -72,14 +76,23 @@ def fetch_hour(pair: str, hour: datetime, retries: int = 6) -> bytes:
     raise FetchFailed(url)
 
 
-def download_year(pair: str, year: int, start: datetime | None = None, end: datetime | None = None, workers: int = 8):
+def download_year(pair: str, year: int, start: datetime | None = None, end: datetime | None = None, workers: int = 8,
+                  hours_utc: set | None = None, weekdays: set | None = None, dates: set | None = None,
+                  suffix: str = ""):
     from fxlab.data.acquire_fxdata_git import clean_ticks, ticks_to_m1, parquet_path, sha256_file, append_manifest
     s = start or datetime(year, 1, 1)
     e = end or datetime(year + 1, 1, 1)
     hours = []
     h = s
     while h < e:
-        if h.weekday() != 5:  # Saturdays carry no FX ticks
+        ok = h.weekday() != 5  # Saturdays carry no FX ticks
+        if ok and hours_utc is not None and h.hour not in hours_utc:
+            ok = False
+        if ok and weekdays is not None and h.weekday() not in weekdays:
+            ok = False
+        if ok and dates is not None and h.date() not in dates:
+            ok = False
+        if ok:
             hours.append(h)
         h += timedelta(hours=1)
     failed = []
@@ -100,6 +113,8 @@ def download_year(pair: str, year: int, start: datetime | None = None, end: date
     drops["hours_failed_download"] = len(failed)
     m1 = ticks_to_m1(ticks.filter(pl.col("ts").dt.year() == year))
     out = parquet_path(pair, year)
+    if suffix:
+        out = out.with_name(out.stem + suffix + out.suffix)
     out.parent.mkdir(parents=True, exist_ok=True)
     m1.write_parquet(out, compression="zstd")
     status = "ok" if len(failed) <= 0.002 * len(hours) else "partial"
@@ -114,14 +129,36 @@ def main(argv=None):
     ap.add_argument("--pairs", nargs="+", required=True)
     ap.add_argument("--start", required=True)
     ap.add_argument("--end", required=True)
+    ap.add_argument("--hours", default="", help="UTC hours to fetch, e.g. 13-20 or 0,1,14-23 (default: all)")
+    ap.add_argument("--weekdays", default="", help="weekdays to fetch, 0=Mon..6=Sun, e.g. 4 or 0-4 (default: all)")
+    ap.add_argument("--dates-file", default="", help="file with one YYYY-MM-DD per line: fetch only those dates")
+    ap.add_argument("--suffix", default="", help="suffix of the output parquet name (partial downloads)")
+    ap.add_argument("--workers", type=int, default=8)
     a = ap.parse_args(argv)
+
+    def rng(spec):
+        if not spec:
+            return None
+        out = set()
+        for part in spec.split(","):
+            if "-" in part:
+                lo, hi = part.split("-")
+                out |= set(range(int(lo), int(hi) + 1))
+            else:
+                out.add(int(part))
+        return out
+    hours, wds = rng(a.hours), rng(a.weekdays)
+    dates = None
+    if a.dates_file:
+        dates = {datetime.fromisoformat(x.strip()).date() for x in open(a.dates_file) if x.strip()}
     s, e = datetime.fromisoformat(a.start), datetime.fromisoformat(a.end)
     if e >= datetime(2026, 1, 1):
         print("NOTE: data from 2026 onward is the locked holdout; it is stored but every loader refuses it "
               "until candidates are frozen and the holdout is explicitly unlocked.")
     for p in a.pairs:
         for y in range(s.year, e.year + 1):
-            print(p, y, download_year(p, y, max(s, datetime(y, 1, 1)), min(e, datetime(y + 1, 1, 1))))
+            print(p, y, download_year(p, y, max(s, datetime(y, 1, 1)), min(e, datetime(y + 1, 1, 1)), workers=a.workers,
+                                      hours_utc=hours, weekdays=wds, dates=dates, suffix=a.suffix))
 
 
 if __name__ == "__main__":

@@ -1,6 +1,8 @@
 """Probe 2: (1) whether Dukascopy's daily minute-candle files are served now; (2) the price scale of index CFDs and
 gold in tick files (decoded with 1, 2, 3 and 5 digits); (3) first hour with data per instrument (history start)."""
 import lzma
+import functools
+print = functools.partial(print, flush=True)  # noqa: A001 - unbuffered notices survive a cancelled job
 import struct
 import time
 import urllib.error
@@ -11,19 +13,21 @@ TICK = "https://datafeed.dukascopy.com/datafeed/{p}/{y:04d}/{m:02d}/{d:02d}/{h:0
 CAND = "https://datafeed.dukascopy.com/datafeed/{p}/{y:04d}/{m:02d}/{d:02d}/{side}_candles_min_1.bi5"
 
 
-def get(url, tries=5):
+def get(url, tries=2):
     for k in range(tries):
         try:
             req = urllib.request.Request(url, headers={"User-Agent": "fxlab-research/1.0"})
-            with urllib.request.urlopen(req, timeout=40) as r:
+            with urllib.request.urlopen(req, timeout=20) as r:
                 return 200, r.read()
         except urllib.error.HTTPError as ex:
             if ex.code == 404:
                 return 404, b""
+            last = f"HTTP {ex.code}"
             time.sleep(2 ** k)
-        except Exception:
+        except Exception as ex:
+            last = repr(ex)[:80]
             time.sleep(2 ** k)
-    return "fail", b""
+    return f"fail ({last})", b""
 
 
 INSTR = ["USA500IDXUSD", "USATECHIDXUSD", "DEUIDXEUR", "GBRIDXGBP", "FRAIDXEUR", "CHEIDXCHF", "XAUUSD", "EURUSD",
@@ -48,7 +52,7 @@ for p in ["EURUSD", "USA500IDXUSD"]:
         print(f"::notice title=candles {p} {side}::code {code} {info}")
 for p in ["USA500IDXUSD", "USATECHIDXUSD", "DEUIDXEUR", "GBRIDXGBP", "FRAIDXEUR", "CHEIDXCHF"]:
     first = None
-    for y in range(2008, 2020):
+    for y in (2008, 2010, 2012, 2014, 2016, 2018, 2019):
         code, b = get(TICK.format(p=p, y=y, m=2, d=12 if y != 2012 else 13, h=15))
         if code == 200 and b:
             first = y
