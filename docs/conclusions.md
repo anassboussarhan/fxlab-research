@@ -244,6 +244,22 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
   At 3x they are too slow; at 10x and above the daily loss limit fails them.
 - It is the only edge in the project that passed a pre-registered out-of-sample test.
 
+### 8.1r Options edges from the research - see `docs/options_edges.md`
+- Eight edges with fixed parameters on real quotes, 2019-2025; held expiries are valued across the day's listed
+  expiries.
+- **The index variance premium shows up when delta-hedged:**
+  - SPY short ATM straddle: +0.27% of notional a month, t 1.74, Sharpe 0.71, 5/7 years;
+  - SPY 25-delta strangle: +0.23%, t 1.76;
+  - DIA (not registered): +0.35% (t about 2.5) and +0.40% (t about 3.8).
+- It is not significant after BH over the eight (q = 0.16), and weaker in 2023-2025.
+- **Single-stock anomalies lose after costs:** Cao-Han, Cremers-Weinbaum and Vasquez, with the Xing-Zhang-Zhao smirk
+  not significant.
+- **Long straddles into earnings lose** -0.85% a trade (median -26% of the premium); selling them is a hypothesis
+  for new data.
+- On the providers, the hedged SPY book loses on Options Funding (monthly fee) and is positive on Imperial at the
+  larger sizes (best: contango only, mean +$1,478, median +$1,657); most accounts are eventually breached by
+  volatility spikes.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
