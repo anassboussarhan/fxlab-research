@@ -1,0 +1,53 @@
+name: untested-edges
+# Daily-data tests of the remaining ideas (scripts/untested_edges_lab.py): RSI(2) on index ETFs, TLT month-end, COT
+# speculative pressure, volatility-managed SPY, overnight on other indices, BTC calendar and trend, crypto carry on
+# other venues, commodity seasonality, factor ETFs, currency value, cross-asset into FX, earnings premium, gold
+# Donchian. Free data, cut at 2025-12-31. Chains run id (closes / earnings) in ci/UNTESTED_EDGES.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/UNTESTED_EDGES"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow yfinance polars
+      - id: r
+        run: echo "chains_run=$(head -1 ci/UNTESTED_EDGES | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+      - uses: actions/download-artifact@v4
+        with:
+          name: chains
+          path: chains
+          run-id: ${{ steps.r.outputs.chains_run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Data (Yahoo, CFTC, Binance / Bybit funding)
+        run: python -W ignore scripts/untested_edges_lab.py --stage data --out data_ue --chain chains 2>&1 | tee log_data.txt
+      - name: Tests
+        run: |
+          mkdir -p out
+          python -W ignore scripts/untested_edges_lab.py --stage tests --data data_ue --out out 2>&1 | tee out/log_tests.txt
+          cp log_data.txt out/
+          cp data_ue/*.unavailable out/ 2>/dev/null || true
+      - name: Publish to the untested-edges branch (results only, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r out /tmp/pub/untested_edges
+          git checkout --orphan ue-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/untested_edges .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > untested_edges/RUN.txt
+          git add -f untested_edges
+          git commit -qm "Untested edges, daily data (run ${{ github.run_id }})"
+          git push -f origin HEAD:untested-edges
