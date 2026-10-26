@@ -4,7 +4,7 @@ The question was whether there is an edge in options. This is the follow-up to `
 tested unhedged structures. Here, eight edges from the published research were tested with their parameters fixed
 in advance (nothing tuned).
 - Script: `scripts/options_edges_lab.py`.
-- Workflow `options-edges`, final run 40301779747. Outputs are on branch `options-edges`; tables are in
+- Workflow `options-edges`, final run 40329232257. Outputs are on branch `options-edges`; tables are in
   `docs/options_edges/`.
 - Data: real DoltHub end-of-day quotes, 2019-2025, 106 underlyings. The data and cost conventions are those of
   `docs/options_strategies.md`. Every position ends by 2025-12-31.
@@ -19,6 +19,14 @@ in advance (nothing tuned).
 - With that, none of the 637,398 hedge deltas fell back to a crude 0 / +-1 delta.
 - The first two runs of this lab (40300348392, 40300593069) used those fallbacks and are superseded.
 
+**Second fix (run 40329232257).** On some snapshots the database's implied-volatility field is wrong for a whole
+expiry (e.g. SPY in mid-November 2021). Those expiries' IVs are now recomputed from the quotes (see
+`docs/options_edges2.md`).
+- The test statistics barely moved.
+- The daily marks of the hedged SPY / DIA books did move: the bad days had produced fake mark spikes. That changed
+  the provider simulation in section 3.
+- Run 40301779747 is superseded.
+
 ## 1. Results
 
 Units: P&L per unit of underlying notional, per position (monthly tests) or per week (H6, H7). The tests are
@@ -28,11 +36,11 @@ one-sided; Benjamini-Hochberg q is across the eight.
 |---|---|---|---|---|---|---|---|---|---|---|
 | **H1 SPY delta-hedged short ATM straddle, 30 days** | 82 | **+0.27%** | **1.74** | 0.71 | 67% | -5.6% | 5/7 | +0.34% (1.59) | +0.18% (0.80) | 0.16 |
 | H2 H1 only when VIX < VIX3M | 78 | +0.19% | 1.24 | 0.52 | 65% | -5.6% | 5/7 | +0.24% (1.15) | +0.13% (0.55) | 0.29 |
-| **H3 SPY delta-hedged short 25-delta strangle** | 74 | **+0.23%** | **1.76** | 0.74 | 66% | -4.9% | 5/7 | +0.34% (2.27) | +0.05% (0.22) | 0.16 |
-| H4 Vasquez IV term slope, straddles (stocks, long-short) | 82 | -0.01% | -0.03 | -0.01 | 52% | -6.2% | 3/7 | | | 0.82 |
-| H5 Cao-Han idiosyncratic vol, delta-hedged (stocks) | 82 | -0.54% | -3.97 | -1.57 | 32% | -4.0% | 0/7 | | | 1.00 |
-| H6 Cremers-Weinbaum call-put IV spread (stocks, weekly) | 352 | -0.10% | -1.48 | -0.59 | 43% | -2.9% | 1/7 | | | 1.00 |
-| H7 Xing-Zhang-Zhao smirk (stocks, weekly) | 352 | +0.11% | 1.04 | 0.41 | 51% | -7.5% | 4/7 | | | 0.30 |
+| **H3 SPY delta-hedged short 25-delta strangle** | 74 | **+0.22%** | **1.74** | 0.73 | 66% | -4.9% | 5/7 | +0.34% (2.23) | +0.05% (0.22) | 0.16 |
+| H4 Vasquez IV term slope, straddles (stocks, long-short) | 82 | -0.01% | -0.04 | -0.02 | 52% | -6.2% | 3/7 | | | 0.83 |
+| H5 Cao-Han idiosyncratic vol, delta-hedged (stocks) | 82 | -0.54% | -3.96 | -1.57 | 32% | -4.0% | 0/7 | | | 1.00 |
+| H6 Cremers-Weinbaum call-put IV spread (stocks, weekly) | 352 | -0.10% | -1.48 | -0.60 | 42% | -2.9% | 1/7 | | | 1.00 |
+| H7 Xing-Zhang-Zhao smirk (stocks, weekly) | 352 | +0.11% | 1.05 | 0.42 | 51% | -7.8% | 4/7 | | | 0.29 |
 | H8 Gao-Xing-Zhang long straddles into earnings | 72 months (2,285 trades) | -1.36% / month | -5.52 | -2.20 | 22% | -8.3% | 1/6 | | | 1.00 |
 
 - **The index volatility premium is there when the option is delta-hedged.**
@@ -67,19 +75,24 @@ e.g. ORATS history (USD 599, not bought).
 The delta-hedged SPY book (one new position a month, daily marks from the day's smiles) was run on the published
 rules from `docs/options_capital_providers.md`. Results are in `docs/options_edges/prop_hedged_spy.csv`.
 
-| Book | Size (daily sd) | Options Funding Growth: mean / median net | Imperial Elite: mean / median net | Imperial paid at least once |
-|---|---|---|---|---|
-| SPY hedged straddle | 0.6% | -$3,478 / -$2,257 | +$415 / -$357 | 37% |
-| SPY hedged straddle | 0.8% | -$2,314 / -$1,908 | +$961 / +$464 | 61% |
-| SPY hedged straddle, contango only | 1.0% | -$1,114 / -$1,106 | **+$1,478 / +$1,657** | 73% |
-| DIA hedged straddle | 0.8% | -$0 / -$1,000 | +$635 / -$357 | 45% |
+| Book | Size (daily sd) | Options Funding Growth: mean / median net | Imperial Elite: mean / median net | Imperial paid at least once | Worst day (account) |
+|---|---|---|---|---|---|
+| SPY hedged straddle | 0.4% | -$2,600 / -$2,250 | +$914 / +$301 | 57% | -6.5% |
+| SPY hedged straddle | 0.6% | -$422 / -$750 | +$940 / +$254 | 55% | -9.7% |
+| SPY hedged straddle | 0.8% | +$557 / -$500 | **+$1,263 / +$1,422** | 51% | -13.0% |
+| SPY hedged straddle | 1.0% | +$29 / -$500 | +$788 / -$357 | 37% | -16.2% |
+| SPY hedged straddle, contango only | 0.4% | -$1,745 / -$1,750 | **+$1,254 / +$1,029** | 63% | -3.8% |
+| SPY hedged straddle, contango only | 0.6% | +$283 / -$500 | +$1,181 / +$990 | 53% | -5.8% |
+| DIA hedged straddle | 0.8% | -$165 / -$1,000 | +$781 / -$357 | 49% | -17.7% |
 
-- **The monthly-fee provider loses money in every case.**
-- **The one-time-fee provider is positive on average,** with a positive median at the larger sizes. Its 7%
-  sim-funded payout cap limits the upside to $3,143 per account.
+- **On the monthly-fee provider the median account loses at every size** (-$500 to -$2,750). Means range from
+  -$3,373 to +$557.
+- **On the one-time-fee provider the mean is positive in every case** (+$168 to +$1,263).
+  - The median is positive for SPY at 0.4-0.8% daily sd and for the contango-only book at 0.4-0.6%.
+  - Its 7% sim-funded payout cap limits the upside to $3,143 per account.
 - **The risk is mark-to-market.**
-  - At 1.0% daily sd the worst day is about -20% of the account (the March 2020 vega spike).
-  - 63-98% of accounts are eventually breached.
+  - At 1.0% daily sd the worst day is about -16% of the account on SPY and -22% on DIA (the March 2020 vega spike).
+  - 69-100% of accounts are eventually breached.
 - **Practical constraint:** the hedge trades the underlying, so the provider must allow stock / ETF trading next to
   the options:
   - Imperial lists stocks and options;
@@ -99,6 +112,6 @@ rules from `docs/options_capital_providers.md`. Results are in `docs/options_edg
   - it was weaker in 2023-2025;
   - its marks fall hard in volatility spikes.
 - **On a prop account** it only makes sense on a one-time-fee provider that allows the hedge, at a size that
-  survives a March-2020 day.
+  survives a March-2020 day: about 0.4-0.8% daily sd, where the median account is +$250 to +$1,400.
 - **The single-stock option anomalies and earnings straddles lose after costs.** The earnings IV crush (selling) is
   a hypothesis for new data.
