@@ -84,7 +84,8 @@ jobs:
           mkdir -p out
           python -W ignore scripts/options_edges2_lab.py --stage combine --inputs $(ls -d parts/* | paste -sd, -) --rates out/rates.csv --out out 2>&1 | tee out/log2_combine.txt
           cp parts/*/meta2_*.json parts/*/log2_symbols_*.txt out/ 2>/dev/null || true
-          cp parts/edges2-0/cpi_dates.csv out/ 2>/dev/null || true
+          cp parts/edges2-0/cpi_dates.csv parts/edges2-0/cpi_dates_log.txt out/ 2>/dev/null || true
+          cp parts/*/box_*.csv.gz out/ 2>/dev/null || true
           du -sh out
       - name: Publish to the options-edges2 branch
         if: always()

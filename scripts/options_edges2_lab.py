@@ -444,7 +444,8 @@ def stage_combine(a):
     if len(stk) and len(idx):
         ip = P[(P.symbol == "SPY") & (P.kind == "short_straddle_hedged")].set_index("entry")
         sg = stk.groupby("entry").agg(pnl=("pnl", "mean"), prem=("premium", "mean"), n=("pnl", "size"))
-        sg = sg[sg.n >= 20].join(ip[["pnl", "premium"]], rsuffix="_i", how="inner")
+        sg = sg[sg.n >= 20].join(ip[["pnl", "premium"]].rename(columns={"pnl": "pnl_i", "premium": "premium_i"}),
+                                 how="inner")
         if len(sg):
             scale = sg.premium_i.abs() / sg.prem.abs()
             x = sg.pnl_i + scale * sg.pnl
