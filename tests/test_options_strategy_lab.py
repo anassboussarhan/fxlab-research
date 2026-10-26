@@ -116,3 +116,104 @@ def test_mark_to_market_adds_up_to_realised():
             r = L.evaluate(bk, d, legs, front, T, mg, 0.75)
             inc = L.mtm_series(bk, d, legs, T, r["exit"], S0, r["pnl"])
             assert abs(inc.sum() - r["pnl"]) < 1e-9
+
+
+def test_second_batch_structures_build_in_delta_order():
+    C, und, exp = _chain()
+    bk = L.Book(C, und)
+    d = pd.Timestamp("2024-01-31")
+    for name in ("LCFLY", "LPFLY", "BWB", "LIC", "CCOND", "PCOND", "XTREE", "DFLY", "JADE", "BCS", "BPS", "SYNL"):
+        bp = L.build_position(bk, d, L.STRUCTS[name], 45, 100.0)
+        assert bp is not None, name
+        legs, front = bp
+        assert L.strikes_ordered(L.STRUCTS[name], legs), name
+    legs, _ = L.build_position(bk, d, L.STRUCTS["LPFLY"], 45, 100.0)
+    ks = sorted(l[3] for l in legs)
+    assert ks[0] < ks[1] < ks[2] and legs[1][3] == ks[1]                 # three distinct strikes, body in the middle
+    syn, _ = L.build_position(bk, d, L.STRUCTS["SYNL"], 45, 100.0)
+    assert syn[0][3] == syn[1][3]                                         # synthetic: same strike
+
+
+def test_roll_marks_add_up_and_rolls_when_tested():
+    path = list(np.linspace(100, 80, 55))                                 # falls through the short put
+    C, und, exp = _chain(path=path)
+    bk = L.Book(C, und)
+    d = pd.Timestamp("2024-01-31")
+    S0 = float(und.px(d))
+    legs, front = L.build_position(bk, d, L.STRUCTS["SP30"], 45, S0)
+    T = L.cycle_paths(bk, d, legs, front)
+    r, inc = L.roll_cycle(bk, d, L.STRUCTS["SP30"], 45, legs, front, T, 0.75, True)
+    assert r["early"]
+    assert abs(inc.sum() - r["pnl"]) < 1e-9
+    h = L.evaluate(bk, d, legs, front, T, "ROLL", 0.75)
+    assert h["exit"] < front
+
+
+def test_wheel_assigns_then_sells_calls():
+    path = list(np.linspace(100, 85, 55))
+    C, und, exp = _chain(path=path)
+    bk = L.Book(C, und)
+    rows, mtm = L.wheel_cycles("X", bk, und, 45, 0.75, True)
+    assert rows and rows[0]["wheel_state"] == "put"
+    for r in rows:
+        k = (r["symbol"], L.WHEEL, 45, "H", str(r["entry"].date()))
+        assert abs(mtm[k].sum() - r["pnl"]) < 1e-9
+
+
+def test_vectorised_walk_forward_scores_match_loop():
+    rng = np.random.default_rng(3)
+    rows = []
+    for k in range(6):
+        for i in range(40):
+            rows.append({"symbol": f"S{k}", "struct": "SP30", "dte": 30, "mgmt": "H", "fill": L.PRIMARY_FILL,
+                         "entry": pd.Timestamp("2019-01-01") + pd.Timedelta(days=30 * i),
+                         "exit": pd.Timestamp("2019-01-20") + pd.Timedelta(days=30 * i), "days": 19,
+                         "pnl": rng.normal(0.001 * k, 0.01), **{f"f_{x}": True for x in L.FILTERS}})
+    R = pd.DataFrame(rows)
+    P, labels = L.wf_frame(R)
+    for crit in ("sharpe", "t"):
+        sc, n = L._key_scores(P, crit)
+        for kid, g in P.groupby("kid"):
+            x = g.sort_values("entry").pnl
+            ref = L._sr(x, 12.0) if crit == "sharpe" else L.nw_t(x.to_numpy())
+            assert abs(sc.loc[kid] - ref) < 1e-9
+
+
+def _chain2(path):
+    """Two expiries (16 Feb and 15 Mar 2024) on every day, for multi-cycle tests."""
+    days = pd.bdate_range("2024-01-02", "2024-03-15")
+    rows = []
+    for i, d in enumerate(days):
+        s = path[i]
+        for exp in (pd.Timestamp("2024-02-16"), pd.Timestamp("2024-03-15")):
+            if d >= exp:
+                continue
+            T = (exp - d).days / 365
+            for K in range(60, 141):
+                for cp in ("P", "C"):
+                    p, dl = _bs(cp, s, K, T, 0.25)
+                    if p < 0.06:
+                        continue
+                    rows.append({"date": d, "expiration": exp, "strike": float(K), "cp": cp, "bid": p - 0.03,
+                                 "ask": p + 0.03, "iv": 0.25, "delta": dl})
+    C = pd.DataFrame(rows)
+    C["mid"] = (C.bid + C.ask) / 2
+    C["half"] = (C.ask - C.bid) / 2
+    px = pd.Series(path[:len(days)], index=days)
+    return C, L.Underlying(px, px)
+
+
+def test_wheel_goes_from_puts_to_calls():
+    n = len(pd.bdate_range("2024-01-02", "2024-03-15"))
+    path = list(np.r_[np.linspace(100, 90, 34), np.linspace(90, 92, n - 34)])
+    C, und = _chain2(path)
+    bk = L.Book(C, und)
+    rows, mtm = L.wheel_cycles("X", bk, und, 30, 0.75, True)
+    states = [r["wheel_state"] for r in rows]
+    assert states[:2] == ["put", "call"], states
+    for r in rows:
+        k = ("X", L.WHEEL, 30, "H", str(r["entry"].date()))
+        assert abs(mtm[k].sum() - r["pnl"]) < 1e-9
+    R, meta, M = L.run_book("X", bk, und, pd.DataFrame({"VIX": [15.0], "VIX3M": [16.0]},
+                                                       index=[pd.Timestamp("2023-12-29")]), dtes=(30,))
+    assert len(R) and (R.struct == L.WHEEL).any() and (R.mgmt == "ROLL").any()

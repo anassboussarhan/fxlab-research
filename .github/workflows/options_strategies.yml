@@ -1,8 +1,10 @@
 name: options-strategies
-# Options strategy lab on every covered underlying: 19 structures x 7/30/45 days x 5 management rules x 5 filters
-# on real end-of-day option quotes (DoltHub post-no-preference/options, free), cut at 2025-12-31; plus stock
-# portfolios, the calibrated synthetic long-history layer (SPY, DIA) and the capital-provider simulation of the
-# best combinations. Results to branch options-strategies.
+# Options strategy lab on every covered underlying: 62 structures (19 first-batch + 42 second-batch + the wheel)
+# x 14/30/45 days x 6 management rules (incl. rolling when tested) x 6 filters (incl. the 200-day trend) on real
+# end-of-day option quotes (DoltHub post-no-preference/options, free), cut at 2025-12-31; plus stock portfolios,
+# the calibrated synthetic long-history layer (SPY, DIA, first-batch structures) and the capital-provider
+# simulation of the best combinations. Results to branch options-strategies-v2 (run 40301779312 stays on
+# options-strategies).
 on:
   workflow_dispatch:
   push:
@@ -92,7 +94,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        group: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+        group: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -106,10 +108,12 @@ jobs:
           path: chains
           run-id: ${{ needs.prep.outputs.chains_run || github.run_id }}
           github-token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Cycles for symbol group ${{ matrix.group }} of 12
+      - name: Cycles for symbol group ${{ matrix.group }} of 20
+        env:
+          OPT_SENS_FILLS: "0"
         run: |
           mkdir -p out
-          python scripts/options_strategy_lab.py --stage cycles --chain chains --closes chains/closes.csv --group ${{ matrix.group }}/12 --out out 2>&1 | tee out/log_cycles_${{ matrix.group }}.txt
+          python -W ignore scripts/options_strategy_lab.py --stage cycles --chain chains --closes chains/closes.csv --group ${{ matrix.group }}/20 --out out 2>&1 | tee out/log_cycles_${{ matrix.group }}.txt
       - uses: actions/upload-artifact@v4
         with:
           name: cycles-${{ matrix.group }}
@@ -119,7 +123,7 @@ jobs:
     needs: [prep, cycles]
     if: always()
     runs-on: ubuntu-latest
-    timeout-minutes: 300
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -139,7 +143,7 @@ jobs:
       - name: "Combine - statistics, multiple testing, walk-forward, stock portfolios"
         run: |
           mkdir -p out
-          python scripts/options_strategy_lab.py --stage combine --inputs $(ls -d parts/* | paste -sd, -) --out out 2>&1 | tee out/log_combine.txt
+          python -W ignore scripts/options_strategy_lab.py --stage combine --inputs $(ls -d parts/* | paste -sd, -) --out out 2>&1 | tee out/log_combine.txt
       - name: Synthetic long-history layer (model, SPY / DIA)
         continue-on-error: true
         run: |
@@ -182,4 +186,4 @@ jobs:
           du -sh options_strategies
           git add -f options_strategies
           git commit -qm "Options strategy lab (run ${{ github.run_id }})"
-          git push -f origin HEAD:options-strategies
+          git push -f origin HEAD:options-strategies-v2

@@ -72,6 +72,7 @@ DTES = (30, 45)
 WEEKLY_DTE = 14                    # weekly entries into the nearest (about two-week) expiry
 MGMT = ("H", "T50", "D21", "T50D21", "T50SL2")
 FILTERS = ("ALL", "CONT", "IVHI", "VRP", "NOERN")
+SENS_FILLS = os.environ.get("OPT_SENS_FILLS", "1") == "1"   # 0: primary fill only (the sensitivity was run already)
 SPLIT = pd.Timestamp("2023-01-01")       # in-sample / out-of-sample split of the real-quote years (both <= 2025)
 
 # (kind, target, qty, expiry) ; kind in P, C, S ; target |delta| or "atm" ; expiry "front" or "back"
@@ -96,10 +97,82 @@ STRUCTS = {
     "LSTRD": [("P", "atm", 1), ("C", "atm", 1)],
     "STK": [("S", None, 1)],
 }
+BASE_STRUCTS = dict(STRUCTS)        # the first 19 (runs 40244024631 / 40301779312)
+BASE_MGMT = MGMT
+BASE_FILTERS = FILTERS
+# Second batch (fixed definitions, nothing tuned): the remaining textbook structures. Targets as above; "same", j =
+# the strike of leg j (calendars at an out-of-the-money strike).
+NEW_STRUCTS = {
+    # single options
+    "LC30": [("C", 0.30, 1)],                                           # long call, 30 delta
+    "LCATM": [("C", "atm", 1)],                                         # long call at the money
+    "LC80": [("C", 0.80, 1)],                                           # deep in-the-money call (stock replacement)
+    "SC16": [("C", 0.16, -1)],                                          # naked short call
+    "SC30": [("C", 0.30, -1)],
+    # stock + options
+    "PP30": [("S", None, 1), ("P", 0.30, 1)],                           # protective (married) put
+    "PPATM": [("S", None, 1), ("P", "atm", 1)],
+    "COLL16": [("S", None, 1), ("P", 0.16, 1), ("C", 0.16, -1)],         # wider collar
+    "CSTRG": [("S", None, 1), ("C", 0.30, -1), ("P", 0.30, -1)],          # covered strangle
+    "SYNL": [("C", "atm", 1), ("P", "atm", -1)],                        # synthetic long stock
+    "SYNS": [("C", "atm", -1), ("P", "atm", 1)],                        # synthetic short stock
+    # debit verticals
+    "BCS": [("C", "atm", 1), ("C", 0.30, -1)],                          # bull call spread
+    "BPS": [("P", "atm", 1), ("P", 0.30, -1)],                          # bear put spread
+    # long volatility
+    "LSTRG25": [("P", 0.25, 1), ("C", 0.25, 1)],
+    "LSTRG16": [("P", 0.16, 1), ("C", 0.16, 1)],
+    "STRIP": [("P", "atm", 2), ("C", "atm", 1)],
+    "STRAP": [("P", "atm", 1), ("C", "atm", 2)],
+    "LGUTS": [("C", 0.70, 1), ("P", 0.70, 1)],                          # in-the-money strangle
+    "SGUTS": [("C", 0.70, -1), ("P", 0.70, -1)],
+    # butterflies and condors
+    "LCFLY": [("C", 0.70, 1), ("C", "atm", -2), ("C", 0.30, 1)],
+    "LPFLY": [("P", 0.70, 1), ("P", "atm", -2), ("P", 0.30, 1)],
+    "BWB": [("P", 0.40, 1), ("P", 0.25, -2), ("P", 0.10, 1)],           # broken-wing put butterfly
+    "LIC": [("P", 0.30, 1), ("P", 0.16, -1), ("C", 0.30, 1), ("C", 0.16, -1)],      # long (reverse) iron condor
+    "LIFLY": [("P", "atm", 1), ("C", "atm", 1), ("P", 0.16, -1), ("C", 0.16, -1)],  # long iron butterfly
+    "CCOND": [("C", 0.80, 1), ("C", 0.60, -1), ("C", 0.40, -1), ("C", 0.20, 1)],
+    "PCOND": [("P", 0.80, 1), ("P", 0.60, -1), ("P", 0.40, -1), ("P", 0.20, 1)],
+    "XTREE": [("C", "atm", 1), ("C", 0.30, -3), ("C", 0.16, 2)],        # Christmas-tree call butterfly 1-3-2
+    "DFLY": [("P", 0.45, 1), ("P", 0.30, -2), ("P", 0.16, 1),
+             ("C", 0.45, 1), ("C", 0.30, -2), ("C", 0.16, 1)],          # double butterfly
+    # ratios and backspreads
+    "CRAT": [("C", 0.40, 1), ("C", 0.20, -2)],
+    "PBSP": [("P", 0.40, -1), ("P", 0.20, 2)],
+    "CBSP": [("C", 0.40, -1), ("C", 0.20, 2)],
+    # combinations
+    "JADE": [("P", 0.30, -1), ("C", 0.30, -1), ("C", 0.16, 1)],         # jade lizard
+    "RJADE": [("C", 0.30, -1), ("P", 0.30, -1), ("P", 0.16, 1)],        # reverse jade lizard
+    "SEAG": [("C", "atm", 1), ("C", 0.25, -1), ("P", 0.25, -1)],        # bullish seagull
+    "RREV": [("P", 0.25, -1), ("C", 0.25, 1)],                          # risk reversal (sell put, buy call)
+    "RREVB": [("P", 0.25, 1), ("C", 0.25, -1)],                         # bearish risk reversal
+    # time spreads (back expiry 14-45 days after the front, nearest 28)
+    "CCAL": [("C", "atm", -1, "front"), ("C", "atm", 1, "back")],
+    "RCAL": [("P", "atm", 1, "front"), ("P", "atm", -1, "back")],       # reverse put calendar
+    "DCAL": [("P", 0.25, -1, "front"), ("P", ("same", 0), 1, "back"),
+             ("C", 0.25, -1, "front"), ("C", ("same", 2), 1, "back")],  # double calendar
+    "PDIAG": [("P", 0.30, -1, "front"), ("P", "atm", 1, "back")],
+    "CDIAG": [("C", 0.30, -1, "front"), ("C", "atm", 1, "back")],
+    "DDIAG": [("P", 0.30, -1, "front"), ("P", "atm", 1, "back"), ("C", 0.30, -1, "front"), ("C", "atm", 1, "back")],
+}
+STRUCTS = {**BASE_STRUCTS, **NEW_STRUCTS}
+WHEEL = "WHEEL"          # the wheel: sell 30-delta puts; once assigned, sell 30-delta calls until called away
+# ROLL: when the underlying closes beyond a short strike, close and re-open the same structure in the listed expiry
+# nearest the original days-to-expiry from that date (roll out and away), at most twice; option-only structures
+# with a short leg.
+MGMT = BASE_MGMT + ("ROLL",)
+MAX_ROLLS = 2
+# TREND: the underlying's total-return close above its 200-day average at entry
+FILTERS = BASE_FILTERS + ("TREND",)
 DEFINED_RISK = {"PCS30_16", "PCS20_05", "CCS30_16", "IC16_05", "IC30_16", "IFLY16", "PCAL", "LP30", "LSTRD",
-                "COLL30"}
+                "COLL30",
+                "LC30", "LCATM", "LC80", "PP30", "PPATM", "COLL16", "BCS", "BPS", "LSTRG25", "LSTRG16", "STRIP",
+                "STRAP", "LGUTS", "LCFLY", "LPFLY", "BWB", "LIC", "LIFLY", "CCOND", "PCOND", "XTREE", "DFLY", "PBSP",
+                "CBSP", "CCAL", "DCAL", "PDIAG", "CDIAG", "DDIAG"}
 SHORT_PREMIUM = {"SP30", "SP16", "SP50", "PCS30_16", "PCS20_05", "CCS30_16", "STRG16", "STRD", "IC16_05",
-                 "IC30_16", "IFLY16", "PRAT", "CC30", "BW50"}
+                 "IC30_16", "IFLY16", "PRAT", "CC30", "BW50",
+                 "SC16", "SC30", "CSTRG", "SGUTS", "BWB", "CRAT", "JADE", "RJADE", "RREV", WHEEL}
 
 
 # ----------------------------------------------------------------------------------------------- data
@@ -157,6 +230,15 @@ class Underlying:
     def tr(self, d0, d1):
         a0, a1 = self.adj.loc[:d0], self.adj.loc[:d1]
         return float(a1.iloc[-1] / a0.iloc[-1] - 1) if len(a0) and len(a1) else np.nan
+
+    def trend(self, d):
+        """Total-return close above its 200-day average (None before 200 closes)."""
+        if not hasattr(self, "_sma"):
+            self._sma = self.adj.rolling(200, min_periods=200).mean()
+        a, m = self.adj.loc[:d], self._sma.loc[:d]
+        if not len(m) or not np.isfinite(m.iloc[-1]):
+            return None
+        return bool(a.iloc[-1] > m.iloc[-1])
 
     def rv21(self, d):
         r = np.log(self.adj.loc[:d]).diff().dropna().iloc[-21:]
@@ -453,22 +535,64 @@ def build_position(bk, d, struct, dte, S):
             legs.append(("S", None, None, None, q))
             continue
         e = back if (len(leg) > 3 and leg[3] == "back") else front
-        k = bk.pick(d, e, kind, target, S, atm_strike=atm_k if target == "atm" else None)
+        if isinstance(target, tuple) and target[0] == "same":        # the strike of an earlier leg
+            k0 = legs[target[1]][3]
+            g = bk.by_day[d]
+            ks = g[(g.expiration == e) & (g.cp == kind) & (g.bid > 0)].strike
+            if not len(ks):
+                return None
+            k = float(ks.iloc[np.argmin(np.abs(ks.to_numpy() - k0))])
+            if abs(k - k0) > 0.01 * k0:
+                return None
+        else:
+            k = bk.pick(d, e, kind, target, S, atm_strike=atm_k if target == "atm" else None)
         if k is None:
             return None
         if target == "atm":
             atm_k = k
         legs.append(("O", kind, e, k, q))
-    # wings must be further out of the money than the short legs of the same type
-    for cp in ("P", "C"):
-        sh = [l[3] for l in legs if l[0] == "O" and l[1] == cp and l[4] < 0 and l[2] == front]
-        lo = [l[3] for l in legs if l[0] == "O" and l[1] == cp and l[4] > 0 and l[2] == front]
-        if sh and lo and struct not in (STRUCTS["PRAT"],):
-            if cp == "P" and min(lo) >= max(sh):
-                return None
-            if cp == "C" and max(lo) <= min(sh):
-                return None
+    if struct in list(BASE_STRUCTS.values()):
+        # wings must be further out of the money than the short legs of the same type
+        for cp in ("P", "C"):
+            sh = [l[3] for l in legs if l[0] == "O" and l[1] == cp and l[4] < 0 and l[2] == front]
+            lo = [l[3] for l in legs if l[0] == "O" and l[1] == cp and l[4] > 0 and l[2] == front]
+            if sh and lo and struct != BASE_STRUCTS["PRAT"]:
+                if cp == "P" and min(lo) >= max(sh):
+                    return None
+                if cp == "C" and max(lo) <= min(sh):
+                    return None
+    elif not strikes_ordered(struct, legs):
+        return None
     return legs, front
+
+
+def _tnum(t):
+    return 0.5 if t == "atm" else (float(t) if isinstance(t, (int, float)) else None)
+
+
+def strikes_ordered(struct, legs):
+    """Second-batch structures: legs of one type and expiry with different target deltas must get distinct strikes
+    in delta order (calls: higher delta = lower strike; puts: higher |delta| = higher strike), so that sparse
+    strikes never collapse a butterfly or condor into something else."""
+    groups = {}
+    for spec, l in zip([s for s in struct if s[0] != "S"], [l for l in legs if l[0] == "O"]):
+        t = _tnum(spec[1])
+        if t is None:
+            continue
+        groups.setdefault((l[1], l[2]), []).append((t, l[3]))
+    for (cp, _), xs in groups.items():
+        by_t = {}
+        for t, k in xs:
+            if t in by_t and by_t[t] != k:
+                return False
+            by_t[t] = k
+        ts = sorted(by_t, reverse=True)                     # highest |delta| first
+        ks = [by_t[t] for t in ts]
+        if cp == "C" and any(b <= a for a, b in zip(ks, ks[1:])):
+            return False
+        if cp == "P" and any(b >= a for a, b in zip(ks, ks[1:])):
+            return False
+    return True
 
 
 def strike_parity_breaks(bk, d, legs, front, tol=0.05):
@@ -539,6 +663,14 @@ def evaluate(bk, d, legs, front, T, mgmt, f):
             if np.isfinite(v):
                 exit_d, exit_val, closed_early = dd, v, True
                 break
+        if mgmt == "ROLL":                                   # tested: the close is beyond a short front strike
+            Sx = bk.und.px(dd)
+            if any(l[4] < 0 and l[2] == front and ((l[1] == "P" and Sx < l[3]) or (l[1] == "C" and Sx > l[3]))
+                   for _, l in opt):
+                v = close_value(row)
+                if np.isfinite(v):
+                    exit_d, exit_val, closed_early = dd, v, True
+                    break
         if mgmt in ("T50", "T50D21", "T50SL2") and np.isfinite(ref):
             v = close_value(row)
             if np.isfinite(v):
@@ -709,14 +841,131 @@ def entry_dates(bk, dte):
     return out
 
 
-def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
+def roll_structs(structs):
+    """Premium-selling, option-only structures with a short leg in the front expiry: the ones the ROLL rule (defend
+    the short strike) applies to."""
+    return {n for n, s in structs.items() if n in SHORT_PREMIUM and all(l[0] != "S" for l in s)
+            and any(l[2] < 0 and (len(l) < 4 or l[3] == "front") for l in s)}
+
+
+def roll_cycle(bk, d, struct, dte, legs, front, T, f, keep_mtm):
+    """ROLL: evaluate; whenever a segment is closed because it was tested, open the same structure on that date in
+    the expiry nearest the original days-to-expiry (at most MAX_ROLLS times). P&L per unit of the first entry's
+    notional; daily marks concatenated across segments."""
+    S0 = bk.und.px(d)
+    r = evaluate(bk, d, legs, front, T, "ROLL", f)
+    if r is None:
+        return None, None
+    total, credit, n = r["pnl"], r["credit"], 0
+    incs = [mtm_series(bk, d, legs, T, r["exit"], S0, r["pnl"], f)] if keep_mtm else []
+    while r["early"] and n < MAX_ROLLS:
+        t = r["exit"]
+        St = bk.und.px(t)
+        bp = build_position(bk, t, struct, dte, St) if np.isfinite(St) else None
+        if bp is None:
+            break
+        legs2, front2 = bp
+        if type(bk) is Book and strike_parity_breaks(bk, t, legs2, front2):
+            break
+        T2 = cycle_paths(bk, t, legs2, front2)
+        r2 = evaluate(bk, t, legs2, front2, T2, "ROLL", f)
+        if r2 is None:
+            break
+        p2 = r2["pnl"] * St / S0
+        total += p2
+        if keep_mtm:
+            incs.append(mtm_series(bk, t, legs2, T2, r2["exit"], S0, p2, f))
+        r, n = r2, n + 1
+    out = {"pnl": total, "credit": credit, "exit": r["exit"], "early": bool(n > 0 or r["early"]),
+           "days": int((r["exit"] - d).days), "rolls": n}
+    inc = pd.concat(incs).groupby(level=0).sum().sort_index() if keep_mtm else None
+    return out, inc
+
+
+def wheel_cycles(sym, bk, und, dte, f, keep_mtm):
+    """The wheel, one position at a time: with cash, sell the 30-delta put of the listed expiry nearest `dte`; if
+    it expires in the money the shares are assigned (1 bp) and 30-delta covered calls are sold on them, cycle after
+    cycle, until a call expires in the money and the shares are called away (1 bp); then back to puts. Each cycle
+    starts on the first snapshot at or after the previous expiry. P&L per cycle per unit of the underlying value at
+    the cycle's start (cash-secured or shares held); the shares earn their total return from the previous expiry."""
+    rows, mtm = [], {}
+    ds = pd.DatetimeIndex(bk.dates)
+    t, stock, hold0 = ds[0], False, None
+    while True:
+        nxt = ds[ds >= t]
+        if not len(nxt):
+            break
+        d = nxt[0]
+        S = und.px(d)
+        t = d + pd.Timedelta(days=1)
+        if not np.isfinite(S):
+            continue
+        if type(bk) is Book:
+            Sp = bk.parity_px(d)
+            if np.isfinite(Sp) and abs(math.log(Sp / S)) > 0.03:
+                continue
+        bp = build_position(bk, d, [("C", 0.30, -1)] if stock else [("P", 0.30, -1)], dte, S)
+        if bp is None:
+            continue
+        legs, front = bp
+        if type(bk) is Book and strike_parity_breaks(bk, d, legs, front):
+            continue
+        T = cycle_paths(bk, d, legs, front)
+        r = evaluate(bk, d, legs, front, T, "H", f)
+        if r is None:
+            continue
+        k = legs[0][3]
+        Sx = und.px(front)
+        if stock:
+            base = und.px(hold0)
+            pnl = r["pnl"] * S + base * (und.tr(hold0, front))
+            called = Sx > k
+            if called:
+                pnl -= Sx * STK_COST
+            ret = pnl / base
+            und_ret, start = und.tr(hold0, front), hold0
+        else:
+            base = S
+            pnl = r["pnl"] * S
+            assigned = Sx < k
+            if assigned:
+                pnl -= Sx * STK_COST
+            ret = pnl / base
+            und_ret, start = und.tr(d, front), d
+        row = {"pnl": ret, "credit": r["credit"] * S / base, "exit": front, "early": False,
+               "days": int((front - start).days), "symbol": sym, "struct": WHEEL, "dte": dte, "mgmt": "H", "fill": f,
+               "entry": d, "expiry": front, "und_ret": und_ret, "iv_entry": bk.atm_iv.get(d, np.nan),
+               "rv21_entry": und.rv21(d), "f_ALL": True, **{f"f_{x}": False for x in FILTERS if x not in ("ALL", "NOERN")},
+               "f_NOERN": None, "legs": ("Sx1;" if stock else "") + f"{legs[0][1]}{k:g}x-1",
+               "wheel_state": "call" if stock else "put"}
+        rows.append(row)
+        if keep_mtm and f == PRIMARY_FILL:
+            L2 = legs + ([("S", None, None, None, 1)] if stock else [])    # option leg first: T holds m0 / h0
+            inc = mtm_series(bk, d, L2, T, front, base, ret, f)
+            mtm[(sym, WHEEL, dte, "H", str(pd.Timestamp(d).date()))] = inc
+        if stock:
+            if called:
+                stock, hold0 = False, None
+            else:
+                hold0 = front
+        elif assigned:
+            stock, hold0 = True, front
+        t = front
+    return rows, mtm
+
+
+def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None, structs=None, mgmts=None, wheel=True):
     """Every structure x entry date x management x fill on one underlying's book (real or synthetic)."""
     dtes = dtes or (DTES + (WEEKLY_DTE,))
+    structs = STRUCTS if structs is None else structs
+    mgmts = MGMT if mgmts is None else mgmts
+    rollable = roll_structs(structs)
     has_weekly = False
     rows, mtm = [], {}
     ivmed = bk.atm_iv.rolling("365D", min_periods=20).median() if len(bk.atm_iv) else bk.atm_iv
     n_mismatch = 0
     n_parity_break = 0
+    n_rolls = 0
     for dte in dtes:
         for d in entry_dates(bk, dte):
             S = und.px(d)
@@ -733,7 +982,9 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
                    "CONT": bool(len(vv) and vv.iloc[-1, 0] < vv.iloc[-1, 1]),
                    "IVHI": bool(np.isfinite(iv) and np.isfinite(ivmed.get(d, np.nan)) and iv > ivmed.get(d)),
                    "VRP": bool(np.isfinite(iv) and iv > und.rv21(d))}
-            for name, struct in STRUCTS.items():
+            if "TREND" in FILTERS:
+                flt["TREND"] = bool(und.trend(d))
+            for name, struct in structs.items():
                 bp = build_position(bk, d, struct, dte, S)
                 if bp is None:
                     continue
@@ -748,15 +999,24 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
                 else:
                     flt["NOERN"] = None
                 T = cycle_paths(bk, d, legs, front)
-                for mg in MGMT:
+                for mg in mgmts:
                     if name == "STK" and mg != "H":
                         continue
                     if dte == WEEKLY_DTE and mg in ("D21", "T50D21"):      # 21-day exit undefined for weeklies
                         continue
+                    if mg == "ROLL" and name not in rollable:
+                        continue
                     for f in FILLS:
-                        if f != PRIMARY_FILL and mg not in ("H", "T50D21" if dte != WEEKLY_DTE else "T50"):
+                        if f != PRIMARY_FILL and (not SENS_FILLS or
+                                                  mg not in ("H", "T50D21" if dte != WEEKLY_DTE else "T50")):
                             continue
-                        r = evaluate(bk, d, legs, front, T, mg, f)
+                        if mg == "ROLL":
+                            r, inc_roll = roll_cycle(bk, d, struct, dte, legs, front, T, f,
+                                                     keep_mtm and f == PRIMARY_FILL)
+                            if r is not None:
+                                n_rolls += r.pop("rolls")
+                        else:
+                            r = evaluate(bk, d, legs, front, T, mg, f)
                         if r is None:
                             continue
                         r.update({"symbol": sym, "struct": name, "dte": dte, "mgmt": mg, "fill": f, "entry": d,
@@ -767,11 +1027,21 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
                                                    for l in legs)})
                         rows.append(r)
                         if keep_mtm and f == PRIMARY_FILL:
-                            mtm[(sym, name, dte, mg, str(pd.Timestamp(d).date()))] = mtm_series(
-                                bk, d, legs, T, r["exit"], S, r["pnl"])
+                            mtm[(sym, name, dte, mg, str(pd.Timestamp(d).date()))] = inc_roll if mg == "ROLL" else \
+                                mtm_series(bk, d, legs, T, r["exit"], S, r["pnl"])
+    n_wheel = 0
+    if wheel:
+        for dte in dtes:
+            for f in FILLS:
+                if f != PRIMARY_FILL and not SENS_FILLS:
+                    continue
+                wr, wm = wheel_cycles(sym, bk, und, dte, f, keep_mtm)
+                rows += wr
+                mtm.update(wm)
+                n_wheel += len(wr) if f == PRIMARY_FILL else 0
     R = pd.DataFrame(rows)
     meta = {"weekly_expiries": has_weekly, "chain_dates": int(len(bk.dates)), "entries_skipped_price_mismatch": n_mismatch,
-            "positions_skipped_parity_break": n_parity_break,
+            "positions_skipped_parity_break": n_parity_break, "roll_segments": n_rolls, "wheel_cycles": n_wheel,
             "path_points_listed": int(getattr(bk, "n_listed", 0)), "path_points_valued_from_smile": int(getattr(bk, "n_modeled", 0)),
             "path_points_unvalued": int(getattr(bk, "n_gap", 0)), "valuations_across_expiries": int(getattr(bk, "n_term", 0)), "corporate_action_days": [str(x.date()) for x in und.events],
             "first": str(pd.Timestamp(bk.dates[0]).date()), "last": str(pd.Timestamp(bk.dates[-1]).date())}
@@ -809,11 +1079,47 @@ def flag(df, flt):
                      (str(v).lower() == "true")).astype(bool)
 
 
+def per_year_of(struct, dte, mean_days):
+    """Cycles per year for annualising: entries are weekly (14 days) or monthly; the wheel runs one cycle at a
+    time, so it has 365 / (mean cycle length) cycles a year."""
+    if struct == WHEEL:
+        return 365.25 / mean_days if mean_days and np.isfinite(mean_days) and mean_days > 0 else 12.0
+    return 52.0 if dte == WEEKLY_DTE else 12.0
+
+
+_TBL = {}
+
+
+def _table_slice(se):
+    return table(_TBL["R"].iloc[se[0]:se[1]])
+
+
+def table_parallel(R, workers=None):
+    """table() per symbol in forked worker processes; R is sorted by symbol and each worker slices its rows."""
+    import multiprocessing as mp
+    workers = workers or max(1, (os.cpu_count() or 1))
+    if not R.symbol.is_monotonic_increasing:
+        R = R.sort_values("symbol", kind="stable").reset_index(drop=True)
+    sym = R.symbol.to_numpy()
+    cut = np.r_[0, np.flatnonzero(sym[1:] != sym[:-1]) + 1, len(R)]
+    spans = list(zip(cut[:-1], cut[1:]))
+    if workers == 1 or len(spans) < 2:
+        return table(R)
+    _TBL["R"] = R
+    try:
+        with mp.get_context("fork").Pool(workers) as pool:
+            parts = pool.map(_table_slice, spans, chunksize=1)
+    finally:
+        _TBL.clear()
+    parts = [p for p in parts if len(p)]
+    return pd.concat(parts, ignore_index=True) if parts else pd.DataFrame()
+
+
 def table(R):
     """One row per combination (symbol, struct, dte, mgmt, filter, fill)."""
     out = []
     for (sym, s, dte, mg, f), g in R.groupby(["symbol", "struct", "dte", "mgmt", "fill"]):
-        per_year = 52.0 if dte == WEEKLY_DTE else 12.0
+        per_year = per_year_of(s, dte, g.days.mean())
         for flt in FILTERS:
             if flt == "NOERN" and (f"f_{flt}" not in g.columns or g[f"f_{flt}"].isna().all()):
                 continue
@@ -826,30 +1132,78 @@ def table(R):
     return pd.DataFrame(out)
 
 
-def walk_forward(R, T, family, min_cycles=24, criterion="sharpe"):
-    """Each year: pick the best combination on cycles that ended before the year, trade it in that year.
-    criterion "sharpe" = long-run Sharpe; "t" = Newey-West t of the mean (favours longer, steadier records)."""
+def wf_frame(R):
+    """Primary-fill cycles prepared once for walk_forward: integer combination key, its label, the filter flags as
+    booleans, cycles per year, sorted by key and entry."""
     P = R[R.fill == PRIMARY_FILL].copy()
-    P["key"] = P.symbol + "|" + P.struct + "|" + P.dte.astype(str) + "|" + P.mgmt
+    kcols = ["symbol", "struct", "dte", "mgmt"]
+    P["kid"] = P.groupby(kcols, sort=True).ngroup()
+    lab = P.drop_duplicates("kid").set_index("kid")[kcols]
+    labels = (lab.symbol.astype(str) + "|" + lab.struct.astype(str) + "|" + lab.dte.astype(str) + "|" +
+              lab.mgmt.astype(str))
+    for flt in FILTERS:
+        P[f"F_{flt}"] = flag(P, flt).to_numpy()
+    P["per_year"] = np.where(P.dte == WEEKLY_DTE, 52.0, 12.0)
+    w = (P.struct == WHEEL).to_numpy()
+    if w.any():
+        md = P[w].groupby("kid").days.mean()
+        P.loc[w, "per_year"] = (365.25 / P.loc[w, "kid"].map(md)).to_numpy()
+    P = P.sort_values(["kid", "entry"], kind="stable").reset_index(drop=True)
+    return P, labels
+
+
+def _key_scores(H, criterion):
+    """Per combination (kid) on the rows of H (sorted by kid, entry): the long-run Sharpe (Newey-West, 1 lag) or the
+    Newey-West t of the mean, vectorised; NaN where fewer than 12 / 8 cycles."""
+    x = H.pnl.to_numpy(float)
+    kid = H.kid.to_numpy()
+    g = pd.Series(x).groupby(kid)
+    n = g.size().astype(float)
+    s = g.sum()
+    ss = pd.Series(x * x).groupby(kid).sum()
+    same = np.r_[False, kid[1:] == kid[:-1]]
+    prod = np.where(same, x * np.r_[np.nan, x[:-1]], 0.0)
+    P_ = pd.Series(prod).groupby(kid).sum()
+    first, last = g.first(), g.last()
+    m = s / n
+    s_e2 = ss - n * m * m
+    s_e1 = P_ - m * (2 * s - first - last) + (n - 1) * m * m
+    var = (s_e2 + s_e1) / n
+    py = pd.Series(H.per_year.to_numpy()).groupby(kid).first()
+    with np.errstate(all="ignore"):
+        if criterion == "sharpe":
+            sc = np.where((var > 0) & (n >= 12), m / np.sqrt(var) * np.sqrt(py), np.nan)
+        else:
+            sc = np.where((var > 0) & (n >= 8), m / np.sqrt(var / n), np.nan)
+    return pd.Series(sc, index=n.index), n
+
+
+def walk_forward(R, T, family, min_cycles=24, criterion="sharpe", prepared=None):
+    """Each year: pick the best combination on cycles that ended before the year, trade it in that year.
+    criterion "sharpe" = long-run Sharpe; "t" = Newey-West t of the mean (favours longer, steadier records).
+    `family` maps a frame to a boolean mask (constant within a combination)."""
+    P, labels = prepared if prepared is not None else wf_frame(R)
+    fam = np.asarray(family(P), bool)
     years = sorted(P.entry.dt.year.unique())
     picks, oos = [], []
     for y in years[2:]:
-        hist = P[P.exit < pd.Timestamp(f"{y}-01-01")]
+        hmask = fam & (P.exit < pd.Timestamp(f"{y}-01-01")).to_numpy()
         best, best_sr, best_flt = None, -np.inf, None
         for flt in FILTERS:
-            H = hist[flag(hist, flt)]
-            for key, g in H.groupby("key"):
-                if not family(g.iloc[0]) or len(g) < min_cycles:
-                    continue
-                per_year = 52.0 if g.dte.iloc[0] == WEEKLY_DTE else 12.0
-                x = g.sort_values("entry").pnl
-                sr = _sr(x, per_year) if criterion == "sharpe" else nw_t(x.to_numpy())
-                if np.isfinite(sr) and sr > best_sr:
-                    best, best_sr, best_flt = key, sr, flt
+            H = P[hmask & P[f"F_{flt}"].to_numpy()]
+            if not len(H):
+                continue
+            sc, n = _key_scores(H, criterion)
+            sc = sc[(n >= min_cycles) & np.isfinite(sc)]
+            if not len(sc):
+                continue
+            k = sc.idxmax()
+            if sc.loc[k] > best_sr:
+                best, best_sr, best_flt = int(k), float(sc.loc[k]), flt
         if best is None:
             continue
-        nxt = P[(P.key == best) & (P.entry.dt.year == y) & flag(P, best_flt)]
-        picks.append({"year": int(y), "pick": best, "filter": best_flt, "in_sample_sharpe": float(best_sr),
+        nxt = P[(P.kid == best).to_numpy() & (P.entry.dt.year == y).to_numpy() & P[f"F_{best_flt}"].to_numpy()]
+        picks.append({"year": int(y), "pick": labels.loc[best], "filter": best_flt, "in_sample_sharpe": best_sr,
                       "oos_cycles": int(len(nxt)), "oos_sum": float(nxt.pnl.sum()), "oos_mean": float(nxt.pnl.mean())
                       if len(nxt) else np.nan})
         oos.append(nxt)
@@ -970,19 +1324,23 @@ def stage_combine(a):
         for f in sorted(os.listdir(d)):
             p = os.path.join(d, f)
             if f.startswith("cycles_") and f.endswith(".csv.gz"):
-                Rs.append(pd.read_csv(p, parse_dates=["entry", "exit", "expiry"]))
+                Rs.append(pd.read_csv(p, parse_dates=["entry", "exit", "expiry"], usecols=lambda c: c != "legs"))
             elif f.startswith("mtm_") and f.endswith(".pkl"):
                 MTM[f[4:-4]] = p                                 # loaded lazily, only for the best combinations
             elif f.startswith("meta_") and f.endswith(".json"):
                 meta.update(json.load(open(p)))
     R = pd.concat(Rs, ignore_index=True)
+    del Rs
     R = R[R.entry <= END]
     for c in [c for c in R.columns if c.startswith("f_") and c != "f_NOERN"] + ["early"]:
-        R[c] = R[c].astype(bool)
+        R[c] = R[c].fillna(False).astype(bool)
     P = portfolios(R)
     RA = pd.concat([R, P], ignore_index=True) if len(P) else R
+    RA = RA.sort_values("symbol", kind="stable").reset_index(drop=True)
+    print("cycles", len(RA), "memory GB", round(RA.memory_usage(deep=True).sum() / 1e9, 2), flush=True)
     RA.to_csv(os.path.join(a.out, "cycles_all.csv.gz"), index=False)
-    T = table(RA)
+    T = table_parallel(RA)
+    print("combinations", len(T), flush=True)
     prim = T.fill == PRIMARY_FILL
     T.loc[prim, "bh_q_mean"] = bh(T.loc[prim, "p_one_sided"])
     T.loc[prim, "bh_q_alpha"] = bh(T.loc[prim, "p_alpha"])
@@ -995,15 +1353,18 @@ def stage_combine(a):
         T.loc[best.index[0], "deflated_sharpe_prob"] = deflated_sharpe(b.sharpe / math.sqrt(per), n_trials,
                                                                        int(b["cycles"]), b["skew"], b["kurt"], sr_var)
     T.to_csv(os.path.join(a.out, "combos.csv"), index=False)
-    fams = {"all": lambda r: True,
-            "defined_risk": lambda r: r.struct in DEFINED_RISK,
-            "short_premium_defined": lambda r: r.struct in DEFINED_RISK and r.struct in SHORT_PREMIUM,
-            "index_etfs": lambda r: r.symbol in INDEX_ETFS,
-            "single_stocks": lambda r: r.symbol not in INDEX_ETFS and r.symbol not in ("EW", "XSQ5", "XSQ1", "GS_LS"),
-            "stock_portfolios": lambda r: r.symbol in ("EW", "XSQ5", "XSQ1", "GS_LS")}
+    PORTS = ["EW", "XSQ5", "XSQ1", "GS_LS"]
+    fams = {"all": lambda df: np.ones(len(df), bool),
+            "defined_risk": lambda df: df.struct.isin(DEFINED_RISK).to_numpy(),
+            "short_premium_defined": lambda df: (df.struct.isin(DEFINED_RISK) & df.struct.isin(SHORT_PREMIUM)).to_numpy(),
+            "index_etfs": lambda df: df.symbol.isin(INDEX_ETFS).to_numpy(),
+            "single_stocks": lambda df: (~df.symbol.isin(INDEX_ETFS) & ~df.symbol.isin(PORTS)).to_numpy(),
+            "stock_portfolios": lambda df: df.symbol.isin(PORTS).to_numpy(),
+            "second_batch": lambda df: (df.struct.isin(list(NEW_STRUCTS) + [WHEEL]) | (df.mgmt == "ROLL")).to_numpy()}
+    prepared = wf_frame(RA)
     wf = {}
     for (name, fam), crit in itertools.product(fams.items(), ("sharpe", "t")):
-        picks, O = walk_forward(RA, T, fam, criterion=crit)
+        picks, O = walk_forward(RA, T, fam, criterion=crit, prepared=prepared)
         picks.to_csv(os.path.join(a.out, f"walkforward_{name}_{crit}.csv"), index=False)
         if len(O):
             m = O.groupby(O.entry.dt.to_period("M")).pnl.sum()

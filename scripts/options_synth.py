@@ -191,7 +191,8 @@ def main():
         vol = X[vi].dropna()
         start = max(vol.index[0], und.raw.index[0]) + pd.Timedelta(days=400)
         bk = SynthBook(und, vol, cal, start, L.END)
-        R, m, _ = L.run_book(sym, bk, und, vix, keep_mtm=False, dtes=L.DTES)
+        R, m, _ = L.run_book(sym, bk, und, vix, keep_mtm=False, dtes=L.DTES, structs=L.BASE_STRUCTS,
+                             mgmts=L.BASE_MGMT, wheel=False)
         meta[sym] = {**m, "vol_index": vi, "calibration_points": cal["n"],
                      "smile_ratio_at": {f"{x:+.2f}": float(g) for x, g in zip(cal["g_x"], cal["g"])},
                      "half_spread_over_mid_at_abs_delta": {f"{x:.3f}": float(h) for x, h in zip(cal["h_d"], cal["h"])}}
