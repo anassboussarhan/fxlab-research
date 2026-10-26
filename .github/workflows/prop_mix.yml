@@ -1,0 +1,42 @@
+name: prop-mix
+# FTMO-rules simulation of Gotobi, Nasdaq-100 overnight (index CFD) and hypothetical SVXY, alone and mixed, on their
+# real 2019-2025 daily outcomes (scripts/prop_mix_sim.py). Results to branch prop-mix.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/PROP_MIX"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy yfinance
+      - name: Gotobi 2019-2025 trades from the gotobi-oos branch
+        run: git show origin/gotobi-oos:gotobi_oos/series.csv > /tmp/gotobi_series.csv && wc -l /tmp/gotobi_series.csv
+      - name: Simulate
+        run: |
+          mkdir -p out
+          python -W ignore scripts/prop_mix_sim.py --gotobi /tmp/gotobi_series.csv --out out 2>&1 | tee out/log.txt
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r out /tmp/pub/prop_mix
+          git checkout --orphan pm-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/prop_mix .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > prop_mix/RUN.txt
+          git add -f prop_mix
+          git commit -qm "Prop mix (run ${{ github.run_id }})"
+          git push -f origin HEAD:prop-mix
