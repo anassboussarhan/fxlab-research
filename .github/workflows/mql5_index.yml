@@ -1,0 +1,39 @@
+name: mql5-index
+# Index of every English MQL5 article (ci/mql5_articles_index.py): titles, categories, strategy families discussed,
+# out-of-sample mentions and the tester figures quoted, with short context. No full text is stored. Respects
+# robots.txt, about one request per second. Results to branch mql5-index.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/MQL5_INDEX"]
+permissions:
+  contents: write
+jobs:
+  crawl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Index the articles
+        run: |
+          mkdir -p out
+          python ci/mql5_articles_index.py --out out --delay 1.2 || true
+          tail -5 out/crawl_log.txt; cat out/summary.json
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp -r out /tmp/pub/mql5_index
+          git checkout --orphan mi-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/mql5_index .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > mql5_index/RUN.txt
+          git add -f mql5_index
+          git commit -qm "MQL5 article index (run ${{ github.run_id }})"
+          git push -f origin HEAD:mql5-index
