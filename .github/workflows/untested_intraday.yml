@@ -57,7 +57,7 @@ jobs:
           f = "out/${{ matrix.group }}/tests.csv"
           if os.path.exists(f) and os.path.getsize(f) > 1:
               for _, r in pd.read_csv(f).iterrows():
-                  print(f"::notice title={r.test[:60]}::n {r.n} mean {r.get('mean_bp', float('nan')):.2f}bp t {r.get('t', float('nan')):.2f} | 07-18 n {r.n_2007_2018} t {r.t_2007_2018} | 19-25 n {r.n_2019_2025} t {r.t_2019_2025}")
+                  print(f"::notice title={r.test[:60]}::n {r.n} mean {r.get('mean_bp', float('nan')):.2f}bp t {r.get('t', float('nan')):.2f} | 07-18 n {r.n_2007_2018} t {r.t_2007_2018} | 19-25 n {r.n_2019_2025} t {r.t_2019_2025} | gross {r.get('gross_mean_bp', float('nan')):.2f}bp t {r.get('gross_t', float('nan')):.2f}")
           PY
       - uses: actions/upload-artifact@v4
         with:

@@ -129,6 +129,19 @@ def net_of(r):
     return net + (rate if np.isfinite(rate) else flat)
 
 
+def rec(r):
+    """(net, gross) of a Book.trade / Book.bracket result; gross = the same rule on the mid path without costs."""
+    return net_of(r), float(r[1])
+
+
+def frame(d):
+    """{time: (net, gross)} -> DataFrame[net, gross] sorted by time."""
+    if not d:
+        return pd.DataFrame({"net": pd.Series(dtype=float), "gross": pd.Series(dtype=float)})
+    f = pd.DataFrame.from_dict(d, orient="index", columns=["net", "gross"]).astype(float)
+    return f.sort_index()
+
+
 def timed(bk, days, t_fn, side, tol_in=10, tol_out=10):
     out = {}
     for d in days:
@@ -138,8 +151,8 @@ def timed(bk, days, t_fn, side, tol_in=10, tol_out=10):
             continue
         r = bk.trade_ij(i, j, side, t0, t1)
         if r is not None:
-            out[d] = net_of(r)
-    return pd.Series(out, dtype=float)
+            out[d] = rec(r)
+    return frame(out)
 
 
 def jst(d, h, m):
@@ -184,8 +197,8 @@ def tokyo_tests(res, bk=None, bk2=None):
             continue
         r = bk.bracket(i, j, +1, 1e9, 0.5 * rg)
         if r is not None:
-            out[d] = net_of(r)
-    res["I3 USDJPY Gotobi overnight 23:00-09:53 Tokyo, 0.5-range stop"] = (pd.Series(out, dtype=float), 62)
+            out[d] = rec(r)
+    res["I3 USDJPY Gotobi overnight 23:00-09:53 Tokyo, 0.5-range stop"] = (frame(out), 62)
     Gs = set(G)
     days = set()
     for h in sorted(hol):
@@ -263,7 +276,7 @@ def candle_fade(bk):
             continue
         r = bk.bracket(i, j, -side, risk, 2 * risk)            # fade: target = retail stop, stop = retail target
         if r is not None:
-            pins[bk.idx[i]] = net_of(r)
+            pins[bk.idx[i]] = rec(r)
             busy = n + 24
     busy = -1
     for n in range(1, nH - 26):
@@ -290,10 +303,10 @@ def candle_fade(bk):
             continue
         r = bk.bracket(i, iend, -side, risk, 2 * risk)
         if r is not None:
-            insides[bk.idx[i]] = net_of(r)
+            insides[bk.idx[i]] = rec(r)
             busy = n + 25
-    return {"I8a EURUSD pin-bar fade (H1)": (pd.Series(pins, dtype=float), 252),
-            "I8b EURUSD inside-bar breakout fade (H1)": (pd.Series(insides, dtype=float), 252)}
+    return {"I8a EURUSD pin-bar fade (H1)": (frame(pins), 252),
+            "I8b EURUSD inside-bar breakout fade (H1)": (frame(insides), 252)}
 
 
 # ----------------------------------------------------------------------------------------------- I7
@@ -347,7 +360,7 @@ def night_scalp(sym, bk=None):
         if r is None:
             n += 1
             continue
-        out[t_in] = net_of(r)
+        out[t_in] = rec(r)
         # where the position actually ended (the stop may have been hit before t_out)
         si = bk.sf * (bk.ao[i] - bk.bo[i]) + bk.sp * bk.pip
         if side > 0:
@@ -358,7 +371,7 @@ def night_scalp(sym, bk=None):
             hit = np.flatnonzero(bk.ah[i:j] >= E + stop_d)
         t_end = bk.idx[i + hit[0]] if len(hit) else bk.idx[j]
         n = max(n + 1, int(t5.searchsorted(t_end, side="right")) - 1)
-    return pd.Series(out, dtype=float)
+    return frame(out)
 
 
 # ----------------------------------------------------------------------------------------------- I9
@@ -391,8 +404,8 @@ def gold_london(res, bk=None):
             continue
         r = bk.bracket(i, j, side, 1e9, stop_d)
         if r is not None:
-            out[d] = net_of(r)
-    res["I9 XAUUSD London breakout of the Asian range"] = (pd.Series(out, dtype=float), 252)
+            out[d] = rec(r)
+    res["I9 XAUUSD London breakout of the Asian range"] = (frame(out), 252)
 
 
 # ----------------------------------------------------------------------------------------------- I10
@@ -436,8 +449,8 @@ def weekend_gap(sym, bk=None):
             continue
         r = bk.bracket(i, j, side, abs(gap), abs(gap))
         if r is not None:
-            out[idx[i]] = net_of(r)
-    return pd.Series(out, dtype=float)
+            out[idx[i]] = rec(r)
+    return frame(out)
 
 
 # ----------------------------------------------------------------------------------------------- I11 / I12
@@ -467,16 +480,17 @@ def review_auctions(res, books=None):
             r = bk.trade_ij(i, j, -1, t0, t1)
             if r is None:
                 continue
-            (ev if d in rev else ctl)[d] = r[0]
-        ev, ctl = pd.Series(ev, dtype=float), pd.Series(ctl, dtype=float)
+            (ev if d in rev else ctl)[d] = (r[0], r[1])
+        ev, ctl = frame(ev), frame(ctl)
         res[f"I11 {name} review-day short into the close"] = (ev, 4)
         res[f"I11 {name} control (other Fridays)"] = (ctl, 48)
         if len(ev) > 3 and len(ctl) > 10:
-            res[f"I11 {name} review minus control (Welch t)"] = float(st.ttest_ind(ev, ctl, equal_var=False).statistic)
+            res[f"I11 {name} review minus control (Welch t)"] = float(st.ttest_ind(ev.net, ctl.net, equal_var=False).statistic)
 
 
 def orb_trail(bk, d, tz, open_hm, close_hm, rng_min=30):
-    """One day's opening-range breakout with breakeven and trailing; net return or None."""
+    """One day's opening-range breakout with breakeven and trailing: (net, gross) or None. Gross = the same exits
+    valued from the entry mid without spread, slippage or commission."""
     t_open = FL.local_ts(d, tz, *open_hm)
     t_rng = t_open + pd.Timedelta(minutes=rng_min)
     t_close = FL.local_ts(d, tz, *close_hm)
@@ -495,6 +509,7 @@ def orb_trail(bk, d, tz, open_hm, close_hm, rng_min=30):
     if k >= iz:
         return None
     side = +1 if mc[br[0]] > hi else -1
+    m_in = 0.5 * (bk.ao[k] + bk.bo[k])
     s_in = bk.sf * (bk.ao[k] - bk.bo[k]) + bk.sp * bk.pip
     E = bk.ao[k] + s_in if side > 0 else bk.bo[k] - s_in
     R = (E - lo) if side > 0 else (hi - E)
@@ -507,7 +522,7 @@ def orb_trail(bk, d, tz, open_hm, close_hm, rng_min=30):
         if (lo_x <= stop) if side > 0 else (hi_x >= stop):
             sx = bk.sf * (bk.ao[x] - bk.bo[x]) + bk.sp * bk.pip
             px = (min(stop, bk.bo[x]) - sx) if side > 0 else (max(stop, bk.ao[x]) + sx)
-            return (px / E - 1 if side > 0 else 1 - px / E) - 2 * bk.comm
+            return (px / E - 1 if side > 0 else 1 - px / E) - 2 * bk.comm, side * (stop / m_in - 1)
         best = max(best, hi_x) if side > 0 else min(best, lo_x)  # the stop moves from the next bar on
         gain = (best - E) * side
         if gain >= 0.5 * R:
@@ -517,7 +532,7 @@ def orb_trail(bk, d, tz, open_hm, close_hm, rng_min=30):
             stop = max(stop, E + lock) if side > 0 else min(stop, E - lock)
     sx = bk.sf * (bk.ao[iz] - bk.bo[iz]) + bk.sp * bk.pip
     px = bk.bo[iz] - sx if side > 0 else bk.ao[iz] + sx
-    return (px / E - 1 if side > 0 else 1 - px / E) - 2 * bk.comm
+    return (px / E - 1 if side > 0 else 1 - px / E) - 2 * bk.comm, side * (0.5 * (bk.ao[iz] + bk.bo[iz]) / m_in - 1)
 
 
 INDEX = {"USA500IDXUSD": ("America/New_York", (9, 30), (16, 0), "US500"),
@@ -537,7 +552,7 @@ def index_momentum(res, books=None):
             r = orb_trail(bk, d, tz, o_hm, c_hm)
             if r is not None:
                 orb[d] = r
-        res[f"I12b {name} opening-range breakout with breakeven and trailing"] = (pd.Series(orb, dtype=float), 252)
+        res[f"I12b {name} opening-range breakout with breakeven and trailing"] = (frame(orb), 252)
         if tz == "America/New_York":
             fl = {}
             for d in days:
@@ -551,8 +566,8 @@ def index_momentum(res, books=None):
                     continue
                 r = bk.trade_ij(ic, ie, 1 if first > 0 else -1, t0, t1)
                 if r is not None:
-                    fl[d] = r[0]
-            res[f"I12a {name} first half-hour -> last half-hour"] = (pd.Series(fl, dtype=float), 252)
+                    fl[d] = (r[0], r[1])
+            res[f"I12a {name} first half-hour -> last half-hour"] = (frame(fl), 252)
 
 
 # ----------------------------------------------------------------------------------------------- main
@@ -595,7 +610,9 @@ def tabulate(res, outdir):
     for k, v in res.items():
         if isinstance(v, tuple):
             x, py = v
-            bp = by_period(x, py)
+            bp = by_period(x.net, py)
+            gp = by_period(x.gross, py)
+            bp["gross"] = gp
             out[k] = bp
             primary = "2019_2025" if k.startswith("I10") else "all"
             s = bp[primary]
@@ -605,10 +622,11 @@ def tabulate(res, outdir):
                          "n_2007_2018": bp["2007_2018"].get("n"), "t_2007_2018": bp["2007_2018"].get("t"),
                          "mean_bp_2007_2018": bp["2007_2018"].get("mean_bp"),
                          "n_2019_2025": bp["2019_2025"].get("n"), "t_2019_2025": bp["2019_2025"].get("t"),
-                         "mean_bp_2019_2025": bp["2019_2025"].get("mean_bp")})
+                         "mean_bp_2019_2025": bp["2019_2025"].get("mean_bp"),
+                         "gross_mean_bp": gp[primary].get("mean_bp"), "gross_t": gp[primary].get("t")})
             if outdir:
                 name = "".join(ch if ch.isalnum() else "_" for ch in k)[:80]
-                pd.Series(x, dtype=float).rename("net").to_csv(os.path.join(outdir, f"trades_{name}.csv"))
+                x.to_csv(os.path.join(outdir, f"trades_{name}.csv"))
         else:
             out[k] = v
     return pd.DataFrame(rows), out

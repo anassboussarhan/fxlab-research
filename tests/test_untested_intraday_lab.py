@@ -42,8 +42,8 @@ def test_orb_trailing_locks_profit_after_a_run_and_reversal():
     s.loc["2024-03-12 15:05":"2024-03-12 16:04"] = np.linspace(101.1, 99.0, 60)
     s.loc["2024-03-12 16:05":] = 99.0
     bk = FL.Book(_m1(s, 0.005), 0.1)
-    r = U.orb_trail(bk, day, "America/New_York", (9, 30), (16, 0))
-    assert r is not None
+    r, g = U.orb_trail(bk, day, "America/New_York", (9, 30), (16, 0))
+    assert g > r                                               # gross excludes the spread, slippage, commission
     # entry 100.15 + half spread + slippage = 100.1675, R = 0.2675; best bid 101.095 = +3.47 R -> 1 R behind is
     # +2.47 R, rounded down to 0.5 R steps = +2 R -> exit at 100.70 (about +0.53%) less slippage and commission
     assert 0.0048 < r < 0.0055
@@ -57,7 +57,7 @@ def test_orb_stop_loss_is_minus_one_r():
     s.loc["2024-03-12 14:05"] = 100.15
     s.loc["2024-03-12 14:06":] = 99.5                         # straight through the stop at 99.9
     bk = FL.Book(_m1(s, 0.005), 0.1)
-    r = U.orb_trail(bk, day, "America/New_York", (9, 30), (16, 0))
+    r, g = U.orb_trail(bk, day, "America/New_York", (9, 30), (16, 0))
     # entry ~100.15 + costs, stop 99.9, the gap bar opens at 100.15 -> the stop fills at 99.9 minus slippage
     assert -0.0035 < r < -0.0020
 
@@ -74,7 +74,7 @@ def test_weekend_gap_fade_hits_friday_close():
     path = np.r_[np.full(30, 1.0040), np.linspace(1.0040, 0.9990, 300), np.full(len(sun) - 330, 0.9990)]
     s = pd.concat([fri, pd.Series(path, index=sun)])
     bk = FL.Book(_m1(s, 0.00005), 1e-4)
-    x = U.weekend_gap("TEST", bk)
+    x = U.weekend_gap("TEST", bk).net
     assert len(x) == 1
     assert 0.0030 < x.iloc[0] < 0.0041                        # target = Friday's close, less spread and costs
 
@@ -87,7 +87,7 @@ def test_night_scalp_short_above_band_exits_at_the_middle():
     s.loc["2024-03-12 21:30":"2024-03-12 21:34"] = 1.0030
     s.loc["2024-03-12 21:35":"2024-03-12 21:39"] = 1.0028
     bk = FL.Book(_m1(s, 0.00003), 1e-4)
-    x = U.night_scalp("TEST", bk)
+    x = U.night_scalp("TEST", bk).net
     assert len(x) >= 1
     first = x.index[0]
     assert first == pd.Timestamp("2024-03-12 21:35", tz="UTC")
@@ -107,7 +107,7 @@ def test_pin_bar_fade_wins_when_the_pin_fails():
     s.loc["2024-03-11 13:00":] = 0.9990
     bk = FL.Book(_m1(s, 0.00002), 1e-4)
     res = U.candle_fade(bk)
-    x = res["I8a EURUSD pin-bar fade (H1)"][0]
+    x = res["I8a EURUSD pin-bar fade (H1)"][0].net
     assert len(x) >= 1 and x.loc[pd.Timestamp("2024-03-11 11:00", tz="UTC")] > 0.0080
 
 
