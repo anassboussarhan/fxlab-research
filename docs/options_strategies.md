@@ -1,5 +1,8 @@
 # Options strategies on real quotes: many structures, many underlyings, optimised and tested out of sample
 
+> **Superseded in part by `docs/options_strategies_all.md`:** the final study of all 92 structures (745,383
+> combinations, run 40370344366). This page documents the first 19 structures, run 40301779312.
+
 The question was the best options edge across many strategies and products, and whether it survives on the
 best capital provider.
 - Scripts: `scripts/options_strategy_lab.py` (engine, statistics, walk-forward), `scripts/options_synth.py`

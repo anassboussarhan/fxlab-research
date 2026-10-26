@@ -123,3 +123,8 @@ results branch (`resultsN`). Development data only (2007-2018, EURUSD to 2022), 
 | 27 | 40301779747 | options edges from the literature: delta-hedged SPY straddle / contango / strangle, Vasquez, Cao-Han, Cremers-Weinbaum, Xing-Zhang-Zhao, earnings straddles; held expiries valued across listed expiries (runs 40300348392 / 40300593069 superseded: crude hedge deltas) | `docs/options_edges.md` |
 | 28 | 40301779312 | run 25 repeated with held expiries valued across the day's listed expiries: the final options strategy results (management rules, walk-forward, provider simulation) | `docs/options_strategies.md` |
 | 29 | 40305837180 | free data: crypto variance premium from Deribit DVOL | `docs/crypto_vrp.md` |
+| 30 | 40329232195 | options strategies: 62 structures + the wheel, rolling, trend filter, IV repaired (cycles; its publish hit GitHub's file limit) | merged in run 33 |
+| 31 | 40334638224 | options strategies: third batch of 30 named structures | merged in run 33 |
+| 32 | 40329232105 / 40329232257 | options edges, second batch E1-E14, and first batch re-run with IV repaired | `docs/options_edges2.md`, `docs/options_edges.md` |
+| 33 | 40370344366 | options strategies, final merge: all 92 structures, 745,383 combinations | `docs/options_strategies_all.md` |
+| 34 | 40374910046 | missed edges M1-M16: cross-asset trend, equity overnight and calendar, SVXY, crypto cash-and-carry, S&P 100 anomalies, FX mean reversion 2019-2025 | `docs/missed_edges.md` |

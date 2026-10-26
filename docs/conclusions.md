@@ -231,6 +231,17 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
 - A 1994-2018 model calibrated on the quotes shows a small positive premium for SPY short puts and strangles (alpha
   t about 2), crash-exposed.
 
+### 8.1p2 All 92 options structures - see `docs/options_strategies_all.md`
+- The final merge (run 40370344366): 92 structures x 106 underlyings x 14 / 30 / 45 days x 6 management rules x 6
+  filters = 745,383 combinations, on IV-repaired real quotes.
+- Year-by-year selection on earlier years, out of sample 2021-2025:
+  - everything: Sharpe 0.38 (t 0.58);
+  - defined risk: -0.11;
+  - index ETFs: 1.52 (t 2.60), all SPY equity / short-volatility picks.
+- No structure has significant SPY alpha at two maturities. The 12 with t > 2 at a single maturity are about what
+  chance gives.
+- Every management rule lowers Sharpe; rolling when tested is the worst (-1.5). No filter helps.
+
 ### 8.1q Gotobi out of sample, 2019-2025 - see `docs/gotobi_oos.md`
 - The pre-registered test on new data (USD/JPY from Dukascopy, 2019-2025, rules unchanged) is **confirmed**:
   - +2.13 bp a trade after costs and swap, t 2.05, 413 trades;
