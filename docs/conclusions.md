@@ -248,16 +248,32 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
   expiries.
 - **The index variance premium shows up when delta-hedged:**
   - SPY short ATM straddle: +0.27% of notional a month, t 1.74, Sharpe 0.71, 5/7 years;
-  - SPY 25-delta strangle: +0.23%, t 1.76;
+  - SPY 25-delta strangle: +0.22%, t 1.74;
   - DIA (not registered): +0.35% (t about 2.5) and +0.40% (t about 3.8).
 - It is not significant after BH over the eight (q = 0.16), and weaker in 2023-2025.
 - **Single-stock anomalies lose after costs:** Cao-Han, Cremers-Weinbaum and Vasquez, with the Xing-Zhang-Zhao smirk
   not significant.
 - **Long straddles into earnings lose** -0.85% a trade (median -26% of the premium); selling them is a hypothesis
   for new data.
-- On the providers, the hedged SPY book loses on Options Funding (monthly fee) and is positive on Imperial at the
-  larger sizes (best: contango only, mean +$1,478, median +$1,657); most accounts are eventually breached by
-  volatility spikes.
+- On the providers (run 40329232257, with the database's bad implied-volatility snapshots repaired):
+  - on Options Funding (monthly fee) the median account loses at every size;
+  - on Imperial the mean is positive at every size, and the median is +$250 to +$1,400 at 0.4-0.8% daily sd;
+  - most accounts are eventually breached by volatility spikes.
+
+### 8.1s Options edges, second batch - see `docs/options_edges2.md`
+- Fourteen more registered tests on real quotes, 2019-2025.
+- **The index variance premium again:**
+  - delta-hedged short variance strips: SPY +0.06% a month (t 2.02), DIA +0.07% (t 2.50);
+  - selling the hedged SPY straddle over weekends: +0.05% a weekend after costs (t 1.78).
+  - None survives BH over the fourteen (best q 0.09).
+- **Lose after costs:**
+  - selling skew (hedged risk reversals, t -2.7 / -4.9);
+  - dispersion (t -2.2);
+  - FOMC (t -2.0) and CPI (t -0.5) volatility drops;
+  - DIA calendars (t -3.6);
+  - single-stock weekends (-0.64% a weekend).
+- **Not significant:** hedged 10-delta puts and the SPY calendar straddle.
+- **Box spreads:** apparent gaps are explained by American exercise and closing quotes.
 
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
