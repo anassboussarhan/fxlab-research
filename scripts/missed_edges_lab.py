@@ -8,7 +8,8 @@ PRE-REGISTERED TESTS (one-sided, mean > 0; Benjamini-Hochberg over M1-M16; sub-p
       each month-end, the sign of the asset's 12-month excess return, sized to 40% / sqrt(252 x 60-day variance) / N
       (EWMA vol, centre of mass 60 days); excess returns over the 13-week T-bill; 5 bp per unit traded; shorts pay
       0.5% a year to borrow. 2008-2025.
-  M2  SPY overnight: buy the close, sell the next open (Cliff, Cooper & Gulen 2008); 1 bp per round trip.
+  M2  SPY overnight: buy the close, sell the next open (Cliff, Cooper & Gulen 2008); 1 bp per round trip, minus
+      the day's T-bill interest forgone.
   M3  QQQ overnight, the same.     M4  IWM overnight, the same.
   M5  Turn of the month, SPY (Lakonishok & Smidt 1988): long from the close of the second-to-last trading day of
       the month to the close of the third trading day of the next; excess over T-bill; 1 bp per round trip.
@@ -16,8 +17,9 @@ PRE-REGISTERED TESTS (one-sided, mean > 0; Benjamini-Hochberg over M1-M16; sub-p
       excess; 1 bp per round trip.
   M7  Pre-FOMC drift, SPY (Lucca & Moench 2015): close before to close of each scheduled FOMC statement day
       (2019-2025); excess; 1 bp.
-  M8  Short volatility through SVXY when VIX < VIX3M at the prior close (Simon & Campasano 2014: the VIX futures
-      roll), otherwise T-bills; 3 bp per switch. 2012-2025.
+  M8  Short volatility through SVXY when VIX < VIX3M (Simon & Campasano 2014: the VIX futures roll), decided at
+      the close before from the VIX closes of the day before that, otherwise T-bills; 3 bp per switch. 2012-2025.
+      (SVXY was -1x VIX futures until 27 Feb 2018 and -0.5x since.)
   M9  SVXY held always (no filter), excess over T-bill. 2012-2025.
   M10 EUR/USD variance premium (Della Corte, Ramadorai & Sarno 2016): each month-end sell one-month variance at EVZ
       against the realised volatility of EUR/USD over the next 21 trading days, 0.5 vol point cost. 2008-2025.
@@ -263,14 +265,19 @@ def m1_tsmom(d, rf):
 
 
 def overnight(d, s, rf=None, cost=1e-4):
+    """Buy the close, sell the next open: P&L minus the round-trip cost and minus that day's T-bill interest (the cash
+    is in the fund at every end of day, so holding overnight forgoes the whole day's interest). Also returns the
+    intraday return and buy-and-hold's daily excess return for comparison."""
     h = load(d, s)
     if h is None:
-        return None, None
+        return None, None, None
     f = h["Adj Close"] / h["Close"]                                    # adjustment factor of the day
     o, c = h["Open"] * f, h["Adj Close"]
-    on = (o / c.shift(1) - 1) - cost                                    # buy close, sell next open (dividend incl.)
+    rfd = rf.reindex(h.index).ffill().fillna(0) if rf is not None and len(rf) else 0.0
+    on = (o / c.shift(1) - 1) - cost - rfd                              # dividend included (adjusted prices)
     intra = c / o - 1
-    return on.dropna(), intra.dropna()
+    bh_ex = c.pct_change() - rfd
+    return on.dropna(), intra.dropna(), bh_ex.dropna()
 
 
 def trading_days(h):
@@ -330,7 +337,9 @@ def m8_m9_svxy(d, rf):
     r = tr(h)
     rfd = rf.reindex(r.index).ffill().fillna(0)
     j = pd.concat([v["Close"].rename("v"), v3["Close"].rename("v3")], axis=1).dropna()
-    cont = (j.v < j.v3).reindex(r.index).ffill().shift(1).fillna(False).astype(bool)
+    # VIX / VIX3M close at 4:15 pm ET, SVXY at 4:00 pm: the position held over day t is decided at the close of
+    # t-1 from the VIX / VIX3M closes of t-2, so nothing published after the trade is used
+    cont = (j.v < j.v3).reindex(r.index).ffill().shift(2).fillna(False).astype(bool)
     pos = cont.astype(float)
     switch = pos.diff().abs().fillna(0)
     filt = pos * (r - rfd) - switch * 3e-4
@@ -510,13 +519,18 @@ def stage_tests(a):
 
     reg("M1 Cross-asset time-series momentum, 22 ETFs", m1_tsmom(d, rf), 12)
     for k, s in (("M2", "SPY"), ("M3", "QQQ"), ("M4", "IWM")):
-        on, intra = overnight(d, s)
-        reg(f"{k} {s} overnight (close to next open), 1 bp", on, 252,
+        on, intra, bh_ex = overnight(d, s, rf)
+        reg(f"{k} {s} overnight (close to next open), 1 bp, excess of T-bill", on, 252,
             intraday_mean=float(intra.mean()) if intra is not None else np.nan,
-            gross_overnight_mean=float(on.mean() + 1e-4) if on is not None else np.nan)
-    reg("M5 Turn of the month, SPY", m5_turn_of_month(d, rf), 12)
-    reg("M6 Pre-holiday, SPY", m6_pre_holiday(d, rf), 9)
-    reg("M7 Pre-FOMC day, SPY (2019-2025)", m7_pre_fomc(d, rf), 8)
+            buy_hold_excess_sharpe=float(bh_ex.mean() / bh_ex.std() * math.sqrt(252)) if bh_ex is not None else np.nan,
+            buy_hold_excess_ann=float(bh_ex.mean() * 252) if bh_ex is not None else np.nan)
+    spy = load(d, "SPY")
+    spy_ex = (tr(spy) - rf.reindex(spy.index).ffill().fillna(0)).dropna()
+    reg("M5 Turn of the month, SPY", m5_turn_of_month(d, rf), 12,
+        any_4_days_mean=float(spy_ex.mean() * 4 - 1e-4))
+    reg("M6 Pre-holiday, SPY", m6_pre_holiday(d, rf), 9, any_day_mean=float(spy_ex.mean() - 1e-4))
+    reg("M7 Pre-FOMC day, SPY (2019-2025)", m7_pre_fomc(d, rf), 8,
+        any_day_mean_2019_2025=float(spy_ex[spy_ex.index >= pd.Timestamp("2019-01-01")].mean() - 1e-4))
     f, al = m8_m9_svxy(d, rf)
     reg("M8 Short volatility (SVXY) only in VIX contango", f, 12)
     reg("M9 SVXY held always", al, 12)
