@@ -35,7 +35,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          read MIRROR DUKA USDJPY < ci/UNTESTED_INTRADAY
+          read MIRROR DUKA USDJPY REST < ci/UNTESTED_INTRADAY
           mkdir -p dl
           for s in ${{ matrix.syms }}; do
             if [ "$MIRROR" != "none" ]; then gh run download $MIRROR -p "mm-$s-*" -D dl/mm || echo "no mirror bars for $s"; fi
