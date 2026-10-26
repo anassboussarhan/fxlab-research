@@ -335,6 +335,7 @@ def run_symbol(sym, chain_dir, und, cpi):
                 "mid": c.mid.to_numpy()[i] - c.mid.to_numpy()[j] + p.mid.to_numpy()[j] - p.mid.to_numpy()[i]}))
     box = pd.concat(box, ignore_index=True) if box else pd.DataFrame()
     meta = {"chain_dates": int(len(dates)), "positions": len(rows), "box_rows": int(len(box)),
+            "iv_repaired_expiry_days": int(bk.n_iv_repaired),
             "delta_fallbacks": COUNT["delta_fallbacks"], "deltas": COUNT["deltas"]}
     COUNT.update({"positions": 0, "delta_fallbacks": 0, "deltas": 0})
     return pd.DataFrame(rows), box, meta

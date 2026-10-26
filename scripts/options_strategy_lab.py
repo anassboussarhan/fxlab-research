@@ -246,10 +246,79 @@ class Underlying:
 
 
 # ----------------------------------------------------------------------------------------------- engine
+def _b76(cp_call, F, K, T, v):
+    sd = v * np.sqrt(T)
+    d1 = (np.log(F / K) + 0.5 * sd * sd) / sd
+    n1 = 0.5 * (1 + _erf(d1 / math.sqrt(2)))
+    n2 = 0.5 * (1 + _erf((d1 - sd) / math.sqrt(2)))
+    return np.where(cp_call, F * n1 - K * n2, K * (1 - n2) - F * (1 - n1))
+
+
+def _erf(x):
+    from scipy.special import erf
+    return erf(x)
+
+
+def repair_iv(C, und, lo=0.67, hi=1.5):
+    """The database's implied volatility is occasionally wrong for a whole snapshot (e.g. SPY in mid-November 2021:
+    0.8 for 11% options; -1 on some dates). Per (date, expiry): compare the database IV at the strike where call and
+    put are closest with the at-the-money straddle approximation from the quotes; where the ratio is outside
+    [0.67, 1.5] (or the IV is missing / non-positive on most rows), recompute every IV of that expiry from the
+    mid price (Black-76 on the put-call-parity forward, the same model as Book.model) and drop the database delta
+    there, so strikes are picked from the repaired IV. Returns the repaired chain and the number of expiry-days."""
+    if "iv" not in C.columns or C.empty:
+        return C, 0
+    C = C.copy()
+    bad_keys = []
+    for (d, e), g in C.groupby(["date", "expiration"]):
+        T = (e - d).days / 365.0
+        if T <= 0:
+            continue
+        P = g[g.cp == "P"].drop_duplicates("strike").set_index("strike")
+        Cc = g[g.cp == "C"].drop_duplicates("strike").set_index("strike")
+        ks = P.index.intersection(Cc.index)
+        ivs = g.iv.to_numpy(float)
+        if not len(ks):
+            continue
+        dif = (Cc.loc[ks, "mid"] - P.loc[ks, "mid"]).abs()
+        k = dif.idxmin()
+        F = float(k + Cc.loc[k, "mid"] - P.loc[k, "mid"])
+        S = und.px(d)
+        if not (np.isfinite(F) and F > 0) or (np.isfinite(S) and not 0.8 * S < F < 1.2 * S):
+            continue
+        approx = 0.5 * (Cc.loc[k, "mid"] + P.loc[k, "mid"]) / (0.3989 * F * math.sqrt(T))
+        db = float(Cc.loc[k, "iv"])
+        bad = (not np.isfinite(db)) or db <= 0 or not (lo <= db / approx <= hi) if approx > 0 else False
+        if np.mean(~(np.isfinite(ivs) & (ivs > 0))) > 0.5:
+            bad = True
+        if bad:
+            bad_keys.append((d, e, F, T))
+    for d, e, F, T in bad_keys:
+        m = (C.date == d) & (C.expiration == e)
+        g = C.loc[m]
+        K = g.strike.to_numpy(float)
+        call = (g.cp == "C").to_numpy()
+        px = g.mid.to_numpy(float)
+        intrinsic = np.where(call, np.maximum(F - K, 0), np.maximum(K - F, 0))
+        lo_v, hi_v = np.full(len(K), 1e-3), np.full(len(K), 5.0)
+        for _ in range(60):
+            mid_v = 0.5 * (lo_v + hi_v)
+            up = _b76(call, F, K, T, mid_v) > px
+            hi_v = np.where(up, mid_v, hi_v)
+            lo_v = np.where(up, lo_v, mid_v)
+        v = 0.5 * (lo_v + hi_v)
+        v = np.where((px > intrinsic + 1e-9) & (v > 1.01e-3) & (v < 4.99), v, np.nan)
+        C.loc[m, "iv"] = v
+        if "delta" in C.columns:
+            C.loc[m, "delta"] = np.nan
+    return C, len(bad_keys)
+
+
 class Book:
     """Fast access to one underlying's chain: per date, per expiration, the puts / calls with quotes."""
 
     def __init__(self, C, und):
+        C, self.n_iv_repaired = repair_iv(C, und)
         self.C = C
         self.und = und
         self.dates = np.array(sorted(C.date.unique()))
@@ -1065,7 +1134,8 @@ def run_symbol(sym, chain_dir, und, vix, keep_mtm=True, earnings=None):
     C = trim_chain(C, und)
     bk = Book(C, und)
     R, meta, mtm = run_book(sym, bk, und, vix, keep_mtm, earnings=earnings)
-    meta.update({"rows_loaded": int(n0), "rows_used": int(len(C)), "smile_valuation_check": bk.model_check(),
+    meta.update({"rows_loaded": int(n0), "rows_used": int(len(C)), "iv_repaired_expiry_days": int(bk.n_iv_repaired),
+                 "smile_valuation_check": bk.model_check(),
                  "across_expiry_valuation_check": bk.term_check()})
     return R, meta, mtm
 

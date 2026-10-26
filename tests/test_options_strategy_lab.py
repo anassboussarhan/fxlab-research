@@ -217,3 +217,15 @@ def test_wheel_goes_from_puts_to_calls():
     R, meta, M = L.run_book("X", bk, und, pd.DataFrame({"VIX": [15.0], "VIX3M": [16.0]},
                                                        index=[pd.Timestamp("2023-12-29")]), dtes=(30,))
     assert len(R) and (R.struct == L.WHEEL).any() and (R.mgmt == "ROLL").any()
+
+
+def test_bad_database_iv_is_repaired_from_the_quotes():
+    C, und, exp = _chain(iv=0.2)
+    d = pd.Timestamp("2024-01-31")
+    C.loc[C.date == d, "iv"] = C.loc[C.date == d, "iv"] * 7          # a corrupted snapshot
+    bk = L.Book(C, und)
+    assert bk.n_iv_repaired == 1
+    g = bk.C[(bk.C.date == d) & (bk.C.strike.between(90, 110))]
+    assert np.nanmax(np.abs(g.iv - 0.2)) < 0.01
+    other = bk.C[bk.C.date == pd.Timestamp("2024-02-01")]
+    assert np.allclose(other.iv, 0.2)                                   # good snapshots untouched

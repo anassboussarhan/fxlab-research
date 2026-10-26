@@ -3,7 +3,7 @@ name: options-strategies
 # x 14/30/45 days x 6 management rules (incl. rolling when tested) x 6 filters (incl. the 200-day trend) on real
 # end-of-day option quotes (DoltHub post-no-preference/options, free), cut at 2025-12-31; plus stock portfolios,
 # the calibrated synthetic long-history layer (SPY, DIA, first-batch structures) and the capital-provider
-# simulation of the best combinations. Results to branch options-strategies-v2 (run 40301779312 stays on
+# simulation of the best combinations. Results to branch options-strategies-v3 (run 40301779312 stays on
 # options-strategies).
 on:
   workflow_dispatch:
@@ -186,4 +186,4 @@ jobs:
           du -sh options_strategies
           git add -f options_strategies
           git commit -qm "Options strategy lab (run ${{ github.run_id }})"
-          git push -f origin HEAD:options-strategies-v2
+          git push -f origin HEAD:options-strategies-v3

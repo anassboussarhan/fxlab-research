@@ -290,6 +290,7 @@ def run_symbol(sym, chain_dir, und, spy_ret, vix, earn):
             ern.append({"symbol": sym, "earnings": E, "entry": d0, "exit": d1, "expiry": e,
                         "pnl": pnl / S0, "premium": val0 / S0, "ret_on_premium": pnl / val0 if val0 > 0 else np.nan})
     meta = {"chain_dates": int(len(bk.dates)), "positions": len(pos), "signals": len(sig), "earnings_trades": len(ern),
+            "iv_repaired_expiry_days": int(bk.n_iv_repaired),
             "hedge_delta_fallbacks": int(FALLBACK[0]), "hedge_deltas": int(FALLBACK[1]),
             "path_points_unvalued": int(getattr(bk, "n_gap", 0)), "across_expiry_check": bk.term_check(800)}
     FALLBACK[0] = FALLBACK[1] = 0
