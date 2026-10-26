@@ -175,8 +175,14 @@ class Book:
         self.key = C.set_index(["expiration", "cp", "strike", "date"])[["bid", "ask", "mid", "half"]].sort_index()
         self.atm_iv = self._atm_iv_series()
         self.surf = self._surfaces() if "iv" in C.columns else {}
+        self.exp_by = {}
+        for (d, e, cp) in self.surf:
+            self.exp_by.setdefault((d, cp), []).append(e)
+        for k in self.exp_by:
+            self.exp_by[k].sort()
         self.n_listed = 0
         self.n_modeled = 0
+        self.n_term = 0
 
     def _surfaces(self):
         """Per snapshot date and expiry: the forward (put-call parity at the strike nearest the close) and, per
@@ -207,21 +213,90 @@ class Book:
                     out[(d, e, cp)] = (F, np.log(h.strike.to_numpy() / F), h.iv.to_numpy(float), h.half.to_numpy(float))
         return out
 
-    def model(self, d, e, cp, k):
-        s = self.surf.get((d, e, cp))
-        if s is None:
-            return None
-        F, x, iv, half = s
-        T = (e - d).days / 365.0
+    def smile(self, d, e, cp, k):
+        """(implied vol, forward, half-spread) of strike k, expiry e on date d. From e's own smile when e is listed
+        on d; otherwise (the database lists different expiries on each snapshot, so a held expiry is often absent)
+        total implied variance is interpolated linearly in time between the listed expiries bracketing e, at the
+        same log-moneyness (flat in vol beyond the first / last listed expiry)."""
+        T = (e - d).days
         if T <= 0:
             return None
-        xk = math.log(k / F)
-        v = float(np.interp(xk, x, iv))
+        s = self.surf.get((d, e, cp))
+        if s is not None:
+            F, x, iv, half = s
+            xk = math.log(k / F)
+            return float(np.interp(xk, x, iv)), F, float(np.interp(xk, x, half))
+        lst = self.exp_by.get((d, cp)) or self.exp_by.get((d, "C" if cp == "P" else "P"))
+        if not lst:
+            return None
+        cpx = cp if (d, cp) in self.exp_by else ("C" if cp == "P" else "P")
+        lo = [x for x in lst if x < e]
+        hi = [x for x in lst if x > e]
+        pts = ([lo[-1]] if lo else []) + ([hi[0]] if hi else [])
+        vals = []
+        for ex in pts:
+            F, x, iv, half = self.surf[(d, ex, cpx)]
+            xk = math.log(k / F)
+            vals.append(((ex - d).days, float(np.interp(xk, x, iv)), F, float(np.interp(xk, x, half))))
+        self.n_term += 1
+        if len(vals) == 1:
+            _, v, F, h = vals[0]
+            return v, F, h
+        (t1, v1, F1, h1), (t2, v2, F2, h2) = vals
+        w = (T - t1) / (t2 - t1)
+        tv = (1 - w) * v1 * v1 * t1 + w * v2 * v2 * t2
+        v = math.sqrt(max(tv, 1e-12) / T)
+        return v, (1 - w) * F1 + w * F2, (1 - w) * h1 + w * h2
+
+    def model(self, d, e, cp, k):
+        sm = self.smile(d, e, cp, k)
+        if sm is None:
+            return None
+        v, F, h = sm
+        T = (e - d).days / 365.0
+        if T <= 0 or v <= 0:
+            return None
         sd = v * math.sqrt(T)
         d1 = (math.log(F / k) + 0.5 * sd * sd) / sd
         n1, n2 = 0.5 * (1 + math.erf(d1 / math.sqrt(2))), 0.5 * (1 + math.erf((d1 - sd) / math.sqrt(2)))
         price = F * n1 - k * n2 if cp == "C" else k * (1 - n2) - F * (1 - n1)
-        return max(price, 0.0), max(float(np.interp(xk, x, half)), 0.005)
+        return max(price, 0.0), max(h, 0.005)
+
+    def term_check(self, n=2000, seed=11):
+        """Accuracy of the across-expiry valuation: on a listed (date, expiry), hide that whole expiry (both
+        calls and puts) and value its listed quotes from the other expiries of the same date."""
+        rng = np.random.default_rng(seed)
+        keys = [(d, e) for (d, e, cp) in self.surf if cp == "P" and len(self.exp_by.get((d, "P"), [])) >= 3]
+        if not keys:
+            return {}
+        errs = []
+        for _ in range(n):
+            d, e = keys[rng.integers(len(keys))]
+            g = self.by_day[d]
+            g = g[(g.expiration == e) & (g.bid > 0)]
+            if not len(g):
+                continue
+            r = g.iloc[rng.integers(len(g))]
+            saved = {cp: self.surf.pop((d, e, cp), None) for cp in ("P", "C")}
+            saved_lists = {cp: list(self.exp_by.get((d, cp), [])) for cp in ("P", "C")}
+            for cp in ("P", "C"):
+                if e in self.exp_by.get((d, cp), []):
+                    self.exp_by[(d, cp)].remove(e)
+            m = self.model(d, e, r.cp, float(r.strike))
+            for cp in ("P", "C"):
+                if saved[cp] is not None:
+                    self.surf[(d, e, cp)] = saved[cp]
+                self.exp_by[(d, cp)] = saved_lists[cp]
+            if m is None:
+                continue
+            S = self.und.px(d)
+            errs.append((m[0] - r.mid) / S)
+        if not errs:
+            return {}
+        e_ = np.abs(np.array(errs))
+        return {"n": int(len(errs)), "median_abs_error_pct_of_underlying": float(np.median(e_) * 100),
+                "p90_abs_error_pct_of_underlying": float(np.quantile(e_, 0.9) * 100),
+                "mean_error_pct_of_underlying": float(np.mean(errs) * 100)}
 
     def model_check(self, n=3000, seed=7):
         """Leave-one-out accuracy of the smile valuation on listed quotes (each removed from its own smile)."""
@@ -339,6 +414,8 @@ class Book:
                 add[t] = m
         self.n_listed += len(have)
         self.n_modeled += len(add)
+        self.n_gap = getattr(self, "n_gap", 0) + int(sum(1 for t in days if pd.Timestamp(t) not in have and
+                                                          pd.Timestamp(t) not in add))
         if add:
             s = pd.concat([s, pd.DataFrame(list(add.values()), index=pd.DatetimeIndex(list(add.keys())),
                                            columns=["mid", "half"])]).sort_index()
@@ -695,7 +772,8 @@ def run_book(sym, bk, und, vix, keep_mtm=True, dtes=None, earnings=None):
     R = pd.DataFrame(rows)
     meta = {"weekly_expiries": has_weekly, "chain_dates": int(len(bk.dates)), "entries_skipped_price_mismatch": n_mismatch,
             "positions_skipped_parity_break": n_parity_break,
-            "path_points_listed": int(getattr(bk, "n_listed", 0)), "path_points_valued_from_smile": int(getattr(bk, "n_modeled", 0)), "corporate_action_days": [str(x.date()) for x in und.events],
+            "path_points_listed": int(getattr(bk, "n_listed", 0)), "path_points_valued_from_smile": int(getattr(bk, "n_modeled", 0)),
+            "path_points_unvalued": int(getattr(bk, "n_gap", 0)), "valuations_across_expiries": int(getattr(bk, "n_term", 0)), "corporate_action_days": [str(x.date()) for x in und.events],
             "first": str(pd.Timestamp(bk.dates[0]).date()), "last": str(pd.Timestamp(bk.dates[-1]).date())}
     return R, meta, mtm
 
@@ -717,7 +795,8 @@ def run_symbol(sym, chain_dir, und, vix, keep_mtm=True, earnings=None):
     C = trim_chain(C, und)
     bk = Book(C, und)
     R, meta, mtm = run_book(sym, bk, und, vix, keep_mtm, earnings=earnings)
-    meta.update({"rows_loaded": int(n0), "rows_used": int(len(C)), "smile_valuation_check": bk.model_check()})
+    meta.update({"rows_loaded": int(n0), "rows_used": int(len(C)), "smile_valuation_check": bk.model_check(),
+                 "across_expiry_valuation_check": bk.term_check()})
     return R, meta, mtm
 
 

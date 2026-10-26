@@ -46,6 +46,7 @@ END = L.END
 FILL = 0.75
 COMM = L.COMM
 SPLIT = pd.Timestamp("2023-01-01")
+FALLBACK = [0, 0]          # hedge deltas that fell back to intrinsic (0 / +-1), and all hedge deltas
 
 
 def ncdf(z):
@@ -53,19 +54,13 @@ def ncdf(z):
 
 
 # ----------------------------------------------------------------------------------------------- smile helpers
-def smile_iv(bk, d, e, cp, k):
-    s = bk.surf.get((d, e, cp))
-    if s is None:
-        return None, None
-    F, x, iv, _ = s
-    return float(np.interp(math.log(k / F), x, iv)), F
-
-
 def smile_delta(bk, d, e, cp, k):
-    v, F = smile_iv(bk, d, e, cp, k)
+    """Black-76 delta from the day's smile (across expiries when e itself is not listed that day)."""
+    sm = bk.smile(d, e, cp, k)
     T = (e - d).days / 365.0
-    if v is None or T <= 0 or v <= 0:
+    if sm is None or T <= 0 or sm[0] <= 0:
         return None
+    v, F, _ = sm
     S = bk.und.px(d)
     if np.isfinite(S) and abs(math.log(F / S)) > 0.02:     # bad quotes on that snapshot: use the close
         F = S
@@ -116,6 +111,8 @@ def option_position(bk, d, front, legs, hedge, hedge_cost, und):
                 x = smile_delta(bk, t, front, cp, k)
                 if x is None:
                     x = (1.0 if St > k else 0.0) if cp == "C" else (-1.0 if St < k else 0.0)
+                    FALLBACK[0] += 1
+                FALLBACK[1] += 1
                 dl += q * x
             target = -dl
             cost += abs(target - held) * St * hedge_cost
@@ -292,7 +289,10 @@ def run_symbol(sym, chain_dir, und, spy_ret, vix, earn):
             pnl = val1 - val0 - 4 * COMM
             ern.append({"symbol": sym, "earnings": E, "entry": d0, "exit": d1, "expiry": e,
                         "pnl": pnl / S0, "premium": val0 / S0, "ret_on_premium": pnl / val0 if val0 > 0 else np.nan})
-    meta = {"chain_dates": int(len(bk.dates)), "positions": len(pos), "signals": len(sig), "earnings_trades": len(ern)}
+    meta = {"chain_dates": int(len(bk.dates)), "positions": len(pos), "signals": len(sig), "earnings_trades": len(ern),
+            "hedge_delta_fallbacks": int(FALLBACK[0]), "hedge_deltas": int(FALLBACK[1]),
+            "path_points_unvalued": int(getattr(bk, "n_gap", 0)), "across_expiry_check": bk.term_check(800)}
+    FALLBACK[0] = FALLBACK[1] = 0
     if daily:
         meta["daily"] = pd.concat(daily, ignore_index=True)
     return pd.DataFrame(pos), pd.DataFrame(sig), pd.DataFrame(ern), meta
