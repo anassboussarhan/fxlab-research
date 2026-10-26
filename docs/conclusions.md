@@ -211,6 +211,8 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
 - Fix reversals, metals fixes, gold sessions and random-entry grids stay negative at retail-ECN and IBKR costs.
 
 ### 8.1p Options strategies on real quotes - see `docs/options_strategies.md`
+- Correction pending: the management-rule and provider-simulation results used stale marks on dates the database
+  did not list the held expiry. They are being re-run; the hold-to-expiry results stand.
 - Real end-of-day option quotes (DoltHub, free), 2019-2025, 106 underlyings (SPY, DIA, XLF, XLE, S&P 100 stocks)
   plus stock portfolios.
 - Tested: 19 structures x 14 / 30 / 45 days x 5 management rules x 5 entry filters = 118,216 combinations, at

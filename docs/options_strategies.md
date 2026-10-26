@@ -9,6 +9,13 @@ best capital provider.
   tables are in `docs/options_strategies/`.
 - Development data only: every quote after 2025-12-31 is dropped and every position must expire by then.
 
+> **Correction (2026-10-26).** The database lists a different set of *expiries* on each snapshot, and a held
+> expiry was quoted on only about 28% of later dates. On the other dates its marks were carried forward. So the
+> management-rule comparison (section 3.4), the daily marks and drawdowns, and the provider simulation (3.6) rest
+> on stale marks, and are being re-run with held expiries valued across the day's listed expiries (run after
+> 40244024631). Hold-to-expiry results (sections 3.1-3.3, 3.5) settle on the underlying at expiry and are not
+> affected.
+
 ## 1. Data
 
 **Source:** DoltHub `post-no-preference/options`, free and cloned on the GitHub runner (8.3 GB, about 3 minutes).
