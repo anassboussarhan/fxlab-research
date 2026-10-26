@@ -1,0 +1,17 @@
+                                                             test     n       first    mean    t_nw  sharpe  ann_return  win_rate   worst years_positive  t_before_2019  t_2019_2025    bh_q
+0                    M1 Cross-asset time-series momentum, 22 ETFs   215  2008-01-31  0.0051  1.6515  0.3792      0.0607    0.5256 -0.1261          14/18         1.4753       0.8206  0.0822
+1   M2 SPY overnight (close to next open), 1 bp, excess of T-bill  8287  1993-02-01  0.0002  3.0140  0.4829      0.0512    0.5406 -0.1046          26/33         2.7766       1.0657  0.0048
+2   M3 QQQ overnight (close to next open), 1 bp, excess of T-bill  6745  1999-03-11  0.0004  3.7564  0.6661      0.0951    0.5465 -0.0947          21/27         3.3419       1.4424  0.0006
+3   M4 IWM overnight (close to next open), 1 bp, excess of T-bill  6437  2000-05-30  0.0004  3.6621  0.6869      0.0911    0.5409 -0.0909          19/26         2.9446       2.0726  0.0006
+4                                       M5 Turn of the month, SPY   394  1993-03-03  0.0024  2.2998  0.3955      0.0290    0.5660 -0.0792          21/33         2.0099       1.1283  0.0230
+5                                             M6 Pre-holiday, SPY   296  1993-02-12  0.0008  1.5254  0.2471      0.0071    0.5608 -0.0326          18/33         0.4944       3.5931  0.0954
+6                                M7 Pre-FOMC day, SPY (2019-2025)    55  2019-01-30  0.0017  0.9912  0.3846      0.0137    0.5273 -0.0301            6/7            NaN       0.9912  0.2010
+7                 M8 Short volatility (SVXY) only in VIX contango   168  2012-01-31  0.0225  2.3837  0.6181      0.2696    0.6131 -0.4028           9/14         2.0477       1.2572  0.0214
+8                                             M9 SVXY held always   168  2012-01-31  0.0245  2.2162  0.5666      0.2934    0.6310 -0.8966           9/14         1.7868       1.3776  0.0250
+9                M10 EUR/USD variance premium at EVZ (vol points)     0         NaN     NaN     NaN     NaN         NaN       NaN     NaN            NaN            NaN          NaN     NaN
+10          M11 Earnings-announcement drift, S&P 100 (long-short)    47  2020-01-31  0.0063  1.1046  0.6138      0.0756    0.6170 -0.0642            4/6            NaN       1.1046  0.1836
+11        M12 Cross-sectional momentum 12-1, S&P 100 (long-short)   204  2008-12-31 -0.0031 -0.7014 -0.1833     -0.0366    0.5245 -0.3688           9/18        -0.6756      -0.2450  0.7629
+12         M13 Low volatility, beta-neutral, S&P 100 (long-short)   216  2007-12-31 -0.0031 -0.7158 -0.1787     -0.0368    0.4815 -0.2142           9/19        -0.5112      -0.5010  0.7629
+13             M14 BTC cash-and-carry (Deribit perpetual funding)    81  2019-04-30  0.0069  4.6255  2.0840      0.0822    0.8148 -0.0327            6/7            NaN       4.6255  0.0000
+14             M15 ETH cash-and-carry (Deribit perpetual funding)    81  2019-04-30  0.0051  2.6524  1.2207      0.0609    0.6667 -0.0416            6/7            NaN       2.6524  0.0120
+15    M16 FX daily Bollinger mean reversion, 19 pairs (2019-2025)    84  2019-01-31  0.0005  0.5266  0.1880      0.0055    0.5952 -0.0331            4/7            NaN       0.5266  0.3453
