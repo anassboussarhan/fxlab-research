@@ -1,0 +1,98 @@
+name: untested-intraday
+# scripts/untested_intraday_lab.py (rules fixed in its docstring) on the bars of the intraday-mirror and
+# intraday-duka runs named in ci/UNTESTED_INTRADAY, plus the USDJPY 2019-2025 months of the gotobi-oos run.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/UNTESTED_INTRADAY"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {group: tokyo, syms: "USDJPY EURJPY"}
+          - {group: eurusd, syms: "EURUSD"}
+          - {group: night, syms: "AUDNZD EURGBP GBPCAD"}
+          - {group: gold, syms: "XAUUSD"}
+          - {group: gap, syms: "AUDUSD EURJPY"}
+          - {group: review, syms: "GBRIDXGBP FRAIDXEUR CHEIDXCHF"}
+          - {group: index, syms: "USA500IDXUSD USATECHIDXUSD DEUIDXEUR GBRIDXGBP"}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow scipy holidays pytest
+      - run: python -m pytest -q tests/test_untested_intraday_lab.py
+      - name: Download the bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRROR DUKA USDJPY < ci/UNTESTED_INTRADAY
+          mkdir -p dl
+          for s in ${{ matrix.syms }}; do
+            if [ "$MIRROR" != "none" ]; then gh run download $MIRROR -p "mm-$s-*" -D dl/mm || echo "no mirror bars for $s"; fi
+            if [ "$DUKA" != "none" ]; then gh run download $DUKA -p "dk-$s-*" -D dl/dk || echo "no Dukascopy bars for $s"; fi
+            if [ "$s" = "USDJPY" ] && [ "$USDJPY" != "none" ]; then gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj || echo "no USDJPY months"; fi
+          done
+          du -sh dl || true
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+      - name: Lab ${{ matrix.group }}
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          mkdir -p out/${{ matrix.group }}
+          cp results/m1_coverage.json out/${{ matrix.group }}/ || true
+          python scripts/untested_intraday_lab.py --out out/${{ matrix.group }} --only ${{ matrix.group }} 2>&1 | tee out/${{ matrix.group }}/log.txt
+          python - <<'PY'
+          import pandas as pd, os
+          f = "out/${{ matrix.group }}/tests.csv"
+          if os.path.exists(f) and os.path.getsize(f) > 1:
+              for _, r in pd.read_csv(f).iterrows():
+                  print(f"::notice title={r.test[:60]}::n {r.n} mean {r.get('mean_bp', float('nan')):.2f}bp t {r.get('t', float('nan')):.2f} | 07-18 n {r.n_2007_2018} t {r.t_2007_2018} | 19-25 n {r.n_2019_2025} t {r.t_2019_2025}")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ui-${{ matrix.group }}
+          path: out
+          retention-days: 30
+  publish:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: ui-*
+          path: pub
+          merge-multiple: true
+      - name: Publish to the untested-intraday branch
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          python - <<'PY'
+          import glob, pandas as pd
+          fs = [f for f in glob.glob("pub/*/tests.csv")]
+          T = pd.concat([pd.read_csv(f) for f in fs if open(f).read().strip()], ignore_index=True) if fs else pd.DataFrame()
+          T.to_csv("pub/tests_all.csv", index=False)
+          print(T.to_string())
+          PY
+          cp -r pub /tmp/pub
+          IN="$(cat ci/UNTESTED_INTRADAY)"
+          git checkout --orphan ui-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p untested_intraday && cp -r /tmp/pub/* untested_intraday/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ); bars from runs (mirror, duka, usdjpy): $IN" > untested_intraday/RUN.txt
+          git add -f untested_intraday
+          git commit -qm "Untested intraday tests (run ${{ github.run_id }})"
+          git push -f origin HEAD:untested-intraday

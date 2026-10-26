@@ -1,0 +1,56 @@
+name: intraday-duka
+# Dukascopy M1 bid/ask bars 2019-2025 restricted to the hours each pre-registered intraday test reads
+# (ci/intraday_plan.py lists the jobs in priority order). Development data only: ends 2025-12-31.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/INTRADAY_DUKA"]
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      matrix: ${{ steps.p.outputs.matrix }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: p
+        run: python ci/intraday_plan.py
+  download:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow holidays
+      - name: ${{ matrix.sym }} ${{ matrix.tag }}
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          ARGS="--pairs ${{ matrix.sym }} --start ${{ matrix.start }} --end ${{ matrix.end }} --suffix _${{ matrix.tag }} --workers 4"
+          if [ -n "${{ matrix.hours }}" ]; then ARGS="$ARGS --hours ${{ matrix.hours }}"; fi
+          if [ -n "${{ matrix.weekdays }}" ]; then ARGS="$ARGS --weekdays ${{ matrix.weekdays }}"; fi
+          if [ -n "${{ matrix.dates }}" ]; then python ci/intraday_dates.py ${{ matrix.dates }} > dates.txt; ARGS="$ARGS --dates-file dates.txt"; wc -l dates.txt; fi
+          python -m fxlab.data.acquire_dukascopy $ARGS
+          mkdir -p part && cp data/m1/${{ matrix.sym }}/*.parquet part/ || true
+          cp data/manifests/acquisition.jsonl part/manifest_${{ matrix.tag }}.jsonl || true
+          ls -la part
+          python - <<'PY'
+          import json, os
+          f = "part/manifest_${{ matrix.tag }}.jsonl"
+          for l in (open(f) if os.path.exists(f) else []):
+              r = json.loads(l)
+              print(f"::notice title=duka ${{ matrix.sym }} ${{ matrix.tag }} {r.get('year')}::{r.get('status')} {r.get('n_minutes')} minutes, failed hours {(r.get('drops') or {}).get('hours_failed_download')}")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dk-${{ matrix.sym }}-${{ matrix.tag }}
+          path: part
+          retention-days: 30
+          if-no-files-found: warn
