@@ -300,6 +300,18 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
   - Their real risks are not in the backtests: exchange failure, crashes, and the overnight trade being equity
     exposure.
 
+### 8.1u What MQL5 publishes - see `docs/mql5_review.md`
+- About 100 MQL5 sources (articles, blogs, forum, Market, Algo Forge code) were read through search, plus the 155
+  newest article titles. mql5.com's robots.txt bars crawling the ~3,600 articles, so they were not read one by one.
+- Almost every strategy article reports one backtest period without costs or an untouched out-of-sample period.
+- The rigorous authors (Krueger, the Warrior_EA research kit, Dilber, Riccio, Njoroge) independently find no
+  edge in indicator, pattern or machine-learning rules after costs.
+- No MQL5 source shows an untouched, cost-inclusive out-of-sample record beyond effects already found here:
+  Gotobi, the overnight / weekend equity premium, and the variance premium.
+- New untested candidates: RSI(2) dip-buying on US indices (vendor holdout +48 bp, t 3.6), FTSE index-review
+  auctions (+8-11 bp per event), TLT month-end, Tokyo month-end / holiday rules, index intraday momentum with
+  trailing exits, and fading pin-bar setups on EUR/USD (weak).
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
