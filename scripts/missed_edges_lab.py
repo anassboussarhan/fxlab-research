@@ -125,6 +125,24 @@ def stage_data(a):
     allp = yahoo(ETFS + IDX + FX)
     for s, h in allp.items():
         h.to_csv(os.path.join(a.out, f"y_{s.replace('^', 'I_').replace('=', '_')}.csv"))
+    if "^EVZ" not in allp:                                  # Yahoo dropped EVZ: Cboe's own daily history file
+        try:
+            with urllib.request.urlopen(urllib.request.Request(
+                    "https://cdn.cboe.com/api/global/us_indices/daily_prices/EVZ_History.csv",
+                    headers={"User-Agent": "Mozilla/5.0"}), timeout=60) as r:
+                raw = r.read().decode()
+            open(os.path.join(a.out, "cboe_EVZ.csv"), "w").write(raw)
+            E = pd.read_csv(os.path.join(a.out, "cboe_EVZ.csv"))
+            E.columns = [c.strip().upper() for c in E.columns]
+            E["DATE"] = pd.to_datetime(E["DATE"])
+            E = E.set_index("DATE").rename(columns={"CLOSE": "Close"})
+            E = E[E.index <= END]
+            E["Adj Close"] = E["Close"]
+            E[["Close", "Adj Close"]].to_csv(os.path.join(a.out, "y_I_EVZ.csv"))
+            allp["^EVZ"] = E
+            print("EVZ from Cboe", len(E), E.index[0].date(), E.index[-1].date(), flush=True)
+        except Exception as ex:                                        # noqa: BLE001
+            print("EVZ unavailable", repr(ex)[:200], flush=True)
     for inst in ("BTC-PERPETUAL", "ETH-PERPETUAL"):
         D = deribit_funding(inst)
         print(inst, len(D), D.index[0] if len(D) else None, flush=True)
@@ -311,7 +329,8 @@ def m8_m9_svxy(d, rf):
         return None, None
     r = tr(h)
     rfd = rf.reindex(r.index).ffill().fillna(0)
-    cont = (v["Close"] < v3["Close"]).reindex(r.index).ffill().shift(1).fillna(False).astype(bool)
+    j = pd.concat([v["Close"].rename("v"), v3["Close"].rename("v3")], axis=1).dropna()
+    cont = (j.v < j.v3).reindex(r.index).ffill().shift(1).fillna(False).astype(bool)
     pos = cont.astype(float)
     switch = pos.diff().abs().fillna(0)
     filt = pos * (r - rfd) - switch * 3e-4
