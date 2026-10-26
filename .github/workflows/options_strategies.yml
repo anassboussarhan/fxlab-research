@@ -200,9 +200,16 @@ jobs:
           import pandas as pd, os
           if os.path.exists("combos.csv"):
               T = pd.read_csv("combos.csv")
-              T[T.fill == 0.75].to_csv("/tmp/pub/options_strategies/combos_primary.csv.gz", index=False)
-              T[T.fill != 0.75].to_csv("/tmp/pub/options_strategies/combos_fill_sensitivity.csv.gz", index=False)
+              # GitHub rejects files over 100 MB: the primary table goes out in parts of 100,000 rows
+              Tp = T[T.fill == 0.75].reset_index(drop=True)
+              for i in range(0, len(Tp), 100000):
+                  Tp.iloc[i:i + 100000].to_csv(f"/tmp/pub/options_strategies/combos_primary_part{i // 100000:02d}.csv.gz", index=False)
+              Tf = T[T.fill != 0.75]
+              if len(Tf):
+                  Tf.to_csv("/tmp/pub/options_strategies/combos_fill_sensitivity.csv.gz", index=False)
+              print("combinations", len(Tp), "parts", (len(Tp) + 99999) // 100000)
           EOF
+          ls -la /tmp/pub/options_strategies/ | sort -k5 -n | tail -3
           cp summary.json walkforward_*.csv top30_drawdowns.csv daily_mtm_top30.csv prop_top30.csv log_*.txt $P/ 2>/dev/null || true
           mkdir -p $P/verdicts && cp verdicts/*.csv $P/verdicts/ 2>/dev/null || true
           mkdir -p $P/synth && cp synth/*.json synth/*.txt synth/validation_model_vs_real.csv $P/synth/ 2>/dev/null || true
@@ -218,6 +225,7 @@ jobs:
           cp -r /tmp/pub/options_strategies .
           echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > options_strategies/RUN.txt
           du -sh options_strategies
+          find options_strategies -type f -size +95M -print -delete | sed 's/^/too large for GitHub, left in the artifact: /'
           git add -f options_strategies
           git commit -qm "Options strategy lab (run ${{ github.run_id }})"
           git push -f origin HEAD:${{ needs.prep.outputs.branch }}
