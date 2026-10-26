@@ -1,0 +1,63 @@
+name: options-republish
+# Publish the `combined` artifact of an options-strategies run whose own publish step failed (files over GitHub's
+# 100 MB limit): line 1 of ci/OPTIONS_REPUBLISH = run id, line 2 = branch.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/OPTIONS_REPUBLISH"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - id: r
+        run: |
+          echo "run=$(sed -n 1p ci/OPTIONS_REPUBLISH | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+          echo "branch=$(sed -n 2p ci/OPTIONS_REPUBLISH | tr -d '[:space:]')" >> $GITHUB_OUTPUT
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          name: combined
+          path: out
+          run-id: ${{ steps.r.outputs.run }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Per-structure summary
+        continue-on-error: true
+        run: python scripts/options_strategy_verdicts.py --combos out/combos.csv --out out/verdicts | tail -80
+      - name: Publish
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          P=/tmp/pub/options_strategies && mkdir -p $P/verdicts $P/synth
+          python - <<'PY'
+          import pandas as pd, os
+          T = pd.read_csv("out/combos.csv")
+          Tp = T[T.fill == 0.75].reset_index(drop=True)
+          for i in range(0, len(Tp), 100000):
+              Tp.iloc[i:i + 100000].to_csv(f"/tmp/pub/options_strategies/combos_primary_part{i // 100000:02d}.csv.gz", index=False)
+          print("combinations", len(Tp))
+          PY
+          cd out
+          cp summary.json walkforward_*.csv top30_drawdowns.csv daily_mtm_top30.csv prop_top30.csv log_*.txt $P/ 2>/dev/null || true
+          cp verdicts/*.csv $P/verdicts/ 2>/dev/null || true
+          cp synth/*.json synth/*.txt synth/validation_model_vs_real.csv $P/synth/ 2>/dev/null || true
+          for f in synth/combos_synth.csv synth/combos_synth_pre2019.csv; do [ -f $f ] && gzip -c $f > $P/synth/$(basename $f).gz; done
+          cd ..
+          git checkout --orphan rp-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/options_strategies .
+          echo "run ${{ steps.r.outputs.run }} (republished by ${{ github.run_id }}) $(date -u +%FT%TZ)" > options_strategies/RUN.txt
+          find options_strategies -type f -size +95M -print -delete
+          du -sh options_strategies
+          git add -f options_strategies
+          git commit -qm "Options strategy lab (run ${{ steps.r.outputs.run }}, republished)"
+          git push -f origin HEAD:${{ steps.r.outputs.branch }}
