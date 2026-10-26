@@ -1,0 +1,8 @@
+SPY {"weekly_expiries": false, "chain_dates": 8010, "entries_skipped_price_mismatch": 0, "positions_skipped_parity_break": 0, "roll_segments": 0, "wheel_cycles": 0, "path_points_listed": 0, "path_points_valued_from_smile": 0, "path_points_unvalued": 0, "valuations_across_expiries": 0, "corporate_action_days": [], "first": "1994-03-07", "last": "2025-12-31", "vol_index": "VIX", "calibration_points": 46009, "smile_ratio_at": {"-3.88": 1.9381237869284689, "-3.62": 1.8592829859302171, "-3.38": 1.7882152463476015, "-3.12": 1.7106216275295596, "-2.88": 1.6307098887924432, "-2.62": 1.557844904663653, "-2 123444
+DIA {"weekly_expiries": false, "chain_dates": 4779, "entries_skipped_price_mismatch": 0, "positions_skipped_parity_break": 0, "roll_segments": 0, "wheel_cycles": 0, "path_points_listed": 0, "path_points_valued_from_smile": 0, "path_points_unvalued": 0, "valuations_across_expiries": 0, "corporate_action_days": [], "first": "2006-12-27", "last": "2025-12-31", "vol_index": "VXD", "calibration_points": 45262, "smile_ratio_at": {"-3.88": 1.920623418255647, "-3.62": 1.8394427689499593, "-3.38": 1.7764995780167494, "-3.12": 1.7040767074314784, "-2.88": 1.6305902953831244, "-2.62": 1.562779275062716, "-2. 73710
+{
+ "pairs": 13865,
+ "median_corr": 0.8754876214786709,
+ "mean_real_minus_model": -0.00017298325510146543,
+ "share_same_sign_mean": 0.8142857142857143
+}

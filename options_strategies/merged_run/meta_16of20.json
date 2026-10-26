@@ -1,0 +1,170 @@
+{
+ "BLK": {
+  "weekly_expiries": true,
+  "chain_dates": 1097,
+  "entries_skipped_price_mismatch": 0,
+  "positions_skipped_parity_break": 0,
+  "roll_segments": 7764,
+  "wheel_cycles": 311,
+  "path_points_listed": 171941,
+  "path_points_valued_from_smile": 662460,
+  "path_points_unvalued": 0,
+  "valuations_across_expiries": 530248,
+  "corporate_action_days": [],
+  "first": "2019-02-09",
+  "last": "2025-12-31",
+  "rows_loaded": 154615,
+  "rows_used": 154227,
+  "iv_repaired_expiry_days": 2,
+  "smile_valuation_check": {
+   "n": 3000,
+   "median_abs_error_per_share": 0.5079642362082213,
+   "median_abs_error_pct_of_underlying": 0.06457479275190084,
+   "p90_abs_error_pct_of_underlying": 0.2530752530674478,
+   "mean_error_pct_of_underlying": -0.03317869250741471
+  },
+  "across_expiry_valuation_check": {
+   "n": 2000,
+   "median_abs_error_pct_of_underlying": 0.13877147600745962,
+   "p90_abs_error_pct_of_underlying": 0.3996651870200595,
+   "mean_error_pct_of_underlying": -0.0072564793340389264
+  }
+ },
+ "EMR": {
+  "weekly_expiries": true,
+  "chain_dates": 1098,
+  "entries_skipped_price_mismatch": 2,
+  "positions_skipped_parity_break": 0,
+  "roll_segments": 6638,
+  "wheel_cycles": 309,
+  "path_points_listed": 196066,
+  "path_points_valued_from_smile": 556444,
+  "path_points_unvalued": 0,
+  "valuations_across_expiries": 476428,
+  "corporate_action_days": [
+   "1997-03-11",
+   "2006-12-12"
+  ],
+  "first": "2019-02-09",
+  "last": "2025-12-31",
+  "rows_loaded": 121123,
+  "rows_used": 120745,
+  "iv_repaired_expiry_days": 8,
+  "smile_valuation_check": {
+   "n": 3000,
+   "median_abs_error_per_share": 0.12807069980277708,
+   "median_abs_error_pct_of_underlying": 0.13622243781612145,
+   "p90_abs_error_pct_of_underlying": 0.6150269523477945,
+   "mean_error_pct_of_underlying": 0.04680623823013883
+  },
+  "across_expiry_valuation_check": {
+   "n": 2000,
+   "median_abs_error_pct_of_underlying": 0.2216364991528424,
+   "p90_abs_error_pct_of_underlying": 0.8072586636071213,
+   "mean_error_pct_of_underlying": 0.09788032665434165
+  }
+ },
+ "LIN": {
+  "weekly_expiries": true,
+  "chain_dates": 1088,
+  "entries_skipped_price_mismatch": 0,
+  "positions_skipped_parity_break": 0,
+  "roll_segments": 2369,
+  "wheel_cycles": 211,
+  "path_points_listed": 335647,
+  "path_points_valued_from_smile": 131594,
+  "path_points_unvalued": 0,
+  "valuations_across_expiries": 32663,
+  "corporate_action_days": [
+   "2003-12-16"
+  ],
+  "first": "2019-05-04",
+  "last": "2025-12-31",
+  "rows_loaded": 104481,
+  "rows_used": 104195,
+  "iv_repaired_expiry_days": 7,
+  "smile_valuation_check": {
+   "n": 3000,
+   "median_abs_error_per_share": 0.31257550958753466,
+   "median_abs_error_pct_of_underlying": 0.08753293926748572,
+   "p90_abs_error_pct_of_underlying": 0.30532961630683964,
+   "mean_error_pct_of_underlying": -0.016516675872402003
+  },
+  "across_expiry_valuation_check": {
+   "n": 2000,
+   "median_abs_error_pct_of_underlying": 0.18085384794790074,
+   "p90_abs_error_pct_of_underlying": 0.5486662520563962,
+   "mean_error_pct_of_underlying": 0.08025295931424373
+  }
+ },
+ "ORCL": {
+  "weekly_expiries": true,
+  "chain_dates": 1096,
+  "entries_skipped_price_mismatch": 1,
+  "positions_skipped_parity_break": 0,
+  "roll_segments": 7242,
+  "wheel_cycles": 308,
+  "path_points_listed": 206394,
+  "path_points_valued_from_smile": 595626,
+  "path_points_unvalued": 0,
+  "valuations_across_expiries": 512643,
+  "corporate_action_days": [
+   "1993-11-09",
+   "1995-02-23",
+   "1996-04-17",
+   "1997-08-18",
+   "1999-03-01",
+   "2000-01-19",
+   "2000-10-13"
+  ],
+  "first": "2019-02-09",
+  "last": "2025-12-31",
+  "rows_loaded": 122454,
+  "rows_used": 122136,
+  "iv_repaired_expiry_days": 0,
+  "smile_valuation_check": {
+   "n": 3000,
+   "median_abs_error_per_share": 0.06018983169112224,
+   "median_abs_error_pct_of_underlying": 0.05561470098071617,
+   "p90_abs_error_pct_of_underlying": 0.29407436563545103,
+   "mean_error_pct_of_underlying": -0.0028876265659885966
+  },
+  "across_expiry_valuation_check": {
+   "n": 2000,
+   "median_abs_error_pct_of_underlying": 0.21726708207719642,
+   "p90_abs_error_pct_of_underlying": 0.8402557295074912,
+   "mean_error_pct_of_underlying": 0.01633446764332778
+  }
+ },
+ "UBER": {
+  "weekly_expiries": true,
+  "chain_dates": 441,
+  "entries_skipped_price_mismatch": 1,
+  "positions_skipped_parity_break": 0,
+  "roll_segments": 2274,
+  "wheel_cycles": 90,
+  "path_points_listed": 82339,
+  "path_points_valued_from_smile": 252575,
+  "path_points_unvalued": 0,
+  "valuations_across_expiries": 223636,
+  "corporate_action_days": [],
+  "first": "2024-01-01",
+  "last": "2025-12-31",
+  "rows_loaded": 53021,
+  "rows_used": 53021,
+  "iv_repaired_expiry_days": 0,
+  "smile_valuation_check": {
+   "n": 3000,
+   "median_abs_error_per_share": 0.06034297078420431,
+   "median_abs_error_pct_of_underlying": 0.07546457440945512,
+   "p90_abs_error_pct_of_underlying": 0.46976971078429314,
+   "mean_error_pct_of_underlying": 0.03289096832718084
+  },
+  "across_expiry_valuation_check": {
+   "n": 2000,
+   "median_abs_error_pct_of_underlying": 0.27792178199849743,
+   "p90_abs_error_pct_of_underlying": 0.9322822228471811,
+   "mean_error_pct_of_underlying": 0.07131235680371649
+  }
+ }
+}
