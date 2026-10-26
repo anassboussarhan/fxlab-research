@@ -1,0 +1,188 @@
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:568: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  quotes.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:585: Pandas4Warning: The inplace keyword in DataFrame.set_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  dividends.set_index("date", inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:587: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  dividends.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:220: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.rename(columns=ctx.isins, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:224: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.sort_index(level=0, axis=1, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:568: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  quotes.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:220: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.rename(columns=ctx.isins, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:224: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.sort_index(level=0, axis=1, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:568: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  quotes.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:604: Pandas4Warning: The inplace keyword in DataFrame.set_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  splits.set_index("date", inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:606: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  splits.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:220: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.rename(columns=ctx.isins, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:224: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.sort_index(level=0, axis=1, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:568: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  quotes.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:220: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.rename(columns=ctx.isins, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:224: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.sort_index(level=0, axis=1, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/utils.py:568: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  quotes.sort_index(inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:220: Pandas4Warning: The inplace keyword in DataFrame.rename is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.rename(columns=ctx.isins, inplace=True)
+/opt/hostedtoolcache/Python/3.11.17/x64/lib/python3.11/site-packages/yfinance/multi.py:224: Pandas4Warning: The inplace keyword in DataFrame.sort_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  data.sort_index(level=0, axis=1, inplace=True)
+0 0 0.1 {'pass_phase1': 0.007, 'pass_both': 0.0, 'any_payout': 0.0, 'mean_payouts_usd': 0.0, 'mean_net_usd': -585.0, 'median_net_usd': -585.0, 'share_net_positive': 0.0, 'p90_net_usd': -585.0, 'p99_net_usd': -585.0, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.0}
+0 0 0.25 {'pass_phase1': 0.693, 'pass_both': 0.401, 'any_payout': 0.384, 'mean_payouts_usd': 1325.143, 'mean_net_usd': 965.046, 'median_net_usd': -585.0, 'share_net_positive': 0.384, 'p90_net_usd': 4857.381, 'p99_net_usd': 7972.333, 'fail_daily_loss_share': 0.334, 'fail_max_loss_share': 0.138}
+0 0 0.5 {'pass_phase1': 0.557, 'pass_both': 0.424, 'any_payout': 0.39, 'mean_payouts_usd': 4735.785, 'mean_net_usd': 4378.877, 'median_net_usd': -585.0, 'share_net_positive': 0.39, 'p90_net_usd': 18302.47, 'p99_net_usd': 21344.995, 'fail_daily_loss_share': 0.547, 'fail_max_loss_share': 0.25}
+0 0.5 0 {'pass_phase1': 0.67, 'pass_both': 0.41, 'any_payout': 0.371, 'mean_payouts_usd': 1760.848, 'mean_net_usd': 1393.0, 'median_net_usd': -585.0, 'share_net_positive': 0.371, 'p90_net_usd': 7505.996, 'p99_net_usd': 10261.43, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.006}
+0 0.5 0.1 {'pass_phase1': 0.814, 'pass_both': 0.505, 'any_payout': 0.493, 'mean_payouts_usd': 3559.883, 'mean_net_usd': 3263.405, 'median_net_usd': -585.0, 'share_net_positive': 0.493, 'p90_net_usd': 10697.86, 'p99_net_usd': 12168.569, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.135}
+0 0.5 0.25 {'pass_phase1': 0.589, 'pass_both': 0.468, 'any_payout': 0.433, 'mean_payouts_usd': 3016.146, 'mean_net_usd': 2684.598, 'median_net_usd': -585.0, 'share_net_positive': 0.433, 'p90_net_usd': 9945.424, 'p99_net_usd': 12846.528, 'fail_daily_loss_share': 0.515, 'fail_max_loss_share': 0.366}
+0 0.5 0.5 {'pass_phase1': 0.585, 'pass_both': 0.432, 'any_payout': 0.399, 'mean_payouts_usd': 5300.93, 'mean_net_usd': 4949.111, 'median_net_usd': -585.0, 'share_net_positive': 0.399, 'p90_net_usd': 20372.751, 'p99_net_usd': 24319.196, 'fail_daily_loss_share': 0.527, 'fail_max_loss_share': 0.3}
+0 1 0 {'pass_phase1': 0.713, 'pass_both': 0.58, 'any_payout': 0.573, 'mean_payouts_usd': 4864.458, 'mean_net_usd': 4614.516, 'median_net_usd': 3019.894, 'share_net_positive': 0.573, 'p90_net_usd': 12914.334, 'p99_net_usd': 17727.94, 'fail_daily_loss_share': 0.315, 'fail_max_loss_share': 0.607}
+0 1 0.1 {'pass_phase1': 0.734, 'pass_both': 0.601, 'any_payout': 0.559, 'mean_payouts_usd': 5273.148, 'mean_net_usd': 5015.368, 'median_net_usd': 1549.637, 'share_net_positive': 0.559, 'p90_net_usd': 14932.693, 'p99_net_usd': 17314.092, 'fail_daily_loss_share': 0.197, 'fail_max_loss_share': 0.602}
+0 1 0.25 {'pass_phase1': 0.657, 'pass_both': 0.525, 'any_payout': 0.495, 'mean_payouts_usd': 5234.288, 'mean_net_usd': 4938.658, 'median_net_usd': -585.0, 'share_net_positive': 0.495, 'p90_net_usd': 16294.688, 'p99_net_usd': 18857.964, 'fail_daily_loss_share': 0.364, 'fail_max_loss_share': 0.489}
+0 1 0.5 {'pass_phase1': 0.578, 'pass_both': 0.421, 'any_payout': 0.37, 'mean_payouts_usd': 3645.804, 'mean_net_usd': 3277.488, 'median_net_usd': -585.0, 'share_net_positive': 0.37, 'p90_net_usd': 14079.456, 'p99_net_usd': 26080.219, 'fail_daily_loss_share': 0.719, 'fail_max_loss_share': 0.264}
+0 2 0 {'pass_phase1': 0.77, 'pass_both': 0.625, 'any_payout': 0.478, 'mean_payouts_usd': 8309.495, 'mean_net_usd': 8004.242, 'median_net_usd': -585.0, 'share_net_positive': 0.478, 'p90_net_usd': 32378.181, 'p99_net_usd': 40923.296, 'fail_daily_loss_share': 0.528, 'fail_max_loss_share': 0.361}
+0 2 0.1 {'pass_phase1': 0.7, 'pass_both': 0.511, 'any_payout': 0.402, 'mean_payouts_usd': 3222.438, 'mean_net_usd': 2872.871, 'median_net_usd': -585.0, 'share_net_positive': 0.402, 'p90_net_usd': 12170.566, 'p99_net_usd': 18371.427, 'fail_daily_loss_share': 0.647, 'fail_max_loss_share': 0.334}
+0 2 0.25 {'pass_phase1': 0.672, 'pass_both': 0.464, 'any_payout': 0.386, 'mean_payouts_usd': 3483.848, 'mean_net_usd': 3124.805, 'median_net_usd': -585.0, 'share_net_positive': 0.386, 'p90_net_usd': 13316.347, 'p99_net_usd': 22669.802, 'fail_daily_loss_share': 0.594, 'fail_max_loss_share': 0.406}
+0 2 0.5 {'pass_phase1': 0.503, 'pass_both': 0.318, 'any_payout': 0.273, 'mean_payouts_usd': 2230.122, 'mean_net_usd': 1804.769, 'median_net_usd': -585.0, 'share_net_positive': 0.273, 'p90_net_usd': 10161.753, 'p99_net_usd': 19318.5, 'fail_daily_loss_share': 0.69, 'fail_max_loss_share': 0.31}
+0 3 0 {'pass_phase1': 0.59, 'pass_both': 0.451, 'any_payout': 0.293, 'mean_payouts_usd': 2878.065, 'mean_net_usd': 2464.206, 'median_net_usd': -585.0, 'share_net_positive': 0.293, 'p90_net_usd': 11283.082, 'p99_net_usd': 27910.835, 'fail_daily_loss_share': 0.757, 'fail_max_loss_share': 0.243}
+0 3 0.1 {'pass_phase1': 0.561, 'pass_both': 0.411, 'any_payout': 0.295, 'mean_payouts_usd': 2545.952, 'mean_net_usd': 2133.41, 'median_net_usd': -585.0, 'share_net_positive': 0.295, 'p90_net_usd': 8995.161, 'p99_net_usd': 26073.307, 'fail_daily_loss_share': 0.742, 'fail_max_loss_share': 0.258}
+0 3 0.25 {'pass_phase1': 0.473, 'pass_both': 0.308, 'any_payout': 0.225, 'mean_payouts_usd': 1744.199, 'mean_net_usd': 1290.883, 'median_net_usd': -585.0, 'share_net_positive': 0.225, 'p90_net_usd': 7640.515, 'p99_net_usd': 18360.719, 'fail_daily_loss_share': 0.813, 'fail_max_loss_share': 0.187}
+0 3 0.5 {'pass_phase1': 0.398, 'pass_both': 0.239, 'any_payout': 0.146, 'mean_payouts_usd': 1153.219, 'mean_net_usd': 653.395, 'median_net_usd': -585.0, 'share_net_positive': 0.146, 'p90_net_usd': 3961.88, 'p99_net_usd': 17485.469, 'fail_daily_loss_share': 0.955, 'fail_max_loss_share': 0.045}
+3 0 0 {'pass_phase1': 0.502, 'pass_both': 0.1, 'any_payout': 0.1, 'mean_payouts_usd': 194.13, 'mean_net_usd': -332.341, 'median_net_usd': -585.0, 'share_net_positive': 0.1, 'p90_net_usd': 719.664, 'p99_net_usd': 2958.298, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.0}
+3 0 0.1 {'pass_phase1': 0.722, 'pass_both': 0.49, 'any_payout': 0.48, 'mean_payouts_usd': 2461.546, 'mean_net_usd': 2157.287, 'median_net_usd': -585.0, 'share_net_positive': 0.48, 'p90_net_usd': 6992.097, 'p99_net_usd': 7882.149, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.041}
+3 0 0.25 {'pass_phase1': 0.861, 'pass_both': 0.771, 'any_payout': 0.763, 'mean_payouts_usd': 6911.022, 'mean_net_usd': 6772.611, 'median_net_usd': 7626.791, 'share_net_positive': 0.763, 'p90_net_usd': 12955.324, 'p99_net_usd': 14568.92, 'fail_daily_loss_share': 0.238, 'fail_max_loss_share': 0.005}
+3 0 0.5 {'pass_phase1': 0.633, 'pass_both': 0.494, 'any_payout': 0.452, 'mean_payouts_usd': 5646.904, 'mean_net_usd': 5326.441, 'median_net_usd': -585.0, 'share_net_positive': 0.452, 'p90_net_usd': 21800.917, 'p99_net_usd': 25318.817, 'fail_daily_loss_share': 0.597, 'fail_max_loss_share': 0.215}
+3 0.5 0 {'pass_phase1': 0.901, 'pass_both': 0.588, 'any_payout': 0.572, 'mean_payouts_usd': 4428.493, 'mean_net_usd': 4178.055, 'median_net_usd': 1331.47, 'share_net_positive': 0.572, 'p90_net_usd': 14002.776, 'p99_net_usd': 14918.73, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.0}
+3 0.5 0.1 {'pass_phase1': 0.968, 'pass_both': 0.743, 'any_payout': 0.721, 'mean_payouts_usd': 7059.827, 'mean_net_usd': 6896.7, 'median_net_usd': 6203.284, 'share_net_positive': 0.721, 'p90_net_usd': 16852.177, 'p99_net_usd': 18841.519, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.0}
+3 0.5 0.25 {'pass_phase1': 0.764, 'pass_both': 0.651, 'any_payout': 0.642, 'mean_payouts_usd': 6329.928, 'mean_net_usd': 6120.293, 'median_net_usd': 5539.589, 'share_net_positive': 0.642, 'p90_net_usd': 14027.47, 'p99_net_usd': 16231.536, 'fail_daily_loss_share': 0.555, 'fail_max_loss_share': 0.092}
+3 0.5 0.5 {'pass_phase1': 0.629, 'pass_both': 0.462, 'any_payout': 0.411, 'mean_payouts_usd': 5088.703, 'mean_net_usd': 4744.401, 'median_net_usd': -585.0, 'share_net_positive': 0.411, 'p90_net_usd': 20223.242, 'p99_net_usd': 29137.775, 'fail_daily_loss_share': 0.558, 'fail_max_loss_share': 0.325}
+3 1 0 {'pass_phase1': 0.827, 'pass_both': 0.74, 'any_payout': 0.644, 'mean_payouts_usd': 6168.188, 'mean_net_usd': 5960.103, 'median_net_usd': 5767.811, 'share_net_positive': 0.644, 'p90_net_usd': 15829.825, 'p99_net_usd': 18301.146, 'fail_daily_loss_share': 0.321, 'fail_max_loss_share': 0.521}
+3 1 0.1 {'pass_phase1': 0.766, 'pass_both': 0.638, 'any_payout': 0.598, 'mean_payouts_usd': 6154.941, 'mean_net_usd': 5919.8, 'median_net_usd': 3228.598, 'share_net_positive': 0.598, 'p90_net_usd': 15388.738, 'p99_net_usd': 19095.537, 'fail_daily_loss_share': 0.514, 'fail_max_loss_share': 0.269}
+3 1 0.25 {'pass_phase1': 0.68, 'pass_both': 0.571, 'any_payout': 0.525, 'mean_payouts_usd': 6384.512, 'mean_net_usd': 6106.549, 'median_net_usd': 1607.939, 'share_net_positive': 0.525, 'p90_net_usd': 18331.161, 'p99_net_usd': 21771.764, 'fail_daily_loss_share': 0.534, 'fail_max_loss_share': 0.267}
+3 1 0.5 {'pass_phase1': 0.591, 'pass_both': 0.435, 'any_payout': 0.386, 'mean_payouts_usd': 3561.837, 'mean_net_usd': 3202.589, 'median_net_usd': -585.0, 'share_net_positive': 0.386, 'p90_net_usd': 13277.562, 'p99_net_usd': 22307.763, 'fail_daily_loss_share': 0.783, 'fail_max_loss_share': 0.217}
+3 2 0 {'pass_phase1': 0.771, 'pass_both': 0.632, 'any_payout': 0.541, 'mean_payouts_usd': 8097.349, 'mean_net_usd': 7829.126, 'median_net_usd': 2385.921, 'share_net_positive': 0.541, 'p90_net_usd': 28711.549, 'p99_net_usd': 39655.932, 'fail_daily_loss_share': 0.63, 'fail_max_loss_share': 0.274}
+3 2 0.1 {'pass_phase1': 0.709, 'pass_both': 0.554, 'any_payout': 0.483, 'mean_payouts_usd': 4304.336, 'mean_net_usd': 4001.686, 'median_net_usd': -585.0, 'share_net_positive': 0.483, 'p90_net_usd': 13860.878, 'p99_net_usd': 23123.73, 'fail_daily_loss_share': 0.685, 'fail_max_loss_share': 0.296}
+3 2 0.25 {'pass_phase1': 0.682, 'pass_both': 0.515, 'any_payout': 0.437, 'mean_payouts_usd': 3764.026, 'mean_net_usd': 3434.467, 'median_net_usd': -585.0, 'share_net_positive': 0.437, 'p90_net_usd': 13666.464, 'p99_net_usd': 21908.87, 'fail_daily_loss_share': 0.643, 'fail_max_loss_share': 0.356}
+3 2 0.5 {'pass_phase1': 0.504, 'pass_both': 0.325, 'any_payout': 0.259, 'mean_payouts_usd': 2138.614, 'mean_net_usd': 1705.012, 'median_net_usd': -585.0, 'share_net_positive': 0.259, 'p90_net_usd': 8948.542, 'p99_net_usd': 20865.086, 'fail_daily_loss_share': 0.732, 'fail_max_loss_share': 0.268}
+3 3 0 {'pass_phase1': 0.626, 'pass_both': 0.492, 'any_payout': 0.357, 'mean_payouts_usd': 3162.984, 'mean_net_usd': 2786.858, 'median_net_usd': -585.0, 'share_net_positive': 0.357, 'p90_net_usd': 10597.573, 'p99_net_usd': 27098.457, 'fail_daily_loss_share': 0.756, 'fail_max_loss_share': 0.244}
+3 3 0.1 {'pass_phase1': 0.566, 'pass_both': 0.418, 'any_payout': 0.326, 'mean_payouts_usd': 2895.092, 'mean_net_usd': 2501.036, 'median_net_usd': -585.0, 'share_net_positive': 0.326, 'p90_net_usd': 9232.132, 'p99_net_usd': 25978.561, 'fail_daily_loss_share': 0.737, 'fail_max_loss_share': 0.264}
+3 3 0.25 {'pass_phase1': 0.486, 'pass_both': 0.33, 'any_payout': 0.234, 'mean_payouts_usd': 1987.723, 'mean_net_usd': 1539.321, 'median_net_usd': -585.0, 'share_net_positive': 0.234, 'p90_net_usd': 8034.966, 'p99_net_usd': 19898.978, 'fail_daily_loss_share': 0.806, 'fail_max_loss_share': 0.194}
+3 3 0.5 {'pass_phase1': 0.419, 'pass_both': 0.269, 'any_payout': 0.182, 'mean_payouts_usd': 1660.884, 'mean_net_usd': 1182.529, 'median_net_usd': -585.0, 'share_net_positive': 0.182, 'p90_net_usd': 6125.913, 'p99_net_usd': 23572.933, 'fail_daily_loss_share': 0.908, 'fail_max_loss_share': 0.092}
+6 0 0 {'pass_phase1': 0.716, 'pass_both': 0.617, 'any_payout': 0.61, 'mean_payouts_usd': 4351.044, 'mean_net_usd': 4122.66, 'median_net_usd': 3310.686, 'share_net_positive': 0.61, 'p90_net_usd': 11895.814, 'p99_net_usd': 16300.522, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.071}
+6 0 0.1 {'pass_phase1': 0.805, 'pass_both': 0.722, 'any_payout': 0.716, 'mean_payouts_usd': 6035.964, 'mean_net_usd': 5869.59, 'median_net_usd': 6014.73, 'share_net_positive': 0.716, 'p90_net_usd': 11859.567, 'p99_net_usd': 15541.271, 'fail_daily_loss_share': 0.0, 'fail_max_loss_share': 0.212}
+6 0 0.25 {'pass_phase1': 0.888, 'pass_both': 0.813, 'any_payout': 0.789, 'mean_payouts_usd': 9811.409, 'mean_net_usd': 9688.003, 'median_net_usd': 11227.37, 'share_net_positive': 0.789, 'p90_net_usd': 16032.393, 'p99_net_usd': 17700.753, 'fail_daily_loss_share': 0.151, 'fail_max_loss_share': 0.1}
+6 0 0.5 {'pass_phase1': 0.698, 'pass_both': 0.541, 'any_payout': 0.488, 'mean_payouts_usd': 4560.708, 'mean_net_usd': 4261.042, 'median_net_usd': -585.0, 'share_net_positive': 0.488, 'p90_net_usd': 15339.478, 'p99_net_usd': 26586.775, 'fail_daily_loss_share': 0.554, 'fail_max_loss_share': 0.356}
+6 0.5 0 {'pass_phase1': 0.917, 'pass_both': 0.662, 'any_payout': 0.609, 'mean_payouts_usd': 4219.656, 'mean_net_usd': 3990.95, 'median_net_usd': 1309.09, 'share_net_positive': 0.609, 'p90_net_usd': 12169.499, 'p99_net_usd': 14862.46, 'fail_daily_loss_share': 0.276, 'fail_max_loss_share': 0.173}
+6 0.5 0.1 {'pass_phase1': 0.903, 'pass_both': 0.704, 'any_payout': 0.618, 'mean_payouts_usd': 5094.482, 'mean_net_usd': 4871.07, 'median_net_usd': 3999.264, 'share_net_positive': 0.618, 'p90_net_usd': 12668.467, 'p99_net_usd': 16773.158, 'fail_daily_loss_share': 0.311, 'fail_max_loss_share': 0.186}
+6 0.5 0.25 {'pass_phase1': 0.764, 'pass_both': 0.625, 'any_payout': 0.547, 'mean_payouts_usd': 5599.441, 'mean_net_usd': 5334.465, 'median_net_usd': 2523.472, 'share_net_positive': 0.547, 'p90_net_usd': 15538.896, 'p99_net_usd': 19150.855, 'fail_daily_loss_share': 0.542, 'fail_max_loss_share': 0.283}
+6 0.5 0.5 {'pass_phase1': 0.623, 'pass_both': 0.482, 'any_payout': 0.419, 'mean_payouts_usd': 4094.101, 'mean_net_usd': 3754.128, 'median_net_usd': -585.0, 'share_net_positive': 0.419, 'p90_net_usd': 14452.595, 'p99_net_usd': 25447.717, 'fail_daily_loss_share': 0.542, 'fail_max_loss_share': 0.405}
+6 1 0 {'pass_phase1': 0.895, 'pass_both': 0.776, 'any_payout': 0.721, 'mean_payouts_usd': 7761.083, 'mean_net_usd': 7597.692, 'median_net_usd': 7596.476, 'share_net_positive': 0.721, 'p90_net_usd': 16244.112, 'p99_net_usd': 18541.853, 'fail_daily_loss_share': 0.323, 'fail_max_loss_share': 0.465}
+6 1 0.1 {'pass_phase1': 0.828, 'pass_both': 0.678, 'any_payout': 0.648, 'mean_payouts_usd': 7197.307, 'mean_net_usd': 6991.534, 'median_net_usd': 4669.388, 'share_net_positive': 0.648, 'p90_net_usd': 16424.623, 'p99_net_usd': 20821.827, 'fail_daily_loss_share': 0.504, 'fail_max_loss_share': 0.251}
+6 1 0.25 {'pass_phase1': 0.709, 'pass_both': 0.584, 'any_payout': 0.518, 'mean_payouts_usd': 7011.226, 'mean_net_usd': 6729.08, 'median_net_usd': 1941.672, 'share_net_positive': 0.518, 'p90_net_usd': 20402.359, 'p99_net_usd': 26357.837, 'fail_daily_loss_share': 0.496, 'fail_max_loss_share': 0.338}
+6 1 0.5 {'pass_phase1': 0.589, 'pass_both': 0.462, 'any_payout': 0.421, 'mean_payouts_usd': 3899.537, 'mean_net_usd': 3560.998, 'median_net_usd': -585.0, 'share_net_positive': 0.421, 'p90_net_usd': 14823.857, 'p99_net_usd': 23879.119, 'fail_daily_loss_share': 0.78, 'fail_max_loss_share': 0.22}
+6 2 0 {'pass_phase1': 0.777, 'pass_both': 0.67, 'any_payout': 0.57, 'mean_payouts_usd': 8066.283, 'mean_net_usd': 7814.557, 'median_net_usd': 3531.843, 'share_net_positive': 0.57, 'p90_net_usd': 25217.405, 'p99_net_usd': 36602.292, 'fail_daily_loss_share': 0.644, 'fail_max_loss_share': 0.283}
+6 2 0.1 {'pass_phase1': 0.711, 'pass_both': 0.564, 'any_payout': 0.451, 'mean_payouts_usd': 4325.911, 'mean_net_usd': 4004.599, 'median_net_usd': -585.0, 'share_net_positive': 0.451, 'p90_net_usd': 15280.581, 'p99_net_usd': 25997.358, 'fail_daily_loss_share': 0.715, 'fail_max_loss_share': 0.273}
+6 2 0.25 {'pass_phase1': 0.675, 'pass_both': 0.519, 'any_payout': 0.433, 'mean_payouts_usd': 3890.448, 'mean_net_usd': 3558.489, 'median_net_usd': -585.0, 'share_net_positive': 0.433, 'p90_net_usd': 13876.611, 'p99_net_usd': 22414.886, 'fail_daily_loss_share': 0.686, 'fail_max_loss_share': 0.314}
+6 2 0.5 {'pass_phase1': 0.507, 'pass_both': 0.34, 'any_payout': 0.288, 'mean_payouts_usd': 2555.899, 'mean_net_usd': 2139.438, 'median_net_usd': -585.0, 'share_net_positive': 0.288, 'p90_net_usd': 10482.179, 'p99_net_usd': 21850.003, 'fail_daily_loss_share': 0.746, 'fail_max_loss_share': 0.254}
+6 3 0 {'pass_phase1': 0.655, 'pass_both': 0.492, 'any_payout': 0.391, 'mean_payouts_usd': 3767.267, 'mean_net_usd': 3411.148, 'median_net_usd': -585.0, 'share_net_positive': 0.391, 'p90_net_usd': 12277.783, 'p99_net_usd': 29460.934, 'fail_daily_loss_share': 0.758, 'fail_max_loss_share': 0.242}
+6 3 0.1 {'pass_phase1': 0.621, 'pass_both': 0.443, 'any_payout': 0.35, 'mean_payouts_usd': 3149.093, 'mean_net_usd': 2769.077, 'median_net_usd': -585.0, 'share_net_positive': 0.35, 'p90_net_usd': 10296.24, 'p99_net_usd': 25317.553, 'fail_daily_loss_share': 0.764, 'fail_max_loss_share': 0.236}
+6 3 0.25 {'pass_phase1': 0.523, 'pass_both': 0.361, 'any_payout': 0.24, 'mean_payouts_usd': 2068.804, 'mean_net_usd': 1624.497, 'median_net_usd': -585.0, 'share_net_positive': 0.24, 'p90_net_usd': 8480.254, 'p99_net_usd': 21344.817, 'fail_daily_loss_share': 0.819, 'fail_max_loss_share': 0.181}
+6 3 0.5 {'pass_phase1': 0.435, 'pass_both': 0.283, 'any_payout': 0.176, 'mean_payouts_usd': 1901.811, 'mean_net_usd': 1419.83, 'median_net_usd': -585.0, 'share_net_positive': 0.176, 'p90_net_usd': 6818.762, 'p99_net_usd': 26628.994, 'fail_daily_loss_share': 0.883, 'fail_max_loss_share': 0.117}
+10 0 0 {'pass_phase1': 0.543, 'pass_both': 0.332, 'any_payout': 0.282, 'mean_payouts_usd': 5483.673, 'mean_net_usd': 5063.439, 'median_net_usd': -585.0, 'share_net_positive': 0.282, 'p90_net_usd': 23188.973, 'p99_net_usd': 27167.537, 'fail_daily_loss_share': 0.792, 'fail_max_loss_share': 0.116}
+10 0 0.1 {'pass_phase1': 0.563, 'pass_both': 0.363, 'any_payout': 0.342, 'mean_payouts_usd': 5990.208, 'mean_net_usd': 5605.365, 'median_net_usd': -585.0, 'share_net_positive': 0.342, 'p90_net_usd': 23380.423, 'p99_net_usd': 27601.735, 'fail_daily_loss_share': 0.78, 'fail_max_loss_share': 0.083}
+10 0 0.25 {'pass_phase1': 0.603, 'pass_both': 0.44, 'any_payout': 0.393, 'mean_payouts_usd': 5442.466, 'mean_net_usd': 5087.371, 'median_net_usd': -585.0, 'share_net_positive': 0.393, 'p90_net_usd': 20486.637, 'p99_net_usd': 25944.452, 'fail_daily_loss_share': 0.762, 'fail_max_loss_share': 0.112}
+10 0 0.5 {'pass_phase1': 0.568, 'pass_both': 0.329, 'any_payout': 0.276, 'mean_payouts_usd': 1711.31, 'mean_net_usd': 1287.507, 'median_net_usd': -585.0, 'share_net_positive': 0.276, 'p90_net_usd': 6299.618, 'p99_net_usd': 19975.885, 'fail_daily_loss_share': 0.806, 'fail_max_loss_share': 0.194}
+10 0.5 0 {'pass_phase1': 0.64, 'pass_both': 0.43, 'any_payout': 0.325, 'mean_payouts_usd': 4869.388, 'mean_net_usd': 4474.279, 'median_net_usd': -585.0, 'share_net_positive': 0.325, 'p90_net_usd': 20094.783, 'p99_net_usd': 27583.467, 'fail_daily_loss_share': 0.628, 'fail_max_loss_share': 0.231}
+10 0.5 0.1 {'pass_phase1': 0.639, 'pass_both': 0.446, 'any_payout': 0.364, 'mean_payouts_usd': 4995.484, 'mean_net_usd': 4623.512, 'median_net_usd': -585.0, 'share_net_positive': 0.364, 'p90_net_usd': 23047.168, 'p99_net_usd': 28090.032, 'fail_daily_loss_share': 0.63, 'fail_max_loss_share': 0.208}
+10 0.5 0.25 {'pass_phase1': 0.646, 'pass_both': 0.459, 'any_payout': 0.4, 'mean_payouts_usd': 4387.407, 'mean_net_usd': 4036.495, 'median_net_usd': -585.0, 'share_net_positive': 0.4, 'p90_net_usd': 20431.277, 'p99_net_usd': 24165.144, 'fail_daily_loss_share': 0.669, 'fail_max_loss_share': 0.189}
+10 0.5 0.5 {'pass_phase1': 0.508, 'pass_both': 0.346, 'any_payout': 0.265, 'mean_payouts_usd': 1500.335, 'mean_net_usd': 1070.36, 'median_net_usd': -585.0, 'share_net_positive': 0.265, 'p90_net_usd': 5440.726, 'p99_net_usd': 16375.785, 'fail_daily_loss_share': 0.855, 'fail_max_loss_share': 0.145}
+10 1 0 {'pass_phase1': 0.649, 'pass_both': 0.464, 'any_payout': 0.403, 'mean_payouts_usd': 5530.07, 'mean_net_usd': 5180.795, 'median_net_usd': -585.0, 'share_net_positive': 0.403, 'p90_net_usd': 21092.643, 'p99_net_usd': 29591.376, 'fail_daily_loss_share': 0.611, 'fail_max_loss_share': 0.242}
+10 1 0.1 {'pass_phase1': 0.681, 'pass_both': 0.512, 'any_payout': 0.428, 'mean_payouts_usd': 5762.671, 'mean_net_usd': 5428.198, 'median_net_usd': -585.0, 'share_net_positive': 0.428, 'p90_net_usd': 22423.873, 'p99_net_usd': 28028.516, 'fail_daily_loss_share': 0.633, 'fail_max_loss_share': 0.216}
+10 1 0.25 {'pass_phase1': 0.644, 'pass_both': 0.504, 'any_payout': 0.369, 'mean_payouts_usd': 4622.116, 'mean_net_usd': 4252.718, 'median_net_usd': -585.0, 'share_net_positive': 0.369, 'p90_net_usd': 19701.899, 'p99_net_usd': 29907.819, 'fail_daily_loss_share': 0.654, 'fail_max_loss_share': 0.275}
+10 1 0.5 {'pass_phase1': 0.497, 'pass_both': 0.367, 'any_payout': 0.272, 'mean_payouts_usd': 1914.093, 'mean_net_usd': 1487.979, 'median_net_usd': -585.0, 'share_net_positive': 0.272, 'p90_net_usd': 7349.634, 'p99_net_usd': 17767.831, 'fail_daily_loss_share': 0.936, 'fail_max_loss_share': 0.064}
+10 2 0 {'pass_phase1': 0.632, 'pass_both': 0.435, 'any_payout': 0.313, 'mean_payouts_usd': 2896.7, 'mean_net_usd': 2494.688, 'median_net_usd': -585.0, 'share_net_positive': 0.313, 'p90_net_usd': 10243.259, 'p99_net_usd': 25890.167, 'fail_daily_loss_share': 0.913, 'fail_max_loss_share': 0.087}
+10 2 0.1 {'pass_phase1': 0.621, 'pass_both': 0.431, 'any_payout': 0.303, 'mean_payouts_usd': 3009.43, 'mean_net_usd': 2601.743, 'median_net_usd': -585.0, 'share_net_positive': 0.303, 'p90_net_usd': 11357.703, 'p99_net_usd': 25175.343, 'fail_daily_loss_share': 0.868, 'fail_max_loss_share': 0.132}
+10 2 0.25 {'pass_phase1': 0.595, 'pass_both': 0.399, 'any_payout': 0.291, 'mean_payouts_usd': 2321.528, 'mean_net_usd': 1906.558, 'median_net_usd': -585.0, 'share_net_positive': 0.291, 'p90_net_usd': 8680.746, 'p99_net_usd': 19622.45, 'fail_daily_loss_share': 0.84, 'fail_max_loss_share': 0.16}
+10 2 0.5 {'pass_phase1': 0.48, 'pass_both': 0.285, 'any_payout': 0.218, 'mean_payouts_usd': 2043.758, 'mean_net_usd': 1586.405, 'median_net_usd': -585.0, 'share_net_positive': 0.218, 'p90_net_usd': 6991.864, 'p99_net_usd': 23003.737, 'fail_daily_loss_share': 0.865, 'fail_max_loss_share': 0.135}
+10 3 0 {'pass_phase1': 0.604, 'pass_both': 0.413, 'any_payout': 0.295, 'mean_payouts_usd': 2966.492, 'mean_net_usd': 2554.038, 'median_net_usd': -585.0, 'share_net_positive': 0.295, 'p90_net_usd': 9770.081, 'p99_net_usd': 32163.358, 'fail_daily_loss_share': 0.813, 'fail_max_loss_share': 0.187}
+10 3 0.1 {'pass_phase1': 0.575, 'pass_both': 0.379, 'any_payout': 0.271, 'mean_payouts_usd': 2521.984, 'mean_net_usd': 2095.285, 'median_net_usd': -585.0, 'share_net_positive': 0.271, 'p90_net_usd': 9055.07, 'p99_net_usd': 27482.274, 'fail_daily_loss_share': 0.811, 'fail_max_loss_share': 0.189}
+10 3 0.25 {'pass_phase1': 0.496, 'pass_both': 0.297, 'any_payout': 0.186, 'mean_payouts_usd': 1564.112, 'mean_net_usd': 1087.893, 'median_net_usd': -585.0, 'share_net_positive': 0.186, 'p90_net_usd': 6746.845, 'p99_net_usd': 20849.782, 'fail_daily_loss_share': 0.853, 'fail_max_loss_share': 0.147}
+10 3 0.5 {'pass_phase1': 0.418, 'pass_both': 0.234, 'any_payout': 0.144, 'mean_payouts_usd': 1456.902, 'mean_net_usd': 956.405, 'median_net_usd': -585.0, 'share_net_positive': 0.144, 'p90_net_usd': 4707.047, 'p99_net_usd': 22640.659, 'fail_daily_loss_share': 0.921, 'fail_max_loss_share': 0.079}
+{
+ "G": {
+  "events": 413,
+  "mean_bp": 2.1285641103414643,
+  "sd_bp": 21.11769302531809,
+  "worst_bp": -70.36898082687792,
+  "worst_day": "2020-02-28",
+  "ann_return_at_1x": 0.012558528251014639
+ },
+ "O": {
+  "events": 1376,
+  "mean_bp": 5.378801039708618,
+  "sd_bp": 89.15085288014363,
+  "worst_bp": -674.3716837763567,
+  "worst_day": "2020-03-12",
+  "ann_return_at_1x": 0.10573186043770082
+ },
+ "S": {
+  "events": 1662,
+  "mean_bp": 7.269173967076583,
+  "sd_bp": 210.8057451444709,
+  "worst_bp": -2143.4289544703024,
+  "worst_day": "2024-08-05",
+  "ann_return_at_1x": 0.1725909590468754
+ }
+}
+    gotobi_lev  overnight_lev  svxy_lev  pass_phase1  pass_both  any_payout  mean_payouts_usd  mean_net_usd  median_net_usd  share_net_positive  p90_net_usd  p99_net_usd  fail_daily_loss_share  fail_max_loss_share
+41           6            0.0      0.25        0.888      0.813       0.789          9811.409      9688.003       11227.370               0.789    16032.393    17700.753                  0.151                0.100
+11           0            2.0      0.00        0.770      0.625       0.478          8309.495      8004.242        -585.000               0.478    32378.181    40923.296                  0.528                0.362
+31           3            2.0      0.00        0.771      0.632       0.542          8097.349      7829.126        2385.921               0.542    28711.549    39655.932                  0.630                0.274
+51           6            2.0      0.00        0.777      0.670       0.570          8066.283      7814.557        3531.843               0.570    25217.405    36602.292                  0.644                0.283
+47           6            1.0      0.00        0.895      0.776       0.721          7761.083      7597.692        7596.476               0.721    16244.112    18541.853                  0.323                0.465
+48           6            1.0      0.10        0.828      0.678       0.648          7197.307      6991.534        4669.388               0.648    16424.623    20821.827                  0.504                0.251
+24           3            0.5      0.10        0.968      0.743       0.721          7059.827      6896.700        6203.284               0.721    16852.177    18841.519                  0.000                0.000
+21           3            0.0      0.25        0.861      0.771       0.763          6911.022      6772.611        7626.791               0.763    12955.324    14568.920                  0.238                0.005
+49           6            1.0      0.25        0.709      0.584       0.518          7011.226      6729.080        1941.672               0.518    20402.359    26357.837                  0.496                0.338
+25           3            0.5      0.25        0.764      0.651       0.642          6329.928      6120.293        5539.589               0.642    14027.470    16231.536                  0.555                0.092
+29           3            1.0      0.25        0.680      0.571       0.525          6384.512      6106.549        1607.939               0.525    18331.161    21771.764                  0.534                0.267
+27           3            1.0      0.00        0.826      0.740       0.644          6168.188      5960.103        5767.811               0.644    15829.825    18301.146                  0.321                0.521
+28           3            1.0      0.10        0.766      0.638       0.598          6154.941      5919.800        3228.598               0.598    15388.738    19095.537                  0.514                0.269
+40           6            0.0      0.10        0.805      0.722       0.716          6035.964      5869.590        6014.730               0.716    11859.567    15541.271                  0.000                0.212
+60          10            0.0      0.10        0.563      0.363       0.342          5990.208      5605.365        -585.000               0.342    23380.423    27601.735                  0.780                0.083
+68          10            1.0      0.10        0.681      0.512       0.428          5762.671      5428.198        -585.000               0.428    22423.873    28028.516                  0.633                0.216
+45           6            0.5      0.25        0.764      0.624       0.547          5599.441      5334.465        2523.472               0.547    15538.896    19150.855                  0.542                0.283
+22           3            0.0      0.50        0.633      0.494       0.452          5646.904      5326.441        -585.000               0.452    21800.917    25318.817                  0.597                0.215
+67          10            1.0      0.00        0.649      0.464       0.403          5530.070      5180.795        -585.000               0.403    21092.643    29591.376                  0.611                0.242
+61          10            0.0      0.25        0.603      0.440       0.393          5442.466      5087.371        -585.000               0.393    20486.637    25944.452                  0.762                0.112
+59          10            0.0      0.00        0.543      0.332       0.282          5483.673      5063.439        -585.000               0.282    23188.973    27167.537                  0.792                0.116
+8            0            1.0      0.10        0.734      0.601       0.559          5273.148      5015.368        1549.637               0.559    14932.693    17314.092                  0.197                0.602
+6            0            0.5      0.50        0.585      0.432       0.399          5300.930      4949.111        -585.000               0.399    20372.751    24319.196                  0.527                0.300
+9            0            1.0      0.25        0.657      0.525       0.495          5234.288      4938.658        -585.000               0.495    16294.688    18857.964                  0.364                0.489
+44           6            0.5      0.10        0.903      0.704       0.618          5094.482      4871.070        3999.264               0.618    12668.467    16773.158                  0.311                0.186
