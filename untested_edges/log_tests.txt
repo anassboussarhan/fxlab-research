@@ -1,0 +1,707 @@
+                                                test family  primary       n  mean_pct       t  p_one_sided  sharpe years_positive
+0                       D1 RSI(2) dip-buying, 4 ETFs     D1     True   873.0    0.3801  4.0801       0.0000  1.0091          25/33
+1                            D1b RSI(2), no weekends     D1     True   847.0    0.1286  1.4991       0.0669  0.3583          22/33
+2                                   D2 TLT month-end     D2     True   281.0    0.3837  4.1224       0.0000  0.8357          19/24
+3          D3 COT speculative pressure, 7 currencies     D3     True   228.0   -0.0070 -0.1172       0.5466 -0.0243          11/19
+4                  D4 Volatility-managed SPY (alpha)     D4     True     NaN    0.2572  2.2571       0.0120     NaN            NaN
+5         D7 BTC 14/56 trend (alpha vs buy-and-hold)     D7     True     NaN    1.2500  1.6545       0.0490     NaN            NaN
+6                       D9 Commodity ETF seasonality     D9     True   191.0   -0.3907 -0.8486       0.8019 -0.2085           8/16
+7                D10 Factor ETFs, equal-weight alpha    D10     True   170.0   -0.0094 -0.1271       0.5506 -0.0360           7/15
+8               D11 Currency value (5-year reversal)    D11     True   290.0    0.0790  0.7754       0.2191  0.1597          12/25
+9         D13 Earnings-announcement premium, S&P 100    D13     True    72.0    0.4331  1.4766       0.0699  0.5705            4/6
+10  D14 Gold multi-length Donchian vs random entries    D14     True   249.0    0.1382  0.6603       0.2800  0.1350          13/21
+11               D5 Overnight, other indices: ^GDAXI     D5     True  7161.0    0.0291  4.0597       0.0000  0.7011          28/36
+12                D5 Overnight, other indices: ^FTSE     D5     True  7186.0    0.0010  0.4441       0.3285  0.0796           8/36
+13                D5 Overnight, other indices: ^FCHI     D5     True  7173.0    0.0261  3.2961       0.0005  0.5460          28/36
+14            D5 Overnight, other indices: ^STOXX50E     D5     True  3675.0    0.0064  1.3349       0.0909  0.2810          12/19
+15                D5 Overnight, other indices: ^N225     D5     True  6826.0    0.0210  3.0440       0.0012  0.5434          26/36
+16                 D5 Overnight, other indices: ^HSI     D5     True  6863.0    0.0379  3.7430       0.0001  0.6797          26/36
+17               D5 Overnight, other indices: pooled     D5    False  7466.0    0.0237  5.2106       0.0000  0.8553          31/36
+18                        D6 BTC calendar: a_weekend     D6     True   589.0    0.1536  1.0347       0.1504  0.3084           8/12
+19                         D6 BTC calendar: b_monday     D6     True   589.0    0.3716  2.3930       0.0084  0.7033           8/12
+20                  D6 BTC calendar: c_turn_of_month     D6     True   136.0    1.4991  2.2394       0.0126  0.8189           6/13
+21          D12 Cross-asset into FX: a_oil_to_USDCAD    D12     True  4939.0   -0.0120 -1.5273       0.9367 -0.3523           7/19
+22          D12 Cross-asset into FX: b_SPY_to_AUDJPY    D12     True  4942.0   -0.0553 -4.2328       1.0000 -0.8729           4/19
+23          D12 Cross-asset into FX: c_VIX_to_AUDJPY    D12     True  4942.0   -0.0404 -2.9121       0.9982 -0.6382           6/19
+24         D12 Cross-asset into FX: d_gold_to_AUDUSD    D12     True  4939.0    0.0180  1.5428       0.0614  0.3636          13/19
+25        D12 Cross-asset into FX: e_yield_to_USDJPY    D12     True  4923.0   -0.0264 -2.2851       0.9888 -0.5599           6/19
+{
+ "D1 RSI(2) dip-buying, 4 ETFs": {
+  "n": 873,
+  "mean_pct": 0.3801477244172179,
+  "t": 4.080095650653181,
+  "p_one_sided": 2.2508586497549388e-05,
+  "sharpe": 1.009104075287249,
+  "worst_pct": -9.237149638440883,
+  "years_positive": "25/33",
+  "first": "1993-11-22",
+  "last": "2025-12-30",
+  "bp_per_trade": 38.01477244172179,
+  "control_bp_per_trade": 19.005383379662224,
+  "minus_control_t": 1.9664449806232636,
+  "dev_1993_2018_bp": 42.369027275603564,
+  "dev_t": 3.9167353667715106,
+  "hold_2019_2025_bp": 25.54927298366204,
+  "hold_t": 1.4048456123553539,
+  "trades": 873,
+  "mean_days": 3.2966781214203893,
+  "weekend_share": 0.6483390607101948,
+  "by_etf_bp": {
+   "DIA": 18.5,
+   "IWM": 35.5,
+   "QQQ": 38.9,
+   "SPY": 56.0
+  }
+ },
+ "D1b RSI(2), no weekends": {
+  "n": 847,
+  "mean_pct": 0.1285601994807858,
+  "t": 1.4990744535914597,
+  "p_one_sided": 0.06692715904784974,
+  "sharpe": 0.3582576568698265,
+  "worst_pct": -12.700558972597806,
+  "years_positive": "22/33",
+  "first": "1993-11-22",
+  "last": "2025-12-30",
+  "bp_per_trade": 12.856019948078579,
+  "control_bp_per_trade": 9.806962093898637,
+  "minus_control_t": 0.345467037874406,
+  "dev_1993_2018_bp": 15.640715088072058,
+  "dev_t": 1.5825539588838278,
+  "hold_2019_2025_bp": 4.670311443539622,
+  "hold_t": 0.2738364847934833,
+  "trades": 847,
+  "mean_days": 2.1865407319952777,
+  "weekend_share": 0.02715466351829988,
+  "by_etf_bp": {
+   "DIA": 4.2,
+   "IWM": 14.9,
+   "QQQ": 8.1,
+   "SPY": 22.7
+  }
+ },
+ "D2 TLT month-end": {
+  "n": 281,
+  "mean_pct": 0.38367617341050697,
+  "t": 4.122445613225204,
+  "p_one_sided": 1.8743556774558634e-05,
+  "sharpe": 0.8357113261713692,
+  "worst_pct": -4.078197474975404,
+  "years_positive": "19/24",
+  "first": "2002-08-30",
+  "last": "2025-12-31",
+  "perm_p": 0.0025,
+  "y2023_2024_pct": 0.2190499811460933
+ },
+ "D3 COT speculative pressure, 7 currencies": {
+  "n": 228,
+  "mean_pct": -0.007010235403297838,
+  "t": -0.1171828494455607,
+  "p_one_sided": 0.5466424212817936,
+  "sharpe": -0.024341059710264477,
+  "worst_pct": -3.6352583574899455,
+  "years_positive": "11/19",
+  "first": "2007-01-01",
+  "last": "2025-12-01",
+  "post_sample_2018_06": {
+   "n": 91,
+   "mean_pct": -0.07341977951938287,
+   "t": -1.1423323070525717,
+   "p_one_sided": 0.8733420414175224,
+   "sharpe": -0.4253194228397312,
+   "worst_pct": -1.6629551938763605,
+   "years_positive": "3/8",
+   "first": "2018-06-01",
+   "last": "2025-12-01"
+  }
+ },
+ "D4 Volatility-managed SPY (alpha)": {
+  "managed": {
+   "n": 394,
+   "mean_pct": 0.6347465780158151,
+   "t": 4.167986878624769,
+   "p_one_sided": 1.5365080980322965e-05,
+   "sharpe": 0.7107394884314298,
+   "worst_pct": -14.200764984206572,
+   "years_positive": "23/33",
+   "first": "1993-03-01",
+   "last": "2025-12-01"
+  },
+  "spy": {
+   "n": 394,
+   "mean_pct": 0.7333376075319202,
+   "t": 3.3876912239281514,
+   "p_one_sided": 0.0003524178248551779,
+   "sharpe": 0.5980464191479969,
+   "worst_pct": -16.565693577596786,
+   "years_positive": "26/33",
+   "first": "1993-03-01",
+   "last": "2025-12-01"
+  },
+  "beta": 0.5148451063055206,
+  "alpha_month_pct": 0.2571912995082075,
+  "t": 2.25714822176258,
+  "p_one_sided": 0.01199940728042348
+ },
+ "D7 BTC 14/56 trend (alpha vs buy-and-hold)": {
+  "strategy": {
+   "n": 134,
+   "mean_pct": 4.872923781531001,
+   "t": 2.9356002892174136,
+   "p_one_sided": 0.0016645149012772809,
+   "sharpe": 1.0878718946041923,
+   "worst_pct": -24.412420727602253,
+   "years_positive": "9/12",
+   "first": "2014-11-01",
+   "last": "2025-12-01"
+  },
+  "buy_hold": {
+   "n": 134,
+   "mean_pct": 5.7104548557061845,
+   "t": 2.803752802391895,
+   "p_one_sided": 0.00252558079721088,
+   "sharpe": 1.016190635333954,
+   "worst_pct": -44.03716010394744,
+   "years_positive": "8/12",
+   "first": "2014-11-01",
+   "last": "2025-12-01"
+  },
+  "beta": 0.6344295684394936,
+  "alpha_month_pct": 1.2500423718321159,
+  "t": 1.654542846097716,
+  "p_one_sided": 0.0490086326189445
+ },
+ "D9 Commodity ETF seasonality": {
+  "n": 191,
+  "mean_pct": -0.3906574547978531,
+  "t": -0.8485564087260269,
+  "p_one_sided": 0.8019359141541803,
+  "sharpe": -0.20848732689162125,
+  "worst_pct": -25.027878172081042,
+  "years_positive": "8/16",
+  "first": "2010-02-01",
+  "last": "2025-12-01"
+ },
+ "D10 Factor ETFs, equal-weight alpha": {
+  "n": 170,
+  "mean_pct": -0.00941939213166557,
+  "t": -0.12713805721177485,
+  "p_one_sided": 0.550584434723763,
+  "sharpe": -0.035986899245696057,
+  "worst_pct": -3.0699907270602003,
+  "years_positive": "7/15",
+  "first": "2011-11-01",
+  "last": "2025-12-01"
+ },
+ "D10 Factor ETFs, equal-weight alpha (each)": {
+  "MTUM": {
+   "beta": 0.9502077035724682,
+   "alpha_month_pct": 0.10921695820996001,
+   "t": 0.6190244364502143,
+   "months": 152
+  },
+  "QUAL": {
+   "beta": 1.0047558762517823,
+   "alpha_month_pct": -0.037270990754423354,
+   "t": -0.5751105410063706,
+   "months": 149
+  },
+  "USMV": {
+   "beta": 0.7078255699829482,
+   "alpha_month_pct": 0.10149537984600038,
+   "t": 0.8784984537046041,
+   "months": 170
+  },
+  "VLUE": {
+   "beta": 1.0383936083335388,
+   "alpha_month_pct": -0.2525556857500903,
+   "t": -1.3175640222656078,
+   "months": 152
+  },
+  "SIZE": {
+   "beta": 1.0249095685743375,
+   "alpha_month_pct": -0.22592773853444525,
+   "t": -2.192645753958817,
+   "months": 152
+  }
+ },
+ "D11 Currency value (5-year reversal)": {
+  "n": 290,
+  "mean_pct": 0.07900436637508246,
+  "t": 0.7754030066282457,
+  "p_one_sided": 0.21905077952969765,
+  "sharpe": 0.15973507221635652,
+  "worst_pct": -5.825361374997509,
+  "years_positive": "12/25",
+  "first": "2001-11-01",
+  "last": "2025-12-01"
+ },
+ "D13 Earnings-announcement premium, S&P 100": {
+  "n": 72,
+  "mean_pct": 0.43305187086098196,
+  "t": 1.4765823589535059,
+  "p_one_sided": 0.06989381169576325,
+  "sharpe": 0.5704587530863098,
+  "worst_pct": -7.865438475777446,
+  "years_positive": "4/6",
+  "first": "2020-01-01",
+  "last": "2025-12-01",
+  "events": 2381,
+  "mean_event_pct": 0.16884329243910107
+ },
+ "D14 Gold multi-length Donchian vs random entries": {
+  "n": 249,
+  "mean_pct": 0.13818298062374584,
+  "t": 0.6602925961523942,
+  "p_one_sided": 0.28,
+  "sharpe": 0.1350070556964852,
+  "worst_pct": -10.689204880841366,
+  "years_positive": "13/21",
+  "first": "2005-04-01",
+  "last": "2025-12-01",
+  "random_p": 0.28,
+  "random_mean_bp_day": 0.34066864063000013,
+  "real_mean_bp_day": 0.6600338034780877
+ },
+ "D5 Overnight, other indices": {
+  "^GDAXI": {
+   "gross": {
+    "n": 7161,
+    "mean_pct": 0.029143450412256123,
+    "t": 4.059689649224412,
+    "p_one_sided": 2.4568991813356256e-05,
+    "sharpe": 0.7010955605871384,
+    "worst_pct": -9.948648215653156,
+    "years_positive": "28/36",
+    "first": "1990-01-03",
+    "last": "2025-12-30"
+   },
+   "net_cfd": {
+    "n": 7161,
+    "mean_pct": 0.014737889817694185,
+    "t": 2.051056341179671,
+    "p_one_sided": 0.02013073016257172,
+    "sharpe": 0.35452142617203924,
+    "worst_pct": -9.956253771223944,
+    "years_positive": "20/36",
+    "first": "1990-01-03",
+    "last": "2025-12-30"
+   },
+   "share_open_equals_prev_close": 0.0006588338640606127
+  },
+  "^FTSE": {
+   "gross": {
+    "n": 7186,
+    "mean_pct": 0.0010285025629221836,
+    "t": 0.4441227042380015,
+    "p_one_sided": 0.32847693617200924,
+    "sharpe": 0.07961057023230235,
+    "worst_pct": -2.304987818482885,
+    "years_positive": "8/36",
+    "first": "1990-01-03",
+    "last": "2025-12-31"
+   },
+   "net_cfd": {
+    "n": 7186,
+    "mean_pct": -0.013425727881074571,
+    "t": -5.8487819332901445,
+    "p_one_sided": 0.9999999975240712,
+    "sharpe": -1.0399634168017233,
+    "worst_pct": -2.3230711524520014,
+    "years_positive": "7/36",
+    "first": "1990-01-03",
+    "last": "2025-12-31"
+   },
+   "share_open_equals_prev_close": 0.7294622236885516
+  },
+  "^FCHI": {
+   "gross": {
+    "n": 7173,
+    "mean_pct": 0.026114085550371906,
+    "t": 3.2961247170986554,
+    "p_one_sided": 0.0004901424342311778,
+    "sharpe": 0.5459518800549522,
+    "worst_pct": -10.520546194109071,
+    "years_positive": "28/36",
+    "first": "1990-03-02",
+    "last": "2025-12-31"
+   },
+   "net_cfd": {
+    "n": 7173,
+    "mean_pct": 0.011804176094948679,
+    "t": 1.487459293572779,
+    "p_one_sided": 0.06844677333659033,
+    "sharpe": 0.24675371735174564,
+    "worst_pct": -10.54162952786626,
+    "years_positive": "19/36",
+    "first": "1990-03-02",
+    "last": "2025-12-31"
+   },
+   "share_open_equals_prev_close": 0.0014284144599494562
+  },
+  "^STOXX50E": {
+   "gross": {
+    "n": 3675,
+    "mean_pct": 0.00640508521036349,
+    "t": 1.334941595268853,
+    "p_one_sided": 0.09094773128595546,
+    "sharpe": 0.281011581952501,
+    "worst_pct": -4.283665361053892,
+    "years_positive": "12/19",
+    "first": "2007-04-03",
+    "last": "2025-12-30"
+   },
+   "net_cfd": {
+    "n": 3675,
+    "mean_pct": -0.004448545172288631,
+    "t": -0.9229193156351079,
+    "p_one_sided": 0.8219753730830679,
+    "sharpe": -0.1951055466790782,
+    "worst_pct": -4.290651472164071,
+    "years_positive": "6/19",
+    "first": "2007-04-03",
+    "last": "2025-12-30"
+   },
+   "share_open_equals_prev_close": 0.0029780897681344395
+  },
+  "^N225": {
+   "gross": {
+    "n": 6826,
+    "mean_pct": 0.021048501448481378,
+    "t": 3.0439771276501086,
+    "p_one_sided": 0.0011673644512272263,
+    "sharpe": 0.5434446642191608,
+    "worst_pct": -2.094860587924808,
+    "years_positive": "26/36",
+    "first": "1990-01-05",
+    "last": "2025-12-30"
+   },
+   "net_cfd": {
+    "n": 6826,
+    "mean_pct": 0.006567997985955584,
+    "t": 0.9470720651594581,
+    "p_one_sided": 0.1718010291153913,
+    "sharpe": 0.16953769891852827,
+    "worst_pct": -2.1021383656951356,
+    "years_positive": "18/36",
+    "first": "1990-01-05",
+    "last": "2025-12-30"
+   },
+   "share_open_equals_prev_close": 0.00011318619128466328
+  },
+  "^HSI": {
+   "gross": {
+    "n": 6863,
+    "mean_pct": 0.03793074505559859,
+    "t": 3.7429856264397454,
+    "p_one_sided": 9.092331733762116e-05,
+    "sharpe": 0.6796938338168541,
+    "worst_pct": -8.09805862091131,
+    "years_positive": "26/36",
+    "first": "1990-01-03",
+    "last": "2025-12-31"
+   },
+   "net_cfd": {
+    "n": 6863,
+    "mean_pct": 0.023452456491269105,
+    "t": 2.310402563123496,
+    "p_one_sided": 0.010432938663834324,
+    "sharpe": 0.42019262754093917,
+    "worst_pct": -8.119141954668498,
+    "years_positive": "22/36",
+    "first": "1990-01-03",
+    "last": "2025-12-31"
+   },
+   "share_open_equals_prev_close": 0.033877321328081036
+  },
+  "pooled": {
+   "n": 7466,
+   "mean_pct": 0.0236942620177284,
+   "t": 5.2105841075637,
+   "p_one_sided": 9.412350754356424e-08,
+   "sharpe": 0.8553448427126493,
+   "worst_pct": -4.7959470807332725,
+   "years_positive": "31/36",
+   "first": "1990-01-03",
+   "last": "2025-12-31"
+  }
+ },
+ "D5 Overnight, other indices: ^GDAXI": {
+  "n": 7161,
+  "mean_pct": 0.029143450412256123,
+  "t": 4.059689649224412,
+  "p_one_sided": 2.4568991813356256e-05,
+  "sharpe": 0.7010955605871384,
+  "worst_pct": -9.948648215653156,
+  "years_positive": "28/36",
+  "first": "1990-01-03",
+  "last": "2025-12-30"
+ },
+ "D5 Overnight, other indices: ^FTSE": {
+  "n": 7186,
+  "mean_pct": 0.0010285025629221836,
+  "t": 0.4441227042380015,
+  "p_one_sided": 0.32847693617200924,
+  "sharpe": 0.07961057023230235,
+  "worst_pct": -2.304987818482885,
+  "years_positive": "8/36",
+  "first": "1990-01-03",
+  "last": "2025-12-31"
+ },
+ "D5 Overnight, other indices: ^FCHI": {
+  "n": 7173,
+  "mean_pct": 0.026114085550371906,
+  "t": 3.2961247170986554,
+  "p_one_sided": 0.0004901424342311778,
+  "sharpe": 0.5459518800549522,
+  "worst_pct": -10.520546194109071,
+  "years_positive": "28/36",
+  "first": "1990-03-02",
+  "last": "2025-12-31"
+ },
+ "D5 Overnight, other indices: ^STOXX50E": {
+  "n": 3675,
+  "mean_pct": 0.00640508521036349,
+  "t": 1.334941595268853,
+  "p_one_sided": 0.09094773128595546,
+  "sharpe": 0.281011581952501,
+  "worst_pct": -4.283665361053892,
+  "years_positive": "12/19",
+  "first": "2007-04-03",
+  "last": "2025-12-30"
+ },
+ "D5 Overnight, other indices: ^N225": {
+  "n": 6826,
+  "mean_pct": 0.021048501448481378,
+  "t": 3.0439771276501086,
+  "p_one_sided": 0.0011673644512272263,
+  "sharpe": 0.5434446642191608,
+  "worst_pct": -2.094860587924808,
+  "years_positive": "26/36",
+  "first": "1990-01-05",
+  "last": "2025-12-30"
+ },
+ "D5 Overnight, other indices: ^HSI": {
+  "n": 6863,
+  "mean_pct": 0.03793074505559859,
+  "t": 3.7429856264397454,
+  "p_one_sided": 9.092331733762116e-05,
+  "sharpe": 0.6796938338168541,
+  "worst_pct": -8.09805862091131,
+  "years_positive": "26/36",
+  "first": "1990-01-03",
+  "last": "2025-12-31"
+ },
+ "D5 Overnight, other indices: pooled": {
+  "n": 7466,
+  "mean_pct": 0.0236942620177284,
+  "t": 5.2105841075637,
+  "p_one_sided": 9.412350754356424e-08,
+  "sharpe": 0.8553448427126493,
+  "worst_pct": -4.7959470807332725,
+  "years_positive": "31/36",
+  "first": "1990-01-03",
+  "last": "2025-12-31"
+ },
+ "D6 BTC calendar": {
+  "a_weekend": {
+   "n": 589,
+   "mean_pct": 0.15363138226382975,
+   "t": 1.0346800616214191,
+   "p_one_sided": 0.15040917523535413,
+   "sharpe": 0.3084494524250047,
+   "worst_pct": -16.884621625757738,
+   "years_positive": "8/12",
+   "first": "2014-09-15",
+   "last": "2025-12-22"
+  },
+  "b_monday": {
+   "n": 589,
+   "mean_pct": 0.37159353937612677,
+   "t": 2.393024394405651,
+   "p_one_sided": 0.00835506501691774,
+   "sharpe": 0.7032776580546062,
+   "worst_pct": -16.07883013727679,
+   "years_positive": "8/12",
+   "first": "2014-09-22",
+   "last": "2025-12-29"
+  },
+  "c_turn_of_month": {
+   "n": 136,
+   "mean_pct": 1.4990713302189413,
+   "t": 2.2393858484273776,
+   "p_one_sided": 0.012565410676820044,
+   "sharpe": 0.8189218832055789,
+   "worst_pct": -13.93477998071251,
+   "years_positive": "6/13",
+   "first": "2014-10-01",
+   "last": "2026-01-01"
+  }
+ },
+ "D6 BTC calendar: a_weekend": {
+  "n": 589,
+  "mean_pct": 0.15363138226382975,
+  "t": 1.0346800616214191,
+  "p_one_sided": 0.15040917523535413,
+  "sharpe": 0.3084494524250047,
+  "worst_pct": -16.884621625757738,
+  "years_positive": "8/12",
+  "first": "2014-09-15",
+  "last": "2025-12-22"
+ },
+ "D6 BTC calendar: b_monday": {
+  "n": 589,
+  "mean_pct": 0.37159353937612677,
+  "t": 2.393024394405651,
+  "p_one_sided": 0.00835506501691774,
+  "sharpe": 0.7032776580546062,
+  "worst_pct": -16.07883013727679,
+  "years_positive": "8/12",
+  "first": "2014-09-22",
+  "last": "2025-12-29"
+ },
+ "D6 BTC calendar: c_turn_of_month": {
+  "n": 136,
+  "mean_pct": 1.4990713302189413,
+  "t": 2.2393858484273776,
+  "p_one_sided": 0.012565410676820044,
+  "sharpe": 0.8189218832055789,
+  "worst_pct": -13.93477998071251,
+  "years_positive": "6/13",
+  "first": "2014-10-01",
+  "last": "2026-01-01"
+ },
+ "D8 Crypto carry, other venues": {
+  "binance_BTCUSDT": {
+   "unavailable": true
+  },
+  "binance_ETHUSDT": {
+   "unavailable": true
+  },
+  "bybit_BTCUSDT": {
+   "unavailable": true
+  },
+  "bybit_ETHUSDT": {
+   "unavailable": true
+  }
+ },
+ "D12 Cross-asset into FX": {
+  "a_oil_to_USDCAD": {
+   "n": 4939,
+   "mean_pct": -0.012046149677230486,
+   "t": -1.5273071850849362,
+   "p_one_sided": 0.9366576781727418,
+   "sharpe": -0.3522748089993157,
+   "worst_pct": -3.6639690949075376,
+   "years_positive": "7/19",
+   "first": "2007-01-04",
+   "last": "2025-12-31"
+  },
+  "b_SPY_to_AUDJPY": {
+   "n": 4942,
+   "mean_pct": -0.055273408774145674,
+   "t": -4.232836176838608,
+   "p_one_sided": 0.9999884618699162,
+   "sharpe": -0.8729492230904545,
+   "worst_pct": -13.216095736116845,
+   "years_positive": "4/19",
+   "first": "2007-01-05",
+   "last": "2025-12-31"
+  },
+  "c_VIX_to_AUDJPY": {
+   "n": 4942,
+   "mean_pct": -0.0404379015510775,
+   "t": -2.9121137636136303,
+   "p_one_sided": 0.998205040688272,
+   "sharpe": -0.6381858399555592,
+   "worst_pct": -13.216095736116845,
+   "years_positive": "6/19",
+   "first": "2007-01-05",
+   "last": "2025-12-31"
+  },
+  "d_gold_to_AUDUSD": {
+   "n": 4939,
+   "mean_pct": 0.0180131884026915,
+   "t": 1.5427670592813243,
+   "p_one_sided": 0.06144365229183324,
+   "sharpe": 0.3636369719318495,
+   "worst_pct": -9.438152777137402,
+   "years_positive": "13/19",
+   "first": "2007-01-04",
+   "last": "2025-12-31"
+  },
+  "e_yield_to_USDJPY": {
+   "n": 4923,
+   "mean_pct": -0.02641349023403871,
+   "t": -2.2850528433721036,
+   "p_one_sided": 0.9888451352923866,
+   "sharpe": -0.5599003538413355,
+   "worst_pct": -17.69015106973859,
+   "years_positive": "6/19",
+   "first": "2007-01-05",
+   "last": "2025-12-31"
+  }
+ },
+ "D12 Cross-asset into FX: a_oil_to_USDCAD": {
+  "n": 4939,
+  "mean_pct": -0.012046149677230486,
+  "t": -1.5273071850849362,
+  "p_one_sided": 0.9366576781727418,
+  "sharpe": -0.3522748089993157,
+  "worst_pct": -3.6639690949075376,
+  "years_positive": "7/19",
+  "first": "2007-01-04",
+  "last": "2025-12-31"
+ },
+ "D12 Cross-asset into FX: b_SPY_to_AUDJPY": {
+  "n": 4942,
+  "mean_pct": -0.055273408774145674,
+  "t": -4.232836176838608,
+  "p_one_sided": 0.9999884618699162,
+  "sharpe": -0.8729492230904545,
+  "worst_pct": -13.216095736116845,
+  "years_positive": "4/19",
+  "first": "2007-01-05",
+  "last": "2025-12-31"
+ },
+ "D12 Cross-asset into FX: c_VIX_to_AUDJPY": {
+  "n": 4942,
+  "mean_pct": -0.0404379015510775,
+  "t": -2.9121137636136303,
+  "p_one_sided": 0.998205040688272,
+  "sharpe": -0.6381858399555592,
+  "worst_pct": -13.216095736116845,
+  "years_positive": "6/19",
+  "first": "2007-01-05",
+  "last": "2025-12-31"
+ },
+ "D12 Cross-asset into FX: d_gold_to_AUDUSD": {
+  "n": 4939,
+  "mean_pct": 0.0180131884026915,
+  "t": 1.5427670592813243,
+  "p_one_sided": 0.06144365229183324,
+  "sharpe": 0.3636369719318495,
+  "worst_pct": -9.438152777137402,
+  "years_positive": "13/19",
+  "first": "2007-01-04",
+  "last": "2025-12-31"
+ },
+ "D12 Cross-asset into FX: e_yield_to_USDJPY": {
+  "n": 4923,
+  "mean_pct": -0.02641349023403871,
+  "t": -2.2850528433721036,
+  "p_one_sided": 0.9888451352923866,
+  "sharpe": -0.5599003538413355,
+  "worst_pct": -17.69015106973859,
+  "years_positive": "6/19",
+  "first": "2007-01-05",
+  "last": "2025-12-31"
+ },
+ "D10b Russell reconstitution (two-sided)": {
+  "pre_mean_pct": 0.7378425187743818,
+  "pre_t": 2.715231598279855,
+  "post_mean_pct": -0.5962435544244036,
+  "post_t": -1.7404873016784606,
+  "years": 25
+ }
+}
