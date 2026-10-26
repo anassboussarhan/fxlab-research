@@ -1,7 +1,7 @@
 # MQL5 review: articles, blogs, forum, Market and code
 
 The question was whether MQL5 (articles, blogs, forum, Market EAs, signals) holds a strategy or edge the project
-missed. Sources read are in `docs/mql5_review/sources.tsv` (77 rows: source, author, family, claim, evidence quality,
+missed. Sources read are in `docs/mql5_review/sources.tsv` (105 rows: source, author, family, claim, evidence quality,
 our status). The newest 155 article titles, classified, are in `docs/mql5_review/articles_newest_155.tsv`.
 
 ## 1. Scope and access
@@ -17,7 +17,10 @@ our status). The newest 155 article titles, classified, are in `docs/mql5_review
   - Searched every strategy family against articles, blogs, the forum, the Market, signals, and Algo Forge
     (MQL5's git host).
   - Read every source found that reported a testable rule with numbers, plus the most-cited method articles.
-  - Read about 100 distinct sources across the four reading rounds, plus the 155-title index.
+  - Read about 130 distinct sources across the five reading rounds, plus the 155-title index.
+  - The fifth round covered the gaps: classic 2017-2019 strategy-test articles, the Russian forum's research threads
+    (statistical arbitrage, arbitrage "grails", random walks), Japanese Gotobi research, night-scalper live records,
+    copy-trading studies, positioning data (COT, retail sentiment) and prop firms' daily-loss mechanics.
 - **Not read:** most of the roughly 3,450 older articles one by one, and the long forum threads in full (the
   machine-learning thread alone has more than 3,600 pages; one recent page was read).
 
@@ -71,6 +74,12 @@ Classification of the 155 newest articles (Sept-Oct 2026, by title):
 | Seasonality (hour, weekday, month) | Boxplots, 75%-hit months, Monday PF; none tested out of sample or for multiple comparisons | Weekday-hour, turn-of-month, intraday seasonality: negative in FX | Agrees |
 | Month-end FX flows | Brent Donnelly (FXStreet, May 2026): his month-end model stopped working in mid-2024 | t 1.4 after costs, about zero since 2011 | Agrees |
 | Grid, martingale, averaging | Waka Waka (>40% drawdown 2024); 43 gold EAs: ~19% blew up; 10 best-selling scalpers: 80% of profit in the first week, 6 of 10 with blow-up reviews | Random-entry grids: negative at retail costs | Agrees |
+| Classic strategy tests (2017-2019) | 10 trend strategies, night trading, candlestick auto-search, gaps, reversing, grids: tuned on the same months, no costs (night trading: +152% on M1 OHLC fell to +48% on real ticks) | Same families negative | Agrees |
+| Gotobi, Japanese research | Kobe thesis (2021): buy-before-fix wins 57-60% vs 46-48% on other days, 2007-2019, robust across three regimes; post-fix short weaker | Confirmed out of sample to 2025 | Agrees; its day-of-month filters would be data-mined |
+| Night scalping, live | Night Hunter Pro (Myfxbook since 2020): flat and more volatile from 2023, blow-up complaints | In the batch at ECN costs | Live records suggest decay |
+| Copying MQL5 / social signals | Dorfleitner et al. (2018): following top performers loses; no abnormal return after costs | Prop study: payout rates fit no skill | Not an edge |
+| COT speculative pressure | (outside MQL5) Fan et al. (JFM 2020): 11 currency futures, long-short +2.51% a year, t 2.45, 1993-2018, weaker post-QE; RBNZ: weekly positioning a limited predictor | Never tested | **Candidate** (June 2018-2025 is post-sample) |
+| Retail sentiment (contrarian) | Vendor claims only | No free historical sentiment data | Untestable here |
 | Swap arbitrage across brokers | Forum: ~8% a month on demo; brokers end swap-free status | Not an edge: broker terms | Excluded |
 | Cross-account hedging at props | Banned at virtually every firm; accounts terminated | n/a | Excluded |
 | Options, implied distributions | Monitoring tools only; one options article hit the same bad-IV data we repaired | 92 structures: no edge beyond beta / variance premium | Agrees |
@@ -86,11 +95,21 @@ Classification of the 155 newest articles (Sept-Oct 2026, by title):
 | 4 | Tokyo month-end and Japanese-holiday rules on USD/JPY, plus the post-fix short leg (09:55-10:30 JST) | +4.5-5.6 bp before commission | Dukascopy USDJPY M1 (have) | Same flow as Gotobi |
 | 5 | Index intraday momentum: first-half-hour → last-half-hour, the noise-band breakout, and the breakout with breakeven + trailing exit, on US500 / NAS100 / DAX / FTSE | Trailing +0.082 R, t 16 (exit comparison); last half-hour R² 0.014 post-sample | Dukascopy index minute data | Hedging-flow intraday momentum (Gao et al.; Baltussen et al.) |
 | 6 | Fade pin-bar / inside-bar setups on EUR/USD at raw-ECN costs | Clears spread only | Dukascopy (have) | Short-horizon reversion is real but small (projection lab) |
+| 7 | COT speculative pressure: 52-week mean of speculators' (long - short) / (long + short), cross-sectional long-short across G10 currencies, monthly, at real spot costs | +2.51% a year, t 2.45 (1993-2018) | CFTC COT history (free); FX we have | Risk transfer from hedgers; turnover 0.16 a month, so costs are small |
 
 These would join the earlier proposed batch (Gotobi EA variants, night scalping at ECN costs, gold London breakout,
 gold multi-length channel, BTC 14/56, USDJPY home vs away, and the free batch) under one multiple-testing correction.
 
-## 5. Conclusion
+## 5. Prop-firm mechanics check
+
+- FTMO measures the daily loss from the balance at 00:00 Central European time, with floating P&L counting
+  (`docs/mql5_review/sources.tsv`, Krueger's daily-loss post). Other firms use the higher of balance and equity at
+  their reset.
+- The Gotobi trade (03:00-09:55 Tokyo) and the Nasdaq-100 overnight trade both span that reset. Their whole loss
+  falls in the new day either way, which is how `scripts/prop_challenge.py` books them.
+- What the simulation still lacks is the open-equity path inside a trade (already listed in `docs/prop_mix.md`).
+
+## 6. Conclusion
 
 - MQL5 contains no published strategy with an untouched, cost-inclusive out-of-sample record beyond the effects this
   project already has:

@@ -301,7 +301,7 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
     exposure.
 
 ### 8.1u What MQL5 publishes - see `docs/mql5_review.md`
-- About 100 MQL5 sources (articles, blogs, forum, Market, Algo Forge code) were read through search, plus the 155
+- About 130 sources (MQL5 articles, blogs, forum, Market, Algo Forge code, and the studies they cite) were read through search, plus the 155
   newest article titles. mql5.com's robots.txt bars crawling the ~3,600 articles, so they were not read one by one.
 - Almost every strategy article reports one backtest period without costs or an untouched out-of-sample period.
 - The rigorous authors (Krueger, the Warrior_EA research kit, Dilber, Riccio, Njoroge) independently find no
@@ -310,7 +310,9 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
   Gotobi, the overnight / weekend equity premium, and the variance premium.
 - New untested candidates: RSI(2) dip-buying on US indices (vendor holdout +48 bp, t 3.6), FTSE index-review
   auctions (+8-11 bp per event), TLT month-end, Tokyo month-end / holiday rules, index intraday momentum with
-  trailing exits, and fading pin-bar setups on EUR/USD (weak).
+  trailing exits, fading pin-bar setups on EUR/USD (weak), and COT speculative pressure across G10 currencies
+  (Fan et al. 2020: +2.51% a year, t 2.45, 1993-2018).
+- Live night-scalper records flatten from 2023, and copy-trading studies find no abnormal return after costs.
 
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.

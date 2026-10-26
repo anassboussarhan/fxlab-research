@@ -76,3 +76,31 @@ https://newyorkcityservers.com/blog/waka-waka-ea-review	review (non-MQL5)	NYC Se
 https://arxiv.org/pdf/2607.06502	paper (non-MQL5)	Chen & Welch	equity anomalies post-2005	median 7bp/month, t 0.45	academic	agrees
 https://www.mql5.com/en/blogs/post/775935	blog	(BTC research)	BTC three strategies	in-sample only	no OOS	BTC 14/56 momentum in batch
 https://www.mql5.com/en/blogs/post/776239	blog	Timon-pascal Krueger	Fibonacci extensions after double bottoms	1.618 reached less often than a random walk predicts (26,795 double bottoms)	descriptive	tested (Fibonacci extension): negative
+https://www.mql5.com/en/articles/3074	article	Alexander Fedosov (2017)	10 trend strategies EURUSD H1/H4	14 months, tuned on the same data, results only in images	no costs, no OOS	tested (trend families): negative
+https://www.mql5.com/fr/articles/3188	article	Alexander Fedosov (2017)	trend vs flat detection	markets ~60% of time in "trend" by 5 detectors	descriptive	n/a
+https://www.mql5.com/en/articles/4102	article	Dmitriy Zabudskiy (2018)	night trading Asian session	Bollinger EURUSD M30 +152% (M1 OHLC) vs +48% (real ticks), 10 months optimised	no OOS, no costs	tested (Asian-range fade, night): negative
+https://www.mql5.com/en/articles/5630	article	Alexander Fedosov (2019)	candlestick pattern auto-search	hand-picked patterns from up to 1,463 combinations	no significance test	tested (candlestick): negative
+https://www.mql5.com/en/articles/5268	article	Roman Klymenko (2019)	reversing (stop-and-reverse with doubling)	stocks/YM/Brent M15; chains wiped out (ORCL step 8); results not reproducible	no OOS	tested (martingale/zone recovery): ruin risk
+https://www.mql5.com/en/articles/5220	article	Vladimir Karputov (2018)	daily gaps stocks/ETFs	gap continuation vs reversal ~50% +- 6%	frequencies only	agrees (gap fade 3 of 14)
+https://www.mql5.com/en/articles/2739	article	MetaQuotes (2017)	MOEX Si/RTS futures spread	2-month optimisation; author: not a guide to action	no costs	n/a (exchange not accessible)
+https://www.mql5.com/tr/articles/7013	article	Roman Klymenko (2019)	grid + martingale	"no more than 100%/yr forex"; <20% DD caps ~20-25%/yr	in-sample	tested (grids): negative at retail costs
+https://www.econ.kobe-u.ac.jp/wp-content/uploads/2023/05/R2_shirakisho2.pdf	thesis (non-MQL5)	Shogo Sakuraba (Kobe, 2021)	Gotobi USDJPY 2007-2019	buy-before-fix win 57-60% vs 46-48% non-Gotobi, robust in 3 regimes; post-fix short weaker and trend-dependent; 10th/15th/20th stronger	fixed 2-sen spread, in-sample day splits	agrees with our Gotobi; day filters would be data-mined
+https://www.soico.jp/no1/news/fx/26080	news (non-MQL5)	soico	Gotobi retail article	Jun 2019-Jul 2020 win rate 48.8% (unsourced)	weak	our OOS uses mean bp, not win rate
+https://mql5.com/en/forum/394395/30323423	forum	stat-arb thread (2016)	89 spreads IS vs OOS	OOS returns cluster around zero with fat left tail	posted PDF	agrees
+https://www.mql5.com/en/forum/402433/32824086	forum	arbitrage grail thread (2009)	broker-to-broker arbitrage	no results; brokers widen spreads / cancel trades	discussion	excluded (broker terms)
+https://www.mql5.com/de/forum/399784/32130198	forum	random price range thread (2007)	profit on a random walk	consensus: zero expectation without drift or structure	discussion	agrees (no_prediction.md)
+https://newyorkcityservers.com/blog/night-hunter-pro-review	review (non-MQL5)	NYC Servers	Night Hunter Pro night scalper	Myfxbook since Oct 2020: flat and more volatile from 2023; blow-up complaints 2024	live, self-reported	supports decay of night scalping
+https://www.mql5.com/en/blogs/post/773390	blog	Bjorn Lynge Larsen	Night Scalper	+102% in 18 weeks, high-risk mode	short record	n/a
+https://ideas.repec.org/a/eee/quaeco/v70y2018icp160-171.html	paper (non-MQL5)	Dorfleitner et al. (2018)	social / copy trading	following top performers loses; no abnormal return after costs (Carhart)	academic	agrees: copying signals is not an edge
+https://utheses-gateway.univie.ac.at/api/document/get/file/73534	thesis (non-MQL5)	Dorian Otahal (2024)	wikifolio copy trading 2018-20	no significant outperformance of the S&P 500	121 providers	agrees
+https://openaccess.city.ac.uk/23283/1/FINAL_JFM__Accepted_27Nov2019_SSRN.pdf	paper (non-MQL5)	Fan, Fernandez-Perez, Fuertes, Miffre (JFM 2020)	COT speculative pressure	11 currency futures 1993-2018: long-short +2.51%/yr t 2.45, Sharpe 0.47; turnover 0.16/month; weaker post-QE for currencies	academic, data ends May 2018	CANDIDATE (untested family; 2018-06..2025-12 is post-sample)
+https://www.rbnz.govt.nz/hub/publications/analytical-note/2018/an2018-03	paper (non-MQL5)	Mulligan & Steenkamp (RBNZ)	COT and exchange rates	weekly positioning a limited predictor	central-bank note	tempers the COT candidate
+https://www.mql5.com/en/blogs/post/748907	blog	vendor	retail sentiment contrarian	claims only, no method	none	untestable: no free historical sentiment data
+https://www.mql5.com/en/forum/336483/15753716	forum/article	Maxim Dmitrievsky	hour-of-day autocorrelation (PACF) EURUSD	pattern "held 2015-2020" per a reader; no numbers, no costs	visual	tested (intraday seasonality): negative
+https://www.mql5.com/en/forum/12350/514094	forum	carry thread (2013)	carry trade	one system with 40% drawdown; no results	discussion	tested (carry, dollar carry): ~zero
+https://www.mql5.com/en/market/product/188684	market	vendor	NAS100 opening-range EA	no results	none	n/a
+https://www.mql5.com/fr/market/product/172894	market	vendor	Connors RSI2 EA for index CFDs	70-85% win rate claim, no numbers	none	CANDIDATE already listed
+https://www.mql5.com/en/market/product/176677	market	vendor	monthly trend/range seasonality	no statistics	none	n/a
+https://forge.mql5.io/animatedread/Warrior_EA/commits/branch/main/research/wf.py	code	Warrior_EA authors	walk-forward GBM sweep	apparent survivor EURUSD 2:3 48h failed: fold win rate 52.9% to 26.2%	honest negative	agrees
+https://www.mql5.com/en/blogs/post/776200	blog	Timon-pascal Krueger	prop daily-loss mechanics	FTMO: balance at 00:00 CE(S)T, floating P&L counts; others use max(balance, equity) at reset	rules collected 3 Sep 2026	prop sim check (overnight trades span the reset)
+https://www.mql5.com/en/blogs/post/777727	blog	(prop risk post)	daily loss lock	balance vs max(balance, equity) base; open profit reversal can exceed the limit	method	prop sim check
