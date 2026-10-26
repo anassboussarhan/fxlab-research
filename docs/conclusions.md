@@ -275,6 +275,20 @@ Run 22 tests 11 further published effects; **0 of 11 survive**.
 - **Not significant:** hedged 10-delta puts and the SPY calendar straddle.
 - **Box spreads:** apparent gaps are explained by American exercise and closing quotes.
 
+### 8.1t Edges outside FX and options - see `docs/missed_edges.md`
+- 16 registered tests on free daily data, 1993-2025 where available.
+- **Significant after BH (q < 0.05):**
+  - BTC and ETH cash-and-carry (Deribit funding): +8.2% / +6.1% a year, t 4.6 / 2.7, 2019-2025;
+  - QQQ / IWM / SPY overnight returns: +9.5% / +9.1% / +5.1% a year after T-bill and 1 bp, t 3.0-3.8;
+  - SVXY short volatility: t 2.2-2.4, with -40% to -90% in February 2018;
+  - turn of the month, mostly the equity premium.
+- **Positive, not significant:** cross-asset trend (t 1.65), pre-holiday, pre-FOMC, earnings drift.
+- **Negative or flat:** S&P 100 momentum and low volatility, and FX daily mean reversion on 2019-2025.
+- **Caveats:**
+  - These are carry and risk premia (funding, equity, volatility), not predictions.
+  - Their real risks are not in the backtests: exchange failure, crashes, and the overnight trade being equity
+    exposure.
+
 ### 8.2 Strategies (H1, 14 instruments, 2007-2018; EURUSD to 2022)
 * 924 family x instrument experiments: 8.4% had positive OOS net Sharpe; median OOS Sharpe -1.02.
 * White's Reality Check p = 1.0 in both screens; Hansen SPA p = 0.95 and 0.999. Every BH-adjusted p-value = 1.0; max Deflated Sharpe = 0.00.
