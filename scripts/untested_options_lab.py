@@ -24,8 +24,16 @@ Earnings premium selling (single stocks with an earnings date; windows exactly a
   entry on the last snapshot 2-10 days before the earnings date, exit on the first snapshot 1-7 days after,
   expiry the first listed 3-45 days after the date.
   E1  short ATM straddle (the mirror of H8);  E2  short 16-delta strangle;  E3  short iron condor 16/5.
+Re-check of the earlier monthly-schedule result (all underlyings, with the quote guard):
+  T0  the five structures on the original monthly 45-day schedule, each exit rule against holding on the SAME
+      entries (paired); ETFs and single stocks separately; plus the share of cycles with an impossible loss
+      (larger than the underlying's move + 5%) per exit rule, to show how much bad quotes remain.
   Monthly average P&L per trade across names (Newey-West t), one-sided mean > 0.
 COSTS: options at mid +- 0.75 x half-spread, USD 0.65 per contract per leg each way; expiring options at intrinsic.
+QUOTE GUARD (added after the first run showed impossible exits on XLF / XLE, e.g. a 16-delta strangle losing 26% of
+notional on a 2% move): every quote used is checked against the same date's smile without that quote; a mid off by
+more than max(25%, 4 half-spreads, 0.1% of the underlying) is replaced by the smile value. Hold-to-expiry books
+settle at intrinsic and are barely affected; early exits are.
 UNIT: P&L per unit of underlying notional (per share / price at entry).
 Usage: python scripts/untested_options_lab.py --stage symbols --chain DIR --group i/n --out DIR
        python scripts/untested_options_lab.py --stage combine --inputs DIRS --out DIR"""
@@ -52,6 +60,7 @@ BOOK_STRUCTS = {"STRG16": L.STRUCTS["STRG16"], "BSTRG": [("P", 0.30, -1), ("C", 
 EXITS = ("H", "T50", "D21", "T50D21")
 ROLL_STRUCTS = ("STRG16", "BSTRG")
 ROLL_EXITS = ("H", "D21")
+CLEAN = os.environ.get("UO_CLEAN", "1") == "1"      # quote guard on (1) / off (0)
 VIX_BP = [(15, 0.25), (20, 0.30), (30, 0.35), (40, 0.40), (np.inf, 0.50)]
 BASE_BP = 0.30
 
@@ -91,6 +100,51 @@ def open_position(bk, t, struct):
     return None
 
 
+GUARD = {"checked": 0, "replaced": 0}
+
+
+def loo_model(bk, t, e, cp, k):
+    """Value of (e, cp, k) on t from t's smile WITHOUT k's own quote (leave-one-out), or None."""
+    srf = bk.surf.get((t, e, cp))
+    if srf is None:
+        return None
+    F, x, iv, half = srf
+    xk = math.log(k / F)
+    keep = np.abs(x - xk) > 1e-9
+    if keep.sum() < 2:
+        return None
+    bk.surf[(t, e, cp)] = (F, x[keep], iv[keep], half[keep])
+    try:
+        m = bk.model(t, e, cp, k)
+    finally:
+        bk.surf[(t, e, cp)] = srf
+    return m
+
+
+def clean_paths(bk, T, legs):
+    """Quote guard: a listed mid far from the leave-one-out smile value of the same date (a bad print in the
+    database) is replaced by that value and its half-spread. Bad = |mid - model| > max(25% of the larger of the
+    two, 4 half-spreads, 0.1% of the underlying)."""
+    for i, (kind, cp, e, k, q) in enumerate(legs):
+        if kind != "O" or f"m{i}" not in T:
+            continue
+        for t in T.index:
+            mid, half = T.at[t, f"m{i}"], T.at[t, f"h{i}"]
+            if not np.isfinite(mid):
+                continue
+            m = loo_model(bk, t, e, cp, k)
+            GUARD["checked"] += 1
+            if m is None:
+                continue
+            mv, mh = m
+            S = bk.und.px(t)
+            tol = max(0.25 * max(mv, mid), 4 * max(half, mh), 0.001 * S if np.isfinite(S) else 0.0)
+            if abs(mid - mv) > tol:
+                T.at[t, f"m{i}"], T.at[t, f"h{i}"] = mv, mh
+                GUARD["replaced"] += 1
+    return T
+
+
 def continuous_book(bk, struct, mgmt, vix):
     """One position at a time, redeployed on the exit close. Returns cycles and daily P&L increments (per unit of
     the underlying notional at each cycle's entry, scaled to the first cycle's notional is NOT done: each cycle is a
@@ -107,6 +161,8 @@ def continuous_book(bk, struct, mgmt, vix):
             continue
         d, legs, front = op
         T = L.cycle_paths(bk, d, legs, front)
+        if CLEAN:
+            T = clean_paths(bk, T, legs)
         r = L.evaluate(bk, d, legs, front, T, mgmt, FILL)
         if r is None:
             nxt = bk.dates[bk.dates > np.datetime64(d)]
@@ -143,6 +199,15 @@ def _iv_delta(bk, t, e, cp, k, S, mid):
     return abs(L.bs_delta(cp, S, k, T, 0.5 * (lo + hi)))
 
 
+def clean_path(bk, e, cp, k, p):
+    """The quote guard on one contract's path (DataFrame with mid, half)."""
+    if not CLEAN or not len(p):
+        return p
+    T = pd.DataFrame({"m0": p["mid"], "h0": p["half"]})
+    T = clean_paths(bk, T, [("O", cp, e, k, 1)])
+    return pd.DataFrame({"mid": T.m0, "half": T.h0})
+
+
 def roll_untested_book(bk, struct, mgmt, max_rolls=2):
     """Continuous strangle book with the untested side rolled toward the money (see docstring)."""
     t = first_entry(bk, struct)
@@ -160,7 +225,7 @@ def roll_untested_book(bk, struct, mgmt, max_rolls=2):
         open_legs = []                       # [cp, k, q, path]
         cash = 0.0
         for kind, cp, e, k, q in legs:
-            p = bk.path(e, cp, k, d, front)
+            p = clean_path(bk, e, cp, k, bk.path(e, cp, k, d, front))
             if not len(p) or p.index[0] != d:
                 open_legs = None
                 break
@@ -209,7 +274,7 @@ def roll_untested_book(bk, struct, mgmt, max_rolls=2):
                         old = call[0] if side == "C" else put[0]
                         closer = k_new is not None and ((side == "C" and k_new < old[1]) or (side == "P" and k_new > old[1]))
                         if closer:
-                            pn = bk.path(front, side, k_new, dd, front)
+                            pn = clean_path(bk, front, side, k_new, bk.path(front, side, k_new, dd, front))
                             if len(pn) and pn.index[0] == dd and dd in old[3].index:
                                 cash += old[2] * (float(old[3].mid.loc[dd]) - np.sign(old[2]) * FILL *
                                                   float(old[3].half.loc[dd])) - COMM * abs(old[2])
@@ -243,6 +308,31 @@ def roll_untested_book(bk, struct, mgmt, max_rolls=2):
     return pd.DataFrame(cycles), incs
 
 
+def monthly_schedule(bk, struct):
+    """T0: the original monthly schedule (entry about 45 days before each third Friday) with the quote guard;
+    every exit rule on the same entries. Rows: entry, mgmt, pnl."""
+    rows = []
+    for d in L.entry_dates(bk, 45):
+        S = bk.und.px(d)
+        if not np.isfinite(S):
+            continue
+        bp = L.build_position(bk, d, struct, 45, S)
+        if bp is None:
+            continue
+        legs, front = bp
+        if L.strike_parity_breaks(bk, d, legs, front):
+            continue
+        T = L.cycle_paths(bk, d, legs, front)
+        if CLEAN:
+            T = clean_paths(bk, T, legs)
+        for mg in EXITS:
+            r = L.evaluate(bk, d, legs, front, T, mg, FILL)
+            if r is not None:
+                rows.append({"entry": d, "exit": r["exit"], "mgmt": mg, "pnl": r["pnl"], "credit": r["credit"],
+                             "und_ret": bk.und.tr(d, r["exit"])})
+    return pd.DataFrame(rows)
+
+
 def earnings_trades(sym, bk, und, earn):
     out = []
     import options_edges_lab as OE
@@ -274,7 +364,7 @@ def earnings_trades(sym, bk, und, earn):
         for name, legs in books.items():
             v0, v1, ok = 0.0, 0.0, True
             for cp, kk, q in legs:
-                p = bk.path(e, cp, kk, d0, d1)
+                p = clean_path(bk, e, cp, kk, bk.path(e, cp, kk, d0, d1))
                 if not len(p) or p.index[0] != d0 or d1 not in p.index:
                     ok = False
                     break
@@ -303,7 +393,7 @@ def stage_symbols(a):
         Ed.columns = [c.lower() for c in Ed.columns]
         Ed["date"] = pd.to_datetime(Ed["date"], errors="coerce")
         E = {k: pd.DatetimeIndex(sorted(v.dropna().unique())) for k, v in Ed.groupby("act_symbol").date}
-    meta, cyc, ern, mtm = {}, [], [], []
+    meta, cyc, ern, mtm, sched = {}, [], [], [], []
     for sym in syms:
         if f"{sym}_raw" not in X.columns:
             continue
@@ -318,6 +408,11 @@ def stage_symbols(a):
             meta[sym] = {"error": repr(ex)[:300]}
             continue
         m = {"chain_dates": int(len(bk.dates))}
+        for sname, struct in BOOK_STRUCTS.items():
+            t0 = monthly_schedule(bk, struct)
+            if len(t0):
+                t0["symbol"], t0["struct"] = sym, sname
+                sched.append(t0)
         if sym in ETFS:
             for sname, struct in BOOK_STRUCTS.items():
                 for mg in EXITS:
@@ -345,6 +440,8 @@ def stage_symbols(a):
             r = earnings_trades(sym, bk, und, E[sym])
             ern.extend(r)
             m["earnings_trades"] = len(r)
+        m["quote_guard"] = dict(GUARD)
+        GUARD["checked"] = GUARD["replaced"] = 0
         meta[sym] = m
         print(sym, m, flush=True)
     tag = a.group.replace("/", "of")
@@ -354,6 +451,8 @@ def stage_symbols(a):
         pd.concat(mtm, ignore_index=True).to_csv(os.path.join(a.out, f"mtm_{tag}.csv.gz"), index=False)
     if ern:
         pd.DataFrame(ern).to_csv(os.path.join(a.out, f"earnings_{tag}.csv.gz"), index=False)
+    if sched:
+        pd.concat(sched, ignore_index=True).to_csv(os.path.join(a.out, f"schedule_{tag}.csv.gz"), index=False)
     json.dump(meta, open(os.path.join(a.out, f"meta_{tag}.json"), "w"), indent=1, default=str)
 
 
@@ -384,7 +483,7 @@ def describe(m, und_m=None):
 
 def stage_combine(a):
     dirs = [d for d in a.inputs.split(",") if d]
-    C, M, R = [], [], []
+    C, M, R, Sd = [], [], [], []
     for d in dirs:
         for f in os.listdir(d):
             p = os.path.join(d, f)
@@ -394,6 +493,8 @@ def stage_combine(a):
                 M.append(pd.read_csv(p, parse_dates=["day"]))
             elif f.startswith("earnings_"):
                 R.append(pd.read_csv(p, parse_dates=["earnings", "entry", "exit", "expiry"]))
+            elif f.startswith("schedule_"):
+                Sd.append(pd.read_csv(p, parse_dates=["entry", "exit"]))
     os.makedirs(a.out, exist_ok=True)
     tests, books = [], []
     X = pd.read_csv(a.closes, parse_dates=["date"]).set_index("date").sort_index() if a.closes else None
@@ -472,6 +573,28 @@ def stage_combine(a):
                           "mean_trade_pct": float(g.pnl.mean() * 100), "median_trade_pct": float(g.pnl.median() * 100),
                           "worst_trade_pct": float(g.pnl.min() * 100), "win_rate": float((g.pnl > 0).mean()),
                           "years_positive": f"{int((yrs > 0).sum())}/{len(yrs)}"})
+    if Sd:
+        Sd = pd.concat(Sd, ignore_index=True)
+        Sd = Sd[Sd.exit <= END]
+        Sd.to_csv(os.path.join(a.out, "schedule_cycles.csv.gz"), index=False)
+        Sd["group"] = np.where(Sd.symbol.isin(ETFS), "4 ETFs", "single stocks")
+        Sd["implausible"] = Sd.pnl < -(Sd.und_ret.abs() + 0.05)
+        imp = Sd.groupby(["group", "mgmt"]).implausible.mean().unstack()
+        imp.to_csv(os.path.join(a.out, "schedule_implausible_share.csv"))
+        W = Sd.pivot_table(index=["symbol", "struct", "entry"], columns="mgmt", values="pnl")
+        for sname in BOOK_STRUCTS:
+            for grp in ("4 ETFs", "single stocks"):
+                for mg in EXITS[1:]:
+                    w = W.loc[[i for i in W.index if i[1] == sname and ((i[0] in ETFS) == (grp == "4 ETFs"))]]
+                    if mg not in w or "H" not in w or not len(w):
+                        continue
+                    dif = (w[mg] - w["H"]).dropna()
+                    ent = pd.DatetimeIndex([i[2] for i in dif.index])
+                    mo = dif.groupby(ent.to_period("M")).mean()
+                    tests.append({"test": f"T0 {sname} {mg} vs hold, monthly schedule, {grp}", "family": "T0",
+                                  "primary": grp == "4 ETFs", **describe(mo), "cycles": int(len(dif)),
+                                  "mean_cycle_diff_bp": float(dif.mean() * 1e4),
+                                  "share_better": float((dif > 0).mean())})
     T = pd.DataFrame(tests)
     if len(T):
         from scipy import stats as st

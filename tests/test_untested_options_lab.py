@@ -97,3 +97,23 @@ def test_vix_weights():
     assert abs(U.vix_weight(12) - 0.25 / 0.30) < 1e-12
     assert abs(U.vix_weight(45) - 0.50 / 0.30) < 1e-12
     assert U.vix_weight(np.nan) == 1.0
+
+
+def test_quote_guard_replaces_a_bad_print_at_the_exit():
+    C, und = _chain()
+    bk0 = L.Book(C.copy(), und)
+    vix = pd.Series(18.0, index=pd.bdate_range("2023-12-01", "2024-08-01"))
+    clean, _ = U.continuous_book(bk0, U.BOOK_STRUCTS["STRG16"], "D21", vix)
+    r0 = clean.iloc[0]
+    legs, front = L.build_position(bk0, r0.entry, U.BOOK_STRUCTS["STRG16"], 45, und.px(r0.entry))
+    bad = C.copy()
+    for kind, cp, e, k, q in legs:          # a bad print on the two held strikes only, on the exit date
+        sel = (bad.date == r0.exit) & (bad.expiration == e) & (bad.cp == cp) & (bad.strike == k)
+        assert sel.sum() == 1
+        bad.loc[sel, ["bid", "ask", "mid"]] = bad.loc[sel, ["bid", "ask", "mid"]] * 5
+    U.CLEAN = False
+    raw, _ = U.continuous_book(L.Book(bad.copy(), und), U.BOOK_STRUCTS["STRG16"], "D21", vix)
+    U.CLEAN = True
+    fixed, _ = U.continuous_book(L.Book(bad.copy(), und), U.BOOK_STRUCTS["STRG16"], "D21", vix)
+    assert raw.pnl.iloc[0] < r0.pnl - 0.003            # the bad print shows up as a large fake loss
+    assert abs(fixed.pnl.iloc[0] - r0.pnl) < 0.001      # the guard removes it
