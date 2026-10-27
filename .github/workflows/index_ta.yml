@@ -1,0 +1,72 @@
+name: index-intraday-ta
+# scripts/index_intraday_ta_lab.py: the strategy catalog on US500 / NAS100 CFD bars M5-H4 (Dukascopy 2019-2025, cash
+# hours), walk-forward with costs and CFD financing. Bars from the Dukascopy run named in ci/INDEX_TA.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/INDEX_TA"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  OMP_NUM_THREADS: "1"
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        include: [{"symbol": "USA500IDXUSD", "tf": "M5"}, {"symbol": "USA500IDXUSD", "tf": "M15"}, {"symbol": "USA500IDXUSD", "tf": "M30"}, {"symbol": "USA500IDXUSD", "tf": "H1"}, {"symbol": "USA500IDXUSD", "tf": "H4"}, {"symbol": "USATECHIDXUSD", "tf": "M5"}, {"symbol": "USATECHIDXUSD", "tf": "M15"}, {"symbol": "USATECHIDXUSD", "tf": "M30"}, {"symbol": "USATECHIDXUSD", "tf": "H1"}, {"symbol": "USATECHIDXUSD", "tf": "H4"}]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read DUKA REST < ci/INDEX_TA
+          gh run download $DUKA -p "dk-${{ matrix.symbol }}-*" -D dl
+          python ci/place_m1.py dl data/m1 && rm -rf dl
+      - run: timeout 320m python scripts/index_intraday_ta_lab.py --symbol ${{ matrix.symbol }} --tf ${{ matrix.tf }} --out out/ix || echo "stopped at the time limit; rows so far are kept"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ix-${{ matrix.symbol }}-${{ matrix.tf }}
+          path: out/ix/rows_*.csv
+          retention-days: 30
+  combine:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy scipy pyarrow numba
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: ix-*
+          path: ix
+          merge-multiple: true
+      - run: python scripts/index_intraday_ta_lab.py --combine ix --out pub 2>&1 | tee combine_log.txt
+      - name: Publish to the index-intraday-ta branch
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/runs && cp ix/rows_*.csv pub/runs/ && cp combine_log.txt pub/
+          cp -r pub /tmp/pub
+          git checkout --orphan ix-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p index_intraday_ta && cp -r /tmp/pub/* index_intraday_ta/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > index_intraday_ta/RUN.txt
+          git add -f index_intraday_ta
+          git commit -qm "Strategy catalog on US index CFDs M5-H4 (run ${{ github.run_id }})"
+          git push -f origin HEAD:index-intraday-ta
