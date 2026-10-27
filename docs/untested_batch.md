@@ -35,6 +35,12 @@ downloading and this page will be updated.**
 - **Many retail rules have real gross edges that the spread removes:** night scalping, candle-pattern fades, the
   gold London breakout, the EURJPY Gotobi trade, US index opening-range breakouts.
 - 7 of 100 tests survive Benjamini-Hochberg at q <= 0.10 (section 6).
+- **Second batch (section 8):**
+  - the whole strategy catalog on 33 daily stock-index, ETF, bond, commodity and crypto markets: no family
+    beats buy-and-hold after correction;
+  - boosted three-outcome ML entries with three targets beat random entries but lose 5 bp a trade after costs;
+  - cost-aware tuning does not rescue the cost-killed rules, except EURJPY Gotobi in the same overnight form as
+    the USD/JPY result.
 
 ## 2. Data problems found on the way
 
@@ -261,3 +267,99 @@ Interim, 100 primary tests (`docs/untested_batch/summary.csv`; FTSE overnight ex
 - **The daily anomalies are tradeable in principle but not obviously at a prop firm:** D1 holds over weekends, D2
   is a bond-ETF trade, D5 pays overnight CFD financing. Each would need its own firm-rule check before use.
 - **For the many cost-killed rules, the spread is the binding constraint, not the signal.**
+
+## 8. Second batch: the strategy catalog on other markets, boosted ML entries, cost-aware tuning
+
+### 8.1 The full catalog on 33 daily markets (`scripts/cross_market_ta_lab.py`, branch `cross-market`, run 40562840315)
+
+**Setup:**
+- **Markets:** 16 US stock, sector and country ETFs; the DAX, CAC 40, Euro Stoxx 50, Nikkei 225 and Hang Seng;
+  4 bond ETFs; 6 commodity ETFs; Bitcoin and Ether. Daily bars from 1993 (or listing) to 2025.
+- **Prices:** excess-return prices (dividends in, the cash rate out), so a long earns the return over cash, as on
+  a CFD.
+- **Costs and financing:** each market's one-way cost (1-12 bp), plus a 2.5% a year overnight financing mark-up
+  (5% for crypto).
+- **Strategies:** 64 families: the 53 single-market families of the FX catalog plus 11 new daily ones
+  (`fxlab/strategies/daily.py`: internal bar strength, double 7s, cumulative RSI, n down days, 52-week high,
+  Faber timing, absolute momentum, volatility target, Halloween, option-expiration week, VIX spike).
+- **Tuning:** the project's own walk-forward. Each 6-month block trades the best of 12 settings on the previous
+  3 years.
+- **Test:** alpha against buying and holding the same markets.
+
+**Results** (2,112 family-market pairs, no errors):
+
+- **No family beats buy-and-hold after correction** (best q 0.91). The median pair has an out-of-sample Sharpe
+  of -0.09, against a median of +0.43 for simply holding the market.
+- **1.3% of pairs have an alpha t above 2, fewer than chance (2.3%); 10.6% have an alpha t below -2.**
+- **The strongest pairs repeat one idea, short-term dip-buying in US stock ETFs:**
+
+  | Market | Family | Sharpe | Alpha a year | Alpha t | Sharpe at 2x costs |
+  |---|---|---|---|---|---|
+  | XLF | Connors RSI(2) | 0.56 | +8.6% | 3.63 | 0.50 |
+  | SPY | Connors RSI(2) | 0.52 | +3.9% | 2.88 | 0.45 |
+  | SPY | cumulative RSI | 0.53 | +3.3% | 2.78 | 0.47 |
+  | XLY | Connors RSI(2) | 0.54 | +4.6% | 2.76 | 0.46 |
+  | XLF | internal bar strength | 0.60 | +12.4% | 2.74 | 0.46 |
+  | BTC | Turtle | 0.88 | +23.8% | 2.72 | 0.84 |
+
+  - Pooled over the 16 stock ETFs, Connors RSI(2) has an alpha t of 3.0 and cumulative RSI 2.9. Across all 33
+    markets they fall to 1.3 and 1.8, because the same rules earn nothing on bonds, commodities and crypto.
+  - It is the same effect as the daily D1 test in section 4: real on US stock indices, weaker after 2018, and not
+    significant once all the families and markets tried are counted.
+  - Trend rules (Turtle, Faber, Donchian, moving averages) do best on crypto (alpha t 1.6-2.8) and are negative
+    on bonds.
+- **The worst families are the pattern and reversal rules:** Gann, false breakouts, stochastic reversal,
+  weekend-gap fade, support-resistance reversal (alpha t -3.9 to -5.1).
+
+### 8.2 Boosted three-outcome ML entries with three targets (`scripts/ml_entry_lab.py`, same run)
+
+**Setup:**
+- **Model:** one LightGBM model across the 33 markets. For each day it learns three outcomes of a trade opened at
+  the next open: +2 ATR touched first, -2 ATR first, or neither within 10 days.
+- **Features:** 49, fixed in advance (returns from 1 day to 1 year, RSI, internal bar strength, distance to
+  averages and highs/lows, volatility, VIX, the yield-curve slope, S&P 500 moves, the asset class).
+- **Training:** retrained every year on earlier years only; no tuning. Test years 2007-2025 (earlier years
+  had too few markets to train on).
+- **Entry:** its top 10% of signals, long or short.
+- **Exits:** three take-profits, a third each at +1, +2 and +3 ATR, with the stop at entry after the first.
+- **Check:** compared with 200 sets of random entries with the same markets, years, trade counts and long/short
+  mix.
+
+**Results:**
+
+| Exit | Trades | Net bp a trade | t | Hit rate | Random entries |
+|---|---|---|---|---|---|
+| Three targets (primary) | 9,799 | -5.1 | -0.64 | 61% | -18.9 bp (model better, p < 0.005) |
+| One target at 2 ATR (the labelled trade) | 9,454 | -5.5 | -0.54 | 49% | - |
+| Time exit after 10 days | 6,941 | -7.8 | -0.53 | 48% | - |
+
+- **The model picks better trades than chance, by about 14 bp a trade, but not good enough to cover costs.**
+  - Its longs make +10.9 bp (t 0.9) and its shorts lose 25.3 bp (t -2.5).
+  - It is positive in 8 of 19 years.
+- **Three targets raise the hit rate** (61% against 49% with one target) **without raising the mean.**
+- **Its most-used inputs are the yield-curve slope, the month and the VIX:** market regime, not price patterns.
+
+### 8.3 Cost-aware tuning of the rules that earn before costs (`scripts/cost_tuning_lab.py`, branch `cost-tuning`, run 40562234862; pass 1)
+
+Each year trades the setting that did best in all earlier years, from fixed grids of 8-54 settings:
+
+| Rule | Tested years | Settings | Net bp a trade, tuned | t | Untuned rule, same years |
+|---|---|---|---|---|---|
+| Night scalping AUDNZD | 2010-2018 | 54 | -4.5 | -4.3 | -6.4 |
+| Night scalping EURGBP | 2010-2018 | 54 | +4.0 (100 trades) | 1.1 | -3.1 |
+| Night scalping GBPCAD | 2011-2018 | 54 | -3.3 | -1.7 | -5.9 |
+| Fading pin bars, EURUSD | 2010-2022 | 24 | -0.1 | -0.1 | -0.4 |
+| Fading inside bars, EURUSD | 2010-2022 | 24 | -0.6 | -1.0 | -0.6 |
+| Gold London breakout | 2014-2018 | 36 | +0.2 | 0.1 | -2.0 |
+| US500 opening-range breakout | 2022-2025 | 18 | -0.7 | -0.3 | +1.8 |
+| NAS100 opening-range breakout | 2022-2025 | 18 | -0.5 | -0.2 | +0.8 |
+| **EURJPY Gotobi** | **2010-2019** | **8** | **+5.0** | **2.8** | +2.5 |
+
+- **Tuning narrows the night-scalping losses but does not turn them positive** (EURGBP's +4.0 is not
+  significant).
+- **The fades, gold and the index breakouts stay at zero.**
+- **EURJPY Gotobi is the exception:** the tuning picked the same setting in every year, the overnight form of
+  section 5.1 (buy 23:00 Tokyo the evening before, stop at half the 20-day range).
+  - It is the USD/JPY result appearing on a second pair.
+  - The 2019-2025 files hold only the 03:00 entry window, so 2019 has 8 trades and later years none. A per-year
+    download of the missing hours is running.
