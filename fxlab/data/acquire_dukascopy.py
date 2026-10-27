@@ -78,7 +78,9 @@ def fetch_hour(pair: str, hour: datetime, retries: int = 6) -> bytes:
 
 def download_year(pair: str, year: int, start: datetime | None = None, end: datetime | None = None, workers: int = 8,
                   hours_utc: set | None = None, weekdays: set | None = None, dates: set | None = None,
-                  suffix: str = ""):
+                  suffix: str = "", deadline: float | None = None):
+    """deadline: time.time() after which no new hour is requested (the rest count as failed), so a job that the
+    feed throttles still writes what it fetched before its time limit."""
     from fxlab.data.acquire_fxdata_git import clean_ticks, ticks_to_m1, parquet_path, sha256_file, append_manifest
     s = start or datetime(year, 1, 1)
     e = end or datetime(year + 1, 1, 1)
@@ -98,6 +100,9 @@ def download_year(pair: str, year: int, start: datetime | None = None, end: date
     failed = []
 
     def get(hh):
+        if deadline is not None and time.time() > deadline:
+            failed.append(hh)
+            return hh, b""
         try:
             return hh, fetch_hour(pair, hh)
         except FetchFailed:
@@ -134,6 +139,7 @@ def main(argv=None):
     ap.add_argument("--dates-file", default="", help="file with one YYYY-MM-DD per line: fetch only those dates")
     ap.add_argument("--suffix", default="", help="suffix of the output parquet name (partial downloads)")
     ap.add_argument("--workers", type=int, default=8)
+    ap.add_argument("--deadline-min", type=float, default=0, help="stop requesting new hours after this many minutes")
     a = ap.parse_args(argv)
 
     def rng(spec):
@@ -152,13 +158,14 @@ def main(argv=None):
     if a.dates_file:
         dates = {datetime.fromisoformat(x.strip()).date() for x in open(a.dates_file) if x.strip()}
     s, e = datetime.fromisoformat(a.start), datetime.fromisoformat(a.end)
+    dl = time.time() + 60 * a.deadline_min if a.deadline_min else None
     if e >= datetime(2026, 1, 1):
         print("NOTE: data from 2026 onward is the locked holdout; it is stored but every loader refuses it "
               "until candidates are frozen and the holdout is explicitly unlocked.")
     for p in a.pairs:
         for y in range(s.year, e.year + 1):
             print(p, y, download_year(p, y, max(s, datetime(y, 1, 1)), min(e, datetime(y + 1, 1, 1)), workers=a.workers,
-                                      hours_utc=hours, weekdays=wds, dates=dates, suffix=a.suffix))
+                                      hours_utc=hours, weekdays=wds, dates=dates, suffix=a.suffix, deadline=dl))
 
 
 if __name__ == "__main__":

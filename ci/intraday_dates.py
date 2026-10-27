@@ -12,5 +12,8 @@ mode = sys.argv[1]
 hol = FL.jp_holidays(range(2019, 2026))
 G = [d for d in FL.gotobi_days("2019-01-01", "2025-12-31", hol) if d.weekday() != 0]
 days = G if mode == "gotobi" else [d - pd.Timedelta(days=1) for d in G]
+if len(sys.argv) > 2:                                   # optional year filter (the Gotobi day's year)
+    yr = int(sys.argv[2])
+    days = [x for x, g in zip(days, G) if g.year == yr]
 for d in days:
     print(d.date().isoformat())

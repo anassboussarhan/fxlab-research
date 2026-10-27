@@ -39,7 +39,7 @@ jobs:
           mkdir -p dl
           for s in ${{ matrix.syms }}; do
             if [ "$MIRROR" != "none" ]; then gh run download $MIRROR -p "mm-$s-*" -D dl/mm || echo "no mirror bars for $s"; fi
-            if [ "$DUKA" != "none" ]; then gh run download $DUKA -p "dk-$s-*" -D dl/dk || echo "no Dukascopy bars for $s"; fi
+            if [ "$DUKA" != "none" ]; then for D in $(echo "$DUKA" | tr ',' ' '); do gh run download $D -p "dk-$s-*" -D dl/dk_$D || echo "no Dukascopy bars for $s in run $D"; done; fi
             if [ "$s" = "USDJPY" ] && [ "$USDJPY" != "none" ]; then gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj || echo "no USDJPY months"; fi
           done
           du -sh dl || true
