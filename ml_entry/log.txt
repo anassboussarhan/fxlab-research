@@ -1,0 +1,70 @@
+rows 187419 features 49 class shares {2: 0.348, 0: 0.331, 1: 0.321}
+skip 2001 2870 4268
+skip 2002 3842 6793
+skip 2003 7201 7138
+skip 2004 10781 7813
+skip 2005 14604 8899
+skip 2006 18893 9613
+year 2007 train 34192 thresholds 0.252 0.272 8s
+year 2008 train 40593 thresholds 0.16 0.437 14s
+year 2009 train 48102 thresholds 0.342 0.192 21s
+year 2010 train 55902 thresholds 0.362 0.193 29s
+year 2011 train 63713 thresholds 0.229 0.272 38s
+year 2012 train 71548 thresholds 0.185 0.27 47s
+year 2013 train 79307 thresholds 0.178 0.268 58s
+year 2014 train 87070 thresholds 0.172 0.266 69s
+year 2015 train 94868 thresholds 0.193 0.185 80s
+year 2016 train 102858 thresholds 0.142 0.185 93s
+year 2017 train 111058 thresholds 0.145 0.193 107s
+year 2018 train 119233 thresholds 0.153 0.174 121s
+year 2019 train 127486 thresholds 0.183 0.166 136s
+year 2020 train 135978 thresholds 0.194 0.121 152s
+year 2021 train 144537 thresholds 0.139 0.168 169s
+year 2022 train 153075 thresholds 0.156 0.122 188s
+year 2023 train 161619 thresholds 0.161 0.085 206s
+year 2024 train 170133 thresholds 0.173 0.064 227s
+year 2025 train 178611 thresholds 0.143 0.102 248s
+                                   0               1          2
+test                              M1              M2         M3
+variant                three targets  labelled trade  time exit
+trades                          9799            9454       6941
+mean_bp                         -5.1          -5.482     -7.778
+t                             -0.642          -0.539     -0.532
+p_one_sided                     0.74           0.705      0.703
+hit                            0.605           0.493      0.484
+long_share                     0.557           0.563       0.55
+years_positive                  8/19            8/19       9/19
+gross_bp                       4.684           5.467      7.483
+random_entry_mean_bp         -18.945             NaN        NaN
+random_entry_p                   0.0             NaN        NaN
+random_entry_gross_bp         -8.876             NaN        NaN
+random_entry_p_gross             0.0             NaN        NaN
+equity_bp                      -1.55          -1.434     -2.573
+equity_t                      -0.166          -0.115     -0.145
+index_bp                       -1.37           2.087    -25.875
+index_t                       -0.122           0.147     -1.166
+bond_bp                       -4.854          -5.748     -6.129
+bond_t                        -0.872          -0.873     -0.563
+commodity_bp                 -26.573          -31.59    -23.941
+commodity_t                   -1.924          -1.799     -0.969
+crypto_bp                     21.801          22.722     58.913
+crypto_t                       0.432           0.392      0.613
+long_bp                       10.949          11.758     29.467
+long_t                         0.914           0.771      1.342
+short_bp                     -25.262         -27.735    -53.258
+short_t                       -2.509          -2.167     -2.805
+term        0.1222
+month       0.0903
+vix         0.0865
+term_d21    0.0756
+vix_z       0.0673
+spy21       0.0544
+vix_d5      0.0449
+r252        0.0345
+spy5        0.0332
+dlo252      0.0267
+vol63       0.0249
+dlo20       0.0235
+dhi252      0.0233
+dma200      0.0219
+atr_pct     0.0217
