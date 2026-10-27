@@ -49,6 +49,8 @@ IMPLEMENTATION CONVENTIONS (fixed with the rules):
     mean high-low of the previous 20 complete FX trading days (>= 1200 M1 bars), because the 2019-2025 files hold only
     the hours around the weekend.
   * Index CFDs (I11, I12) exist only in the 2019-2025 Dukascopy files; their positions are intraday (no financing).
+  * Path tests skip a day whose bars cover less than 95% (I12b) or 90% (I9, I10) of the minutes they span: some
+    hourly Dukascopy files could not be fetched (added before any index result was seen).
 Usage: python scripts/untested_intraday_lab.py --out DIR [--only tokyo,eurusd,night,gold,gap,review,index]"""
 from __future__ import annotations
 
@@ -161,6 +163,13 @@ def jst(d, h, m):
 
 def utc(d, h, m=0):
     return pd.Timestamp(d.date()).tz_localize("UTC") + pd.Timedelta(hours=h, minutes=m)
+
+
+def complete(bk, i, j, frac):
+    """True when bars i..j cover at least `frac` of the minutes between them. The 2019-2025 Dukascopy files miss
+    5-13% of the hours (HTTP 503 after every retry); a path test over a hole would miss stop touches."""
+    mins = (bk.idx[j] - bk.idx[i]).total_seconds() / 60
+    return mins <= 0 or (j - i) >= frac * mins
 
 
 def first_after(bk, ts, tol_min):
@@ -405,7 +414,7 @@ def gold_london(res, bk=None):
         a, b = FL.local_ts(d, "Europe/London", 0, 0), FL.local_ts(d, "Europe/London", 7, 0)
         e = FL.local_ts(d, "Europe/London", 16, 0)
         ia, ib, ie = bk.idx.searchsorted([a, b, e])
-        if ib - ia < 200 or ie <= ib:
+        if ib - ia < 200 or ie <= ib or not complete(bk, ib, min(ie, len(bk.idx) - 1), 0.9):
             continue
         hi, lo = mid[ia:ib].max(), mid[ia:ib].min()
         seg = mid[ib:ie]
@@ -464,7 +473,7 @@ def weekend_gap(sym, bk=None):
             continue
         side = -1 if gap > 0 else +1
         j = first_after(bk, idx[i] + pd.Timedelta(hours=24), 30)
-        if j <= i:
+        if j <= i or not complete(bk, i, j, 0.9):
             continue
         r = bk.bracket(i, j, side, abs(gap), abs(gap))
         if r is not None:
@@ -514,7 +523,7 @@ def orb_trail(bk, d, tz, open_hm, close_hm, rng_min=30):
     t_rng = t_open + pd.Timedelta(minutes=rng_min)
     t_close = FL.local_ts(d, tz, *close_hm)
     i0, i1, iz = bk.at(t_open, 3), bk.at(t_rng, 3), bk.at(t_close, 10)
-    if min(i0, i1, iz) < 0 or not (i0 < i1 < iz):
+    if min(i0, i1, iz) < 0 or not (i0 < i1 < iz) or not complete(bk, i0, iz, 0.95):
         return None
     bk._hl()
     hi, lo = bk.mh[i0:i1].max(), bk.ml[i0:i1].min()
