@@ -16,7 +16,7 @@ review (`docs/tastytrade.md`) and the free-data list, with no assumption about w
     the rate-differential swap.
 - Every intraday result is also given gross (mid prices, no costs), so a signal that costs kill is told apart from
   no signal.
-- Benjamini-Hochberg runs over all primary tests together (100 so far) (`docs/untested_batch/summary.csv`).
+- Benjamini-Hochberg runs over all primary tests together, 100 so far (`docs/untested_batch/summary.csv`).
 
 ## 1. Headline
 
@@ -218,7 +218,8 @@ Each Gotobi test also ran on a control: the same trade on Tuesday-Friday busines
 ### 5.3 Index CFDs (2019-2025; downloading)
 
 I11 (index-review closing auctions on FTSE, CAC, SMI) and I12 (US500/NAS100 intraday momentum; opening-range
-breakout with breakeven and trailing on US500, NAS100, DAX, FTSE) need the Dukascopy index files.
+breakout with breakeven and trailing on US500, NAS100, DAX, FTSE) need the Dukascopy index files. The US500 and NAS100 results so far:
+
 | Test | Trades | Net bp | t | Gross bp | Gross t | Years positive |
 |---|---|---|---|---|---|---|
 | I12a US500, first half-hour sign held 15:30-16:00 New York | 1,299 | -2.41 | -2.52 | +0.03 | 0.03 | 0/7 |
@@ -229,7 +230,7 @@ breakout with breakeven and trailing on US500, NAS100, DAX, FTSE) need the Dukas
 - **Neither US index rule has an edge.** The intraday-momentum effect is zero before costs on the CFDs in
   2019-2025; the opening-range breakout with trailing stops makes 2 bp before costs and nothing after.
 - NAS100 2024-2025 and the DAX, FTSE, CAC and SMI files (I11, the rest of I12) are still downloading.
-- About 22% of the requested index minutes are missing (hours Dukascopy refused after every retry); days with
+- 5-13% of the requested index hours could not be fetched (Dukascopy refused them after every retry). Days with
   holes in the session are skipped, which is why US500 has 1,111 breakout days rather than about 1,760.
 
 ## 6. All tests together
