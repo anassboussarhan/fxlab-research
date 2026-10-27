@@ -40,7 +40,7 @@ downloading and this page will be updated.**
     beats buy-and-hold after correction;
   - boosted three-outcome ML entries with three targets beat random entries but lose 5 bp a trade after costs;
   - cost-aware tuning does not rescue the cost-killed rules, except EURJPY Gotobi in the same overnight form as
-    the USD/JPY result.
+    the USD/JPY result: +4.67 bp a trade, t 2.89, on 2019-2025.
 
 ## 2. Data problems found on the way
 
@@ -361,11 +361,16 @@ Each year trades the setting that did best in all earlier years, from fixed grid
 - **Tuning narrows the night-scalping losses but does not turn them positive** (EURGBP's +4.0 is not
   significant).
 - **The fades, gold and the index breakouts stay at zero.**
-- **EURJPY Gotobi is the exception:** the tuning picked the same setting in every year, the overnight form of
+- **EURJPY Gotobi is the exception:** the tuning picked the same entry in every year, the overnight form of
   section 5.1 (buy 23:00 Tokyo the evening before, stop at half the 20-day range).
   - It is the USD/JPY result appearing on a second pair.
-  - The 2019-2025 files hold only the 03:00 entry window, so 2019 has 8 trades and later years none. A per-year
-    download of the missing hours is running.
+  - **2019-2025 check (pass 2, run 40590254234, with the missing hours downloaded): +4.67 bp a trade, t 2.89,
+    371 trades, positive in 6 of 7 years** (2021: -1.0 bp). Over 2010-2025: +4.90 bp, t 3.93.
+  - The walk-forward kept the 23:00 entry throughout; it dropped the stop from 2023. In 2019-2022 the stop's
+    20-day range came from files holding only the hours around the trade, which made it tighter than designed;
+    the no-stop form is unaffected.
+  - EURJPY moves with USD/JPY (both are yen pairs), so this confirms the same Gotobi yen flow rather than adding
+    an independent edge.
 
 ### 8.4 The strategy catalog on US500 and NAS100 intraday bars (`scripts/index_intraday_ta_lab.py`, branch `index-intraday-ta`, run 40567551158)
 
