@@ -1,0 +1,100 @@
+name: cost-tuning
+# scripts/cost_tuning_lab.py (grids and walk-forward fixed in its docstring) on the bars of the runs named in
+# ci/COST_TUNING (intraday-mirror, intraday-duka, gotobi-oos USDJPY months).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/COST_TUNING"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {group: night, syms: "AUDNZD EURGBP GBPCAD"}
+          - {group: fades, syms: "EURUSD"}
+          - {group: gold, syms: "XAUUSD"}
+          - {group: eurjpy, syms: "EURJPY"}
+          - {group: orb, syms: "USA500IDXUSD USATECHIDXUSD"}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow scipy holidays pytest
+      - run: python -m pytest -q tests/test_untested_intraday_lab.py tests/test_cost_tuning_lab.py
+      - name: Download the bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRROR DUKA USDJPY REST < ci/COST_TUNING
+          mkdir -p dl
+          for s in ${{ matrix.syms }}; do
+            if [ "$MIRROR" != "none" ]; then gh run download $MIRROR -p "mm-$s-*" -D dl/mm || echo "no mirror bars for $s"; fi
+            if [ "$DUKA" != "none" ]; then gh run download $DUKA -p "dk-$s-*" -D dl/dk || echo "no Dukascopy bars for $s"; fi
+            if [ "$s" = "USDJPY" ] && [ "$USDJPY" != "none" ]; then gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj || echo "no USDJPY months"; fi
+          done
+          du -sh dl || true
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+      - name: Lab ${{ matrix.group }}
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          mkdir -p out/${{ matrix.group }}
+          cp results/m1_coverage.json out/${{ matrix.group }}/ || true
+          python scripts/cost_tuning_lab.py --out out/${{ matrix.group }} --only ${{ matrix.group }} 2>&1 | tee out/${{ matrix.group }}/log.txt
+          python - <<'PY'
+          import pandas as pd, os
+          f = "out/${{ matrix.group }}/tests.csv"
+          if os.path.exists(f) and os.path.getsize(f) > 1:
+              for _, r in pd.read_csv(f).iterrows():
+                  print(f"::notice title={r.rule} {r.instrument}::OOS n {r.oos_trades} mean {r.oos_mean_bp:.2f}bp t {r.oos_t:.2f} gross {r.oos_gross_bp:.2f} | 2019-25 {r.oos_2019_2025_bp:.2f}bp t {r.oos_2019_2025_t:.2f} | prereg {r.prereg_mean_bp:.2f}bp | hindsight {r.hindsight_mean_bp:.2f}bp ({r.hindsight_setting})")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ct-${{ matrix.group }}
+          path: out
+          retention-days: 30
+  publish:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q pandas
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: ct-*
+          path: pub
+          merge-multiple: true
+      - name: Publish to the cost-tuning branch
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          python - <<'PY'
+          import glob, pandas as pd
+          fs = [f for f in glob.glob("pub/*/tests.csv")]
+          T = pd.concat([pd.read_csv(f) for f in fs if open(f).read().strip()], ignore_index=True) if fs else pd.DataFrame()
+          T.to_csv("pub/tests_all.csv", index=False)
+          print(T.to_string())
+          PY
+          cp -r pub /tmp/pub
+          IN="$(cat ci/COST_TUNING)"
+          git checkout --orphan ct-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p cost_tuning && cp -r /tmp/pub/* cost_tuning/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ); bars from runs (mirror, duka, usdjpy): $IN" > cost_tuning/RUN.txt
+          git add -f cost_tuning
+          git commit -qm "Cost-aware tuning (run ${{ github.run_id }})"
+          git push -f origin HEAD:cost-tuning
