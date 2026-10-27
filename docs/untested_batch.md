@@ -334,6 +334,9 @@ Interim, 100 primary tests (`docs/untested_batch/summary.csv`; FTSE overnight ex
 | Time exit after 10 days | 6,941 | -7.8 | -0.53 | 48% | - |
 
 - **The model picks better trades than chance, by about 14 bp a trade, but not good enough to cover costs.**
+  - The edge over chance is real direction skill, not just picking volatile times: before costs the model's
+    trades make +4.7 bp against -8.9 bp for random entries (re-run 40567306176, p < 0.005 on gross returns).
+  - Costs and overnight financing take about 10 bp a trade, which turns the +4.7 bp into -5.1 bp.
   - Its longs make +10.9 bp (t 0.9) and its shorts lose 25.3 bp (t -2.5).
   - It is positive in 8 of 19 years.
 - **Three targets raise the hit rate** (61% against 49% with one target) **without raising the mean.**
@@ -363,3 +366,22 @@ Each year trades the setting that did best in all earlier years, from fixed grid
   - It is the USD/JPY result appearing on a second pair.
   - The 2019-2025 files hold only the 03:00 entry window, so 2019 has 8 trades and later years none. A per-year
     download of the missing hours is running.
+
+### 8.4 The strategy catalog on US500 and NAS100 intraday bars (`scripts/index_intraday_ta_lab.py`, branch `index-intraday-ta`, run 40567551158)
+
+- **Setup:** 61-63 families on M5, M15, M30, H1 and H4 bars of the two CFDs (Dukascopy, 2019-2025, cash-session
+  hours), tuned walk-forward (3 years of training, 6-month test blocks from 2022), with the quoted spread, slippage,
+  commission and CFD financing.
+- **Result: 614 family-timeframe pairs, none significant after correction, and none with an alpha t above 2.**
+
+  | Timeframe | Median Sharpe, US500 | Median Sharpe, NAS100 | Share with alpha t below -2 (US500 / NAS100) |
+  |---|---|---|---|
+  | M5 | -1.27 | -0.85 | 59% / 49% |
+  | M15 | -0.68 | -0.47 | 38% / 31% |
+  | M30 | -0.61 | -0.44 | 25% / 18% |
+  | H1 | -0.39 | -0.26 | 13% / 6% |
+  | H4 | -0.24 | -0.11 | 3% / 3% |
+
+- **The shorter the bars, the worse the result**, as in the FX sweep: costs grow relative to each trade's move.
+- The best pairs are Toby Crabel's narrow-range breakout on US500 (alpha t 1.5-1.8 on M5-H1) and Williams'
+  volatility breakout; both are well inside what 614 tries produce by chance.
