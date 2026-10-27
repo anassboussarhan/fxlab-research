@@ -1,0 +1,41 @@
+name: ml-entry
+# Re-run of scripts/ml_entry_lab.py on the cross-market data of run 40562840315, with the gross-return control.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/ML_ENTRY"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  ml:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Data of the cross-market run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download $(cat ci/ML_ENTRY | cut -d' ' -f1) -n cm-data -D cmdata
+      - run: python scripts/ml_entry_lab.py --data cmdata --out out/ml 2>&1 | tee out_log.txt
+      - name: Publish to the ml-entry branch
+        run: |
+          cp out_log.txt out/ml/log.txt
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp -r out/ml /tmp/ml
+          git checkout --orphan ml-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p ml_entry && cp -r /tmp/ml/* ml_entry/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > ml_entry/RUN.txt
+          git add -f ml_entry
+          git commit -qm "ML entries, cross-market daily (run ${{ github.run_id }})"
+          git push -f origin HEAD:ml-entry

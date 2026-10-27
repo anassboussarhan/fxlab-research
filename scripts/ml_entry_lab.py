@@ -32,7 +32,9 @@ FIXED BEFORE ANY RESULT:
     that opens beyond a level fills at its open. Every fill pays the instrument's one-way cost; open positions pay
     the financing mark-up per night (the cash rate is already in the excess-return price).
   Controls: C1 = 200 sets of random entries with the model's number of trades per instrument and year and its
-    long/short mix, the same one-position-at-a-time rule and the V1 exits.
+    long/short mix, the same one-position-at-a-time rule and the V1 exits; compared on net and (added with the
+    second run, before it) on gross returns, because ATR-scaled barriers make costs and financing a smaller share
+    of a trade in volatile times, so beating random entries on net alone can reflect timing volatility.
 PRE-REGISTERED TESTS (one-sided): M1 (primary) mean net return per V1 trade > 0 (t clustered by month) and above
   the random-entry distribution (p = share of C1 draws with a mean at least as high; the draws share the model's
   instruments, years and long/short mix, so market drift is controlled); M2/M3 the same mean test for V2 and V3;
@@ -320,8 +322,9 @@ def run(a):
                 if side == 0 or not np.isfinite(at[t]):
                     continue
                 net, xj = sim_trade(o, h, l, t + 1, side, at[t], cost, fin, nights, v, H)
+                gross, _ = sim_trade(o, h, l, t + 1, side, at[t], 0.0, 0.0, nights, v, H)
                 trades.append({"sym": s, "class": mt["class"], "variant": v, "date": r.date, "side": side,
-                               "net": net, "exit": m.index[xj]})
+                               "net": net, "gross": gross, "exit": m.index[xj]})
                 busy = xj - 1 if v != 3 else t + H
     T = pd.DataFrame(trades)
     T.to_csv(os.path.join(a.out, "trades.csv.gz"), index=False)
@@ -329,9 +332,9 @@ def run(a):
     rng = np.random.default_rng(19)
     v1 = T[T.variant == 1]
     plan = v1.groupby(["sym", v1.date.dt.year]).agg(n=("net", "size"), longs=("side", lambda x: (x > 0).mean()))
-    ctrl = []
+    ctrl, ctrl_g = [], []
     for draw in range(a.draws):
-        tot, cnt = 0.0, 0
+        tot, tot_g, cnt = 0.0, 0.0, 0
         for (s, Y), r in plan.iterrows():
             m, at, mt, nights = store[s]
             o, h, l = m.o.to_numpy(), m.h.to_numpy(), m.l.to_numpy()
@@ -348,13 +351,17 @@ def run(a):
                     continue
                 side = 1 if rng.random() < r.longs else -1
                 net, xj = sim_trade(o, h, l, t + 1, side, at[t], mt["cost_bp"] * 1e-4, mt["markup"] / 360.0, nights, 1, H)
+                g_, _ = sim_trade(o, h, l, t + 1, side, at[t], 0.0, 0.0, nights, 1, H)
                 tot += net
+                tot_g += g_
                 cnt += 1
                 k += 1
                 busy = xj - 1
         ctrl.append(tot / max(cnt, 1))
-    ctrl = np.array(ctrl)
+        ctrl_g.append(tot_g / max(cnt, 1))
+    ctrl, ctrl_g = np.array(ctrl), np.array(ctrl_g)
     np.save(os.path.join(a.out, "control_means.npy"), ctrl)
+    np.save(os.path.join(a.out, "control_gross_means.npy"), ctrl_g)
     # ------------------------------------------------------------------ statistics
     from scipy import stats as st
     res = {"runtime_min": round((time.time() - t0) / 60, 1), "rows": int(len(D)), "features": feats}
@@ -367,9 +374,13 @@ def run(a):
                "p_one_sided": float(1 - st.norm.cdf(tt)) if np.isfinite(tt) else np.nan,
                "hit": float((x > 0).mean()), "long_share": float((T[T.variant == v].side > 0).mean()),
                "years_positive": f"{int((x.groupby(x.index.year).sum() > 0).sum())}/{x.index.year.nunique()}"}
+        xg = T[T.variant == v].gross
+        row["gross_bp"] = float(xg.mean() * 1e4)
         if v == 1:
             row["random_entry_mean_bp"] = float(ctrl.mean() * 1e4)
             row["random_entry_p"] = float((ctrl >= x.mean()).mean())
+            row["random_entry_gross_bp"] = float(ctrl_g.mean() * 1e4)
+            row["random_entry_p_gross"] = float((ctrl_g >= xg.mean()).mean())
         for cls in CLASSES:
             xc = T[(T.variant == v) & (T["class"] == cls)].set_index("date").net.sort_index()
             row[f"{cls}_bp"] = float(xc.mean() * 1e4) if len(xc) else np.nan
