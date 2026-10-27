@@ -390,3 +390,38 @@ Each year trades the setting that did best in all earlier years, from fixed grid
 - **The shorter the bars, the worse the result**, as in the FX sweep: costs grow relative to each trade's move.
 - The best pairs are Toby Crabel's narrow-range breakout on US500 (alpha t 1.5-1.8 on M5-H1) and Williams'
   volatility breakout; both are well inside what 614 tries produce by chance.
+
+### 8.5 Triple-barrier ML entries on every timeframe (`scripts/ml_triple_barrier_lab.py`, branch `ml-triple-barrier`, run 40568194520)
+
+**Setup:**
+- **Data:** 11 FX pairs and gold on M1, M5, M15, M30, H1, H4 and D1, 2007-2018 (EURUSD to 2022, USD/JPY to 2025);
+  the US500 and NAS100 CFDs on M1-H1, 2019-2025. One model per market and timeframe.
+- **The trade is the triple barrier itself:** a take-profit barrier, a stop barrier and a time barrier, in three
+  shapes fixed in advance (symmetric 1.5 / 1.5 ATR in 12 bars; trend 2 / 1 ATR in 24 bars; reversion 1 / 2 ATR
+  in 12 bars).
+- **Model:** LightGBM learns which barrier a trade opened at the next bar touches first. It is retrained every
+  year on earlier years only, and the strategy takes its top 10% of calls.
+- **Fills:** real bid/ask on the M1 path, which decides the order of the barriers.
+- **Check:** random entries with the same counts, mix and barriers, compared before and after costs.
+
+**Results (282 market x timeframe x barrier tests):**
+
+| Timeframe | Tests | Median net bp a trade | Median gross bp | Random entries, gross | Share beating random before costs | Median trades |
+|---|---|---|---|---|---|---|
+| M1 | 42 | -2.86 | +0.20 | -0.02 | 93% | 205,389 |
+| M5 | 42 | -3.10 | +0.33 | -0.05 | 86% | 46,119 |
+| M15 | 42 | -2.68 | +0.37 | -0.11 | 79% | 15,990 |
+| M30 | 42 | -2.16 | +1.00 | -0.18 | 81% | 4,424 |
+| H1 | 42 | -1.95 | +1.10 | -0.22 | 79% | 2,702 |
+| H4 | 36 | -2.35 | +0.69 | -0.38 | 19% | 1,021 |
+| D1 | 36 | -7.48 | -1.04 | -6.45 | 6% | 124 |
+
+- **No test is positive after costs with t above 2; 209 of 282 are significantly negative.** 4% have a positive
+  net mean; none survives Benjamini-Hochberg (best q 1.0).
+- **The models do read direction a little.** Before costs they beat random entries in 79-93% of the M1-H1 tests,
+  and 79% of all tests have a positive gross mean.
+- **But the edge is a fraction of a basis point to 1 bp a trade, against 2-3 bp of spread, slippage and
+  commission.** The edge grows with the bar size up to H1, but never reaches the costs.
+- **The barrier shape hardly matters** (median net -2.5 to -3.1 bp for all three).
+- The best tests are D1 trades on EURGBP and GBPUSD (+9 to +10 bp a trade, t 0.9-1.1, about 130 trades each):
+  too few trades to mean anything.
