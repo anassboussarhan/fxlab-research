@@ -1,2 +1,2 @@
 """Strategy catalog. Importing registers every strategy family."""
-from fxlab.strategies import rules, ml, extra, famous  # noqa: F401
+from fxlab.strategies import rules, ml, extra, famous, daily  # noqa: F401

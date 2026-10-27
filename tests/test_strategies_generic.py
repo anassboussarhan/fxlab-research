@@ -34,7 +34,11 @@ RARE = {"S.GEO.HARMONIC", "S.SEAS.WEEKEND_GAP_FADE", "S.ST.PIVOT_POINTS", "S.XA.
         "S.XA.CARRY", "S.XA.CARRY_FILTER", "S.XA.CARRY_VOLGATE", "S.XA.CARRY_MOM",
         # event families that are one-directional or silent for EURUSD by construction
         "S.SEAS.GOTOBI", "S.EVT.FOMC_USD", "S.XA.RATE_MOMENTUM", "S.XA.VALUE_PPP", "S.SMC.SILVER_BULLET",
-        "S.EVT.GOLD_FIX", "S.WEIRD.LUNAR", "S.FORUM.NEWS_STRADDLE", "S.FAMOUS.CRABEL_NR", "S.FAMOUS.TD_SEQUENTIAL"}
+        "S.EVT.GOLD_FIX", "S.WEIRD.LUNAR", "S.FORUM.NEWS_STRADDLE", "S.FAMOUS.CRABEL_NR", "S.FAMOUS.TD_SEQUENTIAL",
+        # daily families that are long-only in their published form (short = 0 by default)
+        "S.DAILY.IBS", "S.DAILY.DOUBLE_SEVEN", "S.DAILY.CUM_RSI", "S.DAILY.THREE_DOWN", "S.DAILY.HIGH52",
+        "S.DAILY.FABER", "S.DAILY.ABS_MOM", "S.DAILY.VOL_TARGET", "S.DAILY.HALLOWEEN", "S.DAILY.OPEX",
+        "S.DAILY.VIX_SPIKE"}
 
 
 @pytest.fixture(scope="module")
