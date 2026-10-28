@@ -1,0 +1,47 @@
+name: peek-ab
+# Interim look at the finished jobs of an adaptive-barrier run (run id in ci/PEEK_AB): combine what is there and
+# publish it to the ml-adaptive-barrier-partial branch. The full run publishes ml-adaptive-barrier when it ends.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/PEEK_AB"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  peek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy scipy pyarrow numba holidays
+      - name: Combine the finished jobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download $(cat ci/PEEK_AB) -p "ab-*" -D ab || true
+          python scripts/ml_adaptive_barrier_lab.py --combine ab --out pub 2>&1 | tee combine_log.txt
+          python - <<'PY'
+          import pandas as pd
+          T = pd.read_csv("pub/tests_all.csv")
+          for _, r in T.iterrows():
+              print(f"::notice title={r.symbol} {r.tf}::net {r.mean_bp:.2f}bp t {r.t:.2f} gross {r.gross_bp:.2f} trades {r.trades} pred {r.pred_bp_mean:.2f} rand gross {r.random_gross_bp:.2f} p {r.random_p_gross:.2f} tp {r.median_tp} sl {r.median_sl} h {r.median_h}")
+          PY
+      - name: Publish
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/runs && cp $(find ab -name 'tests_*.csv' -o -name 'chosen_*.json') pub/runs/ 2>/dev/null || true
+          cp combine_log.txt pub/
+          cp -r pub /tmp/pub
+          git checkout --orphan pk-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p ml_adaptive_barrier_partial && cp -r /tmp/pub/* ml_adaptive_barrier_partial/
+          echo "interim combine of run $(cat /tmp/pub/../dummy 2>/dev/null) at $(date -u +%FT%TZ)" > ml_adaptive_barrier_partial/RUN.txt
+          git add -f ml_adaptive_barrier_partial
+          git commit -qm "Adaptive-barrier interim (peek run ${{ github.run_id }})"
+          git push -f origin HEAD:ml-adaptive-barrier-partial
