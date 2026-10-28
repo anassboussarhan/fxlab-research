@@ -1,0 +1,8 @@
+    tests  median_net  median_gross  median_random_gross  share_gross_beats  share_net_positive  median_trades  median_pred
+tf                                                                                                                         
+M1      4       -1.51          1.15                 -0.3               0.25                0.25          182.5       762.11
+   symbol  tf  trades  mean_bp     t  gross_bp  pred_bp_mean   hit  median_tp  median_sl  median_h  random_gross_bp  random_p_gross  q_bh years_positive
+0  EURGBP  M1     188    -1.45 -1.55      2.98     541470.46  0.29        3.5        1.0      24.0            -0.03            0.00   1.0            1/3
+4  GBPCAD  M1     177    -1.57 -1.90     -0.68          0.24  0.69        0.5        4.0      48.0            -0.58            0.65   1.0            0/3
+2  AUDUSD  M1    1437    -2.20 -6.12     -2.37       1523.98  0.69        1.0        4.0      48.0            -0.93            1.00   1.0            1/6
+1  XAUUSD  M1       3     4.97   NaN     10.50          0.12  0.67        4.0        3.0      48.0             1.70            0.10   NaN            1/1
