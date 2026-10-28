@@ -1,0 +1,164 @@
+[
+ {
+  "year": "2010",
+  "params": {
+   "num_leaves": 71,
+   "learning_rate": 0.0889011024664543,
+   "n_estimators": 309,
+   "min_child_samples": 93,
+   "subsample": 0.6532449366127329,
+   "colsample_bytree": 0.8417081553644195,
+   "reg_lambda": 6.6170185972695315,
+   "objective": "huber",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.99,
+  "threshold_bp": 8.282062530517578,
+  "validation_net_bp_total": 0.004446219541355347,
+  "trades": 62
+ },
+ {
+  "year": "2011",
+  "params": {
+   "num_leaves": 16,
+   "learning_rate": 0.020687004390358543,
+   "n_estimators": 398,
+   "min_child_samples": 189,
+   "subsample": 0.9580261163405462,
+   "colsample_bytree": 0.5524607010325402,
+   "reg_lambda": 1.693374515299474,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.995,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.00014791906491310315,
+  "trades": 72
+ },
+ {
+  "year": "2012",
+  "params": {
+   "num_leaves": 90,
+   "learning_rate": 0.02035526596199268,
+   "n_estimators": 144,
+   "min_child_samples": 164,
+   "subsample": 0.9742423727434886,
+   "colsample_bytree": 0.90528089180519,
+   "reg_lambda": 6.348656531308952,
+   "objective": "huber",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.995,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.0,
+  "trades": 0
+ },
+ {
+  "year": "2013",
+  "params": {
+   "num_leaves": 33,
+   "learning_rate": 0.05142190712295898,
+   "n_estimators": 241,
+   "min_child_samples": 741,
+   "subsample": 0.9432756704478924,
+   "colsample_bytree": 0.5501831546817665,
+   "reg_lambda": 2.682057581190531,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.995,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.009148124597495519,
+  "trades": 808
+ },
+ {
+  "year": "2014",
+  "params": {
+   "num_leaves": 22,
+   "learning_rate": 0.040057962352132964,
+   "n_estimators": 183,
+   "min_child_samples": 971,
+   "subsample": 0.6980437941858917,
+   "colsample_bytree": 0.8518754160024806,
+   "reg_lambda": 6.787237404305541,
+   "objective": "huber",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.995,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.0,
+  "trades": 0
+ },
+ {
+  "year": "2015",
+  "params": {
+   "num_leaves": 105,
+   "learning_rate": 0.024520075257816538,
+   "n_estimators": 315,
+   "min_child_samples": 937,
+   "subsample": 0.7229206579410428,
+   "colsample_bytree": 0.6388496410245181,
+   "reg_lambda": 3.4292638034602585,
+   "objective": "huber",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.995,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.000506831473572961,
+  "trades": 6733
+ },
+ {
+  "year": "2016",
+  "params": {
+   "num_leaves": 15,
+   "learning_rate": 0.11985306307173935,
+   "n_estimators": 398,
+   "min_child_samples": 479,
+   "subsample": 0.5139663385010854,
+   "colsample_bytree": 0.7705651267033056,
+   "reg_lambda": 0.5955842573979386,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.995,
+  "threshold_bp": 1.3300775289535522,
+  "validation_net_bp_total": 0.019116340855251615,
+  "trades": 733
+ },
+ {
+  "year": "2017",
+  "params": {
+   "num_leaves": 15,
+   "learning_rate": 0.0689727858950681,
+   "n_estimators": 331,
+   "min_child_samples": 195,
+   "subsample": 0.7679978569070243,
+   "colsample_bytree": 0.9543680228303009,
+   "reg_lambda": 2.6249550908829624,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.99,
+  "threshold_bp": 1.8710592985153198,
+  "validation_net_bp_total": 0.011188242010739691,
+  "trades": 140
+ },
+ {
+  "year": "2018",
+  "params": {
+   "num_leaves": 103,
+   "learning_rate": 0.17177744015609975,
+   "n_estimators": 108,
+   "min_child_samples": 373,
+   "subsample": 0.5174159310242203,
+   "colsample_bytree": 0.626345680176726,
+   "reg_lambda": 5.57125053861383,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.995,
+  "threshold_bp": 4.055541038513184,
+  "validation_net_bp_total": 0.007706567005041015,
+  "trades": 297
+ }
+]

@@ -1,0 +1,92 @@
+[
+ {
+  "year": "2014",
+  "params": {
+   "num_leaves": 43,
+   "learning_rate": 0.11680057606715072,
+   "n_estimators": 179,
+   "min_child_samples": 692,
+   "subsample": 0.7712497035267487,
+   "colsample_bytree": 0.5915622899907722,
+   "reg_lambda": 1.241912940050729,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.8,
+  "threshold_bp": 19.529624938964844,
+  "validation_net_bp_total": 0.14994902660883003,
+  "trades": 122
+ },
+ {
+  "year": "2015",
+  "params": {
+   "num_leaves": 41,
+   "learning_rate": 0.19328879414972722,
+   "n_estimators": 326,
+   "min_child_samples": 900,
+   "subsample": 0.7202538112347708,
+   "colsample_bytree": 0.7629745750512666,
+   "reg_lambda": 8.782311071526031,
+   "objective": "huber",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.95,
+  "threshold_bp": 18.512815475463867,
+  "validation_net_bp_total": 0.052639837405382035,
+  "trades": 167
+ },
+ {
+  "year": "2016",
+  "params": {
+   "num_leaves": 29,
+   "learning_rate": 0.1638214239806481,
+   "n_estimators": 463,
+   "min_child_samples": 77,
+   "subsample": 0.8182655138028281,
+   "colsample_bytree": 0.9076624604786349,
+   "reg_lambda": 1.8241165594773712,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.9,
+  "threshold_bp": 54.73219680786133,
+  "validation_net_bp_total": 0.1341154605496646,
+  "trades": 107
+ },
+ {
+  "year": "2017",
+  "params": {
+   "num_leaves": 30,
+   "learning_rate": 0.040799296636603095,
+   "n_estimators": 219,
+   "min_child_samples": 496,
+   "subsample": 0.7366985408240829,
+   "colsample_bytree": 0.5030746325702188,
+   "reg_lambda": 7.01273617233248,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.98,
+  "threshold_bp": 19.309724807739258,
+  "validation_net_bp_total": 0.16336722878159465,
+  "trades": 1
+ },
+ {
+  "year": "2018",
+  "params": {
+   "num_leaves": 121,
+   "learning_rate": 0.042781315912790385,
+   "n_estimators": 308,
+   "min_child_samples": 80,
+   "subsample": 0.5449763223020447,
+   "colsample_bytree": 0.9854111794290774,
+   "reg_lambda": 8.165775737724104,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.99,
+  "threshold_bp": 30.972572326660156,
+  "validation_net_bp_total": 0.07281758116091828,
+  "trades": 1
+ }
+]
