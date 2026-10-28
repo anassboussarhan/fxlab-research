@@ -1,0 +1,92 @@
+[
+ {
+  "year": "2014",
+  "params": {
+   "num_leaves": 32,
+   "learning_rate": 0.12490603790487388,
+   "n_estimators": 127,
+   "min_child_samples": 51,
+   "subsample": 0.8148644116795858,
+   "colsample_bytree": 0.6020863533219865,
+   "reg_lambda": 1.1226230726095099,
+   "objective": "huber",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.8,
+  "threshold_bp": 4.681969165802002,
+  "validation_net_bp_total": 0.05872285474969209,
+  "trades": 2
+ },
+ {
+  "year": "2015",
+  "params": {
+   "num_leaves": 41,
+   "learning_rate": 0.19328879414972722,
+   "n_estimators": 326,
+   "min_child_samples": 900,
+   "subsample": 0.7202538112347708,
+   "colsample_bytree": 0.7629745750512666,
+   "reg_lambda": 8.782311071526031,
+   "objective": "huber",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.98,
+  "threshold_bp": 16.038219451904297,
+  "validation_net_bp_total": 0.02000848790629921,
+  "trades": 38
+ },
+ {
+  "year": "2016",
+  "params": {
+   "num_leaves": 102,
+   "learning_rate": 0.10746553621850727,
+   "n_estimators": 407,
+   "min_child_samples": 460,
+   "subsample": 0.7310452487799793,
+   "colsample_bytree": 0.8212825648609464,
+   "reg_lambda": 2.2486422470597867,
+   "objective": "huber",
+   "linear_tree": false
+  },
+  "threshold_quantile": null,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.10681518794703633,
+  "trades": 39
+ },
+ {
+  "year": "2017",
+  "params": {
+   "num_leaves": 57,
+   "learning_rate": 0.048790821371225555,
+   "n_estimators": 176,
+   "min_child_samples": 330,
+   "subsample": 0.6473255406444615,
+   "colsample_bytree": 0.9724322645693457,
+   "reg_lambda": 1.5162571309720074,
+   "objective": "huber",
+   "linear_tree": true
+  },
+  "threshold_quantile": null,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.24016766334053063,
+  "trades": 32
+ },
+ {
+  "year": "2018",
+  "params": {
+   "num_leaves": 127,
+   "learning_rate": 0.10640474450562439,
+   "n_estimators": 128,
+   "min_child_samples": 145,
+   "subsample": 0.9713520550778074,
+   "colsample_bytree": 0.8050809434187045,
+   "reg_lambda": 2.275774729141621,
+   "objective": "huber",
+   "linear_tree": false
+  },
+  "threshold_quantile": null,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.07597046381664858,
+  "trades": 15
+ }
+]

@@ -1,0 +1,200 @@
+[
+ {
+  "year": "2014",
+  "params": {
+   "num_leaves": 18,
+   "learning_rate": 0.15584382749766273,
+   "n_estimators": 223,
+   "min_child_samples": 521,
+   "subsample": 0.7519951986287241,
+   "colsample_bytree": 0.5182245877394926,
+   "reg_lambda": 9.060777243150984,
+   "objective": "huber",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.95,
+  "threshold_bp": 2.437528371810913,
+  "validation_net_bp_total": 0.045626891880108995,
+  "trades": 52
+ },
+ {
+  "year": "2015",
+  "params": {
+   "num_leaves": 72,
+   "learning_rate": 0.06585693942459177,
+   "n_estimators": 488,
+   "min_child_samples": 192,
+   "subsample": 0.9723380422468466,
+   "colsample_bytree": 0.9111949898333739,
+   "reg_lambda": 0.6360332076675468,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.98,
+  "threshold_bp": 233.00616455078125,
+  "validation_net_bp_total": 0.17997106334076915,
+  "trades": 2
+ },
+ {
+  "year": "2016",
+  "params": {
+   "num_leaves": 29,
+   "learning_rate": 0.1638214239806481,
+   "n_estimators": 463,
+   "min_child_samples": 77,
+   "subsample": 0.8182655138028281,
+   "colsample_bytree": 0.9076624604786349,
+   "reg_lambda": 1.8241165594773712,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.9,
+  "threshold_bp": 2343.63818359375,
+  "validation_net_bp_total": 0.09116572181382884,
+  "trades": 7
+ },
+ {
+  "year": "2017",
+  "params": {
+   "num_leaves": 15,
+   "learning_rate": 0.11697691411034968,
+   "n_estimators": 223,
+   "min_child_samples": 71,
+   "subsample": 0.9653864805434931,
+   "colsample_bytree": 0.8247752052211981,
+   "reg_lambda": 1.4067106021701203,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.995,
+  "threshold_bp": 247.673095703125,
+  "validation_net_bp_total": 0.06658829653465692,
+  "trades": 0
+ },
+ {
+  "year": "2018",
+  "params": {
+   "num_leaves": 103,
+   "learning_rate": 0.17177744015609975,
+   "n_estimators": 108,
+   "min_child_samples": 373,
+   "subsample": 0.5174159310242203,
+   "colsample_bytree": 0.626345680176726,
+   "reg_lambda": 5.57125053861383,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": 0.9,
+  "threshold_bp": 182.24066162109375,
+  "validation_net_bp_total": 0.0852632487046631,
+  "trades": 0
+ },
+ {
+  "year": "2020",
+  "params": {
+   "num_leaves": 33,
+   "learning_rate": 0.14432666739870453,
+   "n_estimators": 318,
+   "min_child_samples": 286,
+   "subsample": 0.8341750134194176,
+   "colsample_bytree": 0.5888963100948403,
+   "reg_lambda": 8.492480168178629,
+   "objective": "huber",
+   "linear_tree": true
+  },
+  "threshold_quantile": null,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.044405046137474924,
+  "trades": 39
+ },
+ {
+  "year": "2021",
+  "params": {
+   "num_leaves": 75,
+   "learning_rate": 0.05227418013878126,
+   "n_estimators": 177,
+   "min_child_samples": 152,
+   "subsample": 0.637676088485065,
+   "colsample_bytree": 0.8397778007439975,
+   "reg_lambda": 5.816264454827282,
+   "objective": "l2",
+   "linear_tree": true
+  },
+  "threshold_quantile": null,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.10887799037361151,
+  "trades": 22
+ },
+ {
+  "year": "2022",
+  "params": {
+   "num_leaves": 88,
+   "learning_rate": 0.13633569604534046,
+   "n_estimators": 556,
+   "min_child_samples": 150,
+   "subsample": 0.7474188149426438,
+   "colsample_bytree": 0.6697547372937454,
+   "reg_lambda": 6.194293262449903,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.9,
+  "threshold_bp": 137.03338623046875,
+  "validation_net_bp_total": 0.01987877227639894,
+  "trades": 21
+ },
+ {
+  "year": "2023",
+  "params": {
+   "num_leaves": 29,
+   "learning_rate": 0.15540051275528455,
+   "n_estimators": 286,
+   "min_child_samples": 72,
+   "subsample": 0.5706706112874262,
+   "colsample_bytree": 0.733947796137433,
+   "reg_lambda": 0.2208966161815673,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": 0.9,
+  "threshold_bp": 188.04832458496094,
+  "validation_net_bp_total": 0.2184679262337415,
+  "trades": 0
+ },
+ {
+  "year": "2024",
+  "params": {
+   "num_leaves": 49,
+   "learning_rate": 0.09897897167978,
+   "n_estimators": 438,
+   "min_child_samples": 126,
+   "subsample": 0.7526152704245732,
+   "colsample_bytree": 0.9245018939415393,
+   "reg_lambda": 2.9351563269757963,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": null,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.21468211250775399,
+  "trades": 16
+ },
+ {
+  "year": "2025",
+  "params": {
+   "num_leaves": 41,
+   "learning_rate": 0.14091586731831177,
+   "n_estimators": 164,
+   "min_child_samples": 138,
+   "subsample": 0.552537300629182,
+   "colsample_bytree": 0.7615738593576407,
+   "reg_lambda": 6.4850802135137755,
+   "objective": "l2",
+   "linear_tree": false
+  },
+  "threshold_quantile": null,
+  "threshold_bp": 0.0,
+  "validation_net_bp_total": 0.24112257526174521,
+  "trades": 16
+ }
+]
