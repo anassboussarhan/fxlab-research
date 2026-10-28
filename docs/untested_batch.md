@@ -425,3 +425,41 @@ Each year trades the setting that did best in all earlier years, from fixed grid
 - **The barrier shape hardly matters** (median net -2.5 to -3.1 bp for all three).
 - The best tests are D1 trades on EURGBP and GBPUSD (+9 to +10 bp a trade, t 0.9-1.1, about 130 trades each):
   too few trades to mean anything.
+
+### 8.6 Adaptive triple barriers, everything tuned (`scripts/ml_adaptive_barrier_lab.py`, branch `ml-adaptive-barrier`, run 40657560894)
+
+**Setup:**
+- **The model sets every barrier.** One boosted model predicts the net return of a trade for any side,
+  take-profit (0.5-4 ATR or none), stop (0.5-4 ATR or none) and time limit (3-48 bars): 490 combinations.
+- **Each bar's trade** is the combination with the best prediction, so the three barriers are a learned nonlinear
+  function of the market state.
+- **Features:** 55 (price and indicator features, long context, calendar including Gotobi days and fix times,
+  carry, spread and ticks).
+- **Tuning inside the walk-forward:** tree settings, loss (L2 or Huber), linear leaves and the trading threshold
+  are tuned by Optuna on the year before each test year, for the policy's realised net return. The model is then
+  refitted on all earlier years.
+- **Coverage:** 11 FX pairs and gold on M1-H4, US500 and NAS100 on M1-H1. D1 is re-running (run
+  `ml-adaptive-barrier-d1`): in this run a daily year (about 260 bars) fell below the 300-bar validation minimum,
+  so no D1 year was tested.
+
+**Results (81 market x timeframe tests):**
+
+| Timeframe | Tests | Median net bp a trade | Median gross bp | Random entries, gross | Share beating random before costs | Median predicted bp |
+|---|---|---|---|---|---|---|
+| M1 | 13 | -1.58 | -1.52 | -0.59 | 23% | +3.6 |
+| M5 | 14 | -2.41 | -0.32 | -0.65 | 14% | +6.4 |
+| M15 | 14 | -2.09 | -0.56 | -0.88 | 29% | +7.7 |
+| M30 | 14 | -2.92 | -0.60 | -1.16 | 14% | +9.4 |
+| H1 | 14 | -2.15 | -0.89 | -1.37 | 0% | +15.2 |
+| H4 | 12 | -3.89 | -1.65 | -2.91 | 8% | +26.3 |
+
+- **None is positive after costs with t above 2; 33 of 81 are significantly negative; none survives
+  Benjamini-Hochberg.**
+  - 7 of 81 have a positive mean. The best is USD/JPY H4, +3.1 bp, t 1.4.
+- **Letting the model choose the barriers made things worse than fixed barriers (section 8.5).**
+  - Only 33% of tests have a positive gross mean, against 79% with the fixed shapes.
+  - The model predicts +4 to +26 bp a trade and realises about -2 bp: classic overfitting of a 490-way choice.
+- **It almost always picks the same shape:** a small take-profit (0.5-1 ATR), a wide or no stop, and the longest
+  time limit. That shape wins 60-85% of the time but loses on average, the pattern of grid and martingale systems.
+- **Linear leaves blew up in 3 of 81 tests** (mean predictions of 1,500 to 3.4 million bp), which made their
+  thresholds meaningless. Removing that option is a possible re-run, but the other 78 tests show the same picture.
