@@ -313,7 +313,7 @@ def run(a):
         trA, trB = before(Y - 1), before(Y)
         va = np.flatnonzero((mk.years == Y - 1) & valid)
         te = np.flatnonzero((mk.years == Y) & valid)
-        if trA.sum() < 2000 or len(va) < 300 or not len(te):
+        if trA.sum() < a.min_train or len(va) < a.min_val or not len(te):
             continue
         XA, yA = build_training(mk, trA, rng)
         va_s = va[:: max(1, len(va) // 25000)]                    # validation decisions (subsampled for M1-M15)
@@ -454,6 +454,8 @@ def main():
     ap.add_argument("--draws", type=int, default=20)
     ap.add_argument("--combine", default="")
     ap.add_argument("--budget-min", type=float, default=270, help="stop starting new test years after this")
+    ap.add_argument("--min-train", type=int, default=2000, help="training bars needed for model A")
+    ap.add_argument("--min-val", type=int, default=300, help="validation-year bars needed (D1 has ~260 a year)")
     a = ap.parse_args()
     combine(a) if a.combine else run(a)
 

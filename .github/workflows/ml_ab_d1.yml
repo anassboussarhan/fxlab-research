@@ -1,0 +1,86 @@
+name: ml-adaptive-barrier-d1
+# scripts/ml_adaptive_barrier_lab.py (search spaces fixed in its docstring): boosted net-return model choosing side,
+# take-profit, stop and time limit per trade, everything tuned inside the walk-forward; every timeframe M1-D1 for
+# 11 FX pairs and gold, M1-H1 for the US500 and NAS100 CFDs. Bars from the runs named in ci/ML_AB.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/ML_AB_D1"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  OMP_NUM_THREADS: "4"
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        include: [{"symbol": "EURUSD", "tf": "D1"}, {"symbol": "GBPUSD", "tf": "D1"}, {"symbol": "USDJPY", "tf": "D1"}, {"symbol": "AUDUSD", "tf": "D1"}, {"symbol": "USDCAD", "tf": "D1"}, {"symbol": "USDCHF", "tf": "D1"}, {"symbol": "NZDUSD", "tf": "D1"}, {"symbol": "EURJPY", "tf": "D1"}, {"symbol": "EURGBP", "tf": "D1"}, {"symbol": "AUDNZD", "tf": "D1"}, {"symbol": "GBPCAD", "tf": "D1"}, {"symbol": "XAUUSD", "tf": "D1"}]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Bars of ${{ matrix.symbol }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRRORS DUKA USDJPY REST < ci/ML_AB
+          s=${{ matrix.symbol }}
+          mkdir -p dl
+          case $s in
+            USA500IDXUSD|USATECHIDXUSD) gh run download $DUKA -p "dk-$s-*" -D dl/dk ;;
+            *) for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_$M || true; done
+               if [ "$s" = "USDJPY" ]; then gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj; fi ;;
+          esac
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+          ls data/m1/$s
+      - run: python -m pytest -q tests/test_ml_adaptive_barrier_lab.py
+      - run: python scripts/ml_adaptive_barrier_lab.py --symbol ${{ matrix.symbol }} --tf ${{ matrix.tf }} --out out/tb --min-train 1000 --min-val 200
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: abd-${{ matrix.symbol }}-${{ matrix.tf }}
+          path: out/tb
+          retention-days: 30
+  combine:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy scipy pyarrow numba holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: abd-*
+          path: tb
+          merge-multiple: true
+      - run: python scripts/ml_adaptive_barrier_lab.py --combine tb --out pub 2>&1 | tee combine_log.txt
+      - name: Publish to the ml-adaptive-barrier-d1 branch (summaries and per-trade returns, no price data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/runs && cp tb/tests_*.csv tb/meta_*.json tb/chosen_*.json pub/runs/ 2>/dev/null || true
+          cp tb/trades_*.csv.gz pub/runs/ 2>/dev/null || true
+          cp combine_log.txt pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          IN="$(cat ci/ML_AB)"
+          git checkout --orphan abd-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p ml_adaptive_barrier && cp -r /tmp/pub/* ml_adaptive_barrier/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ); bars from $IN" > ml_adaptive_barrier/RUN.txt
+          git add -f ml_adaptive_barrier
+          git commit -qm "Adaptive-barrier ML entries, all timeframes (run ${{ github.run_id }})"
+          git push -f origin HEAD:ml-adaptive-barrier-d1
