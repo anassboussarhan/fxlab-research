@@ -438,9 +438,9 @@ Each year trades the setting that did best in all earlier years, from fixed grid
 - **Tuning inside the walk-forward:** tree settings, loss (L2 or Huber), linear leaves and the trading threshold
   are tuned by Optuna on the year before each test year, for the policy's realised net return. The model is then
   refitted on all earlier years.
-- **Coverage:** 11 FX pairs and gold on M1-H4, US500 and NAS100 on M1-H1. D1 is re-running (run
-  `ml-adaptive-barrier-d1`): in this run a daily year (about 260 bars) fell below the 300-bar validation minimum,
-  so no D1 year was tested.
+- **Coverage:** 11 FX pairs and gold on M1-H4, US500 and NAS100 on M1-H1. D1 ran separately (branch
+  `ml-adaptive-barrier-d1`, run 40775845733) with minimums of 1,000 training and 200 validation bars, because a
+  daily year (about 260 bars) fell below the 300-bar validation minimum of the main run.
 
 **Results (81 market x timeframe tests):**
 
@@ -452,10 +452,13 @@ Each year trades the setting that did best in all earlier years, from fixed grid
 | M30 | 14 | -2.92 | -0.60 | -1.16 | 14% | +9.4 |
 | H1 | 14 | -2.15 | -0.89 | -1.37 | 0% | +15.2 |
 | H4 | 12 | -3.89 | -1.65 | -2.91 | 8% | +26.3 |
+| D1 (separate run) | 11 | -12.79 | -3.47 | -10.02 | 18% | +70.4 |
 
 - **None is positive after costs with t above 2; 33 of 81 are significantly negative; none survives
   Benjamini-Hochberg.**
   - 7 of 81 have a positive mean. The best is USD/JPY H4, +3.1 bp, t 1.4.
+  - D1 adds 11 tests with the same picture: none with t above 2, 2 below -2, 2 positive (USD/CHF +44.9 bp on 63
+    trades, t 1.5; AUD/NZD +22.1 bp on 38 trades, t 0.5).
 - **Letting the model choose the barriers made things worse than fixed barriers (section 8.5).**
   - Only 33% of tests have a positive gross mean, against 79% with the fixed shapes.
   - The model predicts +4 to +26 bp a trade and realises about -2 bp: classic overfitting of a 490-way choice.
@@ -463,3 +466,34 @@ Each year trades the setting that did best in all earlier years, from fixed grid
   time limit. That shape wins 60-85% of the time but loses on average, the pattern of grid and martingale systems.
 - **Linear leaves blew up in 3 of 81 tests** (mean predictions of 1,500 to 3.4 million bp), which made their
   thresholds meaningless. Removing that option is a possible re-run, but the other 78 tests show the same picture.
+
+### 8.7 Trading as an optimisation problem (`scripts/policy_opt_lab.py`, branch `policy-opt`; running)
+
+Section 8.6 still chose the barriers from a grid: a model scored 490 fixed combinations and the best one was
+taken. Here there is no grid to back-test. The entry, the side, the take-profit, the stop and the time limit are
+explicit functions of the 55 features, and their parameters are found by maximising the strategy's own net profit.
+
+**Setup:**
+- **The function:** for each bar it outputs 8 numbers:
+  - two logits for long and short against flat;
+  - a continuous take-profit (0.25-16 ATR), stop (0.25-16 ATR) and time limit (1-96 bars) for each side.
+- **Three function classes, each tested separately:**
+  - linear;
+  - a small neural network (1-2 hidden layers, 8-64 units);
+  - boosted trees fitted directly to the profit objective (LightGBM with a custom objective).
+- **Why no backtest loop is needed:** each training bar's trade is simulated once on the M1 bid/ask path for 13
+  take-profits x 13 stops x 13 time limits per side, with the same costs and fill rules as before. Between those
+  points the profit is interpolated, so it is a smooth function of the parameters, and the optimiser climbs its
+  exact gradient (Adam for linear and the network, gradient boosting for the trees).
+- **Objective:** chosen on the validation year from three options:
+  - the expected net return per bar of the stochastic policy;
+  - its Sharpe ratio;
+  - the net return per bar held, which matches one account that is either in a trade or waiting.
+- **Tuning on the year before each test year:**
+  - learning rate, weight decay, network size, tree settings, the objective, and a trading margin;
+  - early stopping on the validation year;
+  - selection by the validation year's realised net profit (exact simulation, one position at a time).
+- **Validation gate:** a test year is traded only if the chosen policy made money in its validation year.
+- **Controls:** random entries with the same counts and barriers, before and after costs.
+- **Coverage:** the same markets and timeframes as 8.6, plus D1.
+- **Saved output:** the fitted linear coefficients for every year, so the learned function can be read.
