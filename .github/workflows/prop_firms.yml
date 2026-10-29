@@ -1,0 +1,44 @@
+name: prop-firms
+# scripts/prop_firms_ev.py: expected value per challenge for the surviving edges under four 100k programmes.
+# Daily outcomes 2019-2025 from the gotobi-oos, untested-intraday, cost-tuning and flow-edges branches.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/PROP_FIRMS"]
+permissions:
+  contents: write
+jobs:
+  ev:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas scipy yfinance
+      - name: Daily series of the edges
+        run: |
+          mkdir -p ser
+          for b in gotobi-oos untested-intraday cost-tuning flow-edges; do git fetch -q origin +$b:refs/remotes/origin/$b || true; done
+          git show origin/gotobi-oos:gotobi_oos/series.csv > ser/gotobi_series.csv
+          git show "origin/untested-intraday:untested_intraday/tokyo/trades_I3_USDJPY_Gotobi_overnight_23_00_09_53_Tokyo__0_5_range_stop.csv" > ser/trades_I3_USDJPY.csv
+          git show origin/cost-tuning:cost_tuning/eurjpy/oos_eurjpy_gotobi_EURJPY.csv > ser/oos_eurjpy_gotobi_EURJPY.csv
+          F=$(git ls-tree -r --name-only origin/flow-edges 2>/dev/null | grep "trades_T3_yen_basket" | head -1)
+          [ -n "$F" ] && git show "origin/flow-edges:$F" > ser/trades_T3_yen_basket.csv || true
+          ls -la ser
+      - run: python -W ignore scripts/prop_firms_ev.py --series ser --out out 2>&1 | tee out_log.txt
+      - name: Publish to the prop-firms branch
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp out_log.txt out/ && cp -r out /tmp/pf
+          git checkout --orphan pf-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p prop_firms && cp -r /tmp/pf/* prop_firms/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > prop_firms/RUN.txt
+          git add -f prop_firms
+          git commit -qm "Prop-firm EV (run ${{ github.run_id }})"
+          git push -f origin HEAD:prop-firms
