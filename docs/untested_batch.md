@@ -525,9 +525,11 @@ explicit functions of the 55 features, and their parameters are found by maximis
   the longest time limits, which amounts to a time exit; the trees choose about 2-3 ATR and 15-20 bars.
 - **The before-cost edge is the same as in 8.5 and 8.6:** the trees beat random entries before costs by under
   2 bp a trade, and costs are 2-3 bp.
-- **Not tested in this run:** D1 (a daily year minus the 96-bar purge left fewer than the 200 validation bars) and
-  four jobs that stopped in their first minute (AUD/NZD and gold H4, US500 and NAS100 H1: LightGBM dropped every
-  feature on the small samples). Both were fixed (`policy-opt-fix`) and re-run.
+- **Completed by the re-run (`policy-opt-fix`, run 40948370133):** D1 (the first run's validation minimum left no
+  daily year) and four jobs that had stopped in their first minute (AUD/NZD and gold H4, US500 and NAS100 H1:
+  LightGBM dropped every feature on the small samples). With them, the total is 274 tests: none with t above 2,
+  102 significantly negative, 30 positive, none surviving Benjamini-Hochberg. The best added test is USD/CHF D1
+  with the network (+28.7 bp on 75 trades, t 1.5).
 
 **Conclusion:** Optimising the trade function directly does no better than choosing barriers from a grid. With
 price-based features, flexibility only widens the gap between the training and the test years.
