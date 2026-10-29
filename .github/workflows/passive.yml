@@ -1,0 +1,92 @@
+name: passive-entry
+# scripts/passive_entry_lab.py (rules fixed in its docstring): the stored out-of-sample trades of the policy-opt,
+# ml-adaptive-barrier(-d1) and ml-triple-barrier branches re-simulated with limit entries at the touch. Bars from the
+# runs named in ci/PASSIVE (same as ci/ML_PO).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/PASSIVE"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        symbol: ["EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD", "USDCHF", "NZDUSD", "EURJPY", "EURGBP", "AUDNZD", "GBPCAD", "XAUUSD", "USA500IDXUSD", "USATECHIDXUSD"]
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Stored trades of ${{ matrix.symbol }}
+        run: |
+          s=${{ matrix.symbol }}
+          for b in policy-opt ml-adaptive-barrier ml-adaptive-barrier-d1 ml-triple-barrier; do
+            git fetch -q origin +$b:refs/remotes/origin/$b
+            mkdir -p in/$b && git archive origin/$b | tar -x -C in/$b --wildcards "*/runs/trades_${s}_*" || true
+          done
+          find in -name 'trades_*' | wc -l
+      - name: Bars of ${{ matrix.symbol }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRRORS DUKA USDJPY REST < ci/PASSIVE
+          s=${{ matrix.symbol }}
+          mkdir -p dl
+          case $s in
+            USA500IDXUSD|USATECHIDXUSD) gh run download $DUKA -p "dk-$s-*" -D dl/dk ;;
+            *) for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_$M || true; done
+               if [ "$s" = "USDJPY" ]; then gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj; fi ;;
+          esac
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+      - run: python -m pytest -q tests/test_passive_entry_lab.py
+      - run: python scripts/passive_entry_lab.py --symbol ${{ matrix.symbol }} --trades in --out out/pe
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pe-${{ matrix.symbol }}
+          path: out/pe
+          retention-days: 30
+  combine:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy scipy pyarrow numba holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pe-*
+          path: pe
+          merge-multiple: true
+      - run: python scripts/passive_entry_lab.py --combine pe --out pub 2>&1 | tee combine_log.txt
+      - name: Publish to the passive-entry branch (summaries and per-trade returns, no price data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/runs && cp pe/tests_*.csv pe/meta_*.json pe/trades_*.csv.gz pub/runs/ 2>/dev/null || true
+          cp combine_log.txt pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          git checkout --orphan pe-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p passive_entry && cp -r /tmp/pub/* passive_entry/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > passive_entry/RUN.txt
+          git add -f passive_entry
+          git commit -qm "Passive entries (run ${{ github.run_id }})"
+          git push -f origin HEAD:passive-entry
