@@ -1,0 +1,88 @@
+name: flow-edges
+# scripts/flow_edges_lab.py (rules fixed in its docstring): Tokyo-fix extensions (AUDJPY, GBPJPY, the yen basket,
+# calendar intensification, the day before, a passive entry) and the London month-end equity-rebalancing flow.
+# ci/FLOW_EDGES: MIRROR_RUNS EURJPY_WINDOW_RUN USDJPY_RUN FLOW_DATA_RUN.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FLOW_EDGES"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        group: [tokyo, monthend]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt yfinance
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRRORS EXTRA USDJPY FLOW < ci/FLOW_EDGES
+          mkdir -p dl
+          if [ "${{ matrix.group }}" = "tokyo" ]; then P="USDJPY EURJPY"; else P="USDJPY EURUSD GBPUSD AUDUSD USDCAD USDCHF NZDUSD"; fi
+          for s in $P; do for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_${M}_$s || true; done; done
+          gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj
+          if [ "${{ matrix.group }}" = "tokyo" ]; then
+            gh run download $EXTRA -p "dk-EURJPY-*" -D dl/ej || true
+            gh run download $FLOW -p "fd-AUDJPY-*" -D dl/fa || true
+            gh run download $FLOW -p "fd-GBPJPY-*" -D dl/fg || true
+          else
+            gh run download $FLOW -p "fd-*-me-*" -D dl/me || true
+          fi
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+          ls data/m1
+      - run: python -m pytest -q tests/test_passive_entry_lab.py
+      - run: python scripts/flow_edges_lab.py --out out/fe --only ${{ matrix.group }}
+      - name: Headline numbers
+        if: always()
+        run: |
+          python - <<'PY'
+          import pandas as pd
+          T = pd.read_csv("out/fe/tests.csv")
+          T = T[~T.test.str.contains("control|reference", case=False)].sort_values("p_one_sided").head(10)
+          for _, r in T.iterrows():
+              print(f"::notice title={r.test[:60]}::n {r.n} mean {r.mean_bp:.2f}bp t {r.t:.2f} | 2007-18 {r.mean_bp_2007_2018} t {r.t_2007_2018} | 2019-25 {r.mean_bp_2019_2025} t {r.t_2019_2025}")
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fe-${{ matrix.group }}
+          path: out/fe
+          retention-days: 30
+  publish:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: fe-*
+          path: fe
+      - name: Publish to the flow-edges branch (results and per-trade returns, no price data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp -r fe /tmp/fe
+          git checkout --orphan fe-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p flow_edges && cp -r /tmp/fe/* flow_edges/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ); bars from $(cat /dev/null)" > flow_edges/RUN.txt
+          git add -f flow_edges
+          git commit -qm "Flow edges (run ${{ github.run_id }})"
+          git push -f origin HEAD:flow-edges
