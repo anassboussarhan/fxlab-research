@@ -341,7 +341,10 @@ class GBMPolicy:
         def feval(preds, data):
             return "J", relaxed(preds, Pv, kind, grad=False)[0], True
         p = {"objective": obj, "num_class": 8, "metric": "None", "verbose": -1, "num_threads": 4, "seed": 0,
-             "bagging_freq": 1, **self.hp}
+             "bagging_freq": 1, "feature_pre_filter": False, **self.hp}
+        # small samples (D1, short histories): a leaf may hold at most a tenth of the rows, else LightGBM drops
+        # every feature and stops ("num_features > 0")
+        p["min_data_in_leaf"] = int(min(p.get("min_data_in_leaf", 20), max(20, len(X) // 10)))
         dtr = lgb.Dataset(X, label=np.zeros(len(X)), free_raw_data=False)
         if rounds is None:
             dva = lgb.Dataset(Xv, label=np.zeros(len(Xv)), reference=dtr)
