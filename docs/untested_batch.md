@@ -467,7 +467,7 @@ Each year trades the setting that did best in all earlier years, from fixed grid
 - **Linear leaves blew up in 3 of 81 tests** (mean predictions of 1,500 to 3.4 million bp), which made their
   thresholds meaningless. Removing that option is a possible re-run, but the other 78 tests show the same picture.
 
-### 8.7 Trading as an optimisation problem (`scripts/policy_opt_lab.py`, branch `policy-opt`; running)
+### 8.7 Trading as an optimisation problem (`scripts/policy_opt_lab.py`, branch `policy-opt`, run 40778681452)
 
 Section 8.6 still chose the barriers from a grid: a model scored 490 fixed combinations and the best one was
 taken. Here there is no grid to back-test. The entry, the side, the take-profit, the stop and the time limit are
@@ -497,3 +497,68 @@ explicit functions of the 55 features, and their parameters are found by maximis
 - **Controls:** random entries with the same counts and barriers, before and after costs.
 - **Coverage:** the same markets and timeframes as 8.6, plus D1.
 - **Saved output:** the fitted linear coefficients for every year, so the learned function can be read.
+
+**Results (226 market x timeframe x function tests with trades, M1-H4; 273,805 trades):**
+
+| Function | Tests | Median net bp a trade | Median gross bp | Share positive | Significantly negative (t < -2) |
+|---|---|---|---|---|---|
+| Boosted trees | 73 | -2.36 | +0.62 | 12% | 26 |
+| Linear | 77 | -2.79 | -0.06 | 6% | 39 |
+| Neural network | 76 | -2.59 | +0.02 | 5% | 37 |
+
+| Timeframe | Tests | Median net | Median gross | Random entries, gross |
+|---|---|---|---|---|
+| M1 | 36 | -2.48 | +0.18 | +0.04 |
+| M5 | 41 | -2.16 | +0.22 | -0.08 |
+| M15 | 41 | -2.42 | +0.74 | +0.12 |
+| M30 | 42 | -2.65 | +0.35 | -0.17 |
+| H1 | 36 | -2.89 | -0.37 | -0.42 |
+| H4 | 30 | -4.68 | -1.63 | -1.31 |
+
+- **None is positive after costs with t above 2; 102 of 226 are significantly negative; none survives
+  Benjamini-Hochberg.**
+- **The best:** USD/JPY M30 with the trees, +0.84 bp over 2,638 trades, t 1.2, positive in 11 of 16 years;
+  gold H1 trees +7.8 bp on only 72 trades (t 1.0).
+- **The objective is positive on the training years and negative on the test years** in every function class and
+  timeframe: the optimiser fits the past and none of it carries over.
+- **The learned shapes:** linear and network functions mostly choose very wide targets and stops (10-15 ATR) with
+  the longest time limits, which amounts to a time exit; the trees choose about 2-3 ATR and 15-20 bars.
+- **The before-cost edge is the same as in 8.5 and 8.6:** the trees beat random entries before costs by under
+  2 bp a trade, and costs are 2-3 bp.
+- **Not tested in this run:** D1 (a daily year minus the 96-bar purge left fewer than the 200 validation bars) and
+  four jobs that stopped in their first minute (AUD/NZD and gold H4, US500 and NAS100 H1: LightGBM dropped every
+  feature on the small samples). Both were fixed (`policy-opt-fix`) and re-run.
+
+**Conclusion:** Optimising the trade function directly does no better than choosing barriers from a grid. With
+price-based features, flexibility only widens the gap between the training and the test years.
+
+## 9. Third batch: lowering costs, new information, more flows, and the prop-firm arithmetic
+
+### 9.1 CFTC positioning (`scripts/cot_lab.py`, branch `cot`, run 40948258662)
+
+**Setup:**
+- **Data:** the CFTC legacy futures-only reports (speculators = non-commercials, hedgers = commercials) for the
+  euro, yen, pound, Swiss franc, Canadian, Australian and New Zealand dollars and gold; Yahoo daily prices,
+  2004-2025.
+- **Timing:** positions are as of Tuesday and published on Friday; a signal is traded from the close of the next
+  Monday to the following Monday. Carry, financing mark-up and costs (1-2 bp a side) included.
+- **Signals, fixed in advance:**
+  - C1 crowding reversal: fade the speculators when their positioning is more than 1.5 standard deviations from
+    its 3-year average;
+  - C2 positioning momentum: follow the 4-week change in their positioning;
+  - C3 cross-sectional: long the two most-shorted currencies, short the two most-crowded;
+  - C4 follow the hedgers at their extremes.
+
+**Results (35 tests: 4 signals x 8 markets plus pooled):**
+
+| Signal | Pooled bp a week | t | Years positive |
+|---|---|---|---|
+| C1 crowding reversal | -1.9 | -1.5 | 12/22 |
+| C2 positioning momentum | -1.0 | -0.4 | 7/22 |
+| C3 cross-sectional crowding | +0.4 | +0.8 | 17/22 |
+| C4 follow the hedgers | -0.7 | -0.6 | 9/22 |
+
+- **None has t above 2; none survives Benjamini-Hochberg.** The best single market is C3 on the pound
+  (+2.8 bp a week, t 1.9).
+- **Positioning data does not predict weekly FX or gold returns after costs.** It is public a week late, and it
+  shows.
