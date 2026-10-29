@@ -1,0 +1,90 @@
+[
+ {
+  "year": "2022",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.0024812066709429064,
+   "wd": 1.7035036650706442e-05,
+   "hidden": 16,
+   "layers": 2
+  },
+  "kappa": 1.0,
+  "steps": 125,
+  "validation_net_bp_total": 2017.6503576697464,
+  "validation_trades": 83,
+  "val_ok": true,
+  "J_train_refit": 0.31733169702895064,
+  "J_val_earlystop": 0.09236180868720444,
+  "J_test": -0.16753304367751976,
+  "J_test_mean_bp_per_bar": -24.88114739342703,
+  "test_trades": 94,
+  "share_bars_signal": 0.4225929978118162,
+  "seconds": 47.9
+ },
+ {
+  "year": "2023",
+  "kind": "rate",
+  "hp": {
+   "lr": 0.008394182392004183,
+   "wd": 2.968666978888616e-06,
+   "hidden": 8,
+   "layers": 1
+  },
+  "kappa": 0.0,
+  "steps": 150,
+  "validation_net_bp_total": 1081.0012737623492,
+  "validation_trades": 238,
+  "val_ok": true,
+  "J_train_refit": 13.018617189915162,
+  "J_val_earlystop": 18.629953743872115,
+  "J_test": 9.377411982213015,
+  "J_test_mean_bp_per_bar": -31.61589695634801,
+  "test_trades": 138,
+  "share_bars_signal": 0.9994408722393067,
+  "seconds": 72.4
+ },
+ {
+  "year": "2024",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.004431676326491545,
+   "wd": 0.20009314789455407,
+   "hidden": 16,
+   "layers": 1
+  },
+  "kappa": 0.0,
+  "steps": 1550,
+  "validation_net_bp_total": 2992.606922343836,
+  "validation_trades": 188,
+  "val_ok": true,
+  "J_train_refit": 0.05076962342959049,
+  "J_val_earlystop": 0.1421593169951776,
+  "J_test": 0.08630226682900681,
+  "J_test_mean_bp_per_bar": 11.082241019843035,
+  "test_trades": 126,
+  "share_bars_signal": 1.0,
+  "seconds": 132.8
+ },
+ {
+  "year": "2025",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.013695647742517527,
+   "wd": 1.0447844508517844e-06,
+   "hidden": 32,
+   "layers": 1
+  },
+  "kappa": 0.5,
+  "steps": 75,
+  "validation_net_bp_total": 2996.6539990547008,
+  "validation_trades": 83,
+  "val_ok": true,
+  "J_train_refit": 0.3965094878075372,
+  "J_val_earlystop": 0.050005723804036596,
+  "J_test": -0.04223209327453877,
+  "J_test_mean_bp_per_bar": -3.4078759491410673,
+  "test_trades": 273,
+  "share_bars_signal": 0.6666666666666666,
+  "seconds": 112.1
+ }
+]

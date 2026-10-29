@@ -1,0 +1,90 @@
+[
+ {
+  "year": "2022",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.003744794485649936,
+   "wd": 0.20250913970327353,
+   "hidden": 64,
+   "layers": 1
+  },
+  "kappa": 0.0,
+  "steps": 1200,
+  "validation_net_bp_total": 0.0,
+  "validation_trades": 0,
+  "val_ok": false,
+  "J_train_refit": -0.028839087804113907,
+  "J_val_earlystop": -0.12668986993892475,
+  "J_test": -0.02300399401506562,
+  "J_test_mean_bp_per_bar": -0.1264898206701044,
+  "test_trades": 0,
+  "share_bars_signal": 0.0,
+  "seconds": 31.8
+ },
+ {
+  "year": "2023",
+  "kind": "mean",
+  "hp": {
+   "lr": 0.0035994021130508957,
+   "wd": 1.2715248463467084e-05,
+   "hidden": 16,
+   "layers": 2
+  },
+  "kappa": 2.0,
+  "steps": 50,
+  "validation_net_bp_total": 0.0,
+  "validation_trades": 0,
+  "val_ok": false,
+  "J_train_refit": -0.25133447810680537,
+  "J_val_earlystop": -1.2499750991565137,
+  "J_test": -0.48160471617364276,
+  "J_test_mean_bp_per_bar": -0.48160471617364276,
+  "test_trades": 30,
+  "share_bars_signal": 0.0007413326658130109,
+  "seconds": 31.5
+ },
+ {
+  "year": "2024",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.02634280995790062,
+   "wd": 0.009687503761387961,
+   "hidden": 64,
+   "layers": 2
+  },
+  "kappa": 0.5,
+  "steps": 350,
+  "validation_net_bp_total": 0.0,
+  "validation_trades": 0,
+  "val_ok": false,
+  "J_train_refit": 0.1284900039819155,
+  "J_val_earlystop": -0.022959259334677223,
+  "J_test": 0.015182898916807724,
+  "J_test_mean_bp_per_bar": 0.013534660602826282,
+  "test_trades": 8,
+  "share_bars_signal": 0.0003029327678588333,
+  "seconds": 67.2
+ },
+ {
+  "year": "2025",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.0015209341408480492,
+   "wd": 0.3134644685986869,
+   "hidden": 8,
+   "layers": 1
+  },
+  "kappa": 2.0,
+  "steps": 2000,
+  "validation_net_bp_total": 0.0,
+  "validation_trades": 0,
+  "val_ok": false,
+  "J_train_refit": -0.08949035552240575,
+  "J_val_earlystop": -0.11840459917462502,
+  "J_test": -0.04736711571327104,
+  "J_test_mean_bp_per_bar": -1.046025227305891,
+  "test_trades": 0,
+  "share_bars_signal": 0.0,
+  "seconds": 82.2
+ }
+]

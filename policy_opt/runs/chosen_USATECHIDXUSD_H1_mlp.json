@@ -1,0 +1,90 @@
+[
+ {
+  "year": "2022",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.0024812066709429064,
+   "wd": 1.7035036650706442e-05,
+   "hidden": 16,
+   "layers": 2
+  },
+  "kappa": 0.0,
+  "steps": 125,
+  "validation_net_bp_total": 4708.007235424704,
+  "validation_trades": 159,
+  "val_ok": true,
+  "J_train_refit": 0.6160080985612464,
+  "J_val_earlystop": 0.15673016703333792,
+  "J_test": -0.18765376520026367,
+  "J_test_mean_bp_per_bar": -55.521753557475314,
+  "test_trades": 62,
+  "share_bars_signal": 0.9974240082431737,
+  "seconds": 38.5
+ },
+ {
+  "year": "2023",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.0015381467793770525,
+   "wd": 7.047698803985972e-06,
+   "hidden": 32,
+   "layers": 2
+  },
+  "kappa": 2.0,
+  "steps": 50,
+  "validation_net_bp_total": 0.0,
+  "validation_trades": 0,
+  "val_ok": false,
+  "J_train_refit": 0.05557832343589709,
+  "J_val_earlystop": -0.11942017285086742,
+  "J_test": -0.026180448594693425,
+  "J_test_mean_bp_per_bar": -1.2750344722328968,
+  "test_trades": 0,
+  "share_bars_signal": 0.0,
+  "seconds": 38.7
+ },
+ {
+  "year": "2024",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.004431676326491545,
+   "wd": 0.20009314789455407,
+   "hidden": 16,
+   "layers": 1
+  },
+  "kappa": 0.0,
+  "steps": 1775,
+  "validation_net_bp_total": 3057.0690340985416,
+  "validation_trades": 115,
+  "val_ok": true,
+  "J_train_refit": 0.07405128871596833,
+  "J_val_earlystop": 0.12398619357747799,
+  "J_test": 0.03780704822567859,
+  "J_test_mean_bp_per_bar": 3.110197367239729,
+  "test_trades": 153,
+  "share_bars_signal": 1.0,
+  "seconds": 88.3
+ },
+ {
+  "year": "2025",
+  "kind": "sharpe",
+  "hp": {
+   "lr": 0.019710168696651386,
+   "wd": 2.5373155435593378e-06,
+   "hidden": 64,
+   "layers": 1
+  },
+  "kappa": 0.0,
+  "steps": 100,
+  "validation_net_bp_total": 3157.0345431170977,
+  "validation_trades": 133,
+  "val_ok": true,
+  "J_train_refit": 0.9588344595123824,
+  "J_val_earlystop": 0.08476073895957971,
+  "J_test": 0.015810875353662407,
+  "J_test_mean_bp_per_bar": 2.421097553742036,
+  "test_trades": 105,
+  "share_bars_signal": 0.8250681198910081,
+  "seconds": 64.4
+ }
+]

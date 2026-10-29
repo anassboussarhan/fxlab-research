@@ -1,0 +1,98 @@
+[
+ {
+  "year": "2022",
+  "kind": "mean",
+  "hp": {
+   "num_leaves": 8,
+   "learning_rate": 0.02761720407727731,
+   "min_data_in_leaf": 801,
+   "feature_fraction": 0.5093318638525377,
+   "bagging_fraction": 0.7618687179924637,
+   "lambda_l2": 8.64435847200369
+  },
+  "kappa": 2.0,
+  "steps": 316,
+  "validation_net_bp_total": 0.0,
+  "validation_trades": 0,
+  "val_ok": false,
+  "J_train_refit": 0.483589436179584,
+  "J_val_earlystop": -1.2619481863165625,
+  "J_test": -2.1611697283536135,
+  "J_test_mean_bp_per_bar": -2.1611697283536135,
+  "test_trades": 1301,
+  "share_bars_signal": 0.09594666816685887,
+  "seconds": 36.1
+ },
+ {
+  "year": "2023",
+  "kind": "mean",
+  "hp": {
+   "num_leaves": 11,
+   "learning_rate": 0.016722446771752757,
+   "min_data_in_leaf": 188,
+   "feature_fraction": 0.5810385034336994,
+   "bagging_fraction": 0.6689793465293958,
+   "lambda_l2": 1.8032328075988824
+  },
+  "kappa": 2.0,
+  "steps": 92,
+  "validation_net_bp_total": 0.0,
+  "validation_trades": 0,
+  "val_ok": false,
+  "J_train_refit": -0.560294917477614,
+  "J_val_earlystop": -1.7330273351870356,
+  "J_test": -1.643082480472997,
+  "J_test_mean_bp_per_bar": -1.643082480472997,
+  "test_trades": 0,
+  "share_bars_signal": 0.0,
+  "seconds": 27.0
+ },
+ {
+  "year": "2024",
+  "kind": "mean",
+  "hp": {
+   "num_leaves": 7,
+   "learning_rate": 0.041738408964839,
+   "min_data_in_leaf": 63,
+   "feature_fraction": 0.7982163434604983,
+   "bagging_fraction": 0.9186618611554151,
+   "lambda_l2": 8.92486386329055
+  },
+  "kappa": 2.0,
+  "steps": 223,
+  "validation_net_bp_total": -139.36318057834623,
+  "validation_trades": 121,
+  "val_ok": false,
+  "J_train_refit": 2.5237917921336095,
+  "J_val_earlystop": -1.2483050767791288,
+  "J_test": -0.912350124773855,
+  "J_test_mean_bp_per_bar": -0.912350124773855,
+  "test_trades": 116,
+  "share_bars_signal": 0.007463922839051686,
+  "seconds": 31.7
+ },
+ {
+  "year": "2025",
+  "kind": "mean",
+  "hp": {
+   "num_leaves": 5,
+   "learning_rate": 0.0592587675212964,
+   "min_data_in_leaf": 545,
+   "feature_fraction": 0.949805791828493,
+   "bagging_fraction": 0.5519329710276983,
+   "lambda_l2": 3.117446759944756
+  },
+  "kappa": 2.0,
+  "steps": 397,
+  "validation_net_bp_total": -750.9082766655778,
+  "validation_trades": 568,
+  "val_ok": false,
+  "J_train_refit": 1.5209534080753824,
+  "J_val_earlystop": -0.5211644777602186,
+  "J_test": -1.1429555314540945,
+  "J_test_mean_bp_per_bar": -1.1429555314540945,
+  "test_trades": 1643,
+  "share_bars_signal": 0.15460023217674915,
+  "seconds": 53.9
+ }
+]

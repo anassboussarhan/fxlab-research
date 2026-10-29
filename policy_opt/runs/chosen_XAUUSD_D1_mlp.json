@@ -1,0 +1,24 @@
+[
+ {
+  "year": "2018",
+  "kind": "mean",
+  "hp": {
+   "lr": 0.0028170637922036766,
+   "wd": 0.14947865055978748,
+   "hidden": 16,
+   "layers": 2
+  },
+  "kappa": 0.0,
+  "steps": 50,
+  "validation_net_bp_total": 1465.8283006355816,
+  "validation_trades": 13,
+  "val_ok": true,
+  "J_train_refit": 156.2846650113577,
+  "J_val_earlystop": 29.10057422831049,
+  "J_test": 6.664250940413152,
+  "J_test_mean_bp_per_bar": 6.664250940413152,
+  "test_trades": 2,
+  "share_bars_signal": 1.0,
+  "seconds": 2.8
+ }
+]
