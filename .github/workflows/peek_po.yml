@@ -1,0 +1,41 @@
+name: peek-po
+# Interim look at the finished jobs of a policy-optimisation run (run id in ci/PEEK_PO): combine what is there and
+# publish it to the policy-opt-partial branch. The full run publishes policy-opt when it ends.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/PEEK_PO"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  peek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy scipy pyarrow numba holidays
+      - name: Combine the finished jobs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download $(cat ci/PEEK_PO) -p "po-*" -D po || true
+          python scripts/policy_opt_lab.py --combine po --out pub 2>&1 | tee combine_log.txt
+      - name: Publish
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/runs && cp $(find po -name 'tests_*.csv' -o -name 'chosen_*.json' -o -name 'meta_*.json') pub/runs/ 2>/dev/null || true
+          cp combine_log.txt pub/
+          cp -r pub /tmp/pub
+          git checkout --orphan pk-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p policy_opt_partial && cp -r /tmp/pub/* policy_opt_partial/
+          echo "interim combine at $(date -u +%FT%TZ)" > policy_opt_partial/RUN.txt
+          git add -f policy_opt_partial
+          git commit -qm "Policy optimisation interim (peek run ${{ github.run_id }})"
+          git push -f origin HEAD:policy-opt-partial
