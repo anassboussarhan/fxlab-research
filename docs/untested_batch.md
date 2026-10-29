@@ -562,3 +562,49 @@ price-based features, flexibility only widens the gap between the training and t
   (+2.8 bp a week, t 1.9).
 - **Positioning data does not predict weekly FX or gold returns after costs.** It is public a week late, and it
   shows.
+
+### 9.2 The Gotobi trade played for maximum profit at high risk (`scripts/gotobi_lottery.py`, `docs/gotobi_lottery/`)
+
+**Setup:**
+- **The trade:** I3 (long USD/JPY 23:00 Tokyo -> 09:53 Tokyo on Gotobi days, stop at half the 20-day range), net
+  of all costs. 697 trades of 2007-2018 with their minute paths, drawn at random with replacement (2019-2025
+  averaged +4.2 bp against +4.6 bp).
+- **The open loss inside each trade is applied:** the median trade goes 19 bp against the position before it
+  ends; 1 in 10 goes 49 bp, 1 in 100 goes 86 bp; the worst went 129 bp.
+- **Full Kelly** (the leverage that maximises compound growth on past trades) is about 32x on 2007-2025.
+- **Haircut scenario:** 2 bp less on every trade (an edge half as large).
+
+**A. Own account, $10,000, compounding at constant leverage (20,000 paths):**
+
+| Leverage | 1 year: median | 1 year: lose half | 7 years: median | 7 years: 100x or more | 7 years: wiped out | 7 years, haircut: median / wiped out |
+|---|---|---|---|---|---|---|
+| 10x | 1.23x | 0.1% | 4.6x | 0% | 0% | 2.0x / 0% |
+| 15x | 1.33x | 1.3% | 7.7x | 1.8% | 0.1% | 2.3x / 1.1% |
+| 20x | 1.40x | 3.8% | 11.1x | 8.8% | 0.7% | 2.2x / 6.3% |
+| 30x | 1.46x | 11% | 14.5x | 21% | 7.5% | 1.1x / 30% |
+| 45x | 1.33x | 23% | 4.1x | 22% | 34% | 0.1x / 68% |
+| 60x | 0.95x | 37% | 0.1x | 13% | 66% | 0.1x / 90% |
+| 100x | 0.08x | 78% | 0.06x | 0.1% | 99.8% | 0.07x / 100% |
+
+- **The median peaks near full Kelly (about 30x), and the chance of a 100-fold outcome peaks at 30-45x (about
+  22% over 7 years),** but at 45x a third of accounts are wiped out and the median halves.
+- **If the edge is half as large, everything above about 15x loses most of its value** (30x: median 1.1x after
+  7 years and 30% wiped out). Half Kelly (15x) keeps most of the growth if the edge is real and survives if it is
+  smaller.
+- **Drawdowns are deep:** the median worst drawdown over 7 years is 55% at 15x and 84% at 30x.
+- **Broker caps:** EU retail FX leverage is limited to 30:1 on majors, US to 50:1.
+
+**B. Prop-firm challenges, where only the fee can be lost:** high leverage does not work here. With the open
+loss checked against the 5% daily limit, passing at 10x falls to 17% (FTMO 2-step) and at 20x to 1%; the expected
+value turns negative from 15x. The best is low leverage while passing and a little more once funded:
+
+| Programme | Leverage passing / funded | Pass | Typical time to pass | Paid | Mean net per attempt |
+|---|---|---|---|---|---|
+| FundedNext Stellar 2-step | 3x / 6x | 63% | 250 trading days | 53% | +$7,450 |
+| FundedNext Stellar 2-step | 4x / 6x | 63% | 181 | 52% | +$7,320 |
+| FTMO 2-step | 4x / 6x | 59% | 207 | 51% | +$6,990 |
+| FTMO 2-step | 10x / 5x | 17% | 49 | 15% | +$1,430 |
+| FTMO 2-step | 20x / 5x | 1% | 33 | 1% | -$460 |
+
+- **Earlier prop numbers (section 9.x drafts, prop_mix) checked only closing losses;** with the open loss inside
+  the trade the pass rate at 5-6x falls from about 62% to about 47%.
