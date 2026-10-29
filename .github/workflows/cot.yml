@@ -1,0 +1,39 @@
+name: cot
+# scripts/cot_lab.py (rules fixed in its docstring): CFTC Commitments of Traders positioning as weekly FX and gold
+# signals. Downloads the public legacy reports from cftc.gov and Yahoo daily closes; weeks to 2025-12-31 only.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/COT"]
+permissions:
+  contents: write
+jobs:
+  cot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy scipy pyarrow requests yfinance pytest
+      - run: python -m pytest -q tests/test_cot_lab.py
+      - run: python scripts/cot_lab.py --fetch cotdata 2>&1 | tee fetch_log.txt
+      - run: python scripts/cot_lab.py --data cotdata --out pub 2>&1 | tee run_log.txt
+      - name: Publish to the cot branch (results and the tidy positioning file; no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub && cp fetch_log.txt run_log.txt pub/ 2>/dev/null || true
+          cp cotdata/cot.csv pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          git checkout --orphan cot-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p cot && cp -r /tmp/pub/* cot/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > cot/RUN.txt
+          git add -f cot
+          git commit -qm "COT positioning signals (run ${{ github.run_id }})"
+          git push -f origin HEAD:cot
