@@ -606,5 +606,6 @@ value turns negative from 15x. The best is low leverage while passing and a litt
 | FTMO 2-step | 10x / 5x | 17% | 49 | 15% | +$1,430 |
 | FTMO 2-step | 20x / 5x | 1% | 33 | 1% | -$460 |
 
-- **Earlier prop numbers (section 9.x drafts, prop_mix) checked only closing losses;** with the open loss inside
-  the trade the pass rate at 5-6x falls from about 62% to about 47%.
+- **Checking only closing losses overstates the pass rate:** I3 at 6x passes about 75% of FundedNext or The5ers
+  challenges on closing losses alone (`scripts/prop_firms_ev.py`), against about 50% at 5x once the open loss
+  inside the trade counts. The earlier prop results (`docs/prop_mix.md`) also used closing losses only.
