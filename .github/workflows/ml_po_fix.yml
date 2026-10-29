@@ -1,0 +1,97 @@
+name: policy-opt-fix
+# scripts/policy_opt_lab.py (search spaces fixed in its docstring): entry, side, take-profit, stop and time limit as
+# explicit functions of the features (linear, MLP, boosted trees), parameters found by maximising the net profit on
+# the training years; every timeframe M1-D1 for 11 FX pairs and gold, M1-H1 for the US500 and NAS100 CFDs.
+# Bars from the runs named in ci/ML_PO.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/ML_PO_FIX"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  OMP_NUM_THREADS: "4"
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 345
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        include: [{"symbol": "AUDNZD", "tf": "H4"}, {"symbol": "XAUUSD", "tf": "H4"}, {"symbol": "USA500IDXUSD", "tf": "H1"}, {"symbol": "USATECHIDXUSD", "tf": "H1"}, {"symbol": "EURUSD", "tf": "D1"}, {"symbol": "GBPUSD", "tf": "D1"}, {"symbol": "USDJPY", "tf": "D1"}, {"symbol": "AUDUSD", "tf": "D1"}, {"symbol": "USDCAD", "tf": "D1"}, {"symbol": "USDCHF", "tf": "D1"}, {"symbol": "NZDUSD", "tf": "D1"}, {"symbol": "EURJPY", "tf": "D1"}, {"symbol": "EURGBP", "tf": "D1"}, {"symbol": "AUDNZD", "tf": "D1"}, {"symbol": "GBPCAD", "tf": "D1"}, {"symbol": "XAUUSD", "tf": "D1"}]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Bars of ${{ matrix.symbol }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRRORS DUKA USDJPY REST < ci/ML_PO
+          s=${{ matrix.symbol }}
+          mkdir -p dl
+          case $s in
+            USA500IDXUSD|USATECHIDXUSD) gh run download $DUKA -p "dk-$s-*" -D dl/dk ;;
+            *) for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_$M || true; done
+               if [ "$s" = "USDJPY" ]; then gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj; fi ;;
+          esac
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+          ls data/m1/$s
+      - run: python -m pytest -q tests/test_ml_adaptive_barrier_lab.py tests/test_policy_opt_lab.py
+      - run: python scripts/policy_opt_lab.py --symbol ${{ matrix.symbol }} --tf ${{ matrix.tf }} --out out/tb --min-val 100
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pf-${{ matrix.symbol }}-${{ matrix.tf }}
+          path: out/tb
+          retention-days: 30
+  combine:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy scipy pyarrow numba holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pf-*
+          path: new
+          merge-multiple: true
+      - name: Main run's artifacts, without the jobs re-run here
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MAIN < ci/ML_PO_FIX
+          gh run download $MAIN -p "po-*" -D old
+          mkdir -p tb && find old -type f -exec cp {} tb/ \;
+          for f in new/tests_*.csv new/error_*.txt; do [ -e "$f" ] || continue; k=$(basename $f | sed -E 's/^(tests|error)_//; s/\.(csv|txt)$//'); rm -f tb/*_${k}.csv tb/*_${k}_*.csv.gz tb/*_${k}.json tb/*_${k}_*.json; done
+          cp new/* tb/ || true
+          ls tb | wc -l
+      - run: python scripts/policy_opt_lab.py --combine tb --out pub 2>&1 | tee combine_log.txt
+      - name: Publish to the policy-opt branch (summaries and per-trade returns, no price data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/runs && cp tb/tests_*.csv tb/meta_*.json tb/chosen_*.json tb/error_*.txt pub/runs/ 2>/dev/null || true
+          cp tb/trades_*.csv.gz pub/runs/ 2>/dev/null || true
+          cp combine_log.txt pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          IN="$(cat ci/ML_PO) + fix of run $(cat ci/ML_PO_FIX)"
+          git checkout --orphan po-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p policy_opt && cp -r /tmp/pub/* policy_opt/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ); bars from $IN" > policy_opt/RUN.txt
+          git add -f policy_opt
+          git commit -qm "Policy optimisation, all timeframes (run ${{ github.run_id }})"
+          git push -f origin HEAD:policy-opt

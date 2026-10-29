@@ -629,7 +629,19 @@ def main():
     ap.add_argument("--min-val", type=int, default=200)
     a = ap.parse_args()
     a.forms = [f for f in a.forms.split(",") if f]
-    combine(a) if a.combine else run(a)
+    if a.combine:
+        return combine(a)
+    try:
+        run(a)
+    except Exception:                                                     # noqa: BLE001
+        import traceback
+        tb = traceback.format_exc()
+        print(tb, flush=True)
+        os.makedirs(a.out, exist_ok=True)
+        open(os.path.join(a.out, f"error_{a.symbol}_{a.tf}.txt"), "w").write(tb)
+        msg = tb[-1800:].replace("%", "%25").replace("\r", "").replace("\n", "%0A")
+        print(f"::error title=policy_opt {a.symbol} {a.tf}::{msg}", flush=True)
+        raise
 
 
 if __name__ == "__main__":
