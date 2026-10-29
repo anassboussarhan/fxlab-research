@@ -25,8 +25,7 @@ jobs:
           git show origin/gotobi-oos:gotobi_oos/series.csv > ser/gotobi_series.csv
           git show "origin/untested-intraday:untested_intraday/tokyo/trades_I3_USDJPY_Gotobi_overnight_23_00_09_53_Tokyo__0_5_range_stop.csv" > ser/trades_I3_USDJPY.csv
           git show origin/cost-tuning:cost_tuning/eurjpy/oos_eurjpy_gotobi_EURJPY.csv > ser/oos_eurjpy_gotobi_EURJPY.csv
-          F=$(git ls-tree -r --name-only origin/flow-edges 2>/dev/null | grep "trades_T3_yen_basket" | head -1)
-          [ -n "$F" ] && git show "origin/flow-edges:$F" > ser/trades_T3_yen_basket.csv || true
+          mkdir -p ser/fe && (git archive origin/flow-edges | tar -x -C ser/fe --wildcards '*trades_T*' || true)
           ls -la ser
       - run: python -W ignore scripts/prop_firms_ev.py --series ser --out out 2>&1 | tee out_log.txt
       - name: Publish to the prop-firms branch

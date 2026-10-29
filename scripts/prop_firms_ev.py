@@ -15,12 +15,15 @@ luxalgo.com prop-firm-sim dataset, tradetanto.com, proptradingvibes.com; confirm
   The5ers High Stakes: fee USD 495, not refunded; +8% then +5%; daily 5%, maximum 10% static; at least 3 days a
                       phase with a closed profit of 0.5% or more; 80% split; payouts every 10 trading days.
   All: a trader who has not passed within 500 trading days is counted as not passed; funded for 250 trading days.
-  Losses are checked after each strategy's daily outcome (the open-trade path inside a trade is not modelled,
-  which slightly favours the trader).
+  Losses are checked against the open loss inside the trades where the minute paths are stored (the yen Gotobi
+  trades from the flow-edges branch; all open positions taken at their worst at the same moment), else against
+  the closing loss only (Gotobi 03:00-09:55, Nasdaq overnight), and after each strategy's daily outcome.
 EDGES (per unit of notional, net of costs and swap, daily outcomes 2019-2025):
   G   Gotobi USD/JPY 03:00-09:55 Tokyo (gotobi-oos branch, test F1);
-  I3  Gotobi USD/JPY overnight 23:00-09:53 Tokyo with a 0.5-range stop (untested-intraday branch);
-  E   Gotobi EUR/JPY (cost-tuning branch, out-of-sample walk-forward trades);
+  I3  Gotobi USD/JPY overnight 23:00-09:53 Tokyo with a 0.5-range stop (flow-edges T7 reference, with open
+      losses; else the untested-intraday branch);
+  E   Gotobi EUR/JPY overnight, no stop (flow-edges T3 reference, with open losses; else the cost-tuning
+      branch's walk-forward trades);
   Y   the yen-basket Gotobi overnight trade (flow-edges branch, T3), when available;
   O   Nasdaq-100 overnight on an index CFD (QQQ close-to-open proxy, Mon-Thu nights), as in prop_mix_sim.py.
 Each of N simulated traders starts on a random day and walks the real calendar (wrapping around).
@@ -57,8 +60,10 @@ FIRMS = {
 INIT, MAX_DAYS, FUNDED_DAYS = 100_000.0, 500, 250
 
 
-def simulate(A, rules, n=20_000, seed=0):
-    """A: (days x strategies) daily account returns at the chosen leverage. Returns the outcome summary."""
+def simulate(A, rules, n=20_000, seed=0, M=None):
+    """A: (days x strategies) daily account returns at the chosen leverage; M: the same days' worst open losses
+    (<= 0), all positions assumed at their worst at the same moment (conservative). Returns the outcome summary."""
+    M = np.minimum(A, 0.0) if M is None else M
     r = rules
     rng = np.random.default_rng(seed)
     T = len(A)
@@ -81,8 +86,13 @@ def simulate(A, rules, n=20_000, seed=0):
         if not alive.any():
             break
         day = A[(pos + step) % T]
+        dip = M[(pos + step) % T].sum(axis=1)
         start = eq.copy()
         floor = np.where(r["trailing"], peak - r["maxloss"], -r["maxloss"])
+        bo = alive & ((-dip >= r["daily"]) | (eq + dip <= floor))          # the open loss inside the trades
+        fail = np.where(bo & (fail == 0), np.where(-dip >= r["daily"], 1, 2), fail)
+        phase = np.where(bo, -1, phase)
+        alive &= ~bo
         for c in range(day.shape[1]):
             eq = np.where(alive, eq + day[:, c], eq)
             bd = alive & (start - eq >= r["daily"])
@@ -132,19 +142,27 @@ def simulate(A, rules, n=20_000, seed=0):
 
 
 def series(d):
-    """Daily per-unit outcomes of each edge, 2019-2025 business days (0 on days without a trade)."""
-    out = {}
+    """Daily per-unit outcomes of each edge, 2019-2025 business days (0 on days without a trade), and their worst
+    open losses where the trade paths are stored (else the loss at the close)."""
+    out, mae = {}, {}
     f = os.path.join(d, "gotobi_series.csv")
     if os.path.exists(f):
         G = pd.read_csv(f, parse_dates=["day"])
         out["G"] = G[(G.test == "F1") & G.net_sw.notna()].set_index("day").net_sw
-    for key, pat in (("I3", "trades_I3_USDJPY*.csv"), ("E", "oos_eurjpy_gotobi_EURJPY.csv"),
-                     ("Y", "trades_T3_yen_basket*.csv")):
-        fs = glob.glob(os.path.join(d, "**", pat), recursive=True)
-        if fs:
-            s = pd.read_csv(fs[0], index_col=0, parse_dates=True)["net"]
-            s.index = pd.DatetimeIndex(s.index).tz_localize(None) if s.index.tz is not None else s.index
-            out[key] = s
+    for key, pats in (("I3", ("trades_T7_reference*.csv", "trades_I3_USDJPY*.csv")),
+                      ("E", ("trades_T3_reference__EURJPY*.csv", "oos_eurjpy_gotobi_EURJPY.csv")),
+                      ("Y", ("trades_T3_yen_basket*.csv",))):
+        for pat in pats:
+            fs = glob.glob(os.path.join(d, "**", pat), recursive=True)
+            if fs:
+                f = pd.read_csv(fs[0], index_col=0, parse_dates=True)
+                f.index = pd.DatetimeIndex(f.index).tz_localize(None) if f.index.tz is not None else f.index
+                out[key] = f["net"]
+                if "mae" in f:
+                    mae[key] = f["mae"].fillna(np.minimum(f["net"], 0.0))
+                print(key, "from", os.path.basename(fs[0]), "open loss" if key in mae else "closing loss only",
+                      flush=True)
+                break
     try:
         import prop_mix_sim as PM
         q, irx = PM.yahoo("QQQ"), PM.yahoo("^IRX")
@@ -158,7 +176,10 @@ def series(d):
         print("no QQQ series:", repr(ex)[:200], flush=True)
     days = pd.bdate_range(START, END)
     X = pd.DataFrame({k: v.groupby(v.index.normalize()).sum().reindex(days) for k, v in out.items()}).fillna(0.0)
-    return X
+    M = pd.DataFrame({k: (mae[k].groupby(mae[k].index.normalize()).sum().reindex(days) if k in mae
+                          else np.minimum(X[k], 0.0)) for k in X.columns}, index=days).fillna(0.0)
+    M = np.minimum(M, np.minimum(X, 0.0))
+    return X, M
 
 
 def main():
@@ -168,7 +189,7 @@ def main():
     ap.add_argument("--traders", type=int, default=20_000)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
-    X = series(a.series)
+    X, MX = series(a.series)
     stats = {k: {"events": int((X[k] != 0).sum()), "mean_bp": float(X[k][X[k] != 0].mean() * 1e4),
                  "worst_bp": float(X[k].min() * 1e4), "year_at_1x": float(X[k].sum() / 7)} for k in X}
     print(json.dumps(stats, indent=1), flush=True)
@@ -187,7 +208,8 @@ def main():
     rows = []
     for (keys, lev), (fname, rules) in itertools.product(combos, FIRMS.items()):
         A = X[list(keys)].to_numpy() * np.asarray(lev)[None, :]
-        res = simulate(A, rules, n=a.traders)
+        Mo = MX[list(keys)].to_numpy() * np.asarray(lev)[None, :]
+        res = simulate(A, rules, n=a.traders, M=Mo)
         rows.append({"mix": " + ".join(f"{k} {l:g}x" for k, l in zip(keys, lev)), "firm": fname, **res})
         print(rows[-1], flush=True)
     R = pd.DataFrame(rows)

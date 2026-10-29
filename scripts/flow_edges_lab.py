@@ -70,16 +70,30 @@ def window(bk, d):
     return (i, j) if (i >= 0 and j > i) else (-1, -1)
 
 
+def open_loss(bk, i, j, sl_dist, net):
+    """Worst open loss of a long from minute i (entry at the ask plus slippage) until its exit: the lowest bid
+    before the stop (or the time exit), as a return; a stopped trade's open loss is its realised loss."""
+    si = bk.sf * (bk.ao[i] - bk.bo[i]) + bk.sp * bk.pip
+    E = bk.ao[i] + si
+    if np.isfinite(sl_dist):
+        hit = np.flatnonzero(bk.bl[i:j] <= E - sl_dist)
+        if len(hit):
+            return min(net, 0.0)
+    return float(min(np.min(bk.bl[i:j]) / E - 1.0, net, 0.0))
+
+
 def overnight(bk, days, stop="none", rng=None):
     """I3 trade on each day: stop "none", "daily" (0.5 x the 20-day daily range, the I3 rule) or "window" (the mean
-    range of the same window on the previous 20 sampled days)."""
+    range of the same window on the previous 20 sampled days). Returns DataFrame[net, gross, mae]."""
     out = {}
+    mae = {}
     bk._hl()
     hist = []
     for d in sorted(days):
         i, j = window(bk, d)
         if i < 0:
             continue
+        sl_dist = np.inf
         if stop == "none":
             r = bk.trade_ij(i, j, +1, None, None)
         elif stop == "daily":
@@ -88,7 +102,8 @@ def overnight(bk, days, stop="none", rng=None):
             rg = float(rng.get(td, np.nan))
             if not np.isfinite(rg) or rg <= 0:
                 continue
-            r = bk.bracket(i, j, +1, 1e9, 0.5 * rg)
+            sl_dist = 0.5 * rg
+            r = bk.bracket(i, j, +1, 1e9, sl_dist)
         else:
             w = float(np.max(bk.mh[i:j + 1]) - np.min(bk.ml[i:j + 1]))
             ok = U.complete(bk, i, j, 0.85)
@@ -97,10 +112,14 @@ def overnight(bk, days, stop="none", rng=None):
                 hist.append(w)
             if len(prev) < 10 or not ok:
                 continue
-            r = bk.bracket(i, j, +1, 1e9, float(np.mean(prev)))
+            sl_dist = float(np.mean(prev))
+            r = bk.bracket(i, j, +1, 1e9, sl_dist)
         if r is not None:
             out[d] = U.rec(r)
-    return U.frame(out)
+            mae[d] = open_loss(bk, i, j, sl_dist, out[d][0])
+    f = U.frame(out)
+    f["mae"] = pd.Series(mae).reindex(f.index)
+    return f
 
 
 def welch(a, b):
@@ -134,13 +153,17 @@ def tokyo(res):
         res[f"{tag}sc {s} control days, window-range stop"] = (ctls, 80)
         res[f"{tag}s {s} Gotobi minus control (Welch t)"] = welch(evs, ctls)
     # T3: basket of the four yen pairs (no stop)
-    per = {}
+    per, per_mae = {}, {}
     for s, bk in books.items():
         G, _, _ = calendar(bk)
-        per[s] = overnight(bk, G).net
+        f = overnight(bk, G)
+        per[s], per_mae[s] = f.net, f.mae
+        res[f"T3 reference: {s} Gotobi overnight, no stop"] = (f, 62)
     B = pd.DataFrame(per)
     basket = B.mean(axis=1, skipna=True).dropna()
-    res["T3 yen basket Gotobi overnight, no stop"] = (pd.DataFrame({"net": basket, "gross": basket * np.nan}), 62)
+    bm = pd.DataFrame(per_mae).mean(axis=1, skipna=True).reindex(basket.index)   # simultaneous: mean of the pairs
+    res["T3 yen basket Gotobi overnight, no stop"] = (pd.DataFrame({"net": basket, "gross": basket * np.nan,
+                                                                     "mae": bm}), 62)
     res["T3 pairs per day (mean)"] = float(B.notna().sum(axis=1).mean())
     # T4 / T5 / T6 on USDJPY with the I3 rule
     bk = bk_uj
