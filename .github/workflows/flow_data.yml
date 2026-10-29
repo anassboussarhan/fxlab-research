@@ -1,0 +1,59 @@
+name: flow-data
+# Data for scripts/flow_edges_lab.py, development years only (to 2025-12-31). Dukascopy windows 2019-2025 (dates from
+# ci/flow_dates.py): AUDJPY and GBPJPY around the Tokyo fix on Gotobi days, the days before them and a third of the
+# other Tue-Fri business days (controls); six USD pairs on the London month-end fix day and the evening before. The
+# FX-Data GitHub mirror for AUDJPY and GBPJPY 2007-2018. Partial downloads are uploaded (deadline inside the job).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FLOW_DATA"]
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        include: [{"kind": "jpy", "pair": "AUDJPY", "years": "2019"}, {"kind": "jpy", "pair": "AUDJPY", "years": "2020"}, {"kind": "jpy", "pair": "AUDJPY", "years": "2021"}, {"kind": "jpy", "pair": "AUDJPY", "years": "2022"}, {"kind": "jpy", "pair": "AUDJPY", "years": "2023"}, {"kind": "jpy", "pair": "AUDJPY", "years": "2024"}, {"kind": "jpy", "pair": "AUDJPY", "years": "2025"}, {"kind": "jpy", "pair": "GBPJPY", "years": "2019"}, {"kind": "jpy", "pair": "GBPJPY", "years": "2020"}, {"kind": "jpy", "pair": "GBPJPY", "years": "2021"}, {"kind": "jpy", "pair": "GBPJPY", "years": "2022"}, {"kind": "jpy", "pair": "GBPJPY", "years": "2023"}, {"kind": "jpy", "pair": "GBPJPY", "years": "2024"}, {"kind": "jpy", "pair": "GBPJPY", "years": "2025"}, {"kind": "me", "pair": "EURUSD", "years": "2019 2020 2021"}, {"kind": "me", "pair": "EURUSD", "years": "2022 2023 2024 2025"}, {"kind": "me", "pair": "GBPUSD", "years": "2019 2020 2021"}, {"kind": "me", "pair": "GBPUSD", "years": "2022 2023 2024 2025"}, {"kind": "me", "pair": "AUDUSD", "years": "2019 2020 2021"}, {"kind": "me", "pair": "AUDUSD", "years": "2022 2023 2024 2025"}, {"kind": "me", "pair": "USDCAD", "years": "2019 2020 2021"}, {"kind": "me", "pair": "USDCAD", "years": "2022 2023 2024 2025"}, {"kind": "me", "pair": "USDCHF", "years": "2019 2020 2021"}, {"kind": "me", "pair": "USDCHF", "years": "2022 2023 2024 2025"}, {"kind": "me", "pair": "NZDUSD", "years": "2019 2020 2021"}, {"kind": "me", "pair": "NZDUSD", "years": "2022 2023 2024 2025"}, {"kind": "mirror", "pair": "AUDJPY", "years": "2007 2008 2009 2010 2011 2012"}, {"kind": "mirror", "pair": "AUDJPY", "years": "2013 2014 2015 2016 2017 2018"}, {"kind": "mirror", "pair": "GBPJPY", "years": "2007 2008 2009 2010 2011 2012"}, {"kind": "mirror", "pair": "GBPJPY", "years": "2013 2014 2015 2016 2017 2018"}]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow holidays
+      - name: ${{ matrix.kind }} ${{ matrix.pair }} ${{ matrix.years }}
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          P=${{ matrix.pair }}
+          case ${{ matrix.kind }} in
+            mirror) python -m fxlab.data.acquire_fxdata_git --pairs $P --years ${{ matrix.years }} --scratch /tmp/fx || true ;;
+            jpy)
+              Y=${{ matrix.years }}; S=$((Y-1))-12-25T00:00:00; E=$((Y+1))-01-01T00:00:00
+              [ $Y = 2025 ] && E=2025-12-31T23:59:00
+              for m in g gp c cp; do python ci/flow_dates.py $m $Y > $m.txt; done
+              wc -l g.txt gp.txt c.txt cp.txt
+              python -m fxlab.data.acquire_dukascopy --pairs $P --start $S --end $E --hours 0-1 --dates-file g.txt --suffix _g$Y --workers 4 --deadline-min 60 || true
+              python -m fxlab.data.acquire_dukascopy --pairs $P --start $S --end $E --hours 14-23 --dates-file gp.txt --suffix _gp$Y --workers 4 --deadline-min 170 || true
+              python -m fxlab.data.acquire_dukascopy --pairs $P --start $S --end $E --hours 0-1 --dates-file c.txt --suffix _c$Y --workers 4 --deadline-min 210 || true
+              python -m fxlab.data.acquire_dukascopy --pairs $P --start $S --end $E --hours 14-23 --dates-file cp.txt --suffix _cp$Y --workers 4 --deadline-min 290 || true ;;
+            me)
+              for Y in ${{ matrix.years }}; do
+                S=$((Y-1))-12-25T00:00:00; E=$((Y+1))-01-01T00:00:00; [ $Y = 2025 ] && E=2025-12-31T23:59:00
+                python ci/flow_dates.py me $Y > me.txt; python ci/flow_dates.py mep $Y > mep.txt
+                python -m fxlab.data.acquire_dukascopy --pairs $P --start $S --end $E --hours 0-16 --dates-file me.txt --suffix _me$Y --workers 4 --deadline-min 290 || true
+                python -m fxlab.data.acquire_dukascopy --pairs $P --start $S --end $E --hours 14-23 --dates-file mep.txt --suffix _mep$Y --workers 4 --deadline-min 300 || true
+              done ;;
+          esac
+          mkdir -p part && cp data/m1/$P/*.parquet part/ || true
+          cp data/manifests/acquisition.jsonl part/manifest_${{ strategy.job-index }}.jsonl || true
+          ls -la part
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fd-${{ matrix.pair }}-${{ matrix.kind }}-${{ strategy.job-index }}
+          path: part
+          retention-days: 30
+          if-no-files-found: warn
