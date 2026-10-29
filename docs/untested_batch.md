@@ -609,3 +609,33 @@ value turns negative from 15x. The best is low leverage while passing and a litt
 - **Checking only closing losses overstates the pass rate:** I3 at 6x passes about 75% of FundedNext or The5ers
   challenges on closing losses alone (`scripts/prop_firms_ev.py`), against about 50% at 5x once the open loss
   inside the trade counts. The earlier prop results (`docs/prop_mix.md`) also used closing losses only.
+
+### 9.3 Limit-order entries on every stored ML trade (`scripts/passive_entry_lab.py`, branch `passive-entry`, run 40947778352)
+
+**Setup:**
+- **Signals:** every out-of-sample trade of the three ML labs (8.5 fixed barriers, 8.6 adaptive barriers, 8.7
+  optimised functions): 12.6 million signals over 600 market x timeframe x source sets.
+- **Entry:** a buy limit at the bid (sell limit at the ask), valid for one bar, filled at the limit price when
+  the quote reaches it (the MT5 rule); barriers measured from the fill; a stop can trigger in the fill minute, the
+  target cannot. Variants: 0.2 pip through the limit (strict), and a limit exit at the time limit as well.
+- **Adverse selection** is read off the M1 path: the market-entry gross return of the signals that filled and of
+  those that did not.
+
+**Results:**
+
+| Source | Timeframes | Fill rate | Market entry, net bp | Limit entry, net bp per fill | Limit entry, per signal | Gross of filled signals | Gross of unfilled signals |
+|---|---|---|---|---|---|---|---|
+| Fixed barriers (8.5) | M1-D1 | 26-96% | -1.9 to -7.3 | -1.4 to -4.3 | -0.5 to -4.1 | -2.5 to +0.1 | +0.4 to +49 |
+| Adaptive barriers (8.6) | M1-D1 | 74-96% | -1.5 to -11.8 | -1.6 to -10.0 | -1.2 to -9.6 | -9.3 to -1.5 | +0.6 to +65 |
+| Optimised functions (8.7) | M1-H4 | 60-95% | -2.3 to -4.0 | -2.0 to -3.8 | -1.3 to -3.6 | -3.0 to -0.6 | +2.1 to +21 |
+
+- **One of 600 has t above 2** (USD/CHF D1 adaptive barriers, 63 trades, +49.5 bp, t 2.1; not significant after
+  Benjamini-Hochberg); 295 are significantly negative; 47 are positive.
+- **The limit saves the spread on the trades it gets and loses the trades that matter.** The signals that never
+  fill earned far more before costs (+0.4 to +65 bp) than the ones that fill (around zero): price moved away
+  from the limit because the signal was right.
+- **Per signal the limit is a little less bad than the market entry** (about 0.3-1.3 bp a trade better), but
+  nowhere near enough to turn the ML skill positive. The strict and the limit-exit variants change little.
+
+**Conclusion:** Cheaper execution does not rescue the price-based ML signals, because their skill is
+concentrated in the moves a passive order misses.
