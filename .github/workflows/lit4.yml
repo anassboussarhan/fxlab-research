@@ -1,0 +1,88 @@
+name: lit4
+# Fourth literature round (blogs, forums, commercial systems): scripts/lit4_daily_lab.py (FX and gold seasonality
+# walk-forward, the published patterns after publication, gold turn of the month) and scripts/lit4_intraday_lab.py
+# (the MQL5 gold London breakout rule, Larry Williams' Smash Day, the commercial Gotobi EA rule).
+# ci/LIT4: MIRRORS EXTRA USDJPY.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/LIT4"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt yfinance lunardate requests
+      - run: python scripts/lit4_daily_lab.py --out out/daily 2>&1 | tee out_daily.txt
+      - if: always()
+        run: mkdir -p out && cp out_daily.txt out/ || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lit4-daily
+          path: out
+          retention-days: 30
+  intraday:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRRORS EXTRA USDJPY REST < ci/LIT4
+          mkdir -p dl
+          for s in EURUSD USDJPY EURJPY XAUUSD; do for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_${M}_$s || true; done; done
+          gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj
+          gh run download $EXTRA -p "dk-EURJPY-*" -D dl/ej || true
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+          ls data/m1
+      - run: python -W ignore scripts/lit4_intraday_lab.py --out out/intraday 2>&1 | tee out_intraday.txt
+      - if: always()
+        run: mkdir -p out && cp out_intraday.txt out/ || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lit4-intraday
+          path: out
+          retention-days: 30
+  publish:
+    needs: [daily, intraday]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: lit4-*
+          path: res
+          merge-multiple: true
+      - name: Publish to the lit4 branch (results and per-trade returns, no price data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp -r res /tmp/l4
+          git checkout --orphan l4-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p lit4 && cp -r /tmp/l4/* lit4/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > lit4/RUN.txt
+          git add -f lit4
+          git commit -qm "Literature round 4 (run ${{ github.run_id }})"
+          git push -f origin HEAD:lit4

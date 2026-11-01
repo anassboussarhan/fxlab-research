@@ -81,9 +81,11 @@ def nw_t(x, lags=3):
     if n < 12:
         return np.nan
     e = x - x.mean()
-    s = (e @ e) / n
+    s0 = (e @ e) / n
+    s = s0
     for L in range(1, lags + 1):
         s += 2 * (1 - L / (lags + 1)) * (e[L:] @ e[:-L]) / n
+    s = max(s, s0)              # floored at the iid variance (run 41338023221 reported D6 at t 4.26 without the floor)
     return float(x.mean() / math.sqrt(s / n)) if s > 0 else np.nan
 
 
