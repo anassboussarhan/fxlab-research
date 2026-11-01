@@ -246,9 +246,9 @@ as `scripts/lit4_daily_lab.py` and `scripts/lit4_intraday_lab.py` (branch `lit4`
 
 | Method | Source and what it claims | Here |
 |---|---|---|
-| FX monthly seasonality (USD/JPY falls in August 14/20 years; GBP up in April 18/20, down in May 17/20; CAD up in April 16/20; ...) | Chandler (2021, sceptical himself); FXEmpire; Euromoney | lit4 S1 (walk-forward 15-of-20 rule, 1991-2025), S1b (20-year sign), S2 (his 15 patterns after publication) |
+| FX monthly seasonality (USD/JPY falls in August 14/20 years; GBP up in April 18/20, down in May 17/20; CAD up in April 16/20; ...) | Chandler (2021, sceptical himself); FXEmpire; Euromoney | lit4 S1 walk-forward 15-of-20 rule 1991-2025: +0.14% a month, t 0.43; S1b 20-year sign: t -0.52; S2 his 15 patterns after publication: +0.03%, t 0.09 |
 | January and December effects in USD/DEM-EUR, 1971-2017 | Girardin et al. (Economic Modelling 2019) | Covered by S1 / S1b (direction not given in the abstract, so not pre-registered on its own) |
-| Gold turn of the month | Seasonax / StoneX notes | lit4 G1 (last day + first three days, 2000-2025) |
+| Gold turn of the month | Seasonax / StoneX notes | lit4 G1 (last day + first three days, 2000-2025): +0.23% a window, 17/26 years, t 1.63, q 0.21 |
 | Gold before the Chinese New Year | Practitioner seasonality | lit3 D6: +1.5% a year, 16/25, t 2.0, q 0.17 |
 | Gold London breakout, Asian range 03:00-08:00 server, range filter 0.3-1.6%, 2.5R, break-even at 1.5R | MQL5 blog 777540: PF 1.38 on 2023-2026 (no costs stated) | lit4 L1, 2011-2018: 984 trades, -0.4 bp, PF 0.98; gross +3.8 bp; short side +1.4, long -1.9 |
 | 400+ gold strategy variants with costs and random-entry controls | MQL5 blog: almost all fail; Asian box +0.035R | Agrees with the catalog results here |
@@ -259,7 +259,7 @@ as `scripts/lit4_daily_lab.py` and `scripts/lit4_intraday_lab.py` (branch `lit4`
 | Crabel NR4 / NR7, inside days | Quantified Strategies, LuxAlgo | Inside bar / narrow range in the catalog: negative |
 | Grid / martingale mean reversion on AUDCAD, AUDNZD, NZDCAD (Waka Waka: "8,100% since 2018", 40-50% drawdowns in 2024, some accounts lost) | Vendor and reseller pages | Grids and night scalping tested: gross edge, negative after costs; a 40-50% drawdown breaks every prop rule |
 | Night scalpers (Night Hunter, Forex Fury) | Myfxbook, vendor pages | Tested (I7): +1.6-2.0 bp gross, -3 to -7 bp net |
-| Commercial Gotobi EA: long 07:30-09:55 Tokyo, 2.5 x ATR(H1) stop, skip volatile mornings; short 09:55-10:30 | MQL5 blog 777443: vendor backtest PF 1.24 (2015-2026), 2015 and 2025 losing, no live record | lit4 L3, USDJPY 2007-2018: -0.7 bp net (+1.7 gross); this project's 23:00 entry earns +4.9 bp. The short leg loses |
+| Commercial Gotobi EA: long 07:30-09:55 Tokyo, 2.5 x ATR(H1) stop, skip volatile mornings; short 09:55-10:30 | MQL5 blog 777443: vendor backtest PF 1.24 (2015-2026), 2015 and 2025 losing, no live record | lit4 L3, USD/JPY 2007-2025: -0.31 bp net (+1.97 gross); EUR/JPY -2.76; this project's 23:00 entry earns +4.9 bp. The short leg loses |
 | Credit Agricole month-end model (USD buying / selling signal each month) | investinglive, Tickmill | The model's history is not published in usable form; month-end flow tests here: dead |
 | Gold reaction to payroll surprises | FXStreet previews | Needs consensus forecasts: not testable |
 | Shanghai gold premium / SGE session | Inproved, MetalCharts | No free history: not testable |

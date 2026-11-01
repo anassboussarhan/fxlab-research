@@ -839,3 +839,37 @@ Intraday (M1 bid/ask, flows-lab costs; index CFDs 2019-2025, gold 2011-2018, FX 
   years, but t 2.0 and q 0.17 after eight tests; one observation a year, so 2026 adds only one more.
 - **The toshin month-start yen selling** shows up only against the control days (first three days -0.86 bp vs
   -4.60 bp on other days, Welch t 2.80), not as a tradable long.
+
+### 9.10 Literature round 4: blogs, forums, commercial systems (`scripts/lit4_daily_lab.py`, `scripts/lit4_intraday_lab.py`, branch `lit4`, run 41342395015)
+
+Rules copied from the sources and fixed before any result (docstrings; inventory in `docs/literature_check.md`
+section 6). The daily job was run three times: the first crashed after its results while saving the series (one
+test has several rows a month); the second used DBnomics' OECD rates, which stop in January 2024; the third adds
+the repo's OECD rate table from 2006. The numbers moved by less than 0.1 in t. FRED timed out from the runner every
+time; FX month-ends came from the BIS (1950s on), rates from OECD MEI (JPY only from 2002, CHF from 1999: carry is
+in 34-85% of the months, spot only otherwise).
+
+| Test | n | Mean | t | q | Years positive |
+|---|---|---|---|---|---|
+| S1 FX seasonality, walk-forward 15-of-20 rule (7 currencies, 1991-2025; 107 positions in 81 months) | 81 months | +0.14% a month | 0.43 | 0.62 | 14/31 |
+| S1b sign of the 20-year calendar-month mean, every month, every currency | 414 | -0.04% | -0.52 | 0.70 | 15/35 |
+| S2 Chandler's 15 published patterns after publication (2021-06 to 2025-12) | 63 | +0.03% | 0.09 | 0.62 | 2/5 |
+| G1 gold over the last day and first three days of the month (2000-2025) | 303 | +0.23% per window | 1.63 | 0.21 | 17/26 |
+
+| Test (M1, flows-lab costs) | Trades | Net bp | t | Gross bp (t) | Note |
+|---|---|---|---|---|---|
+| L1 gold London breakout, MQL5 rule (2011-2018) | 984 | -0.40 | -0.21 | +3.83 (2.05) | PF 0.98; long -1.87, short +1.44 |
+| L2 Smash Day, EUR/USD stop and reverse (2007-2022) | 117 | -14.6 | -0.48 | -2.5 | 7/16 years |
+| L2 Smash Day, gold long only (2011-2018) | 23 | -75.2 | -0.75 | -69.3 | |
+| L3 Gotobi EA rule, USD/JPY (07:30-09:55, ATR stop, filter; 2007-2025) | 1,160 | -0.31 | -0.52 | +1.97 (3.34) | 2019-2025 +0.43 |
+| L3 the same, no filter and no stop | 1,188 | -0.18 | -0.32 | +2.12 (3.63) | |
+| L3 the EA's short leg 09:55-10:30, USD/JPY | 1,256 | -0.42 | -1.17 | +1.46 (4.12) | 2019-2025 +1.33 (t 2.90) |
+| L3 Gotobi EA rule, EUR/JPY | 1,068 | -2.76 | -4.05 | +0.16 | |
+
+- **FX seasonality is noise.** Months that rose in 15 of the previous 20 years do no better in the next year; the
+  patterns quoted in 2021 earned nothing since. Gold's turn of the month is positive (17 of 26 years) but not
+  significant after four tests.
+- **The commercial Gotobi EA enters too late.** From 07:30 Tokyo the move left is about 2 bp gross, below costs;
+  the 23:00 entry used here earns +4.9 bp net on USD/JPY. Its volatility filter and ATR stop change little.
+- **The gold London breakout that made 38% more than it lost in 2023-2026 breaks even in 2011-2018.** The 2023-2026
+  result rode gold's rise (long breakouts); here the short side did better and neither is significant.
