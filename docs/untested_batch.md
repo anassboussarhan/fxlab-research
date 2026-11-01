@@ -641,3 +641,47 @@ value turns negative from 15x. The best is low leverage while passing and a litt
 
 **Conclusion:** Cheaper execution does not rescue the price-based ML signals, because their skill is
 concentrated in the moves a passive order misses.
+
+### 9.4 The Tokyo-fix flow, extended (`scripts/flow_edges_lab.py`, branch `flow-edges`, run 41331534135)
+
+**Setup:** the I3 trade (long 23:00 Tokyo the evening before -> 09:53 Tokyo on Gotobi days) on the other yen pairs
+and in calendar subsets, rules fixed in advance. AUD/JPY and GBP/JPY 2019-2025 come from Dukascopy windows
+around the fix (2024 AUD/JPY and 2022 GBP/JPY timed out and are missing); 2007-2018 from the mirror. Controls: the
+same trade on a third of the other Tue-Fri business days.
+
+**Results (2007-2025):**
+
+| Test | Trades | Net bp a trade | t | Years positive | 2019-2025 bp (t) | BH q |
+|---|---|---|---|---|---|---|
+| USD/JPY overnight, no stop (reference) | 1,077 | +4.91 | 4.08 | 16/19 | +4.63 (2.80) | - |
+| USD/JPY I3 with its stop (reference) | 1,074 | +4.45 | 3.89 | 15/19 | +4.18 (2.72) | - |
+| EUR/JPY overnight, no stop (reference) | 1,037 | +4.40 | 3.00 | 15/19 | +5.01 (2.87) | - |
+| T7 USD/JPY I3, limit entry at the bid | 995 | +4.18 | 3.65 | 14/19 | +3.91 (2.52) | 0.002 |
+| T3 yen basket (4 pairs, equal weight) | 1,142 days | +2.77 | 2.09 | 14/19 | +3.37 (2.13) | 0.05 |
+| T5a USD/JPY I3, quarter-end months | 359 | +4.98 | 2.30 | 13/19 | +3.63 (1.35) | 0.05 |
+| T2 GBP/JPY, no stop | 1,030 | +1.06 | 0.69 | 9/18 | +0.88 (0.43) | 0.39 |
+| T1 AUD/JPY, no stop | 1,011 | +0.90 | 0.43 | 9/18 | +4.21 (1.62) | 0.43 |
+| T4a USD/JPY I3, 25th and month-end Gotobi days | 348 | +1.13 | 0.66 | 9/19 | +0.35 (0.15) | 0.39 |
+| T6 USD/JPY I3 on the day before Gotobi | 1,078 | -1.86 | -1.72 | 7/19 | -1.02 (-0.70) | 0.96 |
+
+- **The flow is in USD/JPY and EUR/JPY, not in the other crosses.** AUD/JPY and GBP/JPY earn more on Gotobi days
+  than on control days (Welch t 1.6 and 2.1; the control days lose about 4-5 bp), but not enough to be positive
+  after costs. Adding them to a basket dilutes the two pairs that work.
+- **The edge belongs to the Gotobi day itself:** the same trade the day before loses (-1.9 bp).
+- **No calendar intensification:** the 25th and month-end Gotobi days are weaker than the others (Welch t -2.2),
+  and quarter-end months are not different from the other months (Welch t 0.3; T5a is significant only because
+  it is a subset of a significant trade).
+- **The stop does not help:** without it the USD/JPY trade makes +4.9 bp against +4.5 bp with it.
+- **A limit entry costs a little** (+4.18 against +4.45 bp; 93% filled): the trades that run away are the good ones,
+  as for the ML signals.
+
+### 9.5 London month-end fix rebalancing (same lab and run)
+
+**Setup:** on the last weekday of the month, hold the foreign currency in the direction of the month-to-date US
+minus foreign equity return (Melvin & Prins 2015), 10:00 -> 16:00 London (M1), from 16:00 the day before (M2), or M1
+only when the gap exceeds 2% (M3); seven USD pairs, 2007-2025.
+
+**Results:** pooled over the pairs M1 -0.6 bp (t -0.4), M2 +1.1 bp (t 0.6), M3 +0.6 bp (t 0.3); no pair has t above
+1.6, and nothing survives Benjamini-Hochberg. The strongest 2007-2018 case (USD/JPY M1: +8.9 bp, t 2.6) reversed
+in 2019-2025 (-9.6 bp, t -2.4). **The equity-rebalancing flow at the fix is not tradable after costs** (the
+earlier flows-lab finding of t 2.5 before costs and 1.4 after is consistent with this).
