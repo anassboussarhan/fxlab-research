@@ -685,3 +685,35 @@ only when the gap exceeds 2% (M3); seven USD pairs, 2007-2025.
 1.6, and nothing survives Benjamini-Hochberg. The strongest 2007-2018 case (USD/JPY M1: +8.9 bp, t 2.6) reversed
 in 2019-2025 (-9.6 bp, t -2.4). **The equity-rebalancing flow at the fix is not tradable after costs** (the
 earlier flows-lab finding of t 2.5 before costs and 1.4 after is consistent with this).
+
+### 9.6 Prop-firm expected value, four programmes (`scripts/prop_firms_ev.py`, branch `prop-firms`, run 41332003476)
+
+**Setup:** daily outcomes 2019-2025; the yen Gotobi trades with their open losses inside the trade (I3 USD/JPY,
+EUR/JPY overnight, the yen basket; from the flow-edges branch), the 03:00-09:55 Gotobi rule and the Nasdaq-100
+overnight CFD (QQQ proxy, Mon-Thu nights, 1 bp and T-bill + 2.5% financing) on closing losses only. 20,000 traders
+from random start days; 100k accounts; rules in the script's docstring (third-party summaries, to be checked on
+the firms' pages).
+
+**Results (net = payouts + refund - fee, over the time to pass plus one funded year):**
+
+| Mix | Programme | Pass | Paid | Mean net | Median net | 10th percentile |
+|---|---|---|---|---|---|---|
+| I3 3x + Nasdaq overnight 0.5x | FundedNext Stellar 2-step | 97% | 97% | +$9,360 | +$8,850 | +$3,500 |
+| I3 3x + Nasdaq overnight 0.5x | The5ers High Stakes | 97% | 97% | +$8,790 | +$8,030 | +$3,180 |
+| I3 3x + Nasdaq overnight 0.5x | FTMO 2-step | 92% | 92% | +$8,410 | +$8,280 | +$2,140 |
+| I3 3x + Nasdaq overnight 0.5x | FTMO 1-step | 90% | 84% | +$6,070 | +$6,810 | -$540 |
+| I3 3x + EUR/JPY 3x + Nasdaq 0.5x | FundedNext Stellar 2-step | 74% | 72% | +$13,870 | +$16,420 | -$549 |
+| I3 3x + EUR/JPY 3x | FTMO 2-step | 72% | 70% | +$12,280 | +$2,700 | -$585 |
+| I3 6x alone | FTMO 2-step | 68% | 62% | +$9,840 | +$3,680 | -$585 |
+| Gotobi 03:00-09:55 6x alone | FTMO 2-step | 62% | 61% | +$4,140 | +$3,310 | -$585 |
+| Yen basket 6x | FTMO 2-step | 26% | 23% | +$680 | -$585 | -$585 |
+
+- **The most reliable mix is the overnight Gotobi trade at 3x with the Nasdaq-100 overnight trade at 0.5x:** the
+  two are nearly uncorrelated, the account almost never breaches, and even the 10th percentile is positive on the
+  2-step programmes.
+- **Adding EUR/JPY raises the mean but not the reliability:** it trades the same nights as USD/JPY, so the open
+  losses add up and 40% of accounts eventually hit the daily limit.
+- **FTMO 1-step's 3% daily limit and trailing maximum punish the yen trades;** the 2-step programmes suit them.
+- **Caveats:** the leverage and the mix were chosen on the same 2019-2025 data; the Nasdaq overnight path within
+  the night is not modelled (only the close and open); firm rules change; FTMO caps one strategy at $400,000 of
+  accounts.
