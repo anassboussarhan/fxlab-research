@@ -742,3 +742,42 @@ R1, band signal (25 bands 0.1-2.5%) R2, their average R3; E1-E3 the same on the 
 +1.0 bp a week (t 0.4), C6 (cross-sectional) -0.9 bp (t -1.8). One market stands out: C5 on the euro, +12.0 bp a
 week (t 3.1, q 0.048 over all 52 COT tests), the only COT test that survives; a single market out of eight, so a
 lead for new data, not an edge.
+
+### 9.9 Literature round 3 (`scripts/lit3_daily_lab.py`, `scripts/lit3_intraday_lab.py`, branch `lit3`, run 41338023221)
+
+Every rule fixed before the run (docstrings). Daily tests use Newey-West t (3 lags); the run reported D6 at t 4.26,
+which was the Newey-West variance shrunk by negative sample autocorrelation in 25 yearly points. The variance is
+now floored at the iid variance (code changed after the run, recomputed from the run's series); the table shows the
+floored t and Benjamini-Hochberg q over the eight primary daily tests.
+
+| Test | n | Mean | t | q | Years positive |
+|---|---|---|---|---|---|
+| D1 composite currency predictor (carry, momentum 1/3/12, value), monthly G7 | 235 | -0.1% a month | -0.78 | 0.97 | 7/20 |
+| D2 Hau-Rey (sell the currencies of outperforming equity markets) | 237 | -0.2% a month | -1.38 | 0.97 | 7/20 |
+| D3 gold variance premium at GVZ (vol points a month) | 210 | +0.74 | 1.46 | 0.29 | 13/18 |
+| D4 D3 only when GVZ is above past realised vol | 171 | +0.62 | 1.09 | 0.32 | 12/18 |
+| D5 gold autumn (Sep-Nov long) | 305 | +0.2% a month | 1.00 | 0.32 | 15/26 |
+| **D6 gold over the 15 days before the Chinese New Year** | 25 | **+1.5% a year** | 2.03 | 0.17 | 16/25 |
+| D7 VRP equity timing, timed minus buy-and-hold | 358 | -0.2% a month | -1.59 | 0.97 | 9/30 |
+| D8 option momentum (straddles, months t-12..t-2), 2019-2025 | 75 | -0.6% a month | -1.89 | 0.97 | 2/7 |
+
+Intraday (M1 bid/ask, flows-lab costs; index CFDs 2019-2025, gold 2011-2018, FX mostly 2007-2018):
+
+| Test | Trades | Net bp | t | Gross bp | Gross t |
+|---|---|---|---|---|---|
+| E1 US500 end-of-day momentum (15:30-16:00 NY) | 1,316 | -0.78 | -0.79 | +1.66 | 1.68 |
+| E1 NAS100 | 1,310 | -1.34 | -1.18 | +0.81 | 0.71 |
+| E2 gold end-of-day momentum (13:00-13:30 NY) | 1,729 | -2.83 | -7.52 | +1.27 | 3.37 |
+| E3 FX end-of-day momentum, pooled 7 pairs (14:30-15:00 NY) | 4,606 | -2.14 | -22.1 | +0.27 | 2.85 |
+| T1 USDJPY long 08:00-15:00 Tokyo, first three business days (toshin) | 599 | -0.86 | -0.72 | +1.35 | 1.15 |
+| T1c control: other Tue-Fri days | 2,934 | -4.60 | -7.39 | -2.41 | -3.88 |
+| K1 USD long into the ECB fix (13:15-14:15 Frankfurt), pooled | 4,732 | -1.32 | -8.71 | +0.64 | 4.21 |
+| K2 USD short after the ECB fix | 4,716 | -1.75 | -6.77 | +0.22 | 0.86 |
+| K3 both legs | 4,676 | -3.03 | -10.0 | +0.91 | 3.01 |
+
+- **Nothing passes.** The four gross edges (gold end-of-day momentum, the FX end-of-day momentum pooled, the ECB
+  fix W, US500 end-of-day) are real before costs and 1-3 bp smaller than the cost of trading them.
+- **Gold before the Chinese New Year** is the only positive daily result: +1.5% over 15 trading days, 16 of 25
+  years, but t 2.0 and q 0.17 after eight tests; one observation a year, so 2026 adds only one more.
+- **The toshin month-start yen selling** shows up only against the control days (first three days -0.86 bp vs
+  -4.60 bp on other days, Welch t 2.6 in favour), not as a tradable long.
