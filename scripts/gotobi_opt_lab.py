@@ -127,12 +127,43 @@ def summ(x):
             "t_2019_2025": tstat(x[x.index >= "2019-01-01"])}
 
 
+def diagnostics(p, bk, G, out_dir):
+    """Robustness of the fixed setting (23:00 -> 09:53, no stop): costs x1 / x2 / x3, weekday, Gotobi days moved by
+    a weekend or holiday vs on their date, and by year (information only; nothing is chosen from it)."""
+    rows = []
+    sf, sp, cm = bk.sf, bk.sp, bk.comm
+    for mult in (1, 2, 3):
+        bk.sf, bk.sp, bk.comm = sf * mult, sp * mult, cm * mult
+        f = all_settings_one(bk, G, BASE)
+        rows.append({"pair": p, "cut": f"costs x{mult}", **summ(f.net)})
+    bk.sf, bk.sp, bk.comm = sf, sp, cm
+    f = all_settings_one(bk, G, BASE)
+    for wd, g in f.groupby(f.index.weekday):
+        rows.append({"pair": p, "cut": f"weekday {wd}", **summ(g.net)})
+    on_date = f.index.day.isin([5, 10, 15, 20, 25]) | (f.index == f.index + pd.offsets.MonthEnd(0))
+    rows.append({"pair": p, "cut": "on the calendar date", **summ(f.net[on_date])})
+    rows.append({"pair": p, "cut": "moved by a weekend / holiday", **summ(f.net[~on_date])})
+    for y, g in f.groupby(f.index.year):
+        rows.append({"pair": p, "cut": f"year {y}", **summ(g.net)})
+    return rows
+
+
+def all_settings_one(bk, G, g):
+    global GRID
+    keep = GRID
+    GRID = [g]
+    try:
+        return all_settings(bk, G)[g]
+    finally:
+        GRID = keep
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
-    rows, choices, oos_all, insample = [], {}, {}, []
+    rows, choices, oos_all, insample, diag = [], {}, {}, [], []
     for p in PAIRS:
         bk = U.book(p)
         if bk is None:
@@ -140,6 +171,8 @@ def main():
             continue
         G, _, _ = F.calendar(bk)
         S = all_settings(bk, G)
+        if p in ("USDJPY", "EURJPY"):
+            diag.extend(diagnostics(p, bk, G, a.out))
         for g, f in S.items():                                   # full-sample table (for information only)
             insample.append({"pair": p, "setting": str(g), **summ(f.net)})
         oos, ch = walk_forward(S)
@@ -173,6 +206,7 @@ def main():
     R.loc[wf, "q_bh"] = bh_q(R.loc[wf, "p_one_sided"].to_numpy())
     R.to_csv(os.path.join(a.out, "tests.csv"), index=False)
     pd.DataFrame(insample).to_csv(os.path.join(a.out, "all_settings_full_sample.csv"), index=False)
+    pd.DataFrame(diag).to_csv(os.path.join(a.out, "diagnostics_fixed_rule.csv"), index=False)
     json.dump(choices, open(os.path.join(a.out, "choices.json"), "w"), indent=1, default=str)
     pd.set_option("display.width", 250)
     print(R.round(3).to_string())
