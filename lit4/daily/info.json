@@ -1,0 +1,121 @@
+{
+ "sources": {
+  "EUR": "BIS WS_XRU M.XM.EUR.E",
+  "DEM": "BIS WS_XRU M.DE.EUR.E",
+  "JPY": "BIS WS_XRU M.JP.JPY.E",
+  "GBP": "BIS WS_XRU M.GB.GBP.E",
+  "CHF": "BIS WS_XRU M.CH.CHF.E",
+  "CAD": "BIS WS_XRU M.CA.CAD.E",
+  "AUD": "BIS WS_XRU M.AU.AUD.E",
+  "NZD": "BIS WS_XRU M.NZ.NZD.E",
+  "rate USD": "OECD MEI (DBnomics) to 2005, repo OECD table from 2006",
+  "rate EUR": "OECD MEI (DBnomics) to 2005, repo OECD table from 2006",
+  "rate JPY": "OECD MEI (DBnomics) to 2005, repo OECD table from 2006",
+  "rate GBP": "OECD MEI (DBnomics) to 2005, repo OECD table from 2006",
+  "rate CHF": "OECD MEI (DBnomics) to 2005, repo OECD table from 2006",
+  "rate CAD": "OECD MEI (DBnomics) to 2005, repo OECD table from 2006",
+  "rate AUD": "OECD MEI (DBnomics) to 2005, repo OECD table from 2006",
+  "rate NZD": "OECD MEI (DBnomics) to 2005, repo OECD table from 2006",
+  "rate DEM": "OECD MEI (DBnomics)",
+  "check EUR": {
+   "first": "1953-09",
+   "months": 862,
+   "max_abs_month": 0.11955761185459135,
+   "dropped_over_25pct": []
+  },
+  "check JPY": {
+   "first": "1957-01",
+   "months": 822,
+   "max_abs_month": 0.16489520704269478,
+   "dropped_over_25pct": []
+  },
+  "check GBP": {
+   "first": "1953-08",
+   "months": 863,
+   "max_abs_month": 0.14272552859577736,
+   "dropped_over_25pct": []
+  },
+  "check CHF": {
+   "first": "1953-09",
+   "months": 862,
+   "max_abs_month": 0.15677817182657572,
+   "dropped_over_25pct": []
+  },
+  "check CAD": {
+   "first": "1950-10",
+   "months": 897,
+   "max_abs_month": 0.14904161788860615,
+   "dropped_over_25pct": []
+  },
+  "check AUD": {
+   "first": "1957-01",
+   "months": 822,
+   "max_abs_month": 0.17797035937272154,
+   "dropped_over_25pct": []
+  },
+  "check NZD": {
+   "first": "1957-01",
+   "months": 822,
+   "max_abs_month": 0.21892930874567396,
+   "dropped_over_25pct": []
+  }
+ },
+ "fx_months": {
+  "EUR": [
+   "1953-10-31",
+   861
+  ],
+  "JPY": [
+   "1957-02-28",
+   821
+  ],
+  "GBP": [
+   "1953-09-30",
+   862
+  ],
+  "CHF": [
+   "1953-10-31",
+   861
+  ],
+  "CAD": [
+   "1950-11-30",
+   896
+  ],
+  "AUD": [
+   "1957-02-28",
+   821
+  ],
+  "NZD": [
+   "1957-02-28",
+   821
+  ]
+ },
+ "carry_share": {
+  "EUR": 0.8501742160278746,
+  "JPY": 0.3386114494518879,
+  "GBP": 0.548723897911833,
+  "CHF": 0.3612078977932636,
+  "CAD": 0.8169642857142857,
+  "AUD": 0.8392204628501827,
+  "NZD": 0.7527405602923264
+ },
+ "S1 FX seasonality, walk-forward, 15-of-20 rule positions by currency": {
+  "NZD": 36,
+  "AUD": 21,
+  "CAD": 16,
+  "GBP": 14,
+  "JPY": 11,
+  "EUR": 6,
+  "CHF": 3
+ },
+ "S1b FX seasonality, walk-forward, sign of the 20-year mean positions by currency": {
+  "EUR": 414,
+  "JPY": 414,
+  "GBP": 414,
+  "CHF": 414,
+  "CAD": 414,
+  "AUD": 414,
+  "NZD": 414
+ },
+ "gold 15-of-20 positions 2020-2025": 2
+}
