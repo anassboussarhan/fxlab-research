@@ -90,9 +90,14 @@ def chronos_forecasts(px, model_id, batch=256):
     out = np.full(len(v), np.nan)
     for a in range(0, len(idx), batch):
         chunk = idx[a:a + batch]
-        ctx = [torch.tensor(v[i - CTX:i]) for i in chunk]   # closes t-511..t where t = i - 1
-        q, _ = pipe.predict_quantiles(context=ctx, prediction_length=1, quantile_levels=[0.5])
-        out[np.array(chunk) - 1] = q[:, 0, 0].numpy()       # forecast of close (t+1), stored at t
+        ctx = torch.stack([torch.tensor(v[i - CTX:i]) for i in chunk])   # closes t-511..t where t = i - 1
+        res = pipe.predict_quantiles(ctx, prediction_length=1, quantile_levels=[0.5])
+        q = res[0]
+        if isinstance(q, (list, tuple)):
+            vals = np.array([float(np.asarray(x).reshape(-1)[0]) for x in q])
+        else:
+            vals = np.asarray(q).reshape(len(chunk), -1)[:, 0]
+        out[np.array(chunk) - 1] = vals                     # forecast of close (t+1), stored at t
     return pd.Series(out, index=px.index)
 
 
@@ -131,6 +136,14 @@ def gold_tests(rows, series):
     rows.append(summ("G7 gold when TIP rose over 3 months (excess over T-bills, monthly)", x, 12,
                      share_months_in=float(pos.reindex(x.index).mean())))
     series["G7"] = x
+    # information: the same months for buy-and-hold gold, and timed minus buy-and-hold (is it timing or gold's drift?)
+    bh = (nxt - rf.shift(-1)).reindex(x.index)
+    rows.append(summ("G7 benchmark: buy-and-hold gold, excess over T-bills", bh, 12))
+    rows.append(summ("G7 benchmark: timed minus buy-and-hold", x - bh, 12))
+    pin = pos.reindex(x.index) > 0
+    rows.append({"test": "G7 benchmark: gold excess in signal months minus other months (Welch t)",
+                 "n": int(len(bh)), "mean_bp": float((bh[pin].mean() - bh[~pin].mean()) * 1e4),
+                 "t": float(st.ttest_ind(bh[pin], bh[~pin], equal_var=False).statistic)})
     # G8: weekly pair
     w = pd.concat([gld.resample("W-FRI").last().rename("gld"), gdx.resample("W-FRI").last().rename("gdx")], axis=1).dropna()
     ratio = w.gld / w.gdx
