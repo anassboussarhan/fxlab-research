@@ -1,0 +1,40 @@
+name: lit7
+# Seventh literature round: scripts/lit7_lab.py (Chronos-Bolt zero-shot forecasts on FX and gold; gold vs real
+# yields; GLD / GDX pair). Daily Yahoo data, development period only.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/LIT7"]
+permissions:
+  contents: write
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: |
+          pip install -q torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -q chronos-forecasting yfinance pandas numpy scipy
+      - run: set -o pipefail; python -W ignore scripts/lit7_lab.py --out out 2>&1 | tee out_run.txt
+      - name: Publish to the lit7 branch
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out && cp out_run.txt out/ 2>/dev/null || true
+          cp -r out /tmp/l7
+          git checkout --orphan l7-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p lit7 && cp -r /tmp/l7/* lit7/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > lit7/RUN.txt
+          git add -f lit7
+          git commit -qm "Literature round 7 (run ${{ github.run_id }})"
+          git push -f origin HEAD:lit7
