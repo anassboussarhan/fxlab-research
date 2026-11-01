@@ -69,7 +69,12 @@ def _get(url, timeout=45):
         return r.read().decode("utf-8", "replace")
 
 
-def fred(sid, timeout=45):
+FRED_DOWN = []
+
+
+def fred(sid, timeout=20):
+    if FRED_DOWN:                                              # FRED timed out once: do not wait on it again
+        return pd.Series(dtype=float)
     try:
         d = pd.read_csv(io.StringIO(_get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}", timeout)))
         s = pd.to_numeric(d.iloc[:, 1], errors="coerce")
@@ -77,6 +82,8 @@ def fred(sid, timeout=45):
         return s[s.index <= END].dropna()
     except Exception as ex:                                                 # noqa: BLE001
         print("FRED", sid, repr(ex)[:100], flush=True)
+        if "imed out" in repr(ex):
+            FRED_DOWN.append(sid)
         return pd.Series(dtype=float)
 
 
@@ -110,11 +117,16 @@ def usd_value(c):
         s = month_end(s)
         return (s if usd_per else 1.0 / s), f"FRED {sid}"
     area, code = BIS_AREA[c]
+    codes = [code] + (["EUR"] if c == "DEM" else [])
     for ds in ("WS_XRU", "XRU"):
-        s = dbnomics(f"BIS/{ds}/M.{area}.{code}.E")
-        if len(s) > 120:
-            return 1.0 / s, f"BIS {ds} M.{area}.{code}.E"
+        for cc in codes:
+            s = dbnomics(f"BIS/{ds}/M.{area}.{cc}.E")
+            print("BIS", ds, area, cc, len(s), flush=True)
+            if len(s) > 120:
+                s = s * 1.95583 if (c == "DEM" and cc == "EUR") else s   # EUR per USD -> DEM per USD
+                return 1.0 / s, f"BIS {ds} M.{area}.{cc}.E"
     s = dbnomics(f"IMF/IFS/M.{IFS_AREA[c]}.ENDE_XDC_USD_RATE")
+    print("IFS", c, len(s), flush=True)
     if len(s) > 120:
         return 1.0 / s, "IMF IFS ENDE"
     if c in YAHOO:
@@ -133,6 +145,7 @@ def rate(c):
     src = "FRED"
     if len(s) < 120:
         s, src = dbnomics(f"OECD/MEI/{a3}.IR3TIB01.ST.M"), "OECD MEI (DBnomics)"
+        print("rate", c, src, len(s), (str(s.index.min())[:7], str(s.index.max())[:7]) if len(s) else "", flush=True)
     if len(s):
         s.index = s.index.to_period("M").to_timestamp(how="end").normalize()
     return s / 100.0, src
@@ -163,6 +176,10 @@ def fx_excess():
         if not len(v):
             continue
         spot = v.pct_change()
+        big = spot[spot.abs() > 0.25]
+        SOURCES[f"check {c}"] = {"first": str(v.index.min())[:7], "months": int(len(v)),
+                                 "max_abs_month": float(spot.abs().max()), "dropped_over_25pct": [str(t)[:7] for t in big.index]}
+        spot = spot[spot.abs() <= 0.25]                        # a G10 currency never moves 25% in a month: data error
         rd = (rates[c].reindex(spot.index) - rates["USD"].reindex(spot.index)) if len(rates[c]) and len(rates["USD"]) \
             else pd.Series(np.nan, index=spot.index)
         rd = rd.shift(1)                                       # month m-1's average, known at the start of month m
@@ -300,8 +317,9 @@ def main():
     from cross_market_ta_lab import bh_q
     R["q_bh"] = bh_q(R.p_one_sided.to_numpy())
     R.to_csv(os.path.join(a.out, "tests.csv"), index=False)
-    pd.DataFrame(series).to_csv(os.path.join(a.out, "series.csv"))
     json.dump({"sources": SOURCES, **info}, open(os.path.join(a.out, "info.json"), "w"), indent=1, default=str)
+    for k, v in series.items():                               # one file per test (S2 has several rows a month)
+        v.rename("ret").to_csv(os.path.join(a.out, "series_" + k.split()[0] + ".csv"))
     pd.set_option("display.width", 250)
     print(R.round(4).to_string())
     print(json.dumps({"sources": SOURCES, **info}, indent=1, default=str))

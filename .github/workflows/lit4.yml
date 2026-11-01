@@ -23,7 +23,7 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install -q -r ci/requirements-ci.txt yfinance lunardate requests
-      - run: python scripts/lit4_daily_lab.py --out out/daily 2>&1 | tee out_daily.txt
+      - run: set -o pipefail; python scripts/lit4_daily_lab.py --out out/daily 2>&1 | tee out_daily.txt
       - if: always()
         run: mkdir -p out && cp out_daily.txt out/ || true
       - uses: actions/upload-artifact@v4
