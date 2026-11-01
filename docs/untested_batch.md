@@ -762,11 +762,11 @@ because it worked.
 
 | Goal | Setup | Pass | Paid | Mean net | Median net | Median days to first payout | Paid within 3 / 6 months |
 |---|---|---|---|---|---|---|---|
-| Highest median | Basket + Nasdaq overnight, FundedNext 2-step, yen 2x passing / 3x funded | 75% | 70% | +$9,601 | +$8,960 | 257 | 1% / 8% |
-| Highest median, The5ers | same mix, 2x / 3x | 75% | 70% | +$9,209 | +$7,786 | 250 | 1% / 9% |
+| Highest median | Basket + Nasdaq overnight, FundedNext 2-step, yen 2x passing / 3x funded | 75% | 70% | +$9,601 | +$8,960 | 257 | 0.5% / 7.5% |
+| Highest median, The5ers | same mix, 2x / 3x | 75% | 70% | +$9,209 | +$7,786 | 250 | 0.6% / 8.5% |
 | Faster | USD/JPY + EUR/JPY + Nasdaq, The5ers, 2x / 3x | 75% | 68% | +$10,062 | +$7,438 | 167 | 5% / 20% |
 | Highest mean | Basket, FundedNext 2-step, 6x / 6x | 59% | 55% | +$12,590 | +$2,197 | 196 | 6% / 19% |
-| Fastest | USD/JPY + Nasdaq, The5ers, 6x / 2x | 36% | 35% | +$3,127 | -$495 (the fee) | 57 | 21% / 32% |
+| Fastest | Basket + Nasdaq, The5ers, 6x / 2x | 36% | 36% | +$3,127 | -$495 (the fee) | 57 | 21% / 32% |
 
 - **Fast and safe do not go together.** At low leverage three accounts in four pass and the median trader nets
   about $8-9k, but the first payout takes 8 months. Raising the leverage to pass quickly lifts the mean (the lucky
