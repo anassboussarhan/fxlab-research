@@ -1,0 +1,70 @@
+{
+ "frozen": true,
+ "frozen_at": "2026-11-01",
+ "authorised_by": "Anas (\"Unlock 2026\"), 2026-11-01",
+ "holdout": [
+  "2026-01-01",
+  "2026-10-31"
+ ],
+ "unlock_token_sha256": "4d0a83b1cfe72c7fc7b00d97bc34921ea75c12d6e7aa401668d0cfa3d53985bf",
+ "preregistration": "docs/holdout_2026_preregistration.md",
+ "primary": "H1",
+ "candidates": {
+  "H1": {
+   "rule": "I3 USDJPY Gotobi overnight 23:00 prev -> 09:53 Tokyo, stop 0.5 x 20-day mean daily range",
+   "dev_mean_bp": 4.45,
+   "dev_t": 3.89,
+   "dev_n": 1074
+  },
+  "H2": {
+   "rule": "F1 USDJPY 03:00 -> 09:55 Tokyo on Gotobi days",
+   "dev_mean_bp": 2.13,
+   "dev_t": 2.05,
+   "dev_n": 413
+  },
+  "H3": {
+   "rule": "USDJPY 23:00 prev -> 09:53 Tokyo, no stop",
+   "dev_mean_bp": 4.91,
+   "dev_t": 4.08,
+   "dev_n": 1077
+  },
+  "H4": {
+   "rule": "EURJPY 23:00 prev -> 09:53 Tokyo, no stop",
+   "dev_mean_bp": 4.4,
+   "dev_t": 3.0,
+   "dev_n": 1037
+  },
+  "H5": {
+   "rule": "average of H3 and H4 per Gotobi day",
+   "dev_mean_bp": 4.66
+  },
+  "H6": {
+   "rule": "Nasdaq-100 overnight, QQQ close -> open, Mon-Thu nights, -1 bp, -(T-bill + 2.5%)/360",
+   "dev_mean_bp": 5.4,
+   "dev_sd_bp": 89,
+   "dev_n": 1376
+  },
+  "H7": {
+   "rule": "R1 calendar rebalancing front-run, SPY - IEF",
+   "dev_mean_bp_day": 2.9,
+   "dev_sharpe": 0.92
+  },
+  "H7b": {
+   "rule": "E1 the same on the equity leg (CFD)",
+   "dev_mean_bp_day": 2.3,
+   "dev_sharpe": 0.82
+  },
+  "H8": {
+   "rule": "C5 EUR speculative pressure (Fan et al.), monthly",
+   "dev_mean_bp_week": 12.0,
+   "dev_t": 3.1
+  }
+ },
+ "verdicts": {
+  "confirmed": "mean > 0 and t >= 1.645",
+  "consistent": "mean > 0, t < 1.645",
+  "not_supported": "mean <= 0",
+  "contradicted": "t of (2026 mean - development mean) <= -1.645"
+ },
+ "overall": "Stouffer Z over H5, H6, H7, H8 >= 1.645"
+}

@@ -6,6 +6,7 @@ data/manifests/*.jsonl
 results/*
 !results/benchmark.json
 !results/catalog_test_status.json
+!results/frozen_candidates.json
 out/
 in/
 sweep_results/
