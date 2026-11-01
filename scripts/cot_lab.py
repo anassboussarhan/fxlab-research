@@ -21,6 +21,9 @@ FIXED BEFORE ANY RESULT:
     C3 cross-sectional crowding: each week long the two currencies with the lowest speculator z and short the two
        with the highest (half a unit each), currencies only.
     C4 follow the hedgers: long when the commercials' z > 1.5, short when < -1.5.
+    C5 speculative pressure as published (Fan et al. 2020, added in a second round): the sign of the speculators'
+       net minus its average over the previous 52 weekly reports, set at the start of each month, held a month.
+    C6 its cross-sectional form: long the two currencies with the highest pressure, short the two lowest.
 PRE-REGISTERED TESTS (one-sided, mean weekly net return > 0, Newey-West t with 4 lags): each signal pooled (the
   equal-weight average over the markets) and per market; Benjamini-Hochberg over all of them.
 Usage: python scripts/cot_lab.py --fetch DATA_DIR            (CI: downloads the reports and prices)
@@ -190,6 +193,29 @@ def positions(panel):
         for m in order.index[-2:]:
             c3[m].loc[t] = -0.5
     P["C3"] = {m: s.reindex(panel[m].index) for m, s in c3.items()}
+    # C5 / C6: speculative pressure as published (Fan, Fernandez-Perez, Fuertes & Miffre 2020): the speculators'
+    # net position relative to its average over the previous 52 weekly reports, set once a month (the first
+    # trading week of the month uses the last report of the previous month) and held for the month.
+    sp = {}
+    for m, g in panel.items():
+        x = g.ns - g.ns.shift(1).rolling(52, min_periods=40).mean()
+        month = pd.Series(pd.DatetimeIndex(g.index).to_period("M"), index=g.index)
+        sp[m] = x.groupby(month).transform("first")
+    P["C5"] = {m: np.sign(v).where(v.notna()) for m, v in sp.items()}
+    S = pd.DataFrame({m: sp[m] for m in CCY if m in sp})
+    c6 = {m: pd.Series(np.nan, index=S.index) for m in S.columns}
+    for t, row in S.iterrows():
+        r = row.dropna()
+        if len(r) < 5:
+            continue
+        o = r.sort_values()
+        for m in r.index:
+            c6[m].loc[t] = 0.0
+        for m in o.index[-2:]:
+            c6[m].loc[t] = 0.5
+        for m in o.index[:2]:
+            c6[m].loc[t] = -0.5
+    P["C6"] = {m: v.reindex(panel[m].index) for m, v in c6.items()}
     return P
 
 

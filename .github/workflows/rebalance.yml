@@ -1,0 +1,35 @@
+name: rebalance
+# scripts/rebalance_lab.py: front-running 60/40 rebalancing (Harvey, Mazzoleni & Melone 2025), rules fixed in its
+# docstring; Yahoo daily closes to 2025-12-31.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/REBALANCE"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy scipy yfinance
+      - run: python scripts/rebalance_lab.py --out pub 2>&1 | tee pub_log.txt
+      - name: Publish to the rebalance branch
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub && cp pub_log.txt pub/ && cp -r pub /tmp/rb
+          git checkout --orphan rb-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p rebalance && cp -r /tmp/rb/* rebalance/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > rebalance/RUN.txt
+          git add -f rebalance
+          git commit -qm "Rebalancing front-running (run ${{ github.run_id }})"
+          git push -f origin HEAD:rebalance
