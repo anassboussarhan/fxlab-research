@@ -873,3 +873,31 @@ in 34-85% of the months, spot only otherwise).
   the 23:00 entry used here earns +4.9 bp net on USD/JPY. Its volatility filter and ATR stop change little.
 - **The gold London breakout that made 38% more than it lost in 2023-2026 breaks even in 2011-2018.** The 2023-2026
   result rode gold's rise (long breakouts); here the short side did better and neither is significant.
+
+### 9.11 Order blocks, liquidity sweeps, volume profile (`scripts/lit5_lab.py`, branch `lit5`, run 41344023616)
+
+The methods YouTube channels and prop-firm blogs credit for funded accounts, made mechanical from written sources
+(rules in the docstring): order blocks as FXNX tested them (OB1) and with their H4-bias and kill-zone filters
+(OB2), the liquidity-sweep continuation that Mahadzva (SSRN 2026) found in place of the taught reversal (LS1), the
+value-area "80% rule" (VP1) and the previous POC as a magnet (VP2), the profiles built from tick counts. M1 fills;
+limit entries without slippage. FX and gold mostly 2007-2018 (EUR/USD to 2022, USD/JPY to 2025), index CFDs
+2019-2025.
+
+| Rule | EUR/USD | GBP/USD | USD/JPY | Gold | US500 | NAS100 |
+|---|---|---|---|---|---|---|
+| OB1 order block, 2.5R: trades / net bp (t) | 13,606 / -1.06 (-14.1) | 9,866 / -1.27 (-13.6) | 15,017 / -1.38 (-18.0) | 6,113 / -2.39 (-14.0) | - | - |
+| OB1 gross bp / win rate / profit factor | +0.29 / 27% / 0.74 | +0.69 / 26% / 0.70 | +0.37 / 26% / 0.69 | +1.26 / 22% / 0.62 | - | - |
+| OB2 + H4 bias + kill zones: net bp (t) | -0.96 (-6.7) | -1.18 (-6.5) | -1.26 (-8.1) | -2.00 (-5.9) | - | - |
+| LS1 sweep continuation: net bp (t) | -1.70 (-26.3) | -2.50 (-29.7) | -1.87 (-27.2) | -4.34 (-27.8) | - | - |
+| VP1 80% rule: trades / net bp (t) / win rate | 812 / -1.61 (-2.5) / 53% | 553 / -1.95 (-2.8) / 49% | 775 / -2.90 (-5.1) / 48% | 331 / -2.16 (-1.8) / 52% | 287 / +0.43 (0.2) / 57% | 266 / -5.65 (-1.5) / 58% |
+| VP2 to the previous POC: net bp (t) | -1.18 (-2.1) | -2.12 (-3.2) | -2.38 (-4.3) | -4.13 (-3.0) | -0.13 (-0.1) | -1.07 (-0.4) |
+
+- **Nothing works after costs; no test is positive with q < 1.** Order blocks carry a small gross edge (+0.3 to
+  +1.3 bp, t 4-8): price does react a little at the last opposite candle, as at any recent level, but the 2.5R
+  trade wins 22-27% of the time where it needs 29% to break even before costs.
+- **The 80% rule wins 48-58% of the time, not 80%,** in line with the strict ES counts on NexusFi (50-62%).
+- **A bug found on the way:** the first local run showed OB2 at +2.4 bp a trade, t 13, 16 of 16 years positive.
+  An order waiting outside a kill zone could fill below a stop that had already been crossed and then exit at the
+  stop for a profit. With orders void once their stop trades, OB2 is -0.96 bp. The same kind of error in a
+  hand-made or AI-written backtest would produce exactly the "this strategy is a money machine" results that
+  circulate online.

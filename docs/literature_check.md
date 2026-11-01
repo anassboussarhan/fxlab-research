@@ -275,3 +275,21 @@ as `scripts/lit4_daily_lab.py` and `scripts/lit4_intraday_lab.py` (branch `lit4`
 numbers with costs, the FX rules lose; the profitable "systems" are gold or index strategies in a bull market,
 grids with large hidden drawdowns, or vendor backtests without live records. The one commercial product built on
 an effect found here (the Gotobi EA) uses a later entry than the one that works.
+
+## 7. Round 5 (2026-11-01): YouTube methods, FTMO's own trader stories, SMC and volume profile
+
+| Claim | Best evidence found | Here |
+|---|---|---|
+| Order blocks work (YouTube, TradingView) | backtrex GBP/USD 1h 2016-2026: -15.3%, PF 0.83; FXNX: 38-48% wins unfiltered, "+0.64R in kill zones" (no sample sizes, broker-published); algolego's TradingView study: order-block touches no different from matched random levels (pooled -1.7 points, CI includes zero) | lit5 OB1 / OB2: negative on all four markets |
+| ICT / SMC as taught | Mahadzva (SSRN 2026), six ICT rules, four majors, walk-forward + bootstrap + holdout: "no evidence that ICT/SMC concepts work as literally taught"; sweeps predict continuation (65 of 66 folds); the one faded rule that passed (EUR/USD 1h, p 0.019, 60 holdout trades) fails the deflated Sharpe test. Tangirala (SSRN 2026): 44 SMC detectors on S&P 500 daily bars (abstract not reachable) | lit5 LS1 (continuation): negative after costs |
+| ICT Silver Bullet | A 16-year NQ / ES study: 25,000 configurations, 420 survived (1.7%), "paper fills" in the holdout | Index-futures M1 not in the data; the FVG + kill-zone family on FX tested in the catalog |
+| Fair value gaps | backtrex NAS100: +37.7% vs +527% buy-and-hold over ten years, PF 1.08; a random-walk simulation fills 83% of FVGs vs 83.5% of random levels; Bindra (SSRN 2026): 78% wins on 473 trades in 2025, no costs or out of sample | Catalog: negative |
+| Volume profile / 80% rule / naked POC | The 80% traces to a 1980s newsletter; strict ES counts: 50-62% on 8-12 days; no statistics anywhere for naked POCs; FX "volume" is tick counts | lit5 VP1 / VP2: wins 48-58%, net negative except US500 VP1 (+0.4 bp, t 0.2) |
+| Fibonacci levels | Forexop: 40,243 corrections on 9 G10 pairs 2003-2016, no clustering at Fibonacci ratios | Not run (no trading rule claimed beyond the levels) |
+| Support / resistance | Osler (FRBNY 2000): published levels bounce 60.8% vs 56.2% for arbitrary levels; stop orders cluster beyond round numbers (Osler 2003) | Round numbers tested: gross edge, negative net |
+| Candles (hammer, pin bar) | 2,219 hammer trades on Dow stocks: 52% wins, the market's own drift | Catalog: negative |
+| Wyckoff | No peer-reviewed test beyond one minor journal | Not testable as a fixed rule |
+| FTMO traders' methods | FTMO's interviews: price action, liquidity, Fibonacci, COT, news; no performance data. FTMO's trader analyses: winners' win rates 41-90%, several added to losing positions; a gold scalper made $50,333 in two weeks with no stops and ended $63 from the daily limit ("exceptionally risky", FTMO). CEO: 8-10% pass | Anecdotes, survivorship |
+| Payout data | FundedNext Feb 2026: 8,340 traders paid, median payout $567, median win rate 50%, median PF 1.47, metals the most traded CFD by count; firms dropped gold after its 2025 rally made "ordinary retail traders consistently profitable" (Finance Magnates, March 2026) | A trend in gold, not a method |
+| Verified competitions | Robbins / World Cup winners: 100-490% one-year returns, no drawdowns or repeat records published | - |
+| "An AI gave me this strategy" | Reddit: "ChatGPT doubled my money in two weeks" (18 trades, no records); Alpha Arena 2025, real money, two weeks: Qwen +22%, DeepSeek +5%, Claude Sonnet 4.5 -42%, Gemini -46%, Grok -58%, GPT-5 -59% | A model describing ICT or volume profile is repeating the internet, not evidence |
