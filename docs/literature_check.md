@@ -317,3 +317,21 @@ claims were checked against independent re-tests and against this project's test
 | TJR ("$1,047,984 in 6 months") | Video title | No public statements found | - |
 | Options: wheel, 0DTE iron condors, theta | tastylive studies | Early Retirement Now: the wheel adds hidden drawdown risk vs plain put-writing; 0DTE needs intraday quotes | Options labs: short premium earns the variance premium with crash risk, no alpha after costs |
 | Day trading in general | - | Brazil futures 2013-2015: 97% of persistent day traders lost money, 0.4% earned more than a bank teller | - |
+
+## 9. Round 7 (2026-11-02): the gaps after six rounds - AI forecasters, AI-built strategies, people who claim an edge
+
+| Claim / source | Evidence found | Here |
+|---|---|---|
+| Time-series foundation models predict returns (Chronos, TimesFM, Moirai, Kronos) | arXiv 2606.27100 (5 US stocks): gains "small and sparse", random walk beaten in 2 of 10 tasks; Re(Visiting) TSFMs (94 countries): zero-shot R² below zero, direction about 51%, "generic pre-training does not transfer"; Kronos (AAAI 2026) reports its own benchmark only | lit7 AI1: Chronos-Bolt on 4 FX pairs and gold, 49-52% direction, nothing significant |
+| LLMs read news and beat the market (Lopez-Lira & Tang) | GPT-4 headline strategy Sharpe 6.5 (late 2021) -> 1.2 (early 2024); unprofitable at 20 bp costs; US small caps | Needs a news archive; equities |
+| LLM agents trade live (Alpha Arena, LiveTradeBench, StockBench) | Alpha Arena 2025: four of six models lost 42-59%; LiveTradeBench: benchmark scores "do not translate" into trading results | - |
+| "Claude / ChatGPT built me a strategy" | NexusTrade (Claude Opus 4.5): TQQQ buy-the-drawdown, lagged buy-and-hold in 2023-2025, lost 53% in 2021-2023, no costs; Rogue Quant (ChatGPT-5): gold pullback, 54 trades, exit re-tuned after seeing results | Same families tested: dip-buying and gold trend; nothing beyond market drift |
+| Copy / mirror trading (eToro, Darwinex) | eToro 2010-2013, 87.5 million trades: past performance does not predict future, mirrored trades -61 bp vs -7 bp own trades; DarwinIA allocates to ~1,400 of 9,400 strategies a month, median +2.4% that month (selection, no persistence statistics) | - |
+| Signal and strategy marketplaces | Collective2 top-41 (2018): 37% in serious trouble, 75% of those with win rates above 79%; Quantopian 888 algorithms: backtest Sharpe predicts live Sharpe with R² < 0.025, more backtests -> worse live; 43 gold EAs: 1 in 5 blew up | Consistent with every high-win-rate system tested here |
+| Gold and real yields | Erb & Harvey sceptical; the link broke in 2022-2025 | lit7 G7: worse than holding gold |
+| Gold vs miners (GLD / GDX) | CXO 2006-2016: not supported | lit7 G8: t 1.6, not significant |
+
+**What is still untested after seven rounds, and why:** news- and consensus-based rules (no archive), FX and gold
+option strategies (no free chains), 0DTE (no intraday option quotes), emerging-market currencies (data not
+downloaded), the Fed-funds-futures FOMC drift (no futures data), interbank order flow (not public), platinum and
+palladium (not downloaded).

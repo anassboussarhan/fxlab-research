@@ -930,3 +930,29 @@ USD/JPY to 2025, index CFDs 2019-2025.
   it would be close to their result; not at CFD spreads.
 - **Gold trend rules (Supertrend H4, Turtle Soup) are positive but not significant** on 2011-2018 (t 0.8-1.2);
   the HackerNoon Supertrend test found the same rule profitable on gold only because of the 2024-2026 rally.
+
+### 9.13 AI forecasters and the last two gold rules (`scripts/lit7_lab.py`, branch `lit7`, run 41360841682)
+
+Daily Yahoo closes 2006-2025, rules in the docstring. The first run's AI part failed on a changed Chronos API (the
+gold tests ran); the second run is reported. Twelve primary tests.
+
+| Test | n | Net bp | t | q | Direction hit | 2025 (after the model's release) bp (t) |
+|---|---|---|---|---|---|---|
+| Chronos-Bolt small, EUR/USD | 5,186 days | +0.60 | 0.62 | 0.40 | 50.5% | +4.8 (1.5) |
+| Chronos-Bolt base, EUR/USD | 5,186 | +0.20 | 0.20 | 0.56 | 50.5% | -1.1 (-0.4) |
+| small / base, GBP/USD | 5,198 | -0.41 / -1.03 | -0.5 / -1.3 | 0.76 / 0.90 | 49.7% / 49.3% | |
+| small / base, USD/JPY | 5,186 | -0.12 / +1.08 | -0.1 / 1.1 | 0.66 / 0.29 | 51.0% / 50.6% | |
+| small / base, AUD/USD | 4,594 | +1.80 / +2.71 | 1.5 / 2.3 | 0.15 / 0.10 | 50.6% / 51.5% | +8.3 (1.8) / +1.3 (0.3) |
+| small / base, gold (GLD) | 4,801 | +1.14 / +2.51 | 0.7 / 1.6 | 0.40 / 0.15 | 52.3% / 51.8% | +9.1 (1.1) / +15.6 (2.0) |
+| Naive benchmark (sign of today's return), per series | | -0.3 to -3.9 | | | | |
+| G7 gold when TIP rose over 3 months, excess, monthly | 252 | +52.6 | 2.15 | 0.10 | | |
+| G7 benchmark: buy-and-hold gold, excess | 253 | +83.6 | 2.77 | | | |
+| G7 timed minus buy-and-hold | 252 | -32.6 | -1.79 | | | |
+| G8 GLD / GDX ratio pair (weekly) | 1,009 weeks | +9.0 | 1.58 | 0.15 | | |
+
+- **The AI forecaster calls direction 49-52% of the time,** a coin, on every series; nothing passes the correction.
+  The best (AUD/USD base, gold base) are within what twelve tries produce by chance, and the gold result is mostly
+  the model leaning long in a rising market.
+- **Real yields do not time gold:** the rule earns less than holding gold (-33 bp a month); its positive mean is
+  gold's own rise. Gold rose about as much in the months the rule was out (Welch t -0.3).
+- **The GLD / GDX pair** is positive but not significant (t 1.6), as CXO found for 2006-2016.
