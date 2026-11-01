@@ -21,6 +21,11 @@ PRE-REGISTERED TESTS (one-sided; Benjamini-Hochberg over H1-H8; 2019-2022 vs 202
       fifth, SHORT the top fifth, same timing.
   H8  Gao, Xing & Zhang (2018): LONG ATM straddle on the last snapshot 2-10 days before an earnings date, expiry
       at least 3 days after it, sold on the first snapshot 1-7 days after.
+  Added in the third literature round (rules fixed before the re-run):
+  H9  the pre-earnings implied-volatility run-up: the same straddle bought on the last snapshot 5-12 days before the
+      announcement and sold on the last snapshot 1-4 days before it.
+  H11 H1 on the currency ETFs (FXE, FXY, FXB, FXA, FXC, FXF, UUP) and H12 on GLD / SLV / IAU, where the database
+      has their chains (equal weight across the ETFs each month).
 COSTS: options at mid +- 0.75 x half-spread and USD 0.65 per contract; hedge trades 1 bp of the traded notional on
 SPY and 3 bp on stocks; stock legs of H6 / H7 3 bp per side with full weekly turnover assumed. Expiring options at
 intrinsic. Unit: P&L per unit of underlying notional (per share / price at entry); long-short tests average each
@@ -46,6 +51,9 @@ END = L.END
 FILL = 0.75
 COMM = L.COMM
 SPLIT = pd.Timestamp("2023-01-01")
+FX_ETF = ("FXE", "FXY", "FXB", "FXA", "FXC", "FXF", "UUP")
+METAL_ETF = ("GLD", "SLV", "IAU")
+NON_STOCK = ("SPY", "DIA", "XLF", "XLE", "QQQ", "IWM", "TLT", "EEM") + FX_ETF + METAL_ETF
 FALLBACK = [0, 0]          # hedge deltas that fell back to intrinsic (0 / +-1), and all hedge deltas
 
 
@@ -287,8 +295,30 @@ def run_symbol(sym, chain_dir, und, spy_ret, vix, earn):
             if not ok:
                 continue
             pnl = val1 - val0 - 4 * COMM
-            ern.append({"symbol": sym, "earnings": E, "entry": d0, "exit": d1, "expiry": e,
+            ern.append({"symbol": sym, "earnings": E, "entry": d0, "exit": d1, "expiry": e, "kind": "through",
                         "pnl": pnl / S0, "premium": val0 / S0, "ret_on_premium": pnl / val0 if val0 > 0 else np.nan})
+            # H9 run-up: the same straddle bought on the last snapshot 5-12 days before and sold on the last
+            # snapshot 1-4 days before the announcement (out before the release)
+            pre9 = [pd.Timestamp(t) for t in bk.dates if E - pd.Timedelta(days=12) <= t <= E - pd.Timedelta(days=5)]
+            out9 = [pd.Timestamp(t) for t in bk.dates if E - pd.Timedelta(days=4) <= t <= E - pd.Timedelta(days=1)]
+            if pre9 and out9:
+                a0, a1 = pre9[-1], out9[-1]
+                S9 = und.px(a0)
+                k9 = atm_strike(bk, a0, e, S9)
+                if k9 is not None and not und.has_event(a0, a1):
+                    v0, v1, ok9 = 0.0, 0.0, True
+                    for cp in ("P", "C"):
+                        p = bk.path(e, cp, k9, a0, a1)
+                        if not len(p) or p.index[0] != a0 or a1 not in p.index:
+                            ok9 = False
+                            break
+                        v0 += p.mid.loc[a0] + FILL * p.half.loc[a0]
+                        v1 += p.mid.loc[a1] - FILL * p.half.loc[a1]
+                    if ok9:
+                        pn = v1 - v0 - 4 * COMM
+                        ern.append({"symbol": sym, "earnings": E, "entry": a0, "exit": a1, "expiry": e, "kind": "runup",
+                                    "pnl": pn / S9, "premium": v0 / S9,
+                                    "ret_on_premium": pn / v0 if v0 > 0 else np.nan})
     meta = {"chain_dates": int(len(bk.dates)), "positions": len(pos), "signals": len(sig), "earnings_trades": len(ern),
             "iv_repaired_expiry_days": int(bk.n_iv_repaired),
             "hedge_delta_fallbacks": int(FALLBACK[0]), "hedge_deltas": int(FALLBACK[1]),
@@ -323,7 +353,7 @@ def stage_symbols(a):
             continue
         try:
             und = L.Underlying(X[f"{sym}_raw"], X[f"{sym}_adj"])
-            out = run_symbol(sym, a.chain, und, spy_ret, vix, (E or {}).get(sym) if sym not in ("SPY", "DIA", "XLF", "XLE") else None)
+            out = run_symbol(sym, a.chain, und, spy_ret, vix, (E or {}).get(sym) if sym not in NON_STOCK else None)
         except Exception as ex:                                       # noqa: BLE001
             meta[sym] = {"error": repr(ex)[:300]}
             continue
@@ -428,7 +458,7 @@ def stage_combine(a):
         series[name] = g.pnl
         tests.append({"test": name, **stats(g.pnl, 12), "mean_premium": float(g.premium.mean()) if len(g) else np.nan,
                       "mean_hedge_cost": float(g.hedge_cost.mean()) if len(g) else np.nan})
-    stocks = P[~P.symbol.isin(["SPY", "DIA", "XLF", "XLE"])].copy()
+    stocks = P[~P.symbol.isin(NON_STOCK)].copy()
     # H4 Vasquez: monthly, slope at the entry date (signal from the weekly table on or before the entry)
     if len(S):
         S = S.sort_values("date")
@@ -455,7 +485,7 @@ def stage_combine(a):
         # H6 / H7: weekly stock returns from the next trading day's close to the next signal's next close
         adj = {c[:-4]: X[c].dropna() for c in X.columns if c.endswith("_adj")}
         rows = []
-        for sym, g in S[~S.symbol.isin(["SPY", "DIA", "XLF", "XLE"])].groupby("symbol"):
+        for sym, g in S[~S.symbol.isin(NON_STOCK)].groupby("symbol"):
             if sym not in adj:
                 continue
             a_ = adj[sym]
@@ -478,6 +508,25 @@ def stage_combine(a):
             series["H7 Xing-Zhang-Zhao smirk, stocks"] = h7
             tests.append({"test": "H6 Cremers-Weinbaum IV spread, stocks", **stats(h6, 52)})
             tests.append({"test": "H7 Xing-Zhang-Zhao smirk, stocks", **stats(h7, 52)})
+    if len(R) and "kind" in R:
+        R9 = R[(R.kind == "runup") & (R.exit <= END)]
+        if len(R9):
+            e9 = R9.groupby(R9.entry.dt.to_period("M").dt.to_timestamp()).pnl.mean()
+            series["H9 pre-earnings implied-volatility run-up (long straddle, out before the release)"] = e9
+            tests.append({"test": "H9 pre-earnings implied-volatility run-up (long straddle, out before the release)",
+                          **stats(e9, 12), "trades": int(len(R9)), "mean_per_trade": float(R9.pnl.mean()),
+                          "mean_ret_on_premium": float(R9.ret_on_premium.mean()),
+                          "median_ret_on_premium": float(R9.ret_on_premium.median())})
+        R = R[R.kind == "through"]
+    # H11 / H12: the delta-hedged short straddle of H1 on the FX and metal ETFs, where the database has them
+    for name, grp in (("H11 FX ETFs delta-hedged short ATM straddle (FX variance premium)", FX_ETF),
+                      ("H12 gold / silver ETFs delta-hedged short ATM straddle", METAL_ETF)):
+        g = P[P.symbol.isin(grp) & (P.kind == "short_straddle_hedged")]
+        if len(g):
+            x = g.groupby(g.entry.dt.to_period("M").dt.to_timestamp()).pnl.mean()
+            series[name] = x
+            tests.append({"test": name, **stats(x, 12), "symbols": ",".join(sorted(g.symbol.unique())),
+                          "trades": int(len(g))})
     if len(R):
         R = R[R.exit <= END]
         er = R.groupby(R.entry.dt.to_period("M").dt.to_timestamp()).pnl.mean()
