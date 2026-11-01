@@ -717,3 +717,28 @@ the firms' pages).
 - **Caveats:** the leverage and the mix were chosen on the same 2019-2025 data; the Nasdaq overnight path within
   the night is not modelled (only the close and open); firm rules change; FTMO caps one strategy at $400,000 of
   accounts.
+
+### 9.8 Two more published effects (`scripts/rebalance_lab.py` branch `rebalance` run 41335377851; `scripts/cot_lab.py` C5-C6 branch `cot` run 41335377840)
+
+**Front-running 60/40 rebalancing (Harvey, Mazzoleni & Melone 2025; the paper reports Sharpe 1.1, 1997-2023).**
+SPY minus IEF; a simulated 60/40 portfolio; calendar signal (last 4 days of the month, reversal on the first day)
+R1, band signal (25 bands 0.1-2.5%) R2, their average R3; E1-E3 the same on the equity leg only (an index CFD).
+
+| Test | 2003-2025: bp a day | Sharpe | t | Years positive | After the paper (2023-03 to 2025): Sharpe | t |
+|---|---|---|---|---|---|---|
+| R1 calendar (5 days a month; +12.4 bp a day when active) | +2.9 | 0.92 | 4.29 | 19/23 | 0.62 | 1.08 |
+| R2 band | +3.0 | 0.77 | 3.53 | 15/23 | -0.04 | -0.08 |
+| R3 combined | +3.0 | 1.12 | 5.21 | 23/23 | 0.24 | 0.45 |
+| E1 calendar, equity leg only (+9.8 bp a day when active) | +2.3 | 0.82 | 3.70 | 19/23 | 0.37 | 0.63 |
+| E3 combined, equity leg only | +2.1 | 0.90 | 4.13 | 18/23 | -0.07 | -0.13 |
+
+- **The paper's result reproduces on 2003-2025 at ETF costs** (all six survive Benjamini-Hochberg), but most of
+  those years are the paper's own sample.
+- **After publication (about 700 trading days) it is much weaker:** the calendar leg keeps a positive Sharpe of
+  0.6 (t 1.1), the band leg is gone. Too short to call; the calendar version is the one to watch (and to put in the
+  2026 test), and it trades an index CFD on 5 days a month, which suits a prop account.
+
+**COT speculative pressure as published (Fan et al. 2020).** Pooled over the currencies and gold: C5 (time-series)
++1.0 bp a week (t 0.4), C6 (cross-sectional) -0.9 bp (t -1.8). One market stands out: C5 on the euro, +12.0 bp a
+week (t 3.1, q 0.048 over all 52 COT tests), the only COT test that survives; a single market out of eight, so a
+lead for new data, not an edge.
