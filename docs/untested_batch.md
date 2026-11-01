@@ -840,6 +840,13 @@ Intraday (M1 bid/ask, flows-lab costs; index CFDs 2019-2025, gold 2011-2018, FX 
 - **The toshin month-start yen selling** shows up only against the control days (first three days -0.86 bp vs
   -4.60 bp on other days, Welch t 2.80), not as a tradable long.
 
+**Options part (`scripts/options_edges_lab.py`, branch `options-edges3`, run 41338023253; DoltHub quotes 2019-2025,
+108 underlyings).** H9, the pre-earnings implied-volatility run-up (long straddle bought 5-12 days before, sold 1-4
+days before the release): -1.51% of premium a trade, t -7.8, 0 of 6 years positive. Gao-Xing-Zhang earnings
+straddles (H8): -1.36%, t -5.5. **H11 / H12 could not run: the free database has no option chains for the FX ETFs
+(FXE, FXY, FXB, UUP, ...) or the metal ETFs (GLD, SLV, IAU).** The re-run of the earlier tests on the fresh export
+agrees with before (SPY delta-hedged short straddle +0.27% a month, t 1.7, q 0.18).
+
 ### 9.10 Literature round 4: blogs, forums, commercial systems (`scripts/lit4_daily_lab.py`, `scripts/lit4_intraday_lab.py`, branch `lit4`, run 41342395015)
 
 Rules copied from the sources and fixed before any result (docstrings; inventory in `docs/literature_check.md`
