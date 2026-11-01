@@ -1,0 +1,68 @@
+name: lit6
+# Sixth literature round: scripts/lit6_lab.py (CRT, Asia sweep, Turtle Soup, 5-minute ORB, Supertrend).
+# ci/LIT6: MIRRORS DUKA USDJPY (DUKA = the run with the US500 / NAS100 CFD bars).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/LIT6"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  intraday:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRRORS DUKA USDJPY REST < ci/LIT6
+          mkdir -p dl
+          for s in EURUSD GBPUSD USDJPY XAUUSD; do for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_${M}_$s || true; done; done
+          gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj
+          for s in USA500IDXUSD USATECHIDXUSD; do gh run download $DUKA -p "dk-$s-*" -D dl/dk_$s || true; done
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+          ls data/m1
+      - run: set -o pipefail; python -W ignore scripts/lit6_lab.py --out out/lab 2>&1 | tee out_lab.txt
+      - if: always()
+        run: mkdir -p out && cp out_lab.txt out/ || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: lit6-lab
+          path: out
+          retention-days: 30
+  publish:
+    needs: [intraday]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: lit6-*
+          path: res
+          merge-multiple: true
+      - name: Publish to the lit6 branch (results and per-trade returns, no price data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp -r res /tmp/l4
+          git checkout --orphan l4-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p lit6 && cp -r /tmp/l4/* lit6/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > lit6/RUN.txt
+          git add -f lit6
+          git commit -qm "Literature round 6 (run ${{ github.run_id }})"
+          git push -f origin HEAD:lit6
