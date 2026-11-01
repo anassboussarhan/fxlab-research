@@ -146,3 +146,91 @@ after publication? Each finding is set against the results here.
 - Melvin & Prins, Equity hedging and exchange rates at the London 4 p.m. fix: https://ideas.repec.org/a/eee/finmar/v22y2015icp50-72.html
 - Breedon & Ranaldo, Intraday patterns in FX returns and order flow: https://www.snb.ch/en/publications/research/working-papers/2011/working_paper_2011_04
 - Della Corte, Ramadorai & Sarno, Volatility risk premia and exchange rate predictability: https://openaccess.city.ac.uk/id/eprint/13156/
+
+## 5. Round 3 (2026-11-01): a full inventory, all eras, FX, metals and options
+
+Every documented strategy found in a third search (academic papers from the 1990s to 2026, Quantpedia, CXO,
+Alpha Architect, practitioner notes, MQL5 / Reddit / Forex Factory), set against what this project has run.
+"Tested" means run here with costs, out of sample; see `docs/conclusions.md` and `docs/untested_batch.md`.
+
+### 5.1 FX
+
+**Tested here** (all negative after costs unless marked): carry (plain, VIX-filtered, momentum- and vol-gated),
+dollar carry, time-series / cross-sectional / weekly momentum, carry and dollar factor momentum, PPP value, macro
+(economic momentum, output gap, Taylor rule, elastic net), COT positioning (six forms; euro speculative pressure a
+lead), the Tokyo fix / Gotobi (**works**: USD/JPY and EUR/JPY), the London 4 pm fix reversal, the month-end fix
+(Melvin-Prins), local-hours depreciation (Breedon-Ranaldo), around-the-clock and NY-hours legs (Krohn et al. in
+part), FOMC days, intraday seasonality, weekday, turn of the month, weekend gaps, Osler round numbers, triangular
+parity, pairs and cointegration, the full technical catalog (67 families), and every ML design.
+
+**Not tested, testable with free data:**
+
+| Idea | Source | Reported | Data here |
+|---|---|---|---|
+| Composite of the currency predictors (average rank of carry, momentum 1/3/12, filter, dollar carry, term spread, value, output gap, Taylor rule) | Bartram, Djuranovik, Garratt & Xu (JFQA 2025) | 45 bp a month net (1971-2022); pooled post-publication 19 bp gross | Monthly G9 from the macro lab |
+| Market intraday momentum: the rest-of-day return predicts the last 30 minutes, strongest when dealers are short gamma | Baltussen, Da, Lammers & Martens (JFE 2021); Elaut et al. (2018, RUB) | Sharpe 0.87-1.73 by asset class, 60+ futures 1974-2020 | M1 FX, gold, US500 / NAS100 CFDs |
+| The W-shaped dollar around all three fixes, including the ECB 14:15 fix | Krohn, Mueller & Whelan (JF 2024) | About 2.5 bp per fix before costs | M1 USD pairs |
+| The dollar before FOMC rate changes, conditioned on market expectations | Karnaukh | 25 bp a trade when a change is expected | M1 + T-bill proxy |
+| Equity outperformance -> currency depreciation, monthly | Hau & Rey (2004, 2006) | Portfolio-rebalancing channel | Yahoo indices + FX |
+| Yield-curve slope (term spread) cross-section | Ang & Chen | Predictive in the 1990s-2000s | OECD rates (DBnomics) |
+| Net foreign assets / foreign-currency liabilities | Della Corte, Riddiough & Sarno (RFS 2016) | 2.3% a year net, Sharpe about 0.5 (1983-2011) | IMF data, annual; weak with 9 currencies |
+| Japanese investment-trust (toshin) launches at the start of the month (yen selling) | Practitioner notes | Not quantified | M1 USD/JPY |
+| Emerging-market currencies (carry, momentum, flows) | Hsu, Taylor & Wang (2016) | More predictable, about 4.5x the costs | Dukascopy USD/MXN, USD/ZAR, USD/TRY, ... |
+| Head-and-shoulders / kernel pattern recognition | Chang & Osler (1999); Lo, Mamaysky & Wang (2000) | Profitable in the 1970s-90s, dominated by simple rules | M1 |
+| Central-bank pre-announcement drift (BoJ, SNB, BoE) | Quantpedia (2025) | Equity ETFs; currencies flat | - |
+| Month-end USD flows | HSBC (Donnelly): "arbitraged away" | - | Tested (dead) |
+
+**Needs data this project does not have:** FX options (volatility premium cross-section, Della Corte et al. 2016;
+FX straddles, Fullwood, James & Marsh 2021; risk reversals and crash-neutral carry, Jurek 2014, Brunnermeier, Nagel
+& Pedersen; correlation risk), interbank or CLS order flow (Evans & Lyons), retail positioning (OANDA), news and
+central-bank text, economic-release consensus forecasts, option-expiry sizes at the 10:00 New York cut, analyst
+forecasts.
+
+### 5.2 Gold, silver, platinum
+
+**Tested here:** the gold AM/PM and silver fixes, gold rising in Asian hours, the gold London breakout, gold/silver
+ratio reversion, gold vs AUD relative value, gold COT, gold in the technical catalog and the ML labs, gold
+seasonality (only as a diagnostic, 7 Septembers), gold time-series momentum.
+
+**Not tested, testable with free data:**
+
+| Idea | Source | Data here |
+|---|---|---|
+| Gold volatility premium: sell 30-day variance at GVZ against realised gold volatility (and EVZ for EUR/USD after 2014) | VRP literature; the EVZ test here (t 5.4, 2008-2014) | Yahoo ^GVZ / ^EVZ + M1 |
+| The gold autumn effect on a long sample (and the Chinese New Year run-up) | Baur (2013); IJME (2024) | Yahoo GC=F / GLD from 2000 |
+| Gold intraday momentum into the COMEX close | Baltussen et al. | M1 XAUUSD |
+| Gold against real yields (TIPS) | Erb & Harvey (2013, sceptical) | TIP ETF / FRED |
+| Gold miners vs gold (GDX / GLD) | Practitioner | Yahoo |
+| Platinum, palladium | - | Dukascopy (to check) |
+
+### 5.3 Options
+
+**Tested here:** 745,383 combinations of 92 structures on 106 underlyings (2019-2025, real quotes), tastytrade's
+rules, delta-hedged index straddles and strangles, variance strips, weekends, skew, dispersion, FOMC and CPI
+volatility, calendars, the single-stock anomalies (Goyal-Saretto, Cao-Han, Cremers-Weinbaum, Vasquez,
+Xing-Zhang-Zhao), long straddles into earnings, box spreads, short volatility in VIX contango, the BTC volatility
+premium, the EUR/USD volatility premium (EVZ, to 2014).
+
+**Not tested, testable with the free quotes (DoltHub, 2019-2025) or index data:**
+
+| Idea | Source | Reported |
+|---|---|---|
+| Option momentum: straddles with high past returns keep outperforming (6-36 months) | Heston, Jones, Khorram, Li & Mo (JF 2023) | Pre-cost Sharpe 3x stock momentum; about zero after full spreads |
+| Seasonality and reversal in straddle returns | Jones, Khorram & Mo | - |
+| Pre-earnings implied-volatility run-up (buy days before, sell before the release); selling the post-earnings crush | Gao, Xing & Zhang (JFQA 2018) | +2.3-3.0% per event (1996-2010), less after costs |
+| Changes in call / put implied volatility predict stock returns | An, Ang, Bali & Cakici (JF 2014) | - |
+| Stock-price pinning at expiry strikes | Ni, Pearson & Poteshman (JFE 2005) | - |
+| The variance premium as an equity-timing signal | Bollerslev, Tauchen & Zhou (RFS 2009) | Quarterly horizon |
+| Dealer gamma from option open interest as the switch for intraday momentum | Baltussen et al. | Momentum only on negative-gamma days |
+| Walk-forward choice of tenor, delta and hedging for the hedged index straddles | - | One setting tested here: t 1.7-2.5 |
+
+**Needs data this project does not have:** 0DTE strategies and overnight vs intraday option returns (Muravyev &
+Ni 2020) need intraday quotes; signed put-call volume (Pan & Poteshman); VIX options; FX and gold (GLD) options are
+not in the free database.
+
+### 5.4 Forums
+
+The strategies posted on MQL5, Forex Factory and r/Forex / r/algotrading (London / Asian breakouts, ICT / SMC
+concepts, news straddles, grids, martingale, pyramiding, Gotobi EAs, wheel / iron condor / 45-DTE strangles) are all
+in the tested catalog. No forum source shows a cost-inclusive, untouched out-of-sample record beyond the effects
+found here.
