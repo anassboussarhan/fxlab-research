@@ -234,3 +234,44 @@ The strategies posted on MQL5, Forex Factory and r/Forex / r/algotrading (London
 concepts, news straddles, grids, martingale, pyramiding, Gotobi EAs, wheel / iron condor / 45-DTE strangles) are all
 in the tested catalog. No forum source shows a cost-inclusive, untouched out-of-sample record beyond the effects
 found here.
+
+## 6. Round 4 (2026-11-01): blogs, prop-firm pages, commercial systems, forums
+
+A fourth search aimed at practitioner sources: trading blogs (Quantified Strategies, backtrex, Rogue Quant, MQL5
+blogs, FlashAlpha, Option Alpha, tastylive, SteadyOptions, optionstradingiq), bank and broker notes (Credit
+Agricole month-end model via investinglive / Tickmill, FX seasonality by Marc Chandler, FXEmpire, Euromoney),
+prop-firm statistics pages, commercial EAs (Waka Waka, Night Hunter, gold scalpers, a Gotobi EA) and forums
+(Reddit, Babypips, Forex Factory, Elite Trader, NexusFi). New rules that could be tested with free data were run
+as `scripts/lit4_daily_lab.py` and `scripts/lit4_intraday_lab.py` (branch `lit4`).
+
+| Method | Source and what it claims | Here |
+|---|---|---|
+| FX monthly seasonality (USD/JPY falls in August 14/20 years; GBP up in April 18/20, down in May 17/20; CAD up in April 16/20; ...) | Chandler (2021, sceptical himself); FXEmpire; Euromoney | lit4 S1 (walk-forward 15-of-20 rule, 1991-2025), S1b (20-year sign), S2 (his 15 patterns after publication) |
+| January and December effects in USD/DEM-EUR, 1971-2017 | Girardin, Moussa et al. (Economic Modelling 2019) | Covered by S1 / S1b (direction not given in the abstract, so not pre-registered on its own) |
+| Gold turn of the month | Seasonax / StoneX notes | lit4 G1 (last day + first three days, 2000-2025) |
+| Gold before the Chinese New Year | Practitioner seasonality | lit3 D6: +1.5% a year, 16/25, t 2.0, q 0.17 |
+| Gold London breakout, Asian range 03:00-08:00 server, range filter 0.3-1.6%, 2.5R, break-even at 1.5R | MQL5 blog 777540: PF 1.38 on 2023-2026 (no costs stated) | lit4 L1, 2011-2018: 984 trades, -0.4 bp, PF 0.98; gross +3.8 bp; short side +1.4, long -1.9 |
+| 400+ gold strategy variants with costs and random-entry controls | MQL5 blog: almost all fail; Asian box +0.035R | Agrees with the catalog results here |
+| RSI(2), Turtle, London breakout, MACD, Bollinger + stochastic, previous-day high/low, order blocks, ICT kill-zone FVG on FX | backtrex.com (with commissions): every FX test negative (-3% to -66%) | Same families negative here; their gold and index "winners" trail buy-and-hold (market beta) |
+| ICT / SMC rules on EUR/USD | Blog test: -0.12R a trade, PF 0.81 before costs | Tested in the catalog (liquidity sweep, FVG): negative |
+| Larry Williams Smash Day (euro both sides, gold long only) | Rogue Quant, futures 2014-2024 | lit4 L2: EUR/USD 117 trades -14.6 bp (t -0.5); gold long 23 trades -75 bp |
+| Larry Williams Oops (gap below the prior low, buy back at it) | Unger Academy, Oxford Strat | FX trades 24 hours: only Monday gaps, tested as weekend gaps (negative). Not run separately |
+| Crabel NR4 / NR7, inside days | Quantified Strategies, LuxAlgo | Inside bar / narrow range in the catalog: negative |
+| Grid / martingale mean reversion on AUDCAD, AUDNZD, NZDCAD (Waka Waka: "8,100% since 2018", 40-50% drawdowns in 2024, some accounts lost) | Vendor and reseller pages | Grids and night scalping tested: gross edge, negative after costs; a 40-50% drawdown breaks every prop rule |
+| Night scalpers (Night Hunter, Forex Fury) | Myfxbook, vendor pages | Tested (I7): +1.6-2.0 bp gross, -3 to -7 bp net |
+| Commercial Gotobi EA: long 07:30-09:55 Tokyo, 2.5 x ATR(H1) stop, skip volatile mornings; short 09:55-10:30 | MQL5 blog 777443: vendor backtest PF 1.24 (2015-2026), 2015 and 2025 losing, no live record | lit4 L3, USDJPY 2007-2018: -0.7 bp net (+1.7 gross); this project's 23:00 entry earns +4.9 bp. The short leg loses |
+| Credit Agricole month-end model (USD buying / selling signal each month) | investinglive, Tickmill | The model's history is not published in usable form; month-end flow tests here: dead |
+| Gold reaction to payroll surprises | FXStreet previews | Needs consensus forecasts: not testable |
+| Shanghai gold premium / SGE session | Inproved, MetalCharts | No free history: not testable |
+| Yen as a risk-off hedge (VIX spikes, S&P falls) | Broker notes | VIX-filtered carry and the cross-asset lead-lag rules tested: negative |
+| CTA trend following 2023-2025 | HedgeNordic, CFM, SG CTA index | Struggling; trend tested here: negative after costs |
+| Put credit spreads on SPY (96 variants: a 100% stop helps; mid fills overstate CAGR by 30-60%) | FlashAlpha | Short-premium structures tested (options strategies labs); fills at the quote, not mid |
+| 45 DTE strangles managed at 21 DTE / 50% profit; "managing winners" | tastylive, SteadyOptions | Tested (tastytrade's rules) |
+| Tom King 1-1-2 (put debit spread + two 5-delta short puts, 90-120 DTE) | optionstradingiq (no backtest; a 3% a month target) | Not run as such; it is the short far-OTM put premium the options labs tested |
+| 0DTE iron condors (afternoon entries best, 450 configurations) | spy-0dte-research | Needs intraday option quotes: not testable |
+| Prop-firm outcomes | Topstep 2025: 16.8% of Combines passed, 33.3% of funded traders paid; MyFundedFutures: 39.2% of funded paid; Earn2Trade: 8.9% passed; GOAT Funded: 22,279 of 1.2 million traders paid | Consistent with the MAE-aware prop simulations here (section 9.6 of `docs/untested_batch.md`) |
+
+**Conclusion of round 4:** the practitioner sources add no edge that the earlier rounds missed. Where they publish
+numbers with costs, the FX rules lose; the profitable "systems" are gold or index strategies in a bull market,
+grids with large hidden drawdowns, or vendor backtests without live records. The one commercial product built on
+an effect found here (the Gotobi EA) uses a later entry than the one that works.
