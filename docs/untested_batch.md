@@ -901,3 +901,25 @@ limit entries without slippage. FX and gold mostly 2007-2018 (EUR/USD to 2022, U
   stop for a profit. With orders void once their stop trades, OB2 is -0.96 bp. The same kind of error in a
   hand-made or AI-written backtest would produce exactly the "this strategy is a money machine" results that
   circulate online.
+
+### 9.12 YouTube day-trading rules with a written form (`scripts/lit6_lab.py`, branch `lit6`, run 41350066971)
+
+Rules in the docstring (fixed before the run). Net bp a trade (t); FX and gold mostly 2007-2018, EUR/USD to 2022,
+USD/JPY to 2025, index CFDs 2019-2025.
+
+| Rule (source) | EUR/USD | GBP/USD | USD/JPY | Gold | US500 | NAS100 |
+|---|---|---|---|---|---|---|
+| CRT1 first 4-hour range re-entry, 2R (Data Trader, 23 trades shown) | -1.28 (-5.2) | -2.04 (-6.5) | -2.14 (-9.7) | -3.28 (-3.6) | - | - |
+| AS1 Asia sweep in the London kill zone ("5-rule SMC", 230 trades shown) | -1.27 (-5.6) | -2.15 (-8.1) | -1.73 (-6.2) | -3.53 (-6.7) | - | - |
+| TS1 Turtle Soup, 20 days (Connors-Raschke) | -4.2 (-0.4) | +1.7 (0.1) | -7.3 (-0.7) | +22.4 (0.8), 60 trades | - | - |
+| ST1 Supertrend (10, 3), H1 | +0.05 (0.0) | -2.45 (-1.3) | +0.40 (0.3) | -2.34 (-0.6) | - | - |
+| ST1 Supertrend (10, 3), H4 | -3.95 (-0.7) | -2.27 (-0.4) | -6.75 (-1.3) | +17.8 (1.2), 274 trades | - | - |
+| ORB5 5-minute opening range, 10R (Zarattini & Aziz) | - | - | - | - | -1.12 (-0.9) | +1.69 (1.0); gross +3.82 (2.2) |
+
+- **No test passes (all q = 1).** The two session-range reversals (CRT1, AS1) lose on every market, as the sweep
+  papers predict (continuation, not reversal).
+- **The 5-minute ORB is real before costs on the Nasdaq** (+3.8 bp, t 2.2, 1,463 days), as Zarattini and Aziz
+  found on QQQ without spreads; on a CFD with costs it is +1.7 bp, t 1.0. On a futures account with ~0.5 bp costs
+  it would be close to their result; not at CFD spreads.
+- **Gold trend rules (Supertrend H4, Turtle Soup) are positive but not significant** on 2011-2018 (t 0.8-1.2);
+  the HackerNoon Supertrend test found the same rule profitable on gold only because of the 2024-2026 rally.

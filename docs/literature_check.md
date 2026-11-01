@@ -293,3 +293,27 @@ an effect found here (the Gotobi EA) uses a later entry than the one that works.
 | Payout data | FundedNext Feb 2026: 8,340 traders paid, median payout $567, median win rate 50%, median PF 1.47, metals the most traded CFD by count; firms dropped gold after its 2025 rally made "ordinary retail traders consistently profitable" (Finance Magnates, March 2026) | A trend in gold, not a method |
 | Verified competitions | Robbins / World Cup winners: 100-490% one-year returns, no drawdowns or repeat records published | - |
 | "An AI gave me this strategy" | Reddit: "ChatGPT doubled my money in two weeks" (18 trades, no records); Alpha Arena 2025, real money, two weeks: Qwen +22%, DeepSeek +5%, Claude Sonnet 4.5 -42%, Gemini -46%, Grok -58%, GPT-5 -59% | A model describing ICT or volume profile is repeating the internet, not evidence |
+
+## 8. Round 6 (2026-11-01): the full YouTube sweep, double-checked
+
+Video contents were read through transcript and summary sites (recapio, summyt, tubescript, chaindesk, briefread);
+claims were checked against independent re-tests and against this project's tests.
+
+| YouTube claim | What the video offers as proof | Independent check | Here |
+|---|---|---|---|
+| Data Trader "best 5-minute scalping" (4-hour range re-entry, 2R) | 23 trades: 72% / 83% / 60% wins | - | lit6 CRT1: negative on 4 markets (1,890-2,755 trades each) |
+| "5-rule SMC" (Asia sweep, kill zones, 1-minute reversal, OB/FVG entry) | 230 trades, 216%, 33% wins, 2023-2025 | Mahadzva (SSRN 2026): sweeps predict continuation | lit6 AS1: negative on 4 markets |
+| Triple Supertrend + Stoch RSI + 200 EMA (DaviddTech) | 100 trades, 56% wins, +40% | r/algotrading rebuild, 16 years EUR/USD, 1,700 trades: -23%, 39% wins | ST1 Supertrend alone: flat to negative |
+| "Manergy Cloud" (3,888%, BTC, 10x) | Its core indicators are not public | dev.to rebuild: win rates 33-35% at 1:2, net negative or huge drawdown | - |
+| Supertrend in general | - | HackerNoon, Exness ticks 2020-2026: gold H4 PF 1.97 only thanks to 2024-26; NZD/USD loses | lit6 ST1 |
+| Gold scalping (Smart Risk: sweep + order block + IFVG; breaker blocks) | None (sells an indicator) | - | lit5 OB1/OB2 on gold: -2.0 to -2.4 bp |
+| 5-minute ORB (Zarattini & Aziz; many YouTube copies) | Paper: +1,484% 2016-2023 on QQQ/TQQQ, no spreads or slippage | - | lit6 ORB5: gross +3.8 bp on NAS100 (t 2.2), +1.7 net at CFD costs |
+| MACD + 200 EMA "86% win rate" (Trading Rush style, 100 manual trades) | 100 hand-picked trades | Validation videos and rebuilds: far lower | Catalog: negative |
+| ICT Silver Bullet, Unicorn, Judas swing, Power of 3, Turtle Soup | Screenshots, "70% win rate" | Silver Bullet: 1.7% of 25,000 variants survive on paper fills; Turtle Soup notes: no costs, results not disclosed | AS1 / TS1 / OB / LS: negative or not significant |
+| Harmonic patterns, Elliott waves, Fibonacci | Chart examples | Liberated Stock Trader (no baselines); Elliott: "no statistically significant predictive power" (Nazarbayev thesis); Fibonacci: no clustering (Forexop) | Catalog patterns: negative |
+| Hammer / pin bars | Examples | 2,219 hammers: the market's own drift | Catalog: negative |
+| FTMO's own YouTube stories (Bernd S., "#1 FTMO trader": supply / demand + fundamentals, 2% risk, 1:1; the "$500,000 profit" trader: RSI / MACD / COT) | Interviews | Payouts self-reported via FTMO; no trade records | Swing / fundamental: COT tested (one market of 52 survives) |
+| Warrior Trading (Ross Cameron, small-cap momentum) | "$101,280 verified profits in 45 days" | FTC 2022: most customers lost money; $3 million settlement | Not our markets |
+| TJR ("$1,047,984 in 6 months") | Video title | No public statements found | - |
+| Options: wheel, 0DTE iron condors, theta | tastylive studies | Early Retirement Now: the wheel adds hidden drawdown risk vs plain put-writing; 0DTE needs intraday quotes | Options labs: short premium earns the variance premium with crash risk, no alpha after costs |
+| Day trading in general | - | Brazil futures 2013-2015: 97% of persistent day traders lost money, 0.4% earned more than a bank teller | - |
