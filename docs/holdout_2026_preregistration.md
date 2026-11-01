@@ -59,3 +59,13 @@ Ten months is short. The expected t if each rule keeps its development edge exac
 So "consistent" is the most likely outcome even if every edge is real, and a failure to confirm is weak evidence
 against an edge. A **contradiction** (a 2026 mean significantly below the development mean) is the result that
 would count against a rule.
+
+## Addendum (2026-11-01, still before any 2026 data was downloaded)
+
+- **t-statistics for the verdicts:** per-trade tests (H1-H6) the ordinary t; the daily R1 / E1 series a
+  Newey-West t with 5 lags and the weekly C5 series 4 lags, as in their labs, with the variance never below the
+  iid variance.
+- **Code check:** `scripts/holdout_2026.py --dry 2017` runs the Gotobi rules on a development year. It reproduces
+  the development numbers for 2017 (USD/JPY no stop +3.60 bp on 63 trades, EUR/JPY +5.06 bp on 63, as in
+  `gotobi-opt` diagnostics), so the copied code is the frozen code.
+- Mondays: as in development, a Gotobi Monday has no trade when its entry time falls before the weekly open.

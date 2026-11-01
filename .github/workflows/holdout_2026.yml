@@ -1,0 +1,107 @@
+name: holdout-2026
+# The 2026 holdout, run once (docs/holdout_2026_preregistration.md, results/frozen_candidates.json). Downloads
+# USDJPY and EURJPY M1 for 2026-01..2026-10 from Dukascopy, the 2026 COT reports and Yahoo closes, then runs
+# scripts/holdout_2026.py. The unlock phrase below matches the SHA-256 in results/frozen_candidates.json; it was
+# set on Anas's instruction of 2026-11-01, after the candidates were frozen. ci/HOLDOUT_2026: WARMUP_UJ WARMUP_EJ.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/HOLDOUT_2026"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        pair: [USDJPY, EURJPY]
+        month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow
+      - name: Download ${{ matrix.pair }} 2026-${{ matrix.month }}
+        run: |
+          S=$(printf "2026-%02d-01" ${{ matrix.month }})
+          E=$(date -u -d "$S +1 month" +%Y-%m-%d)
+          python -m fxlab.data.acquire_dukascopy --pairs ${{ matrix.pair }} --start ${S}T00:00:00 --end ${E}T00:00:00
+          M=$(printf "%02d" ${{ matrix.month }})
+          mkdir -p part && mv data/m1/${{ matrix.pair }}/${{ matrix.pair }}_2026.parquet part/${{ matrix.pair }}_2026_$M.parquet
+          tail -1 data/manifests/acquisition.jsonl > part/manifest_${{ matrix.pair }}_2026_$M.jsonl
+          ls -la part && cut -c1-400 part/manifest_*.jsonl
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h26-${{ matrix.pair }}-${{ matrix.month }}
+          path: part
+          retention-days: 30
+  cot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt yfinance requests
+      - run: python scripts/holdout_2026.py --fetch-cot --cot-data cotdata --out unused
+      - uses: actions/upload-artifact@v4
+        with:
+          name: h26-cot
+          path: cotdata
+          retention-days: 30
+  analyse:
+    needs: [download, cot]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt yfinance requests holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: h26-*
+          path: dl
+      - name: Bars (2026 plus development warm-up from 2025-10)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read WUJ WEJ REST < ci/HOLDOUT_2026
+          for M in 10 11 12; do gh run download $WUJ -n m1-USDJPY-2025-$M -D dl/wuj_$M || true; done
+          gh run download $WEJ -n dk-EURJPY-x2025 -D dl/wej || true
+          mkdir -p cotdata && cp dl/h26-cot/* cotdata/ || true
+          python ci/place_m1.py dl data/m1
+          ls -la data/m1/USDJPY data/m1/EURJPY
+      - name: Run the frozen rules on 2026, once
+        env:
+          FXLAB_HOLDOUT_UNLOCK: "unlock 2026: authorised by Anas on 2026-11-01 after the candidates below were frozen"
+        run: |
+          set -o pipefail
+          python -W ignore scripts/holdout_2026.py --cot-data cotdata --out out 2>&1 | tee out_run.txt
+      - name: Publish to the holdout-2026 branch (results and per-trade returns, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out && cp out_run.txt out/ 2>/dev/null || true
+          cp results/m1_coverage.json out/ 2>/dev/null || true
+          cp -r out /tmp/h26
+          git checkout --orphan h26-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p holdout_2026 && cp -r /tmp/h26/* holdout_2026/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > holdout_2026/RUN.txt
+          git add -f holdout_2026
+          git commit -qm "2026 holdout (run ${{ github.run_id }})"
+          git push -f origin HEAD:holdout-2026
