@@ -163,8 +163,21 @@ def fx_excess():
                 v = pd.concat([dem_eur[dem_eur.index < "1999-01-01"], v[v.index >= "1999-01-01"]])
         vals[c] = v.sort_index()
     rates = {}
+    me = pd.date_range("2006-01-31", END, freq="ME")
+    try:                                                       # the project's OECD 3-month rates, 2006 on (in the repo)
+        from fxlab.data import rates as RR
+        loc = RR.known_at(pd.DatetimeIndex(me + pd.Timedelta(days=1)).tz_localize("UTC"))
+        loc.index = me                                         # month m's average, at the end of month m
+    except Exception as ex:                                                 # noqa: BLE001
+        print("local rates", repr(ex)[:100], flush=True)
+        loc = pd.DataFrame(index=me)
     for c in ("USD",) + CCYS:
-        rates[c], srcs[f"rate {c}"] = rate(c)
+        r_, srcs[f"rate {c}"] = rate(c)
+        if c in loc and loc[c].notna().any():
+            l_ = loc[c].dropna()
+            r_ = pd.concat([r_[r_.index < l_.index.min()], l_]).sort_index()
+            srcs[f"rate {c}"] += " to 2005, repo OECD table from 2006"
+        rates[c] = r_
     dem_r, srcs["rate DEM"] = rate("DEM")
     if len(dem_r):
         e = rates["EUR"]
