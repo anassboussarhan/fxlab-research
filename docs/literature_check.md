@@ -247,7 +247,7 @@ as `scripts/lit4_daily_lab.py` and `scripts/lit4_intraday_lab.py` (branch `lit4`
 | Method | Source and what it claims | Here |
 |---|---|---|
 | FX monthly seasonality (USD/JPY falls in August 14/20 years; GBP up in April 18/20, down in May 17/20; CAD up in April 16/20; ...) | Chandler (2021, sceptical himself); FXEmpire; Euromoney | lit4 S1 (walk-forward 15-of-20 rule, 1991-2025), S1b (20-year sign), S2 (his 15 patterns after publication) |
-| January and December effects in USD/DEM-EUR, 1971-2017 | Girardin, Moussa et al. (Economic Modelling 2019) | Covered by S1 / S1b (direction not given in the abstract, so not pre-registered on its own) |
+| January and December effects in USD/DEM-EUR, 1971-2017 | Girardin et al. (Economic Modelling 2019) | Covered by S1 / S1b (direction not given in the abstract, so not pre-registered on its own) |
 | Gold turn of the month | Seasonax / StoneX notes | lit4 G1 (last day + first three days, 2000-2025) |
 | Gold before the Chinese New Year | Practitioner seasonality | lit3 D6: +1.5% a year, 16/25, t 2.0, q 0.17 |
 | Gold London breakout, Asian range 03:00-08:00 server, range filter 0.3-1.6%, 2.5R, break-even at 1.5R | MQL5 blog 777540: PF 1.38 on 2023-2026 (no costs stated) | lit4 L1, 2011-2018: 984 trades, -0.4 bp, PF 0.98; gross +3.8 bp; short side +1.4, long -1.9 |
