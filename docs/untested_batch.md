@@ -780,4 +780,4 @@ Intraday (M1 bid/ask, flows-lab costs; index CFDs 2019-2025, gold 2011-2018, FX 
 - **Gold before the Chinese New Year** is the only positive daily result: +1.5% over 15 trading days, 16 of 25
   years, but t 2.0 and q 0.17 after eight tests; one observation a year, so 2026 adds only one more.
 - **The toshin month-start yen selling** shows up only against the control days (first three days -0.86 bp vs
-  -4.60 bp on other days, Welch t 2.6 in favour), not as a tradable long.
+  -4.60 bp on other days, Welch t 2.80), not as a tradable long.
