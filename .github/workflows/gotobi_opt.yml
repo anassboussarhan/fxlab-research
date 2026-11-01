@@ -25,7 +25,7 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          read MIRRORS EXTRA USDJPY FLOW FLOW2 < ci/GOTOBI_OPT
+          read MIRRORS EXTRA USDJPY FLOW FLOW2 REST < ci/GOTOBI_OPT
           mkdir -p dl
           for s in USDJPY EURJPY; do for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_${M}_$s || true; done; done
           gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj
