@@ -60,7 +60,7 @@ FIRMS = {
 INIT, MAX_DAYS, FUNDED_DAYS = 100_000.0, 500, 250
 
 
-def simulate(A, rules, n=20_000, seed=0, M=None):
+def simulate(A, rules, n=20_000, seed=0, M=None, scale_eval=1.0, scale_funded=1.0):
     """A: (days x strategies) daily account returns at the chosen leverage; M: the same days' worst open losses
     (<= 0), all positions assumed at their worst at the same moment (conservative). Returns the outcome summary."""
     M = np.minimum(A, 0.0) if M is None else M
@@ -81,12 +81,14 @@ def simulate(A, rules, n=20_000, seed=0, M=None):
     npay = np.zeros(n, int)
     fail = np.zeros(n, int)                  # 1 daily, 2 max loss
     passed = np.zeros(n, bool)
+    first = np.full(n, -1)
     for step in range(MAX_DAYS + FUNDED_DAYS):
         alive = phase >= 0
         if not alive.any():
             break
-        day = A[(pos + step) % T]
-        dip = M[(pos + step) % T].sum(axis=1)
+        sc = np.where(phase >= nph, scale_funded, scale_eval)[:, None]
+        day = A[(pos + step) % T] * sc
+        dip = (M[(pos + step) % T] * sc).sum(axis=1)
         start = eq.copy()
         floor = np.where(r["trailing"], peak - r["maxloss"], -r["maxloss"])
         bo = alive & ((-dip >= r["daily"]) | (eq + dip <= floor))          # the open loss inside the trades
@@ -127,6 +129,7 @@ def simulate(A, rules, n=20_000, seed=0, M=None):
         f = alive & (phase == nph) & ~newly
         fday = np.where(f, fday + 1, fday)
         due = f & (fday >= r["first_pay"]) & ((fday - r["first_pay"]) % r["pay_every"] == 0) & (eq > 0)
+        first = np.where(due & (npay == 0), step, first)
         paid = np.where(due, paid + r["split"] * eq * INIT, paid)
         npay = np.where(due, npay + 1, npay)
         eq = np.where(due, 0.0, eq)
@@ -135,7 +138,11 @@ def simulate(A, rules, n=20_000, seed=0, M=None):
         phase = np.where((phase >= 0) & (phase < nph) & (step + 1 >= MAX_DAYS), -2, phase)
     refund = np.where((npay > 0) & r["refund"], r["fee"], 0.0)
     net = paid + refund - r["fee"]
+    fp = first[first >= 0]
     return {"pass": float(passed.mean()), "paid": float((npay > 0).mean()), "mean_net": float(net.mean()),
+            "median_days_to_first_pay": float(np.median(fp)) if len(fp) else np.nan,
+            "paid_within_3_months": float(((first >= 0) & (first <= 63)).mean()),
+            "paid_within_6_months": float(((first >= 0) & (first <= 126)).mean()),
             "median_net": float(np.median(net)), "p10_net": float(np.percentile(net, 10)),
             "p90_net": float(np.percentile(net, 90)), "share_positive": float((net > 0).mean()),
             "fail_daily": float((fail == 1).mean()), "fail_max": float((fail == 2).mean())}
