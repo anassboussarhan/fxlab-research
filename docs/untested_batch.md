@@ -718,6 +718,64 @@ the firms' pages).
   the night is not modelled (only the close and open); firm rules change; FTMO caps one strategy at $400,000 of
   accounts.
 
+### 9.7 Gotobi on more yen pairs, optimised walk-forward (`scripts/gotobi_opt_lab.py`, `scripts/gotobi_opt_sims.py`, branch `gotobi-opt`, run 41339650101)
+
+First run: USD/JPY, EUR/JPY, AUD/JPY and GBP/JPY (CHF/JPY, CAD/JPY and NZD/JPY were still downloading; they follow
+in a second run). Grid of 72 settings (entry 23:00 the evening before or 01:00-08:00 Tokyo; exit 09:50 / 09:53 /
+09:55; no stop or a window stop; Mondays in or out). Each year from 2011 trades the setting with the best t on all
+earlier years. Out of sample 2011-2025, net of costs and swap:
+
+| Pair | Walk-forward bp | t | Years positive | 2019-2025 bp (t) | Fixed rule (23:00 -> 09:53, no stop) bp | t | q |
+|---|---|---|---|---|---|---|---|
+| USD/JPY | +4.76 | 3.90 | 11/15 | +4.25 (2.63) | +5.40 | 4.31 | 0.000 |
+| EUR/JPY | +5.91 | 4.54 | 14/15 | +5.14 (3.03) | +6.20 | 4.64 | 0.000 |
+| AUD/JPY | +2.05 | 1.20 | 8/14 | +3.76 (1.47) | +2.75 | 1.57 | 0.115 |
+| GBP/JPY | +2.09 | 1.45 | 7/14 | +0.23 (0.11) | +2.41 | 1.61 | 0.091 |
+| Basket (pairs with train t > 1.5, their settings; 1.7 pairs a day) | +5.06 | 4.51 | 11/13 | +4.79 (3.37) | - | - | 0.000 |
+
+- **Optimising does not beat the fixed rule.** On every pair the walk-forward choice earns 0.3-0.7 bp less than
+  23:00 -> 09:53 with no stop. The choices drift towards that rule anyway: USD/JPY settles on 23:00 -> 09:55, no
+  stop, from 2021; EUR/JPY on 23:00 -> 09:50/09:55 with the window stop throughout.
+- **USD/JPY and EUR/JPY carry the effect; AUD/JPY and GBP/JPY do not** (t 1.2-1.6, below the 5% line after the
+  correction). The basket mostly holds USD/JPY and EUR/JPY.
+- **Robustness of the fixed rule (2007-2025):** USD/JPY +4.91 bp at today's costs, +3.67 at double costs (t 3.05),
+  +2.42 at triple (t 2.01); EUR/JPY +4.40, +3.03, +1.66. Gotobi days moved by a weekend or holiday earn as much as
+  those on their date (USD/JPY +5.15 vs +4.78). Losing years: USD/JPY 2007, 2018, 2024; EUR/JPY 2007, 2008, 2010,
+  2018.
+
+**Own account, compounding (nights resampled from the out-of-sample trades, open loss applied each night):**
+
+| Series | Leverage | Median after 3 years | P(wipe-out) | P(10x) | P(100x) | Median max drawdown |
+|---|---|---|---|---|---|---|
+| Basket | 15x | 3.2x | 0.0% | 3% | 0% | 36% |
+| Basket | 20x | 4.3x | 0.0% | 15% | 0% | 46% |
+| Basket | 30x | 6.9x | 2.5% | 38% | 1.3% | 62% |
+| Basket | 40x | 6.3x | 21.6% | 41% | 6.4% | 76% |
+| USD/JPY | 30x | 4.5x | 4.3% | 27% | 1.0% | 75% |
+| EUR/JPY | 40x | 8.3x | 2.7% | 46% | 8.6% | 74% |
+
+The median peaks near 30x for the basket; above that the median falls while the tail grows (60x: median 1.3x,
+46% wiped out, 14% reach 100x). EUR/JPY's numbers are the most flattering and the least trustworthy: it was added
+because it worked.
+
+**Prop programmes (100k; daily and maximum loss checked against open losses):**
+
+| Goal | Setup | Pass | Paid | Mean net | Median net | Median days to first payout | Paid within 3 / 6 months |
+|---|---|---|---|---|---|---|---|
+| Highest median | Basket + Nasdaq overnight, FundedNext 2-step, yen 2x passing / 3x funded | 75% | 70% | +$9,601 | +$8,960 | 257 | 1% / 8% |
+| Highest median, The5ers | same mix, 2x / 3x | 75% | 70% | +$9,209 | +$7,786 | 250 | 1% / 9% |
+| Faster | USD/JPY + EUR/JPY + Nasdaq, The5ers, 2x / 3x | 75% | 68% | +$10,062 | +$7,438 | 167 | 5% / 20% |
+| Highest mean | Basket, FundedNext 2-step, 6x / 6x | 59% | 55% | +$12,590 | +$2,197 | 196 | 6% / 19% |
+| Fastest | USD/JPY + Nasdaq, The5ers, 6x / 2x | 36% | 35% | +$3,127 | -$495 (the fee) | 57 | 21% / 32% |
+
+- **Fast and safe do not go together.** At low leverage three accounts in four pass and the median trader nets
+  about $8-9k, but the first payout takes 8 months. Raising the leverage to pass quickly lifts the mean (the lucky
+  accounts earn more) and drops the median to the lost fee.
+- The tables in 9.6 (I3 with its stop, 2019-2025) gave higher pass rates; these use the 2011-2025 walk-forward
+  trades, which include the weak years 2015 and 2018.
+- **Caveats:** leverage, mixes and firms are chosen on the same data; resampling nights at random ignores runs of
+  bad years like 2018; firm rules change.
+
 ### 9.8 Two more published effects (`scripts/rebalance_lab.py` branch `rebalance` run 41335377851; `scripts/cot_lab.py` C5-C6 branch `cot` run 41335377840)
 
 **Front-running 60/40 rebalancing (Harvey, Mazzoleni & Melone 2025; the paper reports Sharpe 1.1, 1997-2023).**
