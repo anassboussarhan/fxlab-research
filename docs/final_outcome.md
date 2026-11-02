@@ -11,6 +11,9 @@ against the loss limits. Three edge sizes: development (+4.6 bp), 2026 (+2.0 bp)
 
 ## Prop firms (100k; mean and median net per attempt, after the fee)
 
+*Superseded by `docs/prop_best.md` (below): this table is without a stop, and FundedNext at 5x breaks its 3% open-risk
+rule.*
+
 | Goal | Firm, leverage (passing / funded) | Pass | Paid | Mean net, 2026 edge | Mean net, zero edge | Paid within 3 / 6 months | Median days to 1st payout |
 |---|---|---|---|---|---|---|---|
 | Highest | FundedNext Stellar 2-step, 5x / 5x | 33% | 30% | +$3,843 | +$1,969 | 2.8% / 14% | 131 |
@@ -95,6 +98,19 @@ With the 2026 edge size, the median best is about 15x (+27% in 3 years); a lotte
 - **The monthly forward-test job** (`.github/workflows/forward_test.yml`, 07:23 UTC on the 3rd of each month)
   downloads the new month, scores every Gotobi night from 2026-11-05 with both frozen filters and the stops, and
   publishes the tests to the `forward-test` branch (`forward_test/report.md`).
+
+## Best prop setup (added 2026-11-02; `docs/prop_best.md`, `scripts/prop_best.py`)
+
+- **FTMO 2-Step at 5x with the 80 bp stop** (Swing account type, entry moved to 14:06 UTC) has the highest mean per
+  attempt and per dollar of fee and is in the top group for being paid: 45% of attempts paid at the 2026 edge (80%
+  at the 2019-2025 edge), +$6.1k mean net per attempt on 100k (fee EUR 540, refunded with the first reward).
+- Cheapest tickets: The5ers High Stakes Classic 2.5k ($22, 4x) and FundedNext Stellar Lite 5k ($33, 3.5x), 41-42%
+  paid at the 2026 edge, small payouts.
+- No setup is fast (12-14% paid within 6 months at best) and none is a sure win: at the 2026 edge the median
+  attempt loses the fee everywhere.
+- Leverage caps: 5x for 5% daily limits measured from the balance, 3x for 3% daily limits, 3.5x at FundedNext (3%
+  combined open risk), 4x at The5ers (its daily loss starts from the open profit at server midnight, which falls
+  inside the trade).
 
 Not financial advice: research results on historical data with an edge that is small and not confirmed out of
 sample.

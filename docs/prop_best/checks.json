@@ -1,0 +1,57 @@
+{
+ "nights": 685,
+ "midnight": {
+  "3x": {
+   "breaches_old": 0,
+   "breaches_fivers": 0
+  },
+  "3.5x": {
+   "breaches_old": 0,
+   "breaches_fivers": 0
+  },
+  "4x": {
+   "breaches_old": 0,
+   "breaches_fivers": 0
+  },
+  "4.5x": {
+   "breaches_old": 0,
+   "breaches_fivers": 2
+  },
+  "5x": {
+   "breaches_old": 0,
+   "breaches_fivers": 2
+  },
+  "6x": {
+   "breaches_old": 2,
+   "breaches_fivers": 7
+  }
+ },
+ "delay": {
+  "+0 min": {
+   "mean_gross_bp": 5.491672846036354,
+   "diff_bp": 0.0,
+   "t": 0.0
+  },
+  "+3 min": {
+   "mean_gross_bp": 6.273829046050715,
+   "diff_bp": 0.7821562000143605,
+   "t": 2.338939787295349
+  },
+  "+6 min": {
+   "mean_gross_bp": 5.758548212836805,
+   "diff_bp": 0.2668753668004511,
+   "t": 0.7737486906917134
+  },
+  "+10 min": {
+   "mean_gross_bp": 5.7653044215517655,
+   "diff_bp": 0.2736315755154111,
+   "t": 0.6282403850176481
+  },
+  "+15 min": {
+   "mean_gross_bp": 5.724384402232932,
+   "diff_bp": 0.23271155619657843,
+   "t": 0.5019794160904126
+  }
+ },
+ "delay_nights": 685
+}
