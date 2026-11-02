@@ -1,0 +1,94 @@
+name: gotobi-panel
+# scripts/gotobi_panel_lab.py: the Gotobi night on every instrument (one job per instrument, then the tables).
+# ci/GOTOBI_PANEL: PANEL_DATA_RUN (the gotobi-panel-data run whose pd-* artifacts to use).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/GOTOBI_PANEL"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/panel_instruments.json)" >> "$GITHUB_OUTPUT"
+  instrument:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Bars of ${{ matrix.sym }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD REST < ci/GOTOBI_PANEL
+          S=${{ matrix.sym }}
+          mkdir -p dl
+          for R in 40403976401 40567306171; do gh run download $R -p "mm-$S-*" -D dl/mm_$R || true; done
+          gh run download 40946488168 -p "fd-$S-*" -D dl/fd || true
+          gh run download 41332786946 -p "fd2-$S-*" -D dl/fd2 || true
+          [ $S = USDJPY ] && gh run download 40227329900 -p "m1-USDJPY-*" -D dl/uj || true
+          [ $S = EURJPY ] && gh run download 40563102528 -p "dk-EURJPY-*" -D dl/ej || true
+          gh run download $PD -p "pd-$S-*" -D dl/pd || true
+          find dl -name "*.parquet" | head -40
+          python ci/place_m1.py dl data/m1 || true
+          rm -rf dl
+      - run: python -W ignore scripts/gotobi_panel_lab.py --instrument ${{ matrix.sym }} --out out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: nights-${{ matrix.sym }}
+          path: out
+          retention-days: 30
+          if-no-files-found: ignore
+  tables:
+    needs: instrument
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: nights-*
+          path: nights
+          merge-multiple: true
+      - run: set -o pipefail; python -W ignore scripts/gotobi_panel_lab.py --aggregate nights --out out/panel 2>&1 | tee out_lab.txt
+      - name: Publish to the gotobi-panel branch (results and per-night returns, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out && cp out_lab.txt out/ 2>/dev/null || true
+          cp nights/*.csv out/panel/ 2>/dev/null || true
+          cp nights/*.json out/panel/ 2>/dev/null || true
+          cp -r out /tmp/gp
+          git checkout --orphan gp-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p gotobi_panel && cp -r /tmp/gp/* gotobi_panel/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > gotobi_panel/RUN.txt
+          git add -f gotobi_panel
+          git commit -qm "Gotobi panel (run ${{ github.run_id }})"
+          git push -f origin HEAD:gotobi-panel
