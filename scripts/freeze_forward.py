@@ -21,8 +21,10 @@ import pandas as pd
 END = pd.Timestamp("2025-12-31")
 
 
-def load(features, trades):
+def load(features, trades, drop_prefix=""):
     X = pd.read_csv(features, index_col=0, parse_dates=True)
+    if drop_prefix:
+        X = X[[c for c in X.columns if not c.startswith(drop_prefix)]]
     T = pd.read_csv(trades, index_col=0, parse_dates=True)
     X.index, T.index = pd.DatetimeIndex(X.index).normalize(), pd.DatetimeIndex(T.index).normalize()
     y = T.net.reindex(X.index)
@@ -58,8 +60,11 @@ def main():
     ap.add_argument("--trades", required=True)
     ap.add_argument("--out", default="")
     ap.add_argument("--check", default="")
+    ap.add_argument("--version", default="forward-v1")
+    ap.add_argument("--feature-code", default="scripts/gotobi_accuracy_lab.py, function features(), commit b90884b")
+    ap.add_argument("--drop-prefix", default="", help="columns not known at entry (forward-v2: night_)")
     a = ap.parse_args()
-    X, y = load(a.features, a.trades)
+    X, y = load(a.features, a.trades, a.drop_prefix)
     if a.check:
         F = json.load(open(a.check))
         s = score(X, F)
@@ -69,9 +74,9 @@ def main():
     F, p = fit(X, y)
     s = score(X, F)
     assert np.allclose(s.p_win.to_numpy(), p, atol=1e-9), "score() does not reproduce the fit"
-    F.update({"version": "forward-v1", "fitted_on": f"{X.index.min().date()} to {X.index.max().date()}",
+    F.update({"version": a.version, "fitted_on": f"{X.index.min().date()} to {X.index.max().date()}",
               "n_fit": int(len(X)), "target": "basket no-stop net > 0",
-              "feature_code": "scripts/gotobi_accuracy_lab.py, function features(), commit b90884b",
+              "feature_code": a.feature_code,
               "fit_sample_kept": {"n": int(s.keep.sum()), "mean_bp": float(y[s.keep].mean() * 1e4),
                                   "skipped_mean_bp": float(y[~s.keep].mean() * 1e4)}})
     txt = json.dumps(F, indent=1, sort_keys=True)

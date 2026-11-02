@@ -73,5 +73,17 @@ With the 2026 edge size, the median best is about 15x (+27% in 3 years); a lotte
   14 years (2012-2025). It helps the own account (smaller drawdowns) more than a prop challenge (fewer nights reach
   the target more slowly). Not yet tested on any month after 2025 that was not used before.
 
+## Losing nights and the forward test (added 2026-11-02; `docs/untested_batch.md` 9.16, `docs/forward_test_preregistration.md`)
+
+- **What goes with losing nights:** US yields having risen the day or week before (about half those nights lose,
+  vs a third after falling yields, in both periods) and a strong Tokyo session the day before. During the night,
+  losses come from the New York session (79% of the night's variance): falling US yields, falling stocks, a lower
+  Nikkei open. The worst nights are shocks (2008, Brexit, BoJ surprises, Japan's 2024 intervention) that nothing
+  known at entry flagged. Calendar items (months, holidays, Obon, year-end, FOMC nights) do not matter.
+- **Skipping the nights most likely to lose big does not work:** they are also the best nights.
+- **Frozen for the forward test from 2026-11-05:** the trade, the 80 bp stop (100 bp secondary), the winning-night
+  filter forward-v1 (primary) and its 80-feature version forward-v2 (secondary), with verdicts and power stated in
+  advance. First verdict after October 2027.
+
 Not financial advice: research results on historical data with an edge that is small and not confirmed out of
 sample.

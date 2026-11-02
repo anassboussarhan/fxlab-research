@@ -1181,3 +1181,68 @@ low of the fill minute), so CVaR figures are a little smaller than in 9.14.
   target more slowly, and if the filter's gain shrinks with the edge the mean per attempt falls (+$2,747 vs
   +$4,527).
 - The 2026 nights were not used; November 2026 onward is the clean test for the filter and the 80-100 bp stop.
+
+### 9.16 What goes with losing nights (`scripts/gotobi_losses_lab.py`, branch `gotobi-losses`, run 41431532005; results in `docs/gotobi_losses/`)
+
+The same trade, 2007-2018 train / 2019-2025 test, about 90 features known at 23:00 Tokyo plus the night's own
+legs and markets (descriptive). Outcomes: a losing night (net < 0), a big loss (below -1 W, W the recent window
+range, about 45-60 bp), a deep open loss (below -1 W at any time), and the net itself. Benjamini-Hochberg over the
+features on train; "confirmed" = q <= 0.10 on train and the same sign with p <= 0.10 on test.
+
+**Known at entry, confirmed (basket)**
+
+| Feature | Losing nights, top vs bottom tercile, train / test | Mean bp by tercile low / mid / high, train; test |
+|---|---|---|
+| US 10-year yield change the day before | 52% vs 37% / 49% vs 36% | 10.7 / 1.8 / 0.8; 7.2 / 4.8 / 1.8 |
+| US 5-year yield change the day before | 51% vs 39% / 48% vs 37% | |
+| US 10-year yield change over the week before | 55% vs 39% / 47% vs 35% | 11.8 / 3.9 / -3.1; 7.1 / 2.5 / 4.5 |
+| Nikkei 225 previous-day return (on the net, weakly) | 51% vs 37% / 48% vs 41% | 11.9 / 1.6 / -0.4; 8.4 / 3.8 / 1.5 |
+| Distance to the next whole yen above (on the net, weakly) | rho -0.09 / -0.10 | |
+| Previous night's range (deep open loss only) | 19% vs 7% / 20% vs 8% deep open losses | the mean barely changes: it predicts a deeper dip, not a loss |
+
+- **The clearest warning sign is US yields having risen the day or week before:** about half of those nights lose
+  (vs a third after falling yields) and the average gain shrinks to 1-2 bp, in both periods. A strong Tokyo
+  session the day before points the same way. Both are reversals of a move in favour of the dollar that came
+  before the night.
+- **Not confirmed:** 20 other markets (dollar index, gold, oil, copper, Nasdaq, DAX, EUR/USD, AUD/JPY, bitcoin, Hang
+  Seng, KOSPI, ASX, Shanghai; Asian indices were strong on train only), VIX term structure, the yield curve, the
+  pair's London and Tokyo sessions before entry, its realised volatility and position in the day's range, the rate
+  differential, and every calendar item: each month, Golden Week, Obon, year-end, US and Japanese holidays, US
+  daylight time, the Gotobi's rank, the 5th, FOMC nights and intervention periods. Small groups looked different
+  but are not significant after the correction (Obon 22 nights -6.2 bp; year-end 38 nights +0.2 bp; FOMC nights 30
+  nights +15.9 bp; nights within 30 days of a Japanese intervention 44 nights +12.0 bp).
+
+**What a losing night looks like (descriptive, not known at entry)**
+
+- **The New York leg (entry to 21:00 UTC) decides most nights:** it carries 79% of the night's variance and most of
+  the mean (+0.06 / +0.08 W, train / test); on losing nights it averages -0.28 W, on winning nights +0.34 W. The
+  Asia leg (21:00-23:00 UTC) adds little; the fix leg (23:00 UTC to the exit) is 24% of the variance.
+- Losing nights go with US yields falling during the night (59-61% of nights lose when the 10-year falls most, vs
+  32%), the Nikkei opening lower on the Gotobi morning, and for EUR/JPY a falling S&P 500 and rising VIX.
+- **The 25 worst nights are event shocks:** eleven in the 2008-09 crisis (VIX 20-70), the euro-crisis sell-offs of
+  2010 and 2012, Crimea (March 2014), Brexit (2016-06-24), the BoJ's December 2023 comments and the night before
+  its July 2024 hike, and Japan's intervention of 1 May 2024 (New York time); most lost in the New York leg. Two
+  fell within 30 days of an intervention; none was an FOMC night.
+- Losses do not cluster: the longest losing run is 8 nights, below the 11 that random order gives at the 95th
+  percentile (runs test p 0.38). By year, the trade did better when USD/JPY rose over the year (correlation +0.49,
+  19 years) and worse when the USD-JPY rate differential was high (-0.42); losing years 2007, 2008, 2018, 2024.
+- A hedge against the yield move cannot be tested with free data (no intraday Treasury futures); the daily
+  correlation (0.25-0.33) means it could remove at most about a tenth of the variance.
+
+**Models (features known at entry)**
+
+| Model, basket | Test AUC | 2019-2025 kept nights: mean bp, winners | Skipped nights: mean bp | Walk-forward 2012-2025: kept vs skipped bp (gap t); years kept > skipped |
+|---|---|---|---|---|
+| Big-loss model, 80 features (skip the riskiest) | 0.66 | 264: 3.9, 58% | 6.2 | 4.3 vs 7.8 (-1.1); 6 of 14 |
+| Win model, forward-v1's 24 features | 0.58 | 282: 7.5, 63% | -0.7 | 8.1 vs -0.6 (3.8); 13 of 14 |
+| **Win model, 80 features (forward-v2)** | **0.61** | 197: 11.5, 67% | -1.1 | 8.7 vs -0.6 (4.1); 14 of 14 |
+
+- **Predicting big losses does not help: the nights most likely to lose big are also the best nights.** The model
+  finds volatile nights (USD/JPY AUC 0.69), and skipping them gives up more gain than loss.
+- **The extended win model passed the forward-v2 rule set before the run, narrowly** (walk-forward gap 9.3 vs 9.2
+  bp, test AUC 0.61 vs 0.58; walk-forward AUC 0.58 vs 0.59 for forward-v1's features). It is frozen as forward-v2
+  (`results/frozen_forward_v2.json`) and tested next to forward-v1 from November 2026
+  (`docs/forward_test_preregistration.md`). Its largest weights: distance below the 4-week high -0.39, Nikkei
+  previous day -0.35, S&P 500 1-week -0.27, VIX -0.25, speculators' yen positioning -0.24, distance to the next
+  whole yen above -0.22, 10-year yield 1-week change -0.21, month-end -0.20; AUD/JPY 1-week +0.41, 4-week return
+  +0.24. On 2019-2025 it skipped more than half the nights for about the same total (5.3 bp a Gotobi day vs 4.8).

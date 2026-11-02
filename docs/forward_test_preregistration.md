@@ -44,3 +44,16 @@ against it.
   the development numbers on 2025 nights (dry run) before any forward night is evaluated.
 - A second filter (forward-v2) may be frozen before 2026-11-04 14:00 UTC from the losing-night analysis of
   `scripts/gotobi_losses_lab.py`; it will be tested alongside forward-v1, never in its place.
+
+## Addendum (2026-11-02, still before the first forward night): forward-v2
+
+The losing-night lab (run 41431532005) applied its pre-set rule: the extended win model qualifies as forward-v2 when
+its walk-forward kept-minus-skipped gap (2012-2025) and its 2019-2025 AUC both beat forward-v1's (+9.2 bp, 0.58).
+It did, narrowly (+9.3 bp, 0.61; in the same run forward-v1's features gave +8.8 bp and 0.58, and the walk-forward
+AUCs are 0.58 vs 0.59), so it is frozen and tested as a secondary filter:
+
+| ID | Rule |
+|---|---|
+| FV2 | `results/frozen_forward_v2.json` (sha256 `27e57a992a21994e90d8ee0f911d966d5e9840c08780cae7c98b77f60e677835`): the same fitting on all 1,067 development nights with 80 features known at entry (`features()` of `scripts/gotobi_accuracy_lab.py` at b90884b joined with `more_features()` of `scripts/gotobi_losses_lab.py` at b82707d, columns starting `night_` excluded); trade the night when the predicted probability of a win is above 0.4832 |
+
+FT5 (secondary): FT1 for forward-v2, with the same verdicts. FT1 (forward-v1) stays the primary test.
