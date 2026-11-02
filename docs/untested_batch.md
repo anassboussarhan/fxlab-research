@@ -1368,6 +1368,7 @@ bond futures follow when their Dukascopy download finishes (run 41447353092, thr
   negative alpha: its Gotobi return is the basket's yen move at a higher cost.
 - **No wider basket beats the current one on 2007-2018:** USD/JPY + EUR/JPY t 2.70; adding CHF/JPY and short gold
   (equal or inverse-variance weights) t 2.00-2.25; adding only the low-correlation carrier (gold) t 2.07.
-- **No hedge helps:** shorting a correlated yen cross removes the gain (t 2.7 -> -1.7 to +1.4); the USD pairs and
+- **No hedge helps:** shorting a correlated yen cross removes the gain (t 2.7 -> -1.7 to +1.1), EUR/CHF halves it
+  (t 1.4); the USD pairs and
   GBP/CHF most correlated with the basket (-0.3 to -0.4) lower its volatility a little and its mean a little more
   (t 2.7 -> 2.3-2.7).
