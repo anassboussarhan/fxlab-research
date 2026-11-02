@@ -1338,3 +1338,36 @@ difference with no stop, train / test.
   sells the dip.
 - **Waiting for a correlated pair to confirm the drop does not help:** confirmation by AUD/JPY was worse on
   2007-2018 and only slightly better on 2019-2025; requiring both legs to fall was worse in both.
+
+### 9.19 The Gotobi night on every instrument: 2007-2018 screen (`scripts/gotobi_panel_lab.py`; results in `docs/gotobi_panel/train/`)
+
+34 instruments with 2007-2018 data from the FX-Data mirror of Dukascopy ticks: the 7 yen pairs, 25 other FX pairs
+(majors, crosses, Scandinavian) and gold and silver. The same window (23:00 -> 09:53 Tokyo) on Gotobi nights and on
+every other Tuesday-Friday (control nights); effect = Gotobi minus control, gross; net = after the instrument's own
+spread and costs, in the effect's direction. Rules fixed in the lab's docstring before the run. The 2019-2025 check,
+indices (Nikkei, S&P 500, Nasdaq, Dow, Hang Seng, ASX, DAX, China A50), exotic yen pairs, USD/CNH, oil, copper and
+bond futures follow when their Dukascopy download finishes (run 41447353092, throttled to about 2 files a second).
+
+| Instrument | Gotobi minus control, bp (t) | Net a Gotobi night in that direction, bp (t) | Spread at entry, bp | Correlation with the USD/JPY + EUR/JPY basket |
+|---|---|---|---|---|
+| USD/JPY | +8.4 (4.34) | +5.07 (3.12) | 0.8 | 0.89 |
+| CHF/JPY | +7.9 (3.97) | +2.50 (1.53) | 1.9 | 0.82 |
+| EUR/JPY | +7.9 (3.27) | +4.08 (2.01) | 1.1 | 0.93 |
+| CAD/JPY | +6.2 (2.17) | -0.41 | 2.2 | 0.83 |
+| AUD/JPY, NZD/JPY, GBP/JPY | +4.6 to +6.8 (1.6-1.9) | -1.6 to +1.2 | 1.5-3.0 | 0.63-0.85 |
+| Gold (XAU/USD), short | -8.7 (-2.31) | +1.17 (0.38) | 2.2 | 0.33 |
+| Silver (XAG/USD), short | -15.1 (-2.38) | -19.7 (spread 17 bp) | 17.5 | 0.08 |
+| GBP/USD, short; GBP/CHF, short; EUR/GBP, long | -4.0, -3.4, +3.0 (2.0-2.3) | -2.6 to 0.0 | 0.8-1.9 | -0.31 to +0.07 |
+| The other 22 FX pairs (EUR/USD, USD/CHF, USD/CAD, AUD/USD, NZD/USD, crosses, SEK, NOK) | -3.7 to +3.2 (all below 1.4) | all negative | | -0.50 to +0.29 |
+
+- **The Gotobi move belongs to the yen, not the dollar.** Every yen pair rises on Gotobi nights (+4.6 to +8.4 bp
+  over control nights); the dollar does not rise against the euro, franc, Canadian or Australian dollar. The only
+  other pattern is a weaker pound (GBP/USD, GBP/CHF down, EUR/GBP up, t 2.0-2.3), and gold and silver fall (t -2.3).
+- **After costs only USD/JPY and EUR/JPY carry it well** (+5.1 and +4.1 bp a night); CHF/JPY keeps +2.5 bp; the
+  other crosses and the metals lose it to their wider spreads. Measured against the basket, every cross has a
+  negative alpha: its Gotobi return is the basket's yen move at a higher cost.
+- **No wider basket beats the current one on 2007-2018:** USD/JPY + EUR/JPY t 2.70; adding CHF/JPY and short gold
+  (equal or inverse-variance weights) t 2.00-2.25; adding only the low-correlation carrier (gold) t 2.07.
+- **No hedge helps:** shorting a correlated yen cross removes the gain (t 2.7 -> -1.7 to +1.4); the USD pairs and
+  GBP/CHF most correlated with the basket (-0.3 to -0.4) lower its volatility a little and its mean a little more
+  (t 2.7 -> 2.3-2.7).
