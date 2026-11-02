@@ -149,3 +149,23 @@ paid, if attempts are independent):
 - Comparisons: https://velotrade.com/blog/prop-firm-comparison ; https://velotrade.com/blog/cheapest-prop-firm ;
   https://www.quantvps.com/blog/forex-prop-firms-that-pay ; https://brokeranalysis.com/prop-trading-firms/compare-challenges/ ;
   https://forextester.com/blog/cheapest-prop-firm-challenge/
+
+## Second search (2026-11-02): Maven, Blueberry and others
+
+**Added to the simulation** (`scripts/prop_best.py`):
+- **Maven 2-Step:** 8% / 5% targets; 4% daily loss, measured from the higher of balance and equity at 00:00 UTC (inside the trade), so leverage is capped at 3.5x; 8% static max loss; 80% split; payouts every 10 business days; withdrawals capped at $10k per 30 days. Prices with the 10% code: 5k $19.80, 50k $198, 100k $396.
+- **Blueberry Prime 2-Step:** 8% / 6% targets; 4% daily loss; 10% static max loss; 5 trading days a phase; 80% split; 14-day payout cycle; fee refunded with the 1st payout. 10k $90, 100k $650.
+
+| Programme, leverage | Best size by mean per fee | Paid at the 2026 edge | Mean per fee: 2026 / 2019-25 |
+|---|---|---|---|
+| Maven 2-Step, 3.5x | 50k ($198) | 33% | 8.8 / 19.7 |
+| Blueberry Prime 2-Step, 4x | 200k ($1,170) | 33% | 7.0 / 15.3 |
+
+- Neither beats FTMO 2-Step at 5x (9.8 / 19.6).
+- Maven 5k ($19.80) is the most account per dollar: 33% paid, mean +$175.
+- FundedNext Stellar Lite 5k ($32.99, 42% paid) still has the best chance of being paid among the tickets under $35.
+
+**Read but not simulated:**
+- **BrightFunded:** no prices found. Its daily loss is measured from the higher of balance and equity at the 23:30 CET rollover, which falls inside the trade. The first payout comes 30 days after funding.
+- **FundingPips, Goat, Sure Leverage, FundYourFX:** floating-loss rules, mandatory stop-loss timing, or consistency rules on funded accounts.
+- **Instant-funding accounts:** trailing drawdowns of 3-4% and 2% daily limits, too tight for an 80 bp stop at any useful leverage.

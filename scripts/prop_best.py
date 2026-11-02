@@ -22,6 +22,11 @@ LEVERAGE CAPS (x the account, both pairs together; with the 80 bp stop a stop-ou
   trade); The5ers 4x, because The5ers measures the daily loss from the higher of balance and equity at MT5 server
   midnight (17:00 New York), which falls inside the trade: on 2007-2018 nights that turns 0 breaches at 5x into 2
   (scripts/prop_checks.py), while FTMO and FundedNext measure from the balance.
+  Added 2026-11-02 (second search): Maven 2-Step (8% / 5%, daily 4% from the higher of balance and equity at
+  00:00 UTC, which falls inside the trade, so capped at 3.5x; 8% static; 80%; every 10 business days; refund at the
+  3rd withdrawal; withdrawals capped at $10,000 a 30 days; prices with the 10% code listed by propfirmsfinder) and
+  Blueberry Prime 2-Step (8% / 6%, daily 4%, 10% static, 5 days, 80%, 14-day cycle, refund with the 1st payout;
+  2-minute news rule).
 SCENARIOS for the size of the edge: "2019-2025" (the basket's own nights, +4.8 bp a night with the stop), "2026"
   (every night shifted down by the same amount so the mean is the 2026 no-stop mean, +2.04 bp), "zero" (mean 0).
 Usage: python scripts/prop_best.py --trades docs/gotobi_losses/trades_basket_stop_80_bp.csv --out DIR [--n 4000]"""
@@ -66,6 +71,13 @@ P = {
                                         trailing=False, min_days=0, profit_day=0.005, min_profit_days=3, best_day=None,
                                         split=0.80, refund_after=1, first_pay=10, pay_every=10, max_lev=4),
 }
+P["Maven 2-Step"] = dict(sizes={2: 17.10, 5: 19.80, 10: 39.60, 20: 79.20, 50: 198.00, 100: 396.00}, targets=(0.08, 0.05),
+                         daily=0.04, maxloss=0.08, trailing=False, min_days=0, profit_day=0.0, min_profit_days=0,
+                         best_day=None, split=0.80, refund_after=3, first_pay=10, pay_every=10, max_lev=3.5)
+P["Blueberry Prime 2-Step"] = dict(sizes={2.5: 30, 5: 55, 10: 90, 25: 165, 50: 325, 100: 650, 200: 1170},
+                                   targets=(0.08, 0.06), daily=0.04, maxloss=0.10, trailing=False, min_days=5,
+                                   profit_day=0.0, min_profit_days=0, best_day=None, split=0.80, refund_after=1,
+                                   first_pay=10, pay_every=10, max_lev=4)
 LEV = (2, 3, 3.5, 4, 5, 6)
 
 
