@@ -1,0 +1,46 @@
+# Forward test from November 2026: pre-registration
+
+Written and committed on 2026-11-02, before the first Gotobi night after the 2026 holdout (2026-11-05; entry
+2026-11-04 23:00 Tokyo = 14:00 UTC). No price, positioning or market data after 2026-10-31 had been downloaded or
+read, and the frozen model below was fitted on development nights only (2007-2025). Nothing is re-tuned after
+this commit. A coding or data error found later is fixed and reported next to the first result, never in its place.
+
+## Frozen rules
+
+| ID | Rule | Development evidence |
+|---|---|---|
+| T | **The trade:** long USD/JPY and EUR/JPY, equal weight, from 23:00 Tokyo the evening before to 09:53 Tokyo on Gotobi days (5th, 10th, 15th, 20th, 25th, month end; the previous Tokyo business day when that is a weekend or a Japanese holiday); no trade when the entry has no quote within 10 minutes (Gotobi Mondays). Costs, fills and swap as in development | +4.6 bp a night, 2007-2025; +2.0 bp in the 2026 holdout |
+| S1 | **Disaster stop, 80 bp** below each pair's entry (resting order; a gap fills at the next price) | the 2007-2018 pick for the worst case; 2019-2025 +4.96 bp vs +4.77 without, worst -81 vs -141 bp (`docs/untested_batch.md` 9.15) |
+| S2 | Disaster stop, 100 bp (secondary) | 2007-2018 / 2019-2025 +4.68 / +4.71 bp |
+| FV1 | **Winning-night filter forward-v1:** `results/frozen_forward_v1.json` (sha256 `b5b5c96a7e8f0aca123eac17074f69f687dece2fa9def46974ac70e6e771f8a7`), logistic regression fitted on all 1,067 development nights; trade the night only when its predicted probability of a win is above 0.5126 (the lowest-tercile cut of the fit). Features computed exactly as `features()` in `scripts/gotobi_accuracy_lab.py` at commit b90884b (USD/JPY M1 bars, Yahoo ^VIX, ^GSPC, ^N225, ^TNX, CFTC legacy JPY reports); scored with `score()` in `scripts/freeze_forward.py` | 2019-2025 (model fitted on 2007-2018): kept 63% winners, +7.5 bp vs +4.8 all; walk-forward 2012-2025: kept +8.4 bp, skipped -0.8 bp, kept above skipped in 13 of 14 years |
+
+## Periods
+
+- **First look (primary):** Gotobi nights 2026-11-05 to 2027-10-29 (about 53 traded nights).
+- **Second look:** to 2028-10-31. Interim results may be reported for information; they change nothing.
+
+## Tests and verdicts, decided now
+
+| Test | Statistic | Confirmed | Consistent | Not supported | Contradicted |
+|---|---|---|---|---|---|
+| **FT1 (primary): the filter** | mean no-stop net of kept nights minus skipped nights, Welch t | > 0 and t >= 1.645 | > 0 | <= 0 | t <= -1.645 |
+| FT2: kept nights | mean no-stop net of kept nights, t | t >= 1.645 | > 0 | <= 0 | |
+| FT3: the 80 bp stop | paired difference S1 - no stop, all nights | "keeps the gain" if >= -0.5 bp a night; "cuts the loss" if both the worst trade and CVaR5 of the open loss are smaller | | | |
+| FT4: the trade itself | mean no-stop net, all nights, t | t >= 1.645 | > 0 | <= 0 | below +4.6 bp with t of the difference <= -1.645 |
+
+S2 is reported next to S1 with the same statistics, as information.
+
+## Power, stated before the run
+
+With about 35 kept and 18 skipped nights in the first year, a per-night sd of 30-35 bp and the walk-forward gap
+(+8.4 vs -0.8 bp), the expected FT1 t is about 1.0 (a 25-30% chance of "confirmed"); after two years about 1.5
+(about 45%). "Consistent" is the most likely outcome even if the filter works; a contradiction is what would count
+against it.
+
+## Procedure
+
+- Data: Dukascopy M1 for USD/JPY and EUR/JPY (downloaded in CI after each month), Yahoo daily closes, CFTC
+  reports. The evaluation code is written later, uses the frozen JSON without refitting, and must first reproduce
+  the development numbers on 2025 nights (dry run) before any forward night is evaluated.
+- A second filter (forward-v2) may be frozen before 2026-11-04 14:00 UTC from the losing-night analysis of
+  `scripts/gotobi_losses_lab.py`; it will be tested alongside forward-v1, never in its place.
