@@ -1,0 +1,73 @@
+{
+ "nights": 58,
+ "first": "2025-01-03",
+ "last": "2025-12-31",
+ "FT1 forward-v1 filter": {
+  "kept": 30,
+  "skipped": 28,
+  "kept_mean_bp": 16.314976942681188,
+  "skipped_mean_bp": -5.01392077511691,
+  "difference_bp": 21.3288977177981,
+  "t": 2.395018349845878,
+  "verdict": "confirmed"
+ },
+ "FT5 forward-v2 filter": {
+  "kept": 36,
+  "skipped": 22,
+  "kept_mean_bp": 14.795318444000863,
+  "skipped_mean_bp": -8.344178973039492,
+  "difference_bp": 23.139497417040353,
+  "t": 2.7110821081728815,
+  "verdict": "confirmed"
+ },
+ "FT2 kept nights (v1)": {
+  "n": 30,
+  "mean_bp": 16.314976942681188,
+  "t": 2.2528262473819636,
+  "verdict": "confirmed"
+ },
+ "FT3 stop 80 bp": {
+  "mean_bp": 6.013223443589702,
+  "paired_difference_bp": -0.005044256016543393,
+  "keeps_the_gain": true,
+  "worst_bp": -80.18775482633632,
+  "worst_no_stop_bp": -84.76691193296524,
+  "cvar5_open_loss_bp": -70.33124483160587,
+  "cvar5_open_loss_no_stop_bp": -73.84037048865032,
+  "cuts_the_loss": true
+ },
+ "S2 stop 100 bp": {
+  "mean_bp": 6.018267699606245,
+  "paired_difference_bp": 0.0,
+  "keeps_the_gain": true,
+  "worst_bp": -84.76691193296524,
+  "worst_no_stop_bp": -84.76691193296524,
+  "cvar5_open_loss_bp": -73.84037048865032,
+  "cvar5_open_loss_no_stop_bp": -73.84037048865032,
+  "cuts_the_loss": false
+ },
+ "FT4 the trade": {
+  "mean_bp": 6.018267699606245,
+  "t": 1.2849324897776202,
+  "winners": 0.5689655172413793,
+  "verdict": "consistent"
+ },
+ "mode": "dry 2025",
+ "last_bar": "2025-12-31 01:59:00+00:00",
+ "errors": {},
+ "frozen": {
+  "v1": "forward-v1",
+  "v2": "forward-v2"
+ },
+ "dry_check": {
+  "trades_max_abs_diff_bp": 9.805489753489383e-13,
+  "trades_compared": 58,
+  "stop80_max_abs_diff_bp": 9.805489753489383e-13,
+  "v1_features_differing": {},
+  "v1_p_max_abs_diff": 2.1327384303049257e-13,
+  "v1_same_decision_share": 1.0,
+  "v2_features_differing": {},
+  "v2_p_max_abs_diff": 1.0008660566995786e-13,
+  "v2_same_decision_share": 1.0
+ }
+}
