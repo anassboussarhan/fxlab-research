@@ -58,5 +58,20 @@ With the 2026 edge size, the median best is about 15x (+27% in 3 years); a lotte
   (daily-limit failures 10% instead of 33%) but the target takes longer and the mean per attempt is lower
   (+$2,248 at 3x / 3x vs +$4,908 at 5x / 5x, 2026 edge). Risking 1% a trade means 1x.
 
+## Accuracy (added 2026-11-02; `docs/untested_batch.md` 9.15, `docs/gotobi_accuracy/`)
+
+- **About 60 more exits and entries tested; none beats holding to the fix.** Targets, half-profits and tight stops
+  raise the share of winners (to 60-66%) only by cutting the mean; re-entries, scale-ins and dip entries lower it.
+- **The disaster stop is confirmed in development at 70-100 bp** (80 bp was the 2007-2018 pick for the worst
+  case: worst trade -97 / -81 bp, mean 4.40 / 4.96 bp vs 4.37 / 4.77 without, 2007-2018 / 2019-2025).
+- **Why:** trades that fall below about -0.75 W end as losers 84-91% of the time, but held they lose about as much
+  as the stop: from there the rest of the night is a coin flip. The gain comes from nights that stay near flat.
+- **The one way found to raise accuracy without cutting the gain is to skip some nights:** a logistic model of
+  winning nights (fixed before the run; 24 features known at entry, led by the Nikkei's previous-day return)
+  skipping the third it rates lowest gave, on 2019-2025, 63% winners and +7.5 bp a trade (vs 58%, +4.8 bp), the
+  same total per Gotobi day on two-thirds of the nights; refitted yearly, kept nights beat skipped nights in 13 of
+  14 years (2012-2025). It helps the own account (smaller drawdowns) more than a prop challenge (fewer nights reach
+  the target more slowly). Not yet tested on any month after 2025 that was not used before.
+
 Not financial advice: research results on historical data with an edge that is small and not confirmed out of
 sample.

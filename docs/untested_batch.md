@@ -1067,3 +1067,117 @@ every exit by the same amount, which flatters stop 0.75 W, whose real 2026 mean 
   (2026 edge, 40x: 41% vs 69% wiped out). The best median is still near 15x (1.36x in 3 years at the 2026 edge).
 - The 1-step programmes (3% daily limit) are the exception: only a tight stop gets through them (FundedNext
   1-step 5x / 3x, pass 30% vs 16%), and the tight stop is the exit that failed in 2026.
+
+### 9.15 Harder: 60 more exits and entries, what goes with winning nights, a winning-night filter (`scripts/gotobi_accuracy_lab.py`, branch `gotobi-accuracy`, run 41427843322; `scripts/gotobi_filter_wf.py`; results in `docs/gotobi_accuracy/`)
+
+Protocol as in 9.14 (chosen on 2007-2018, reported on 2019-2025; 2026 not loaded), with the floor for "keeps the
+gain" raised to 90% of the no-stop mean per Gotobi day, and every rule compared with no stop on the same nights
+(paired t, Benjamini-Hochberg on train). **Data caveat:** the 2007-2018 M1 bars have no 09:00-10:00 Tokyo hour (the
+known hour-0 gap, `docs/flows_lab.md`), so in train the exit is the 10:00 bar and nothing can trigger in that hour;
+the 2019-2025 bars have it (exit 09:53). The open loss of a stopped trade is now marked at its fill (9.14 used the
+low of the fill minute), so CVaR figures are a little smaller than in 9.14.
+
+**Exits and entries, USD/JPY + EUR/JPY basket (mean per Gotobi day, train / test)**
+
+| Rule | Mean bp | vs no stop, t (train / test) | Winners test | Worst trade bp | CVaR5 open loss bp |
+|---|---|---|---|---|---|
+| No stop | 4.37 / 4.77 | | 58% | -268 / -141 | -139 / -93 |
+| Stop 70 / 80 / 90 / 100 bp | 4.06-4.68 / 4.71-5.00 | -0.4 to +0.8 / -0.4 to +0.9 | 58% | -76 to -107 / -71 to -109 | -71 to -94 / -65 to -77 |
+| **Stop 80 bp (pick P3, worst case)** | **4.40 / 4.96** | +0.1 / +0.9 | 58% | **-97 / -81** | -80 / -70 |
+| Stop 1.25-2.0 W | 4.28-4.58 / 4.75-4.89 | -0.4 to +0.6 / -0.1 to +0.7 | 58% | -141 to -200 / -85 to -101 | -94 to -113 / -62 to -74 |
+| Stop 0.75 W (pick P1 again; failed in 2026) | 4.36 / 4.10 | 0.0 / -1.1 | 55% | -133 / -56 | -72 / -47 |
+| Stop 0.5 W | 3.02 / 3.00 | -1.4 / -2.2 | 50% | -107 / -38 | -57 / -33 |
+| Stops on a 15-minute close (0.75-2 W, 60, 100 bp) | 4.18-4.57 / 4.07-5.08 | -0.3 to +0.6 / -1.3 to +1.1 | 56-58% | worse than the same stop on the low | |
+| Stop only from 03:00 / 05:00, or only until 05:00 / 07:00 (1.0, 1.5 W) | 4.21-4.74 / 4.50-4.90 | -0.3 to +1.1 / -0.8 to +0.7 | 57-58% | | |
+| Stop, then re-enter at the entry price or at 08:00 | 1.02-4.13 / 2.45-4.47 | -3.3 to -0.4 / -3.6 to -0.7 | 51-57% | | |
+| Target 0.5-2.0 W, 15-40 bp | -0.65-4.47 / 1.11-4.86 | -4.1 to +0.2 / -3.8 to +0.6 | 59-66% | as no stop | |
+| **Target 0.75 W (pick P2, accuracy)** | 3.99 / 3.40 | -0.5 / **-2.4** | **61%** | -268 / -141 | -128 / -93 |
+| Target from 08:00 (0.25, 0.5, 1.0 W) | -5.40-3.00 / -2.75-3.57 | -10.4 to -2.6 / -9.4 to -3.2 | 58-59% | | |
+| Half at +0.5 / +1.0 W (with or without a 100 bp stop) | 3.27-4.56 / 3.63-4.39 | -2.4 to +0.4 / -2.8 to -1.6 | 59-63% | | |
+| Stop 100 bp + target 1.0 / 1.5 / 2.0 W | 4.44-4.79 / 3.95-4.80 | +0.1 to +0.7 / -1.8 to +0.1 | 59% | -107 / -109 | |
+| Scale-in: half more 0.5 or 1.0 W lower | 2.17-2.82 / 2.33-2.91 | -2.8 to -1.9 / -3.5 to -3.1 | 59-63% | | |
+| Dip entry only (limit 0.25 / 0.5 W below) | 1.36 / 0.67 train; 2.06 / 0.99 test | -2.6, -2.7 / -2.7, -3.1 | 41% / 24% | | |
+
+- **No exit or entry rule beats holding.** Among about 60 rules, none improves the mean on the same nights (best
+  t +1.1); the ones that raise the share of winners (targets, half at a target) lower the mean significantly.
+- **A disaster stop of 70-100 bp (or 1.25-2 W) is free in development:** same mean in both periods, worst trade cut
+  from -268 / -141 to about -100 bp. The 80 bp stop is the train pick for the worst case and held on 2019-2025.
+- **Buying the dip is wrong for this trade:** nights that fall 0.25-0.5 W below the entry keep losing on average
+  (the dip entries win 24-41% of the time), and adding to the position on a dip cuts the mean by half.
+
+**Why a stop cannot add gain (B1, B2)**
+
+| Stop | Trades it closes (train / test) | Of those, would have won if held | Stopped minus held, bp per stopped trade (t), train / test |
+|---|---|---|---|
+| 0.5 W | 319 / 197 | 29% / 34% | -2.9 (-1.4) / -3.8 (-2.2) |
+| 0.75 W | 187 / 117 | 16% / 15% | 0.0 (0.0) / -2.4 (-1.1) |
+| 1.0 W | 116 / 71 | 9% / 13% | -0.7 (-0.2) / -2.4 (-0.8) |
+| 1.5 W | 44 / 23 | 7% / 4% | +3.3 (0.6) / -0.3 (-0.1) |
+| 100 bp | 35 / 8 | 6% / 12% | +6.1 (0.8) / -3.1 (-0.4) |
+| Target 0.5 W (taking profit) | 347 / 217 hit | 78% / 82% | -4.4 (-2.4) / -4.2 (-2.9) |
+
+- Trades that fall below about -0.75 W rarely come back to a win (84-91% end as losers), but **held, they lose about
+  as much as the stop does**: from that point the rest of the night is a coin flip. So a stop there cuts the tail
+  without changing the mean, and a tighter one (0.5 W) stops trades that still have a gain ahead.
+- **Where the gain is (rest of the night after each hour, basket 2019-2025):** trades standing between -0.5 W and 0
+  at 01:00-08:00 still gain +3.2 to +6.4 bp to the exit (t 2.2-3.9); those below -0.5 W gain about nothing (-7 to
+  +0 bp, not significant); those above +1 W at 07:00-09:00 give back 3-6 bp (t -0.7 to -1.5, train mixed).
+- **Taking profit early always costs:** trades that reach +0.5 W would have won anyway 80% of the time, and a
+  target there gives up 4 bp a hit. Selling from 08:00 gives up the fix itself (t -2.6 to -10).
+- No regime (tercile of W / its median, of the VIX) where a stop helps in both periods.
+
+**What goes with winning nights (26 features known at 23:00 Tokyo; Spearman with the net return)**
+
+| Feature (basket; USD/JPY features) | Train rho (q) | Test rho (p) | Winners, top vs bottom tercile, train / test |
+|---|---|---|---|
+| **Nikkei 225 previous-day return** | **-0.19 (0.000)** | **-0.09 (0.08)**; USD/JPY alone -0.11 (0.03) | 49% vs 63% / 52% vs 60% |
+| US 10-year yield, 1-week change | -0.18 (0.000) | -0.07 (0.17) | 45% vs 61% / 53% vs 65% |
+| Pair's return over the previous 24 h | -0.12 (0.009) | -0.04 (0.50) | 49% vs 59% / 59% vs 56% |
+| VIX, 1-week change | +0.11 (0.014) | -0.01 (0.84) | |
+| S&P 500 previous-day return | -0.11 (0.014) | -0.04 (0.47) | |
+| Pair's return over the previous week | -0.11 (0.016) | 0.00 (0.99) | |
+| March (Japanese fiscal year-end) | +0.09 (0.064) | +0.04 (0.47) | |
+| W / its 60-day median (not significant on train) | +0.05 (0.31) | +0.14 (0.007) | 59% vs 53% / 59% vs 55% |
+| Month-end, 10th, 25th, moved, weekday, quarter-end, days off, spread, previous trade, COT yen positioning, 4-week trend, 200-day mean, previous night's range | all q >= 0.12 | | |
+
+- **One feature holds out of sample, weakly: the Nikkei's previous-day return.** After a day when Tokyo stocks fell,
+  the Gotobi night wins more often (60% vs 52% in the top Nikkei tercile, 2019-2025). The rest (yields, the pair's
+  own recent move, S&P, VIX change) were strong on 2007-2018 and faded to nothing.
+- **Calendar details do not matter:** month-end, the 10th, the 25th, moved days, weekday, March and holidays give
+  no reliable difference.
+
+**A winning-night filter (the pre-registered logistic model)**
+
+| Series, 2019-2025 | Nights | Mean bp | t | Winners | Per Gotobi day bp |
+|---|---|---|---|---|---|
+| Basket, all nights | 423 | 4.77 | 3.23 | 58% | 4.77 |
+| **Basket, skip the third the model rates lowest** | 282 | **7.52** | **3.95** | **63%** | 5.01 |
+| The skipped third | 141 | -0.74 | -0.34 | 49% | |
+| Gradient boosting instead (skip lowest third) | 323 | 6.26 | 3.51 | 61% | 4.78 |
+| USD/JPY / EUR/JPY alone, logistic, test AUC | | | | | 0.55 / 0.51 (EUR/JPY: no gain) |
+
+- Test AUC 0.58 (basket; the model uses the USD/JPY features, so nights with only EUR/JPY data get the training
+  medians). **Walk-forward, same specification refitted each year (2012-2025, not pre-registered):**
+  kept 500 of 784 nights, +8.4 bp (t 5.65), 62% winners; skipped nights -0.8 bp; kept beat skipped in 13 of 14
+  years (not 2019). A smaller model with only the train-significant features did worse on 2019-2025.
+- The model's largest weights (standardised): Nikkei previous day -0.33; distance below the 4-week high -0.29 (the
+  further below, the better); 4-week return +0.28; W / median +0.20; speculators' yen positioning -0.20; distance
+  from the 200-day mean -0.17; 10-year yield 1-week change -0.17. The trade does better after a weak Tokyo session,
+  with USD/JPY off its recent high and the overnight range wide.
+- **This is the one tested way to raise accuracy without cutting the gain:** 58% -> 63% winners and a 60% higher
+  mean per trade, for the same total per Gotobi day on two-thirds of the nights (less time in the market).
+
+**Effect on the simulations** (2012-2025 trades, 100 bp stop, walk-forward filter; `docs/gotobi_accuracy/filter_*.csv`)
+
+| | FundedNext 2-step, best setup: pass, mean net | Same, 5x / 5x, 2026 edge | Own account 30x, 3 years: median / P(wipe-out), observed | Same, 2026 edge |
+|---|---|---|---|---|
+| All nights | 5x / 5x: 60%, +$8,853 | 42%, +$4,527 | 6.1x / 0.4% | 1.29x / 5.4% |
+| Filtered | 3x / 5x: 70%, +$9,270 (median +$8,103) | 47%, +$4,866 | 7.9x / 0% | 3.1x / 0.2% |
+| Filtered, its gain shrinking with the edge | | 35%, +$2,747 | | 1.71x / 0.9% |
+
+- **For an own account the filter helps** in every scenario: the same total in fewer nights means smaller
+  drawdowns (median worst drawdown at 30x 49% vs 61%).
+- **For a prop challenge it helps only if its gain holds in full.** With fewer nights the account reaches the
+  target more slowly, and if the filter's gain shrinks with the edge the mean per attempt falls (+$2,747 vs
+  +$4,527).
+- The 2026 nights were not used; November 2026 onward is the clean test for the filter and the 80-100 bp stop.
