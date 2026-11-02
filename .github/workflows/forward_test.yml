@@ -1,0 +1,133 @@
+name: forward-test
+# Monthly evaluation of the frozen forward test (docs/forward_test_preregistration.md, scripts/forward_eval.py):
+# downloads the USD/JPY and EUR/JPY M1 months not yet held, scores every Gotobi night from 2026-11-05 with the
+# frozen filters and publishes the cumulative tests to the forward-test branch (results only, no price data).
+# The downloaded months are kept as the artifact fwd-store, renewed every run. The 2026 holdout months serve only as
+# indicator history; the unlock phrase is the one set on Anas's instruction of 2026-11-01 (holdout_2026.yml).
+on:
+  schedule:
+    - cron: "23 7 3 * *"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FORWARD_TEST"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      matrix: ${{ steps.m.outputs.matrix }}
+      n: ${{ steps.m.outputs.n }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p store
+          PREV=$(gh run list --workflow forward_test.yml --status success --limit 1 --json databaseId -q '.[0].databaseId' 2>/dev/null || true)
+          if [ -n "$PREV" ]; then gh run download "$PREV" -n fwd-store -D store || true; fi
+          for p in USDJPY EURJPY; do for M in 1 2 3 4 5 6 7 8 9 10; do
+            f="store/${p}_2026_$(printf %02d $M).parquet"
+            if [ ! -f "$f" ]; then
+              gh run download 41347184098 -n "h26-$p-$M" -D "seed/$p$M" 2>/dev/null && cp seed/$p$M/*.parquet store/ 2>/dev/null || true
+            fi
+          done; done
+          ls -la store
+          python ci/forward_months.py store > m.json
+          cat m.json
+          echo "matrix=$(cat m.json)" >> "$GITHUB_OUTPUT"
+          echo "n=$(python -c 'import json; print(len(json.load(open("m.json"))["include"]))')" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fwd-base
+          path: store
+          retention-days: 7
+          if-no-files-found: ignore
+  download:
+    needs: prepare
+    if: needs.prepare.outputs.n != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix: ${{ fromJSON(needs.prepare.outputs.matrix) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow
+      - name: Download ${{ matrix.pair }} ${{ matrix.ym }}
+        run: |
+          S="${{ matrix.ym }}-01"
+          E=$(date -u -d "$S +1 month" +%Y-%m-%d)
+          Y=${S:0:4}; M=${S:5:2}
+          python -m fxlab.data.acquire_dukascopy --pairs ${{ matrix.pair }} --start ${S}T00:00:00 --end ${E}T00:00:00
+          mkdir -p part && mv data/m1/${{ matrix.pair }}/${{ matrix.pair }}_$Y.parquet part/${{ matrix.pair }}_${Y}_$M.parquet
+          ls -la part
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fwdm-${{ matrix.pair }}-${{ matrix.ym }}
+          path: part
+          retention-days: 7
+  analyse:
+    needs: [prepare, download]
+    if: always() && needs.prepare.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt yfinance requests holidays
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: fwd-base
+          path: store
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          pattern: fwdm-*
+          path: store
+          merge-multiple: true
+      - name: Bars
+        run: |
+          ls -la store
+          python ci/place_m1.py store data/m1
+          ls -la data/m1/USDJPY data/m1/EURJPY || true
+      - name: Score the forward nights with the frozen filters
+        env:
+          FXLAB_HOLDOUT_UNLOCK: "unlock 2026: authorised by Anas on 2026-11-01 after the candidates below were frozen"
+        run: |
+          set -o pipefail
+          python -W ignore scripts/forward_eval.py --out out 2>&1 | tee out_run.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fwd-store
+          path: store
+          retention-days: 90
+      - name: Publish to the forward-test branch (results only)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out && cp out_run.txt out/ 2>/dev/null || true
+          cp results/m1_coverage.json out/ 2>/dev/null || true
+          cp -r out /tmp/fw
+          git checkout --orphan fw-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p forward_test && cp -r /tmp/fw/* forward_test/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > forward_test/RUN.txt
+          git add -f forward_test
+          git commit -qm "Forward test (run ${{ github.run_id }})"
+          git push -f origin HEAD:forward-test
