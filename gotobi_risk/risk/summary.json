@@ -1,0 +1,25 @@
+{
+ "picks": {
+  "CHFJPY": {
+   "variant": "stop 1.0 W + target 1.0 W",
+   "train_score": 0.024240858791566726,
+   "train_mean_bp": 2.3868920685043116
+  },
+  "EURJPY": {
+   "variant": "stop 40 bp",
+   "train_score": 0.07141788402922418,
+   "train_mean_bp": 3.823415745258422
+  },
+  "USDJPY": {
+   "variant": "stop 0.75 W",
+   "train_score": 0.06060879023133447,
+   "train_mean_bp": 4.623149141086332
+  },
+  "basket UJ+EJ": {
+   "variant": "stop 0.75 W",
+   "train_score": 0.05478326152317277,
+   "train_mean_bp": 4.357536044657525
+  }
+ },
+ "errors": {}
+}
