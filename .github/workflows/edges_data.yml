@@ -1,0 +1,47 @@
+name: edges-data
+# ci/edges_data.py: free data for the edges batch (docs/edges_batch_preregistration.md). Raw data stays in the
+# artifact (90 days); only the availability report is published to the edges-data branch.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/EDGES_DATA"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q requests pandas pytrends
+      - name: Download
+        env:
+          OANDA_TOKEN: ${{ secrets.OANDA_TOKEN }}
+        run: python ci/edges_data.py out_edges 2>&1 | tee out_edges_log.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: edges-data
+          path: out_edges
+          retention-days: 90
+      - name: Publish the availability report
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/go && cp out_edges/report.json out_edges_log.txt /tmp/go/ 2>/dev/null || true
+          git checkout --orphan ed-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p edges_data && cp -r /tmp/go/* edges_data/ || true
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > edges_data/RUN.txt
+          git add -f edges_data
+          git commit -qm "Edges data availability (run ${{ github.run_id }})"
+          git push -f origin HEAD:edges-data
