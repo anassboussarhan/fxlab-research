@@ -1,0 +1,11 @@
+     pair      variant   n  mean_bp     t  win_rate  avg_win_bp  avg_loss_bp  worst_bp  share_loss_gt_50bp  worst_open_loss_bp  cvar5_open_loss_bp  score
+0  USDJPY         none  46     2.41  0.74      0.59       16.21       -17.20    -67.73                0.02             -112.30              -82.49   0.03
+1  USDJPY  stop 0.75 W  46    -1.21 -0.41      0.52       14.89       -18.77    -32.53                0.00              -32.53              -31.51  -0.04
+2  USDJPY   stop 40 bp  46    -0.76 -0.24      0.54       14.92       -19.43    -40.89                0.00              -43.19              -42.35  -0.02
+3  EURJPY         none  51     2.01  0.78      0.61       13.38       -15.63    -47.87                0.00             -108.42              -83.80   0.02
+4  EURJPY  stop 0.75 W  51     0.17  0.07      0.59       12.16       -16.97    -26.84                0.00              -30.41              -28.92   0.01
+5  EURJPY   stop 40 bp  51    -0.50 -0.19      0.59       12.16       -18.60    -40.88                0.00              -43.61              -42.77  -0.01
+6  basket         none  53     2.04  0.86      0.64       12.11       -15.98    -40.94                0.00             -110.36              -79.33   0.03
+7  basket  stop 0.75 W  53    -1.07 -0.48      0.57       11.22       -17.11    -30.89                0.00              -30.89              -29.67  -0.04
+8  basket   stop 40 bp  53    -0.83 -0.33      0.60       11.20       -19.15    -40.88                0.00              -43.35              -42.67  -0.02
+{'stop 0.75 W': {'keeps_gains': False, 'cuts_losses': True}, 'stop 40 bp': {'keeps_gains': False, 'cuts_losses': True}}
