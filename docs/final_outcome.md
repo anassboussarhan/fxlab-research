@@ -85,5 +85,16 @@ With the 2026 edge size, the median best is about 15x (+27% in 3 years); a lotte
   filter forward-v1 (primary) and its 80-feature version forward-v2 (secondary), with verdicts and power stated in
   advance. First verdict after October 2027.
 
+## Technical indicators (added 2026-11-02; `docs/untested_batch.md` 9.17)
+
+- 64 standard indicator readings at entry (RSI, MACD, stochastics, Bollinger, ATR, ADX, CCI, Williams %R, moving
+  averages, Ichimoku, SAR, pivots, candles) add nothing the filter does not already have. The few that hold in both
+  periods say the night goes better **after a dip within an up-trend** (oversold Williams %R, CCI, stochastics, a
+  close below the lower Bollinger band, a red Heikin-Ashi day; Tenkan above Kijun); overbought readings are not a
+  warning. No indicator warns of big losses, and adding them to the filter made it worse. Nothing new is frozen.
+- **The monthly forward-test job** (`.github/workflows/forward_test.yml`, 07:23 UTC on the 3rd of each month)
+  downloads the new month, scores every Gotobi night from 2026-11-05 with both frozen filters and the stops, and
+  publishes the tests to the `forward-test` branch (`forward_test/report.md`).
+
 Not financial advice: research results on historical data with an edge that is small and not confirmed out of
 sample.

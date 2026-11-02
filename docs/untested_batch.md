@@ -1246,3 +1246,59 @@ features on train; "confirmed" = q <= 0.10 on train and the same sign with p <= 
   previous day -0.35, S&P 500 1-week -0.27, VIX -0.25, speculators' yen positioning -0.24, distance to the next
   whole yen above -0.22, 10-year yield 1-week change -0.21, month-end -0.20; AUD/JPY 1-week +0.41, 4-week return
   +0.24. On 2019-2025 it skipped more than half the nights for about the same total (5.3 bp a Gotobi day vs 4.8).
+
+### 9.17 Technical indicators at entry (`scripts/gotobi_ta_lab.py`, branch `gotobi-ta`, run 41434033432; results in `docs/gotobi_ta/`)
+
+64 standard readings on bars that end exactly at the 23:00 Tokyo entry (daily bars cut at 14:00 UTC, 4-hour and
+1-hour bars): RSI 14 and 2, MACD, stochastics, Bollinger %B and width, ATR, ADX and DI, CCI, Williams %R, distance
+to the 20 / 50 / 100 / 200-day averages, EMA and SMA crosses, Donchian, Ichimoku, Parabolic SAR, ROC, Keltner,
+pivots, candle patterns, Heikin-Ashi, and the usual thresholds (RSI 70 / 30, stochastic 80 / 20, CCI +-100, ...).
+Same protocol as 9.16. The basket uses the USD/JPY readings; EUR/JPY's 2019-2025 bars cover only the hours around
+the trade, so its own indicators cannot be computed there.
+
+**Confirmed (q <= 0.10 on 2007-2018, same sign and p <= 0.10 on 2019-2025), all weak**
+
+| Reading at entry | Spearman with the net, train / test | Mean bp when on vs off, train; test | Losing nights on vs off, train; test |
+|---|---|---|---|
+| Daily Heikin-Ashi candle up | -0.18 / -0.10 | -2.6 vs 10.6; 1.4 vs 8.6 | 53% vs 39%; 44% vs 38% |
+| Williams %R below -80 (oversold) | +0.17 / +0.11 | 15.6 vs 1.8; 13.4 vs 3.0 | 30% vs 49%; 36% vs 43% |
+| Close below the lower Bollinger band (33 / 20 nights) | +0.13 / +0.10 | 34.9 vs 2.8; 15.7 vs 4.0 | 24% vs 47%; 35% vs 42% |
+| ATR above its usual level | +0.10 / +0.09 | | |
+| 4-hour MACD histogram (USD/JPY) | -0.13 / -0.10 | | |
+
+**The classic signals (basket, mean bp when the signal is on vs off; 2007-2018; 2019-2025)**
+
+| Signal | 2007-2018 | 2019-2025 | Signal | 2007-2018 | 2019-2025 |
+|---|---|---|---|---|---|
+| RSI 14 > 70 | 9.0 vs 4.0 | 8.4 vs 4.3 | MACD above signal | 2.4 vs 6.3 | 2.8 vs 6.6 |
+| RSI 14 < 30 (20 / 8 nights) | 33.5 vs 3.5 | -3.8 vs 4.8 | Tenkan above Kijun | 6.7 vs 2.5 | 6.3 vs 2.2 |
+| RSI 2 < 10 | 19.9 vs 1.8 | 5.7 vs 4.5 | SMA 50 above SMA 200 | 4.8 vs 4.0 | 5.2 vs 3.8 |
+| Stochastic < 20 | 17.5 vs 1.7 | 8.7 vs 4.1 | ADX > 25 | 3.8 vs 4.7 | 6.0 vs 3.9 |
+| CCI < -100 | 14.7 vs 2.0 | 11.1 vs 3.5 | Price above the Ichimoku cloud | 7.1 vs 3.3 (below) | 4.8 vs 5.3 |
+| Below pivot S1 | 17.5 vs 1.1 | 5.9 vs 4.2 | Bullish / bearish engulfing, doji, inside / outside bar | no consistent difference | |
+
+- **The indicators say one thing: the night goes better after USD/JPY has dipped within an up-trend.** Oversold
+  short-term readings (Williams %R, CCI, stochastics, a lower Bollinger close, a red Heikin-Ashi day) come before
+  better nights, as do up-trend readings (Tenkan above Kijun, SMA 50 above SMA 200). Overbought readings are not a
+  warning: RSI above 70 nights were above average in both periods.
+- **Most of it was already in the model:** the median indicator correlates 0.72 with one of forward-v2's 80
+  features (distance to the 200-day average vs the 200-day-mean feature 0.98; the daily candle vs the 24-hour return
+  0.93). Many short-term oscillators (close streak, RSI 2, pivot position, 4-hour stochastic and %B) were strong on
+  2007-2018 (losing nights 54-59% vs 36-38%) and faded to nothing on 2019-2025.
+- No indicator warns of big losses or deep open losses (best train q 0.14 and 0.17).
+
+**Models (basket; 2019-2025 AUC; walk-forward 2012-2025 kept vs skipped bp, gap t, years kept above skipped)**
+
+| Features | Test AUC | Walk-forward | |
+|---|---|---|---|
+| Indicators only (64) | 0.53 | 7.8 vs -0.4 (t 3.5) | 13 of 14 |
+| forward-v2's 80 features | 0.62 | 9.1 vs -0.9 (t 4.35) | 14 of 14 |
+| 80 features + indicators (144) | 0.59 | 7.9 vs +0.8 (t 3.1) | 11 of 14 |
+
+- **Adding the indicators makes the filter worse** (more features than the nights can support), so the forward-v3
+  rule set before the run was not met and nothing new is frozen.
+
+**Corrections found in this round.** The repo's FOMC table ends in 2022, so the "skip FOMC nights" filter in 9.14
+and the `fomc_night` feature in 9.16 missed the 2023-2025 meetings (forward-v2's weight on it is small, +0.05); and
+EUR/JPY's 2019-2025 M1 bars cover only the hours around the trade (no effect on the trade or on the basket
+features, which come from USD/JPY).

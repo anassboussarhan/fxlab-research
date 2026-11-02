@@ -57,3 +57,11 @@ AUCs are 0.58 vs 0.59), so it is frozen and tested as a secondary filter:
 | FV2 | `results/frozen_forward_v2.json` (sha256 `27e57a992a21994e90d8ee0f911d966d5e9840c08780cae7c98b77f60e677835`): the same fitting on all 1,067 development nights with 80 features known at entry (`features()` of `scripts/gotobi_accuracy_lab.py` at b90884b joined with `more_features()` of `scripts/gotobi_losses_lab.py` at b82707d, columns starting `night_` excluded); trade the night when the predicted probability of a win is above 0.4832 |
 
 FT5 (secondary): FT1 for forward-v2, with the same verdicts. FT1 (forward-v1) stays the primary test.
+
+## Dry run (2026-11-02): passed
+
+`scripts/forward_eval.py --dry 2025` (run 41434905713) rebuilt the 58 Gotobi nights of 2025 from the development
+store with the forward code: trades (no stop and 80 bp stop) identical to the development files (largest difference
+1e-12 bp), all 24 forward-v1 and 80 forward-v2 features identical, predicted probabilities identical (1e-13) and the
+same trade / skip decision on every night for both filters. The monthly job (`.github/workflows/forward_test.yml`)
+runs the same code on the forward nights.
