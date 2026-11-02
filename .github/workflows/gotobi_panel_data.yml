@@ -1,0 +1,79 @@
+name: gotobi-panel-data
+# Data for scripts/gotobi_panel_lab.py (the Gotobi night on every instrument), development years only (to
+# 2025-12-31): the FX-Data mirror (real Dukascopy ticks) 2007-2018 for the 17 pairs not yet stored, and Dukascopy M1
+# candles (fxlab/data/acquire_dukascopy_candles.py) for 2019-2025 FX and metals and for exotic yen pairs, indices,
+# commodities and bonds over their history. Matrix in ci/panel_matrix.json. Partial downloads are uploaded.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/GOTOBI_PANEL_DATA"]
+jobs:
+  matrix:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/panel_matrix.json)" >> "$GITHUB_OUTPUT"
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow
+      - name: Candles vs ticks, USD/JPY March 2024
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download 40227329900 -n m1-USDJPY-2024-3 -D tick || true
+          python -m fxlab.data.acquire_dukascopy_candles --pairs USDJPY --start 2024-03-01 --end 2024-04-01 --suffix _cand
+          python - <<'PY'
+          import glob, polars as pl
+          t = pl.concat([pl.read_parquet(f) for f in glob.glob("tick/**/*.parquet", recursive=True)])
+          c = pl.read_parquet(glob.glob("data/m1/USDJPY/*_cand.parquet")[0])
+          t = t.filter((pl.col("ts").dt.year() == 2024) & (pl.col("ts").dt.month() == 3))
+          j = t.join(c, on="ts", suffix="_c")
+          print("tick minutes", t.height, "candle minutes", c.height, "common", j.height)
+          for k in ("bid_o", "bid_h", "bid_l", "bid_c", "ask_o", "ask_c"):
+              d = (j[k] - j[k + "_c"]).abs()
+              print(k, "max abs diff", d.max(), "share > 0.0005", (d > 0.0005).mean())
+          PY
+  download:
+    needs: matrix
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.matrix.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow
+      - name: ${{ matrix.kind }} ${{ matrix.pair }} ${{ matrix.span }}
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          P=${{ matrix.pair }}
+          if [ "${{ matrix.kind }}" = mirror ]; then
+            python -m fxlab.data.acquire_fxdata_git --pairs $P --years ${{ matrix.span }} --scratch /tmp/fx || true
+          else
+            set -- ${{ matrix.span }}
+            python -m fxlab.data.acquire_dukascopy_candles --pairs $P --start $1 --end $2 --suffix _c${1:0:4} --workers 8 --deadline-min 320 || true
+          fi
+          mkdir -p part && cp data/m1/$P/*.parquet part/ 2>/dev/null || true
+          ls -la part
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pd-${{ matrix.pair }}-${{ matrix.kind }}-${{ strategy.job-index }}
+          path: part
+          retention-days: 60
+          if-no-files-found: ignore
