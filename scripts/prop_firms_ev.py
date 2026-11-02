@@ -136,7 +136,7 @@ def simulate(A, rules, n=20_000, seed=0, M=None, scale_eval=1.0, scale_funded=1.
         peak = np.where(due, 0.0, peak)
         phase = np.where(f & (fday >= FUNDED_DAYS), -2, phase)
         phase = np.where((phase >= 0) & (phase < nph) & (step + 1 >= MAX_DAYS), -2, phase)
-    refund = np.where((npay > 0) & r["refund"], r["fee"], 0.0)
+    refund = np.where((npay >= r.get("refund_after", 1)) & r["refund"], r["fee"], 0.0)
     net = paid + refund - r["fee"]
     fp = first[first >= 0]
     return {"pass": float(passed.mean()), "paid": float((npay > 0).mean()), "mean_net": float(net.mean()),
