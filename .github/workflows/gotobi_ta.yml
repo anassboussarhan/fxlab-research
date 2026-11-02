@@ -1,0 +1,51 @@
+name: gotobi-ta
+# scripts/gotobi_ta_lab.py: technical indicators at entry and the Gotobi night.
+# ci/GOTOBI_TA: MIRRORS EXTRA USDJPY (artifact run ids, as in ci/GOTOBI_RISK).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/GOTOBI_TA"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt yfinance requests
+      - name: Bars of USD/JPY and EUR/JPY
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRRORS EXTRA USDJPY REST < ci/GOTOBI_TA
+          mkdir -p dl
+          for s in USDJPY EURJPY; do for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_${M}_$s || true; done; done
+          gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj
+          gh run download $EXTRA -p "dk-EURJPY-*" -D dl/ej || true
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+          ls data/m1
+      - run: set -o pipefail; python -W ignore scripts/gotobi_ta_lab.py --out out/ta 2>&1 | tee out_lab.txt
+      - name: Publish to the gotobi-ta branch (results and per-trade returns, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out && cp out_lab.txt out/ 2>/dev/null || true
+          cp -r out /tmp/go
+          git checkout --orphan gt-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p gotobi_ta && cp -r /tmp/go/* gotobi_ta/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > gotobi_ta/RUN.txt
+          git add -f gotobi_ta
+          git commit -qm "Gotobi TA lab (run ${{ github.run_id }})"
+          git push -f origin HEAD:gotobi-ta
