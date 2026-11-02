@@ -1,0 +1,140 @@
+USDJPY {'trades': 1067, 'first': '2007-05-25', 'last': '2025-12-31'}
+EURJPY {'trades': 1027, 'first': '2007-05-25', 'last': '2025-12-31'}
+      series              feature                group         outcome               contrast  train_stat  train_p  train_n  test_stat  test_p  test_n  train_rate_high  train_rate_low  test_rate_high  test_rate_low  train_q_bh  confirmed
+31    basket   prev_night_range_W       known at entry  deep_open_loss  top vs bottom tercile       0.120    0.001      576      0.126   0.011   296.0            0.193           0.073           0.204          0.078       0.022       True
+80    basket          n225_ret_1d       known at entry             net  top vs bottom tercile      -0.189    0.000      690     -0.091   0.076   377.0              NaN             NaN             NaN            NaN       0.000       True
+85    basket         us10y_chg_1w       known at entry            lose  top vs bottom tercile       0.161    0.001      690      0.120   0.056   377.0            0.548           0.387           0.474          0.354       0.044       True
+176   basket          us5y_chg_1d       known at entry             net  top vs bottom tercile      -0.115    0.002      690     -0.110   0.032   377.0              NaN             NaN             NaN            NaN       0.024       True
+177   basket          us5y_chg_1d       known at entry            lose  top vs bottom tercile       0.123    0.008      690      0.109   0.088   377.0            0.513           0.390           0.478          0.369       0.099       True
+180   basket         us10y_chg_1d       known at entry             net  top vs bottom tercile      -0.120    0.002      690     -0.119   0.021   377.0              NaN             NaN             NaN            NaN       0.021       True
+181   basket         us10y_chg_1d       known at entry            lose  top vs bottom tercile       0.146    0.002      690      0.129   0.037   377.0            0.518           0.372           0.488          0.359       0.053       True
+220   basket  to_next_yen_above_W       known at entry             net  top vs bottom tercile      -0.090    0.018      690     -0.104   0.044   377.0              NaN             NaN             NaN            NaN       0.085       True
+324   basket       night_ny_leg_W  night (descriptive)             net  top vs bottom tercile       0.680    0.000      690      0.685   0.000   362.0              NaN             NaN             NaN            NaN       0.000       True
+325   basket       night_ny_leg_W  night (descriptive)            lose  top vs bottom tercile      -0.635    0.000      690     -0.602   0.000   362.0            0.148           0.783           0.115          0.718       0.000       True
+326   basket       night_ny_leg_W  night (descriptive)        big_loss  top vs bottom tercile      -0.135    0.000      690     -0.097   0.000   362.0            0.004           0.139           0.000          0.097       0.000       True
+327   basket       night_ny_leg_W  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.252    0.000      690     -0.267   0.000   362.0            0.026           0.278           0.015          0.282       0.000       True
+332   basket      night_fix_leg_W  night (descriptive)             net  top vs bottom tercile       0.417    0.000      690      0.480   0.000   362.0              NaN             NaN             NaN            NaN       0.000       True
+333   basket      night_fix_leg_W  night (descriptive)            lose  top vs bottom tercile      -0.443    0.000      690     -0.471   0.000   362.0            0.235           0.678           0.222          0.694       0.000       True
+334   basket      night_fix_leg_W  night (descriptive)        big_loss  top vs bottom tercile      -0.057    0.010      690     -0.073   0.004   362.0            0.030           0.087           0.007          0.081       0.015       True
+344   basket      night_us10y_chg  night (descriptive)             net  top vs bottom tercile       0.248    0.000      671      0.319   0.000   363.0              NaN             NaN             NaN            NaN       0.000       True
+345   basket      night_us10y_chg  night (descriptive)            lose  top vs bottom tercile      -0.269    0.000      671     -0.291   0.000   363.0            0.321           0.591           0.318          0.609       0.000       True
+346   basket      night_us10y_chg  night (descriptive)        big_loss  top vs bottom tercile      -0.068    0.002      671     -0.072   0.002   363.0            0.022           0.091           0.000          0.072       0.003       True
+347   basket      night_us10y_chg  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.088    0.004      671     -0.149   0.000   363.0            0.076           0.164           0.047          0.196       0.007       True
+356   basket       night_n225_gap  night (descriptive)             net  top vs bottom tercile       0.461    0.000      681      0.181   0.000   370.0              NaN             NaN             NaN            NaN       0.000       True
+357   basket       night_n225_gap  night (descriptive)            lose  top vs bottom tercile      -0.427    0.000      681     -0.172   0.006   370.0            0.238           0.665           0.336          0.508       0.000       True
+358   basket       night_n225_gap  night (descriptive)        big_loss  top vs bottom tercile      -0.115    0.000      681     -0.048   0.030   370.0            0.009           0.123           0.008          0.056       0.000       True
+359   basket       night_n225_gap  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.189    0.000      681     -0.129   0.001   370.0            0.044           0.233           0.048          0.177       0.000       True
+440   USDJPY          n225_ret_1d       known at entry             net  top vs bottom tercile      -0.135    0.000      690     -0.111   0.031   377.0              NaN             NaN             NaN            NaN       0.014       True
+445   USDJPY         us10y_chg_1w       known at entry            lose  top vs bottom tercile       0.152    0.001      690      0.120   0.059   377.0            0.530           0.378           0.519          0.398       0.084       True
+684   USDJPY       night_ny_leg_W  night (descriptive)             net  top vs bottom tercile       0.835    0.000      690      0.811   0.000   362.0              NaN             NaN             NaN            NaN       0.000       True
+685   USDJPY       night_ny_leg_W  night (descriptive)            lose  top vs bottom tercile      -0.826    0.000      690     -0.809   0.000   362.0            0.048           0.874           0.062          0.871       0.000       True
+686   USDJPY       night_ny_leg_W  night (descriptive)        big_loss  top vs bottom tercile      -0.178    0.000      690     -0.113   0.000   362.0            0.000           0.178           0.000          0.113       0.000       True
+687   USDJPY       night_ny_leg_W  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.339    0.000      690     -0.299   0.000   362.0            0.017           0.357           0.015          0.315       0.000       True
+692   USDJPY      night_fix_leg_W  night (descriptive)             net  top vs bottom tercile       0.444    0.000      690      0.471   0.000   362.0              NaN             NaN             NaN            NaN       0.000       True
+693   USDJPY      night_fix_leg_W  night (descriptive)            lose  top vs bottom tercile      -0.443    0.000      690     -0.427   0.000   362.0            0.209           0.652           0.267          0.694       0.000       True
+694   USDJPY      night_fix_leg_W  night (descriptive)        big_loss  top vs bottom tercile      -0.061    0.010      690     -0.097   0.001   362.0            0.039           0.100           0.007          0.105       0.015       True
+704   USDJPY      night_us10y_chg  night (descriptive)             net  top vs bottom tercile       0.278    0.000      671      0.326   0.000   363.0              NaN             NaN             NaN            NaN       0.000       True
+705   USDJPY      night_us10y_chg  night (descriptive)            lose  top vs bottom tercile      -0.260    0.000      671     -0.303   0.000   363.0            0.326           0.586           0.349          0.652       0.000       True
+706   USDJPY      night_us10y_chg  night (descriptive)        big_loss  top vs bottom tercile      -0.085    0.000      671     -0.080   0.001   363.0            0.027           0.112           0.000          0.080       0.001       True
+707   USDJPY      night_us10y_chg  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.109    0.001      671     -0.149   0.000   363.0            0.080           0.190           0.047          0.196       0.001       True
+712   USDJPY        night_dxy_ret  night (descriptive)             net  top vs bottom tercile       0.188    0.000      671      0.259   0.000   364.0              NaN             NaN             NaN            NaN       0.000       True
+713   USDJPY        night_dxy_ret  night (descriptive)            lose  top vs bottom tercile      -0.174    0.000      671     -0.249   0.000   364.0            0.375           0.549           0.328          0.576       0.000       True
+715   USDJPY        night_dxy_ret  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.085    0.009      671     -0.145   0.001   364.0            0.094           0.179           0.059          0.203       0.013       True
+716   USDJPY       night_n225_gap  night (descriptive)             net  top vs bottom tercile       0.440    0.000      681      0.105   0.043   370.0              NaN             NaN             NaN            NaN       0.000       True
+719   USDJPY       night_n225_gap  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.207    0.000      681     -0.081   0.043   370.0            0.048           0.256           0.072          0.153       0.000       True
+1044  EURJPY       night_ny_leg_W  night (descriptive)             net  top vs bottom tercile       0.852    0.000      675      0.851   0.000   336.0              NaN             NaN             NaN            NaN       0.000       True
+1045  EURJPY       night_ny_leg_W  night (descriptive)            lose  top vs bottom tercile      -0.871    0.000      675     -0.826   0.000   336.0            0.044           0.916           0.030          0.856       0.000       True
+1046  EURJPY       night_ny_leg_W  night (descriptive)        big_loss  top vs bottom tercile      -0.156    0.000      675     -0.153   0.000   336.0            0.004           0.160           0.000          0.153       0.000       True
+1047  EURJPY       night_ny_leg_W  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.298    0.000      675     -0.294   0.000   336.0            0.013           0.311           0.020          0.314       0.000       True
+1052  EURJPY      night_fix_leg_W  night (descriptive)             net  top vs bottom tercile       0.375    0.000      675      0.401   0.000   336.0              NaN             NaN             NaN            NaN       0.000       True
+1053  EURJPY      night_fix_leg_W  night (descriptive)            lose  top vs bottom tercile      -0.356    0.000      675     -0.350   0.000   336.0            0.262           0.618           0.271          0.621       0.000       True
+1054  EURJPY      night_fix_leg_W  night (descriptive)        big_loss  top vs bottom tercile      -0.076    0.002      675     -0.161   0.000   336.0            0.036           0.111           0.008          0.168       0.003       True
+1055  EURJPY      night_fix_leg_W  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.067    0.039      675     -0.120   0.010   336.0            0.102           0.169           0.090          0.211       0.044       True
+1056  EURJPY        night_spx_ret  night (descriptive)             net  top vs bottom tercile       0.340    0.000      657      0.178   0.001   339.0              NaN             NaN             NaN            NaN       0.000       True
+1057  EURJPY        night_spx_ret  night (descriptive)            lose  top vs bottom tercile      -0.315    0.000      657     -0.136   0.037   339.0            0.292           0.607           0.383          0.519       0.000       True
+1059  EURJPY        night_spx_ret  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.164    0.000      657     -0.091   0.041   339.0            0.059           0.224           0.094          0.185       0.000       True
+1060  EURJPY        night_vix_chg  night (descriptive)             net  top vs bottom tercile      -0.263    0.000      657     -0.246   0.000   339.0              NaN             NaN             NaN            NaN       0.000       True
+1061  EURJPY        night_vix_chg  night (descriptive)            lose  top vs bottom tercile       0.239    0.000      657      0.182   0.004   339.0            0.587           0.348           0.538          0.355       0.000       True
+1062  EURJPY        night_vix_chg  night (descriptive)        big_loss  top vs bottom tercile       0.101    0.000      657      0.068   0.025   339.0            0.128           0.027           0.092          0.025       0.000       True
+1063  EURJPY        night_vix_chg  night (descriptive)  deep_open_loss  top vs bottom tercile       0.134    0.000      657      0.110   0.011   339.0            0.211           0.077           0.185          0.074       0.000       True
+1064  EURJPY      night_us10y_chg  night (descriptive)             net  top vs bottom tercile       0.187    0.000      657      0.174   0.001   339.0              NaN             NaN             NaN            NaN       0.000       True
+1065  EURJPY      night_us10y_chg  night (descriptive)            lose  top vs bottom tercile      -0.200    0.000      657     -0.136   0.032   339.0            0.339           0.539           0.380          0.516       0.000       True
+1066  EURJPY      night_us10y_chg  night (descriptive)        big_loss  top vs bottom tercile      -0.078    0.001      657     -0.104   0.001   339.0            0.028           0.105           0.017          0.121       0.002       True
+1067  EURJPY      night_us10y_chg  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.124    0.000      657     -0.111   0.012   339.0            0.069           0.193           0.083          0.194       0.000       True
+1072  EURJPY        night_dxy_ret  night (descriptive)             net  top vs bottom tercile      -0.231    0.000      657     -0.162   0.003   340.0              NaN             NaN             NaN            NaN       0.000       True
+1073  EURJPY        night_dxy_ret  night (descriptive)            lose  top vs bottom tercile       0.192    0.000      657      0.157   0.016   340.0            0.553           0.361           0.478          0.321       0.000       True
+1076  EURJPY       night_n225_gap  night (descriptive)             net  top vs bottom tercile       0.402    0.000      666      0.282   0.000   347.0              NaN             NaN             NaN            NaN       0.000       True
+1077  EURJPY       night_n225_gap  night (descriptive)            lose  top vs bottom tercile      -0.365    0.000      666     -0.259   0.000   347.0            0.266           0.631           0.282          0.541       0.000       True
+1078  EURJPY       night_n225_gap  night (descriptive)        big_loss  top vs bottom tercile      -0.135    0.000      666     -0.108   0.001   347.0            0.014           0.149           0.009          0.117       0.000       True
+1079  EURJPY       night_n225_gap  night (descriptive)  deep_open_loss  top vs bottom tercile      -0.216    0.000      666     -0.144   0.002   347.0            0.036           0.252           0.064          0.207       0.000       True
+                                                    0                             1                               2                                  3                             4                               5                                  6                             7                               8
+series                                         basket                        basket                          basket                             USDJPY                        USDJPY                          USDJPY                             EURJPY                        EURJPY                          EURJPY
+model               big-loss model, extended features  win model, extended features  win model, forward-v1 features  big-loss model, extended features  win model, extended features  win model, forward-v1 features  big-loss model, extended features  win model, extended features  win model, forward-v1 features
+features                                           80                            80                              24                                 80                            80                              24                                 80                            80                              24
+test_auc                                        0.663                         0.607                           0.581                              0.689                         0.568                           0.547                               0.52                         0.512                           0.506
+skip_share                                      0.376                         0.534                           0.333                              0.374                         0.517                           0.316                              0.284                         0.528                           0.304
+all_n                                             423                           423                             423                                377                           377                             377                                352                           352                             352
+all_mean_bp                                     4.767                         4.767                           4.767                              4.631                         4.631                           4.631                              5.009                         5.009                           5.009
+all_t                                           3.227                         3.227                           3.227                                2.8                           2.8                             2.8                              2.867                         2.867                           2.867
+all_win                                         0.584                         0.584                           0.584                              0.546                         0.546                           0.546                              0.588                         0.588                           0.588
+all_worst_bp                                  -140.65                       -140.65                         -140.65                           -143.303                      -143.303                        -143.303                           -137.996                      -137.996                        -137.996
+all_per_day_bp                                  4.767                         4.767                           4.767                              4.631                         4.631                           4.631                              5.009                         5.009                           5.009
+all_cvar5_bp                                  -93.087                       -93.087                         -93.087                           -101.192                      -101.192                        -101.192                            -88.795                       -88.795                         -88.795
+kept_n                                            264                           197                             282                                236                           182                             258                                252                           166                             245
+kept_mean_bp                                    3.926                        11.454                           7.521                              6.865                         9.717                           6.394                              6.848                         7.286                           5.094
+kept_t                                          2.568                         5.045                           3.947                              3.821                         4.268                           3.309                              3.438                         2.707                           2.361
+kept_win                                        0.576                          0.67                           0.631                              0.572                         0.588                           0.574                              0.607                         0.596                           0.588
+kept_worst_bp                                -105.443                      -116.958                        -116.958                           -105.443                      -119.436                        -119.436                            -90.841                       -114.48                         -114.48
+kept_per_day_bp                                  2.45                         5.334                           5.014                              4.297                         4.691                           4.376                              4.902                         3.436                           3.546
+kept_cvar5_bp                                 -81.175                      -104.098                         -99.532                            -87.754                       -105.88                        -107.814                            -73.731                       -95.931                         -89.932
+skipped_n                                         159                           226                             141                                141                           195                             119                                100                           186                             107
+skipped_mean_bp                                 6.164                        -1.062                          -0.742                              0.893                        -0.115                           0.811                              0.373                         2.976                           4.812
+skipped_t                                       2.052                        -0.574                          -0.338                              0.277                        -0.049                           0.259                              0.106                         1.313                           1.632
+skipped_win                                     0.597                         0.509                           0.489                              0.504                         0.508                           0.487                               0.54                         0.581                           0.589
+skipped_worst_bp                              -140.65                       -140.65                         -140.65                           -143.303                      -143.303                        -143.303                           -137.996                      -137.996                        -137.996
+skipped_per_day_bp                              2.317                        -0.568                          -0.247                              0.334                         -0.06                           0.256                              0.106                         1.572                           1.463
+wf_kept_bp                                      4.307                         8.676                           8.108                               4.98                          8.58                           7.585                              6.583                          7.33                           7.364
+wf_kept_t                                       3.642                         5.963                           5.783                              3.759                         5.159                           4.875                              4.703                         4.557                           4.744
+wf_skipped_bp                                   7.758                        -0.597                          -0.648                              5.755                         0.496                          -0.183                              0.499                         1.312                           0.841
+wf_gap_bp                                      -3.451                         9.273                           8.756                             -0.775                         8.084                           7.767                              6.083                         6.017                           6.523
+wf_gap_t                                       -1.119                         4.124                           3.805                             -0.231                         3.194                           2.972                              1.695                         2.208                             2.3
+wf_auc                                          0.588                          0.58                           0.587                              0.613                         0.546                           0.553                              0.588                         0.558                           0.567
+wf_kept_win                                     0.565                         0.618                           0.615                              0.568                         0.593                            0.59                              0.584                         0.596                           0.588
+wf_kept_worst_bp                              -140.65                      -117.959                        -117.959                           -123.117                      -123.117                        -123.117                           -149.142                      -149.142                        -149.142
+{
+ "errors": {},
+ "describe": {
+  "basket": {
+   "longest_losing_streak": 8,
+   "shuffled_p95_longest": 11.0,
+   "runs": 544,
+   "shuffled_runs_mean": 550.03,
+   "runs_p_low": 0.3795,
+   "year_corr_mean_vs_pair_return": 0.48970391776172645,
+   "year_corr_mean_vs_rate_diff": -0.42331331423289414
+  },
+  "USDJPY": {
+   "longest_losing_streak": 9,
+   "shuffled_p95_longest": 11.0,
+   "runs": 518,
+   "shuffled_runs_mean": 528.153,
+   "runs_p_low": 0.276,
+   "year_corr_mean_vs_pair_return": 0.3338568327518295,
+   "year_corr_mean_vs_rate_diff": -0.5332235477544349
+  },
+  "EURJPY": {
+   "longest_losing_streak": 8,
+   "shuffled_p95_longest": 11.0,
+   "runs": 493,
+   "shuffled_runs_mean": 506.147,
+   "runs_p_low": 0.206,
+   "year_corr_mean_vs_pair_return": 0.5813614742958347,
+   "year_corr_mean_vs_rate_diff": -0.2793237949827063
+  }
+ },
+ "forward_v2_rule": {
+  "extended_wf_gap_bp": 9.27263884180166,
+  "extended_test_auc": 0.6067238682370262,
+  "qualifies_for_forward_v2": true
+ }
+}
