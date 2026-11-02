@@ -69,3 +69,10 @@ would count against a rule.
   the development numbers for 2017 (USD/JPY no stop +3.60 bp on 63 trades, EUR/JPY +5.06 bp on 63, as in
   `gotobi-opt` diagnostics), so the copied code is the frozen code.
 - Mondays: as in development, a Gotobi Monday has no trade when its entry time falls before the weekly open.
+
+## Second use (2026-11-02), pre-registered before the run
+
+The exit rule chosen on 2007-2018 by `scripts/gotobi_risk_lab.py` (stop 0.75 W; runner-up stop 40 bp) is run
+once on the same 2026 Gotobi days next to the no-stop rule (`scripts/holdout_2026_stop.py`). Nothing is chosen
+from it. Verdict: the stop "keeps the gains" if its 2026 basket mean is at least 75% of the no-stop mean, and
+"cuts the losses" if its CVaR5 open loss and its worst trade are smaller in size.

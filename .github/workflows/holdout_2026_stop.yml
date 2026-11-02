@@ -1,0 +1,53 @@
+name: holdout-2026-stop
+# Second, separately pre-registered use of the 2026 data: the stop chosen on 2007-2018 (scripts/gotobi_risk_lab.py)
+# on 2026, next to the frozen no-stop rule (scripts/holdout_2026_stop.py). Bars: the 2026 downloads of run
+# 41347184098 plus development warm-up. ci/HOLDOUT_2026_STOP: H26RUN WARMUP_UJ WARMUP_EJ.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/HOLDOUT_2026_STOP"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read H26 WUJ WEJ REST < ci/HOLDOUT_2026_STOP
+          mkdir -p dl
+          gh run download $H26 -p "h26-USDJPY-*" -D dl/h26u
+          gh run download $H26 -p "h26-EURJPY-*" -D dl/h26e
+          for M in 10 11 12; do gh run download $WUJ -n m1-USDJPY-2025-$M -D dl/wuj_$M || true; done
+          gh run download $WEJ -n dk-EURJPY-x2025 -D dl/wej || true
+          python ci/place_m1.py dl data/m1
+      - name: Run once
+        env:
+          FXLAB_HOLDOUT_UNLOCK: "unlock 2026: authorised by Anas on 2026-11-01 after the candidates below were frozen"
+        run: |
+          set -o pipefail
+          python -W ignore scripts/holdout_2026_stop.py --out out 2>&1 | tee out_run.txt
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out && cp out_run.txt out/ 2>/dev/null || true
+          cp -r out /tmp/h26s
+          git checkout --orphan h26s-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p holdout_2026_stop && cp -r /tmp/h26s/* holdout_2026_stop/
+          git add -f holdout_2026_stop
+          git commit -qm "2026 check of the chosen stop (run ${{ github.run_id }})"
+          git push -f origin HEAD:holdout-2026-stop
