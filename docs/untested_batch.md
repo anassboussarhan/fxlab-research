@@ -1302,3 +1302,39 @@ the trade, so its own indicators cannot be computed there.
 and the `fomc_night` feature in 9.16 missed the 2023-2025 meetings (forward-v2's weight on it is small, +0.05); and
 EUR/JPY's 2019-2025 M1 bars cover only the hours around the trade (no effect on the trade or on the basket
 features, which come from USD/JPY).
+
+### 9.18 Every other kind of stop (`scripts/gotobi_stops2_lab.py`, branch `gotobi-stops2`, run 41446835207; results in `docs/gotobi_stops2/`)
+
+The stop families not tried in 9.14-9.15, on the USD/JPY + EUR/JPY basket (signals from USD/JPY, which has full
+history in both periods; 690 nights 2007-2018, 377 nights 2019-2025 on which USD/JPY trades). Same protocol (picks on
+2007-2018 among rules keeping 90% of the no-stop mean). Mean bp per night, train / test; t of the paired
+difference with no stop, train / test.
+
+| Family | Rules | Mean bp | Paired t vs no stop | Worst trade bp, train / test |
+|---|---|---|---|---|
+| No stop | | 4.37 / 4.64 | | -268 / -141 |
+| **Fixed 80 bp (the frozen S1)** | | **4.40 / 4.84** | +0.1 / +0.9 | **-97 / -81** |
+| ATR stops, daily ATR 14 | 0.5, 0.75, 1, 1.5, 2 ATR | 3.90-4.39 / 4.37-4.71 | -1.6 to +0.1 / -1.7 to +0.2 | 1 ATR: -205 / -107 |
+| ATR stops, 1-hour ATR 14 | 2, 3, 4, 6 ATR | 3.96-4.34 / 4.01-4.79 | -0.7 to -0.1 / -0.8 to +0.3 | |
+| Chandelier (ATR trailing from the high) | 1, 1.5 ATR | 4.46-4.61 / 4.46-4.53 | +0.7, +0.8 / -0.3, -1.2 | |
+| | 0.5 ATR | 2.73 / 2.88 | -1.7 / -2.3 | |
+| Swing lows (24 h, London session, 4 h before entry) | buffer 0 or 0.25 ATR | 3.83-4.17 / 3.55-4.81 | -0.8 to -0.3 / -1.0 to +0.2 | |
+| Round number (10 pips under the whole yen) | | 4.01 / 4.48 | -0.5 / -0.2 | |
+| Moving-average exits (15-min SMA 20 / 50, EMA 100; 1-hour SMA 20, EMA 50) | | -2.43 to -0.31 / -0.19 to +1.18 | -4.5 to -3.6 / -3.5 to -2.9 | |
+| Donchian exits (15-min 16 / 32 bars, 1-hour 12 bars) | | 1.98-3.23 / 2.63-4.37 | -2.3 to -1.5 / -2.0 to -0.4 | |
+| Parabolic SAR flip (15-min) | | 0.56 / 0.39 | -3.2 / -3.9 | |
+| Basket stop (both legs on the basket's mark-to-market) | 40-100 bp, 0.75-1.5 W | 3.07-4.43 / 3.66-4.12 | -1.3 to +0.1 / -1.0 to -0.6 | |
+| Stop confirmed by AUD/JPY (both down k W at the same minute) | k = 0.75, 1, 1.5 | 3.64-4.00 / 4.46-5.03 | -1.3 to -0.7 / -0.2 to +0.4 | |
+| Stop on both legs (USD/JPY and EUR/JPY both down k W) | k = 0.75, 1, 1.5 | 3.99-4.32 / 3.65-4.00 | -0.7 to -0.1 / -1.0 to -0.7 | |
+
+- **Nothing beats a fixed disaster stop of about 80 bp.** It was again the 2007-2018 pick for the worst case
+  (P3) and held on 2019-2025 (+4.84 vs +4.64 bp, worst trade -81 vs -141 bp). The other picks were stop 0.75 W
+  (P1, again; it failed in 2026) and the 1.5 W basket stop (P2: 60% winners on 2019-2025 but 0.7 bp less a
+  night).
+- **ATR, chandelier, swing-low and round-number stops are at best equal to the fixed stop**; a stop scaled by the
+  daily ATR is worse in a crisis year (2008: ATR so wide that 1 ATR let a -205 bp trade through).
+- **Trend-following exits ruin the trade:** moving-average, Parabolic-SAR and short Donchian exits cost 2-7 bp a
+  night (t -2 to -4.5 in both periods). The night typically dips and recovers, so any exit that sells weakness
+  sells the dip.
+- **Waiting for a correlated pair to confirm the drop does not help:** confirmation by AUD/JPY was worse on
+  2007-2018 and only slightly better on 2019-2025; requiring both legs to fall was worse in both.
