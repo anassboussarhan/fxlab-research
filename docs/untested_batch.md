@@ -776,6 +776,19 @@ because it worked.
 - **Caveats:** leverage, mixes and firms are chosen on the same data; resampling nights at random ignores runs of
   bad years like 2018; firm rules change.
 
+**Second run, with CHF/JPY, CAD/JPY and NZD/JPY (run 41363896954; the first four pairs reproduce exactly):**
+
+| Pair | Walk-forward bp | t | Years positive | 2019-2025 bp (t) | Fixed rule bp | t | q |
+|---|---|---|---|---|---|---|---|
+| CHF/JPY | +3.45 | 3.14 | 12/15 | +2.81 (2.16) | +3.10 | 2.85 | 0.000 |
+| CAD/JPY | +1.85 | 1.27 | 11/15 | +2.38 (1.31) | +2.43 | 1.67 | 0.13 |
+| NZD/JPY | +0.30 | 0.21 | 8/14 | +1.22 (0.68) | -0.04 | -0.02 | 0.41 |
+| Basket, all seven pairs eligible (2.5 pairs a day) | +4.28 | 4.07 | 12/13 | +3.83 (3.06) | - | - | 0.000 |
+
+- **CHF/JPY is a third pair that carries the flow** (t 3.1, 12 of 15 years); CAD/JPY and NZD/JPY do not.
+- **The wider basket is not better:** +4.28 bp (t 4.07) against +5.06 (t 4.51) when only USD/JPY and EUR/JPY
+  usually qualified. CHF/JPY was not in the frozen 2026 set, so it has no out-of-sample check yet.
+
 ### 9.8 Two more published effects (`scripts/rebalance_lab.py` branch `rebalance` run 41335377851; `scripts/cot_lab.py` C5-C6 branch `cot` run 41335377840)
 
 **Front-running 60/40 rebalancing (Harvey, Mazzoleni & Melone 2025; the paper reports Sharpe 1.1, 1997-2023).**
