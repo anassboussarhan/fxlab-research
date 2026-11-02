@@ -1,0 +1,55 @@
+name: gotobi-risk
+# scripts/gotobi_risk_lab.py: exit rules, hedges and filters for the Gotobi overnight trade.
+# ci/GOTOBI_RISK: MIRRORS EXTRA USDJPY FLOW FLOW2 DUKA.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/GOTOBI_RISK"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt yfinance
+      - name: Bars of the yen pairs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read MIRRORS EXTRA USDJPY FLOW FLOW2 DUKA REST < ci/GOTOBI_RISK
+          mkdir -p dl
+          for s in USDJPY EURJPY; do for M in $(echo "$MIRRORS" | tr ',' ' '); do gh run download $M -p "mm-$s-*" -D dl/mm_${M}_$s || true; done; done
+          gh run download $USDJPY -p "m1-USDJPY-*" -D dl/uj
+          gh run download $EXTRA -p "dk-EURJPY-*" -D dl/ej || true
+          gh run download $FLOW -p "fd-AUDJPY-*" -D dl/fa || true
+          gh run download $FLOW -p "fd-GBPJPY-*" -D dl/fg || true
+          gh run download $FLOW2 -p "fd2-*" -D dl/f2 || true
+          gh run download $DUKA -p "dk-USA500IDXUSD-*" -D dl/dk_us500 || true
+          python ci/place_m1.py dl data/m1
+          rm -rf dl
+          ls data/m1
+      - run: set -o pipefail; python -W ignore scripts/gotobi_risk_lab.py --out out/risk 2>&1 | tee out_lab.txt
+      - name: Publish to the gotobi-opt branch (results and per-trade returns, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out && cp out_lab.txt out/ 2>/dev/null || true
+          cp -r out /tmp/go
+          git checkout --orphan gr-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p gotobi_risk && cp -r /tmp/go/* gotobi_risk/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ); bars from $(cat /dev/null)" > gotobi_risk/RUN.txt
+          git add -f gotobi_risk
+          git commit -qm "Gotobi risk control (run ${{ github.run_id }})"
+          git push -f origin HEAD:gotobi-risk
