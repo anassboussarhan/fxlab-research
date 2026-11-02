@@ -1,7 +1,9 @@
-"""Prop-firm and own-account simulations of the Gotobi basket with and without the chosen stop (stop 0.75 W, chosen
-on 2007-2018 in scripts/gotobi_risk_lab.py), at the development edge and at the 2026 edge (every variant shifted by
-the same amount that brings the no-stop basket to its 2026 mean, +2.04 bp). Rules and firms as in final_sims.py.
-Usage: python scripts/stop_sims.py --dir DIR_WITH_trades_basket_*.csv --out DIR"""
+"""Prop-firm and own-account simulations of the Gotobi basket under four exits: no stop, the disaster stops 2.0 W and
+100 bp, and stop 0.75 W (chosen on 2007-2018 in scripts/gotobi_risk_lab.py; it failed the 2026 check). Two edge sizes:
+development, and "2026" (every variant shifted by the same amount that brings the no-stop basket to its 2026 mean,
++2.04 bp; for stop 0.75 W this is optimistic, its real 2026 mean was -1.07 bp). Rules and firms as in final_sims.py.
+Usage: python scripts/stop_sims.py --dir DIR --out DIR [--n 8000]
+  DIR holds the basket trade files of the gotobi-risk branch (trades_basket_<variant>.csv, or renamed basket_*.csv)."""
 from __future__ import annotations
 
 import argparse
@@ -17,13 +19,16 @@ import final_sims as FS  # noqa: E402
 import gotobi_opt_sims as GS  # noqa: E402
 import prop_firms_ev as PF  # noqa: E402
 
-VARIANTS = ("none", "stop_0.75_W", "stop_40_bp")
-LEV_PASS = (3, 5, 8, 10, 15, 20)
-LEV_FUND = (3, 5, 8, 10, 15)
+VARIANTS = ("none", "stop_2.0_W", "stop_100_bp", "stop_0.75_W")
+LEV_PASS = (3, 5, 8, 10, 15)
+LEV_FUND = (3, 5, 8, 10)
 
 
 def load(d, v):
-    f = pd.read_csv(os.path.join(d, f"basket_{v}.csv"), index_col=0, parse_dates=True)
+    p = os.path.join(d, f"basket_{v}.csv")
+    if not os.path.exists(p):
+        p = os.path.join(d, f"trades_basket_{v}.csv")
+    f = pd.read_csv(p, index_col=0, parse_dates=True)
     f.index = pd.DatetimeIndex(f.index).normalize()
     return f[["net", "mae"]].dropna().sort_index()
 

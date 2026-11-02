@@ -27,3 +27,23 @@ the 2019-2025 data; trades whose entry or exit fell in a gap are missing), Yahoo
 - **The Nasdaq overnight and the rebalancing calendar did not work in 2026.**
 - Gold over the 15 days before the Chinese New Year (information only, one event): +0.99%.
 - After this run 2026 is no longer an untouched holdout; later months (November 2026 on) are the next clean test.
+
+## Second use: the stop chosen on 2007-2018 (run 41423405774, pre-registered in the addendum)
+
+The exit rule `scripts/gotobi_risk_lab.py` chose on 2007-2018 (stop 0.75 W; runner-up stop 40 bp) against the
+no-stop rule, on the same 2026 Gotobi days (`scripts/holdout_2026_stop.py`). Open loss = the worst mark-to-market
+loss while the trade is open; CVaR5 = the average of the worst 5% of those.
+
+| Series | Exit | Trades | Mean (bp) | t | Winners | Worst trade (bp) | Worst open loss (bp) | CVaR5 open loss (bp) |
+|---|---|---|---|---|---|---|---|---|
+| Basket | no stop | 53 | **+2.04** | 0.86 | 64% | -40.9 | -110.4 | -79.3 |
+| Basket | stop 0.75 W | 53 | **-1.07** | -0.48 | 57% | -30.9 | -30.9 | -29.7 |
+| Basket | stop 40 bp | 53 | -0.83 | -0.33 | 60% | -40.9 | -43.4 | -42.7 |
+| USD/JPY | no stop / 0.75 W / 40 bp | 46 | +2.41 / -1.21 / -0.76 | | 59% / 52% / 54% | -67.7 / -32.5 / -40.9 | -112.3 / -32.5 / -43.2 | -82.5 / -31.5 / -42.4 |
+| EUR/JPY | no stop / 0.75 W / 40 bp | 51 | +2.01 / +0.17 / -0.50 | | 61% / 59% / 59% | -47.9 / -26.8 / -40.9 | -108.4 / -30.4 / -43.6 | -83.8 / -28.9 / -42.8 |
+
+**Verdict (as pre-registered): both stops cut the losses (open-loss CVaR5 -79 -> -30 / -43 bp) and neither keeps
+the gains** (the mean falls from +2.0 bp to below zero; the threshold was 75% of the no-stop mean). The 2026 trades
+fell overnight and recovered into the 09:55 fix: the no-stop basket's deepest open loss was -110 bp while its worst
+closed trade was -41 bp. The same thing sank H1 (the 0.5-range stop). Wider stops (1.5-2 W, 100 bp) were not run on
+2026 and will not be: 2026 has now been used twice.

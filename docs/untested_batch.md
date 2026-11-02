@@ -969,3 +969,101 @@ gold tests ran); the second run is reported. Twelve primary tests.
 - **Real yields do not time gold:** the rule earns less than holding gold (-33 bp a month); its positive mean is
   gold's own rise. Gold rose about as much in the months the rule was out (Welch t -0.3).
 - **The GLD / GDX pair** is positive but not significant (t 1.6), as CXO found for 2006-2016.
+
+### 9.14 Cutting the losses of the Gotobi trade: stops, targets, hedges, filters (`scripts/gotobi_risk_lab.py`, branch `gotobi-risk`, run 41422655963)
+
+The one surviving trade (long USD/JPY and EUR/JPY 23:00 -> 09:53 Tokyo on Gotobi days) has no stop. Every exit
+rule, hedge and filter below was chosen on 2007-2018 and reported on 2019-2025, net of costs and swap. W = the mean
+range of the 23:00-09:53 window over the previous 20 Gotobi days. Open loss = the worst
+mark-to-market loss while the trade is open (under a stop it includes the low of the minute in which the stop
+fills, so it can exceed the stop); CVaR5 = the average of the worst 5% of open losses. Selection rule, fixed before
+the run: the best mean / -CVaR5 on 2007-2018 among exits keeping at least 75% of the no-stop mean.
+
+**Exits, USD/JPY + EUR/JPY basket (690 trades 2007-2018, 423 trades 2019-2025)**
+
+| Exit | Mean bp train / test | t test | Winners test | Worst trade train / test | CVaR5 open loss train / test |
+|---|---|---|---|---|---|
+| No stop | 4.37 / 4.77 | 3.23 | 58% | -268 / -141 | -139 / -93 |
+| Stop 0.25 W | 1.84 / 1.61 | 1.61 | 39% | -51 / -23 | -39 / -25 |
+| Stop 0.5 W | 3.02 / 3.00 | 2.47 | 50% | -107 / -38 | -65 / -36 |
+| **Stop 0.75 W (chosen)** | 4.36 / 4.10 | 3.01 | 55% | -133 / -56 | -80 / -48 |
+| Stop 1.0 W | 4.25 / 4.36 | 3.14 | 57% | -154 / -69 | -92 / -57 |
+| Stop 1.5 W | 4.58 / 4.75 | 3.31 | 58% | -156 / -101 | -109 / -69 |
+| Stop 2.0 W | 4.28 / 4.89 | 3.40 | 58% | -200 / -96 | -120 / -77 |
+| Stop 25 / 40 / 60 bp | 2.70 / 3.20 / 3.76 train; 3.01 / 4.34 / 4.67 test | 2.5-3.3 | 51-58% | -33 to -71 / -37 to -61 | -37 to -71 / -33 to -60 |
+| **Stop 100 bp** | **4.68 / 4.71** | 3.22 | 58% | **-107 / -109** | -104 / -81 |
+| Stop 1 W + target 0.5 W | 2.05 / 2.33 | 2.25 | **62%** | -124 / -69 | -83 / -57 |
+| Stop 1 W + target 1 W | 4.01 / 3.58 | 2.91 | 57% | -154 / -69 | -88 / -57 |
+| Stop 1 W, break-even at +0.5 W | 3.51 / 3.79 | 2.87 | 55% | -124 / -69 | -84 / -57 |
+| Trailing 0.25 / 0.5 / 1.0 W | -1.90 / 1.62 / 3.13 train | | 34-56% | | |
+| Time cut at 05:00 or 07:00 Tokyo if losing | 4.30-4.63 train / 3.14-4.48 test | 2.2-3.1 | 51-57% | -185 to -228 / -106 to -218 | -117 to -128 / -75 to -87 |
+
+- **There is a level that cuts the losses and keeps the gains in development: a wide stop, 1.5-2 W or about 100
+  bp.** The 100 bp stop kept 107% / 99% of the no-stop mean on 2007-2018 / 2019-2025 and cut the worst trade from
+  -268 / -141 bp to -107 / -109 bp. It is touched on 1-5% of trades (open loss beyond 100 bp: USD/JPY 21 and 6,
+  EUR/JPY 31 and 4 trades); it is a disaster stop.
+- **Tight stops (0.25-0.75 W, 25-40 bp) halve the tail but cost the gain.** The chosen 0.75 W held up on
+  2019-2025 (4.10 bp) but **failed the pre-registered 2026 check**: -1.07 bp vs +2.04 for no stop
+  (`docs/holdout_2026_results.md`). The trade dips overnight and recovers into the fix, so a tight stop sells the
+  low of trades that would have won.
+- **Higher accuracy is available only by giving up the gain:** a 0.5 W target lifts the win rate to 62% and halves
+  the mean. Break-even moves and trailing stops lower the mean; time cuts trim the tail a little and cost gain on 2019-2025.
+- Caveat on fills: a stop is assumed filled at its level unless the minute opens through it. In a flash crash (USD/JPY
+  on 2019-01-03) real fills were far worse.
+
+**Hedges (each pair alone, short beta x a yen cross over the same window, no stop)**
+
+| Hedge | USD/JPY test bp | EUR/JPY test bp | Note |
+|---|---|---|---|
+| None | +4.63 | +5.01 | |
+| Short 0.5 x AUD/JPY, CAD/JPY, GBP/JPY, NZD/JPY | -0.46 to +1.88 | -1.33 to +1.13 | |
+| Short 1.0 x the same | -3.5 to -4.8 | -4.3 to -6.2 | |
+| Short S&P 500 (Dukascopy USA500) | no trades | no trades | the free series has no quotes near the 09:53 Tokyo exit |
+
+- **Hedging with other yen crosses destroys the trade.** On Gotobi nights the crosses rise too (+3.9 to +5.4 bp
+  gross, correlation 0.5-0.8 with the pair), so a short cross gives back that rise plus its wider spread: about -8
+  to -12 bp a full hedge after costs. It can cut volatility (EUR/JPY sd 48 -> 30 bp with GBP/JPY) but it removes
+  the mean with it. The Gotobi move is yen-wide; it cannot be isolated with a cross.
+
+**Filters (skip the night when ...)**
+
+| Filter | USD/JPY bp train / test | EUR/JPY bp train / test |
+|---|---|---|
+| None | 4.99 / 4.63 | 3.98 / 5.01 |
+| FOMC night | 4.35 / 4.93 | 3.24 / 5.19 |
+| VIX > 25 | **5.49 / 2.44** | 4.84 / 4.28 |
+| Prior 24 h fall > 1 W | 3.43 / 2.68 | 2.47 / (2 trades) |
+| Prior 24 h rise > 1 W | **7.37 / 3.81** | 5.35 / (2 trades) |
+
+- **No filter is robust:** the two that looked best on 2007-2018 (skip VIX > 25, skip after a rise) earned less
+  than no filter on 2019-2025. The EUR/JPY prior-move filters kept only 2 test trades, a data fault in that filter's
+  EUR/JPY input, not a result.
+
+**Other ways to raise accuracy, tested on 2007-2025 data afterwards (information, not pre-registered)**
+
+- *Adding CHF/JPY to the basket:* mean 3.72 / 3.42 bp (train / test) vs 4.37 / 4.77, CVaR5 -138 / -88 vs -139 /
+  -93. Less gain for almost no tail cut.
+- *Sizing each trade by the past volatility of the basket* (20 or 60 trades, target and caps fixed on 2007-2018):
+  mean / -CVaR5 falls on 2007-2018 (0.032 -> 0.027; 0.034 -> 0.033); on 2019-2025 it rises only with the 60-trade
+  window (0.051 -> 0.055). Not robust.
+- *The two-pair basket itself is the diversification that works:* winners 58% vs 55% (USD/JPY alone) on 2019-2025,
+  sd 30 vs 32-33 bp, CVaR5 -93 vs -102 (USD/JPY) and -89 (EUR/JPY).
+
+**What the stops do to the prop and own-account simulations** (`scripts/stop_sims.py`, 8,000 attempts a setup,
+results in `docs/final_sims/stops_*.csv`; firms and rules as in `docs/final_outcome.md`; the "2026 edge" shifts
+every exit by the same amount, which flatters stop 0.75 W, whose real 2026 mean was -1.07 bp)
+
+| Exit | FundedNext 2-step 5x / 5x: pass, dev / 2026 edge | Mean net per attempt, dev / 2026 edge | Fails on the daily limit (2026 edge) | Own account 30x, 3 years, 2026 edge: median / P(wipe-out) | Same, development edge |
+|---|---|---|---|---|---|
+| No stop | 40% / 33% | +$5,578 / +$3,759 | 62% | 0.67x / 33% | 2.92x / 17% |
+| Stop 2.0 W | 47% / 36% | +$6,651 / +$4,210 | 50% | 0.84x / 21% | 3.30x / 7% |
+| **Stop 100 bp** | **50% / 39%** | **+$7,345 / +$4,908** | 56% | **1.04x / 15%** | **4.03x / 4%** |
+| Stop 0.75 W | 62% / 33% | +$7,063 / +$2,978 (real 2026 lower) | 7% (fails the 10% total limit instead, 79%) | 0.98x / 10% | 3.72x / 1% |
+
+- **For a prop account the 100 bp disaster stop is worth about +$1,100 an attempt (+30%)** at the 2026 edge on
+  FundedNext 2-step and The5ers (+$4,800 vs +$3,660), and lifts the pass rate by about 6 points: one overnight drop
+  no longer breaks the daily limit. The median attempt still loses the fee.
+- **For the own-account lottery it roughly halves the chance of a wipe-out at 30-40x** and raises the median
+  (2026 edge, 40x: 41% vs 69% wiped out). The best median is still near 15x (1.36x in 3 years at the 2026 edge).
+- The 1-step programmes (3% daily limit) are the exception: only a tight stop gets through them (FundedNext
+  1-step 5x / 3x, pass 30% vs 16%), and the tight stop is the exit that failed in 2026.
