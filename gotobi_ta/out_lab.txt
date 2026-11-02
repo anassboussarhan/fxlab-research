@@ -1,0 +1,47 @@
+USDJPY {'nights': 1067, 'indicators': 64}
+EURJPY {'nights': 1027, 'indicators': 64}
+     series              feature           group outcome               contrast  train_stat  train_p  train_n  test_stat  test_p  test_n  train_rate_high  train_rate_low  test_rate_high  test_rate_low  train_q_bh  confirmed
+88   basket   ta_d_atr_vs_median  known at entry     net  top vs bottom tercile       0.103    0.008      653      0.089   0.084     377              NaN             NaN             NaN            NaN       0.020       True
+200  basket  ta_d_heikin_ashi_up  known at entry     net                 1 vs 0      -0.175    0.000      653     -0.101   0.050     377              NaN             NaN             NaN            NaN       0.000       True
+232  basket        ta_d_pctb_lt0  known at entry     net                 1 vs 0       0.131    0.001      653      0.097   0.060     377              NaN             NaN             NaN            NaN       0.003       True
+252  basket    ta_d_willr_lt_m80  known at entry     net                 1 vs 0       0.165    0.000      653      0.111   0.032     377              NaN             NaN             NaN            NaN       0.000       True
+260  USDJPY  ta_h4_macd_hist_atr  known at entry     net  top vs bottom tercile      -0.133    0.000      690     -0.095   0.070     368              NaN             NaN             NaN            NaN       0.004       True
+456  USDJPY  ta_d_heikin_ashi_up  known at entry     net                 1 vs 0      -0.174    0.000      653     -0.122   0.018     377              NaN             NaN             NaN            NaN       0.001       True
+                                   0                         1                         2                3                         4                         5
+series                        basket                    basket                    basket           USDJPY                    USDJPY                    USDJPY
+model                indicators only  forward-v2's 80 features  80 features + indicators  indicators only  forward-v2's 80 features  80 features + indicators
+features                          64                        80                       144               64                        80                       144
+test_auc                       0.531                     0.622                     0.592            0.581                     0.568                      0.58
+kept_n                           248                       151                       154              279                       182                       197
+kept_mean_bp                   8.096                    13.168                    10.726            7.058                     9.717                     9.245
+kept_t                         4.055                     4.904                     4.063            3.768                     4.268                     4.254
+kept_win                       0.601                     0.695                     0.669            0.584                     0.588                     0.604
+kept_worst_bp               -116.958                  -116.958                  -116.958         -119.436                  -119.436                  -119.436
+kept_per_day_bp                5.326                     5.274                     4.382            5.224                     4.691                     4.831
+skipped_n                        129                       226                       223               98                       195                       180
+skipped_mean_bp               -2.013                    -1.062                     0.432           -2.278                    -0.115                    -0.418
+skipped_t                     -0.807                    -0.574                     0.226           -0.672                    -0.049                    -0.169
+skipped_win                     0.55                     0.509                     0.525            0.439                     0.508                     0.483
+skipped_worst_bp             -140.65                   -140.65                   -140.65         -143.303                  -143.303                  -143.303
+skipped_per_day_bp            -0.689                    -0.637                     0.256           -0.592                     -0.06                    -0.199
+wf_kept_bp                     7.805                     9.145                     7.895              7.8                      8.58                     7.522
+wf_skipped_bp                 -0.383                     -0.93                     0.789            -0.84                     0.496                     1.813
+wf_gap_bp                      8.187                    10.074                     7.106             8.64                     8.084                     5.709
+wf_gap_t                       3.487                      4.35                     3.062            3.262                     3.194                     2.262
+wf_auc                         0.537                     0.583                     0.561            0.547                     0.546                     0.544
+wf_kept_win                    0.591                      0.62                     0.586             0.59                     0.593                     0.587
+wf_years_kept_above               13                        14                        11               11                        12                        10
+{
+ "errors": {
+  "analysis EURJPY": "Traceback (most recent call last):\n  File \"/home/runner/work/fxlab-research/fxlab-research/scripts/gotobi_ta_lab.py\", line 345, in main\n    L.feature_tests(s, TA[s], base.net, L.outcomes(base, Wr[s]), tests)\n    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/home/runner/work/fxlab-research/fxlab-research/scripts/gotobi_losses_lab.py\", line 262, in feature_tests\n    D[\"confirmed\"] = ((D.train_q_bh <= 0.10) & (np.sign(D.train_stat) == np.sign(D.get(\"test_stat\")))\n                                                                         ~~~~~~~^^^^^^^^^^^^^^^^^^^^\nTypeError: '<' not supported between instances of 'NoneType' and 'int'\n"
+ },
+ "forward_v3_rule": {
+  "gap_bp": 7.105714213051792,
+  "ref_gap_bp": 10.074457964177636,
+  "test_auc": 0.5915170816444701,
+  "ref_test_auc": 0.6222929936305733,
+  "wf_auc": 0.5610661268556005,
+  "ref_wf_auc": 0.5832936413431771,
+  "qualifies_for_forward_v3": false
+ }
+}
