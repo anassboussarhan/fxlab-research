@@ -1,5 +1,7 @@
-"""Two practical checks for running the Gotobi trade on a prop account, on 2007-2018 nights only (the M1 store held
-locally; no 2019+ or 2026 data is read).
+"""Practical checks for running the Gotobi trade on a prop account, on 2007-2025 development nights (2007-2018 and
+2019-2025 reported apart; nothing from 2026). Added 2026-11-03: Maven's daily loss from the higher of balance and
+equity at 00:00 UTC (only the 2019-2025 files have 00:00-01:00 UTC bars), and the nights whose 14:00 UTC entry falls
+on a scheduled US release (calendar dataset, 2017-2023; --raw DIR).
 1. MIDNIGHT RULE: The5ers measures the daily loss from the higher of balance and equity at MT5 server midnight
    (17:00 New York = 21:00 UTC in US summer time, 22:00 UTC otherwise), which falls inside the 14:00 -> 00:53 UTC trade.
    For each night: the basket's open P&L path with the 80 bp stop; "old" = the worst open loss (what the prop
@@ -51,6 +53,7 @@ def leg(bk, i, j):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
+    ap.add_argument("--raw", default="raw")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     paths, delay = {}, {}
@@ -60,7 +63,7 @@ def main():
         G, _, _ = F.calendar(bk)
         P_, D_ = {}, {}
         for d in G:
-            if pd.Timestamp(d) > pd.Timestamp("2018-12-31"):
+            if pd.Timestamp(d) > pd.Timestamp("2025-12-31"):
                 continue
             i0, j = F.window(bk, d)
             if i0 < 0 or not np.isfinite([bk.bo[i0], bk.ao[i0], bk.bo[j]]).all():
@@ -87,19 +90,57 @@ def main():
         ref = max(at_mid, 0.0)
         d1 = -min(before.min() if len(before) else 0.0, 0.0)
         d2 = ref - min(after.min() if len(after) else ref, ref)
+        mz = pd.Timestamp(pd.Timestamp(d).date()).tz_localize("UTC")          # Maven: 00:00 UTC on the Gotobi day
+        bz, az = pth[pth.index < mz], pth[pth.index >= mz]
+        has0 = bool(len(az) and (az.index[0] - mz) <= pd.Timedelta(minutes=5))
+        atz = float(bz.iloc[-1]) if len(bz) else 0.0
+        refz = max(atz, 0.0)
+        mav = max(-min(bz.min() if len(bz) else 0.0, 0.0), refz - min(az.min() if len(az) else refz, refz)) if has0 else np.nan
         rows.append({"date": d, "open_pnl_at_midnight": at_mid, "old": -min(pth.min(), 0.0), "fivers": max(d1, d2),
-                     "midnight_utc_hour": mid.hour})
+                     "midnight_utc_hour": mid.hour, "maven": mav, "net_path_end": float(pth.iloc[-1])})
     M = pd.DataFrame(rows).set_index("date")
-    M.to_csv(os.path.join(a.out, "midnight_2007_2018.csv"))
-    out = {"nights": int(len(M)), "midnight": {}, "delay": {}}
-    for L in (3, 3.5, 4, 4.5, 5, 6):
-        lim = 0.05 / L
-        out["midnight"][f"{L}x"] = {"breaches_old": int((M.old >= lim).sum()), "breaches_fivers": int((M.fivers >= lim).sum())}
+    M.index = pd.DatetimeIndex(M.index)
+    M.to_csv(os.path.join(a.out, "midnight_2007_2025.csv"))
+    out = {"nights": int(len(M)), "midnight": {}, "maven_0000utc_4pct_daily": {}, "delay": {}}
+    for per, m in (("2007-2018", M.index <= "2018-12-31"), ("2019-2025", M.index > "2018-12-31")):
+        X = M[m]
+        out["midnight"][per] = {f"{L}x": {"breaches_old": int((X.old >= 0.05 / L).sum()),
+                                          "breaches_fivers": int((X.fivers >= 0.05 / L).sum())} for L in (3, 3.5, 4, 4.5, 5, 6)}
+        X2 = X[X.maven.notna()]
+        out["maven_0000utc_4pct_daily"][per] = {"nights_with_00utc_bars": int(len(X2)), **{
+            f"{L}x": {"breaches_old": int((X2.old >= 0.04 / L).sum()), "breaches_maven": int((X2.maven >= 0.04 / L).sum())}
+            for L in (3, 3.5, 4)}}
     Bk = ((delay["USDJPY"] + delay["EURJPY"].reindex(delay["USDJPY"].index)) / 2).dropna()
-    for k in DELAYS:
-        dd = Bk[k] - Bk[0]
-        t = float(dd.mean() / dd.std() * np.sqrt(len(dd))) if dd.std() > 0 else 0.0
-        out["delay"][f"+{k} min"] = {"mean_gross_bp": float(Bk[k].mean() * 1e4), "diff_bp": float(dd.mean() * 1e4), "t": t}
+    Bk.index = pd.DatetimeIndex(Bk.index)
+    for per, m in (("2007-2018", Bk.index <= "2018-12-31"), ("2019-2025", Bk.index > "2018-12-31")):
+        X = Bk[m]
+        out["delay"][per] = {}
+        for k in DELAYS:
+            dd = X[k] - X[0]
+            t = float(dd.mean() / dd.std() * np.sqrt(len(dd))) if dd.std() > 0 else 0.0
+            out["delay"][per][f"+{k} min"] = {"n": int(len(X)), "mean_gross_bp": float(X[k].mean() * 1e4),
+                                              "diff_bp": float(dd.mean() * 1e4), "t": t}
+    # nights whose 14:00 UTC entry falls on a scheduled US release (calendar dataset 2017-2023)
+    import glob as _g
+    rel = []
+    for f in _g.glob(os.path.join(a.raw, "**", "calendar_repo", "news_data", "1*_US_*.csv"), recursive=True) + \
+            _g.glob(os.path.join(a.raw, "**", "calendar_repo", "news_data", "102*_*.csv"), recursive=True):
+        try:
+            d = pd.read_csv(f, usecols=["Timestamp"])
+            ts = pd.to_datetime(d.Timestamp)
+            rel += [(t, os.path.basename(f)[:-4]) for t in ts if t.hour == 14 and t.minute <= 5]
+        except Exception:                                                   # noqa: BLE001
+            pass
+    R_ = pd.DataFrame(rel, columns=["ts", "release"]).drop_duplicates()
+    entry = pd.Series(M.index - pd.Timedelta(days=1), index=M.index)
+    clash = {d: ", ".join(sorted(set(R_[R_.ts.dt.normalize() == e].release))) for d, e in entry.items()
+             if (R_.ts.dt.normalize() == e).any()}
+    span = (M.index >= "2017-01-01") & (M.index <= "2023-12-31")
+    cl = pd.Series(clash)
+    out["news_at_entry"] = {"gotobi_nights_2017_2023": int(span.sum()), "nights_with_a_14utc_release": int(len(cl)),
+                            "examples": {str(k.date()): v for k, v in list(cl.items())[:12]},
+                            "net_path_end_bp_on_clash_nights": float(M.net_path_end.reindex(cl.index).mean() * 1e4) if len(cl) else None,
+                            "net_path_end_bp_other_nights_2017_2023": float(M.net_path_end[span & ~M.index.isin(cl.index)].mean() * 1e4)}
     out["delay_nights"] = int(len(Bk))
     json.dump(out, open(os.path.join(a.out, "checks.json"), "w"), indent=1)
     print(json.dumps(out, indent=1))

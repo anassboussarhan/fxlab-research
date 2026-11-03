@@ -1,0 +1,42 @@
+name: misc
+# Runs ci/misc_job.sh (data fetch + commands) and publishes out/ to the misc-<tag> branch. ci/MISC: TAG
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/MISC"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays yfinance lunardate statsmodels requests
+      - name: Job
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/misc_job.sh 2>&1 | tee misc_log.txt
+      - name: Publish
+        if: always()
+        run: |
+          TAG=$(cut -d' ' -f1 ci/MISC)
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out && cp misc_log.txt out/
+          cp -r out /tmp/pub
+          git checkout --orphan misc-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p misc && cp -r /tmp/pub/* misc/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > misc/RUN.txt
+          git add -f misc
+          git commit -qm "misc $TAG (run ${{ github.run_id }})"
+          git push -f origin HEAD:misc-$TAG

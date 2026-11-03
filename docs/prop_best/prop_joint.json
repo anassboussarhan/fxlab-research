@@ -1,0 +1,41 @@
+{
+ "2019-2025": {
+  "paid_each": {
+   "FTMO 2-Step": 0.801,
+   "FundedNext Stellar 1-Step": 0.8155,
+   "The5ers High Stakes Classic": 0.843625
+  },
+  "paid_at_least_one": 0.874125,
+  "paid_all": 0.793,
+  "mean_total_net": 29105.77836762513,
+  "median_total_net": 15012.76207658266,
+  "share_total_positive": 0.811125,
+  "fees": 1645.99
+ },
+ "2026": {
+  "paid_each": {
+   "FTMO 2-Step": 0.449875,
+   "FundedNext Stellar 1-Step": 0.459125,
+   "The5ers High Stakes Classic": 0.4085
+  },
+  "paid_at_least_one": 0.4665,
+  "paid_all": 0.4085,
+  "mean_total_net": 13598.33156615159,
+  "median_total_net": -1645.99,
+  "share_total_positive": 0.423375,
+  "fees": 1645.99
+ },
+ "zero": {
+  "paid_each": {
+   "FTMO 2-Step": 0.30925,
+   "FundedNext Stellar 1-Step": 0.296375,
+   "The5ers High Stakes Classic": 0.243375
+  },
+  "paid_at_least_one": 0.32025,
+  "paid_all": 0.243375,
+  "mean_total_net": 6016.530478298831,
+  "median_total_net": -1645.99,
+  "share_total_positive": 0.26975,
+  "fees": 1645.99
+ }
+}
