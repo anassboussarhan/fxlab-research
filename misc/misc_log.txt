@@ -1,0 +1,212 @@
+AUDNZD 2025 1 parts 321209 minutes
+0 manifest records; 0 not ok
+AUDNZD years: 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+EURGBP 2025 1 parts 317724 minutes
+0 manifest records; 0 not ok
+EURGBP years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+GBPCAD 2025 1 parts 337544 minutes
+0 manifest records; 0 not ok
+GBPCAD years: 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+XAUUSD 2025 1 parts 332486 minutes
+0 manifest records; 0 not ok
+XAUUSD years: 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+EURUSD 2025 1 parts 326590 minutes
+0 manifest records; 0 not ok
+EURUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+GBPUSD 2025 1 parts 344230 minutes
+0 manifest records; 0 not ok
+GBPUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDJPY 2025 1 parts 366567 minutes
+0 manifest records; 0 not ok
+USDJPY years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDCHF 2025 1 parts 342552 minutes
+0 manifest records; 0 not ok
+USDCHF years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDCAD 2025 1 parts 333038 minutes
+0 manifest records; 0 not ok
+USDCAD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+AUDUSD 2025 1 parts 231697 minutes
+0 manifest records; 0 not ok
+AUDUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+NZDUSD 2025 1 parts 334637 minutes
+0 manifest records; 0 not ok
+NZDUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+{
+ "E26": {
+  "test": "E26 dollar 48h -> 15 min before Fed decisions, in the expected direction (information only)",
+  "decisions_2017_2023": 56,
+  "with_expected_change": 18,
+  "priced": 18,
+  "net_bp": -18.614709628278074,
+  "t": -1.397974998015587,
+  "gross_bp": -16.910189098517,
+  "win": 0.3888888888888889,
+  "hikes": {
+   "n": 15,
+   "net_bp": -24.225399147826085
+  },
+  "cuts": {
+   "n": 3,
+   "net_bp": 9.438737969462005
+  }
+ },
+ "E25_probe": {
+  "pages": {
+   "https://www.mof.go.jp/english/policy/jgbs/auction/past_auction_results/index.html": {
+    "status": 200,
+    "bytes": 16781
+   },
+   "https://www.mof.go.jp/jgbs/reference/appendix/index.html": {
+    "status": 404,
+    "bytes": 20481
+   },
+   "https://www.mof.go.jp/jgbs/auction/past_auction_results/index.html": {
+    "status": 404,
+    "bytes": 20481
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/calendar/0701e.htm": {
+    "status": 404,
+    "bytes": 20480
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/calendar/1501e.htm": {
+    "status": 404,
+    "bytes": 20480
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/calendar/2001e.htm": {
+    "status": 404,
+    "bytes": 20481
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/calendar/2501e.htm": {
+    "status": 200,
+    "bytes": 29828
+   }
+  },
+  "files": {
+   "https://www.mof.go.jp/english/policy/jgbs/auction/past_auction_results/Auction_Results_for_JGBs.xls": {
+    "status": 200,
+    "bytes": 494080,
+    "parse": "ImportError('`Import xlrd` failed. Install xlrd >= 2.0.1 for xls Excel support Use pip or conda to install the xlrd package.')"
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/past_auction_results/Auction_Results_for_T-bills.xls": {
+    "status": 200,
+    "bytes": 357376,
+    "parse": "ImportError('`Import xlrd` failed. Install xlrd >= 2.0.1 for xls Excel support Use pip or conda to install the xlrd package.')"
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/past_auction_results/e-ryudousei_historical_data.xls": {
+    "status": 200,
+    "bytes": 391168,
+    "parse": "ImportError('`Import xlrd` failed. Install xlrd >= 2.0.1 for xls Excel support Use pip or conda to install the xlrd package.')"
+   }
+  }
+ }
+}
+AUDNZD i7 8437
+EURGBP i7 7824
+GBPCAD i7 6260
+XAUUSD i9 3431
+XAUUSD e14 707
+XAUUSD e18 1572
+EURUSD e14 766
+EURUSD e18 4134
+GBPUSD e14 780
+GBPUSD e18 4558
+USDJPY e14 811
+USDJPY e18 3784
+USDCHF e14 724
+USDCAD e14 681
+AUDUSD e14 737
+NZDUSD e14 754
+{
+ "E14 end-of-day momentum": {
+  "2010-2018": {
+   "all_trades": 2851,
+   "all_net_bp": -1.5596981965612222,
+   "all_gross_bp": 1.3069005196687284,
+   "kept": 892,
+   "kept_net_bp": -0.6899505043756621,
+   "kept_gross_bp": 2.333384164442768,
+   "kept_t": -0.9519277023204643,
+   "pred_gross_corr": 0.13376219775310844
+  },
+  "2019-2025": {
+   "all_trades": 1693,
+   "all_net_bp": -1.621550941072562,
+   "all_gross_bp": 1.0908329099205656,
+   "kept": 521,
+   "kept_net_bp": -1.710545003974238,
+   "kept_gross_bp": 1.2734950666607558,
+   "kept_t": -2.3060123439136864,
+   "pred_gross_corr": 0.05987574565504136
+  },
+  "counts": false
+ },
+ "E18 round numbers": {
+  "2010-2018": {
+   "all_trades": 6575,
+   "all_net_bp": -2.5348836633883596,
+   "all_gross_bp": -1.6657099506740796,
+   "kept": 806,
+   "kept_net_bp": -2.312111225137908,
+   "kept_gross_bp": -1.3853203862031966,
+   "kept_t": -4.72012702514654,
+   "pred_gross_corr": 0.07830376815396803
+  },
+  "2019-2025": {
+   "all_trades": 5047,
+   "all_net_bp": -2.174494745857685,
+   "all_gross_bp": -1.2928151939774826,
+   "kept": 530,
+   "kept_net_bp": -1.386846815245156,
+   "kept_gross_bp": -0.47712121807534463,
+   "kept_t": -2.0213848574653075,
+   "pred_gross_corr": 0.11143795633204592
+  },
+  "counts": false
+ },
+ "I7 night fade": {
+  "2010-2018": {
+   "all_trades": 9872,
+   "all_net_bp": -5.24456772470789,
+   "all_gross_bp": 1.670655099051674,
+   "kept": 2435,
+   "kept_net_bp": -4.413022004485427,
+   "kept_gross_bp": 1.8260581784459418,
+   "kept_t": -17.598168674761645,
+   "pred_gross_corr": 0.03051219630517494
+  },
+  "2019-2025": {
+   "all_trades": 11102,
+   "all_net_bp": -8.484077085323051,
+   "all_gross_bp": 1.6792501873884498,
+   "kept": 1097,
+   "kept_net_bp": -4.088787850239424,
+   "kept_gross_bp": 2.2099639509190054,
+   "kept_t": -12.218366320167089,
+   "pred_gross_corr": 0.17876386133011649
+  },
+  "counts": false
+ },
+ "I9 gold London breakout": {
+  "2010-2018": {
+   "all_trades": 1369,
+   "all_net_bp": -0.5052345914151657,
+   "all_gross_bp": 4.150708455412075,
+   "kept": 760,
+   "kept_net_bp": 1.6061293062786328,
+   "kept_gross_bp": 6.1199341881409195,
+   "kept_t": 0.8606614377233326,
+   "pred_gross_corr": 0.01759523476099221
+  },
+  "2019-2025": {
+   "all_trades": 1641,
+   "all_net_bp": -0.9410198403316969,
+   "all_gross_bp": 2.51937028945994,
+   "kept": 836,
+   "kept_net_bp": -1.0323957129648385,
+   "kept_gross_bp": 2.6143672983056683,
+   "kept_t": -0.49871357709305897,
+   "pred_gross_corr": 0.00025701765632069577
+  },
+  "counts": false
+ }
+}

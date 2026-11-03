@@ -1,0 +1,69 @@
+{
+ "E26": {
+  "test": "E26 dollar 48h -> 15 min before Fed decisions, in the expected direction (information only)",
+  "decisions_2017_2023": 56,
+  "with_expected_change": 18,
+  "priced": 18,
+  "net_bp": -18.614709628278074,
+  "t": -1.397974998015587,
+  "gross_bp": -16.910189098517,
+  "win": 0.3888888888888889,
+  "hikes": {
+   "n": 15,
+   "net_bp": -24.225399147826085
+  },
+  "cuts": {
+   "n": 3,
+   "net_bp": 9.438737969462005
+  }
+ },
+ "E25_probe": {
+  "pages": {
+   "https://www.mof.go.jp/english/policy/jgbs/auction/past_auction_results/index.html": {
+    "status": 200,
+    "bytes": 16781
+   },
+   "https://www.mof.go.jp/jgbs/reference/appendix/index.html": {
+    "status": 404,
+    "bytes": 20481
+   },
+   "https://www.mof.go.jp/jgbs/auction/past_auction_results/index.html": {
+    "status": 404,
+    "bytes": 20481
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/calendar/0701e.htm": {
+    "status": 404,
+    "bytes": 20480
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/calendar/1501e.htm": {
+    "status": 404,
+    "bytes": 20480
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/calendar/2001e.htm": {
+    "status": 404,
+    "bytes": 20481
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/calendar/2501e.htm": {
+    "status": 200,
+    "bytes": 29828
+   }
+  },
+  "files": {
+   "https://www.mof.go.jp/english/policy/jgbs/auction/past_auction_results/Auction_Results_for_JGBs.xls": {
+    "status": 200,
+    "bytes": 494080,
+    "parse": "ImportError('`Import xlrd` failed. Install xlrd >= 2.0.1 for xls Excel support Use pip or conda to install the xlrd package.')"
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/past_auction_results/Auction_Results_for_T-bills.xls": {
+    "status": 200,
+    "bytes": 357376,
+    "parse": "ImportError('`Import xlrd` failed. Install xlrd >= 2.0.1 for xls Excel support Use pip or conda to install the xlrd package.')"
+   },
+   "https://www.mof.go.jp/english/policy/jgbs/auction/past_auction_results/e-ryudousei_historical_data.xls": {
+    "status": 200,
+    "bytes": 391168,
+    "parse": "ImportError('`Import xlrd` failed. Install xlrd >= 2.0.1 for xls Excel support Use pip or conda to install the xlrd package.')"
+   }
+  }
+ }
+}
