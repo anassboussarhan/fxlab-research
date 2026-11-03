@@ -87,3 +87,21 @@ forward nights.
 **FW2:** the mean of the 80 bp stop nights on the 5th, 10th, 15th and 20th, against the 25th and month-end, with
 the Welch t of the difference. The slot comes from the lab's `day_25` and `month_end` features. Information only,
 no verdict.
+
+## Addendum 4 (2026-11-03, before the first forward night): FW3, half size after a losing month (exploratory)
+
+The rule was found by looking at the development data, so it is judged only on forward nights.
+- **What the development data showed:**
+  - Monthly returns of the 80 bp stop basket have lag-1 autocorrelation +0.13.
+  - The month after a losing month averaged +9.9 bp, against +32.8 bp after a winning month.
+- **The rule at 4x:** half size for a whole calendar month after a month whose summed net was below zero.
+- **Its effect in development:**
+
+  | Period | Max drawdown | CAGR | Monthly Sharpe |
+  |---|---|---|---|
+  | 2007-2018 | 23.1% -> 13.1% | 9.9% -> 9.1% | 0.80 -> 0.91 |
+  | 2019-2025 | 12.4% -> 8.0% | 12.3% -> 11.4% | 1.40 -> 1.50 |
+
+**FW3:** each month's size multiplier (1 or 0.5) is set from the previous month's forward net. Reported against
+the fixed size on the same nights: the total, the maximum drawdown, and the worst month. Information only, no
+verdict. It changes nothing in the primary rule.
