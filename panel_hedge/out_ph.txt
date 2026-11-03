@@ -1,0 +1,32 @@
+USTBONDTRUSD 2018-01-04 20:53:00+00:00 2024-04-15 23:59:00+00:00
+BUNDTREUR 2018-05-03 06:01:00+00:00 2024-08-19 19:59:00+00:00
+USA500IDXUSD 2012-01-19 16:20:00+00:00 2024-05-23 23:59:00+00:00
+USATECHIDXUSD 2012-01-19 16:15:00+00:00 2025-12-12 21:14:00+00:00
+JPNIDXJPY 2012-02-06 00:00:00+00:00 2024-04-09 23:59:00+00:00
+XAUUSD 2011-05-10 09:00:00+00:00 2025-12-30 23:59:00+00:00
+       instrument        window   beta  fit_corr  fit_n  fit_B0_bp  fit_hedged_bp  fit_B0_t  fit_hedged_t  fit_B0_sd_bp  fit_hedged_sd_bp  check_n  check_B0_bp  check_hedged_bp  check_B0_t  check_hedged_t  check_B0_sd_bp  check_hedged_sd_bp  p_var rules_met                    status  holm_p  counts
+0    USTBONDTRUSD  14:00->00:53 -0.302    -0.502  178.0      7.436          4.981     3.851         2.986        25.761            22.255     69.0        4.354            2.788       1.265           0.981          28.601              23.614  0.003     False                       NaN   0.025   False
+1    USTBONDTRUSD             b    NaN       NaN    NaN        NaN            NaN       NaN           NaN           NaN               NaN      NaN          NaN              NaN         NaN             NaN             NaN                 NaN    NaN       NaN  too few nights (69 / 29)     NaN   False
+2       BUNDTREUR             a    NaN       NaN    NaN        NaN            NaN       NaN           NaN           NaN               NaN      NaN          NaN              NaN         NaN             NaN             NaN                 NaN    NaN       NaN                 no trades     NaN   False
+3       BUNDTREUR             b    NaN       NaN    NaN        NaN            NaN       NaN           NaN           NaN               NaN      NaN          NaN              NaN         NaN             NaN             NaN                 NaN    NaN       NaN                 no trades     NaN   False
+4    USA500IDXUSD  14:00->00:53  0.098     0.389  206.0      6.383          5.531     3.584         3.372        25.564            23.546     69.0        2.230            1.559       0.581           0.397          31.864              32.599  0.845     False                       NaN   1.000   False
+5    USA500IDXUSD  14:00->21:00  0.091     0.353   78.0      2.873          2.813     0.929         0.972        27.304            25.551     30.0        7.719            7.924       1.107           1.090          38.208              39.826  0.921     False                       NaN   1.000   False
+6   USATECHIDXUSD  14:00->00:53  0.067     0.347  221.0      6.600          5.545     3.768         3.374        26.040            24.432    155.0        2.536            1.752       0.896           0.636          35.242              34.325  0.078     False                       NaN   0.543   False
+7   USATECHIDXUSD  14:00->21:00  0.068     0.357   81.0      3.066          2.450     1.029         0.880        26.814            25.051     51.0        9.403            9.632       1.612           1.573          41.659              43.728  0.985     False                       NaN   1.000   False
+8       JPNIDXJPY  14:00->00:53  0.157     0.526  203.0      6.654          4.186     3.947         2.919        24.017            20.428     62.0        2.139            0.415       0.546           0.110          30.859              29.645  0.212     False                       NaN   1.000   False
+9       JPNIDXJPY             b    NaN       NaN    NaN        NaN            NaN       NaN           NaN           NaN               NaN      NaN          NaN              NaN         NaN             NaN             NaN                 NaN    NaN       NaN  too few nights (42 / 30)     NaN   False
+10         XAUUSD  14:00->00:53 -0.177    -0.402  203.0      5.909          4.833     3.306         2.949        25.466            23.354    163.0        3.826            4.844       1.398           1.818          34.940              34.015  0.091     False                       NaN   0.545   False
+11         XAUUSD  14:00->21:00 -0.154    -0.314   78.0      2.491          1.321     0.817         0.457        26.909            25.551     57.0       11.519           10.974       2.102           2.032          41.380              40.766  0.307     False                       NaN   1.000   False
+       instrument            signal  fit_n  fit_rho  fit_p  check_n  check_rho  check_p_one_sided   bh_q  counts
+0    USTBONDTRUSD  12:00->14:00 UTC    200   -0.095  0.179       73      0.075              0.737  0.810   False
+1    USTBONDTRUSD  08:00->14:00 UTC    200   -0.072  0.311       73      0.131              0.865  0.865   False
+2       BUNDTREUR  12:00->14:00 UTC    215   -0.145  0.033       89     -0.052              0.315  0.473   False
+3       BUNDTREUR  08:00->14:00 UTC    215   -0.126  0.065       89     -0.144              0.090  0.359   False
+4    USA500IDXUSD  12:00->14:00 UTC    221   -0.217  0.001       79     -0.082              0.238  0.473   False
+5    USA500IDXUSD  08:00->14:00 UTC    221   -0.214  0.001       79     -0.213              0.030  0.317   False
+6   USATECHIDXUSD  12:00->14:00 UTC    230   -0.225  0.001      164     -0.051              0.259  0.473   False
+7   USATECHIDXUSD  08:00->14:00 UTC    231   -0.195  0.003      164     -0.127              0.053  0.317   False
+8       JPNIDXJPY  12:00->14:00 UTC    219   -0.116  0.087       71     -0.058              0.315  0.473   False
+9       JPNIDXJPY  08:00->14:00 UTC    219   -0.143  0.035       71     -0.075              0.267  0.473   False
+10         XAUUSD  12:00->14:00 UTC    224   -0.093  0.166      173      0.050              0.742  0.810   False
+11         XAUUSD  08:00->14:00 UTC    224   -0.027  0.687      173      0.020              0.603  0.803   False
