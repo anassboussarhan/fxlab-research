@@ -1,0 +1,56 @@
+USDJPY 2025 1 parts 366567 minutes
+0 manifest records; 0 not ok
+USDJPY years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+EURUSD 2025 1 parts 326590 minutes
+0 manifest records; 0 not ok
+EURUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+GBPUSD 2025 1 parts 344230 minutes
+0 manifest records; 0 not ok
+GBPUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+AUDUSD 2025 1 parts 231697 minutes
+0 manifest records; 0 not ok
+AUDUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+{
+ "E26": {
+  "test": "E26 dollar 48h -> 15 min before Fed decisions, in the expected direction (information only)",
+  "decisions_2017_2023": 56,
+  "with_expected_change": 18,
+  "priced": 18,
+  "net_bp": -18.614709628278074,
+  "t": -1.397974998015587,
+  "gross_bp": -16.910189098517,
+  "win": 0.3888888888888889,
+  "hikes": {
+   "n": 15,
+   "net_bp": -24.225399147826085
+  },
+  "cuts": {
+   "n": 3,
+   "net_bp": 9.438737969462005
+  }
+ },
+ "E25": {
+  "auction_days": 422,
+  "first": "2007-01-10",
+  "windows": {
+   "before 00:00->03:00": {
+    "events": 402,
+    "direction_from_fit": "short",
+    "fit_gross_bp": -0.6356993775634874,
+    "check_n": 165,
+    "check_net_bp": -3.1667693922693148,
+    "check_t": -2.0505885492404303,
+    "counts": false
+   },
+   "after 03:40->08:00": {
+    "events": 402,
+    "direction_from_fit": "long",
+    "fit_gross_bp": 0.23315401952181883,
+    "check_n": 165,
+    "check_net_bp": -1.9714076709277517,
+    "check_t": -1.1833972984466914,
+    "counts": false
+   }
+  }
+ }
+}
