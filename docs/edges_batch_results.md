@@ -241,3 +241,29 @@ change. FS1's correction is still taken over all 58,920 tests.
        ones that happened to trend in 2019-2025.
   - **Status:** a forward watch list (FS1-W), not a trading plan. Promoting any of them would need its own
     pre-registered forward test on data after 2026-11-03; the 2026 holdout stays locked.
+
+
+## External verification report (2026-11-03) and the timing audit of the frozen basket (CI misc-strict)
+
+The report audits the trade-log archive and **F1**, the older USD/JPY-only 03:00 -> 09:55 Tokyo variant. Its
+findings on the archive (nothing survives costs or correction) agree with this repository's. For the frozen basket
+B0 (USD/JPY + EUR/JPY, 23:00 -> 09:53 Tokyo, 80 bp stop):
+
+- **Exit timing** (`scripts/gotobi_strict_timing.py`):
+  - **2019-2025:** 835 of 838 leg exits are exact (within 2 minutes); 3 are late, at most 7 minutes.
+  - With strict endpoints (416 nights) the gross is the same, +5.41 bp, t 3.80.
+  - **2007-2018:** every exit is 7-8 minutes late, because those files have no 00:00-01:00 UTC bars. The 2007-2018
+    figures are for an exit at about 01:00 UTC, not 00:53.
+- **Extra cost** (net per night, t), from `docs/gotobi_losses/trades_basket_stop_80_bp.csv`:
+
+  | Period | Nights | Recorded | +1 bp | +2 bp |
+  |---|---|---|---|---|
+  | 2007-2018 | 690 | +4.40 (2.91) | +3.40 (2.25) | +2.40 (1.59) |
+  | 2019-2025 | 423 | +4.96 (3.48) | +3.96 (2.77) | +2.96 (2.07) |
+  | 2023-2025 | 182 | +3.05 (1.21) | +2.05 (0.82) | +1.05 (0.42) |
+  | 2024-2025 | 121 | +3.02 (0.95) | +2.02 (0.64) | +1.02 (0.32) |
+
+- **As the report says, the recent years alone do not establish the edge.** 2023-2025 is positive but not
+  significant, and an extra 1-2 bp of real cost removes most of it.
+- **The 2026 holdout has been opened once** (`docs/holdout_2026_preregistration.md`), so it is no longer untouched.
+  The genuinely new sample is the forward test from 2026-11-05.
