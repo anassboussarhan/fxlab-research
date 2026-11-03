@@ -1,0 +1,74 @@
+name: ml-confidence
+# scripts/ml_confidence_lab.py: E20 / E22 of docs/edges_batch_preregistration.md (confidence curve of the
+# fixed-barrier ML entries, M15-H4, 11 FX pairs and gold, 2007-2025). ci/ML_CONF: PANEL_DATA_RUN
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/ML_CONF"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  OMP_NUM_THREADS: "4"
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        include: [{"symbol": "EURUSD", "tf": "H4"}, {"symbol": "GBPUSD", "tf": "H4"}, {"symbol": "USDJPY", "tf": "H4"}, {"symbol": "AUDUSD", "tf": "H4"}, {"symbol": "USDCAD", "tf": "H4"}, {"symbol": "USDCHF", "tf": "H4"}, {"symbol": "NZDUSD", "tf": "H4"}, {"symbol": "EURJPY", "tf": "H4"}, {"symbol": "EURGBP", "tf": "H4"}, {"symbol": "AUDNZD", "tf": "H4"}, {"symbol": "GBPCAD", "tf": "H4"}, {"symbol": "XAUUSD", "tf": "H4"}, {"symbol": "EURUSD", "tf": "H1"}, {"symbol": "GBPUSD", "tf": "H1"}, {"symbol": "USDJPY", "tf": "H1"}, {"symbol": "AUDUSD", "tf": "H1"}, {"symbol": "USDCAD", "tf": "H1"}, {"symbol": "USDCHF", "tf": "H1"}, {"symbol": "NZDUSD", "tf": "H1"}, {"symbol": "EURJPY", "tf": "H1"}, {"symbol": "EURGBP", "tf": "H1"}, {"symbol": "AUDNZD", "tf": "H1"}, {"symbol": "GBPCAD", "tf": "H1"}, {"symbol": "XAUUSD", "tf": "H1"}, {"symbol": "EURUSD", "tf": "M30"}, {"symbol": "GBPUSD", "tf": "M30"}, {"symbol": "USDJPY", "tf": "M30"}, {"symbol": "AUDUSD", "tf": "M30"}, {"symbol": "USDCAD", "tf": "M30"}, {"symbol": "USDCHF", "tf": "M30"}, {"symbol": "NZDUSD", "tf": "M30"}, {"symbol": "EURJPY", "tf": "M30"}, {"symbol": "EURGBP", "tf": "M30"}, {"symbol": "AUDNZD", "tf": "M30"}, {"symbol": "GBPCAD", "tf": "M30"}, {"symbol": "XAUUSD", "tf": "M30"}, {"symbol": "EURUSD", "tf": "M15"}, {"symbol": "GBPUSD", "tf": "M15"}, {"symbol": "USDJPY", "tf": "M15"}, {"symbol": "AUDUSD", "tf": "M15"}, {"symbol": "USDCAD", "tf": "M15"}, {"symbol": "USDCHF", "tf": "M15"}, {"symbol": "NZDUSD", "tf": "M15"}, {"symbol": "EURJPY", "tf": "M15"}, {"symbol": "EURGBP", "tf": "M15"}, {"symbol": "AUDNZD", "tf": "M15"}, {"symbol": "GBPCAD", "tf": "M15"}, {"symbol": "XAUUSD", "tf": "M15"}]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt statsmodels
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD REST < ci/ML_CONF
+          ci/fetch_m1.sh $PD ${{ matrix.symbol }}
+      - run: python -W ignore scripts/ml_confidence_lab.py --symbol ${{ matrix.symbol }} --tf ${{ matrix.tf }} --out out/mc
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: mc-${{ matrix.symbol }}-${{ matrix.tf }}
+          path: out/mc
+          retention-days: 30
+  combine:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt statsmodels
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: mc-*
+          path: mc
+          merge-multiple: true
+      - run: python -W ignore scripts/ml_confidence_lab.py --combine mc --out pub 2>&1 | tee combine_log.txt
+      - name: Publish to the ml-confidence branch (summaries and per-trade returns, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/runs && cp mc/tests_*.csv mc/trades_*.csv.gz pub/runs/ 2>/dev/null || true
+          cp combine_log.txt pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          git checkout --orphan mc-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p ml_confidence && cp -r /tmp/pub/* ml_confidence/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > ml_confidence/RUN.txt
+          git add -f ml_confidence
+          git commit -qm "ML confidence curve (run ${{ github.run_id }})"
+          git push -f origin HEAD:ml-confidence
