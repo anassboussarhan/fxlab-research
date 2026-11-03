@@ -179,3 +179,54 @@ have none, and dropping them keeps both periods alike.
   - The round-2 carry factor (long the top 2, short the bottom 2 of the 8 currencies by three-month rate,
     monthly), with real swaps.
   - Run without a filter and flat after a month-end VIX above 25.
+
+## Addendum 3 (2026-11-03): ML rules aimed at the cost problem (M1-M4)
+
+These were written before any of their data was assembled. The same counting rules and split apply (2007-2018 fit,
+2019-2025 check; walk-forward refits yearly on earlier years only). Costs, fills and swaps are those of the flows
+lab. Models: LightGBM with the 8.5 settings, nothing tuned.
+
+- **M1. Weekly FX model, 28 pairs pooled.**
+  - Each Friday at 21:00 UTC, predict the 5-day return of each pair, in units of its 20-day volatility.
+  - Features:
+    - momentum over 1, 4, 12 and 26 weeks;
+    - carry (the 3-month rate difference, point-in-time);
+    - the 3-month change in that difference;
+    - the 20-day volatility and its ratio to the 120-day volatility;
+    - the distance to the 52-week high and low;
+    - VIX and its 1-week change;
+    - S&P 500 4-week return;
+    - TFF leveraged-fund z-scores for the pair's currencies (JPY, EUR, GBP, AUD, CAD, CHF, MXN where reported), published Friday;
+    - month and week-of-month.
+  - Trades: long or short the 5 pairs with the largest |prediction| in the top 10% of the fit-year distribution.
+    Each is held 5 days, with real swaps.
+  - **Counts if:** weekly portfolio net > 0, t >= 1.645 on 2019-2025.
+- **M2. Cost-aware meta-labels on the rules that earn before costs.** The rules:
+  - night fade I7: AUD/NZD, EUR/GBP, GBP/CAD;
+  - end-of-day momentum E14: gold, 7 majors;
+  - gold London breakout I9;
+  - round numbers E18.
+
+  For each, a model predicts the trade's gross (mid) return from features known at entry:
+  - the live spread, and the spread over its 100-bar median;
+  - band width or move size, in ATR;
+  - the hour, the weekday;
+  - 20-bar volatility;
+  - the distance to the day's high and low.
+
+  A trade is taken only if the prediction exceeds 1.2 times its own round-trip cost at entry.
+  - **Counts if:** net > 0, t >= 1.645 on 2019-2025.
+- **M3. Cross-asset intraday features.** The 8.5 symmetric-barrier model on H1 for USD/JPY, EUR/USD and gold, with
+  extra features:
+  - the last 1-hour and 4-hour returns of USTBOND, BUND, US500, NAS100, JPN225 and Brent;
+  - each relative to its 20-bar volatility.
+
+  Bars from 2012 (the bond / index history), 60/40 split; reported next to the same model without those features.
+  - **Counts if:** the C90 rule is net > 0 with t >= 1.645 on the check period, and above the version without the
+    extra features.
+- **M4. One pooled intraday model across the 12 markets** (11 FX pairs and gold), H1 and H4, with the market as a
+  feature, under the C90 / C95 / C98 / C99 rules of E20.
+  - **Counts as in E20.**
+
+M3 and M4 run after E20 reports. If E20's net does not rise with confidence, M4 is reported as the pooled variant
+only.
