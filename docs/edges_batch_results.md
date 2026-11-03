@@ -30,6 +30,7 @@ Net is after costs, in bp a trade; "fit" and "check" are the two halves of the s
 | E11a hedge-fund positioning (TFF), yen / euro | +9.5 / +8.3 (t 1.0) | +1.9 / -3.9 | nothing |
 | E11b search-interest spikes | 9-14 months | 4-24 months, reversed | nothing |
 | E12 lower leverage after a 4% drawdown | - | P(paid) 43% vs 45% (fixed 5x), 23% (3x); accounts lost 32% vs 81% | does not count |
+| E17 gold calendar trades (turn of month, Chinese New Year) at 2x next to Gotobi at 5x | - | P(paid) 35% vs 45% (Gotobi alone) at the 2026 edge; 44% vs 80% at the 2019-2025 edge | hurts: the gold days add losses that end accounts |
 | E13 short after the fix, after a large rise | 175, -0.2 | 76, +1.5 (1.1) | nothing |
 | E14 end-of-day momentum after large moves, gold / FX | +0.5 / -2.6 | -3.7 (-3.8) / -1.3 (-4.4) | loses |
 | E15 gold before Dhanteras; silver before the Chinese New Year | 18 years each | 7 years each | too few years to judge |
@@ -52,8 +53,11 @@ Net is after costs, in bp a trade; "fit" and "check" are the two halves of the s
 - The USD/CNH, USD/MXN, USD/ZAR and USD/SGD files have gaps (2013-2015) and stop in 2022-2023, because Dukascopy throttled the downloads.
 - The forecast dataset covers 2017-2023 only.
 
+**A data bug found and fixed:** the first E20 and E21 runs failed on the instruments whose 2019-2025 files come only from
+Dukascopy candles (AUD/NZD, EUR/GBP, GBP/CAD, gold) and on every cross-asset family. Those files lack the spread
+columns of the older ones. The loader (`fxlab/data/store.py`) now aligns the columns, and both have been rerun.
+
 **Still running:**
 - E20 / E22 (the confidence curve and timeframe agreement): run `ml-confidence`.
 - E21 (the catalog on 2019-2025): run `catalog-rep`.
-- E17 (the gold calendar next to Gotobi): run `edges-extra`.
 - The panel test period, and the hedges and pre-entry signals: they wait for the bond and index downloads.
