@@ -53,11 +53,12 @@ from the user).
 |---|---|
 | M1 weekly pooled model; M2 cost-aware meta-labels; M4 pooled intraday model with the FS5 large-move filter | done, none counts (`docs/edges_batch_results.md`, addenda 3-5) |
 | M3 cross-asset intraday features | done: slightly better, still negative (-1.1 to -1.6 bp) |
-| **FS1 settings and transforms chosen inside the walk-forward; FS2 session / volatility cells** | **running** (`fs-lab`, 138 jobs) |
+| FS1 settings and transforms chosen inside the walk-forward | done: 66 of 58,920 meet the rule on 2019-2025, but they lose on 2010-2018 and cluster in a few GBP / NZD crosses; forward watch list only |
+| FS2 session / volatility cells | done: 0 after the non-overlapping fix |
 | FS3 new intraday sources | done: 9 significant ICs (cross-asset), none tradeable after costs |
-| **Feature predictability on 2019-2025** | open: part of FS1 |
-| Volatility or large-move targets (FS5) | trading rule done (in M4, no count); information part **running** (`fs-lab`) |
-| **Systematic pairs of features (FS4)** | **running** (`fs-lab`) |
+| Feature predictability on 2019-2025 | done in FS1 |
+| Volatility or large-move targets (FS5) | done: trading rule no count (M4); 59 significant ICs, regime-like (yen MAs vs volatility) |
+| Systematic pairs of features (FS4) | done: 0 of 9,120 |
 | Deep sequence models | not planned (Chronos failed; the limit is the information, not the model) |
 
 ## 5. Outside forex prop accounts (personal account)

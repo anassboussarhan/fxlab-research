@@ -210,3 +210,34 @@ MXN/JPY, USD/JPY and gold. Each was then checked on 2019-2025.
   - Bund failed to load (no date column in its pieces).
   - The US bond file has only 12 nights before 2019.
   - Most index and commodity series start in 2012-2013.
+
+
+## FS1, FS2, FS4, FS5: feature settings, cells, pairs, volatility targets (CI runs 41670196230 and recheck 41687280097)
+
+**Correction before reading the numbers.** The first run counted every signal bar as a trade, even while an h-bar
+position from an earlier bar was still open. That inflates t: a D1 signal held 24 days was counted on each of the
+days. The rule says to hold the position for h bars, so the recheck takes one position at a time and needs 20
+trades for a t.
+
+The recheck reran the 70 FS1 jobs that have a BH-significant IC, and every FS2 job. The IC side (z, BH) does not
+change. FS1's correction is still taken over all 58,920 tests.
+
+- **FS4, pairs of features:** 9,120 tests, none significant after BH. Does not count.
+- **FS5, volatility targets** (information only): 59 of 1,920 are significant. Nearly all are moving-average levels
+  on yen pairs predicting the size of the next moves. That is most likely the 2022-2024 regime (weak yen, larger
+  swings), not a tradable signal.
+- **FS2, session and volatility cells:** 4 rows passed in the first run. **After the fix: 0 of 8,448.**
+- **FS1, settings and transforms chosen inside the walk-forward** (58,920 tests on 2019-2025 folds):
+  - 318 ICs survive BH at 10%.
+  - Of those, 66 also trade net > 0 with t >= 1.645 after the fix (90 before it). Rows: `docs/fs_lab/fs1_passing_rows.csv`.
+  - **By the letter of the rule, these 66 count. I do not treat them as edges, for four reasons:**
+    1. **They fail on 2010-2018.** The same procedure (same feature, same selection inside each fold) scored on
+       the 2010-2018 folds gives a median IC z of 0.21 and net < 0 in 46 of the 66. A real effect should show in
+       both periods. These appear only after 2019.
+    2. **They are few trades:** a median of 72 positions in seven years (22-327). Weekly rows have 22-80.
+    3. **They are not independent.** 29 involve the pound and 19 the New Zealand dollar, many on the same pairs
+       (GBP/NZD, GBP/CHF, AUD/CAD, EUR/GBP), so they are a handful of moves counted many times.
+    4. **The expected number of false ICs among the 318 is about 32** (10% FDR). The economic filter keeps the
+       ones that happened to trend in 2019-2025.
+  - **Status:** a forward watch list (FS1-W), not a trading plan. Promoting any of them would need its own
+    pre-registered forward test on data after 2026-11-03; the 2026 holdout stays locked.
