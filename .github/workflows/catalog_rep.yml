@@ -1,0 +1,75 @@
+name: catalog-rep
+# scripts/catalog_replication_lab.py: E21 of docs/edges_batch_preregistration.md (catalog walk-forward scored on
+# 2019-2025). ci/CATALOG_REP: PANEL_DATA_RUN
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/CATALOG_REP"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  POLARS_MAX_THREADS: "2"
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 11
+      matrix:
+        family: ["S.VOL.EXPANSION", "S.RG.CHANGE_POINT", "S.BO.RANGE_EXPANSION", "S.XA.STAT_ARB", "S.TREND.REGRESSION", "S.XA.RELATIVE_VALUE", "S.XA.GOLD_FX", "S.GEO.HARMONIC", "S.SEAS.WEEKEND_GAP_FADE", "S.BO.VOL_BREAKOUT", "lit"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt statsmodels holidays
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD REST < ci/CATALOG_REP
+          ci/fetch_m1.sh $PD EURUSD GBPUSD USDJPY AUDUSD USDCAD USDCHF NZDUSD EURJPY EURGBP AUDNZD GBPCAD XAUUSD GBPJPY XAGUSD EURCHF AUDJPY
+          df -h . | tail -1
+      - run: python -W ignore scripts/catalog_replication_lab.py --family ${{ matrix.family }} --out out/cr 2>&1 | tee out_cr.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: cr-${{ strategy.job-index }}
+          path: |
+            out/cr/rows_*.csv
+            out_cr.txt
+          retention-days: 30
+  combine:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt statsmodels
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: cr-*
+          path: cr
+      - run: python -W ignore scripts/catalog_replication_lab.py --combine cr --out pub 2>&1 | tee combine_log.txt
+      - name: Publish to the catalog-rep branch
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp combine_log.txt pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          git checkout --orphan cr-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p catalog_rep && cp -r /tmp/pub/* catalog_rep/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > catalog_rep/RUN.txt
+          git add -f catalog_rep
+          git commit -qm "Catalog replication 2019-2025 (run ${{ github.run_id }})"
+          git push -f origin HEAD:catalog-rep
