@@ -267,3 +267,51 @@ B0 (USD/JPY + EUR/JPY, 23:00 -> 09:53 Tokyo, 80 bp stop):
   significant, and an extra 1-2 bp of real cost removes most of it.
 - **The 2026 holdout has been opened once** (`docs/holdout_2026_preregistration.md`), so it is no longer untouched.
   The genuinely new sample is the forward test from 2026-11-05.
+
+
+## FS6 cross-asset composite, and the cost audit of the frozen basket (CI runs 41723718676, 41724161522)
+
+**FS6 does not count** (12 tests, 0 after BH).
+- On the 2012-2019 fit period, only 0-3 candidates per market cleared |t| >= 2, so 7 of the 12 tests selected
+  nothing.
+- Where something was selected, the check-period (2020-2025) net is:
+
+  | Market, horizon | Signal kept | Net | t |
+  |---|---|---|---|
+  | USD/JPY D1, 6 bars | Brent | +0.2 bp | 0.03 |
+  | USD/JPY D1, 24 bars | JPN225 | +16 bp | 0.40 (40 trades) |
+  | Gold D1, 24 bars | JPN225 | +47 bp | 0.53 (31 trades) |
+  | Gold H4, 6 bars | USTBOND | -5.4 bp | -1.3 |
+
+- Limit: the US bond and Bund files start in 2018, so the 2012-2019 fit period has almost no bond history. The
+  Bund -> gold and rate-gap leads from FS3 could not be selected honestly.
+
+**Cost audit** (`scripts/gotobi_costs.py`, `docs/prop_best/costs_audit.json`).
+- **Dukascopy spreads at the basket's entry (14:00 UTC) and exit (00:53 UTC), median / 90th percentile, pips:**
+
+  | Pair | 2007-2018, entry | 2007-2018, exit | 2019-2025, entry | 2019-2025, exit | 2023-2025, entry | 2023-2025, exit |
+  |---|---|---|---|---|---|---|
+  | USD/JPY | 0.7 / 1.9 | 0.6 / 1.5 | 0.4 / 0.9 | 0.5 / 0.9 | 0.6 / 1.4 | 0.6 / 0.9 |
+  | EUR/JPY | 1.4 / 3.2 | 1.4 / 2.5 | 0.8 / 1.7 | 0.8 / 1.5 | 1.1 / 2.9 | 1.15 / 1.55 |
+
+- **The model charges 1.5 x those spreads plus 0.2 pip and 0.7 bp commission.** That is a round trip of 1.7 bp on
+  2019-2025 and 2.0 bp on 2023-2025.
+- **Published prop figures** are cheaper or similar:
+  - FTMO (undated): USD/JPY about 0.1 pip and EUR/JPY about 1.3 pips in normal hours.
+  - Commission: $5 per lot ($3 in older FTMO material).
+  - Spreads are not overstated by the model.
+- **The swap is the optimistic part.** The modelled rate swap adds +0.4 bp a night on 2019-2025 and +1.0 bp on
+  2023-2025, because USD rates were high. Retail long swaps now are about +1.7% a year on USD/JPY (OANDA) and 0 or
+  negative on EUR/JPY. Prop firms do not publish theirs.
+- **Basket net per night, t** (fixed spread at both ends + 0.1 pip slippage each side):
+
+  | Scenario | 2019-2025 | 2023-2025 |
+  |---|---|---|
+  | Model (Dukascopy, rate swap) | +5.08 (3.57) | +3.63 (1.48) |
+  | 0.5 pip, $5 commission, no swap | +5.37 (3.79) | +3.58 (1.47) |
+  | 1.0 pip, $5 commission, no swap | +5.00 (3.52) | +3.26 (1.34) |
+  | 1.0 pip, $7 commission, swap -0.5 bp | +4.30 (3.03) | +2.56 (1.05) |
+  | 2.0 pip, $7 commission, swap -0.5 bp | +3.54 (2.50) | +1.91 (0.78) |
+
+- **Reading:** the costs were not overstated. At realistic prop costs (about 1 pip and $5, no swap) the 2019-2025
+  edge is +5.0 bp (t 3.5). 2023-2025 stays positive but not significant in every scenario.
