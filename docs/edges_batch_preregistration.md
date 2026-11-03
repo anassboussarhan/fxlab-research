@@ -88,3 +88,59 @@ This document fixes the rules of the batch before any of its data is downloaded 
 - Each of these has perhaps a 5-10% chance of counting after costs. The likeliest result is zero or one.
 - A test that counts on fewer than about 150 check events is treated as "promising", not "confirmed", until the
   forward test.
+
+## Addendum (2026-11-03): E12-E19, from the inventory in `docs/untested_variations.md`
+
+These rules were fixed before any of their data was read. For E13, E14, E16, E18 and E19, the 2019-2025 M1 files
+are part of the panel data run, which had not finished. The same counting rules apply (net > 0, one-sided
+t >= 1.645, BH over the whole batch), and the same 2007-2018 / 2019-2025 split.
+
+- **E12. Prop leverage that falls after a drawdown.**
+  - FTMO 2-Step simulation as in `scripts/prop_best.py`.
+  - Trade at 5x. Drop to 2.5x while equity is more than 4% below the phase or payout start. Return to 5x once it
+    is within 2%.
+  - Compared with a fixed 5x and a fixed 3x.
+  - **Counts if:** P(paid) at the 2026-shifted edge is at least 3 points above both, on 2019-2025.
+  - This is a sizing rule on nights already studied, so a "count" means "use it", not "a new edge".
+- **E13. Short USD/JPY after the fix, only after a large rise into it.**
+  - The trade: short 09:55 -> 10:30 Tokyo on Gotobi days.
+  - Condition: the 03:00 -> 09:50 mid move is above its 2007-2018 75th percentile.
+- **E14. End-of-day momentum, only after a large earlier move.**
+  - Gold: follow the sign of the 08:00 London -> 13:00 New York move from 13:00 to 13:30 New York.
+  - FX: the same for the 7 majors pooled, with the 08:00 London -> 14:30 New York move traded from 14:30 to
+    15:00 New York.
+  - Only when |move| is in the top 20% of the 2007-2018 days.
+- **E15. Gold before Indian festival demand.**
+  - Long gold over the 15 business days before Dhanteras (two days before Diwali; dates from the `holidays`
+    package's India calendar) and before Akshaya Tritiya, if that package has it.
+  - Silver over the 15 days before the Chinese New Year.
+  - Daily data from 2000, as in the Chinese New Year test (lit3 D6).
+- **E16. Emerging-market carry with a crash filter.**
+  - Monthly. Hold the two highest-yielding of MXN, ZAR, TRY, CNH and SGD against USD, using three-month
+    interbank rates from FRED (OECD series).
+  - Flat in a month that follows a month-end VIX above 25.
+  - Costs: spread + 0.35 bp commission each way, plus the rate differential as swap.
+  - The split is 60/40 if the M1 history starts after 2008.
+- **E17. Gold calendar trades added to Gotobi in a prop account.**
+  - E6b (if it counts), the gold turn of the month and gold before the Chinese New Year, at 2x on their own
+    days, next to the Gotobi trade at 5x.
+  - FTMO 2-Step simulation on 2019-2025.
+  - **Counts if:** P(paid) at the 2026-shifted edge is at least 3 points above Gotobi alone.
+  - This is a portfolio evaluation, exploratory.
+- **E18. Round numbers with resting limit orders.**
+  - EUR/USD, GBP/USD, USD/JPY and gold.
+  - Buy limit 2 pips above a 100-pip level (gold: 2 dollars above a 50-dollar level) when price approaches from
+    above within the day, and the mirror image for sells.
+  - Target 10 pips, stop 10 pips, out by the end of the day.
+  - Only fills that the bid/ask path reaches count.
+- **E19. Night-scalping fade after the rollover hour.**
+  - The Bollinger fade of `docs/untested_batch.md` I7 with entries only from 23:00 to 02:00 UTC, so that the
+    21:00-23:00 UTC rollover spreads are avoided.
+  - Exits as in I7.
+
+Not added:
+- **Japanese government bond auctions:** the MoF auction calendar has not been downloaded yet. It will be
+  pre-registered once its format is known.
+- **Platinum and palladium:** no mechanism found.
+- **FOMC in the expected direction:** about 20 decisions with a change, too few for this batch's bar. It is
+  reported as information only.
