@@ -84,3 +84,54 @@ columns of the older ones. The loader (`fxlab/data/store.py`) now aligns the col
 
 **Still running:**
 - The panel test period, and the hedges and pre-entry signals: they wait for the bond and index downloads.
+
+
+## Addenda 3-5: ML aimed at costs, JGB auctions, Fed direction (2026-11-03, CI runs 41666606308, 41667582897, 41670214634, 41672048522)
+
+All on 2007-2025 data; 2026 untouched. None of these counts.
+
+- **M1, weekly model pooled over the 28 pairs** (`scripts/ml_weekly_lab.py`, branch `misc-weekly`).
+  - Features: momentum over 1/4/12/26 weeks, carry, its 3-month change, volatility and its ratio, the 52-week range,
+    VIX, S&P 500, TFF, and the calendar.
+  - Trades: top 5 pairs above the fit-year cut, held a week, real swaps. 1,549 trades.
+  - 2011-2018: -3.8 bp a week (t -1.2). 2019-2025: -2.5 bp a week (t -1.2), -7.1 bp per trade, 46% winners.
+  - Weekly rank IC of the prediction: +0.009 and -0.014. The model carries no information about next week.
+  - Timing note: 21:00 UTC Friday is the summer market close, so fills are at 20:45 UTC. The S&P 500 is the
+    Dukascopy CFD, which starts in 2013.
+- **M2, cost-aware meta-labels** (`scripts/ml_meta_lab.py`, branch `misc-last`).
+  - Method: predict each trade's gross from its entry features; keep the trade if the prediction exceeds 1.2 times
+    its cost.
+  - Net per trade on 2019-2025, all trades vs kept trades:
+
+    | Rule | All trades | Kept trades | t (kept) |
+    |---|---|---|---|
+    | I7 night fade | -8.5 bp | -4.1 bp | -12.2 |
+    | I9 gold breakout | -0.9 bp | -1.0 bp | -0.5 |
+    | E14 end-of-day momentum | -1.6 bp | -1.7 bp | -2.3 |
+    | E18 round numbers | -2.2 bp | -1.4 bp | -2.0 |
+
+  - The filter raises the kept trades' gross only slightly. The prediction's correlation with the gross is 0.00 to
+    0.18, which is far too little to clear costs.
+- **M4, one pooled intraday model across 12 markets, and the FS5 large-move filter** (`scripts/ml_pooled_lab.py`,
+  branch `ml-pooled`).
+  - H1: none of 60 market x rule rows is net > 0 with t >= 1.645 on 2019-2025.
+  - H4: 2 of 60 are: USD/JPY at the 99% cut (+6.2 bp, t 2.2, 166 trades) and USD/JPY with the large-move filter
+    (+4.7 bp, t 1.95). Neither survives correction over the 120 rows.
+  - It is the same USD/JPY H4 lead as in E20, seen again by a different model. It goes to the forward watch list,
+    not into trading.
+  - Gold H4 at 98% shows +9.5 bp, but t is only 1.4.
+- **E25, 10- and 30-year JGB auctions.**
+  - Dates: 659 auctions from the MoF history spreadsheet, now saved as `data/jgb_auctions.csv`; 402 were priced for
+    2007-2025.
+  - Before the result (00:00 -> 03:00 UTC): direction from the fit period is short; 2019-2025 gives -3.2 bp, t -2.1.
+  - After the result (03:40 -> 08:00 UTC): direction is long; -2.0 bp, t -1.2.
+  - Note: the 2007-2018 files have no 00:00-01:00 UTC bars, so the 00:00 entry takes the first bar up to 01:05.
+- **E26, the dollar before Fed decisions in the expected direction** (information only).
+  - Events: 18 decisions in 2017-2022 with an expected change. The 2023 rows have no forecast.
+  - Result: -18.6 bp per event (t -1.4), 39% winners. Before the 15 expected hikes the dollar fell on average
+    (-24 bp).
+
+**Still running:**
+- FS1, FS2, FS4, FS5 information (`fs-lab`, 138 jobs).
+- E4 / E16 on the re-downloaded files.
+- FS3, M3, the panel test period and the hedges: they start when the bond and Brent downloads finish.

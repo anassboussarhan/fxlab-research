@@ -1,4 +1,4 @@
-# Ledger: everything raised so far and its status (2026-11-03, 14:20 UTC)
+# Ledger: everything raised so far and its status (2026-11-03, 16:30 UTC)
 
 Status words: **done** (result in the doc named), **running**, **written** (rules fixed, code not yet built),
 **open** (raised in the discussion, not yet written as rules), **untestable** (no data), **user** (needs an action
@@ -41,8 +41,8 @@ from the user).
 | BoE meetings, ISM surprises, Akshaya Tritiya, TRY carry, gold positioning | untestable (no data in the free sources found) |
 | **Payroll and retail-sales surprises** | done but too few events (fewer than 10 with abs(z) >= 1 in 2017-2023) |
 | **Emerging-market currency files with gaps (2013-2015, after 2022)** | **open**: re-download would let E4 / E16 run on full data |
-| **Japanese government bond auctions** | **open**: calendar not downloaded, rules not written |
-| **FOMC in the expected direction (Karnaukh)** | **open**: about 20 decisions, information only, not run |
+| Japanese government bond auctions (E25) | done: MoF history file (659 auctions); both windows negative on 2019-2025 |
+| FOMC in the expected direction (E26) | done: 18 decisions, -18.6 bp (t -1.4), information only |
 | Retail positioning (OANDA) | **user**: needs a free OANDA practice token as the `OANDA_TOKEN` secret |
 | Platinum, palladium | skipped (no mechanism) |
 | Gold breakout short side | forward only (chosen after seeing it) |
@@ -51,11 +51,13 @@ from the user).
 
 | Item | Status |
 |---|---|
-| **M1 weekly pooled FX model; M2 cost-aware filters on before-cost edges; M3 cross-asset intraday features; M4 pooled intraday model** | **written**, not built |
-| **FS1 feature settings and forms chosen inside the walk-forward (H8, D1, weekly); FS2 by session and volatility; FS3 new intraday sources** | **written**, not built |
+| M1 weekly pooled model; M2 cost-aware meta-labels; M4 pooled intraday model with the FS5 large-move filter | done, none counts (`docs/edges_batch_results.md`, addenda 3-5) |
+| **M3 cross-asset intraday features** | **written and built** (`cross-assets` workflow); waits for the bond / Brent downloads |
+| **FS1 settings and transforms chosen inside the walk-forward; FS2 session / volatility cells** | **running** (`fs-lab`, 138 jobs) |
+| **FS3 new intraday sources** (cross-asset returns, event clock, TFF, rate-gap change) | **built**; waits for the bond downloads (`cross-assets`) |
 | **Feature predictability on 2019-2025** | open: part of FS1 |
-| **Volatility or large-move targets** (instead of the next return) | open |
-| **Systematic pairs of features (interactions)** | open |
+| Volatility or large-move targets (FS5) | trading rule done (in M4, no count); information part **running** (`fs-lab`) |
+| **Systematic pairs of features (FS4)** | **running** (`fs-lab`) |
 | Deep sequence models | not planned (Chronos failed; the limit is the information, not the model) |
 
 ## 5. Outside forex prop accounts (personal account)
