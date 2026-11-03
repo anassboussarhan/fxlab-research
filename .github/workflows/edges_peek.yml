@@ -40,6 +40,24 @@ jobs:
                       print("ERR", ex)
           PY
           ls dl/*/raw/calendar_repo/news_data > pub/calendar_files.txt 2>/dev/null || true
+          python3 - <<'PY' > pub/detail.txt
+          import glob, re
+          f = glob.glob("dl/*/raw/mof_ja_week.csv")[0]
+          L = open(f, encoding="cp932", errors="replace").read().splitlines()
+          print("MOF lines", len(L)); print("\n".join(L[8:40])); print("..."); print("\n".join(L[-15:]))
+          for f in sorted(glob.glob("dl/*/raw/calendar_repo/news_data/*.csv")):
+              L = open(f, encoding="utf-8", errors="replace").read().splitlines()
+              print("CAL", f.split("/")[-1], len(L), "|", L[1] if len(L) > 1 else "", "|", L[-1])
+          import os
+          for f in glob.glob("dl/*/raw/cftc_tff/*.txt")[:1]:
+              for l in open(f, encoding="utf-8", errors="replace"):
+                  if "JAPANESE YEN" in l or "EURO FX" in l and "CHICAGO" in l:
+                      print("TFF", l[:400]); break
+          for f in glob.glob("dl/*/raw/cb/boj/past.htm") + glob.glob("dl/*/raw/cb/boe/mps.htm") + glob.glob("dl/*/raw/cb/boe/bank_rate.htm"):
+              t = re.sub(r"<[^>]+>", " ", open(f, encoding="utf-8", errors="replace").read())
+              t = re.sub(r"\s+", " ", t)
+              print("PAGE", f, t[:3000])
+          PY
       - name: Publish
         run: |
           git config user.name "fxlab-sweep"
