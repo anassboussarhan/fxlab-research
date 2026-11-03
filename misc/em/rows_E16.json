@@ -1,0 +1,25 @@
+[
+ {
+  "test": "E16 TRY carry",
+  "status": "untestable (no USD/TRY bars; only TRY/JPY was downloaded)"
+ },
+ {
+  "test": "E16 EM carry: long the 2 highest-yielding of MXN, ZAR, CNH, SGD vs USD, flat after VIX > 25",
+  "instrument": "USDMXN/USDZAR/USDCNH/USDSGD",
+  "note": "currencies with rates: ['CNH', 'MXN', 'ZAR']; swap = rate differential - 0.75% a year",
+  "n_events": 80,
+  "split": "60/40 by events",
+  "fit_n": 48,
+  "fit_net_bp": -29.361846412583155,
+  "fit_t": -0.680921989665698,
+  "fit_p": 0.7503689923883815,
+  "fit_win": 0.5416666666666666,
+  "check_n": 32,
+  "check_net_bp": 17.900623654602587,
+  "check_t": 0.4881339889360225,
+  "check_p": 0.314444969353832,
+  "check_win": 0.34375,
+  "p_for_bh": 0.314444969353832,
+  "counts": false
+ }
+]

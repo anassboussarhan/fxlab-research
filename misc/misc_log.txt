@@ -1,0 +1,20 @@
+USDCNH 2025 1 parts 341245 minutes
+0 manifest records; 0 not ok
+USDCNH years: 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDMXN 2025 1 parts 338622 minutes
+0 manifest records; 0 not ok
+USDMXN years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDZAR 2025 1 parts 357532 minutes
+0 manifest records; 0 not ok
+USDZAR years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDSGD 2025 1 parts 353697 minutes
+0 manifest records; 0 not ok
+USDSGD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+AUDUSD 2025 1 parts 231697 minutes
+0 manifest records; 0 not ok
+AUDUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+{"test": "E4 yuan fixing: USD/CNH 01:16-08:00 UTC in the direction of fix minus market", "instrument": "USDCNH", "note": "|signal| > fit 75th pct (442 pips); split 60/40 by events", "n_events": 651, "split": "given", "fit_n": 363, "fit_net_bp": -2.8212361234357393, "fit_t": -3.0554609754919375, "fit_p": 0.9987930884859793, "fit_win": 0.371900826446281, "check_n": 288, "check_net_bp": -2.5303075158935657, "check_t": -2.3620587955748187, "check_p": 0.9905793214003503, "check_win": 0.3645833333333333, "p_for_bh": 0.9905793214003503, "counts": false}
+{"test": "E4 yuan fixing: AUD/USD opposite to the signal", "instrument": "AUDUSD", "note": "same days as the USD/CNH rule", "n_events": 590, "split": "given", "fit_n": 356, "fit_net_bp": -2.221714115393769, "fit_t": -1.0869665744177903, "fit_p": 0.861105475372516, "fit_win": 0.5028089887640449, "check_n": 234, "check_net_bp": -2.2679081270100423, "check_t": -1.2470552570566775, "check_p": 0.8931853441172315, "check_win": 0.4658119658119658, "p_for_bh": 0.8931853441172315, "counts": false}
+FRED IR3TIB01SGM156N ParserError('Error tokenizing data. C error: Expected 1 fields in line 6, saw 2\n')
+{"test": "E16 TRY carry", "status": "untestable (no USD/TRY bars; only TRY/JPY was downloaded)"}
+{"test": "E16 EM carry: long the 2 highest-yielding of MXN, ZAR, CNH, SGD vs USD, flat after VIX > 25", "instrument": "USDMXN/USDZAR/USDCNH/USDSGD", "note": "currencies with rates: ['CNH', 'MXN', 'ZAR']; swap = rate differential - 0.75% a year", "n_events": 80, "split": "60/40 by events", "fit_n": 48, "fit_net_bp": -29.361846412583155, "fit_t": -0.680921989665698, "fit_p": 0.7503689923883815, "fit_win": 0.5416666666666666, "check_n": 32, "check_net_bp": 17.900623654602587, "check_t": 0.4881339889360225, "check_p": 0.314444969353832, "check_win": 0.34375, "p_for_bh": 0.314444969353832, "counts": false}

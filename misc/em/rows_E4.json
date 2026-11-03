@@ -1,0 +1,40 @@
+[
+ {
+  "test": "E4 yuan fixing: USD/CNH 01:16-08:00 UTC in the direction of fix minus market",
+  "instrument": "USDCNH",
+  "note": "|signal| > fit 75th pct (442 pips); split 60/40 by events",
+  "n_events": 651,
+  "split": "given",
+  "fit_n": 363,
+  "fit_net_bp": -2.8212361234357393,
+  "fit_t": -3.0554609754919375,
+  "fit_p": 0.9987930884859793,
+  "fit_win": 0.371900826446281,
+  "check_n": 288,
+  "check_net_bp": -2.5303075158935657,
+  "check_t": -2.3620587955748187,
+  "check_p": 0.9905793214003503,
+  "check_win": 0.3645833333333333,
+  "p_for_bh": 0.9905793214003503,
+  "counts": false
+ },
+ {
+  "test": "E4 yuan fixing: AUD/USD opposite to the signal",
+  "instrument": "AUDUSD",
+  "note": "same days as the USD/CNH rule",
+  "n_events": 590,
+  "split": "given",
+  "fit_n": 356,
+  "fit_net_bp": -2.221714115393769,
+  "fit_t": -1.0869665744177903,
+  "fit_p": 0.861105475372516,
+  "fit_win": 0.5028089887640449,
+  "check_n": 234,
+  "check_net_bp": -2.2679081270100423,
+  "check_t": -1.2470552570566775,
+  "check_p": 0.8931853441172315,
+  "check_win": 0.4658119658119658,
+  "p_for_bh": 0.8931853441172315,
+  "counts": false
+ }
+]
