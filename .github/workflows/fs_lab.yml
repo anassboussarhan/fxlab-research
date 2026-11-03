@@ -1,0 +1,87 @@
+name: fs-lab
+# scripts/fs_lab.py: FS1 (settings and transforms chosen inside the walk-forward), FS2 (session / volatility cells),
+# FS4 (pairs of features), FS5 (volatility targets, information) of docs/edges_batch_preregistration.md.
+# ci/FS_LAB: PANEL_DATA_RUN
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FS_LAB"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  OMP_NUM_THREADS: "4"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/fs_matrix.json)" >> "$GITHUB_OUTPUT"
+  lab:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 16
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Bars (the instrument and the 14 panel instruments of the feature lab)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD REST < ci/FS_LAB
+          ci/fetch_m1.sh $PD ${{ matrix.sym }} EURUSD GBPUSD USDJPY USDCHF USDCAD AUDUSD NZDUSD EURGBP EURJPY EURCHF GBPJPY AUDJPY XAUUSD XAGUSD
+      - name: Lab
+        run: |
+          for M in ${{ matrix.modes }}; do
+            timeout 18000 python -W ignore scripts/fs_lab.py --mode $M --sym ${{ matrix.sym }} --tf ${{ matrix.tf }} --budget 9000 --out out/fs || echo "failed $M"
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fs-${{ matrix.sym }}-${{ matrix.tf }}
+          path: out/fs
+          retention-days: 30
+  combine:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: fs-*
+          path: fs
+          merge-multiple: true
+      - run: python -W ignore scripts/fs_lab.py --combine fs --out pub 2>&1 | tee combine_log.txt
+      - name: Publish to the fs-lab branch (statistics only, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/runs && cp fs/fs_*.csv fs/log_*.json pub/runs/ 2>/dev/null || true
+          cp combine_log.txt pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          git checkout --orphan fs-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p fs_lab && cp -r /tmp/pub/* fs_lab/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > fs_lab/RUN.txt
+          git add -f fs_lab
+          git commit -qm "FS1 / FS2 / FS4 / FS5 (run ${{ github.run_id }})"
+          git push -f origin HEAD:fs-lab
