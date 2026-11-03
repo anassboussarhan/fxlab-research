@@ -293,3 +293,30 @@ These rules were written before their data was computed or downloaded. The batch
   - **Information only:** about 20 decisions with an expected change.
 - **E4 / E16 rerun** on the re-downloaded emerging-market files (run `em-redownload`), with unchanged rules. Both
   versions are reported.
+
+## Addendum 6 (2026-11-03, 21:45 UTC): FS6, a cross-asset composite chosen on the fit period only
+
+Written before any composite was computed. FS3 found real but small cross-asset information; this asks whether
+the signals add up when combined, with the selection kept out of the check period.
+
+- **Markets:** USD/JPY, EUR/USD, gold, on H4 and D1; h = 6 and 24 bars (12 tests).
+- **Candidates:**
+  - the FS3 cross-asset returns over 1, 4 and 24 bars of USTBOND, BUND, US500, NAS100, JPN225 and Brent;
+  - the 3-month rate-gap change and the TFF leveraged-fund z (USD/JPY and EUR/USD).
+  - The event clock is left out: it only covers 2017-2023, which straddles the split.
+- **Fixed split:** fit 2012-01-01 to 2019-12-31, check 2020-01-01 to 2025-12-31. 2020 is about 60% of the way
+  through the 2012-2025 cross-asset history.
+- **Selection, fit period only:** for each candidate, the correlation of its value with the next-h-bar mid log
+  return. It is taken on non-overlapping bars (every h-th bar), and t = corr x sqrt(n). A candidate is kept if
+  |t| >= 2, with sign(corr).
+- **Composite:**
+  - Each kept candidate is standardised with fit mean and sd, and clipped at ±4.
+  - The score is the mean of sign x z over the kept candidates available at the bar.
+  - The score needs at least half of them to be present, else it is missing.
+- **Trading on the check period:**
+  - Long when the score is at or above its fit-period 90th percentile, short at or below its 10th.
+  - One position at a time, held h bars.
+  - Net = signed next-h-bar mid return minus the round-trip cost at the bar, as in FS1-FS5. t is clustered by
+    month.
+- **Counts if:** net > 0, t >= 1.645, and BH q <= 0.10 over the 12 tests. If no candidate is kept, that test is
+  reported as "nothing selected".

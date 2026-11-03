@@ -1,0 +1,74 @@
+name: fs6
+# FS6 (docs/edges_batch_preregistration.md addendum 6): cross-asset composite chosen on 2012-2019 only, traded on
+# 2020-2025, USD/JPY, EUR/USD, gold, H4 / D1. ci/FS6: PANEL_DATA_RUN
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FS6"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  OMP_NUM_THREADS: "4"
+jobs:
+  lab:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        sym: [USDJPY, EURUSD, XAUUSD]
+        tf: [H4, D1]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD REST < ci/FS6
+          for R in 41507595752 41553423279; do gh run download $R -n edges-data -D raw/$R || true; done
+          ci/fetch_m1.sh $PD ${{ matrix.sym }}
+          NO_STAGE=1 ci/fetch_m1.sh $PD USTBONDTRUSD BUNDTREUR USA500IDXUSD USATECHIDXUSD JPNIDXJPY BRENTCMDUSD
+      - name: FS3
+        run: python -W ignore scripts/fs_lab.py --mode fs6 --sym ${{ matrix.sym }} --tf ${{ matrix.tf }} --raw raw --out out/x || echo "fs6 failed"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: f6-${{ matrix.sym }}-${{ matrix.tf }}
+          path: out/x
+  publish:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: f6-*
+          path: xa
+          merge-multiple: true
+      - run: python -W ignore scripts/fs_lab.py --combine xa --out pub 2>&1 | tee pub_log.txt || true
+      - name: Publish to the cross-assets branch (statistics only)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub && cp xa/* pub/ 2>/dev/null || true; cp pub_log.txt pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          git checkout --orphan f6-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p fs6 && cp -r /tmp/pub/* fs6/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > fs6/RUN.txt
+          git add -f fs6
+          git commit -qm "FS6 composite (run ${{ github.run_id }})"
+          git push -f origin HEAD:fs6

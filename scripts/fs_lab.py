@@ -492,10 +492,8 @@ def event_clock(index, raw):
     return out
 
 
-def mode_fs3(a, bars, panel, mid, c_rt):
+def fs3_features(a, idx, events=True):
     from fxlab.orchestration.runners import cached_bars
-    hs = (6, 24)
-    idx = bars.index
     F = {}
     for s in CROSS:
         try:
@@ -507,7 +505,8 @@ def mode_fs3(a, bars, panel, mid, c_rt):
         c = c.reindex(c.index.union(idx)).ffill().reindex(idx)
         for k in (1, 4, 24):
             F[f"x:{s}_r{k}"] = (c - c.shift(k)).to_numpy()
-    F.update(event_clock(idx, a.raw))
+    if events:
+        F.update(event_clock(idx, a.raw))
     ccy = {"USDJPY": "JPY", "EURUSD": "EUR"}.get(a.sym)
     if ccy:
         import ml_weekly_lab as W
@@ -522,6 +521,13 @@ def mode_fs3(a, bars, panel, mid, c_rt):
             rd = rate_diff(a.sym, days)
             ch = (rd - rd.shift(91)).reindex(idx.floor("D")).to_numpy()
             F["rate:gap_chg_3m"] = ch
+    return F
+
+
+def mode_fs3(a, bars, panel, mid, c_rt):
+    hs = (6, 24)
+    idx = bars.index
+    F = fs3_features(a, idx)
     names = list(F)
     B = np.column_stack([np.asarray(F[k], float) for k in names])
     ys, sh = targets(mid, hs)
@@ -543,6 +549,57 @@ def mode_fs3(a, bars, panel, mid, c_rt):
     return rows, {"features": names, "splits": {str(k): len(v) for k, v in groups.items()}}
 
 
+def mode_fs6(a, bars, panel, mid, c_rt):
+    """FS6 (addendum 6): cross-asset composite chosen on 2012-2019, traded on 2020-2025."""
+    idx = bars.index
+    F = fs3_features(a, idx, events=False)
+    names = list(F)
+    B = np.column_stack([np.asarray(F[k], float) for k in names])
+    ys, _ = targets(mid, (6, 24))
+    fit = (idx >= pd.Timestamp("2012-01-01", tz="UTC")) & (idx < pd.Timestamp("2020-01-01", tz="UTC"))
+    chk = (idx >= pd.Timestamp("2020-01-01", tz="UTC")) & (idx <= pd.Timestamp(DEV_END + " 23:59", tz="UTC"))
+    month = idx.tz_convert(None).to_period("M").astype(str).to_numpy()
+    rows, log = [], {"candidates": names}
+    for h in (6, 24):
+        y = ys[h]
+        kept = []
+        for j, k in enumerate(names):
+            ii = np.flatnonzero(fit)[::h]
+            x, yy = B[ii, j], y[ii]
+            ok = np.isfinite(x) & np.isfinite(yy)
+            if ok.sum() < 50 or np.nanstd(x[ok]) == 0:
+                continue
+            r = float(np.corrcoef(x[ok], yy[ok])[0, 1])
+            t = r * math.sqrt(ok.sum())
+            if abs(t) >= 2:
+                mu, sd = np.nanmean(B[fit, j]), np.nanstd(B[fit, j])
+                kept.append((j, k, np.sign(r), mu, sd, round(t, 2)))
+        log[f"kept_h{h}"] = [(k, int(sg), t) for _, k, sg, _, _, t in kept]
+        if not kept:
+            rows.append({"mode": "fs6", "sym": a.sym, "tf": a.tf, "group": "composite", "h": h, "period": "check (from 2020)",
+                         "status": "nothing selected", "kept": 0})
+            continue
+        Z = np.column_stack([np.clip((B[:, j] - mu) / (sd + 1e-12), -4, 4) * sg for j, _, sg, mu, sd, _ in kept])
+        avail = np.isfinite(Z).sum(1)
+        score = np.where(avail >= max(1, math.ceil(len(kept) / 2)), np.nanmean(np.where(np.isfinite(Z), Z, np.nan), 1), np.nan)
+        q10, q90 = np.nanquantile(score[fit], [0.1, 0.9])
+        pos = np.where(score >= q90, 1.0, np.where(score <= q10, -1.0, 0.0))
+        for per, m in (("fit (2012-2019, in sample)", fit), ("check (from 2020)", chk)):
+            k_ = nonoverlap(np.flatnonzero(m & (pos != 0) & np.isfinite(y) & np.isfinite(score)), h)
+            net = pos[k_] * y[k_] - c_rt[k_]
+            t = np.nan
+            if len(k_) >= 20:
+                S = pd.Series(net).groupby(month[k_]).agg(["sum", "count"])
+                mean = net.mean()
+                e = S["sum"] - S["count"] * mean
+                se = math.sqrt((e ** 2).sum()) / len(net) * math.sqrt(len(S) / max(len(S) - 1, 1))
+                t = mean / se if se > 0 else np.nan
+            rows.append({"mode": "fs6", "sym": a.sym, "tf": a.tf, "group": "composite", "h": h, "period": per,
+                         "kept": len(kept), "trades": int(len(k_)), "net_bp": float(net.mean() * 1e4) if len(k_) else np.nan,
+                         "gross_bp": float((pos[k_] * y[k_]).mean() * 1e4) if len(k_) else np.nan, "t": t})
+    return rows, log
+
+
 def combine(a):
     from scipy import stats as st
     fs = glob.glob(os.path.join(a.combine, "**", "fs_*.csv"), recursive=True)
@@ -551,7 +608,10 @@ def combine(a):
     summ = {}
     for mode, g in R.groupby("mode"):
         c = g[g.period.astype(str).isin(["2019-2025"]) | g.period.astype(str).str.startswith("check")].copy()
-        if mode == "fs2":
+        for col in ("t", "net_bp", "z"):
+            if col not in c:
+                c[col] = np.nan
+        if mode in ("fs2", "fs6"):
             c["p"] = st.norm.sf(c.t.fillna(-9))
         else:
             c["p"] = st.norm.sf(c.z.fillna(-9))
@@ -598,7 +658,7 @@ def main():
     panel = panel_of(a.sym, a.tf, bars.index)
     mid, c_rt = costs(bars, a.sym)
     FOLDS_CACHE[:] = folds(bars.index)
-    fn = {"fs1": mode_fs1, "fs2": mode_fs2, "fs3": mode_fs3, "fs4": mode_fs4, "fs5": mode_fs5}[a.mode]
+    fn = {"fs1": mode_fs1, "fs2": mode_fs2, "fs3": mode_fs3, "fs4": mode_fs4, "fs5": mode_fs5, "fs6": mode_fs6}[a.mode]
     rows, log = fn(a, bars, panel, mid, c_rt)
     tag = f"{a.mode}_{a.sym}_{a.tf}"
     pd.DataFrame(rows).to_csv(os.path.join(a.out, f"fs_{tag}.csv"), index=False)
