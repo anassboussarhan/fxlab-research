@@ -11,7 +11,7 @@ from the user).
 | Stops, targets, exits, entries, filters, indicators, losing nights | done | `docs/untested_batch.md` 9.14-9.18 |
 | Panel, 2007-2018 screen (34 instruments) | done | 9.19 |
 | **Panel, 2019-2025 check, indices / bonds / commodities** | **open**, waiting for the last 4 bond and commodity downloads; the panel CI has not been triggered | `scripts/gotobi_panel_lab.py` |
-| **New York-leg hedges and pre-entry signals (H, F)** | **written**, code built (`scripts/panel_hedge_lab.py`), waits for the bond data | `docs/panel_hedge_preregistration.md` |
+| New York-leg hedges and pre-entry signals (H, F) | done: none counts (bond hedge cuts sd 17% but also the mean); bond data incomplete | `docs/edges_batch_results.md` |
 | Sizing by filter probability (E1) | done: P(paid) 60% vs 49%, fails its own rule; forward line FW1 | `docs/edges_batch/e1.json` |
 | Cheaper limit entry (E2), short after the fix (E13), Japan's flows (E3) | done, nothing | `docs/edges_batch_results.md` |
 | Entry at 14:06 instead of 14:00 checked on 2019-2025 | done: +0.5 bp vs 14:00 (t 1.6), no cost | `docs/prop_best.md` |
@@ -52,9 +52,9 @@ from the user).
 | Item | Status |
 |---|---|
 | M1 weekly pooled model; M2 cost-aware meta-labels; M4 pooled intraday model with the FS5 large-move filter | done, none counts (`docs/edges_batch_results.md`, addenda 3-5) |
-| **M3 cross-asset intraday features** | **written and built** (`cross-assets` workflow); waits for the bond / Brent downloads |
+| M3 cross-asset intraday features | done: slightly better, still negative (-1.1 to -1.6 bp) |
 | **FS1 settings and transforms chosen inside the walk-forward; FS2 session / volatility cells** | **running** (`fs-lab`, 138 jobs) |
-| **FS3 new intraday sources** (cross-asset returns, event clock, TFF, rate-gap change) | **built**; waits for the bond downloads (`cross-assets`) |
+| FS3 new intraday sources | done: 9 significant ICs (cross-asset), none tradeable after costs |
 | **Feature predictability on 2019-2025** | open: part of FS1 |
 | Volatility or large-move targets (FS5) | trading rule done (in M4, no count); information part **running** (`fs-lab`) |
 | **Systematic pairs of features (FS4)** | **running** (`fs-lab`) |

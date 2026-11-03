@@ -135,3 +135,42 @@ All on 2007-2025 data; 2026 untouched. None of these counts.
 - FS1, FS2, FS4, FS5 information (`fs-lab`, 138 jobs).
 - E4 / E16 on the re-downloaded files.
 - FS3, M3, the panel test period and the hedges: they start when the bond and Brent downloads finish.
+
+
+## Hedges (H / F), FS3 and M3: the bond, index and Brent data (2026-11-03, CI runs 41676706418, 41679528174)
+
+**Data caveat.** The Dukascopy candle files are incomplete. US Treasury bond: 2018-01 to 2024-04. Bund: 2018-05 to
+2024-08. US500, NAS100, JPN225: 2012 to 2024-2025, with gaps. So the 2023-2025 check of the hedges rests on 62-69
+nights for bonds and the Nikkei, instead of about 165.
+
+- **H, hedging the Gotobi night with a New York-session leg** (`scripts/panel_hedge_lab.py`, branch `panel-hedge`):
+  none counts.
+  - Best case, short US bonds over the whole night, on 2023-2025:
+    - the night's sd falls 17% (28.6 -> 23.6 bp);
+    - the mean falls from 4.4 to 2.8 bp, and t falls from 1.27 to 0.98.
+  - The rule needs t to rise, so it fails. Indices and gold fail too.
+- **F, pre-entry signals** (12 tests): none.
+  - On 2019-2022 a rise in US stocks over 08:00 -> 14:00 UTC went with a weaker night (rho about -0.2,
+    p 0.001). On 2023-2025 it is -0.21 (one-sided p 0.03) for US500 but fails the BH correction (q 0.32).
+  - Weak lead, not a rule.
+- **M3, cross-asset features in the 8.5 model, H1** (2012-, 60/40 split; check from 2020): the extra features raise
+  net slightly, but every version loses on the check:
+
+  | Market | Without cross-asset | With cross-asset |
+  |---|---|---|
+  | USD/JPY | -1.8 bp | -1.6 bp |
+  | EUR/USD | -2.0 bp | -1.4 bp |
+  | Gold | -2.1 bp | -1.1 bp |
+
+  Does not count.
+- **FS3, new intraday sources** (528 checks on USD/JPY, EUR/USD and gold, H1-D1): nothing counts. It is the first
+  test where the information is clearly real but too small to trade.
+  - Information: 9 of the 528 IC tests survive BH at 10%. All but one are cross-asset returns. Examples:
+    - the Bund's 24-bar return predicts gold 24 H4 bars ahead (z 4.3);
+    - US500's last H4 bar predicts gold (z 3.7);
+    - the 3-month rate-gap change predicts USD/JPY 24 days ahead (z 3.2, +62 bp per trade, t 1.58).
+  - Trading: none of them clears costs with t >= 1.645. The decile trades with net > 0 and t >= 1.645 (15) are not
+    the ones with a significant IC.
+  - Leads for the forward watch list:
+    - the rate-gap change on USD/JPY D1 and EUR/USD H4 (t 2.9 net, but IC z 0.4);
+    - the Bund -> gold link.
