@@ -1,0 +1,54 @@
+name: edges-peek
+# Heads of every file the edges-data runs downloaded (run ids in ci/EDGES_PEEK), so parsers can be written
+# against the real formats. Publishes only the heads (a few lines each) to the edges-peek branch.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/EDGES_PEEK"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  peek:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Heads
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for R in $(cat ci/EDGES_PEEK); do gh run download $R -n edges-data -D dl/$R || true; done
+          mkdir -p pub
+          python3 - <<'PY' > pub/heads.txt
+          import os, json, zipfile
+          for root, _, files in os.walk("dl"):
+              for f in sorted(files):
+                  p = os.path.join(root, f)
+                  if "/.git" in p or "calendar_repo" in p and not p.endswith(".csv"):
+                      continue
+                  print("=" * 20, p, os.path.getsize(p))
+                  try:
+                      if f.endswith(".zip"):
+                          z = zipfile.ZipFile(p); print(z.namelist()[:5])
+                          m = z.namelist()[0]; print(z.read(m)[:1500].decode("utf-8", "replace"))
+                      elif f.endswith(".json"):
+                          s = open(p, encoding="utf-8", errors="replace").read(); print(s[:1500])
+                      else:
+                          with open(p, "rb") as fh: print(fh.read(1500).decode("utf-8", "replace") if "calendar_repo" not in p or f.startswith(("0", "1")) and ("Nonfarm" in f or "CPI" in f or "Interest_Rate" in f or "Retail" in f or "ISM" in f) else "")
+                  except Exception as ex:
+                      print("ERR", ex)
+          PY
+          ls dl/*/raw/calendar_repo/news_data > pub/calendar_files.txt 2>/dev/null || true
+      - name: Publish
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp -r pub /tmp/pub
+          git checkout --orphan ep-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p edges_peek && cp -r /tmp/pub/* edges_peek/
+          git add -f edges_peek
+          git commit -qm "Edges data heads (run ${{ github.run_id }})"
+          git push -f origin HEAD:edges-peek

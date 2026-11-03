@@ -16,7 +16,7 @@ from urllib.parse import urlparse
 
 import requests
 
-UA = {"User-Agent": "fxlab-research/1.0 (research; contact via github.com/anassboussarhan)"}
+UA = {"User-Agent": "fxlab-research/1.0 (research)"}
 OUT = sys.argv[1] if len(sys.argv) > 1 else "out_edges"
 RAW = os.path.join(OUT, "raw")
 os.makedirs(RAW, exist_ok=True)
