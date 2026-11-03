@@ -4,6 +4,7 @@
 # the pieces of six runs (far fewer API calls; the pieces route hit the token's rate limit with many parallel jobs).
 set -u
 PD=$1; shift
+[ -z "${NO_STAGE:-}" ] && [ -z "${STAGE_RUN:-}" ] && [ -f ci/STAGE_RUN ] && STAGE_RUN=$(cut -d' ' -f1 ci/STAGE_RUN)
 get() {  # gh run download with retries; prints the last error
   for k in 1 2 3 4 5; do
     out=$(gh run download "$@" 2>&1) && return 0
@@ -15,8 +16,10 @@ get() {  # gh run download with retries; prints the last error
 for S in "$@"; do
   mkdir -p dl_$S
   if [ -n "${STAGE_RUN:-}" ]; then
-    get $STAGE_RUN -n "m1all-$S" -D dl_$S/st || echo "no staged artifact for $S"
-  else
+    get $STAGE_RUN -n "m1all-$S" -D dl_$S/st || { echo "no staged artifact for $S, using the pieces"; STAGE_FALLBACK=1; }
+  fi
+  if [ -z "${STAGE_RUN:-}" ] || [ -n "${STAGE_FALLBACK:-}" ]; then
+    unset STAGE_FALLBACK
     for R in 40403976401 40567306171; do get $R -p "mm-$S-*" -D dl_$S/mm_$R || true; done
     get 40946488168 -p "fd-$S-*" -D dl_$S/fd || true
     get 41332786946 -p "fd2-$S-*" -D dl_$S/fd2 || true

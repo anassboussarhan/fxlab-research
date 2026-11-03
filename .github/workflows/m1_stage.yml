@@ -34,6 +34,7 @@ jobs:
       - name: Gather ${{ matrix.sym }}
         env:
           GH_TOKEN: ${{ github.token }}
+          NO_STAGE: "1"
         run: |
           read PD REST < ci/M1_STAGE
           ci/fetch_m1.sh $PD ${{ matrix.sym }}
