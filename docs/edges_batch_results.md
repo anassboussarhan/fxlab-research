@@ -53,11 +53,34 @@ Net is after costs, in bp a trade; "fit" and "check" are the two halves of the s
 - The USD/CNH, USD/MXN, USD/ZAR and USD/SGD files have gaps (2013-2015) and stop in 2022-2023, because Dukascopy throttled the downloads.
 - The forecast dataset covers 2017-2023 only.
 
+
+## E20 / E22 / E21 (CI runs 41637369890 + 41647033603, 41647033503)
+
+- **E20, the confidence curve: the edge barely grows with confidence.**
+  - Median gross per trade by cut-off (top 10% / 5% / 2% / 1% of calls):
+    - H1: +1.00 / +0.87 / +1.04 / +1.02 bp;
+    - M30: +0.73 / +1.09 / +1.37 / +1.20 bp.
+  - Median net is about -1.9 to -3.1 bp everywhere.
+  - On 2019-2025, 0-12% of the tests are positive.
+  - Two series meet the rule's own conditions (net rising with confidence, t >= 1.645 at 98% or 99%), but both
+    fail the correction over all tests (q = 1.0):
+    - EUR/USD M30 at 99%: +0.74 bp, t 1.75;
+    - USD/JPY H4 at 98%: +3.4 bp overall, t 1.96. That is -0.1 bp on 2010-2018 and +6.9 bp (t 3.3, 248 trades) on
+      2019-2025.
+  - The second is a lead to watch, not an edge.
+  - **Quantile abstention** (trade only when the 25% quantile beats the cost) is no better.
+- **E22, agreement across timeframes:** median -2.2 bp on H1, no better than without it.
+- **E21, the catalog on 2019-2025** (10 families x 12 markets x H1/H4, plus the night fade and gold breakout): none
+  after correction.
+  - The best are cross-asset statistical arbitrage on USD/CHF H4 (+1.2 bp a day, t 2.1) and the change-point rule
+    on gold H4 (t 1.8), both q = 1.0.
+  - Median Sharpe by family is -1.0 to +0.03.
+- **E5, FX option expiries:** untestable. The DTCC files exist only for recent months; 3 of the 4 sampled days
+  were refused.
+
 **A data bug found and fixed:** the first E20 and E21 runs failed on the instruments whose 2019-2025 files come only from
 Dukascopy candles (AUD/NZD, EUR/GBP, GBP/CAD, gold) and on every cross-asset family. Those files lack the spread
 columns of the older ones. The loader (`fxlab/data/store.py`) now aligns the columns, and both have been rerun.
 
 **Still running:**
-- E20 / E22 (the confidence curve and timeframe agreement): run `ml-confidence`.
-- E21 (the catalog on 2019-2025): run `catalog-rep`.
 - The panel test period, and the hedges and pre-entry signals: they wait for the bond and index downloads.
