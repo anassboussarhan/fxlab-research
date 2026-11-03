@@ -133,7 +133,8 @@ def fred():
 
 @source("cftc_tff")
 def tff():
-    files = ["fin_fut_txt_2006_2016.zip"] + [f"fin_fut_txt_{y}.zip" for y in range(2017, 2026)]
+    # history file 2006-2016, then one file a year named fut_fin_txt_YYYY.zip (futures only)
+    files = ["fin_fut_txt_2006_2016.zip"] + [f"fut_fin_txt_{y}.zip" for y in range(2017, 2026)]
     n = 0
     for f in files:
         r = get("https://www.cftc.gov/files/dea/history/" + f)
@@ -223,7 +224,9 @@ def oanda():
 
 
 if __name__ == "__main__":
+    only = set(sys.argv[2:])
     for fn in (treasury, cny, mof, fred, tff, cb, calendar, dtcc, trends, oanda):
-        fn()
+        if not only or fn.__name__ in only:
+            fn()
     json.dump(REPORT, open(os.path.join(OUT, "report.json"), "w"), indent=1)
     print(json.dumps({k: v["ok"] for k, v in REPORT.items()}))

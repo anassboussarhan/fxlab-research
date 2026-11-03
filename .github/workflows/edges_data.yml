@@ -24,7 +24,7 @@ jobs:
       - name: Download
         env:
           OANDA_TOKEN: ${{ secrets.OANDA_TOKEN }}
-        run: python ci/edges_data.py out_edges 2>&1 | tee out_edges_log.txt
+        run: python ci/edges_data.py out_edges $(cat ci/EDGES_DATA | cut -s -d" " -f2-) 2>&1 | tee out_edges_log.txt
       - uses: actions/upload-artifact@v4
         if: always()
         with:
