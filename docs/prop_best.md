@@ -203,3 +203,48 @@ Script: `scripts/prop_checks.py`. Results: `docs/prop_best/checks.json`.
 
   - The accounts move together: when one fails, the others usually fail too. Three firms raise the payout per good
     year but do not diversify the risk of a bad one.
+
+## Real costs and the scaling question (2026-11-03, web research; figures change, check the platform)
+
+**Costs found:**
+- **Commission per round lot:**
+  - FTMO and FundedNext: $5, which is about 0.5 bp of notional.
+  - The5ers: $4, about 0.4 bp.
+  - The model charges 0.7 bp, so it is slightly too expensive here.
+- **Swaps** (retail, long, early November 2026):
+  - USD/JPY: OANDA +1.66% a year (about +0.45 bp a night); Afterprime about zero; HFM 0.
+  - EUR/JPY: OANDA +0.21% a year; HFM -30 JPY a lot; XM -545 JPY a lot.
+  - FTMO, FundedNext and The5ers publish swaps only in the platform. All three charge swaps; The5ers has no
+    swap-free account.
+  - The model's average swap on 2019-2025 nights is about +0.25 bp. A real swap of 0 to -0.5 bp is plausible, the
+    same size as the commission saving.
+- **Spreads:** no firm publishes USD/JPY or EUR/JPY figures; they are variable. The model uses Dukascopy's quoted
+  spread x 1.25 + 0.1 pip at 14:00 UTC and 00:53 UTC. Measure the firm's live spread at those two times before
+  trading.
+- **Net effect:** within about ±0.5 bp of the model. The +1 bp stress (2019-2025: +4.0 bp, t 2.8) covers it.
+
+**Scaling plans:**
+- **The plans:**
+  - FTMO: +25% every 4 months, up to $2M.
+  - FundedNext: +40% every 4 months, up to $4M.
+  - Both require 10% profit in the 4 months and 2 payouts.
+  - The5ers High Stakes: needs a 10% target, and its ceiling is $500k ($4M is Hyper Growth only).
+- **What the trade makes in 4 months** (real 2019-2025 nights, rolling windows, compounded):
+
+  | Leverage | Median 4-month gain | P(window >= 10%) | Same, at the 2026 edge |
+  |---|---|---|---|
+  | 3x | 2.7% | 9% | 2% |
+  | 4x | 3.6% | 21% | 12% |
+  | 5x | 4.4% | 26% | 20% |
+
+  - Scaling from $100k to $1M at FundedNext takes 7 consecutive qualifying reviews. That is close to impossible
+    with this edge.
+- **Initial allocation caps:** FTMO $400k per trader or strategy (all accounts combined, before scaling);
+  FundedNext $300k. Copying the same strategy across accounts at one firm is policed.
+- **Conclusion:**
+  - Prop scaling plans are built for 10% per 4 months, about 30% a year. The edge earns about 9-15% a year at
+    3-5x on the 2019-2025 edge, and 3.5-6% at the 2026 edge.
+  - The realistic route to $1M of buying power is the initial caps at several firms: FTMO $400k + FundedNext
+    $300k + others. Those accounts fail together.
+  - The route to $1-4M of own capital is a real-money track record and investors. Liquidity is no limit: USD/JPY
+    absorbs $4M without slippage worth measuring.
