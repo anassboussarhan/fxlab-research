@@ -1,0 +1,117 @@
+name: edges-batch
+# scripts/edges_lab2.py: the edges batch of docs/edges_batch_preregistration.md, one job per group, then the
+# Benjamini-Hochberg aggregate. ci/EDGES_BATCH: PANEL_DATA_RUN EDGES_DATA_RUNS(comma-separated)
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/EDGES_BATCH"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  group:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {g: g1, tests: "E2 E13", syms: "USDJPY EURJPY"}
+          - {g: g2, tests: "E3 E10", syms: "USDJPY XAUUSD"}
+          - {g: g3, tests: "E4", syms: "USDCNH AUDUSD"}
+          - {g: g4, tests: "E6 E15", syms: "XAUUSD"}
+          - {g: g5, tests: "E7 E8", syms: "USDJPY XAUUSD EURUSD"}
+          - {g: g6, tests: "E9 E11", syms: "USDJPY EURJPY EURUSD XAUUSD"}
+          - {g: g7, tests: "E14", syms: "XAUUSD EURUSD GBPUSD USDJPY USDCHF USDCAD AUDUSD NZDUSD"}
+          - {g: g8, tests: "E16", syms: "USDMXN USDZAR USDCNH USDSGD"}
+          - {g: g9, tests: "E18", syms: "EURUSD GBPUSD USDJPY XAUUSD"}
+          - {g: g10, tests: "E19", syms: "AUDNZD EURGBP GBPCAD"}
+          - {g: g12, tests: "E24", syms: "EURUSD GBPUSD AUDUSD NZDUSD USDJPY USDCHF USDCAD"}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays yfinance lunardate statsmodels requests
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD ED REST < ci/EDGES_BATCH
+          for R in $(echo $ED | tr ',' ' '); do gh run download $R -n edges-data -D raw/$R || true; done
+          ci/fetch_m1.sh $PD ${{ matrix.syms }}
+          df -h . | tail -1
+      - run: python -W ignore scripts/edges_lab2.py --tests ${{ matrix.tests }} --raw raw --out out/${{ matrix.g }} 2>&1 | tee out_${{ matrix.g }}.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eb-${{ matrix.g }}
+          path: |
+            out
+            out_${{ matrix.g }}.txt
+          retention-days: 30
+  strength:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays statsmodels
+      - name: E23, one pair at a time
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD ED REST < ci/EDGES_BATCH
+          mkdir -p out/g11
+          for S in EURUSD EURGBP EURAUD EURNZD EURCAD EURCHF EURJPY GBPUSD GBPAUD GBPNZD GBPCAD GBPCHF GBPJPY AUDUSD AUDNZD AUDCAD AUDCHF AUDJPY NZDUSD NZDCAD NZDCHF NZDJPY USDCAD USDCHF USDJPY CADCHF CADJPY CHFJPY; do
+            ci/fetch_m1.sh $PD $S
+            python -W ignore scripts/edges_lab2.py --pair $S --out out/g11 || true
+            rm -rf data/m1/$S
+          done
+          python -W ignore scripts/edges_lab2.py --tests E23 --out out/g11 2>&1 | tee out_g11.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: eb-g11
+          path: |
+            out
+            out_g11.txt
+          retention-days: 30
+  aggregate:
+    needs: [group, strength]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt statsmodels
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: eb-*
+          path: eb
+          merge-multiple: true
+      - run: python -W ignore scripts/edges_lab2.py --aggregate eb --out pub 2>&1 | tee aggregate.txt
+      - name: Publish to the edges-batch branch (results and per-event returns, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p pub/groups && cp eb/out_*.txt pub/groups/ 2>/dev/null || true
+          find eb/out -name 'events_*.csv' -exec cp {} pub/groups/ \; 2>/dev/null || true
+          cp aggregate.txt pub/ 2>/dev/null || true
+          cp -r pub /tmp/pub
+          git checkout --orphan eb-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p edges_batch && cp -r /tmp/pub/* edges_batch/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > edges_batch/RUN.txt
+          git add -f edges_batch
+          git commit -qm "Edges batch (run ${{ github.run_id }})"
+          git push -f origin HEAD:edges-batch
