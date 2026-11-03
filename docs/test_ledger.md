@@ -14,8 +14,8 @@ from the user).
 | **New York-leg hedges and pre-entry signals (H, F)** | **written**, code built (`scripts/panel_hedge_lab.py`), waits for the bond data | `docs/panel_hedge_preregistration.md` |
 | Sizing by filter probability (E1) | done: P(paid) 60% vs 49%, fails its own rule; forward line FW1 | `docs/edges_batch/e1.json` |
 | Cheaper limit entry (E2), short after the fix (E13), Japan's flows (E3) | done, nothing | `docs/edges_batch_results.md` |
-| **Entry at 14:06 instead of 14:00 checked on 2019-2025** | **open**: checked on 2007-2018 only (`scripts/prop_checks.py`) | - |
-| **Skip the 25th and month-end** | **open**: can only be judged forward; not yet a forward-report line | - |
+| Entry at 14:06 instead of 14:00 checked on 2019-2025 | done: +0.5 bp vs 14:00 (t 1.6), no cost | `docs/prop_best.md` |
+| Skip the 25th and month-end | forward-report line FW2 (exploratory) | `scripts/forward_eval.py` |
 | **USD/SGD, USD/CNH, USD/HKD as Asian dollar carriers** | open: in the panel check above (the USD/CNH, USD/SGD files have gaps) | - |
 | Forward test | running: first nights from 2026-11-05, monthly report on the 3rd | `docs/forward_test_preregistration.md` |
 
@@ -25,9 +25,9 @@ from the user).
 |---|---|
 | Seven programmes simulated, plus Maven and Blueberry; leverage caps; The5ers midnight rule | done (`docs/prop_best.md`) |
 | Drawdown-scaled leverage (E12); gold calendar next to Gotobi (E17) | done, neither helps |
-| **Maven's daily loss from equity at 00:00 UTC (inside the trade)** | **open**: the 2007-2018 files have no 00:00-01:00 UTC bars; testable on 2019-2025 |
-| **Several firms at once: joint outcome of correlated accounts** | **open**: discussed, not simulated |
-| **Which Gotobi nights have a high-impact US release at 14:00 UTC** | **open**: the calendar dataset (2017-2023) can list them |
+| Maven's daily loss from equity at 00:00 UTC | done on 2019-2025 (419 nights): no breach at 3-4x |
+| Several firms at once | done: all three paid 79% (2019-2025 edge), 41% (2026 edge); the accounts fail together |
+| Gotobi nights with a US release at 14:00 UTC | done: 49 of 375 (2017-2023), +2.9 bp vs +5.9 bp |
 | FTMO Swing account price and availability; Alpha Capital, BrightFunded prices | open (prices not found; check on the firms' sites) |
 | The5ers Hyper Growth ($4M scaling), instant-funding accounts | not simulated (rules too tight for the trade, or not verified) |
 

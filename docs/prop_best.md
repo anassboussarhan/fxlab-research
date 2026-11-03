@@ -169,3 +169,37 @@ paid, if attempts are independent):
 - **BrightFunded:** no prices found. Its daily loss is measured from the higher of balance and equity at the 23:30 CET rollover, which falls inside the trade. The first payout comes 30 days after funding.
 - **FundingPips, Goat, Sure Leverage, FundYourFX:** floating-loss rules, mandatory stop-loss timing, or consistency rules on funded accounts.
 - **Instant-funding accounts:** trailing drawdowns of 3-4% and 2% daily limits, too tight for an 80 bp stop at any useful leverage.
+
+## Practical checks on 2007-2025 and several firms at once (2026-11-03, CI run 41651787391)
+
+Script: `scripts/prop_checks.py`. Results: `docs/prop_best/checks.json`.
+
+- **The5ers midnight rule.**
+  - 2019-2025: no night breaches a 5% daily loss at 3x-6x.
+  - 2007-2018: 2 nights would at 4.5x-5x, and 7 at 6x. The simulator's own measure gives 0 at 5x.
+  - The 4x cap stands.
+- **Maven, daily loss from equity at 00:00 UTC.** Testable on 2019-2025 only (419 nights). No breach of the 4%
+  limit at 3x, 3.5x or 4x.
+- **Later entry.** Gross gain over the 14:00 entry, per night:
+
+  | Delay | 2007-2018 | 2019-2025 |
+  |---|---|---|
+  | +3 min | +0.8 bp (t 2.3) | +0.4 bp (t 1.4) |
+  | +6 min | +0.3 bp (t 0.8) | +0.5 bp (t 1.6) |
+  | +10 min | +0.3 bp (t 0.6) | +0.6 bp (t 1.6) |
+  | +15 min | | +0.0 bp |
+
+  - No delay costs anything, so the 14:06 entry (which keeps clear of the 2-5 minute news rules) is safe.
+- **US release at 14:00 UTC.** 49 of 375 Gotobi nights in 2017-2023 have one. Those nights average +2.9 bp, against
+  +5.9 bp on the others.
+- **Three accounts on the same nights** (`scripts/prop_joint.py`): FTMO 2-Step 5x, FundedNext Stellar 1-Step 3x,
+  The5ers High Stakes Classic 4x. Fees $1,646 in total.
+
+  | Edge | P(at least one paid) | P(all three paid) | Median total net |
+  |---|---|---|---|
+  | 2019-2025 edge | 87% | 79% | +$15,013 |
+  | 2026 edge (+2.0 bp) | 47% | 41% | -$1,646 (all fees lost) |
+  | Zero edge | 32% | 24% | -$1,646 |
+
+  - The accounts move together: when one fails, the others usually fail too. Three firms raise the payout per good
+    year but do not diversify the risk of a bad one.

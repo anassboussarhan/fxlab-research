@@ -1,57 +1,176 @@
 {
- "nights": 685,
+ "nights": 1104,
  "midnight": {
-  "3x": {
-   "breaches_old": 0,
-   "breaches_fivers": 0
+  "2007-2018": {
+   "3x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   },
+   "3.5x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   },
+   "4x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   },
+   "4.5x": {
+    "breaches_old": 0,
+    "breaches_fivers": 2
+   },
+   "5x": {
+    "breaches_old": 0,
+    "breaches_fivers": 2
+   },
+   "6x": {
+    "breaches_old": 2,
+    "breaches_fivers": 7
+   }
   },
-  "3.5x": {
-   "breaches_old": 0,
-   "breaches_fivers": 0
+  "2019-2025": {
+   "3x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   },
+   "3.5x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   },
+   "4x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   },
+   "4.5x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   },
+   "5x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   },
+   "6x": {
+    "breaches_old": 0,
+    "breaches_fivers": 0
+   }
+  }
+ },
+ "maven_0000utc_4pct_daily": {
+  "2007-2018": {
+   "nights_with_00utc_bars": 0,
+   "3x": {
+    "breaches_old": 0,
+    "breaches_maven": 0
+   },
+   "3.5x": {
+    "breaches_old": 0,
+    "breaches_maven": 0
+   },
+   "4x": {
+    "breaches_old": 0,
+    "breaches_maven": 0
+   }
   },
-  "4x": {
-   "breaches_old": 0,
-   "breaches_fivers": 0
-  },
-  "4.5x": {
-   "breaches_old": 0,
-   "breaches_fivers": 2
-  },
-  "5x": {
-   "breaches_old": 0,
-   "breaches_fivers": 2
-  },
-  "6x": {
-   "breaches_old": 2,
-   "breaches_fivers": 7
+  "2019-2025": {
+   "nights_with_00utc_bars": 419,
+   "3x": {
+    "breaches_old": 0,
+    "breaches_maven": 0
+   },
+   "3.5x": {
+    "breaches_old": 0,
+    "breaches_maven": 0
+   },
+   "4x": {
+    "breaches_old": 0,
+    "breaches_maven": 0
+   }
   }
  },
  "delay": {
-  "+0 min": {
-   "mean_gross_bp": 5.491672846036354,
-   "diff_bp": 0.0,
-   "t": 0.0
+  "2007-2018": {
+   "+0 min": {
+    "n": 685,
+    "mean_gross_bp": 5.491672846036354,
+    "diff_bp": 0.0,
+    "t": 0.0
+   },
+   "+3 min": {
+    "n": 685,
+    "mean_gross_bp": 6.273829046050715,
+    "diff_bp": 0.7821562000143605,
+    "t": 2.338939787295349
+   },
+   "+6 min": {
+    "n": 685,
+    "mean_gross_bp": 5.758548212836805,
+    "diff_bp": 0.2668753668004511,
+    "t": 0.7737486906917134
+   },
+   "+10 min": {
+    "n": 685,
+    "mean_gross_bp": 5.7653044215517655,
+    "diff_bp": 0.2736315755154111,
+    "t": 0.6282403850176481
+   },
+   "+15 min": {
+    "n": 685,
+    "mean_gross_bp": 5.724384402232932,
+    "diff_bp": 0.23271155619657843,
+    "t": 0.5019794160904126
+   }
   },
-  "+3 min": {
-   "mean_gross_bp": 6.273829046050715,
-   "diff_bp": 0.7821562000143605,
-   "t": 2.338939787295349
-  },
-  "+6 min": {
-   "mean_gross_bp": 5.758548212836805,
-   "diff_bp": 0.2668753668004511,
-   "t": 0.7737486906917134
-  },
-  "+10 min": {
-   "mean_gross_bp": 5.7653044215517655,
-   "diff_bp": 0.2736315755154111,
-   "t": 0.6282403850176481
-  },
-  "+15 min": {
-   "mean_gross_bp": 5.724384402232932,
-   "diff_bp": 0.23271155619657843,
-   "t": 0.5019794160904126
+  "2019-2025": {
+   "+0 min": {
+    "n": 419,
+    "mean_gross_bp": 5.418954818289996,
+    "diff_bp": 0.0,
+    "t": 0.0
+   },
+   "+3 min": {
+    "n": 419,
+    "mean_gross_bp": 5.804864618870437,
+    "diff_bp": 0.38590980058044105,
+    "t": 1.3580511206009716
+   },
+   "+6 min": {
+    "n": 419,
+    "mean_gross_bp": 5.9511519180159835,
+    "diff_bp": 0.5321970997259888,
+    "t": 1.5617177549312962
+   },
+   "+10 min": {
+    "n": 419,
+    "mean_gross_bp": 6.049194804180855,
+    "diff_bp": 0.63023998589086,
+    "t": 1.6102684262111944
+   },
+   "+15 min": {
+    "n": 419,
+    "mean_gross_bp": 5.435482554505324,
+    "diff_bp": 0.01652773621532876,
+    "t": 0.03842628433459573
+   }
   }
  },
- "delay_nights": 685
+ "news_at_entry": {
+  "gotobi_nights_2017_2023": 375,
+  "nights_with_a_14utc_release": 49,
+  "examples": {
+   "2017-03-17": "10080_1057_US_JOLTs_Job_Openings",
+   "2017-03-24": "10160_896_US_New_Home_Sales_MoM, 10162_222_US_New_Home_Sales",
+   "2017-04-05": "10110_100_US_Factory_Orders_MoM",
+   "2017-04-14": "10090_320_US_Michigan_Consumer_Sentiment, 10091_389_US_Michigan_Inflation_Expectations, 10092_901_US_Michigan_Current_Conditions",
+   "2017-05-02": "10210_45_US_Construction_Spending_MoM",
+   "2017-05-10": "10080_1057_US_JOLTs_Job_Openings, 10120_305_US_Wholesale_Inventories_MoM, 10200_305_US_Wholesale_Inventories_MoM",
+   "2017-06-15": "10140_29_US_Business_Inventories_MoM",
+   "2017-08-04": "10110_100_US_Factory_Orders_MoM",
+   "2017-08-10": "10120_305_US_Wholesale_Inventories_MoM, 10200_305_US_Wholesale_Inventories_MoM",
+   "2017-11-02": "10210_45_US_Construction_Spending_MoM",
+   "2018-03-30": "10090_320_US_Michigan_Consumer_Sentiment, 10091_389_US_Michigan_Inflation_Expectations, 10092_901_US_Michigan_Current_Conditions",
+   "2018-04-05": "10110_100_US_Factory_Orders_MoM, 10170_86_US_Durable_Goods_Orders_MoM"
+  },
+  "net_path_end_bp_on_clash_nights": 2.9110136223470024,
+  "net_path_end_bp_other_nights_2017_2023": 5.931722559315035
+ },
+ "delay_nights": 1104
 }
