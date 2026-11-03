@@ -13,14 +13,22 @@ env:
   PYTHONUNBUFFERED: "1"
   OMP_NUM_THREADS: "4"
 jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/ml_conf_matrix.json)" >> "$GITHUB_OUTPUT"
   lab:
+    needs: list
     runs-on: ubuntu-latest
     timeout-minutes: 340
     strategy:
       fail-fast: false
       max-parallel: 12
-      matrix:
-        include: [{"symbol": "EURUSD", "tf": "H4"}, {"symbol": "GBPUSD", "tf": "H4"}, {"symbol": "USDJPY", "tf": "H4"}, {"symbol": "AUDUSD", "tf": "H4"}, {"symbol": "USDCAD", "tf": "H4"}, {"symbol": "USDCHF", "tf": "H4"}, {"symbol": "NZDUSD", "tf": "H4"}, {"symbol": "EURJPY", "tf": "H4"}, {"symbol": "EURGBP", "tf": "H4"}, {"symbol": "AUDNZD", "tf": "H4"}, {"symbol": "GBPCAD", "tf": "H4"}, {"symbol": "XAUUSD", "tf": "H4"}, {"symbol": "EURUSD", "tf": "H1"}, {"symbol": "GBPUSD", "tf": "H1"}, {"symbol": "USDJPY", "tf": "H1"}, {"symbol": "AUDUSD", "tf": "H1"}, {"symbol": "USDCAD", "tf": "H1"}, {"symbol": "USDCHF", "tf": "H1"}, {"symbol": "NZDUSD", "tf": "H1"}, {"symbol": "EURJPY", "tf": "H1"}, {"symbol": "EURGBP", "tf": "H1"}, {"symbol": "AUDNZD", "tf": "H1"}, {"symbol": "GBPCAD", "tf": "H1"}, {"symbol": "XAUUSD", "tf": "H1"}, {"symbol": "EURUSD", "tf": "M30"}, {"symbol": "GBPUSD", "tf": "M30"}, {"symbol": "USDJPY", "tf": "M30"}, {"symbol": "AUDUSD", "tf": "M30"}, {"symbol": "USDCAD", "tf": "M30"}, {"symbol": "USDCHF", "tf": "M30"}, {"symbol": "NZDUSD", "tf": "M30"}, {"symbol": "EURJPY", "tf": "M30"}, {"symbol": "EURGBP", "tf": "M30"}, {"symbol": "AUDNZD", "tf": "M30"}, {"symbol": "GBPCAD", "tf": "M30"}, {"symbol": "XAUUSD", "tf": "M30"}, {"symbol": "EURUSD", "tf": "M15"}, {"symbol": "GBPUSD", "tf": "M15"}, {"symbol": "USDJPY", "tf": "M15"}, {"symbol": "AUDUSD", "tf": "M15"}, {"symbol": "USDCAD", "tf": "M15"}, {"symbol": "USDCHF", "tf": "M15"}, {"symbol": "NZDUSD", "tf": "M15"}, {"symbol": "EURJPY", "tf": "M15"}, {"symbol": "EURGBP", "tf": "M15"}, {"symbol": "AUDNZD", "tf": "M15"}, {"symbol": "GBPCAD", "tf": "M15"}, {"symbol": "XAUUSD", "tf": "M15"}]
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -55,6 +63,13 @@ jobs:
           pattern: mc-*
           path: mc
           merge-multiple: true
+      - name: Earlier runs' artifacts (ci/ML_CONF fields after the first)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD PREV REST < ci/ML_CONF
+          for R in $(echo "$PREV" | tr ',' ' '); do gh run download $R -p "mc-*" -D mc_prev/$R || true; done
+          mkdir -p mc && find mc_prev -type f -exec cp -n {} mc/ \; || true
       - run: python -W ignore scripts/ml_confidence_lab.py --combine mc --out pub 2>&1 | tee combine_log.txt
       - name: Publish to the ml-confidence branch (summaries and per-trade returns, no price data)
         if: always()

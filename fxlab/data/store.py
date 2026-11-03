@@ -75,7 +75,8 @@ def load_m1(symbol: str, start: str | pd.Timestamp | None = None,
         files.append(str(M1_DIR / symbol / f"{symbol}_{y}.parquet"))
     if not files:
         raise FileNotFoundError(f"no M1 files for {symbol} in requested range")
-    lf = pl.scan_parquet(files)
+    # files from different sources (mirror, tick-built, candle) carry different extra columns: align them
+    lf = pl.concat([pl.scan_parquet(f) for f in files], how="diagonal_relaxed")
     if s is not None:
         lf = lf.filter(pl.col("ts") >= s.to_pydatetime())
     if e is not None:
