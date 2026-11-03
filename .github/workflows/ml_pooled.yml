@@ -1,0 +1,94 @@
+name: ml-pooled
+# scripts/ml_pooled_lab.py: M4 (one pooled intraday model, 12 markets, H1 and H4) and the FS5 large-move filter
+# (docs/edges_batch_preregistration.md, addenda 3 and 5). ci/ML_POOLED: PANEL_DATA_RUN
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/ML_POOLED"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  OMP_NUM_THREADS: "4"
+jobs:
+  bars:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        symbol: [EURUSD, GBPUSD, USDJPY, USDCHF, USDCAD, AUDUSD, NZDUSD, EURJPY, EURGBP, AUDNZD, GBPCAD, XAUUSD]
+        tf: [H1, H4]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt statsmodels
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD REST < ci/ML_POOLED
+          ci/fetch_m1.sh $PD ${{ matrix.symbol }}
+      - run: python -W ignore scripts/ml_pooled_lab.py --bars ${{ matrix.symbol }} --tf ${{ matrix.tf }} --out out/t
+      - uses: actions/upload-artifact@v4
+        with:
+          name: pt-${{ matrix.symbol }}-${{ matrix.tf }}
+          path: out/t
+          retention-days: 30
+  pool:
+    needs: bars
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        tf: [H1, H4]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt statsmodels
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pt-*-${{ matrix.tf }}
+          path: tables
+          merge-multiple: true
+      - run: python -W ignore scripts/ml_pooled_lab.py --pool ${{ matrix.tf }} --tables tables --out out/p 2>&1 | tee out_log_${{ matrix.tf }}.txt
+      - run: mkdir -p out/p && cp out_log_${{ matrix.tf }}.txt out/p/
+        if: always()
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: pooled-${{ matrix.tf }}
+          path: out/p
+  publish:
+    needs: pool
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: pooled-*
+          path: pub
+          merge-multiple: true
+      - name: Publish to the ml-pooled branch (summaries and per-trade returns, no price data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp -r pub /tmp/pub
+          git checkout --orphan mp-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p ml_pooled && cp -r /tmp/pub/* ml_pooled/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > ml_pooled/RUN.txt
+          git add -f ml_pooled
+          git commit -qm "M4 / FS5 pooled model (run ${{ github.run_id }})"
+          git push -f origin HEAD:ml-pooled
