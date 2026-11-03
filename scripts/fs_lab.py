@@ -126,10 +126,11 @@ def targets(mid, hs, seed=777):
 class Acc:
     """Per (group, h, period) accumulators: IC (real and nulls, n-weighted) and month-clustered trade nets."""
 
-    def __init__(self, groups, hs):
+    def __init__(self, groups, hs, labels=("2010-2018", "2019-2025"), split=2019):
         self.groups, self.hs = list(groups), list(hs)
+        self.labels, self.split = labels, split
         G, H = len(self.groups), len(hs)
-        self.ic = {p: np.zeros((G, H, K_NULL + 1)) for p in ("2010-2018", "2019-2025")}
+        self.ic = {p: np.zeros((G, H, K_NULL + 1)) for p in labels}
         self.w = {p: np.zeros(H) for p in self.ic}
         self.tr = {p: [[{} for _ in range(H)] for _ in range(G)] for p in self.ic}  # month -> [sum, count, sumsq]
 
@@ -189,7 +190,7 @@ def run_engine(acc, gid, fold_mats, ys, shifts, c_rt, index, hs, target_fn=None)
     gs = gid[order]
     starts = np.r_[0, np.flatnonzero(np.diff(gs)) + 1]
     for a, m, b, yr in FOLDS_CACHE:
-        per = "2019-2025" if yr >= 2019 else "2010-2018"
+        per = acc.labels[1] if yr >= acc.split else acc.labels[0]
         tr = np.arange(a, max(a, m - max(hs)))
         te = np.arange(m, min(b, n - max(hs)))
         if len(tr) < 100 or len(te) < 10:
@@ -430,6 +431,107 @@ def mode_fs2(a, bars, panel, mid, c_rt):
     return rows, {"features": len(fids)}
 
 
+CROSS = ("USTBONDTRUSD", "BUNDTREUR", "USA500IDXUSD", "USATECHIDXUSD", "JPNIDXJPY", "BRENTCMDUSD")
+
+
+def raw_glob(raw, *parts):
+    return sorted(glob.glob(os.path.join(raw, "**", *parts), recursive=True))
+
+
+def event_clock(index, raw):
+    """Minutes to the next / since the last event of each schedule (2017-2023 for the calendar dataset)."""
+    import flows_lab as FL
+    ev = {}
+    us = []
+    for f in raw_glob(raw, "news_data", "1*_US_*.csv"):
+        try:
+            us += list(pd.to_datetime(pd.read_csv(f, usecols=["Timestamp"]).Timestamp))
+        except Exception:                                                   # noqa: BLE001
+            pass
+    ev["us_release"] = us
+    cb = []
+    for f in raw_glob(raw, "news_data", "*_Fed_Interest_Rate_Decision.csv") + \
+            raw_glob(raw, "news_data", "*_Eurozone_Interest_Rate_Decision.csv"):
+        cb += list(pd.to_datetime(pd.read_csv(f, usecols=["Timestamp"]).Timestamp))
+    ev["cb_decision"] = cb
+    fs = raw_glob(raw, "treasury_auctions.json")
+    if fs:
+        import edges_lab2 as E
+        E.RAW = os.path.dirname(fs[0])
+        ev["treasury_auction"] = [c.tz_convert(None) for _, _, c in E.auctions()]
+    years = range(2006, 2027)
+    hol = FL.jp_holidays(years)
+    G = FL.gotobi_days("2006-12-01", "2026-01-31", hol)
+    ev["gotobi_fix"] = [FL.local_ts(d, "Asia/Tokyo", 9, 55).tz_convert(None) for d in G]
+    ev["london_fix"] = [FL.local_ts(d, "Europe/London", 16, 0).tz_convert(None) for d in pd.bdate_range("2006-12-01", "2026-01-31")]
+    t = index.tz_convert(None)
+    tv = t.values.astype("datetime64[ns]").astype(np.int64)
+    out = {}
+    for k, v in ev.items():
+        if len(v) < 20:
+            continue
+        e = np.unique(pd.DatetimeIndex(v).values.astype("datetime64[ns]").astype(np.int64))
+        j = np.searchsorted(e, tv, side="right")
+        nxt = np.where(j < len(e), (e[np.minimum(j, len(e) - 1)] - tv) / 6e10, np.nan)
+        prv = np.where(j > 0, (tv - e[np.maximum(j - 1, 0)]) / 6e10, np.nan)
+        lo, hi = pd.DatetimeIndex(v).min(), pd.DatetimeIndex(v).max()
+        ok = (t >= lo) & (t <= hi)
+        out[f"ev:{k}_to_next_min"] = np.where(ok, np.minimum(nxt, 60 * 24 * 14), np.nan)
+        out[f"ev:{k}_since_last_min"] = np.where(ok, np.minimum(prv, 60 * 24 * 14), np.nan)
+    return out
+
+
+def mode_fs3(a, bars, panel, mid, c_rt):
+    from fxlab.orchestration.runners import cached_bars
+    hs = (6, 24)
+    idx = bars.index
+    F = {}
+    for s in CROSS:
+        try:
+            b = cached_bars(s, a.tf, "2007-01-01", DEV_END)
+        except Exception as ex:                                             # noqa: BLE001
+            print("cross", s, repr(ex)[:100], flush=True)
+            continue
+        c = np.log(((b.bid_c + b.ask_c) / 2))
+        c = c.reindex(c.index.union(idx)).ffill().reindex(idx)
+        for k in (1, 4, 24):
+            F[f"x:{s}_r{k}"] = (c - c.shift(k)).to_numpy()
+    F.update(event_clock(idx, a.raw))
+    ccy = {"USDJPY": "JPY", "EURUSD": "EUR"}.get(a.sym)
+    if ccy:
+        import ml_weekly_lab as W
+        Z = W.tff(a.raw).get(ccy)
+        if Z is not None:
+            pub = pd.DatetimeIndex(Z.index + pd.Timedelta(days=3, hours=20, minutes=30)).tz_localize("UTC")
+            zz = pd.Series(Z.values, index=pub).sort_index()
+            F["tff:lev_z"] = zz.reindex(zz.index.union(idx)).ffill().reindex(idx).to_numpy()
+        from fxlab.data.rates import has_rates, rate_diff
+        if has_rates(a.sym):
+            days = pd.date_range(idx[0].floor("D"), idx[-1].floor("D"), freq="D")
+            rd = rate_diff(a.sym, days)
+            ch = (rd - rd.shift(91)).reindex(idx.floor("D")).to_numpy()
+            F["rate:gap_chg_3m"] = ch
+    names = list(F)
+    B = np.column_stack([np.asarray(F[k], float) for k in names])
+    ys, sh = targets(mid, hs)
+    rows = []
+    # split: 2007-2018 / 2019-2025, or 60/40 of the feature's own rows if it starts after 2008
+    groups = {}
+    for j, k in enumerate(names):
+        v = np.isfinite(B[:, j])
+        if v.sum() < 300:
+            continue
+        first = idx[v][0]
+        split = 2019 if first.year <= 2008 else int(idx[v][int(0.6 * v.sum())].year)
+        groups.setdefault(split, []).append(j)
+    for split, js in groups.items():
+        acc = Acc([names[j] for j in js], hs, labels=(f"fit (before {split})", f"check (from {split})"), split=split)
+        Bs = B[:, js]
+        run_engine(acc, np.arange(len(js)), lambda tr, te: (Bs[tr], Bs[te]), ys, sh, c_rt, idx, hs)
+        rows += acc.rows({"mode": "fs3", "sym": a.sym, "tf": a.tf})
+    return rows, {"features": names, "splits": {str(k): len(v) for k, v in groups.items()}}
+
+
 def combine(a):
     from scipy import stats as st
     fs = glob.glob(os.path.join(a.combine, "**", "fs_*.csv"), recursive=True)
@@ -437,7 +539,7 @@ def combine(a):
     os.makedirs(a.out, exist_ok=True)
     summ = {}
     for mode, g in R.groupby("mode"):
-        c = g[g.period == "2019-2025"].copy()
+        c = g[g.period.astype(str).isin(["2019-2025"]) | g.period.astype(str).str.startswith("check")].copy()
         if mode == "fs2":
             c["p"] = st.norm.sf(c.t.fillna(-9))
         else:
@@ -471,6 +573,7 @@ def main():
     ap.add_argument("--tf", default="D1")
     ap.add_argument("--budget", type=float, default=9000)
     ap.add_argument("--combine", default="")
+    ap.add_argument("--raw", default="raw")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     import warnings
@@ -484,7 +587,7 @@ def main():
     panel = panel_of(a.sym, a.tf, bars.index)
     mid, c_rt = costs(bars, a.sym)
     FOLDS_CACHE[:] = folds(bars.index)
-    fn = {"fs1": mode_fs1, "fs2": mode_fs2, "fs4": mode_fs4, "fs5": mode_fs5}[a.mode]
+    fn = {"fs1": mode_fs1, "fs2": mode_fs2, "fs3": mode_fs3, "fs4": mode_fs4, "fs5": mode_fs5}[a.mode]
     rows, log = fn(a, bars, panel, mid, c_rt)
     tag = f"{a.mode}_{a.sym}_{a.tf}"
     pd.DataFrame(rows).to_csv(os.path.join(a.out, f"fs_{tag}.csv"), index=False)
@@ -493,7 +596,7 @@ def main():
     R = pd.DataFrame(rows)
     print(tag, len(R), "rows", round(time.time() - t0), "s", flush=True)
     if len(R) and "z" in R:
-        c = R[R.period == "2019-2025"]
+        c = R[R.period.astype(str).isin(["2019-2025"]) | R.period.astype(str).str.startswith("check")]
         print(c.sort_values("z", ascending=False).head(8).round(3).to_string(), flush=True)
 
 
