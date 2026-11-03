@@ -1,0 +1,5 @@
+test,symbol,period,trades,net_bp,t,cross_features
+M3 without cross-asset,USDJPY,fit (before 2020),2016,-0.9619298222008985,-1.6636888728098886,12
+M3 without cross-asset,USDJPY,check (from 2020),2252,-1.7901467920989773,-3.3218112269743387,12
+M3 with cross-asset,USDJPY,fit (before 2020),2305,-0.5139705267748718,-1.162857046307824,12
+M3 with cross-asset,USDJPY,check (from 2020),2494,-1.5685724810667194,-3.469051685070554,12

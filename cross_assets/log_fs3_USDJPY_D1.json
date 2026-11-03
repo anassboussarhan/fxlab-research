@@ -1,0 +1,41 @@
+{
+ "features": [
+  "x:USTBONDTRUSD_r1",
+  "x:USTBONDTRUSD_r4",
+  "x:USTBONDTRUSD_r24",
+  "x:BUNDTREUR_r1",
+  "x:BUNDTREUR_r4",
+  "x:BUNDTREUR_r24",
+  "x:USA500IDXUSD_r1",
+  "x:USA500IDXUSD_r4",
+  "x:USA500IDXUSD_r24",
+  "x:USATECHIDXUSD_r1",
+  "x:USATECHIDXUSD_r4",
+  "x:USATECHIDXUSD_r24",
+  "x:JPNIDXJPY_r1",
+  "x:JPNIDXJPY_r4",
+  "x:JPNIDXJPY_r24",
+  "x:BRENTCMDUSD_r1",
+  "x:BRENTCMDUSD_r4",
+  "x:BRENTCMDUSD_r24",
+  "ev:us_release_to_next_min",
+  "ev:us_release_since_last_min",
+  "ev:cb_decision_to_next_min",
+  "ev:cb_decision_since_last_min",
+  "ev:treasury_auction_to_next_min",
+  "ev:treasury_auction_since_last_min",
+  "ev:gotobi_fix_to_next_min",
+  "ev:gotobi_fix_since_last_min",
+  "ev:london_fix_to_next_min",
+  "ev:london_fix_since_last_min",
+  "tff:lev_z",
+  "rate:gap_chg_3m"
+ ],
+ "splits": {
+  "2023": 6,
+  "2020": 12,
+  "2021": 4,
+  "2019": 8
+ },
+ "seconds_total": 18
+}

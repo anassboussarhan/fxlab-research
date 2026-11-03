@@ -1,0 +1,5 @@
+test,symbol,period,trades,net_bp,t,cross_features
+M3 without cross-asset,XAUUSD,fit (before 2020),1912,-1.6349308098487756,-2.733293608813242,12
+M3 without cross-asset,XAUUSD,check (from 2020),2132,-2.143384944441544,-1.825883501315993,12
+M3 with cross-asset,XAUUSD,fit (before 2020),2204,-1.6003938988747848,-2.6564778529171234,12
+M3 with cross-asset,XAUUSD,check (from 2020),2491,-1.0512521190773763,-1.20093402422251,12

@@ -1,0 +1,5 @@
+test,symbol,period,trades,net_bp,t,cross_features
+M3 without cross-asset,EURUSD,fit (before 2020),2140,-0.42507431266359913,-1.0580616502380318,12
+M3 without cross-asset,EURUSD,check (from 2020),2124,-1.9760030997160292,-5.465982373304232,12
+M3 with cross-asset,EURUSD,fit (before 2020),2451,-0.4286343933737692,-1.1536210288250284,12
+M3 with cross-asset,EURUSD,check (from 2020),2230,-1.4228592621592153,-4.740509453367441,12
