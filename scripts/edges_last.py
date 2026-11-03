@@ -123,7 +123,8 @@ def probe(a):
 
 
 def e25(a):
-    D = pd.read_csv(a.e25, parse_dates=["date"])
+    D = pd.read_csv(a.e25, parse_dates=["date"], comment="#")
+    D = D[D.date >= "2007-01-01"]
     D = D[(D.tenor.isin([10, 30])) & (D.date <= "2025-12-31")].drop_duplicates("date").sort_values("date")
     bk = W.book("USDJPY")
     res = {"auction_days": int(len(D)), "first": str(D.date.min().date()), "windows": {}}
