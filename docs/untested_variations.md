@@ -55,3 +55,25 @@ Sources: `docs/untested_batch.md` (sections 4-9.19), `docs/flows_lab.md`, `docs/
 - Fed funds futures, beyond the consensus forecasts above.
 - News text.
 - Consensus forecasts before 2017.
+
+## 4. Across all tests (2026-11-03): did a missing variation make a strategy lose?
+
+Almost every losing test has the same shape: an edge before costs of 0.2-1 bp a trade (intraday ML, scalping,
+fixes) against 2-3 bp of costs, or no edge at all. A variation can only rescue such a test in one of three ways:
+- raise the edge per trade above the costs (selectivity, confidence, horizon);
+- cut the costs (execution);
+- move to periods or markets where costs are small next to the moves.
+
+| Lever | Tested | Not tested |
+|---|---|---|
+| **Confidence / selectivity** | Top 10% of model calls (8.2, 8.5); cost-aware thresholds that abstained 65-100% of the time (round 2); entry thresholds of 0.2-5x the cost (edge harvest); Optuna-tuned thresholds (8.6); meta-labelling (catalog); filter-probability sizing for Gotobi (E1) | **The confidence curve beyond the top 10%** (top 5 / 2 / 1%). The stored trades do not keep the model's score, so this needs a rerun. **Agreement across timeframes** (trade only when the M15, H1 and H4 models agree). **Abstaining when the model is uncertain** (prediction intervals) |
+| Costs / execution | Four cost levels up to institutional; limit entries on 12.6 million signals (the unfilled signals were the good ones); cost-aware tuning; a later Gotobi entry | Nothing material: the barrier targets are already limit exits |
+| **Period** | Most FX and gold intraday labs (catalog, ML 8.5 / 8.6, literature rounds on FX) ran on **2007-2018** (EUR/USD to 2022), the data available then | **The same frozen rules on 2019-2025**, now in the panel download: larger moves, rate gaps, and gold at twice the price (cost in bp halved). A legitimate replication, the largest gap |
+| **Carry** | G10 carry, pair carry families, dollar carry: 2007-2018 / 2022, near-zero rates | **Carry in 2019-2025** with real swaps (2022-2025 had the largest rate gaps in 15 years); emerging-market carry (E16) |
+| Cross-section | Monthly cross-sectional momentum, value, composite | **Daily currency-strength ranking** (8 currencies from 28 pairs: long the strongest against the weakest) |
+| Horizon | M1 to D1, 10-day trades, monthly macro | ML on FX at weekly horizons: the 33-market ML lab (8.2) had no FX |
+| Regime filters | HMM, entropy, Hurst, volatility forecasts, VIX filters | - |
+| Sizing | Volatility targeting (not robust), Kelly-like in the lottery simulations | Drawdown-based leverage (E12) |
+
+A data issue that matters for any rerun: the 2019-2025 Dukascopy candle files carry no tick counts (n_ticks = 1).
+Features built from tick counts must be dropped there.

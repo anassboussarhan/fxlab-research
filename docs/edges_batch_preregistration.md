@@ -144,3 +144,38 @@ Not added:
 - **Platinum and palladium:** no mechanism found.
 - **FOMC in the expected direction:** about 20 decisions with a change, too few for this batch's bar. It is
   reported as information only.
+
+## Addendum 2 (2026-11-03): E20-E24, levers across all tests
+
+These come from `docs/untested_variations.md` section 4. They were fixed before any 2019-2025 FX or gold M1 file
+was read, and the same counting rules apply. Tick-count features are dropped everywhere: the 2019-2025 candle files
+have none, and dropping them keeps both periods alike.
+
+- **E20. The confidence curve.**
+  - Rerun of the fixed-barrier ML lab (8.5) with its symmetric barrier (1.5 / 1.5 ATR, 12 bars), on M15, M30, H1
+    and H4.
+  - Markets: 11 FX pairs and gold, 2007-2025, with the 2019-2025 panel files.
+  - The score of every bar is saved.
+  - Long and short cut-offs at the 90th, 95th, 98th and 99th percentiles of the calibration-year scores, set as
+    in 8.5.
+  - **Counts if:** a cut-off at 98% or 99% is net > 0 with t >= 1.645 on the test years (2019-2025 reported
+    separately), and the net mean rises from 90% -> 95% -> 98%.
+  - Also: abstain unless a LightGBM quantile model's 25th-percentile prediction of the 12-bar return is above
+    the round-trip cost (long; mirror image for short).
+- **E21. Replication on 2019-2025.**
+  - The catalog's walk-forward (each 6-month block trades the best of the family's settings on the previous 3
+    years), H1 and H4, 11 FX pairs and gold.
+  - Only 2019-2025 blocks are scored.
+  - The 10 families with the highest 2007-2018 gross Sharpe in `docs/research_report.md` section 4, plus the
+    gold London breakout and the night fade.
+  - **Counts if:** net > 0, t >= 1.645, BH over E21.
+- **E22. Agreement across timeframes.** An H1 trade from E20 at its 90% cut-off is taken only when the M15 and H4
+  models' latest scores point the same way.
+- **E23. Currency strength.**
+  - Each day at 21:00 UTC, rank the 8 currencies by their average 5-day return across the 28 pairs.
+  - Hold the strongest against the weakest (the one pair) until the next day at 21:00 UTC.
+  - Also run with a 20-day ranking, and with the trade reversed (weakest against strongest).
+- **E24. G10 carry on 2019-2025.**
+  - The round-2 carry factor (long the top 2, short the bottom 2 of the 8 currencies by three-month rate,
+    monthly), with real swaps.
+  - Run without a filter and flat after a month-end VIX above 25.
