@@ -133,12 +133,18 @@ def e25(a):
         rows = []
         for t in D.date:
             t = pd.Timestamp(t).tz_localize("UTC")
-            L = bk.trade(t + pd.Timedelta(hours=h0, minutes=m0), t + pd.Timedelta(hours=h1, minutes=m1), 1, 5)
-            S = bk.trade(t + pd.Timedelta(hours=h0, minutes=m0), t + pd.Timedelta(hours=h1, minutes=m1), -1, 5)
+            # the 2007-2018 files have no 00:00-01:00 UTC bars: the 00:00 entry takes the first bar up to 01:05
+            t0, t1 = t + pd.Timedelta(hours=h0, minutes=m0), t + pd.Timedelta(hours=h1, minutes=m1)
+            i, j = bk.at(t0, 65 if h0 == 0 else 5), bk.at(t1, 5)
+            L = bk.trade_ij(i, j, 1, t0, t1) if 0 <= i < j else None
+            S = bk.trade_ij(i, j, -1, t0, t1) if 0 <= i < j else None
             if L and S:
-                rows.append((t, L[0], S[0], L[1]))
+                rows.append((t, L[0] + (L[6] if np.isfinite(L[6]) else L[5]), S[0] + (S[6] if np.isfinite(S[6]) else S[5]), L[1]))
         F = pd.DataFrame(rows, columns=["t", "long", "short", "gross"]).set_index("t")
         fit = np.arange(len(F)) < int(0.6 * len(F)) if split60 else (F.index.year <= 2018)
+        if fit.sum() < 20:
+            res["windows"][nm] = {"events": int(len(F)), "fit_events": int(fit.sum()), "status": "too few fit events"}
+            continue
         dr = "long" if F.gross[fit].mean() > 0 else "short"
         chk = F[dr][~fit]
         res["windows"][nm] = {"events": int(len(F)), "direction_from_fit": dr, "fit_gross_bp": float(F.gross[fit].mean() * 1e4),
