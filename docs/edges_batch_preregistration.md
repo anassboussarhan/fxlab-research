@@ -263,3 +263,33 @@ before any new computation.
   - IC and decile trading as in FS1. A series starting after 2008 is split 60/40.
 
 Order: FS1 on the weekly and daily bars first (where costs are smallest relative to the move), then FS3, then FS2.
+
+## Addendum 5 (2026-11-03): the last open items of `docs/test_ledger.md`
+
+These rules were written before their data was computed or downloaded. The batch counting rules and split apply.
+
+- **FS4. Pairs of features.**
+  - The 20 features with the highest median IC in `docs/fx_feature_predictability.csv`, at defaults; all 190 products
+    of two of them, each standardised with training statistics.
+  - IC on H4 and D1 for 12 markets (11 FX pairs and gold), horizons 6 and 24 bars, 2007-2025.
+  - The same null with 20 circular shifts, BH over all.
+  - Decile trading after costs on 2019-2025, as in FS1.
+- **FS5. Volatility and large-move targets.**
+  - For the same 20 features: the IC with the next-h-bar absolute return, and with the indicator |return| > 2x
+    the round-trip cost. These measure information only.
+  - A trading rule: the direction model of M4 is traded only when the FS5 model's predicted P(|return| > 2x cost)
+    is in its top tercile (fit-year cut).
+  - **Counts as in E20.**
+- **E25. Japanese government bond auctions.**
+  - 10-year and 30-year JGB auction days, from the Ministry of Finance auction calendar if it can be downloaded;
+    untestable otherwise.
+  - USD/JPY in two windows: 00:00 -> 03:00 UTC before the 03:35 UTC result, and 03:40 -> 08:00 UTC after it.
+  - Direction from the fit period.
+- **E26. The dollar before Fed decisions, in the expected direction** (Karnaukh).
+  - Fed decisions 2017-2023 from the calendar dataset. The expected move is the sign of forecast minus previous
+    rate; no trade when they are equal.
+  - Long the dollar against EUR, JPY, GBP and AUD (equal weight) for an expected hike, short for a cut.
+  - Window: 48 hours to 15 minutes before the decision.
+  - **Information only:** about 20 decisions with an expected change.
+- **E4 / E16 rerun** on the re-downloaded emerging-market files (run `em-redownload`), with unchanged rules. Both
+  versions are reported.
