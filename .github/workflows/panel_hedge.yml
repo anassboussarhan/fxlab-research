@@ -1,0 +1,44 @@
+name: panel-hedge
+# scripts/panel_hedge_lab.py: H and F of docs/panel_hedge_preregistration.md. ci/PANEL_HEDGE: PANEL_DATA_RUN
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/PANEL_HEDGE"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt statsmodels holidays
+      - name: Bars
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD REST < ci/PANEL_HEDGE
+          ci/fetch_m1.sh $PD USTBONDTRUSD BUNDTREUR USA500IDXUSD USATECHIDXUSD JPNIDXJPY XAUUSD
+      - run: python -W ignore scripts/panel_hedge_lab.py --out out/ph 2>&1 | tee out_ph.txt
+      - name: Publish to the panel-hedge branch (results and per-night returns, no price data)
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p out/ph && cp out_ph.txt out/ph/
+          cp -r out/ph /tmp/pub
+          git checkout --orphan ph-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p panel_hedge && cp -r /tmp/pub/* panel_hedge/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > panel_hedge/RUN.txt
+          git add -f panel_hedge
+          git commit -qm "Panel hedges and pre-entry signals (run ${{ github.run_id }})"
+          git push -f origin HEAD:panel-hedge

@@ -59,7 +59,9 @@ def book(sym):
         try:
             m = U.load(sym)
             if m is not None and len(m) > 1000:
-                bk = FL.Book(m, pip_of(sym), sym if len(sym) == 6 else None)
+                fx = len(sym) == 6 and not any(k in sym for k in ("IDX", "CMD", "TR"))
+                pip = pip_of(sym) if fx else 1e-4 * float(np.median(0.5 * (m.bid_c + m.ask_c)))   # about 1 bp of price
+                bk = FL.Book(m, pip, sym if fx else None)
                 bk._hl()
         except Exception as ex:                                             # noqa: BLE001
             print("book", sym, repr(ex)[:200], flush=True)
