@@ -1,0 +1,46 @@
+name: m1-stage
+# One consolidated M1 artifact per symbol (m1all-SYM, 2007-2025) from the mirror, Dukascopy and panel runs, so that
+# lab jobs download one artifact instead of six runs' pieces. ci/M1_STAGE: PANEL_DATA_RUN
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/M1_STAGE"]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/m1_stage_symbols.json)" >> "$GITHUB_OUTPUT"
+  stage:
+    needs: list
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q polars pyarrow
+      - name: Gather ${{ matrix.sym }}
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          read PD REST < ci/M1_STAGE
+          ci/fetch_m1.sh $PD ${{ matrix.sym }}
+          test -d data/m1/${{ matrix.sym }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: m1all-${{ matrix.sym }}
+          path: data/m1/${{ matrix.sym }}
+          retention-days: 60
+          compression-level: 0
