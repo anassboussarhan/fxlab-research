@@ -173,6 +173,11 @@ def tests(N):
     out["FW1 sizing by v1 p (exploratory)"] = {"weighted_mean_bp": float((w * N.net_s80_bp).mean()) if len(N) else np.nan,
                                                "unweighted_mean_bp": float(N.net_s80_bp.mean()) if len(N) else np.nan,
                                                "paired_difference_bp": float(dd.mean()) if len(N) else np.nan, "t": tw}
+    if "late_slot" in N:
+        e, l_ = N.loc[~N.late_slot.astype(bool), "net_s80_bp"], N.loc[N.late_slot.astype(bool), "net_s80_bp"]
+        out["FW2 5th-20th only (exploratory)"] = {"early_n": int(len(e)), "early_mean_bp": float(e.mean()) if len(e) else np.nan,
+                                                  "late_n": int(len(l_)), "late_mean_bp": float(l_.mean()) if len(l_) else np.nan,
+                                                  "t_difference": welch(e, l_)}
     x = N.net_none_bp
     t = float(x.mean() / x.std() * np.sqrt(len(x))) if len(x) > 2 and x.std() > 0 else np.nan
     td = float((x.mean() - DEV_MEAN_BP) / x.std() * np.sqrt(len(x))) if len(x) > 2 and x.std() > 0 else np.nan
@@ -207,6 +212,10 @@ def report_md(S, N, mode):
     lines.append(f"| FW1 sizing by v1 p (exploratory, not a verdict) | weighted {g(fw['weighted_mean_bp'])} vs "
                  f"{g(fw['unweighted_mean_bp'])} (80 bp stop); difference {g(fw['paired_difference_bp'])} (t {g(fw['t'])}) | "
                  "information |")
+    if "FW2 5th-20th only (exploratory)" in S:
+        f2 = S["FW2 5th-20th only (exploratory)"]
+        lines.append(f"| FW2 5th-20th vs 25th / month-end (exploratory, not a verdict) | {f2['early_n']}: {g(f2['early_mean_bp'])} vs "
+                     f"{f2['late_n']}: {g(f2['late_mean_bp'])} (t {g(f2['t_difference'])}) | information |")
     lines += ["", "## Nights", "", "| Night | No stop | Stop 80 bp | Stop 100 bp | v1 p(win) | v1 | v2 p(win) | v2 |",
               "|---|---|---|---|---|---|---|---|"]
     for d, r in N.iterrows():
@@ -270,7 +279,8 @@ def main():
                       "mae_s80_bp": B["stop 80 bp"].mae * 1e4, "mae_s100_bp": B["stop 100 bp"].mae * 1e4,
                       "net_usdjpy_bp": fr["USDJPY"]["none"].net.reindex(B["none"].index) * 1e4,
                       "net_eurjpy_bp": fr["EURJPY"]["none"].net.reindex(B["none"].index) * 1e4,
-                      "p_v1": s1.p_win, "keep_v1": s1.keep, "p_v2": s2.p_win, "keep_v2": s2.keep})
+                      "p_v1": s1.p_win, "keep_v1": s1.keep, "p_v2": s2.p_win, "keep_v2": s2.keep,
+                      "late_slot": ((Xu.get("day_25", 0) == 1) | (Xu.get("month_end", 0) == 1)).astype(bool)})
     N.to_csv(os.path.join(a.out, "nights.csv"))
     Xu.to_csv(os.path.join(a.out, "features_usdjpy.csv"))
     S = tests(N)

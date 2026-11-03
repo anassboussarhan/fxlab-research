@@ -77,3 +77,13 @@ confirmed rule. It is added to the forward report as information only, with no v
 | ID | Rule |
 |---|---|
 | FW1 | weight = min(p_v1 / 0.55764, 2), with p_v1 from the frozen forward-v1 model and 0.55764 its mean over the 1,067 development nights; reported: weighted vs unweighted mean of the 80 bp stop nights and their paired difference |
+
+## Addendum 3 (2026-11-03, before the first forward night): FW2, the 5th-20th Gotobi days (exploratory)
+
+In development, the 25th and month-end Gotobi days earned +1.1 bp against +4.5 bp for all days
+(`docs/untested_batch.md` 9.4, T4a). That split was seen before this line was written, so it is judged only on
+forward nights.
+
+**FW2:** the mean of the 80 bp stop nights on the 5th, 10th, 15th and 20th, against the 25th and month-end, with
+the Welch t of the difference. The slot comes from the lab's `day_25` and `month_end` features. Information only,
+no verdict.
