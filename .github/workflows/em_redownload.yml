@@ -1,0 +1,42 @@
+name: em-redownload
+# Dukascopy M1 candles for the missing years of the emerging-market USD pairs (ledger item 12). ci/EM_REDOWNLOAD: stamp
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/EM_REDOWNLOAD"]
+permissions:
+  contents: read
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/em_gaps.json)" >> "$GITHUB_OUTPUT"
+  dl:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - run: |
+          Y=${{ matrix.year }}; N=$((Y+1))
+          python -m fxlab.data.acquire_dukascopy_candles --pairs ${{ matrix.pair }} --start $Y-01-01 --end $N-01-01 --suffix _emre --workers 3 --deadline-min 320 || true
+          ls -la data/m1/${{ matrix.pair }} || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: emre-${{ matrix.pair }}-${{ matrix.year }}
+          path: data/m1/${{ matrix.pair }}
+          retention-days: 60
+          if-no-files-found: ignore

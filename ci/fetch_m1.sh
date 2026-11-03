@@ -27,6 +27,7 @@ for S in "$@"; do
     [ $S = EURJPY ] && { get 40563102528 -p "dk-EURJPY-*" -D dl_$S/ej || true; }
     get $PD -p "pd-$S-*" -D dl_$S/pd || true
   fi
+  for R in ${EXTRA_RUNS:-}; do get $R -p "*-$S-*" -D dl_$S/x_$R || true; done
   python ci/place_m1.py dl_$S data/m1 | tail -2 || true
   rm -rf dl_$S
   echo "$S years: $(ls data/m1/$S 2>/dev/null | sed 's/.*_//; s/.parquet//' | tr '\n' ' ')"
