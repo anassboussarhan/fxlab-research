@@ -1,0 +1,32 @@
+name: edges-extra
+# Small parts of the edges batch that need Yahoo data: E17 (gold calendar next to Gotobi, prop simulation).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/EDGES_EXTRA"]
+permissions:
+  contents: write
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt yfinance lunardate
+      - run: mkdir -p out && python scripts/edges_e17.py --out out 2>&1 | tee out/e17_log.txt
+      - name: Publish
+        if: always()
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          cp -r out /tmp/pub
+          git checkout --orphan ex-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p edges_extra && cp -r /tmp/pub/* edges_extra/
+          git add -f edges_extra
+          git commit -qm "Edges extra (run ${{ github.run_id }})"
+          git push -f origin HEAD:edges-extra

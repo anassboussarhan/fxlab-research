@@ -1,0 +1,75 @@
+{
+ "2019-2025|fixed 5x": {
+  "pass": 0.81425,
+  "paid": 0.801,
+  "mean_net_100k": 12028.551744648285,
+  "paid_within_12m": 0.443625,
+  "fail_daily": 0.0,
+  "fail_max": 0.17875
+ },
+ "2019-2025|fixed 3x": {
+  "pass": 0.4945,
+  "paid": 0.488,
+  "mean_net_100k": 5502.760783392512,
+  "paid_within_12m": 0.20225,
+  "fail_daily": 0.0,
+  "fail_max": 0.0315
+ },
+ "2019-2025|5x, 2.5x after -4%": {
+  "pass": 0.671625,
+  "paid": 0.651875,
+  "mean_net_100k": 11279.265501230177,
+  "paid_within_12m": 0.39425,
+  "fail_daily": 0.0,
+  "fail_max": 0.12675
+ },
+ "2026|fixed 5x": {
+  "pass": 0.47775,
+  "paid": 0.449875,
+  "mean_net_100k": 6025.9516641717,
+  "paid_within_12m": 0.31225,
+  "fail_daily": 0.0,
+  "fail_max": 0.80575
+ },
+ "2026|fixed 3x": {
+  "pass": 0.24,
+  "paid": 0.228125,
+  "mean_net_100k": 1279.0537866132913,
+  "paid_within_12m": 0.09025,
+  "fail_daily": 0.0,
+  "fail_max": 0.21475
+ },
+ "2026|5x, 2.5x after -4%": {
+  "pass": 0.446125,
+  "paid": 0.427125,
+  "mean_net_100k": 5714.207263927303,
+  "paid_within_12m": 0.2975,
+  "fail_daily": 0.0,
+  "fail_max": 0.316875
+ },
+ "zero|fixed 5x": {
+  "pass": 0.340375,
+  "paid": 0.30925,
+  "mean_net_100k": 2727.6657100268458,
+  "paid_within_12m": 0.20125,
+  "fail_daily": 0.0,
+  "fail_max": 0.97525
+ },
+ "zero|fixed 3x": {
+  "pass": 0.198375,
+  "paid": 0.186375,
+  "mean_net_100k": 222.68175905148468,
+  "paid_within_12m": 0.04525,
+  "fail_daily": 0.0,
+  "fail_max": 0.46325
+ },
+ "zero|5x, 2.5x after -4%": {
+  "pass": 0.31225,
+  "paid": 0.28925,
+  "mean_net_100k": 2474.7597244207427,
+  "paid_within_12m": 0.1935,
+  "fail_daily": 0.0,
+  "fail_max": 0.538625
+ },
+ "counts": false
+}

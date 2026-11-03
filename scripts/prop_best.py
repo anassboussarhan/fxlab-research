@@ -81,9 +81,11 @@ P["Blueberry Prime 2-Step"] = dict(sizes={2.5: 30, 5: 55, 10: 90, 25: 165, 50: 3
 LEV = (2, 3, 3.5, 4, 5, 6)
 
 
-def simulate(A, M, r, n, seed, le, lf):
+def simulate(A, M, r, n, seed, le, lf, dd_rule=None):
     """Per-attempt outcomes: payouts as a fraction of the account, number of payouts, first payout step, fail type.
-    A, M: daily net return and worst open loss (<= 0) of one unit; le / lf leverage in evaluation / funded."""
+    A, M: daily net return and worst open loss (<= 0) of one unit; le / lf leverage in evaluation / funded.
+    dd_rule (low_lev, enter, exit): trade at low_lev while equity is more than `enter` below the phase / payout
+    start, back to the normal leverage once it is within `exit` (E12 of docs/edges_batch_preregistration.md)."""
     rng = np.random.default_rng(seed)
     T = len(A)
     pos = rng.integers(0, T, size=n)
@@ -94,11 +96,14 @@ def simulate(A, M, r, n, seed, le, lf):
     paid = np.zeros(n)
     passed = np.zeros(n, bool)
     first = np.full(n, -1)
+    low = np.zeros(n, bool)
     for step in range(MAX_DAYS + FUNDED_DAYS):
         alive = phase >= 0
         if not alive.any():
             break
         sc = np.where(phase >= nph, lf, le)
+        if dd_rule is not None:
+            sc = np.where(low, dd_rule[0], sc)
         day = A[(pos + step) % T] * sc
         dip = M[(pos + step) % T] * sc
         start = eq.copy()
@@ -144,6 +149,8 @@ def simulate(A, M, r, n, seed, le, lf):
         peak = np.where(due, 0.0, peak)
         phase = np.where(f & (fday >= FUNDED_DAYS), -2, phase)
         phase = np.where((phase >= 0) & (phase < nph) & (step + 1 >= MAX_DAYS), -2, phase)
+        if dd_rule is not None:
+            low = np.where(eq < -dd_rule[1], True, np.where(eq >= -dd_rule[2], False, low))
     return paid, npay, passed, first, fail
 
 
