@@ -40,7 +40,7 @@ from the user).
 | E5 FX option expiries | untestable (DTCC history) |
 | BoE meetings, ISM surprises, Akshaya Tritiya, TRY carry, gold positioning | untestable (no data in the free sources found) |
 | **Payroll and retail-sales surprises** | done but too few events (fewer than 10 with abs(z) >= 1 in 2017-2023) |
-| **Emerging-market currency files with gaps (2013-2015, after 2022)** | **open**: re-download would let E4 / E16 run on full data |
+| Emerging-market files with gaps | done: re-downloaded; E4 / E16 rerun on full data, neither counts |
 | Japanese government bond auctions (E25) | done: MoF history file (659 auctions); both windows negative on 2019-2025 |
 | FOMC in the expected direction (E26) | done: 18 decisions, -18.6 bp (t -1.4), information only |
 | Retail positioning (OANDA) | **user**: needs a free OANDA practice token as the `OANDA_TOKEN` secret |

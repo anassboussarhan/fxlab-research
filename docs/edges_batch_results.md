@@ -315,3 +315,17 @@ B0 (USD/JPY + EUR/JPY, 23:00 -> 09:53 Tokyo, 80 bp stop):
 
 - **Reading:** the costs were not overstated. At realistic prop costs (about 1 pip and $5, no swap) the 2019-2025
   edge is +5.0 bp (t 3.5). 2023-2025 stays positive but not significant in every scenario.
+
+
+## E4 / E16 rerun on the re-downloaded emerging-market files (CI runs 41652052176, 41743073347; branch `misc-em`)
+
+The rules are unchanged. USD/CNH now has 2012-2025, and USD/MXN, USD/ZAR and USD/SGD have 2007-2025 with no
+missing years.
+
+| Test | First run, fit / check | Rerun on full data, fit / check | Verdict |
+|---|---|---|---|
+| E4 yuan fixing, USD/CNH | 263, -4.4 bp (t -3.8) / 85, -3.5 bp (t -0.8) | 363, -2.8 bp (t -3.1) / 288, -2.5 bp (t -2.4) | loses |
+| E4 yuan fixing, AUD/USD opposite | - | fit t -1.1 / -2.3 bp (t -1.2) | loses |
+| E16 EM carry (MXN, ZAR, CNH; SGD has no rate data) | 32 months, +30 / 22 months, -11 | 48 months, -29 bp / 32 months, +18 bp (t 0.5) | nothing |
+
+The complete files do not change either verdict. TRY carry stays untestable: there are no USD/TRY bars.
