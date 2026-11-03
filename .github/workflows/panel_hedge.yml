@@ -25,7 +25,8 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           read PD REST < ci/PANEL_HEDGE
-          ci/fetch_m1.sh $PD USTBONDTRUSD BUNDTREUR USA500IDXUSD USATECHIDXUSD JPNIDXJPY XAUUSD
+          NO_STAGE=1 ci/fetch_m1.sh $PD USTBONDTRUSD BUNDTREUR USA500IDXUSD USATECHIDXUSD JPNIDXJPY
+          ci/fetch_m1.sh $PD XAUUSD USDJPY EURJPY
       - run: python -W ignore scripts/panel_hedge_lab.py --out out/ph 2>&1 | tee out_ph.txt
       - name: Publish to the panel-hedge branch (results and per-night returns, no price data)
         if: always()
