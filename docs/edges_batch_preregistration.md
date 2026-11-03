@@ -230,3 +230,36 @@ lab. Models: LightGBM with the 8.5 settings, nothing tuned.
 
 M3 and M4 run after E20 reports. If E20's net does not rise with confidence, M4 is reported as the pooled variant
 only.
+
+## Addendum 4 (2026-11-03): feature parameters, transforms, conditions and new sources (FS1-FS3)
+
+**Gap.** The feature predictability lab (`scripts/feature_ic_lab.py`, 857,202 tests) used every feature at its
+**default parameters only**, in two forms (raw and minus its 20-bar EMA). It used horizons of 1, 6 and 24 bars on
+2007-2018. Strategies sampled 6 settings per fold, and the ML labs used fixed lookbacks. These rules were written
+before any new computation.
+
+- **FS1. Parameters and transforms chosen inside the walk-forward.**
+  - Scope: every feature with a search space, on H8, D1 and weekly bars, for 28 pairs plus gold and silver,
+    2007-2025.
+  - In each fold (3-year training, 6-month test), choose the feature's setting and transform on the training
+    window by its training IC. Transforms: raw, minus its 20-bar EMA, percentile rank over 250 bars, z over 100
+    bars, 1-bar change.
+  - Measure the out-of-sample IC on the test window. Horizons: 6 and 24 bars (weekly: 1 and 4).
+  - The null repeats the same selection on 20 circularly shifted targets, so choosing the best of many settings
+    is charged against the feature.
+  - Economic test: hold the sign of the chosen feature's top / bottom decile for h bars, after costs.
+  - **Counts if:** net > 0, t >= 1.645 on the 2019-2025 folds, and the IC z beats the null after BH over
+    feature x timeframe x horizon x instrument.
+- **FS2. Conditional predictability.**
+  - The 68 features rated "predictive", on M30-H4.
+  - IC by session (Tokyo 00:00-07:00, London 07:00-13:00, New York 13:00-21:00 UTC) and by volatility tercile.
+    The cell is chosen on 2007-2018, and only that cell is traded on 2019-2025, after costs.
+- **FS3. Feature sources never used intraday, for USD/JPY, EUR/USD and gold on H1-D1.**
+  - Cross-asset returns over 1, 4 and 24 bars: US and German bonds, US500, NAS100, JPN225, Brent.
+  - Event clock: minutes to and from the next scheduled US release, central-bank decision, Treasury auction,
+    Gotobi day and fix (2017-2023 where the calendar exists).
+  - TFF positioning z.
+  - The 3-month rate-gap change.
+  - IC and decile trading as in FS1. A series starting after 2008 is split 60/40.
+
+Order: FS1 on the weekly and daily bars first (where costs are smallest relative to the move), then FS3, then FS2.
