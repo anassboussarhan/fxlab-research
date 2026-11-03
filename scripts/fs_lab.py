@@ -9,7 +9,8 @@ shifted targets; z = (IC - mean null) / sd null, n-weighted over the folds of a 
 Economic test: in each test window, bars with the candidate at or above its training 90th percentile take the sign
 of the training top-minus-bottom-decile spread for h bars, bars at or below the 10th the opposite sign; net = signed
 next-h-bar mid return minus the round-trip cost at the bar (2 x (spread x (1/2 + 0.25) + 0.1 pip) / mid + 0.7 bp).
-Overlapping signals are all kept; t is clustered by calendar month. Counts (FS1, FS2, FS4): net > 0 and t >= 1.645 on
+One position at a time: a signal is taken only after the previous h-bar position has ended (the first run, CI
+41670196230, kept every overlapping signal bar, which inflates t; corrected 2026-11-03). t clustered by month. Counts (FS1, FS2, FS4): net > 0 and t >= 1.645 on
 2019-2025, and the 2019-2025 IC z significant after Benjamini-Hochberg (10%) over the whole batch (--combine).
 
 FS1  every registered feature with a search space, every setting (cartesian product of its space) x 5 transforms
@@ -159,7 +160,7 @@ class Acc:
                     C = np.array([x[1] for x in d.values()]) if d else np.zeros(0)
                     N = C.sum()
                     mean = S.sum() / N if N else np.nan
-                    if N >= 10 and len(S) > 1:
+                    if N >= 20 and len(S) > 1:
                         e = S - C * mean
                         se = math.sqrt((e ** 2).sum()) / N * math.sqrt(len(S) / (len(S) - 1))
                         t = mean / se if se > 0 else np.nan
@@ -176,6 +177,16 @@ def standardise(xtr, xte):
     xtr_c, xte_c = np.clip(xtr, lo, hi), np.clip(xte, lo, hi)
     mu, sd = np.nanmean(xtr_c, 0), np.nanstd(xtr_c, 0) + 1e-15
     return np.nan_to_num((xtr_c - mu) / sd), np.nan_to_num((xte_c - mu) / sd), q10, q90
+
+
+def nonoverlap(k, h):
+    """Greedy: keep a signal only if the previous kept position (h bars) has ended."""
+    out, nxt = [], -1
+    for v in k:
+        if v >= nxt:
+            out.append(v)
+            nxt = v + h
+    return np.asarray(out, dtype=int)
 
 
 def run_engine(acc, gid, fold_mats, ys, shifts, c_rt, index, hs, target_fn=None):
@@ -228,7 +239,7 @@ def run_engine(acc, gid, fold_mats, ys, shifts, c_rt, index, hs, target_fn=None)
                 if s == 0 or not np.isfinite(s):
                     continue
                 pz = np.where(x_te >= q90[c], s, np.where(x_te <= q10[c], -s, 0.0))
-                k_ = np.flatnonzero((pz != 0) & np.isfinite(yte_h))
+                k_ = nonoverlap(np.flatnonzero((pz != 0) & np.isfinite(yte_h)), h)   # one position at a time
                 if len(k_):
                     acc.add_trades(per, g, hi, month[te][k_], pz[k_] * yte_h[k_] - c_rt[te][k_])
     return acc
@@ -413,13 +424,13 @@ def mode_fs2(a, bars, panel, mid, c_rt):
                 s = np.sign(y[mf & (x >= q90)].mean() - y[mf & (x <= q10)].mean())
                 mc = ok & chk & cm
                 pz = np.where(x >= q90, s, np.where(x <= q10, -s, 0.0))
-                k = np.flatnonzero(mc & (pz != 0))
+                k = nonoverlap(np.flatnonzero(mc & (pz != 0)), h)                    # one position at a time
                 net = pz[k] * y[k] - c_rt[k]
                 xs = x[ok & chk & cm]
                 ic_c = float(np.sign(best[1]) * ((xs - x[mf].mean()) / (x[mf].std() + 1e-12) * y[ok & chk & cm]).mean() /
                              (np.sqrt((y[ok & chk & cm] ** 2).mean()) + 1e-15)) if (ok & chk & cm).sum() > 50 else np.nan
                 t = np.nan
-                if len(k) >= 10:
+                if len(k) >= 20:
                     S = pd.Series(net).groupby(month[k]).agg(["sum", "count"])
                     mean = net.mean()
                     e = S["sum"] - S["count"] * mean
