@@ -174,3 +174,39 @@ nights for bonds and the Nikkei, instead of about 165.
   - Leads for the forward watch list:
     - the rate-gap change on USD/JPY D1 and EUR/USD H4 (t 2.9 net, but IC z 0.4);
     - the Bund -> gold link.
+
+
+## Gotobi panel, 2019-2025 check (CI run 41676706514, branch `gotobi-panel`)
+
+The 2007-2018 screen of 54 instruments picked six carriers of the Gotobi night: CHF/JPY, EUR/JPY, HKD/JPY,
+MXN/JPY, USD/JPY and gold. Each was then checked on 2019-2025.
+
+- **Confirmed on 2019-2025: USD/JPY, EUR/JPY and HKD/JPY.**
+
+  | Pair | Night net, in its direction | t |
+  |---|---|---|
+  | USD/JPY | +5.0 bp | 3.3 |
+  | EUR/JPY | +4.8 bp | 3.0 |
+  | HKD/JPY | +4.0 bp | 2.1 (170 nights) |
+
+  HKD is pegged to the dollar, so HKD/JPY is USD/JPY under another name. It adds nothing new.
+- **Not confirmed:**
+  - CHF/JPY: +1.7 bp, t 1.4.
+  - MXN/JPY: no 2019-2025 data.
+  - Gold: -8.1 bp.
+- **Baskets on 2019-2025:**
+
+  | Basket | Mean per night | t |
+  |---|---|---|
+  | B0 = USD/JPY + EUR/JPY (the frozen trade) | +4.7 bp | 3.35 |
+  | All six carriers, equal weight | +1.3 bp | 1.0 |
+  | All six carriers, inverse variance | +2.3 bp | 1.9 |
+  | B0 + gold | +1.0 bp | 0.7 |
+
+  Widening the basket only dilutes the trade, so **B0 stays as it is**.
+- **Hedge legs** (17 tested, from TRY/JPY to the indices): none raises B0's t on 2019-2025. The yen crosses cut the sd
+  but also remove the edge, because they carry the same yen move.
+- **Data notes:**
+  - Bund failed to load (no date column in its pieces).
+  - The US bond file has only 12 nights before 2019.
+  - Most index and commodity series start in 2012-2013.

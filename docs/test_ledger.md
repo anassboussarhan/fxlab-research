@@ -10,13 +10,13 @@ from the user).
 |---|---|---|
 | Stops, targets, exits, entries, filters, indicators, losing nights | done | `docs/untested_batch.md` 9.14-9.18 |
 | Panel, 2007-2018 screen (34 instruments) | done | 9.19 |
-| **Panel, 2019-2025 check, indices / bonds / commodities** | **open**, waiting for the last 4 bond and commodity downloads; the panel CI has not been triggered | `scripts/gotobi_panel_lab.py` |
+| Panel, 2019-2025 check | done: USD/JPY, EUR/JPY (and HKD/JPY, the same trade) confirmed; wider baskets dilute it; B0 stays | `docs/edges_batch_results.md` |
 | New York-leg hedges and pre-entry signals (H, F) | done: none counts (bond hedge cuts sd 17% but also the mean); bond data incomplete | `docs/edges_batch_results.md` |
 | Sizing by filter probability (E1) | done: P(paid) 60% vs 49%, fails its own rule; forward line FW1 | `docs/edges_batch/e1.json` |
 | Cheaper limit entry (E2), short after the fix (E13), Japan's flows (E3) | done, nothing | `docs/edges_batch_results.md` |
 | Entry at 14:06 instead of 14:00 checked on 2019-2025 | done: +0.5 bp vs 14:00 (t 1.6), no cost | `docs/prop_best.md` |
 | Skip the 25th and month-end | forward-report line FW2 (exploratory) | `scripts/forward_eval.py` |
-| **USD/SGD, USD/CNH, USD/HKD as Asian dollar carriers** | open: in the panel check above (the USD/CNH, USD/SGD files have gaps) | - |
+| USD/SGD, USD/CNH as Asian dollar carriers | done: neither is a carrier (USD/SGD -2.6 bp, USD/CNH -3.3 bp net on 2019-2025) | panel |
 | Forward test | running: first nights from 2026-11-05, monthly report on the 3rd | `docs/forward_test_preregistration.md` |
 
 ## 2. Prop firms and execution
