@@ -1,0 +1,542 @@
+{
+ "2007-2018": {
+  "EURJPY": {
+   "nights": 685,
+   "spread_in_pips_median": 1.3999999999995794,
+   "spread_in_pips_p90": 3.1599999999991746,
+   "spread_out_pips_median": 1.3999999999981583,
+   "spread_out_pips_p90": 2.5000000000005684,
+   "pip_bp": 0.7890231792839401,
+   "model_cost_bp_mean": 2.6673267436001025,
+   "swap_bp_mean": -0.02026597340265967,
+   "gross_mid_bp": 7.148614962643286
+  },
+  "USDJPY": {
+   "nights": 700,
+   "spread_in_pips_median": 0.7000000000005002,
+   "spread_in_pips_p90": 1.9000000000006878,
+   "spread_out_pips_median": 0.6000000000000227,
+   "spread_out_pips_p90": 1.5000000000000568,
+   "pip_bp": 1.0131677608941438,
+   "model_cost_bp_mean": 2.2227294206992982,
+   "swap_bp_mean": -0.0437808219178082,
+   "gross_mid_bp": 7.168070557426673
+  },
+  "basket": {
+   "nights": 685,
+   "gross_mid_bp": 7.3076105509762295,
+   "model_cost_bp": 2.455052144419507,
+   "swap_bp": -0.03606239376062392,
+   "scenarios": {
+    "model (Dukascopy spread x1.5 crossed + slippage, 0.7 bp commission, rate swap)": {
+     "net_bp": 4.816496012796099,
+     "t": 3.178761003630734
+    },
+    "spread 0.3 pip both ends, commission $5, rate swap": {
+     "net_bp": 6.320479146039446,
+     "t": 4.170522248310355
+    },
+    "spread 0.3 pip both ends, commission $5, swap 0": {
+     "net_bp": 6.356541539800068,
+     "t": 4.192200652184491
+    },
+    "spread 0.3 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 5.8565415398000695,
+     "t": 3.862445814122319
+    },
+    "spread 0.3 pip both ends, commission $7, rate swap": {
+     "net_bp": 6.120479146039446,
+     "t": 4.038553701244624
+    },
+    "spread 0.3 pip both ends, commission $7, swap 0": {
+     "net_bp": 6.156541539800069,
+     "t": 4.060298716959623
+    },
+    "spread 0.3 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 5.656541539800069,
+     "t": 3.7305438788974494
+    },
+    "spread 0.5 pip both ends, commission $5, rate swap": {
+     "net_bp": 6.140051541568982,
+     "t": 4.051642028468503
+    },
+    "spread 0.5 pip both ends, commission $5, swap 0": {
+     "net_bp": 6.176113935329606,
+     "t": 4.07339257649544
+    },
+    "spread 0.5 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 5.676113935329605,
+     "t": 3.7436227067077272
+    },
+    "spread 0.5 pip both ends, commission $7, rate swap": {
+     "net_bp": 5.940051541568981,
+     "t": 3.9196678259381708
+    },
+    "spread 0.5 pip both ends, commission $7, swap 0": {
+     "net_bp": 5.976113935329605,
+     "t": 3.941484628580355
+    },
+    "spread 0.5 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 5.476113935329605,
+     "t": 3.6117147587926426
+    },
+    "spread 0.8 pip both ends, commission $5, rate swap": {
+     "net_bp": 5.869410134863284,
+     "t": 3.873299976806476
+    },
+    "spread 0.8 pip both ends, commission $5, swap 0": {
+     "net_bp": 5.905472528623908,
+     "t": 3.8951575258725226
+    },
+    "spread 0.8 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 5.405472528623908,
+     "t": 3.5653653282970836
+    },
+    "spread 0.8 pip both ends, commission $7, rate swap": {
+     "net_bp": 5.669410134863285,
+     "t": 3.741317379311721
+    },
+    "spread 0.8 pip both ends, commission $7, swap 0": {
+     "net_bp": 5.7054725286239085,
+     "t": 3.7632406468423474
+    },
+    "spread 0.8 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 5.2054725286239085,
+     "t": 3.433448449266909
+    },
+    "spread 1.0 pip both ends, commission $5, rate swap": {
+     "net_bp": 5.68898253039282,
+     "t": 3.754390979410489
+    },
+    "spread 1.0 pip both ends, commission $5, swap 0": {
+     "net_bp": 5.725044924153445,
+     "t": 3.77631905166734
+    },
+    "spread 1.0 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 5.225044924153445,
+     "t": 3.4465121155038005
+    },
+    "spread 1.0 pip both ends, commission $7, rate swap": {
+     "net_bp": 5.488982530392821,
+     "t": 3.6224028441208134
+    },
+    "spread 1.0 pip both ends, commission $7, swap 0": {
+     "net_bp": 5.525044924153444,
+     "t": 3.644396277201923
+    },
+    "spread 1.0 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 5.025044924153445,
+     "t": 3.3145893410383844
+    },
+    "spread 1.5 pip both ends, commission $5, rate swap": {
+     "net_bp": 5.237913519216659,
+     "t": 3.4570693745598273
+    },
+    "spread 1.5 pip both ends, commission $5, swap 0": {
+     "net_bp": 5.273975912977283,
+     "t": 3.4791709133713806
+    },
+    "spread 1.5 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 4.773975912977283,
+     "t": 3.149327644196559
+    },
+    "spread 1.5 pip both ends, commission $7, rate swap": {
+     "net_bp": 5.0379135192166595,
+     "t": 3.3250676008811806
+    },
+    "spread 1.5 pip both ends, commission $7, swap 0": {
+     "net_bp": 5.073975912977283,
+     "t": 3.347233605701452
+    },
+    "spread 1.5 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 4.573975912977283,
+     "t": 3.017390336526631
+    },
+    "spread 2.0 pip both ends, commission $5, rate swap": {
+     "net_bp": 4.786844508040499,
+     "t": 3.1596791990401383
+    },
+    "spread 2.0 pip both ends, commission $5, swap 0": {
+     "net_bp": 4.822906901801122,
+     "t": 3.181950139327921
+    },
+    "spread 2.0 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 4.322906901801122,
+     "t": 2.8520712712390908
+    },
+    "spread 2.0 pip both ends, commission $7, rate swap": {
+     "net_bp": 4.586844508040499,
+     "t": 3.0276640816185134
+    },
+    "spread 2.0 pip both ends, commission $7, swap 0": {
+     "net_bp": 4.622906901801122,
+     "t": 3.049998592092389
+    },
+    "spread 2.0 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 4.122906901801122,
+     "t": 2.720119724003559
+    }
+   }
+  }
+ },
+ "2019-2025": {
+  "EURJPY": {
+   "nights": 427,
+   "spread_in_pips_median": 0.7999999999995566,
+   "spread_in_pips_p90": 1.7000000000001592,
+   "spread_out_pips_median": 0.8000000000009777,
+   "spread_out_pips_p90": 1.4999999999986358,
+   "pip_bp": 0.7133783850061531,
+   "model_cost_bp_mean": 1.9555454013110527,
+   "swap_bp_mean": 0.10444964871194384,
+   "gross_mid_bp": 6.6824326983483315
+  },
+  "USDJPY": {
+   "nights": 429,
+   "spread_in_pips_median": 0.40000000000048885,
+   "spread_in_pips_p90": 0.9000000000014552,
+   "spread_out_pips_median": 0.49999999999954525,
+   "spread_out_pips_p90": 0.9000000000014552,
+   "pip_bp": 0.7961263313936165,
+   "model_cost_bp_mean": 1.4937093195728657,
+   "swap_bp_mean": 0.6980425966727337,
+   "gross_mid_bp": 5.676453778302338
+  },
+  "basket": {
+   "nights": 419,
+   "gross_mid_bp": 6.401350736265548,
+   "model_cost_bp": 1.728107250314542,
+   "swap_bp": 0.4039526596266387,
+   "scenarios": {
+    "model (Dukascopy spread x1.5 crossed + slippage, 0.7 bp commission, rate swap)": {
+     "net_bp": 5.077196145577645,
+     "t": 3.5669164445522625
+    },
+    "spread 0.3 pip both ends, commission $5, rate swap": {
+     "net_bp": 5.928062856949303,
+     "t": 4.177026883800484
+    },
+    "spread 0.3 pip both ends, commission $5, swap 0": {
+     "net_bp": 5.524110197322664,
+     "t": 3.893764456673133
+    },
+    "spread 0.3 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 5.024110197322666,
+     "t": 3.5413308232383502
+    },
+    "spread 0.3 pip both ends, commission $7, rate swap": {
+     "net_bp": 5.728062856949305,
+     "t": 4.036103044610626
+    },
+    "spread 0.3 pip both ends, commission $7, swap 0": {
+     "net_bp": 5.324110197322666,
+     "t": 3.75279100329922
+    },
+    "spread 0.3 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 4.824110197322665,
+     "t": 3.400357369864436
+    },
+    "spread 0.5 pip both ends, commission $5, rate swap": {
+     "net_bp": 5.777166641372151,
+     "t": 4.070708439792492
+    },
+    "spread 0.5 pip both ends, commission $5, swap 0": {
+     "net_bp": 5.373213981745512,
+     "t": 3.787457719829444
+    },
+    "spread 0.5 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 4.873213981745512,
+     "t": 3.4350189622537526
+    },
+    "spread 0.5 pip both ends, commission $7, rate swap": {
+     "net_bp": 5.577166641372151,
+     "t": 3.9297843954472644
+    },
+    "spread 0.5 pip both ends, commission $7, swap 0": {
+     "net_bp": 5.173213981745512,
+     "t": 3.646482216799167
+    },
+    "spread 0.5 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 4.673213981745513,
+     "t": 3.2940434592234764
+    },
+    "spread 0.8 pip both ends, commission $5, rate swap": {
+     "net_bp": 5.550822318006421,
+     "t": 3.9112264458371673
+    },
+    "spread 0.8 pip both ends, commission $5, swap 0": {
+     "net_bp": 5.146869658379783,
+     "t": 3.6279883409428444
+    },
+    "spread 0.8 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 4.646869658379783,
+     "t": 3.275542234693
+    },
+    "spread 0.8 pip both ends, commission $7, rate swap": {
+     "net_bp": 5.350822318006422,
+     "t": 3.770302228783797
+    },
+    "spread 0.8 pip both ends, commission $7, swap 0": {
+     "net_bp": 4.946869658379783,
+     "t": 3.4870098984429063
+    },
+    "spread 0.8 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 4.446869658379783,
+     "t": 3.1345637921930614
+    },
+    "spread 1.0 pip both ends, commission $5, rate swap": {
+     "net_bp": 5.399926102429269,
+     "t": 3.8049024689226045
+    },
+    "spread 1.0 pip both ends, commission $5, swap 0": {
+     "net_bp": 4.99597344280263,
+     "t": 3.521669476630449
+    },
+    "spread 1.0 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 4.49597344280263,
+     "t": 3.1692186963221705
+    },
+    "spread 1.0 pip both ends, commission $7, rate swap": {
+     "net_bp": 5.199926102429268,
+     "t": 3.6639782267478496
+    },
+    "spread 1.0 pip both ends, commission $7, swap 0": {
+     "net_bp": 4.795973442802631,
+     "t": 3.380689164507138
+    },
+    "spread 1.0 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 4.295973442802631,
+     "t": 3.028238384198859
+    },
+    "spread 1.5 pip both ends, commission $5, rate swap": {
+     "net_bp": 5.022685563486387,
+     "t": 3.539084448528811
+    },
+    "spread 1.5 pip both ends, commission $5, swap 0": {
+     "net_bp": 4.6187329038597476,
+     "t": 3.255852695336099
+    },
+    "spread 1.5 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 4.1187329038597476,
+     "t": 2.9033910177388433
+    },
+    "spread 1.5 pip both ends, commission $7, rate swap": {
+     "net_bp": 4.822685563486386,
+     "t": 3.3981604586116614
+    },
+    "spread 1.5 pip both ends, commission $7, swap 0": {
+     "net_bp": 4.418732903859748,
+     "t": 3.1148680242971976
+    },
+    "spread 1.5 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 3.918732903859748,
+     "t": 2.7624063466999416
+    },
+    "spread 2.0 pip both ends, commission $5, rate swap": {
+     "net_bp": 4.645445024543505,
+     "t": 3.273256925646219
+    },
+    "spread 2.0 pip both ends, commission $5, swap 0": {
+     "net_bp": 4.241492364916866,
+     "t": 2.9900099206660875
+    },
+    "spread 2.0 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 3.741492364916865,
+     "t": 2.637538471536802
+    },
+    "spread 2.0 pip both ends, commission $7, rate swap": {
+     "net_bp": 4.445445024543504,
+     "t": 3.1323336380665596
+    },
+    "spread 2.0 pip both ends, commission $7, swap 0": {
+     "net_bp": 4.041492364916866,
+     "t": 2.8490213410143737
+    },
+    "spread 2.0 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 3.541492364916866,
+     "t": 2.496549891885089
+    }
+   }
+  }
+ },
+ "2023-2025": {
+  "EURJPY": {
+   "nights": 186,
+   "spread_in_pips_median": 1.099999999999568,
+   "spread_in_pips_p90": 2.899999999998215,
+   "spread_out_pips_median": 1.1500000000012278,
+   "spread_out_pips_p90": 1.5500000000002956,
+   "pip_bp": 0.6202548133905584,
+   "model_cost_bp_mean": 2.255869936705625,
+   "swap_bp_mean": 0.7244513183090294,
+   "gross_mid_bp": 4.564708148848111
+  },
+  "USDJPY": {
+   "nights": 185,
+   "spread_in_pips_median": 0.6000000000000227,
+   "spread_in_pips_p90": 1.4000000000010004,
+   "spread_out_pips_median": 0.6000000000000227,
+   "spread_out_pips_p90": 0.9000000000014552,
+   "pip_bp": 0.6811809108428082,
+   "model_cost_bp_mean": 1.636815438067327,
+   "swap_bp_mean": 1.3526841910403553,
+   "gross_mid_bp": 4.142246592720501
+  },
+  "basket": {
+   "nights": 183,
+   "gross_mid_bp": 4.538755310226139,
+   "model_cost_bp": 1.952235351102602,
+   "swap_bp": 1.0437008758140578,
+   "scenarios": {
+    "model (Dukascopy spread x1.5 crossed + slippage, 0.7 bp commission, rate swap)": {
+     "net_bp": 3.6302208349375946,
+     "t": 1.4769023422429148
+    },
+    "spread 0.3 pip both ends, commission $5, rate swap": {
+     "net_bp": 4.756982729853073,
+     "t": 1.9469338345739615
+    },
+    "spread 0.3 pip both ends, commission $5, swap 0": {
+     "net_bp": 3.7132818540390153,
+     "t": 1.5225662377842024
+    },
+    "spread 0.3 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 3.2132818540390153,
+     "t": 1.317549988327125
+    },
+    "spread 0.3 pip both ends, commission $7, rate swap": {
+     "net_bp": 4.5569827298530745,
+     "t": 1.8650780051484852
+    },
+    "spread 0.3 pip both ends, commission $7, swap 0": {
+     "net_bp": 3.5132818540390165,
+     "t": 1.440559738001372
+    },
+    "spread 0.3 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 3.0132818540390165,
+     "t": 1.2355434885442946
+    },
+    "spread 0.5 pip both ends, commission $5, rate swap": {
+     "net_bp": 4.626793347378225,
+     "t": 1.893674982297429
+    },
+    "spread 0.5 pip both ends, commission $5, swap 0": {
+     "net_bp": 3.583092471564167,
+     "t": 1.4692032828871786
+    },
+    "spread 0.5 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 3.083092471564167,
+     "t": 1.2641843928435996
+    },
+    "spread 0.5 pip both ends, commission $7, rate swap": {
+     "net_bp": 4.426793347378224,
+     "t": 1.811818074494512
+    },
+    "spread 0.5 pip both ends, commission $7, swap 0": {
+     "net_bp": 3.3830924715641673,
+     "t": 1.3871957268697475
+    },
+    "spread 0.5 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 2.8830924715641673,
+     "t": 1.1821768368261685
+    },
+    "spread 0.8 pip both ends, commission $5, rate swap": {
+     "net_bp": 4.4315092736659505,
+     "t": 1.8137839204614754
+    },
+    "spread 0.8 pip both ends, commission $5, swap 0": {
+     "net_bp": 3.387808397851893,
+     "t": 1.3891561560431187
+    },
+    "spread 0.8 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 2.887808397851893,
+     "t": 1.184133322265987
+    },
+    "spread 0.8 pip both ends, commission $7, rate swap": {
+     "net_bp": 4.23150927366595,
+     "t": 1.731925401909351
+    },
+    "spread 0.8 pip both ends, commission $7, swap 0": {
+     "net_bp": 3.1878083978518936,
+     "t": 1.3071470225322666
+    },
+    "spread 0.8 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 2.687808397851893,
+     "t": 1.1021241887551345
+    },
+    "spread 1.0 pip both ends, commission $5, rate swap": {
+     "net_bp": 4.301319891191101,
+     "t": 1.7605213672973086
+    },
+    "spread 1.0 pip both ends, commission $5, swap 0": {
+     "net_bp": 3.257619015377044,
+     "t": 1.3357896188885
+    },
+    "spread 1.0 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 2.757619015377044,
+     "t": 1.1307641673880129
+    },
+    "spread 1.0 pip both ends, commission $7, rate swap": {
+     "net_bp": 4.1013198911911015,
+     "t": 1.6786617794576428
+    },
+    "spread 1.0 pip both ends, commission $7, swap 0": {
+     "net_bp": 3.0576190153770435,
+     "t": 1.253779438288305
+    },
+    "spread 1.0 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 2.5576190153770435,
+     "t": 1.048753986787818
+    },
+    "spread 1.5 pip both ends, commission $5, rate swap": {
+     "net_bp": 3.975846435003979,
+     "t": 1.6273585776449868
+    },
+    "spread 1.5 pip both ends, commission $5, swap 0": {
+     "net_bp": 2.9321455591899204,
+     "t": 1.202367077311423
+    },
+    "spread 1.5 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 2.4321455591899204,
+     "t": 0.9973351215234559
+    },
+    "spread 1.5 pip both ends, commission $7, rate swap": {
+     "net_bp": 3.7758464350039787,
+     "t": 1.5454963324980182
+    },
+    "spread 1.5 pip both ends, commission $7, swap 0": {
+     "net_bp": 2.732145559189921,
+     "t": 1.1203542949962364
+    },
+    "spread 1.5 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 2.232145559189921,
+     "t": 0.9153223392082696
+    },
+    "spread 2.0 pip both ends, commission $5, rate swap": {
+     "net_bp": 3.6503729788168546,
+     "t": 1.494186724186108
+    },
+    "spread 2.0 pip both ends, commission $5, swap 0": {
+     "net_bp": 2.6066721030027975,
+     "t": 1.0689357697132196
+    },
+    "spread 2.0 pip both ends, commission $5, swap -0.5 bp": {
+     "net_bp": 2.1066721030027975,
+     "t": 0.8638973668236036
+    },
+    "spread 2.0 pip both ends, commission $7, rate swap": {
+     "net_bp": 3.450372978816855,
+     "t": 1.4123218444679597
+    },
+    "spread 2.0 pip both ends, commission $7, swap 0": {
+     "net_bp": 2.4066721030027973,
+     "t": 0.9869204085573732
+    },
+    "spread 2.0 pip both ends, commission $7, swap -0.5 bp": {
+     "net_bp": 1.906672103002797,
+     "t": 0.7818820056677572
+    }
+   }
+  }
+ }
+}
