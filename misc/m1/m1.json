@@ -1,0 +1,29 @@
+{
+ "weeks": 778,
+ "trades": 1549,
+ "periods": {
+  "2011-2018": {
+   "weeks": 415,
+   "weeks_with_trades": 308,
+   "trades": 898,
+   "weekly_port_net_bp": -3.7968057456775015,
+   "t_weekly": -1.1720816791323583,
+   "per_trade_net_bp": -8.77324267514567,
+   "per_trade_win": 0.4665924276169265,
+   "mean_weekly_rank_ic": 0.009162567851368757,
+   "ic_t": 0.5582580023200758
+  },
+  "2019-2025": {
+   "weeks": 363,
+   "weeks_with_trades": 265,
+   "trades": 651,
+   "weekly_port_net_bp": -2.5431364788802657,
+   "t_weekly": -1.2049673370706717,
+   "per_trade_net_bp": -7.0903113812099585,
+   "per_trade_win": 0.46236559139784944,
+   "mean_weekly_rank_ic": -0.014241871430255577,
+   "ic_t": -0.7858495659965544
+  }
+ },
+ "counts": false
+}
