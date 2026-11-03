@@ -1,0 +1,29 @@
+{
+ "gold_days": 421,
+ "gold_mean_bp_active_day": 11.650927973215557,
+ "2019-2025|Gotobi alone": {
+  "pass": 0.81425,
+  "paid": 0.801,
+  "mean_net_100k": 12028.551744648285,
+  "paid_within_12m": 0.443625
+ },
+ "2019-2025|Gotobi + gold calendar": {
+  "pass": 0.504625,
+  "paid": 0.43775,
+  "mean_net_100k": 6230.592705785809,
+  "paid_within_12m": 0.43775
+ },
+ "2026|Gotobi alone": {
+  "pass": 0.47775,
+  "paid": 0.449875,
+  "mean_net_100k": 6025.9516641717,
+  "paid_within_12m": 0.31225
+ },
+ "2026|Gotobi + gold calendar": {
+  "pass": 0.425875,
+  "paid": 0.34925,
+  "mean_net_100k": 3251.7874095001016,
+  "paid_within_12m": 0.346875
+ },
+ "counts": false
+}
