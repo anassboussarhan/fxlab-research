@@ -1,0 +1,32 @@
+median net bp by timeframe and rule
+ rule   C90   C95   C98   C99  E22 agree   Q25
+tf                                           
+H1   -2.34 -2.40 -2.00 -1.86      -2.23 -1.46
+H4   -2.78 -2.20 -2.33 -2.80        NaN -2.94
+M15  -3.14 -3.05 -2.95 -2.88        NaN -1.80
+M30  -2.75 -2.29 -2.07 -1.88        NaN -1.72
+median gross bp
+ rule   C90   C95   C98   C99  E22 agree   Q25
+tf                                           
+H1    1.00  0.87  1.04  1.02       1.02  1.37
+H4    0.08  0.73  0.51  1.53        NaN  0.21
+M15   0.34  0.43  0.51  0.65        NaN  0.79
+M30   0.73  1.09  1.37  1.20        NaN  1.47
+best by t
+      symbol   tf rule period  trades  net_bp      t  gross_bp    win  p_one_sided  bh_q
+99   EURUSD   H4  C99    all     276   5.780  2.436     6.982  0.569        0.007   1.0
+96   EURUSD   H4  C98    all     481   4.530  2.346     5.981  0.572        0.009   1.0
+561  USDJPY   H4  C98    all     494   3.376  1.964     5.052  0.538        0.025   1.0
+564  USDJPY   H4  C99    all     311   4.135  1.871     5.818  0.540        0.031   1.0
+567  USDJPY   H4  Q25    all    1088   2.596  1.862     4.449  0.516        0.031   1.0
+177  XAUUSD   H1  Q25    all     393   2.317  1.821     6.616  0.552        0.034   1.0
+249  EURUSD  M30  C99    all    1416   0.745  1.752     2.134  0.537        0.040   1.0
+558  USDJPY   H4  C95    all     975   1.412  1.070     3.713  0.512        0.142   1.0
+174  XAUUSD   H1  C99    all     499   1.760  0.909     5.265  0.531        0.182   1.0
+246  EURUSD  M30  C98    all    2720   0.149  0.527     1.484  0.522        0.299   1.0
+546  XAUUSD   H4  C98    all     325   1.876  0.456     6.193  0.523        0.324   1.0
+171  XAUUSD   H1  C98    all     926   0.541  0.363     4.307  0.521        0.358   1.0
+657  EURUSD  M15  Q25    all     422   0.117  0.341     1.613  0.491        0.367   1.0
+543  XAUUSD   H4  C95    all     658   0.892  0.315     5.637  0.520        0.376   1.0
+159  EURJPY   H4  C99    all     301   0.367  0.115     2.020  0.505        0.454   1.0
+E20 counts: [{'symbol': 'EURUSD', 'tf': 'M30', 'counts': True}, {'symbol': 'USDJPY', 'tf': 'H4', 'counts': True}]
