@@ -1372,3 +1372,43 @@ bond futures follow when their Dukascopy download finishes (run 41447353092, thr
   (t 1.4); the USD pairs and
   GBP/CHF most correlated with the basket (-0.3 to -0.4) lower its volatility a little and its mean a little more
   (t 2.7 -> 2.3-2.7).
+
+**2019-2025 check, all 54 instruments** (CI run 41676706514, branch `gotobi-panel`; the rules in the lab's docstring
+applied unchanged; summary in `docs/edges_batch_results.md`).
+
+- **Carriers from the screen:** CHF/JPY, EUR/JPY, HKD/JPY, MXN/JPY, USD/JPY and gold.
+  - Confirmed on 2019-2025:
+
+    | Pair | Net in its direction | t |
+    |---|---|---|
+    | USD/JPY | +5.0 bp | 3.27 |
+    | EUR/JPY | +4.8 bp | 2.95 |
+    | HKD/JPY | +4.0 bp | 2.11 |
+
+    HKD/JPY is pegged to USD/JPY, so it is the same trade.
+  - Not confirmed:
+    - CHF/JPY: +1.7 bp, t 1.35.
+    - Gold: -8.1 bp.
+    - MXN/JPY: no 2019-2025 bars.
+- **Indices, bonds and commodities** (2012 on, Dukascopy candles): none is a carrier.
+  - JPN225 short: -14.8 bp net.
+  - NAS100 long: +4.8 bp, t 0.7.
+  - Brent and WTI negative.
+  - US bond: only 12 nights before 2019.
+  - Bund: failed to load.
+- **Asian dollar pairs:** USD/SGD -2.6 bp, USD/CNH -3.3 bp net on 2019-2025. The move belongs to the yen, as on
+  2007-2018.
+- **Baskets on 2019-2025:**
+
+  | Basket | Mean per night | t |
+  |---|---|---|
+  | B0 = USD/JPY + EUR/JPY | +4.72 bp | 3.35 |
+  | All carriers, equal weight | +1.32 bp | 1.02 |
+  | All carriers, inverse variance | +2.32 bp | 1.86 |
+  | B0 + gold | +0.99 bp | 0.67 |
+
+  No forward-candidate basket.
+- **Hedges:** none of the 17 counts. The yen crosses cut the sd but also the mean, because they carry the same move.
+  Indices and USD pairs leave t lower.
+- **Decision:** nothing new is frozen. The forward test keeps B0 alone, as pre-registered.
+
