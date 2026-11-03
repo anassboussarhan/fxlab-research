@@ -121,6 +121,12 @@ def resample(m1: pd.DataFrame, tf: str) -> pd.DataFrame:
         out["n_m1"] = 1
         return out
     base_cols = list(_agg_spec().keys())
+    m1 = m1.copy() if any(c not in m1.columns for c in base_cols + ["spread_mean"]) else m1
+    for c in base_cols:                      # candle-only files (no tick statistics): fill what can be derived
+        if c not in m1.columns:
+            m1[c] = 1.0 if c == "n_ticks" else np.nan
+    if "spread_mean" not in m1.columns:
+        m1["spread_mean"] = m1["ask_c"] - m1["bid_c"]
     x = m1[base_cols + ["spread_mean"]].copy()
     x["_sw"] = m1["spread_mean"] * m1["n_ticks"]
     mid_c = (m1["bid_c"] + m1["ask_c"]) / 2
