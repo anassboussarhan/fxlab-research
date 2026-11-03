@@ -38,6 +38,7 @@ import untested_intraday_lab as U  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 START = pd.Timestamp("2026-11-05")
 DEV_MEAN_BP = 4.6
+V1_MEAN_P = 0.5576389056804121   # mean forward-v1 p over the 1,067 development nights (FW1 sizing, exploratory)
 COLS = ["bid_o", "bid_h", "bid_l", "bid_c", "ask_o", "ask_h", "ask_l", "ask_c"]
 V1_MKT = (("vix", "^VIX", False, "level"), ("vix_chg_1w", "^VIX", False, "chg5"), ("spx_ret_1d", "^GSPC", False, "ret1"),
           ("n225_ret_1d", "^N225", True, "ret1"), ("us10y_chg_1w", "^TNX", False, "chg5"))
@@ -166,6 +167,12 @@ def tests(N):
                     "cvar5_open_loss_bp": cvar5(N[mcol]), "cvar5_open_loss_no_stop_bp": cvar5(N.mae_none_bp),
                     "cuts_the_loss": bool(N[col].min() > N.net_none_bp.min() and cvar5(N[mcol]) > cvar5(N.mae_none_bp))
                     if len(N) else None}
+    w = np.minimum(N.p_v1 / V1_MEAN_P, 2.0)
+    dd = w * N.net_s80_bp - N.net_s80_bp
+    tw = float(dd.mean() / dd.std() * np.sqrt(len(dd))) if len(dd) > 2 and dd.std() > 0 else np.nan
+    out["FW1 sizing by v1 p (exploratory)"] = {"weighted_mean_bp": float((w * N.net_s80_bp).mean()) if len(N) else np.nan,
+                                               "unweighted_mean_bp": float(N.net_s80_bp.mean()) if len(N) else np.nan,
+                                               "paired_difference_bp": float(dd.mean()) if len(N) else np.nan, "t": tw}
     x = N.net_none_bp
     t = float(x.mean() / x.std() * np.sqrt(len(x))) if len(x) > 2 and x.std() > 0 else np.nan
     td = float((x.mean() - DEV_MEAN_BP) / x.std() * np.sqrt(len(x))) if len(x) > 2 and x.std() > 0 else np.nan
@@ -196,6 +203,10 @@ def report_md(S, N, mode):
                  f"{f4['verdict']} |")
     lines.append(f"| FT5 filter v2 (secondary) | kept {f5['kept']}: {g(f5['kept_mean_bp'])}; skipped {f5['skipped']}: "
                  f"{g(f5['skipped_mean_bp'])}; difference {g(f5['difference_bp'])} (t {g(f5['t'])}) | {f5['verdict']} |")
+    fw = S["FW1 sizing by v1 p (exploratory)"]
+    lines.append(f"| FW1 sizing by v1 p (exploratory, not a verdict) | weighted {g(fw['weighted_mean_bp'])} vs "
+                 f"{g(fw['unweighted_mean_bp'])} (80 bp stop); difference {g(fw['paired_difference_bp'])} (t {g(fw['t'])}) | "
+                 "information |")
     lines += ["", "## Nights", "", "| Night | No stop | Stop 80 bp | Stop 100 bp | v1 p(win) | v1 | v2 p(win) | v2 |",
               "|---|---|---|---|---|---|---|---|"]
     for d, r in N.iterrows():

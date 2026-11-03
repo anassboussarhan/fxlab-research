@@ -65,3 +65,15 @@ store with the forward code: trades (no stop and 80 bp stop) identical to the de
 1e-12 bp), all 24 forward-v1 and 80 forward-v2 features identical, predicted probabilities identical (1e-13) and the
 same trade / skip decision on every night for both filters. The monthly job (`.github/workflows/forward_test.yml`)
 runs the same code on the forward nights.
+
+## Addendum 2 (2026-11-03, before the first forward night): FW1, sizing by the filter's probability (exploratory)
+
+The edges batch tested E1 (`docs/edges_batch_preregistration.md`, `scripts/edges_e1.py`, `docs/edges_batch/e1.json`).
+On 2019-2025 walk-forward nights, sizing each night by the forward-v1 probability raised the FTMO 2-Step 5x chance
+of being paid at the 2026-shifted edge from 49% (all nights) and 44% (skip a third) to 60%. It did **not** meet its
+pre-set rule, which also required the weighted night's t (3.62) to beat the skip rule's (3.95). So it is not a
+confirmed rule. It is added to the forward report as information only, with no verdict:
+
+| ID | Rule |
+|---|---|
+| FW1 | weight = min(p_v1 / 0.55764, 2), with p_v1 from the frozen forward-v1 model and 0.55764 its mean over the 1,067 development nights; reported: weighted vs unweighted mean of the 80 bp stop nights and their paired difference |
