@@ -1,0 +1,41 @@
+                             n  median_sharpe  positive  t_above_1645
+family                  tf                                           
+I7 night fade           M5   3     -13.667113         0             0
+I9 gold London breakout M1   1      -0.247202         0             0
+S.BO.RANGE_EXPANSION    H1  12      -0.321001         1             0
+                        H4  12      -0.353676         2             0
+S.BO.VOL_BREAKOUT       H1  12      -0.685559         1             0
+                        H4  12      -0.377631         2             0
+S.GEO.HARMONIC          H1  12      -0.273960         1             0
+                        H4  12      -0.307703         4             0
+S.RG.CHANGE_POINT       H1  12      -0.617186         1             0
+                        H4  12      -0.337265         2             1
+S.SEAS.WEEKEND_GAP_FADE H1  12      -1.016174         2             0
+                        H4  12      -0.460947         3             0
+S.TREND.REGRESSION      H1  12      -0.473937         1             0
+                        H4  12      -0.423415         1             0
+S.VOL.EXPANSION         H1  12      -0.351178         3             0
+                        H4  12      -0.245032         1             0
+S.XA.GOLD_FX            H1  12      -0.330955         1             0
+                        H4  12      -0.220257         5             0
+S.XA.RELATIVE_VALUE     H1  12       0.032177         7             0
+                        H4  12      -0.020090         6             0
+S.XA.STAT_ARB           H1  12      -0.149487         3             0
+                        H4  12      -0.177601         4             1
+                      family  symbol  tf  days  net_bp_day      t  sharpe  active_days  pre2019_sharpe  seconds note      p  bh_q  counts
+17             S.XA.STAT_ARB  USDCHF  H4  2047       1.211  2.135   0.755          683           0.118      1.8  NaN  0.016   1.0   False
+119        S.RG.CHANGE_POINT  XAUUSD  H4  2039       0.649  1.825   0.641          403           0.634      3.0  NaN  0.034   1.0   False
+85       S.XA.RELATIVE_VALUE  GBPUSD  H4  1931       1.113  1.434   0.534          936          -0.183      0.7  NaN  0.076   1.0   False
+37              S.XA.GOLD_FX  GBPUSD  H4  1931       1.269  1.391   0.503         1130           0.155      0.5  NaN  0.082   1.0   False
+143        S.BO.VOL_BREAKOUT  XAUUSD  H4  2039       0.736  1.370   0.482         1311           0.142      2.8  NaN  0.085   1.0   False
+65            S.GEO.HARMONIC  USDCHF  H4  2047       0.298  1.233   0.453          194           0.123      3.8  NaN  0.109   1.0   False
+98         S.RG.CHANGE_POINT  USDJPY  H1  2189       0.714  1.228   0.416          623          -0.188      7.9  NaN  0.110   1.0   False
+94       S.XA.RELATIVE_VALUE  GBPCAD  H4  1915       0.904  1.226   0.445          910          -0.690      2.7  NaN  0.110   1.0   False
+20             S.XA.STAT_ARB  EURGBP  H4  1945       0.674  1.193   0.429          815          -0.059      1.8  NaN  0.116   1.0   False
+191          S.VOL.EXPANSION  XAUUSD  H4  2039       0.315  1.004   0.354          354           0.265      1.8  NaN  0.158   1.0   False
+168          S.VOL.EXPANSION  EURUSD  H1  2052       0.433  0.942   0.330          410          -0.113      7.1  NaN  0.173   1.0   False
+236  S.SEAS.WEEKEND_GAP_FADE  USDCAD  H4  2027       0.151  0.931   0.328          177          -1.223      2.9  NaN  0.176   1.0   False
+71            S.GEO.HARMONIC  XAUUSD  H4  2039       0.240  0.911   0.341          186           0.017      2.8  NaN  0.181   1.0   False
+231  S.SEAS.WEEKEND_GAP_FADE  XAUUSD  H1  2039       0.185  0.893   0.314          175          -0.325      2.8  NaN  0.186   1.0   False
+59            S.GEO.HARMONIC  XAUUSD  H1  2039       0.333  0.861   0.303          250          -0.335      3.8  NaN  0.195   1.0   False
+counts: []
