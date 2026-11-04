@@ -47,3 +47,7 @@ Development data end 2025-12-31. **Nothing from 2026 is used.**
   the rolls only partly.
 - GDELT has gaps where the API refused requests; a missing week is no trade.
 - If a series cannot be read, the test is reported as "data missing", never replaced.
+
+**Addendum (2026-11-04, still before any analysis).** In V7 the continuous front fed funds future rolls to the
+next contract at month start, which makes the implied rate jump for reasons other than news. The first trading
+day of each month is therefore excluded from V7's signal days.
