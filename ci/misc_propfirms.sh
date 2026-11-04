@@ -13,12 +13,15 @@ F = ["challengeId", "challengeName", "accountSize", "steps", "profitTarget", "pr
      "maxLossLockOffset", "maxLossIsPercent", "lossIsPercent", "price", "interval", "activationFee", "resetFee",
      "profitSplitPercent", "payoutFrequency", "payoutIntervalDays", "firstPayoutMinDays", "payoutMinWinningDays",
      "payoutMaxPct", "payoutMaxAmount", "consistencyMaxBestDayPct", "fundedConsistencyPct", "isFeeRefundable",
-     "sourceUrl", "lastVerifiedAt"]
+     "sourceUrl", "lastVerifiedAt", "autoTrading", "copyTrading", "maxLeverage", "newsTrading", "overnightHolding",
+     "weekendHolding", "stoplossRequired", "payoutBufferAmount", "payoutWinningDayMinProfit", "profitSplitDetails"]
 rows = []
 for f in firms:
     for c in f.get("challenges", []) or []:
         r = {"propfirmId": f.get("propfirmId"), "firm": f.get("name"), "productTypes": "|".join(f.get("productTypes") or []),
-             "currency": f.get("currency")}
+             "currency": f.get("currency"), "trustpilot": f.get("reviewsTrustPilotScore"),
+             "trustpilotCount": f.get("reviewsTrustPilotCount"), "yearFounded": f.get("yearFounded"),
+             "country": f.get("countryIso2"), "markets": json.dumps(f.get("tradedMarketTypes"))}
         for k in F:
             v = c.get(k)
             r[k] = json.dumps(v) if isinstance(v, (list, dict)) else v
