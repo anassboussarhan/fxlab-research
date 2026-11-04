@@ -368,3 +368,24 @@ Lessons: the free flow sources add no tradeable daily or weekly FX signal after 
 only leads worth keeping on the forward watch list are V6 US-euro (large n, consistent sign in both periods: fit
 +16.0 bp, check +12.0 bp net at 5 days) and V3c managed money in metals (sign flipped between fit and check, so
 weak). Neither is traded.
+
+## P batch: the leads on unseen years and pairs (2026-11-04; CI runs 41807379331, 41818327390; branches `misc-push12`, `misc-push1au`)
+
+Rules: `docs/push_preregistration.md` (with its data addendum). P3 / P4 (2003-2006 Gotobi, post-fix reversal) are
+still running and are reported separately.
+
+| Test | Data | Result | Counts? |
+|---|---|---|---|
+| **P1** 2-year yield gap, follow, 5 days, pooled (fixed direction) | GBP/USD, USD/CAD, USD/CHF; 1,275 event days 2007-2025 | **-1.2 bp (t -0.2)**; 2007-2018 -1.4, 2019-2025 -0.8 | No |
+| P1 per pair, 5 days | | GBP/USD -4.3 (t -0.5), USD/CAD +6.2 (t 0.7), USD/CHF -1.1 (t -0.1) | - |
+| P1 1 day, pooled | | -7.6 bp (t -4.0): the day after a yield-gap jump the pair gives part of it back, but fading earns about the cost | - |
+| **P2** gold, 15 days before the Chinese New Year | BoE daily gold, 1980-2000 (21 years) | **-97 bp a year (t -1.2)**, 9 of 21 years positive | No: D6 does not hold before 2001 |
+| **P5** V2 GLD holdings change, 1 / 5 days | SPDR archive via the fund API (5,523 days, 2004-2026) | 6 and 18 check events: -85 / -53 bp | No (too few events, negative) |
+| P5 V9 GLD flow and managed money agree | | 19 check events, +3 bp (t 0.06) | No |
+
+BH over the counted rows: q = 0.88 for all. Data gaps: Australia's 2-year (the RBA file's header row was not found
+by the parser, twice) and New Zealand's (RBNZ refuses automated requests) are missing from P1; silver before the
+Chinese New Year has no free daily source before 2000.
+
+**What it means:** the US-euro yield-gap lead does not carry over to other dollar pairs, and the gold Chinese New
+Year lead does not exist before its own sample. Both leave the watch list.
