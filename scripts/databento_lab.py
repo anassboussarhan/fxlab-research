@@ -51,6 +51,19 @@ def daily_volume_and_return(df):
 
 
 def f1(a):
+    """Two passes (as in flow_volume_lab): record every trade, price each market's trades with its book loaded once,
+    then replay; V1b alternates markets day by day, which otherwise reloads the minute books thousands of times."""
+    import flow_volume_lab as V
+    V.PASS["mode"] = "record"
+    V.PASS["want"].clear()
+    f1_body(a)
+    print("F1 trades to price:", len(V.PASS["want"]), flush=True)
+    V.price_all()
+    V.PASS["mode"] = "replay"
+    return f1_body(a)
+
+
+def f1_body(a):
     import flow_volume_lab as V
     V.ROWS.clear()
     Z = {}
