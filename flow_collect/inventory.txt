@@ -2,7 +2,11 @@
       1 daily/dtcc_fx/2026_11_01.zip
       1 daily/dtcc_fx/2026_11_02.zip
       1 daily/dtcc_fx/2026_11_03.zip
+      1 daily/gdelt/tone_EUR_20261028_20261104.csv
+      1 daily/gdelt/tone_GOLD_20261028_20261104.csv
+      1 daily/gdelt/tone_USD_20261028_20261104.csv
       1 daily/gld/2026-11-04.csv
+      1 daily/saxo_fxo/2026-11-04T0228.html
       1 history/cftc_disagg/2010_f_year.txt
       1 history/cftc_disagg/2011_f_year.txt
       1 history/cftc_disagg/2012_f_year.txt
@@ -67,8 +71,66 @@
       1 history/futures/PALLADIUM.csv
       1 history/futures/PLATINUM.csv
       1 history/futures/SILVER.csv
+      1 history/gdelt/tone_AUD_20170101_20171231.csv
+      1 history/gdelt/tone_AUD_20180101_20181231.csv
+      1 history/gdelt/tone_AUD_20190101_20191231.csv
+      1 history/gdelt/tone_AUD_20220101_20221231.csv
+      1 history/gdelt/tone_CAD_20170101_20171231.csv
+      1 history/gdelt/tone_CAD_20190101_20191231.csv
+      1 history/gdelt/tone_CAD_20200101_20201231.csv
+      1 history/gdelt/tone_CAD_20210101_20211231.csv
+      1 history/gdelt/tone_CAD_20230101_20231231.csv
+      1 history/gdelt/tone_CAD_20260101_20261104.csv
+      1 history/gdelt/tone_CHF_20180101_20181231.csv
+      1 history/gdelt/tone_CHF_20200101_20201231.csv
+      1 history/gdelt/tone_CHF_20250101_20251231.csv
+      1 history/gdelt/tone_CHF_20260101_20261104.csv
+      1 history/gdelt/tone_EUR_20170101_20171231.csv
+      1 history/gdelt/tone_EUR_20210101_20211231.csv
+      1 history/gdelt/tone_EUR_20220101_20221231.csv
+      1 history/gdelt/tone_EUR_20230101_20231231.csv
+      1 history/gdelt/tone_EUR_20240101_20241231.csv
+      1 history/gdelt/tone_EUR_20250101_20251231.csv
+      1 history/gdelt/tone_EUR_20260101_20261104.csv
+      1 history/gdelt/tone_GBP_20170101_20171231.csv
+      1 history/gdelt/tone_GBP_20180101_20181231.csv
+      1 history/gdelt/tone_GBP_20190101_20191231.csv
+      1 history/gdelt/tone_GBP_20210101_20211231.csv
+      1 history/gdelt/tone_GBP_20220101_20221231.csv
+      1 history/gdelt/tone_GBP_20230101_20231231.csv
+      1 history/gdelt/tone_GBP_20260101_20261104.csv
+      1 history/gdelt/tone_GOLD_20170101_20171231.csv
+      1 history/gdelt/tone_GOLD_20200101_20201231.csv
+      1 history/gdelt/tone_GOLD_20210101_20211231.csv
+      1 history/gdelt/tone_GOLD_20220101_20221231.csv
+      1 history/gdelt/tone_GOLD_20250101_20251231.csv
+      1 history/gdelt/tone_JPY_20170101_20171231.csv
+      1 history/gdelt/tone_JPY_20200101_20201231.csv
+      1 history/gdelt/tone_JPY_20210101_20211231.csv
+      1 history/gdelt/tone_JPY_20220101_20221231.csv
+      1 history/gdelt/tone_JPY_20230101_20231231.csv
+      1 history/gdelt/tone_JPY_20240101_20241231.csv
+      1 history/gdelt/tone_JPY_20260101_20261104.csv
+      1 history/gdelt/tone_NZD_20180101_20181231.csv
+      1 history/gdelt/tone_NZD_20200101_20201231.csv
+      1 history/gdelt/tone_NZD_20230101_20231231.csv
+      1 history/gdelt/tone_NZD_20240101_20241231.csv
+      1 history/gdelt/tone_NZD_20250101_20251231.csv
+      1 history/gdelt/tone_SILVER_20190101_20191231.csv
+      1 history/gdelt/tone_SILVER_20210101_20211231.csv
+      1 history/gdelt/tone_SILVER_20260101_20261104.csv
+      1 history/gdelt/tone_USD_20190101_20191231.csv
+      1 history/gdelt/tone_USD_20200101_20201231.csv
+      1 history/gdelt/tone_USD_20220101_20221231.csv
+      1 history/gdelt/tone_USD_20230101_20231231.csv
       1 history/intervention/mof_en.csv
       1 history/intervention/mof_ja.csv
+      1 history/probe/cls_monthly.html
+      1 history/probe/gdt_events.html
+      1 history/probe/gdt_home.html
+      1 history/rates_futures/fedfunds_front.csv
+      1 history/rates_futures/sofr3m_front.csv
+      1 history/snb/sight_deposits.csv
       1 history/tic/mfh.txt
       1 history/tic/slt_table5.txt
       1 history/yields/ecb_aaa_SR_10Y.csv
@@ -76,5 +138,6 @@
       1 history/yields/mof_jgbcme.csv
       1 history/yields/mof_jgbcme_all.csv
       1 report_daily_2026-11-04.json//
+      1 report_history2_2026-11-04.json//
       1 report_history_2026-11-04.json//
-326M	flow_store
+328M	flow_store

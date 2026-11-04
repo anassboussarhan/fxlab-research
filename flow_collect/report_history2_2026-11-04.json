@@ -1,0 +1,43 @@
+{
+ "snb_sight_deposits": {
+  "ok": true,
+  "bytes": 416064,
+  "seconds": 1.2
+ },
+ "fed_odds_and_vol": {
+  "ok": true,
+  "fedfunds_front": 6555,
+  "sofr3m_front": 1,
+  "EVZCLS": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.cs",
+  "OVXCLS": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.cs",
+  "GVZCLS": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.cs",
+  "VXEEMCLS": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.cs",
+  "seconds": 1178.7
+ },
+ "dairy_and_cls_probe": {
+  "ok": true,
+  "gdt_home": 56347,
+  "gdt_home_files": [],
+  "gdt_events": 48837,
+  "gdt_events_files": [],
+  "cls_monthly": 179897,
+  "cls_monthly_files": [],
+  "seconds": 1.4
+ },
+ "gdelt_history": {
+  "ok": true,
+  "years": {
+   "2017": 6,
+   "2018": 4,
+   "2019": 5,
+   "2020": 6,
+   "2021": 6,
+   "2022": 6,
+   "2023": 6,
+   "2024": 3,
+   "2025": 4,
+   "2026": 6
+  },
+  "seconds": 4661.9
+ }
+}
