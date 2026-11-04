@@ -184,8 +184,17 @@ def foreign_2y(store):
     try:
         parts = []
         for f in find(store, "push", "yields", "rba_f02d*"):
-            X = pd.read_excel(f, header=None)
-            hdr = next(i for i in range(min(30, len(X))) if (X.iloc[i].astype(str) == "Series ID").any())
+            found = None
+            for shn, X in pd.read_excel(f, header=None, sheet_name=None).items():
+                hit = [i for i in range(min(40, len(X)))
+                       if X.iloc[i].astype(str).str.strip().str.lower().eq("series id").any()]
+                if hit:
+                    found = (X, hit[0])
+                    break
+            if found is None:
+                LOG.setdefault("rba_ids", {})[os.path.basename(f)] = "no 'Series ID' row in any sheet"
+                continue
+            X, hdr = found
             ids = [v.strip().upper() for v in X.iloc[hdr].astype(str).tolist()]
             cand = [k for k, v in enumerate(ids) if v.startswith("FCMYGBAG2")]
             if not cand:
