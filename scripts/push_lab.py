@@ -186,8 +186,12 @@ def foreign_2y(store):
         for f in find(store, "push", "yields", "rba_f02d*"):
             X = pd.read_excel(f, header=None)
             hdr = next(i for i in range(min(30, len(X))) if (X.iloc[i].astype(str) == "Series ID").any())
-            ids = X.iloc[hdr].astype(str).tolist()
-            c = ids.index("FCMYGBAG2")
+            ids = [v.strip().upper() for v in X.iloc[hdr].astype(str).tolist()]
+            cand = [k for k, v in enumerate(ids) if v.startswith("FCMYGBAG2")]
+            if not cand:
+                LOG.setdefault("rba_ids", {})[os.path.basename(f)] = [v for v in ids if v.startswith("FCMY")][:20]
+                continue
+            c = cand[0]
             body = X.iloc[hdr + 1:, [0, c]].dropna()
             parts.append(pd.Series(pd.to_numeric(body.iloc[:, 1], errors="coerce").values,
                                    index=pd.to_datetime(body.iloc[:, 0], errors="coerce")).dropna())
