@@ -10,7 +10,7 @@ pre-registration before its data is read; 2026 stays untouched until a frozen ru
 |---|---|---|
 | P3 | Frozen Gotobi basket B0 on 2003-2006 (Dukascopy, before the project's data) | first run partial (USD/JPY 2003-2005: +4.2 bp, t 1.3); full download running (`early-gotobi`) |
 | P4 | Post-fix yen reversal | done: fails on the other crosses and on 2003-2005 |
-| Q | Queue batch: VS1-VS5, T1, BS1, C5E, P1 with Australia (`docs/queue_preregistration.md`) | CI runs 41822593590, 41822610046 |
+| Q | Queue batch: VS1-VS5, T1, BS1, C5E, P1 with Australia | **done: nothing new counts** (BS1 closest: Sharpe 0.31, t 1.5); see `docs/edges_batch_results.md` |
 | Forward test | B0 live-data nights from 2026-11-05, monthly report on the 3rd | scheduled |
 
 ## A. Using the volatility forecast in spot FX (the one strongly predictable part of price)
@@ -54,6 +54,11 @@ forward-v1 / v2 win models; the post-fix USD/JPY / EUR/JPY reversal as a second 
 Tokyo; +1.6 / +0.8 bp on 2019-2025, absent in the other crosses and in 2003-2005).
 
 ## E. Dropped (tested on unseen data and failed; kept here so they are not re-run)
+
+Q batch: volatility sizing of the Gotobi trade (VS1), variance-ratio switching (VS2), gold volatility premium as
+a direction signal (VS3), the cost-to-volatility gate on E2 / E3 / K3 (VS4), volatility jumps (VS5), slow trend on
+prop CFDs (T1), euro COT before 2004 (C5E). BS1 rate-expectation carry: positive but not significant (forward watch).
+
 
 US-euro 2-year gap and its extension to GBP, CAD, CHF (P1); gold before the Chinese New Year 1980-2000 (P2); GLD
 holdings flows (P5); futures and ETF volume (V1, V10); CFTC positioning changes (V3); SNB deposits (V4); news tone

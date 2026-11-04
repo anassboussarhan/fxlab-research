@@ -408,3 +408,24 @@ rule is judged on the full basket when it finishes.
 - The post-fix reversal is real after costs on USD/JPY and EUR/JPY since 2019, but it is absent from the other
   yen crosses and from 2003-2005. It is a recent USD/JPY / EUR/JPY pattern, not a general one: forward watch only
   (a possible second leg after the Gotobi exit: short 09:55 -> 10:20 Tokyo).
+
+## Queue batch Q (2026-11-04; CI runs 41822593590 part A, 41822610046 part B; branches `misc-qa`, `misc-qb`)
+
+Rules: `docs/queue_preregistration.md`. BH table: `docs/q_combined.csv`. The volatility forecast itself works: the
+HAR forecast fitted on 2007-2018 correlates 0.70-0.76 with the realised daily volatility on 2019-2025 for every pair.
+
+| Test | Result | Verdict |
+|---|---|---|
+| **VS1** Gotobi sized for a constant breach risk | Five-firm average P(paid) on 2019-2025: **62.5% vs 81.0% for fixed 4x** (development edge), 29.3% vs 40.4% (2026 edge); daily-limit failures 51% vs 17%. Same as a fixed leverage equal to its average (5.2x: 62.4%). The forecast explains little of a night's size (correlation with abs(net) 0.28) | **Do not use.** Fixed 4x stays best |
+| **VS2** grid vs trend by the variance ratio | -3.9 bp a day (t -7.3) on 2019-2025, -3.7 on 2007-2018; worse than always following (-3.2) or always fading (-2.2). The median variance ratio is 0.92-0.98 for every instrument (mild mean reversion), but not enough to pay the spread | Fails |
+| **VS3** gold implied minus realised volatility | Check months (Feb 2021 on, 58): +9.5 bp a month, t 0.16 | Fails |
+| **VS4** cost-to-volatility gate | Gold end-of-day momentum -3.0 bp (t -5.7); FX end-of-day momentum -1.3 (t -7.9); ECB fix -2.3 (t -3.9): the gate helps by 0.5-1 bp but stays negative. Post-fix reversal (PF) +1.7 bp (t 3.5, q 0.003; ungated +1.3) | E2, E3, K3 fail. PF meets the rule, **but its 2019-2025 data had been seen** (L3, P4 reference), and it is negative on 2007-2018 (-1.3 bp, t -3.6), on 2003-2005 (-1.4) and in the five other yen crosses: a 2019-2025 USD/JPY / EUR/JPY pattern, forward only |
+| **VS5** volatility jumps -> short AUD/JPY, NZD/JPY | 189 days, -9.4 bp (t -0.9) | Fails |
+| **T1** slow trend, 16 prop instruments | Weekly portfolio -1.3 bp (t -0.6), Sharpe -0.13, max drawdown -21%; 2019-2025 Sharpe +0.09. Indices +0.29 Sharpe (NAS100 0.60, t 2.1: a long ride of the 2012-2025 bull market); FX -0.19; metals, energy, bonds about 0 | Fails. Most CFD history starts in 2012 and the 3% financing on non-FX CFDs is a real cost |
+| **BS1** rate-expectation carry (60 days) | **+3.3 bp a week (t 1.50), Sharpe 0.31, +1.7% a year at 1x, max drawdown -12%**; 2007-2018 +4.3, 2019-2025 +1.7. 20 and 120 days weaker (Sharpe 0.16-0.17) | Positive in both halves but t < 1.645 (q 0.33): **not counted**, the closest result of the batch |
+| **C5E** euro COT pressure 2000-2003 | 39 months, +68 bp a month (t 1.3); JPY +108 (t 2.5) but the seven currencies pooled -31 bp | Fails |
+| **P1 with Australia** (RBA 2013 on; the pre-2013 file still unreadable) | Pooled 5 days -2.2 bp (t -0.5) | Still fails |
+
+What the batch shows: the volatility forecast is accurate but it does not translate into money in spot FX. It
+cannot size the Gotobi trade better than a fixed leverage, cannot pick between trend and mean reversion, and
+cannot rescue effects that are smaller than the spread. The one place it pays is options (O1, needs data).
