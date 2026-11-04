@@ -203,6 +203,80 @@ def intervention():
     return out
 
 
+@source
+def snb_sight_deposits():
+    r = get("https://data.snb.ch/api/cube/snbgwdchfsgw/data/csv/en")
+    save("history/snb/sight_deposits.csv", r.content)
+    return {"bytes": len(r.content)}
+
+
+GDELT_Q = {"JPY": '"japanese yen"', "EUR": '"euro" currency', "USD": '"us dollar"', "GBP": '"british pound" OR sterling',
+           "CHF": '"swiss franc"', "AUD": '"australian dollar"', "CAD": '"canadian dollar"', "NZD": '"new zealand dollar"',
+           "GOLD": '"gold price"', "SILVER": '"silver price"'}
+
+
+def gdelt_tone(start, end, sub):
+    out = {}
+    for k, q in GDELT_Q.items():
+        try:
+            r = get("https://api.gdeltproject.org/api/v2/doc/doc",
+                    params={"query": q + " sourcelang:english", "mode": "timelinetone", "format": "csv",
+                            "startdatetime": start, "enddatetime": end})
+            save(f"{sub}/gdelt/tone_{k}_{start[:8]}_{end[:8]}.csv", r.content)
+            out[k] = len(r.content)
+        except Exception as ex:                                              # noqa: BLE001
+            out[k] = repr(ex)[:60]
+        time.sleep(6)
+    return out
+
+
+@source
+def gdelt_history():
+    out = {}
+    for y in range(2017, TODAY.year + 1):
+        e = f"{y}1231235959" if y < TODAY.year else TODAY.strftime("%Y%m%d000000")
+        out[y] = gdelt_tone(f"{y}0101000000", e, "history")
+    return {"years": {y: sum(isinstance(v, int) for v in o.values()) for y, o in out.items()}}
+
+
+@source
+def fed_odds_and_vol():
+    import yfinance as yf
+    out = {}
+    for t, nm in (("ZQ=F", "fedfunds_front"), ("SR3=F", "sofr3m_front")):
+        d = yf.download(t, start="2000-01-01", end=str(TODAY), progress=False, auto_adjust=False)
+        if d is not None and len(d):
+            d.columns = [c[0] if isinstance(c, tuple) else c for c in d.columns]
+            save(f"history/rates_futures/{nm}.csv", d.to_csv())
+            out[nm] = int(len(d))
+    for sid in ("EVZCLS", "OVXCLS", "GVZCLS", "VXEEMCLS"):
+        try:
+            r = get("https://fred.stlouisfed.org/graph/fredgraph.csv", params={"id": sid})
+            save(f"history/implied_vol/fred_{sid}.csv", r.content)
+            out[sid] = len(r.content)
+        except Exception as ex:                                              # noqa: BLE001
+            out[sid] = repr(ex)[:60]
+    return out
+
+
+@source
+def dairy_and_cls_probe():
+    out = {}
+    for nm, u in (("gdt_home", "https://www.globaldairytrade.info/en/product-results/"),
+                  ("gdt_events", "https://www.globaldairytrade.info/en/gdt-events/"),
+                  ("cls_monthly", "https://www.cls-group.com/news/fx-trade-volume-report/")):
+        try:
+            r = get(u)
+            save(f"history/probe/{nm}.html", r.content)
+            out[nm] = len(r.content)
+            import re
+            links = sorted(set(re.findall(r'href="([^"]+\.(?:xlsx?|csv|pdf))"', r.text)))[:30]
+            out[nm + "_files"] = links
+        except Exception as ex:                                              # noqa: BLE001
+            out[nm] = repr(ex)[:80]
+    return out
+
+
 # ------------------------------------------------------------------------------------------- daily
 @source
 def dtcc_options():
@@ -277,9 +351,25 @@ def gld_daily():
     return {"bytes": len(r.content)}
 
 
+@source
+def saxo_fx_options():
+    r = get("https://fxowebtools.saxobank.com/otc.html")
+    save(f"daily/saxo_fxo/{dt.datetime.utcnow():%Y-%m-%dT%H%M}.html", r.content)
+    return {"bytes": len(r.content)}
+
+
+@source
+def gdelt_daily():
+    s = (TODAY - dt.timedelta(days=7)).strftime("%Y%m%d000000")
+    e = TODAY.strftime("%Y%m%d000000")
+    return gdelt_tone(s, e, "daily")
+
+
 if __name__ == "__main__":
-    fns = {"--history": (yahoo_futures, yahoo_etfs, gld_holdings, cftc, tic, yields, intervention),
-           "--daily": (dtcc_options, cme_volume, myfxbook_outlook, oanda_books, gld_daily)}[MODE]
+    fns = {"--history": (yahoo_futures, yahoo_etfs, gld_holdings, cftc, tic, yields, intervention, snb_sight_deposits,
+                         fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
+           "--history2": (snb_sight_deposits, fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
+           "--daily": (dtcc_options, cme_volume, myfxbook_outlook, oanda_books, gld_daily, saxo_fx_options, gdelt_daily)}[MODE]
     for fn in fns:
         fn()
     json.dump(REPORT, open(os.path.join(STORE, f"report_{MODE.strip('-')}_{TODAY}.json"), "w"), indent=1)
