@@ -61,6 +61,11 @@ Tokyo; +1.6 / +0.8 bp on 2019-2025, absent in the other crosses and in 2003-2005
 
 ## E. Dropped (tested on unseen data and failed; kept here so they are not re-run)
 
+Free retail / positioning: CFTC small traders (FF1), FFAJ Japanese retail positions monthly (FF2), daily
+trend-follower flow and crowding estimated from prices (FD1a, FD1b). The paid feeds (R2, M2) stay listed only for
+their higher frequency (hourly retail flow), not for a different idea.
+
+
 Q batch: volatility sizing of the Gotobi trade (VS1), variance-ratio switching (VS2), gold volatility premium as
 a direction signal (VS3), the cost-to-volatility gate on E2 / E3 / K3 (VS4), volatility jumps (VS5), slow trend on
 prop CFDs (T1), euro COT before 2004 (C5E). BS1 rate-expectation carry: positive but not significant (forward watch).

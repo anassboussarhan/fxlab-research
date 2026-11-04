@@ -429,3 +429,23 @@ HAR forecast fitted on 2007-2018 correlates 0.70-0.76 with the realised daily vo
 What the batch shows: the volatility forecast is accurate but it does not translate into money in spot FX. It
 cannot size the Gotobi trade better than a fixed leverage, cannot pick between trend and mean reversion, and
 cannot rescue effects that are smaller than the spread. The one place it pays is options (O1, needs data).
+
+## Free retail flow and daily speculative positioning (2026-11-04; branches `misc-ff`, `misc-ff2`)
+
+Rules: `docs/free_flow_preregistration.md` (free stand-ins for Nasdaq GRFF / TraditionData Gaitame flow and Marex
+MDSP). Directions fixed in advance; nothing fitted.
+
+| Test | Data | Result | Counts? |
+|---|---|---|---|
+| **FF1** fade crowded small traders (CFTC non-reportable, abs(z) >= 1.5), next week, 7 currencies | 678 events 2007-2025 | **-7.0 bp (t -1.7)**; 2007-2018 -12.6, 2019-2025 +3.6. Change version -5.5 bp; gold / silver -18 bp | No |
+| **FF2** fade the monthly change of Japanese retail net positioning (FFAJ per-pair long / short, USD, EUR, GBP, AUD, NZD vs JPY) | 195 months 2009-2025 (FFAJ series from 2008-11) | **-3.2 bp a month (t -0.2)**; pre-2019 -1.2, 2019-2025 -5.9; no currency significant | No |
+| **FD1** validation: the free daily trend-follower position vs the CFTC weekly positions | 765-980 weeks | Level correlation 0.54-0.79 for the currencies, 0.69 gold, 0.52 silver: **a usable free stand-in for a daily positioning feed** | - |
+| **FD1a** follow the trend followers' forced flow the next day (top 20% position changes) | 3,074 days | **-6.3 bp (t -6.7)**; 2019-2025 -5.5 (t -4.6) | No |
+| **FD1b** fade a crowded trend-follower position (abs >= 0.95) for 5 days | 405 events | -6.8 bp (t -0.7) | No |
+
+Data note: gold and silver have almost no bars at 16:55 New York in these files (the metals' daily break), so FD1
+is in effect a test on the seven currencies (6 gold and 6 silver flow trades).
+
+What it shows: the free versions of the retail and speculative positioning feeds can be built (the daily
+trend-follower estimate tracks the CFTC positions closely), but neither retail crowding nor trend-follower flow or
+crowding predicts the next day, week or month after costs in these markets.
