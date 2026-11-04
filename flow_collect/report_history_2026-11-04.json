@@ -1,0 +1,89 @@
+{
+ "yahoo_futures": {
+  "ok": true,
+  "rows": {
+   "EUR": 6599,
+   "JPY": 6522,
+   "GBP": 6513,
+   "AUD": 6502,
+   "CAD": 6619,
+   "CHF": 6507,
+   "NZD": 6491,
+   "MXN": 6359,
+   "DXY": 0,
+   "GOLD": 6570,
+   "SILVER": 6571,
+   "PLATINUM": 6053,
+   "PALLADIUM": 6292,
+   "COPPER": 6574
+  },
+  "seconds": 17.1
+ },
+ "yahoo_etfs": {
+  "ok": true,
+  "rows": {
+   "GLD": 5524,
+   "GLD_shares": 185,
+   "IAU": 5476,
+   "IAU_shares": 189,
+   "SLV": 5162,
+   "SLV_shares": 175,
+   "FXE": 5256,
+   "FXE_shares": 150,
+   "FXY": 4963,
+   "FXY_shares": 109,
+   "FXB": 5122,
+   "FXA": 5122,
+   "FXC": 5122,
+   "FXF": 5122,
+   "UUP": 4952,
+   "UDN": 4952
+  },
+  "seconds": 14.1
+ },
+ "gld_holdings": {
+  "ok": true,
+  "bytes": 697565,
+  "seconds": 0.3
+ },
+ "cftc": {
+  "ok": true,
+  "tff_2006": "RuntimeError('https://www.cftc.gov/files/dea/history/fut_fin_txt_2006.zip: HTTP ",
+  "tff_2007": "RuntimeError('https://www.cftc.gov/files/dea/history/fut_fin_txt_2007.zip: HTTP ",
+  "tff_2008": "RuntimeError('https://www.cftc.gov/files/dea/history/fut_fin_txt_2008.zip: HTTP ",
+  "tff_2009": "RuntimeError('https://www.cftc.gov/files/dea/history/fut_fin_txt_2009.zip: HTTP ",
+  "tff_years": 17,
+  "disagg_2006": "RuntimeError('https://www.cftc.gov/files/dea/history/fut_disagg_txt_2006.zip: HT",
+  "disagg_2007": "RuntimeError('https://www.cftc.gov/files/dea/history/fut_disagg_txt_2007.zip: HT",
+  "disagg_2008": "RuntimeError('https://www.cftc.gov/files/dea/history/fut_disagg_txt_2008.zip: HT",
+  "disagg_2009": "RuntimeError('https://www.cftc.gov/files/dea/history/fut_disagg_txt_2009.zip: HT",
+  "disagg_years": 17,
+  "seconds": 200.5
+ },
+ "tic": {
+  "ok": true,
+  "slt_table5_bytes": 3804,
+  "mfh_bytes": 7486,
+  "seconds": 0.2
+ },
+ "yields": {
+  "ok": true,
+  "DGS2": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.csv: ReadTimeout(ReadT",
+  "DGS10": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.csv: ReadTimeout(ReadT",
+  "DFII10": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.csv: ReadTimeout(ReadT",
+  "T10YIE": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.csv: ReadTimeout(ReadT",
+  "VIXCLS": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.csv: ReadTimeout(ReadT",
+  "DTWEXBGS": "RuntimeError('https://fred.stlouisfed.org/graph/fredgraph.csv: ReadTimeout(ReadT",
+  "jgbcme_all": 1197657,
+  "jgbcme": 347,
+  "ecb_SR_2Y": 3157943,
+  "ecb_SR_10Y": 3178740,
+  "seconds": 1784.3
+ },
+ "intervention": {
+  "ok": true,
+  "en": 43477,
+  "ja": 43477,
+  "seconds": 5.4
+ }
+}

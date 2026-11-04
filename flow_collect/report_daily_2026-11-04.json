@@ -1,0 +1,30 @@
+{
+ "dtcc_options": {
+  "ok": true,
+  "2026_11_03": 2798237,
+  "2026_11_02": 2094357,
+  "2026_11_01": 3508,
+  "2026_10_31": 6187,
+  "seconds": 2.0
+ },
+ "cme_volume": {
+  "ok": false,
+  "error": "RuntimeError('{\"EUR\": \"RuntimeError(\\'https://www.cmegroup.com/CmeWS/mvc/Volume/Deta\", \"JPY\": \"RuntimeError(\\'https://www.cmegroup.com/CmeWS/mvc/Volume/Deta\", \"GBP\": \"RuntimeError(\\'https://www.cmegroup.com/CmeWS/mvc/Volume/Deta\", \"AUD\": \"RuntimeError(\\'https://www.cmegroup.com/CmeWS/mvc/Volume/Deta\", \"CAD\": \"Runtime')",
+  "seconds": 193.6
+ },
+ "myfxbook_outlook": {
+  "ok": false,
+  "error": "RuntimeError('https://www.myfxbook.com/community/outlook: HTTP 403')",
+  "seconds": 24.2
+ },
+ "oanda_books": {
+  "ok": false,
+  "error": "RuntimeError('no OANDA_TOKEN secret (a free OANDA practice account token is needed)')",
+  "seconds": 0.0
+ },
+ "gld_daily": {
+  "ok": true,
+  "bytes": 697565,
+  "seconds": 0.3
+ }
+}
