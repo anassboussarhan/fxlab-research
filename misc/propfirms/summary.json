@@ -1,0 +1,31 @@
+{
+ "firms": 27,
+ "challenges": 520,
+ "other_challenge_fields": [
+  "feeCurrency",
+  "maxContractSize"
+ ],
+ "firm_fields": [
+  "challenges",
+  "commissionAmount",
+  "countryIso2",
+  "currency",
+  "id",
+  "isPreferredPartner",
+  "isVisible",
+  "logoImageUrl",
+  "name",
+  "offers",
+  "overview",
+  "paymentMethods",
+  "payoutMethods",
+  "productTypes",
+  "propfirmId",
+  "restrictedCountries",
+  "reviewsTrustPilotCount",
+  "reviewsTrustPilotScore",
+  "tradedMarketTypes",
+  "tradingPlatforms",
+  "yearFounded"
+ ]
+}
