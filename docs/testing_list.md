@@ -38,6 +38,10 @@ implied variance), so the natural way to sell a volatility forecast is an option
 
 | ID | Idea | Data and how to get it | Cost |
 |---|---|---|---|
+Databento cost check (2026-11-04, the $125 free credit; nothing downloaded yet): K1 fed funds futures $13.08; F1 futures
+volume $4.58; O1 euro and yen options (bars, definitions, settlements, underlyings) $54.18; gold options $177.08; all
+$250.34. K1 + F1 + FX options = $71.84, inside the free credit. Awaiting the user's approval.
+
 | O1 | Sell FX / gold volatility when implied is above the HAR forecast (options on 6E, 6J, GC, or OTC through a broker) | Historical option prices: CME DataMine or a vendor (paid); free path is the Saxo daily snapshots already collecting (about a year needed) | Quote first |
 | O2 | FX volatility risk premium and risk reversals across currencies (Della Corte et al.; Jurek) | Saxo snapshots (collecting daily since 2026-11-04) | Free, forward |
 | R2 | Japanese retail FX flow and positioning, hourly (Gaitame, 29 pairs incl. USD/JPY, EUR/JPY), as a contrarian signal

@@ -248,3 +248,38 @@ Script: `scripts/prop_checks.py`. Results: `docs/prop_best/checks.json`.
     $300k + others. Those accounts fail together.
   - The route to $1-4M of own capital is a real-money track record and investors. Liquidity is no limit: USD/JPY
     absorbs $4M without slippage worth measuring.
+
+## Third search (2026-11-04): every CFD programme in LuxAlgo's public rules directory
+
+**Data.** LuxAlgo's keyless directory API (the data behind luxalgo.com/prop-firms, fetched by
+`ci/misc_propfirms.sh`): 27 firms, 520 programmes; 419 CFD programmes allow overnight holding. FundedNext is not in
+the directory (covered above). Code: `scripts/prop_scan.py` (the directory fields mapped as in LuxAlgo's own
+adapter, github.com/LuxAlgo/prop-firm-sim); results `docs/prop_best/prop_scan_best.csv`. The frozen basket's real
+2019-2025 nights, development edge and 2026 edge (+2.04 bp), leverage 2-8x up to each programme's cap (daily
+limit / 1.2% where the daily reference is the end-of-day equity inside the trade, / 1.0% where it is the balance).
+
+**Directory errors and exclusions found on the way:** FTMO 1-Step is listed at $90 for every size (real: about
+€79-999), so it is left out; Darwinex Zero is a different model (allocation from investors, performance fee), left
+out; instant-funding programmes look fastest in the raw scan (first payout within days) but the ones checked are
+unusable for this trade: FundingPips Zero caps the total floating loss at 1% and forbids holding through high-impact
+news (the basket is open 14:00 -> 00:53 UTC, through US and Japanese releases); Lark and Funded Trading Plus instant
+accounts cost $4,500 for 100k and return less than their fee.
+
+**Verified on the firm's terms and re-simulated (6,000 attempts, `docs/prop_best/prop_focus_lark_ftmo.csv`):**
+Lark Funding 1-Stage: 10% target, 5% daily loss from the **balance** at 5 PM New York, 6% static max loss, no
+minimum days, news and overnight allowed, weekends not (the basket never holds a weekend), FX leverage 15:1, 80%
+split, first payout 30 days after funding, then every 14.
+
+| Programme (100k), leverage | Fee | Paid: 2026 / dev edge | Mean net per attempt: 2026 / dev | Mean / fee (2026) | Paid within 6 months: 2026 / dev | Median business days to 1st payout (2026) |
+|---|---|---|---|---|---|---|
+| **Lark Funding 1-Stage, 5x** | $500 | **46% / 73%** | **+$6,156 / +$11,118** | **12.3** | **20% / 31%** | **141** |
+| Lark Funding 2-Stage, 6x | $550 | 41% / 77% | +$7,929 / +$13,614 | 14.4 | 13% / 23% | 165 (16% daily-limit failures) |
+| FTMO Swing 2-Step, 5x | €540 | 44% / 85% | +$5,148 / +$12,152 | 8.3 | 10% / 20% | 177 |
+| Lark Funding 3-Stage (no daily limit), 6x | $370 | 27% / 39% | +$4,993 / +$9,757 | 13.5 | 13% / 18% | 140 |
+
+**Answer.** For the most money per fee and the fastest first payout with this trade: **Lark Funding 1-Stage 100k at
+5x** (about twice FTMO's chance of a payout within six months, the same overall chance of being paid, 50% more
+expected profit per dollar of fee). FTMO Swing at 5x stays the most established firm (founded 2015, Trustpilot 4.8,
+now owner of OANDA's prop business) against Lark (founded 2022, 4.5). Nothing is fast: with about 5 trading nights
+a month, the median first payout is about 6.5 months at the 2026 edge. Running both at once raises the chance of
+at least one payout, but the accounts trade the same nights and fail together.
