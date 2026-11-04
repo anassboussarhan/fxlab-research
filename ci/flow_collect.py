@@ -204,6 +204,45 @@ def intervention():
 
 
 @source
+def cftc_2006_2009():
+    out = {}
+    for name, u in (("tff", "https://www.cftc.gov/files/dea/history/fin_fut_txt_2006_2016.zip"),
+                    ("disagg", "https://www.cftc.gov/files/dea/history/fut_disagg_txt_hist_2006_2016.zip")):
+        try:
+            r = get(u)
+            z = zipfile.ZipFile(io.BytesIO(r.content))
+            for m in z.namelist():
+                save(f"history/cftc_{name}/2006_2016_{os.path.basename(m)}", z.read(m))
+            out[name] = len(r.content)
+        except Exception as ex:                                              # noqa: BLE001
+            out[name] = repr(ex)[:80]
+    return out
+
+
+@source
+def treasury_and_cboe():
+    """US Treasury daily par yield curve (1990-) and Cboe volatility indices (FRED times out from CI)."""
+    out = {}
+    for y in range(2000, TODAY.year + 1):
+        u = ("https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/"
+             f"all/{y}?type=daily_treasury_yield_curve&field_tdr_date_value={y}&page&_format=csv")
+        try:
+            r = get(u)
+            save(f"history/yields/ust_curve_{y}.csv", r.content)
+            out[y] = len(r.content)
+        except Exception as ex:                                              # noqa: BLE001
+            out[y] = repr(ex)[:50]
+    for ix in ("VIX", "EVZ", "GVZ", "OVX", "VXEEM"):
+        try:
+            r = get(f"https://cdn.cboe.com/api/global/us_indices/daily_prices/{ix}_History.csv")
+            save(f"history/implied_vol/cboe_{ix}.csv", r.content)
+            out[ix] = len(r.content)
+        except Exception as ex:                                              # noqa: BLE001
+            out[ix] = repr(ex)[:50]
+    return out
+
+
+@source
 def snb_sight_deposits():
     r = get("https://data.snb.ch/api/cube/snbgwdchfsgw/data/csv/en")
     save("history/snb/sight_deposits.csv", r.content)
@@ -218,6 +257,10 @@ GDELT_Q = {"JPY": '"japanese yen"', "EUR": '"euro" currency', "USD": '"us dollar
 def gdelt_tone(start, end, sub):
     out = {}
     for k, q in GDELT_Q.items():
+        rel = f"{sub}/gdelt/tone_{k}_{start[:8]}_{end[:8]}.csv"
+        if os.path.exists(os.path.join(STORE, rel)) and os.path.getsize(os.path.join(STORE, rel)) > 100:
+            out[k] = "have"
+            continue
         try:
             r = get("https://api.gdeltproject.org/api/v2/doc/doc",
                     params={"query": q + " sourcelang:english", "mode": "timelinetone", "format": "csv",
@@ -226,7 +269,7 @@ def gdelt_tone(start, end, sub):
             out[k] = len(r.content)
         except Exception as ex:                                              # noqa: BLE001
             out[k] = repr(ex)[:60]
-        time.sleep(6)
+        time.sleep(15)
     return out
 
 
@@ -236,7 +279,7 @@ def gdelt_history():
     for y in range(2017, TODAY.year + 1):
         e = f"{y}1231235959" if y < TODAY.year else TODAY.strftime("%Y%m%d000000")
         out[y] = gdelt_tone(f"{y}0101000000", e, "history")
-    return {"years": {y: sum(isinstance(v, int) for v in o.values()) for y, o in out.items()}}
+    return {"years": {y: sum(isinstance(v, int) or v == "have" for v in o.values()) for y, o in out.items()}}
 
 
 @source
@@ -369,7 +412,8 @@ if __name__ == "__main__":
     fns = {"--history": (yahoo_futures, yahoo_etfs, gld_holdings, cftc, tic, yields, intervention, snb_sight_deposits,
                          fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
            "--history2": (snb_sight_deposits, fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
-           "--daily": (dtcc_options, cme_volume, myfxbook_outlook, oanda_books, gld_daily, saxo_fx_options, gdelt_daily)}[MODE]
+           "--history3": (cftc_2006_2009, treasury_and_cboe, gdelt_history),
+           "--daily": (dtcc_options, oanda_books, gld_daily, saxo_fx_options, gdelt_daily)}[MODE]
     for fn in fns:
         fn()
     json.dump(REPORT, open(os.path.join(STORE, f"report_{MODE.strip('-')}_{TODAY}.json"), "w"), indent=1)

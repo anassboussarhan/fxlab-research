@@ -39,7 +39,7 @@ jobs:
         if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
         run: |
           MODE=$(cut -d' ' -f1 ci/FLOW_COLLECT)
-          case "$MODE" in history|history2) python ci/flow_collect.py --$MODE flow_store || true ;; esac
+          case "$MODE" in history|history2|history3) python ci/flow_collect.py --$MODE flow_store || true ;; esac
       - name: Daily snapshot
         env:
           OANDA_TOKEN: ${{ secrets.OANDA_TOKEN }}
