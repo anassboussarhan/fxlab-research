@@ -67,6 +67,9 @@ def main():
     rep["total_usd_all_items"] = round(sum(v["usd"] for v in rep["items"].values()), 2)
     json.dump(rep, open(os.path.join(out, "cost.json"), "w"), indent=1)
     print("TOTAL (all items) USD", rep["total_usd_all_items"])
+    if mode == "batch":
+        batch(c, sys.argv[2:-1], rep, out)
+        return
     if mode == "download":
         items = sys.argv[2:-1]
         total = sum(rep["items"][i]["usd"] for i in items)
@@ -85,6 +88,69 @@ def main():
                 c.timeseries.get_range(dataset="GLBX.MDP3", symbols=[s], stype_in="parent", schema=r["schema"],
                                        start=START, end=END, path=path)
                 print("downloaded", item, s, os.path.getsize(path), flush=True)
+
+
+def batch(c, items, rep, out):
+    """Batch jobs (billed once, re-downloadable for 30 days) for the large schemas, then compact tables: option
+    definitions -> one row per instrument; statistics -> settlement prices and open interest only."""
+    import time
+    import databento as db
+    import pandas as pd
+    total = sum(rep["items"][i]["usd"] for i in items)
+    cap = float(os.environ.get("DATABENTO_CAP_USD", "80"))
+    print("batch items", items, "priced at USD", round(total, 2), "cap", cap, flush=True)
+    if total > cap:
+        print("ABORT: above the cap; nothing submitted")
+        return
+    comp = os.path.join(out, "compact")
+    os.makedirs(comp, exist_ok=True)
+    for item in items:
+        r = REQ[item]
+        for s in r["symbols"]:
+            if "error" in rep["items"][item]["per_symbol"].get(s, {}):
+                continue
+            job = c.batch.submit_job(dataset="GLBX.MDP3", symbols=[s], schema=r["schema"], start=START, end=END,
+                                     stype_in="parent", split_duration="month", compression="zstd")
+            jid = job["id"]
+            print("submitted", item, s, jid, flush=True)
+            for _ in range(240):
+                done = [j for j in c.batch.list_jobs(states="done") if j.get("id") == jid]
+                if done:
+                    break
+                time.sleep(30)
+            else:
+                print("timeout waiting for", jid)
+                continue
+            d = os.path.join(out, "raw", item, s.replace(".", "_"))
+            files = c.batch.download(job_id=jid, output_dir=d)
+            dbn = sorted(str(f) for f in files if str(f).endswith(".dbn.zst"))
+            print("downloaded", item, s, len(dbn), "files", flush=True)
+            parts = []
+            for f in dbn:
+                store = db.DBNStore.from_file(f)
+                for df in store.to_df(count=500_000, map_symbols=False):
+                    df = df.reset_index()
+                    if r["schema"] == "statistics":
+                        st = df["stat_type"].astype(str).str.upper()
+                        keep = st.isin(["3", "9", "STATTYPE.SETTLEMENT_PRICE", "STATTYPE.OPEN_INTEREST",
+                                        "SETTLEMENT_PRICE", "OPEN_INTEREST"])
+                        cols = [x for x in ("ts_event", "ts_ref", "instrument_id", "stat_type", "price", "quantity")
+                                if x in df.columns]
+                        parts.append(df.loc[keep, cols])
+                    else:
+                        cols = [x for x in ("ts_recv", "instrument_id", "raw_symbol", "expiration", "strike_price",
+                                            "instrument_class", "underlying", "asset", "group") if x in df.columns]
+                        parts.append(df[cols].drop_duplicates("instrument_id", keep="last"))
+            if parts:
+                T = pd.concat(parts, ignore_index=True)
+                if r["schema"] != "statistics":
+                    T = T.drop_duplicates("instrument_id", keep="last")
+                T["stat_type"] = T["stat_type"].astype(str) if "stat_type" in T else None
+                path = os.path.join(comp, f"{item}_{s.replace('.', '_')}.parquet")
+                T.to_parquet(path, index=False)
+                print("compact", path, len(T), flush=True)
+            import shutil
+            shutil.rmtree(d, ignore_errors=True)
 
 
 if __name__ == "__main__":

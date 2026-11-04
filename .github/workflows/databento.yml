@@ -12,13 +12,13 @@ permissions:
 jobs:
   run:
     runs-on: ubuntu-latest
-    timeout-minutes: 120
+    timeout-minutes: 340
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -q databento
+      - run: pip install -q databento==0.90.0 pandas pyarrow
       - name: Job
         env:
           DATABENTO_API_KEY: ${{ secrets.DATABENTO_API_KEY }}
@@ -28,6 +28,13 @@ jobs:
         with:
           name: databento-data
           path: out/databento/data
+          retention-days: 90
+          if-no-files-found: ignore
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: databento-compact
+          path: out/databento/compact
           retention-days: 90
           if-no-files-found: ignore
       - name: Publish the cost report
