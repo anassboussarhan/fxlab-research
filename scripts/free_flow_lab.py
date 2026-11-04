@@ -170,10 +170,36 @@ def ffaj_positions(d):
     return res
 
 
+def ffaj_pair_sheets(d):
+    """trading_vol_and_position.xls: one sheet per pair (USDJPY, EURJPY, ...); rows: month, year, then the yen-converted
+    trading volume, short, long and total open positions (newest first). Returns {ccy: DataFrame[long, short]}."""
+    f = os.path.join(d, "trading_vol_and_position.xls")
+    if not os.path.exists(f):
+        return {}
+    book = pd.read_excel(f, sheet_name=None, header=None)
+    out = {}
+    for sh, X in book.items():
+        m = re.fullmatch(r"(USD|EUR|GBP|AUD|NZD)JPY", str(sh).strip().upper())
+        if not m:
+            continue
+        rows = {}
+        for r in X.itertuples(index=False):
+            mo = pd.to_numeric(r[0], errors="coerce")
+            yr = pd.to_numeric(r[1], errors="coerce")
+            S = pd.to_numeric(r[3], errors="coerce")
+            L = pd.to_numeric(r[4], errors="coerce")
+            if np.isfinite([mo, yr, S, L]).all() and 1 <= mo <= 12 and 1990 < yr < 2100 and L + S > 0:
+                rows[pd.Period(f"{int(yr)}-{int(mo):02d}", "M")] = (L, S)
+        if rows:
+            out[m.group(1)] = pd.DataFrame.from_dict(rows, orient="index", columns=["long", "short"]).sort_index()
+    LOG["ffaj_parsed"] = {c: [str(v.index.min()), str(v.index.max()), int(len(v))] for c, v in out.items()}
+    return out
+
+
 def ff2(a):
     if not a.ffaj or not os.path.isdir(a.ffaj):
         return {"status": "FFAJ files missing"}
-    P = ffaj_positions(a.ffaj)
+    P = ffaj_pair_sheets(a.ffaj) or ffaj_positions(a.ffaj)
     if len(P) < 2:
         return {"status": "data missing: the FFAJ files could not be parsed", "parsed": LOG.get("ffaj_parsed")}
     pair = {"USD": ("USDJPY", 1), "EUR": ("EURJPY", 1), "GBP": ("GBPJPY", 1), "AUD": ("AUDJPY", 1), "NZD": ("NZDJPY", 1)}
