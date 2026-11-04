@@ -40,6 +40,12 @@ implied variance), so the natural way to sell a volatility forecast is an option
 |---|---|---|---|
 | O1 | Sell FX / gold volatility when implied is above the HAR forecast (options on 6E, 6J, GC, or OTC through a broker) | Historical option prices: CME DataMine or a vendor (paid); free path is the Saxo daily snapshots already collecting (about a year needed) | Quote first |
 | O2 | FX volatility risk premium and risk reversals across currencies (Della Corte et al.; Jurek) | Saxo snapshots (collecting daily since 2026-11-04) | Free, forward |
+| R2 | Japanese retail FX flow and positioning, hourly (Gaitame, 29 pairs incl. USD/JPY, EUR/JPY), as a contrarian signal
+and as a Gotobi filter | TraditionData "Japanese Retail Foreign Exchange Flow" (from February 2015; trial / sample on request) or
+Nasdaq Data Link "Global Retail FX Flow" (GRFF, from 2012, about 6% of global retail spot volume) | No public price: ask for a
+trial / sample first |
+| M2 | Daily speculative positioning in commodity futures (gold / silver if covered) | Nasdaq Data Link "Marex Daily
+Speculative Positioning" (MDSP, from 1992); our weekly CFTC versions failed (V3), so low priority | No public price |
 | R1 | Retail positioning, contrarian (2025 study: against retail flow over 4-20 hours) | OANDA order / position books: needs a free OANDA practice token as the `OANDA_TOKEN` secret | Free, needs the user |
 | X1 | Option-expiry pinning at the 10:00 New York cut | DTCC public option trades (collecting daily) | Free, forward |
 | K1 | Pre-FOMC dollar drift as published (Karnaukh) | Next-month fed funds futures history (paid) | Quote first |
