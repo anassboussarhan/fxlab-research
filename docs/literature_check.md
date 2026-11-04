@@ -335,3 +335,38 @@ claims were checked against independent re-tests and against this project's test
 option strategies (no free chains), 0DTE (no intraday option quotes), emerging-market currencies (data not
 downloaded), the Fed-funds-futures FOMC drift (no futures data), interbank order flow (not public), platinum and
 palladium (not downloaded).
+
+## 10. Round 8 (2026-11-04): who actually made money in FX and metals, and how
+
+The question: do the funds, traders and forum accounts that made real money in currencies and metals use a method
+this project has not tested?
+
+| Who | What the record shows | How the money was made | Testable here? |
+|---|---|---|---|
+| Currency CTAs (Barclay Currency Traders Index, 16 programmes) | 2005-2021 mostly 0-5% a year (2005 -1.2%, 2013 +0.9%, 2017 -0.1%); 2022 +9.0%, 2023 +6.5%, 2024 +12.1%, 2025 -0.6% | Systematic trend, carry, rate expectations; the good years are the rate-divergence years | Tested: trend, carry, momentum, value, rate gaps (V6, P1). The index's long-run 2-4% a year is the professional benchmark |
+| FX Concepts (once $12bn, closed 2013) | +16% 2000-2008, then losses | One programmatic strategy (trend / carry / momentum); "excessive concentration in a single strategy" | The failure mode is the lesson: one strategy, no diversification |
+| BSIC rate-expectation carry (2-year swap differentials vs their moving average) | Significant 2000-2010; no factor significant 2010-2020 | Rate-expectation momentum | Close to V6 / P1 (2-year yield gaps): no edge after costs on 2007-2025 |
+| Macro funds in 2022 (Rokos +51%, Brevan Howard +20%, Caxton +17%, HFR macro +14%) | One exceptional year | Discretionary rates and FX bets on the central-bank regime change (short bonds, short yen) | Not a rule; the systematic part (rate divergence, trend) is tested |
+| The franc unpeg, January 2015 (Quaesta +14% that year; Lynx, Brevan small gains; JPMorgan $250-300m) | One event | Being long volatility / short the peg when it broke | Needs option prices; prop accounts cannot hold that kind of convexity cheaply |
+| XTX Markets (record profit about £1.7bn) | Years of profits | Market making: speed, inventory, flow internalisation | Not available to a retail or prop account |
+| Japanese retail ("Mrs Watanabe", the 2007 tax cases) | Large gains in 2003-2007 | Leveraged carry in a yen-weakening regime; losses in 2008 | Carry tested; the gains were the regime, not a repeatable rule |
+| FTMO's featured top traders | 2-3% a month targets; 0.13-1% risk per trade; one pair (GBP/JPY) or a few; swing or session trading; win rates 41-68% | Discretionary price action, news / COT reading, small risk | The mechanical forms (sessions, breakouts, order blocks, COT) are tested; the discretionary skill is not testable |
+| Forum and Myfxbook "verified" multi-year accounts | +541%, +600% (5 years), "+853% robot" threads | Mostly grids, martingale or averaging into losers (FTMO notes all three featured traders added to losers) | Tested: grids and martingale have no expectancy; the record ends at the blow-up |
+
+**What this changes:** nothing in the conclusions. The money in FX and metals is made by
+1. scale and speed (market makers);
+2. discretionary regime calls with large capital (macro funds), which no rule captures;
+3. leverage in a favourable regime (retail carry 2003-2007), which is luck unless it repeats;
+4. convexity at pegs (options);
+5. small structural flows sized carefully, which is what the Gotobi trade is.
+
+The systematic managers earn 2-4% a year over the long run. The one method in the table with a published
+systematic form not yet tested exactly as written is the BSIC rate-expectation carry, and its own authors find no
+edge after 2010.
+
+Sources: Barclay Currency Traders Index (portal.barclayhedge.com); The Full FX, "Currency Traders End Year on Strong
+Note"; Euromoney, "FX Concepts closure signals shift in FX investing"; BSIC, "What works today might not work
+tomorrow"; Reuters / Yahoo, "Macro hedge funds end 2022 on high"; Business Insider, "A few hedge funds actually
+killed it betting on the Swiss franc"; Finance Magnates on JPMorgan and the franc; FX News Group and Pulse on XTX
+Markets' results; FTMO blog, "How do our best FTMO traders trade?" and "Less is sometimes more"; Forex Factory and
+Myfxbook threads cited in the text.
