@@ -40,7 +40,7 @@ implied variance), so the natural way to sell a volatility forecast is an option
 |---|---|---|---|
 Databento cost check (2026-11-04, the $125 free credit; nothing downloaded yet): K1 fed funds futures $13.08; F1 futures
 volume $4.58; O1 euro and yen options (bars, definitions, settlements, underlyings) $54.18; gold options $177.08; all
-$250.34. K1 + F1 + FX options = $71.84, inside the free credit. Awaiting the user's approval.
+$250.34. K1 + F1 + FX options = $71.84, inside the free credit: approved and downloaded; F1, K1, O1 done (none counts).
 
 | O1 | Sell FX / gold volatility when implied is above the HAR forecast (options on 6E, 6J, GC, or OTC through a broker) | Historical option prices: CME DataMine or a vendor (paid); free path is the Saxo daily snapshots already collecting (about a year needed) | Quote first |
 | O2 | FX volatility risk premium and risk reversals across currencies (Della Corte et al.; Jurek) | Saxo snapshots (collecting daily since 2026-11-04) | Free, forward |
@@ -64,6 +64,10 @@ forward-v1 / v2 win models; the post-fix USD/JPY / EUR/JPY reversal as a second 
 Tokyo; +1.6 / +0.8 bp on 2019-2025, absent in the other crosses and in 2003-2005).
 
 ## E. Dropped (tested on unseen data and failed; kept here so they are not re-run)
+
+Databento options: selling euro / yen volatility, hedged or not, when rich or always (O1: -13.2 bp a cycle when rich,
+-5.7 bp always, 2018-2025; implied volatility is not rich against a forecast and costs take the small premium).
+
 
 Databento: real futures volume (F1: V1b -11.1 bp, V1a never fires); Karnaukh pre-FOMC drift as published (K1:
 -13.9 bp, 31 trades). Lead from K1, information only: the dollar weakens into FOMC decisions (-10.9 bp before

@@ -489,3 +489,28 @@ expected change from the next-month fed funds contract three business days befor
   tends to weaken into FOMC decisions whatever is expected (Karnaukh also reports a 5-10 bp drift lower before
   neutral meetings). Meetings: `docs/edges_batch/k1_meetings.csv`. Not traded; a short-dollar-before-FOMC rule would
   need its own pre-registration and new meetings (2026 on) to be tested.
+
+## O1: selling euro and yen volatility on real CME options (2026-11-04; branch `misc-o1`)
+
+Data: Databento CME settlements and definitions of the euro (6E quarterly, EUU monthly) and yen (6J, JPU) futures
+options, June 2010 - December 2025; 185 monthly cycles a currency (`docs/edges_batch/o1_cycles.csv`). Strikes and
+premiums are in the futures' price units (strike / future 1.00 / 1.02; ATM straddle 1.7% of the future, as
+expected for about 8% volatility over a month). Rules: `docs/databento_preregistration.md`.
+
+| Rule | Period | Months | Mean per cycle (% of notional) | t | Winners | Worst cycle |
+|---|---|---|---|---|---|---|
+| **O1a sell when implied > HAR forecast + 1 point, delta-hedged (count)** | 2018-2025 | 28 | **-13.2 bp** | -1.0 | 46% | -215 bp |
+| O1a, reference | 2010-2017 | 54 | +4.6 bp | 0.6 | 56% | -152 bp |
+| O1b always sell, delta-hedged | 2018-2025 | 96 | -5.7 bp | -1.6 | 47% | -144 bp |
+| O1b always sell, delta-hedged | 2010-2017 | 89 | -2.5 bp | -0.5 | 47% | -134 bp |
+| O1c always sell, unhedged | 2018-2025 | 96 | -4.8 bp | -0.5 | 55% | -334 bp |
+
+Per currency, always selling 2018-2025: EUR -9.0 bp (t -2.5), JPY -2.3 bp.
+
+**O1 does not count.** Implied volatility in the euro and yen is not rich against a simple forecast: the median gap
+is -0.15 volatility points, and only 29% of cycles are "rich". Before the assumed option costs (4% of the premium,
+about 7 bp of notional), selling earns only a few basis points a month, so the costs take it all. The earlier EVZ
+result (2008-2014, an index, no trading costs) does not carry over to tradable options after 2018.
+
+**The Databento credit:** fed funds futures, futures volume, and the euro / yen options with settlements and
+definitions, priced at $71.84 of the $125 free credit (plus at most about $3 for a stream that broke).
