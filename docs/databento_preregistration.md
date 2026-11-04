@@ -40,3 +40,13 @@ BH set (they are judged as one batch of their own rows).
 - Reported: always selling (O1b), the unhedged straddle held to expiry (O1c), and the worst cycle (tail risk).
 
 These are personal-account strategies (prop CFD accounts do not offer options); they are judged as research only.
+
+**Addendum (2026-11-04, after a first run with two reading errors; rules unchanged).**
+- K1 read the "rate in force" from the previous month's fed funds contract, which has expired for any mid-month
+  meeting, so 107 of 122 meetings were skipped. Fixed: for meetings on the 1st-10th the previous month's final
+  price is used (no meeting falls in that month); later in the month the rate in force is backed out of the meeting
+  month's contract and the next month's (the FedWatch method: the meeting month averages the old and new rates).
+- The scraped FOMC calendar missed the three meetings that span two months (2017-02-01, 2017-11-01, 2018-08-01) and
+  picked up a non-meeting date (2025-08-22); corrected.
+- F1: the per-market rows (V1a) found no events in the first run while V1b ran; event counts are now logged and the
+  cause fixed before the rows are read.

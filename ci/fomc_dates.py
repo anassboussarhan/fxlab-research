@@ -54,6 +54,11 @@ for blk in re.split(r"(?=\b(20\d\d) FOMC Meetings)", cur):
         rows.append(pd.Timestamp(y, mon, int(days[-1])))
         n += 1
     log[y] = n
+# Corrections checked against the Federal Reserve's calendars: the cross-month meetings the page markup splits
+# (Jan 31-Feb 1 2017, Oct 31-Nov 1 2017, Jul 31-Aug 1 2018) and a non-meeting date picked up on the 2025 page.
+FIX_ADD = [pd.Timestamp("2017-02-01"), pd.Timestamp("2017-11-01"), pd.Timestamp("2018-08-01")]
+FIX_DROP = [pd.Timestamp("2025-08-22")]
+rows = [r for r in rows if r not in FIX_DROP] + FIX_ADD
 d = pd.DataFrame({"date": sorted(set(rows))})
 d.to_csv(sys.argv[1], index=False)
 print("FOMC meetings per year:", log, "total", len(d))

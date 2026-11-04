@@ -78,6 +78,10 @@ def f1_body(a):
         v = np.log(d.Volume.where(d.Volume > 0))
         z = (v - v.rolling(60, min_periods=40).mean().shift(1)) / v.rolling(60, min_periods=40).std().shift(1)
         Z[name] = pd.DataFrame({"z": z, "r": d.r})
+        LOG.setdefault("f1_events", {})[name] = {"z_ge_2": int((z >= 2).sum()), "r_notna": int(d.r.notna().sum()),
+                                                 "both": int(((z >= 2) & d.r.notna()).sum()),
+                                                 "z_max": float(z.max()) if z.notna().any() else None,
+                                                 "z_notna": int(z.notna().sum())}
         sym, sg = V.FUT_MAP[name]
         for n in (1, 5):
             rows = []
@@ -164,17 +168,26 @@ def k1(a):
     LOG["zq"] = [str(Z.index.min().date()), str(Z.index.max().date()), int(Z.shape[1])]
     legs = {"EURUSD": -1, "USDJPY": 1, "GBPUSD": -1, "USDCHF": 1}               # +1 = long the pair when long USD
     sig = []
+    Zf = Z.ffill()                                       # an expired contract keeps its last (final) price
     for m in meetings:
-        sd = (pd.Timestamp(m) - pd.offsets.BDay(3)).normalize()
-        row = Z[Z.index <= sd]
+        m = pd.Timestamp(m)
+        sd = (m - pd.offsets.BDay(3)).normalize()
+        row = Zf[Zf.index <= sd]
         if not len(row):
             continue
         row = row.iloc[-1]
         mm = pd.Period(m, "M")
-        nxt, prev = row.get(mm + 1, np.nan), row.get(mm - 1, np.nan)
-        if not (np.isfinite(nxt) and np.isfinite(prev)):
+        nxt, cur, prev = row.get(mm + 1, np.nan), row.get(mm, np.nan), row.get(mm - 1, np.nan)
+        r1 = 100 - nxt                                       # expected rate after the meeting (next-month contract)
+        D = mm.days_in_month
+        d1 = m.day                                           # days at the old rate (the change applies the day after)
+        if m.day <= 10:
+            r0 = 100 - prev                                  # previous month: no meeting in it (meetings ~6 weeks apart)
+        else:
+            r0 = (D * (100 - cur) - (D - d1) * r1) / d1      # FedWatch: the meeting month's average = mix of r0 and r1
+        if not (np.isfinite(r1) and np.isfinite(r0)):
             continue
-        spread = (100 - nxt) - (100 - prev)
+        spread = r1 - r0
         sig.append({"meeting": pd.Timestamp(m), "expected_bp": spread * 100,
                     "side": 1 if spread * 100 >= 12.5 else (-1 if spread * 100 <= -12.5 else 0)})
     S = pd.DataFrame(sig)
