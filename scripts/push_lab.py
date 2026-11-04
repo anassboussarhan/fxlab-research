@@ -203,11 +203,15 @@ def foreign_2y(store):
             for nm in z.namelist():
                 if "nominal" not in nm.lower() or not nm.lower().endswith((".xlsx", ".xls")):
                     continue
-                book = pd.read_excel(io.BytesIO(z.read(nm)), sheet_name=None, header=None)
-                sh = next((k for k in book if "spot" in k.lower()), None)
+                yrs = [int(y) for y in re.findall(r"(19\d\d|20\d\d)", nm)]
+                if yrs and max(yrs) < 2005:                                 # the z needs 250 days before 2007
+                    continue
+                xl = pd.ExcelFile(io.BytesIO(z.read(nm)))
+                sh = next((k for k in xl.sheet_names if "spot" in k.lower() and "short" not in k.lower()), None) or \
+                    next((k for k in xl.sheet_names if "spot" in k.lower()), None)
                 if sh is None:
                     continue
-                X = book[sh]
+                X = xl.parse(sh, header=None)
                 hr = next(i for i in range(min(10, len(X))) if pd.to_numeric(X.iloc[i, 1:], errors="coerce").notna().sum() > 5)
                 mats = pd.to_numeric(X.iloc[hr, 1:], errors="coerce")
                 col = int(np.flatnonzero(np.isclose(mats.values.astype(float), 2.0))[0]) + 1
