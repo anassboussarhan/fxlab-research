@@ -1,0 +1,46 @@
+name: databento
+# Itemised Databento cost check (default) or an approved download. ci/DATABENTO: "cost" or "download ITEM ...".
+# The cost report goes to the databento branch; downloaded data stays in an artifact (licence: not redistributable).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/DATABENTO"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q databento
+      - name: Job
+        env:
+          DATABENTO_API_KEY: ${{ secrets.DATABENTO_API_KEY }}
+        run: python ci/databento_job.py $(cat ci/DATABENTO) out/databento 2>&1 | tee log.txt
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: databento-data
+          path: out/databento/data
+          retention-days: 90
+          if-no-files-found: ignore
+      - name: Publish the cost report
+        if: always()
+        run: |
+          mkdir -p pub && cp out/databento/cost.json pub/ 2>/dev/null || true; cp log.txt pub/
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan db-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p databento && cp pub/* databento/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > databento/RUN.txt
+          git add -f databento
+          git commit -qm "databento (run ${{ github.run_id }})"
+          git push -f origin HEAD:databento
