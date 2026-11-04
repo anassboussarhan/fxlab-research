@@ -21,6 +21,11 @@ REQ = {
     # K1: every fed funds futures contract (Karnaukh: the next-month contract 3 days before each meeting)
     "K1_zq": dict(schema="ohlcv-1d", symbols=["ZQ.FUT"]),
     "K1_zq_defs": dict(schema="definition", symbols=["ZQ.FUT"]),
+    # the FX-only versions of O1 (gold options exceed the free credit)
+    "O1fx_bars": dict(schema="ohlcv-1d", symbols=["6E.OPT", "EUU.OPT", "6J.OPT", "JPU.OPT"]),
+    "O1fx_stats": dict(schema="statistics", symbols=["6E.OPT", "EUU.OPT", "6J.OPT", "JPU.OPT"]),
+    "O1fx_defs": dict(schema="definition", symbols=["6E.OPT", "EUU.OPT", "6J.OPT", "JPU.OPT"]),
+    "O1fx_under": dict(schema="ohlcv-1d", symbols=["6E.FUT", "6J.FUT"]),
     # F1: real daily volume of the currency and metal futures, every contract
     "F1_volume": dict(schema="ohlcv-1d", symbols=["6E.FUT", "6J.FUT", "6B.FUT", "6A.FUT", "6C.FUT", "6S.FUT", "6N.FUT",
                                                   "6M.FUT", "GC.FUT", "SI.FUT"]),
@@ -63,7 +68,14 @@ def main():
     json.dump(rep, open(os.path.join(out, "cost.json"), "w"), indent=1)
     print("TOTAL (all items) USD", rep["total_usd_all_items"])
     if mode == "download":
-        for item in sys.argv[2:-1]:
+        items = sys.argv[2:-1]
+        total = sum(rep["items"][i]["usd"] for i in items)
+        cap = float(os.environ.get("DATABENTO_CAP_USD", "80"))
+        print("selected items", items, "priced at USD", round(total, 2), "cap", cap, flush=True)
+        if total > cap:
+            print("ABORT: the selected items cost more than the cap; nothing downloaded")
+            return
+        for item in items:
             r = REQ[item]
             for s in r["symbols"]:
                 if "error" in rep["items"][item]["per_symbol"].get(s, {}):
