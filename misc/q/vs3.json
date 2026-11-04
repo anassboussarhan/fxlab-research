@@ -1,0 +1,15 @@
+{
+ "months": 143,
+ "fit_months": 85,
+ "check_from": "2021-02-01",
+ "direction": "follow",
+ "fit_gross_follow_bp": 12.545375635348003,
+ "check": {
+  "n": 58,
+  "mean_bp": 9.533464656265691,
+  "t_iid": 0.16440365320793174,
+  "win": 0.5
+ },
+ "note": "signal +1 = implied volatility rich relative to its 36-month median",
+ "counts_own_rule": false
+}
