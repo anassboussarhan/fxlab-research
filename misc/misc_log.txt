@@ -1,0 +1,66 @@
+
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+FOMC meetings per year: {2010: 8, 2011: 8, 2012: 8, 2013: 8, 2014: 8, 2015: 8, 2016: 8, 2017: 6, 2018: 7, 2019: 8, 2020: 7, 2026: 8, 2025: 9, 2024: 8, 2023: 8, 2022: 8, 2021: 8, 2027: 8} total 141
+total 709512
+drwxr-xr-x  2 runner runner      4096 Nov  4 15:10 .
+drwxr-xr-x 15 runner runner      4096 Nov  4 15:10 ..
+-rw-r--r--  1 runner runner    489051 Nov  4 15:10 F1_volume_6A_FUT.dbn.zst
+-rw-r--r--  1 runner runner    507257 Nov  4 15:10 F1_volume_6B_FUT.dbn.zst
+-rw-r--r--  1 runner runner    606337 Nov  4 15:10 F1_volume_6C_FUT.dbn.zst
+-rw-r--r--  1 runner runner    757695 Nov  4 15:10 F1_volume_6E_FUT.dbn.zst
+-rw-r--r--  1 runner runner    549913 Nov  4 15:10 F1_volume_6J_FUT.dbn.zst
+-rw-r--r--  1 runner runner    231333 Nov  4 15:10 F1_volume_6M_FUT.dbn.zst
+-rw-r--r--  1 runner runner    196827 Nov  4 15:10 F1_volume_6N_FUT.dbn.zst
+-rw-r--r--  1 runner runner    254556 Nov  4 15:10 F1_volume_6S_FUT.dbn.zst
+-rw-r--r--  1 runner runner   2698293 Nov  4 15:10 F1_volume_GC_FUT.dbn.zst
+-rw-r--r--  1 runner runner   1992275 Nov  4 15:10 F1_volume_SI_FUT.dbn.zst
+-rw-r--r--  1 runner runner   5004766 Nov  4 15:10 K1_zq_ZQ_FUT.dbn.zst
+-rw-r--r--  1 runner runner 187394759 Nov  4 15:10 K1_zq_defs_ZQ_FUT.dbn.zst
+-rw-r--r--  1 runner runner   9835440 Nov  4 15:10 O1fx_bars_6E_OPT.dbn.zst
+-rw-r--r--  1 runner runner   4871965 Nov  4 15:10 O1fx_bars_6J_OPT.dbn.zst
+-rw-r--r--  1 runner runner  16576385 Nov  4 15:10 O1fx_bars_EUU_OPT.dbn.zst
+-rw-r--r--  1 runner runner   7543520 Nov  4 15:10 O1fx_bars_JPU_OPT.dbn.zst
+-rw-r--r--  1 runner runner 486988384 Nov  4 15:10 O1fx_stats_6E_OPT.dbn.zst
+EURUSD 2025 1 parts 326590 minutes
+0 manifest records; 0 not ok
+EURUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+GBPUSD 2025 1 parts 344230 minutes
+0 manifest records; 0 not ok
+GBPUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDJPY 2025 1 parts 366567 minutes
+0 manifest records; 0 not ok
+USDJPY years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+AUDUSD 2025 1 parts 231697 minutes
+0 manifest records; 0 not ok
+AUDUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDCAD 2025 1 parts 333038 minutes
+0 manifest records; 0 not ok
+USDCAD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDCHF 2025 1 parts 342552 minutes
+0 manifest records; 0 not ok
+USDCHF years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+NZDUSD 2025 1 parts 334637 minutes
+0 manifest records; 0 not ok
+NZDUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDMXN 2022 1 parts 46668 minutes
+0 manifest records; 0 not ok
+USDMXN years: 2007 2008 2009 2010 2011 2012 2013 2014 2016 2017 2018 2019 2020 2021 2022 
+XAUUSD 2025 1 parts 332486 minutes
+0 manifest records; 0 not ok
+XAUUSD years: 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+XAGUSD 2025 1 parts 335626 minutes
+0 manifest records; 0 not ok
+XAGUSD years: 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+F1 EUR
+F1 JPY
+F1 GBP
+F1 AUD
+F1 CAD
+F1 CHF
+F1 NZD
+F1 MXN
+F1 GOLD
+F1 SILVER
+F1 [{"test": "F1 V1a EUR real volume z >= 2, 1 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a EUR real volume z >= 2, 5 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a JPY real volume z >= 2, 1 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a JPY real volume z >= 2, 5 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a GBP real volume z >= 2, 1 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a GBP real volume z >= 2, 5 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a AUD real volume z >= 2, 1 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a AUD real volume z >= 2, 5 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a CAD real volume z >= 2, 1 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a CAD real volume z >= 2, 5 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a CHF real volume z >= 2, 1 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a CHF real volume z >= 2, 5 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": NaN, "check_n": NaN, "check_net_bp": NaN, "check_t": NaN, "check_win": NaN, "fit_net_dir_bp": NaN, "info_only": NaN, "bh_q": NaN, "counts": false}, {"test": "F1 V1a NZD real volume z >= 2, 1 day(s)", "status": "no events / data missing", "note": "", "split": NaN, "fit_n": NaN, "fit_gross_follow_bp": NaN, "direction": 
+K1 {"meetings": 15, "signals": 5, "trades": {"n": 5, "mean_bp": -19.033534449010713, "t": -0.6080354075210936, "win": 0.2}, "post_publication_2016_2025": {"n": 5, "mean_bp": -19.033534449010713, "t": -0.6080354075210936, "win": 0.2}, "no_signal_meetings_long_usd (information)": {"n": 10, "mean_bp": -10.511872867203548, "t": -0.43950819461483576, "win": 0.5}, "counts_own_rule": false}
