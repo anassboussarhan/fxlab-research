@@ -47,8 +47,35 @@ def bday_after(d, n=1):
     return pd.Timestamp(d) + pd.offsets.BDay(n)
 
 
+PASS = {"mode": "direct", "want": set(), "done": {}}
+
+
 def tr(sym, t_in, t_out, side):
-    """(net, gross in the trade's direction) or None."""
+    """(net, gross in the trade's direction) or None.
+    Two passes so each market's minute book is loaded once: 'record' notes the trade and returns a placeholder,
+    'replay' looks up the trade priced in between (signals never depend on trade results)."""
+    key = (sym, pd.Timestamp(t_in), pd.Timestamp(t_out), int(side))
+    if PASS["mode"] == "record":
+        PASS["want"].add(key)
+        return 0.0, 0.0
+    if PASS["mode"] == "replay":
+        return PASS["done"].get(key)
+    return tr_direct(*key)
+
+
+def price_all():
+    by = {}
+    for k in PASS["want"]:
+        by.setdefault(k[0], []).append(k)
+    for sym, keys in sorted(by.items()):
+        for k in sorted(keys, key=lambda x: x[1]):
+            PASS["done"][k] = tr_direct(*k)
+        BOOKS.clear()
+        E.BOOKS.clear()
+        print("priced", sym, len(keys), flush=True)
+
+
+def tr_direct(sym, t_in, t_out, side):
     bk = book(sym)
     if bk is None:
         return None
@@ -516,6 +543,18 @@ def main():
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    PASS["mode"] = "record"
+    run_all(a)
+    print("trades to price:", len(PASS["want"]), flush=True)
+    price_all()
+    ROWS.clear()
+    LOG.clear()
+    PASS["mode"] = "replay"
+    run_all(a)
+    finish(a)
+
+
+def run_all(a):
     for fn in (v1, v3, v4, v5, v6, v7, v8):
         try:
             r = fn(a.store)
@@ -532,6 +571,9 @@ def main():
         import traceback
         traceback.print_exc()
         ROWS.append({"test": "v2/v9", "status": f"error {ex!r}"[:300]})
+
+
+def finish(a):
     R = pd.DataFrame(ROWS)
     from scipy import stats as st
     if "check_t" in R:

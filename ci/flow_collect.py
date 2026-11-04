@@ -415,6 +415,7 @@ if __name__ == "__main__":
                          fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
            "--history2": (snb_sight_deposits, fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
            "--history3": (cftc_2006_2009, treasury_and_cboe, gdelt_history),
+           "--history4": (treasury_and_cboe,),
            "--daily": (dtcc_options, oanda_books, gld_daily, saxo_fx_options, gdelt_daily)}[MODE]
     for fn in fns:
         fn()
