@@ -283,3 +283,20 @@ expected profit per dollar of fee). FTMO Swing at 5x stays the most established 
 now owner of OANDA's prop business) against Lark (founded 2022, 4.5). Nothing is fast: with about 5 trading nights
 a month, the median first payout is about 6.5 months at the 2026 edge. Running both at once raises the chance of
 at least one payout, but the accounts trade the same nights and fail together.
+
+### Instant funding with this trade (2026-11-04)
+
+The instant accounts checked on the firms' own pages share one design: 3% daily loss counting open losses, 5-6%
+max loss trailing the high, a 1% cap on the total floating loss (Funding Traders, FundingPips Zero, Blue Guardian
+Starter), a 15-20% best-day consistency rule before any payout, 5-7 profitable days of at least +0.5% (For
+Traders, Blue Guardian), a 3% non-withdrawable cushion (Funding Traders, FundingPips), and no opening or closing
+within 5-10 minutes of red-folder news.
+
+- The 1% floating cap with the 80 bp stop allows at most 1.25x; at 1.25x only 8% of nights (2026 edge) reach the
+  +0.5% that counts as a profitable day, so the 5-7 profitable days take about a year.
+- Simulated on the 2019-2025 nights with Funding Traders' rules (cushion, 15% consistency, trailing 6% locking at
+  +3%, on-demand payouts, $500 fee assumed for 100k): at 1.25x, **27% paid within a year at the 2026 edge, median
+  first payout after about 9 months, mean -$229 per attempt** (dev edge: 46%, +$512). Even 2x, which breaks the
+  floating cap, gives +$542 at the 2026 edge.
+- Instant accounts are built for many small daily profits; a trade that earns on 5 nights a month cannot meet their
+  payout conditions quickly. They are slower and less profitable here than Lark's 1-Stage evaluation.
