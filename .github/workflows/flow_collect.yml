@@ -1,0 +1,62 @@
+name: flow-collect
+# ci/flow_collect.py: money-flow, volume, positioning and yield data for every market. The store is a rolling
+# artifact (flow-store): each run downloads the previous one, adds today's snapshots, and uploads it again, so the
+# daily-only sources build a history. Data are never committed; only the reports go to the flow-collect branch.
+# ci/FLOW_COLLECT: "history" (one-off full download + daily snapshot); the schedule runs the daily snapshot.
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "37 22 * * 1-5"
+  push:
+    branches: [main]
+    paths: ["ci/FLOW_COLLECT"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q requests pandas yfinance
+      - name: Previous store
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          R=$(gh run list --workflow flow_collect.yml --status success -L 1 --json databaseId -q '.[0].databaseId' || true)
+          if [ -n "$R" ]; then gh run download $R -n flow-store -D flow_store || echo "no previous store"; fi
+          mkdir -p flow_store
+      - name: History (one-off)
+        if: github.event_name == 'push' && contains(github.event.head_commit.message, 'history') || github.event_name == 'workflow_dispatch'
+        run: python ci/flow_collect.py --history flow_store || true
+      - name: Daily snapshot
+        env:
+          OANDA_TOKEN: ${{ secrets.OANDA_TOKEN }}
+        run: python ci/flow_collect.py --daily flow_store || true
+      - name: Inventory
+        run: |
+          find flow_store -type f | sed 's#flow_store/##' | awk -F/ '{print $1"/"$2"/"$3}' | sort | uniq -c > inventory.txt
+          du -sh flow_store >> inventory.txt; cat inventory.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: flow-store
+          path: flow_store
+          retention-days: 90
+      - name: Publish reports (no data)
+        run: |
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          mkdir -p /tmp/pub && cp inventory.txt /tmp/pub/ && cp flow_store/report_*.json /tmp/pub/ 2>/dev/null || true
+          git fetch -q origin flow-collect && git checkout -q -B fc origin/flow-collect || git checkout -q --orphan fc
+          git rm -rq --cached . 2>/dev/null || true
+          find . -mindepth 1 -maxdepth 1 ! -name .git ! -name flow_collect -exec rm -rf {} + 2>/dev/null || true
+          mkdir -p flow_collect && cp /tmp/pub/* flow_collect/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > flow_collect/RUN.txt
+          git add -f flow_collect
+          git commit -qm "flow-collect $(date -u +%F) (run ${{ github.run_id }})" && git push -q origin HEAD:flow-collect
