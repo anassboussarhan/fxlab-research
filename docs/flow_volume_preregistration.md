@@ -51,3 +51,25 @@ Development data end 2025-12-31. **Nothing from 2026 is used.**
 **Addendum (2026-11-04, still before any analysis).** In V7 the continuous front fed funds future rolls to the
 next contract at month start, which makes the implied rate jump for reasons other than news. The first trading
 day of each month is therefore excluded from V7's signal days.
+
+**Addendum 2 (2026-11-04, after a first run; written before any rerun).** A first run exposed three data
+problems, all found from data checks (event counts and file layouts), not from test results:
+1. *Friday timestamps.* 17:05 New York on a Friday is after the weekly close, so every trade entering or exiting
+   on a Friday was unpriced (roughly a fifth to a half of the daily trades). From now on, a Friday entry or exit
+   uses 16:55 New York, the last quoted minutes of the week. Nothing else in the timing changes.
+2. *Yahoo futures volume.* The continuous front-future volume drops by about 100 times from 2017 (for example the
+   euro future from about 200,000 contracts a day to about 1,000), so it is not the real volume after 2016. V1a and
+   V1b keep their rules and are reported as "data unusable after 2016"; their 2019-2025 check is not counted.
+3. *GLD holdings.* The SPDR archive address now returns a PDF chart, not a table. V2 and V9 are reported as
+   "data missing".
+4. *MoF intervention file.* The parser did not match the file's layout (year and month carried down, month as a
+   word, amount in 100 million yen, direction in the currency-pair column). The parser is fixed; V8 stays
+   information only, USD/JPY rows only.
+
+**New test V10 (added, not a replacement for V1).** Currency and metal ETF share volume from Yahoo (FXE, FXY, FXB,
+FXA, FXC, FXF, GLD, SLV), which has no contract rolls. V10a: log ETF volume z (prior 60 days) >= 2; side = sign of
+the ETF's close-to-close return that day mapped to the pair (FXE EUR/USD +, FXY USD/JPY -, FXB GBP/USD +, FXA
+AUD/USD +, FXC USD/CAD -, FXF USD/CHF -, GLD gold +, SLV silver +); that market, N = 1 and 5 days, follow / fade
+from fit. V10b: each day the 3 of the 6 currency ETFs with the lowest volume z, the day's return followed or faded
+(from fit), equal weight, N = 1. Same entry/exit times, fills, split (2007-2018 / 2019-2025) and counting rule as
+the batch; V10 joins the batch's Benjamini-Hochberg set. No ETF volume result has been looked at.

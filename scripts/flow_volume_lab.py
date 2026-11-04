@@ -40,7 +40,11 @@ def book(sym):
 
 
 def ny(d, hh=17, mm=5):
-    return FL.local_ts(pd.Timestamp(d), "America/New_York", hh, mm)
+    """17:05 New York; on a Friday 16:55, the last quoted minutes before the weekly close (addendum 2)."""
+    d = pd.Timestamp(d)
+    if d.weekday() == 4 and (hh, mm) == (17, 5):
+        hh, mm = 16, 55
+    return FL.local_ts(d, "America/New_York", hh, mm)
 
 
 def bday_after(d, n=1):
@@ -189,7 +193,8 @@ def v1(store):
                 if side == 0:
                     continue
                 rows.append(ev_row(dd, daily_trade(sym, dd, side, n), daily_trade(sym, dd, -side, n)))
-            evaluate(f"V1a {name} volume z >= 2, {n} day(s)", frame([r for r in rows if r]))
+            evaluate(f"V1a {name} volume z >= 2, {n} day(s)", frame([r for r in rows if r]), info=True,
+                     note="data unusable after 2016 (Yahoo futures volume); not counted")
     # V1b cross-sectional low-volume reversal, currencies only
     cc = [k for k in Z if k in CCY_PAIR]
     if len(cc) >= 5:
@@ -214,8 +219,63 @@ def v1(store):
             if fo:
                 rows.append({"date": dd, "follow_net": np.mean([x[0] for x in fo]), "follow_gross": np.mean([x[1] for x in fo]),
                              "fade_net": np.mean([x[0] for x in fa])})
-        evaluate("V1b low-volume reversal, 3 lowest-volume currency futures, 1 day", frame(rows),
-                 note="pre-registered as fade; direction still taken from the fit period")
+        evaluate("V1b low-volume reversal, 3 lowest-volume currency futures, 1 day", frame(rows), info=True,
+                 note="data unusable after 2016 (Yahoo futures volume); not counted")
+
+
+ETF_MAP = {"FXE": ("EURUSD", 1), "FXY": ("USDJPY", -1), "FXB": ("GBPUSD", 1), "FXA": ("AUDUSD", 1),
+           "FXC": ("USDCAD", -1), "FXF": ("USDCHF", -1), "GLD": ("XAUUSD", 1), "SLV": ("XAGUSD", 1)}
+
+
+def v10(store):
+    """ETF share volume (addendum 2): V10a per market, V10b 3 lowest-volume currency ETFs."""
+    Z = {}
+    for name, (sym, sg) in ETF_MAP.items():
+        f = find(store, "etf", f"{name}.csv")
+        if not f:
+            evaluate(f"V10a {name} ETF volume z >= 2", None, note="file missing")
+            continue
+        d = yahoo_csv(f[0])
+        v = np.log(d.Volume.where(d.Volume > 0))
+        z = (v - v.rolling(60, min_periods=40).mean().shift(1)) / v.rolling(60, min_periods=40).std().shift(1)
+        r = np.log(d.Close).diff()
+        Z[name] = pd.DataFrame({"z": z, "r": r})
+        LOG.setdefault("etf", {})[name] = [str(d.index.min().date()), str(d.index.max().date()), int(len(d))]
+        for n in (1, 5):
+            rows = []
+            for dd, x in Z[name][(Z[name].z >= 2) & Z[name].r.notna()].iterrows():
+                if dd > END or dd < pd.Timestamp("2007-01-01"):
+                    continue
+                side = int(np.sign(x.r) * sg)
+                if side == 0:
+                    continue
+                rows.append(ev_row(dd, daily_trade(sym, dd, side, n), daily_trade(sym, dd, -side, n)))
+            evaluate(f"V10a {name} ETF volume z >= 2, {n} day(s)", frame([r for r in rows if r]))
+    cc = [k for k in ("FXE", "FXY", "FXB", "FXA", "FXC", "FXF") if k in Z]
+    if len(cc) < 5:
+        evaluate("V10b 3 lowest-volume currency ETFs, 1 day", None, note="too few ETFs")
+        return
+    P = pd.concat({k: Z[k].z for k in cc}, axis=1).dropna(thresh=5)
+    R = pd.concat({k: Z[k].r for k in cc}, axis=1)
+    rows = []
+    for dd, zr in P.iterrows():
+        if dd > END or dd < pd.Timestamp("2007-01-01"):
+            continue
+        fo, fa = [], []
+        for k in zr.dropna().nsmallest(3).index:
+            rr = R.at[dd, k]
+            if not np.isfinite(rr) or rr == 0:
+                continue
+            sym, sg = ETF_MAP[k]
+            side = int(np.sign(rr) * sg)
+            a, b = daily_trade(sym, dd, side, 1), daily_trade(sym, dd, -side, 1)
+            if a and b:
+                fo.append(a)
+                fa.append(b)
+        if fo:
+            rows.append({"date": dd, "follow_net": np.mean([x[0] for x in fo]), "follow_gross": np.mean([x[1] for x in fo]),
+                         "fade_net": np.mean([x[0] for x in fa])})
+    evaluate("V10b 3 lowest-volume currency ETFs, 1 day", frame(rows))
 
 
 def gld_tonnes(store):
@@ -241,7 +301,8 @@ def gld_tonnes(store):
 def v2_v9(store, mm_gold):
     s = gld_tonnes(store)
     if s is None or len(s) < 500:
-        evaluate("V2 GLD holdings change", None, note="GLD archive not parsed")
+        evaluate("V2 GLD holdings change", None, note="data missing: the SPDR archive address returns a PDF")
+        evaluate("V9 GLD flow and managed money", None, note="data missing: GLD holdings")
         return None
     LOG["gld"] = [str(s.index.min().date()), str(s.index.max().date()), int(len(s))]
     ch = s.pct_change()
@@ -519,22 +580,36 @@ def v8(store):
             break
         except Exception:                                                   # noqa: BLE001
             pass
-    days = []
-    for l in (txt or "").splitlines():
-        m = re.match(r"\s*(\d{4})[/-](\d{1,2})[/-](\d{1,2})\s*,\s*([-\d,\.]+)", l)
-        if m:
-            amt = float(m.group(4).replace(",", "") or 0)
-            days.append((pd.Timestamp(int(m.group(1)), int(m.group(2)), int(m.group(3))), amt))
+    import csv
+    MON = {m: k for k, m in enumerate(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"], 1)}
+    days, yy, mo = [], None, None
+    for row in csv.reader(io.StringIO(txt or "")):
+        if len(row) < 9:
+            continue
+        y, m, dd, amt, pair = row[3].strip(), row[4].strip(), row[5].strip(), row[6].strip(), row[8].lower()
+        if y.isdigit():
+            yy = int(y)
+        if m[:3] in MON:
+            mo = MON[m[:3]]
+        if not dd.isdigit() or yy is None or mo is None or "yen" not in pair or "dollar" not in pair:
+            continue
+        try:
+            a = float(amt.replace(",", ""))
+        except ValueError:
+            continue
+        # "the US dollar (sold) the Japanese yen (bought)" -> USD/JPY down (-1); dollar bought -> up (+1)
+        usd_sold = "dollar (sold)" in pair
+        days.append((pd.Timestamp(yy, mo, int(dd)), -a if usd_sold else a))
     LOG["intervention_rows"] = len(days)
     for n in (5, 20):
         rows = []
         for d0, amt in days:
             if d0 < pd.Timestamp("2007-01-01") or d0 > END or amt == 0:
                 continue
-            side = -1 if amt > 0 else 1        # positive amount read as yen bought (USD sold) -> USD/JPY down
+            side = int(np.sign(amt))           # dollar bought -> long USD/JPY, dollar sold -> short
             rows.append(ev_row(d0, daily_trade("USDJPY", d0, side, n), daily_trade("USDJPY", d0, -side, n)))
         evaluate(f"V8 MoF intervention days, USD/JPY next {n} days in the intervention's direction", frame([r for r in rows if r]),
-                 info=True, note="information only; amount sign convention checked in the log")
+                 info=True, note="information only; direction from the currency-pair column")
 
 
 def main():
@@ -555,7 +630,7 @@ def main():
 
 
 def run_all(a):
-    for fn in (v1, v3, v4, v5, v6, v7, v8):
+    for fn in (v1, v10, v3, v4, v5, v6, v7, v8):
         try:
             r = fn(a.store)
             if fn is v3:
