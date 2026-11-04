@@ -1,0 +1,18 @@
+
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+17
+total 298028
+drwxr-xr-x  2 runner runner     4096 Nov  4 19:14 .
+drwxr-xr-x 16 runner runner     4096 Nov  4 19:14 ..
+-rw-r--r--  1 runner runner   321692 Nov  4 19:14 O1fx_defs_6E_OPT.parquet
+-rw-r--r--  1 runner runner   365930 Nov  4 19:14 O1fx_defs_6J_OPT.parquet
+-rw-r--r--  1 runner runner  2817351 Nov  4 19:14 O1fx_defs_EUU_OPT.parquet
+-rw-r--r--  1 runner runner  1549972 Nov  4 19:14 O1fx_defs_JPU_OPT.parquet
+-rw-r--r--  1 runner runner 55589606 Nov  4 19:14 O1fx_stats_6E_OPT.parquet
+-rw-r--r--  1 runner runner 57977278 Nov  4 19:14 O1fx_stats_6J_OPT.parquet
+-rw-r--r--  1 runner runner 95880188 Nov  4 19:14 O1fx_stats_EUU_OPT.parquet
+-rw-r--r--  1 runner runner 90639882 Nov  4 19:14 O1fx_stats_JPU_OPT.parquet
+-rw-r--r--  1 runner runner     5335 Nov  4 19:14 O1fx_under_6E_FUT.parquet
+-rw-r--r--  1 runner runner     4965 Nov  4 19:14 O1fx_under_6J_FUT.parquet
+O1 {"cycles": {"EUR": 185, "JPY": 185}, "iv_minus_forecast_vol_points_median": -0.15110322117952643, "share_rich": 0.2891891891891892, "O1a sell when rich, hedged, 2018-2025 (count)": {"n": 28, "mean_bp": -13.195139765393716, "t": -0.9838268341679833, "win": 0.4642857142857143, "worst_bp": -214.98392766391007, "sd_bp": 70.96992503461246}, "O1a 2010-2017 (reference)": {"n": 54, "mean_bp": 4.580001903756089, "t": 0.5633383419492825, "win": 0.5555555555555556, "worst_bp": -152.07536377419976, "sd_bp": 59.743852937608075}, "O1b always sell, hedged, 2018-2025": {"n": 96, "mean_bp": -5.6815296409559375, "t": -1.5532643955778669, "win": 0.46875, "worst_bp": -143.94878125517354, "sd_bp": 35.83896886701667}, "O1b always sell, hedged, 2010-2017": {"n": 89, "mean_bp": -2.4769734889350334, "t": -0.4708904019767904, "win": 0.47191011235955055, "worst_bp": -134.2526224920579, "sd_bp": 49.624543335604635}, "O1c always sell, unhedged, 2018-2025": {"n": 96, "mean_bp": -4.8282095249808235, "t": -0.4562375965486529, "win": 0.5520833333333334, "worst_bp": -334.25307068133907, "sd_bp": 103.68851490464468}, "per currency 2018-2025 hedged (always)": {"EUR": {"n": 96, "mean_bp": -9.043805186112314, "t": -2.543604152378128, "win": 0.3854166666666667, "worst_bp": -122.93795806391228, "sd_bp": 34.836722559050514}, "JPY": {"n": 96, "mean_bp": -2.3192540957995615, "t": -0.4469402740413192, "win": 0.4895833333333333, "worst_bp": -214.98392766391007, "sd_bp": 50.84338511005341}}, "counts_own_rule": false}

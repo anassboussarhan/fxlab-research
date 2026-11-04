@@ -1,0 +1,48 @@
+{
+ "o1_har": [
+  {
+   "beta": [
+    1.4147075082743395e-05,
+    0.0003005701548003392,
+    0.009215375934059411,
+    0.50259446942693
+   ],
+   "fit_n": 2289
+  },
+  {
+   "beta": [
+    1.8347566612552497e-05,
+    0.001700367858201296,
+    0.020314342677926325,
+    0.38201748614032244
+   ],
+   "fit_n": 2289
+  }
+ ],
+ "o1_units_premium": {
+  "EUR": {
+   "atm_premium_over_future_median": 0.017398702586006044,
+   "scale": 1.0
+  },
+  "JPY": {
+   "atm_premium_over_future_median": 0.017547066349844636,
+   "scale": 1.0
+  }
+ },
+ "o1_units": {
+  "EUR": {
+   "strike_over_future_median": 0.9982976551791845,
+   "scale": 1.0,
+   "settlement_rows": 4695081
+  },
+  "JPY": {
+   "strike_over_future_median": 1.024099738409306,
+   "scale": 1.0,
+   "settlement_rows": 4687765
+  }
+ },
+ "o1_cycles": {
+  "EUR": 185,
+  "JPY": 185
+ }
+}
