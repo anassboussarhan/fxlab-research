@@ -1,0 +1,42 @@
+{
+ "push_data2": {
+  "ok": true,
+  "metals/bbk_gold_pm.csv": {
+   "error": "RuntimeError('https://api.statistiken.bundesbank.de/rest/data/BBEX3/D.XAU.USD.EA.AC.C05?format=csv&lang=en: HTTP 404')"
+  },
+  "metals/bbk_gold_am.csv": {
+   "error": "RuntimeError('https://api.statistiken.bundesbank.de/rest/data/BBEX3/D.XAU.USD.EA.AC.C04?format=csv&lang=en: HTTP 404')"
+  },
+  "metals/bbk_silver.csv": {
+   "error": "RuntimeError('https://api.statistiken.bundesbank.de/rest/data/BBEX3/D.XAG.USD.EA.AC.C06?format=csv&lang=en: HTTP 404')"
+  },
+  "metals/bbk_gold_pm_its.csv": {
+   "bytes": 83,
+   "type": "text/csv",
+   "head": "\ufeffDie Zeitreihe BBEX3.D.XAU.USD.EA.AC.C05 ist nicht g\u00fcltig oder nicht vorhanden.\n"
+  },
+  "metals/bbk_silver_its.csv": {
+   "bytes": 83,
+   "type": "text/csv",
+   "head": "\ufeffDie Zeitreihe BBEX3.D.XAG.USD.EA.AC.C06 ist nicht g\u00fcltig oder nicht vorhanden.\n"
+  },
+  "yields/dbnomics_rbnz_b2.json": {
+   "error": "RuntimeError('https://api.db.nomics.world/v22/series/RBNZ/B2?observations=1&limit=200: HTTP 404')"
+  },
+  "yields/dbnomics_rbnz_b2_daily.json": {
+   "error": "RuntimeError('https://api.db.nomics.world/v22/series/RBNZ/B2_DAILY?observations=1&limit=200: HTTP 404')"
+  },
+  "gld_page_links": [
+   "https://api.spdrgoldshares.com/api/v1/barlist?underlying=gld",
+   "https://api.spdrgoldshares.com/api/v1/historical-archive?product=gld&amp;exchange=NYSE&amp;lang=en"
+  ],
+  "gld_page_words": {
+   "tonnes": 4,
+   "archive": 6,
+   "holdings": 0,
+   "csv": 0,
+   "xlsx": 2
+  },
+  "seconds": 137.6
+ }
+}
