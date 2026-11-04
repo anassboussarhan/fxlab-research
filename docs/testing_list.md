@@ -8,7 +8,7 @@ pre-registration before its data is read; 2026 stays untouched until a frozen ru
 
 | ID | Test | Status |
 |---|---|---|
-| P3 | Frozen Gotobi basket B0 on 2003-2006 (Dukascopy, before the project's data) | first run partial (USD/JPY 2003-2005: +4.2 bp, t 1.3); full download running (`early-gotobi`) |
+| P3 | Frozen Gotobi basket B0 on 2003-2006 (Dukascopy, before the project's data) | **done: confirms** (+8.4 bp, t 3.85, 152 nights, every year positive; control -1.1 bp) |
 | P4 | Post-fix yen reversal | done: fails on the other crosses and on 2003-2005 |
 | Q | Queue batch: VS1-VS5, T1, BS1, C5E, P1 with Australia | **done: nothing new counts** (BS1 closest: Sharpe 0.31, t 1.5); see `docs/edges_batch_results.md` |
 | Forward test | B0 live-data nights from 2026-11-05, monthly report on the 3rd | scheduled |

@@ -449,3 +449,24 @@ is in effect a test on the seven currencies (6 gold and 6 silver flow trades).
 What it shows: the free versions of the retail and speculative positioning feeds can be built (the daily
 trend-follower estimate tracks the CFTC positions closely), but neither retail crowding nor trend-follower flow or
 crowding predicts the next day, week or month after costs in these markets.
+
+### P3 / P4b final: the frozen Gotobi basket on 2003-2006 (workflow `early-gotobi`, run 41823180878)
+
+Data: Dukascopy ticks for the trade's hours only (14:00-23:59 UTC on the evening before, 00:00-01:59 UTC on the day),
+one job per pair and year; coverage USD/JPY 2003-2006, EUR/JPY 2003-2006 (2003 from May). Rule frozen as B0;
+fills cross the quoted spread plus slippage; before commission (0.7 bp) and swap (positive for these longs in
+2003-2006). Nights: `docs/edges_batch/p3_basket_nights_2003_2006.csv`.
+
+| | Nights | Mean (fill-based) | t | Winners | By year |
+|---|---|---|---|---|---|
+| **Basket (B0), Gotobi nights** | 152 | **+8.4 bp** | **3.85** | 66% | 2003 +1.6, 2004 +7.8, 2005 +9.7, 2006 +10.9 |
+| Basket, mid-price (no costs) | 152 | +10.9 bp | 5.05 | 70% | |
+| Basket, control days (every third other Tue-Fri) | 125 | -1.1 bp | -0.5 | 54% | |
+| USD/JPY leg / EUR/JPY leg | 189 / 187 | +6.3 / +8.0 bp | 2.65 / 3.41 | 58% / 63% | |
+
+**P3 confirms** (pre-registered rule: fill-based basket mean > 0 with t >= 1.645): +8.4 bp, t 3.85, every year
+positive, 9.5 bp above the control days. The effect is now seen on 2003-2006 (never used before), 2007-2018 and
+2019-2025 with the same rule: 23 years. The open question is unchanged: it is smaller on 2023-2025 (+3.3 bp).
+
+P4b (post-fix reversal on 2003-2006): pooled -0.5 bp (t -0.9; USD/JPY -0.1, EUR/JPY -1.2). Does not count; the
+2019-2025 USD/JPY / EUR/JPY reversal stays a recent pattern on the watch list only.
