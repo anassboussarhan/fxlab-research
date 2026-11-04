@@ -72,3 +72,14 @@ the 2019-2025 sample it came from would only fit noise. 2026 is not used anywher
 Benjamini-Hochberg at q <= 0.10 over the primary rows of P1, P2, P4a, P4b (and V2 / V9 if P5 finds data). A row
 counts only if it meets its own rule and survives BH. P3 is judged on its own rule. Anything that counts goes to the
 forward test before any money, and its size is decided on 2007-2025 only.
+
+**Addendum (2026-11-04, after the data probes, before any P1 / P2 / P5 result).**
+- LBMA's price files refuse automated requests (HTTP 403) and the Bundesbank series key did not exist. Gold for
+  P2 is taken from the Bank of England's daily US-dollar gold series if one of the candidate codes returns it;
+  the Bank's notes say it is daily only from late 1979 (Friday averages before), so P2 covers the Chinese New
+  Years of 1980-2000 (21 events, still none in D6's sample). Silver: data missing. If no BoE code works, P2 is
+  data missing.
+- New Zealand: the RBNZ files refuse automated requests (HTTP 403) and DBnomics has no copy; P1 runs on GBP/USD,
+  USD/CAD, AUD/USD and USD/CHF (SNB daily 2-year Confederation yield). The 1975 start and NZD are the only changes.
+- GLD: the fund page links a holdings archive API (`api.spdrgoldshares.com/api/v1/historical-archive`); if it
+  returns a table with tonnes, V2 / V9 run unchanged.

@@ -351,6 +351,8 @@ def p2(a):
     res = {}
     for nm, fn in (("gold", "lbma_gold_pm.json"), ("silver", "lbma_silver.json")):
         px = lbma(a.store, fn)
+        if px is None and nm == "gold":
+            px = boe_gold(a.store)
         if px is None or rf is None:
             res[nm] = {"status": "data missing", "rf": rf is not None}
             continue
@@ -378,6 +380,106 @@ def p2(a):
     return res
 
 
+# ------------------------------------------------------------------------------------------- P5 and extra fetches
+UA = {"User-Agent": "fxlab-research/1.0 (research data collection)"}
+
+
+def fetch_extra(store):
+    """GLD holdings archive from the API address in the fund page; BoE daily gold price in USD (candidate codes)."""
+    import requests
+    info = {}
+    d = os.path.join(store, "history", "push", "extra")
+    os.makedirs(d, exist_ok=True)
+    try:
+        r = requests.get("https://api.spdrgoldshares.com/api/v1/historical-archive?product=gld&exchange=NYSE&lang=en",
+                         headers=UA, timeout=120)
+        info["gld_api"] = {"status": r.status_code, "type": r.headers.get("content-type", ""), "bytes": len(r.content),
+                           "head": r.content[:300].decode("utf-8", "replace")}
+        open(os.path.join(d, "gld_api.bin"), "wb").write(r.content)
+        body = r.content
+        if r.ok and body[:1] in (b"{", b"["):
+            j = r.json()
+            urls = re.findall(r'https?://[^"\s]+', json.dumps(j))
+            info["gld_api_urls"] = urls[:10]
+            for u in urls:
+                if re.search(r"(?i)\.(csv|xlsx?)", u):
+                    body = requests.get(u, headers=UA, timeout=120).content
+                    break
+        tonnes = None
+        if body[:2] == b"PK" or body[:8] == b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1":
+            book = pd.read_excel(io.BytesIO(body), sheet_name=None, header=None)
+            for nm, X in book.items():
+                for i in range(min(40, len(X))):
+                    row = X.iloc[i].astype(str).str.lower()
+                    if row.str.contains("date").any() and row.str.contains("tonne").any():
+                        dc = int(np.flatnonzero(row.str.contains("date"))[0])
+                        tc = int(np.flatnonzero(row.str.contains("tonne"))[0])
+                        b = X.iloc[i + 1:, [dc, tc]]
+                        tonnes = pd.Series(pd.to_numeric(b.iloc[:, 1].astype(str).str.replace(",", ""), errors="coerce").values,
+                                           index=pd.to_datetime(b.iloc[:, 0], errors="coerce", dayfirst=True)).dropna()
+                        info["gld_sheet"] = nm
+                        break
+                if tonnes is not None:
+                    break
+        elif body[:4] != b"%PDF":
+            txt = body.decode("utf-8", "ignore").splitlines()
+            hi = next((i for i, l in enumerate(txt) if "date" in l.lower() and "tonne" in l.lower()), None)
+            if hi is not None:
+                X = pd.read_csv(io.StringIO("\n".join(txt[hi:])), on_bad_lines="skip")
+                tc = next(c for c in X.columns if "tonne" in c.lower())
+                tonnes = pd.Series(pd.to_numeric(X[tc].astype(str).str.replace(",", ""), errors="coerce").values,
+                                   index=pd.to_datetime(X[X.columns[0]], errors="coerce", dayfirst=True)).dropna()
+        if tonnes is not None and len(tonnes) > 500:
+            tonnes = tonnes[~tonnes.index.duplicated()].sort_index()
+            for f in glob.glob(os.path.join(store, "**", "GLD_holdings_archive.csv"), recursive=True):
+                os.rename(f, f + ".pdf")
+            out = os.path.join(store, "history", "etf", "GLD_holdings_archive.csv")
+            with open(out, "w") as fh:
+                fh.write("Date,Tonnes\n")
+                for t, v in tonnes.items():
+                    fh.write(f"{t.strftime('%d-%b-%Y')},{v}\n")
+            info["gld_tonnes"] = [str(tonnes.index.min().date()), str(tonnes.index.max().date()), int(len(tonnes))]
+    except Exception as ex:                                                 # noqa: BLE001
+        info["gld_error"] = repr(ex)[:300]
+    for code in ("XUDLGPD", "XUDLGPS", "XUDLGOD", "XUDLGLD"):
+        u = ("https://www.bankofengland.co.uk/boeapps/database/_iadb-fromshowcolumns.asp?csv.x=yes&Datefrom=01/Jan/1975"
+             f"&Dateto=31/Dec/2001&SeriesCodes={code}&CSVF=TN&UsingCodes=Y&VPD=Y&VFD=N")
+        try:
+            r = requests.get(u, headers=UA, timeout=120)
+            info[f"boe_{code}"] = {"status": r.status_code, "bytes": len(r.content), "head": r.content[:200].decode("utf-8", "replace")}
+            if r.ok and len(r.content) > 20000 and b"DATE" in r.content[:200].upper():
+                open(os.path.join(d, f"boe_gold_{code}.csv"), "wb").write(r.content)
+        except Exception as ex:                                             # noqa: BLE001
+            info[f"boe_{code}"] = repr(ex)[:200]
+    LOG["fetch_extra"] = info
+    return info
+
+
+def boe_gold(store):
+    for f in sorted(glob.glob(os.path.join(store, "**", "extra", "boe_gold_*.csv"), recursive=True)):
+        d = pd.read_csv(f)
+        s = pd.Series(pd.to_numeric(d.iloc[:, 1], errors="coerce").values,
+                      index=pd.to_datetime(d.iloc[:, 0], format="%d %b %Y", errors="coerce")).dropna()
+        if len(s) > 3000 and 30 < s.median() < 3000:                      # a dollar price per ounce, daily
+            LOG.setdefault("metal_source", {})["gold"] = f"BoE {os.path.basename(f)}"
+            return s[s > 0].sort_index()
+    return None
+
+
+def p5(a):
+    import flow_volume_lab as V
+    V.ROWS.clear()
+    D = V.cftc_frame(a.store, "disagg")
+    mm = None
+    if D is not None:
+        g = D[D.code == V.DIS_CODES["GOLD"]]
+        mm = V.change_z(g, "M_Money_Positions_Long_All", "M_Money_Positions_Short_All") if len(g) >= 100 else None
+    V.v2_v9(a.store, mm)
+    R = pd.DataFrame(V.ROWS)
+    R.to_csv(os.path.join(a.out, "p5_v2_v9.csv"), index=False)
+    return R.to_dict("records")
+
+
 # ------------------------------------------------------------------------------------------- combine
 def combine(a):
     from scipy import stats as st
@@ -392,6 +494,11 @@ def combine(a):
         x = j.get(key[0], {}).get(key[1], {})
         t = x.get("t") if key[0] != "gold" else x.get("t_iid")
         rows.append({"test": f"{nm}:{'/'.join(key)}", "n": x.get("n"), "mean_bp": x.get("mean_bp"), "t": t})
+    f5 = os.path.join(a.out, "p5_v2_v9.csv")
+    if os.path.exists(f5):
+        for r in pd.read_csv(f5).to_dict("records"):
+            rows.append({"test": "P5 " + str(r.get("test")), "n": r.get("check_n"), "mean_bp": r.get("check_net_bp"),
+                         "t": r.get("check_t") if pd.notna(r.get("check_t")) else None, "status": r.get("status")})
     R = pd.DataFrame(rows)
     m = R.t.notna() if "t" in R else pd.Series(False, index=R.index)
     p = pd.Series(np.nan, index=R.index)
@@ -412,12 +519,16 @@ def main():
     ap.add_argument("--p1", action="store_true")
     ap.add_argument("--p2", action="store_true")
     ap.add_argument("--combine", action="store_true")
+    ap.add_argument("--p5", action="store_true")
+    ap.add_argument("--fetch-extra", action="store_true")
     ap.add_argument("--early", default="data/m1_early")
     ap.add_argument("--store", default="flow_store")
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
-    for flag, fn in ((a.p34, p34), (a.p1, p1), (a.p2, p2)):
+    if a.fetch_extra:
+        print("fetch_extra", json.dumps(fetch_extra(a.store), indent=1, default=str)[:4000], flush=True)
+    for flag, fn in ((a.p34, p34), (a.p1, p1), (a.p2, p2), (a.p5, p5)):
         if flag:
             try:
                 r = fn(a)
@@ -427,7 +538,7 @@ def main():
                 traceback.print_exc()
     if a.combine:
         combine(a)
-    json.dump(LOG, open(os.path.join(a.out, f"log_{'_'.join(k for k in ('p34', 'p1', 'p2') if getattr(a, k))}.json"), "w"),
+    json.dump(LOG, open(os.path.join(a.out, f"log_{'_'.join(k for k in ('p34', 'p1', 'p2', 'p5') if getattr(a, k))}.json"), "w"),
               indent=1, default=str)
 
 

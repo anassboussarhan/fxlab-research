@@ -4,8 +4,8 @@ pip install -q openpyxl xlrd
 R=$(gh run list --workflow flow_collect.yml --status success -L 1 --json databaseId -q '.[0].databaseId')
 echo "flow store from run $R"
 gh run download $R -n flow-store -D flow_store
-ci/fetch_m1.sh 41447353092 GBPUSD USDCAD AUDUSD USDCHF NZDUSD
+ci/fetch_m1.sh 41447353092 GBPUSD USDCAD AUDUSD USDCHF NZDUSD XAUUSD
 mkdir -p out/push
-python -W ignore scripts/push_lab.py --p1 --p2 --store flow_store --out out/push
+python -W ignore scripts/push_lab.py --fetch-extra --p1 --p2 --p5 --store flow_store --out out/push
 git fetch -q origin misc-push34 && git show origin/misc-push34:misc/push/p34.json > out/push/p34.json 2>/dev/null || true
 python -W ignore scripts/push_lab.py --combine --out out/push
