@@ -65,6 +65,11 @@ Tokyo; +1.6 / +0.8 bp on 2019-2025, absent in the other crosses and in 2003-2005
 
 ## E. Dropped (tested on unseen data and failed; kept here so they are not re-run)
 
+Databento: real futures volume (F1: V1b -11.1 bp, V1a never fires); Karnaukh pre-FOMC drift as published (K1:
+-13.9 bp, 31 trades). Lead from K1, information only: the dollar weakens into FOMC decisions (-10.9 bp before
+93 no-change meetings, t -2.0); testable only on new meetings.
+
+
 Free retail / positioning: CFTC small traders (FF1), FFAJ Japanese retail positions monthly (FF2), daily
 trend-follower flow and crowding estimated from prices (FD1a, FD1b). The paid feeds (R2, M2) stay listed only for
 their higher frequency (hourly retail flow), not for a different idea.

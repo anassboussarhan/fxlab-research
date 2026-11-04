@@ -470,3 +470,22 @@ positive, 9.5 bp above the control days. The effect is now seen on 2003-2006 (ne
 
 P4b (post-fix reversal on 2003-2006): pooled -0.5 bp (t -0.9; USD/JPY -0.1, EUR/JPY -1.2). Does not count; the
 2019-2025 USD/JPY / EUR/JPY reversal stays a recent pattern on the watch list only.
+
+## Databento tests F1 and K1 (2026-11-04; branch `misc-db`; rules `docs/databento_preregistration.md` with its addendum)
+
+**F1, the V1 volume tests with real CME volume** (every outright contract, June 2010 - December 2025):
+- V1b (the three lowest-volume currency futures each day, direction from the fit, 60/40 split): fit 2,797 days ->
+  fade; check 1,866 days **-11.1 bp a day (t -12.9)**. Fails clearly, as with the Yahoo series.
+- V1a (a market's volume z >= 2 against its previous 60 days): **no event in any market.** With real volume the
+  holiday and half-day sessions (a tenth of normal volume) make the 60-day dispersion so wide that the largest z is
+  1.3-1.7; the rule as registered never fires. Not re-tuned.
+
+**K1, the dollar before FOMC decisions as published (Karnaukh)**, 124 scheduled meetings 2010-06 to 2025-12, the
+expected change from the next-month fed funds contract three business days before:
+- 31 meetings with an expected change of at least 12.5 bp: **-13.9 bp per trade (t -1.4)**, 48% winners; after
+  publication (2016-2025, 30 trades) -16.0 bp (t -1.6). **Does not count**: the dollar did not move toward the
+  expected decision.
+- Information: before the 93 meetings with no expected change, a dollar long lost -10.9 bp (t -2.0). The dollar
+  tends to weaken into FOMC decisions whatever is expected (Karnaukh also reports a 5-10 bp drift lower before
+  neutral meetings). Meetings: `docs/edges_batch/k1_meetings.csv`. Not traded; a short-dollar-before-FOMC rule would
+  need its own pre-registration and new meetings (2026 on) to be tested.
