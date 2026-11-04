@@ -260,8 +260,194 @@ def main():
     json.dump(LOG, open(os.path.join(a.out, "log_databento.json"), "w"), indent=1, default=str)
 
 
+def bs76(F, K, T, vol, cp):
+    from scipy.stats import norm
+    if T <= 0 or vol <= 0:
+        return max(F - K, 0.0) if cp == "C" else max(K - F, 0.0), (1.0 if (cp == "C" and F > K) else (-1.0 if cp == "P" and F < K else 0.0))
+    d1 = (math.log(F / K) + 0.5 * vol * vol * T) / (vol * math.sqrt(T))
+    d2 = d1 - vol * math.sqrt(T)
+    if cp == "C":
+        return F * norm.cdf(d1) - K * norm.cdf(d2), norm.cdf(d1)
+    return K * norm.cdf(-d2) - F * norm.cdf(-d1), norm.cdf(d1) - 1.0
+
+
+def implied(F, K, T, price, cp):
+    from scipy.optimize import brentq
+    intrinsic = max(F - K, 0.0) if cp == "C" else max(K - F, 0.0)
+    if not (price > intrinsic + 1e-12) or T <= 0:
+        return np.nan
+    try:
+        return brentq(lambda v: bs76(F, K, T, v, cp)[0] - price, 1e-4, 3.0, maxiter=200)
+    except ValueError:
+        return np.nan
+
+
+def futures_closes(path):
+    """Daily close of every outright contract (CME trade date) -> DataFrame[date x raw symbol]; and the most traded
+    contract's daily return (for the volatility forecast)."""
+    df = read_dbn(path)
+    df = df[df["symbol"].map(outright)].copy()
+    df["date"] = pd.DatetimeIndex(df["ts_event"]).tz_convert("America/Chicago").tz_localize(None).normalize()
+    C = df.pivot_table(index="date", columns="symbol", values="close", aggfunc="last").sort_index()
+    df = df.sort_values(["symbol", "date"])
+    df["ret"] = np.log(df["close"]).groupby(df["symbol"]).diff()
+    top = df.loc[df.groupby("date")["volume"].idxmax()].set_index("date")["ret"]
+    return C, top.sort_index()
+
+
+def har_month(r, fit_end="2017-12-31"):
+    """HAR in levels on daily squared returns: next 21 days' mean r^2 on the last 1 / 5 / 22 days' means; fitted on
+    windows ending by fit_end, then fixed. Returns the annualised volatility forecast by date."""
+    q = r.dropna() ** 2
+    X = pd.DataFrame({"d": q, "w": q.rolling(5).mean(), "m": q.rolling(22).mean()})
+    y = q[::-1].rolling(21).mean()[::-1].shift(-1)
+    D = pd.concat([X, y.rename("y")], axis=1).dropna()
+    fit = D[D.index <= pd.Timestamp(fit_end) - pd.Timedelta(days=35)]
+    A = np.c_[np.ones(len(fit)), fit[["d", "w", "m"]].values]
+    beta = np.linalg.lstsq(A, fit.y.values, rcond=None)[0]
+    Xa = X.dropna()
+    pred = np.c_[np.ones(len(Xa)), Xa.values] @ beta
+    LOG.setdefault("o1_har", []).append({"beta": beta.tolist(), "fit_n": int(len(fit))})
+    return pd.Series(np.sqrt(np.clip(pred, 1e-12, None) * 252), index=Xa.index)
+
+
 def o1(a):
-    return {"status": "not yet implemented (waiting for the compact option files)"}
+    import glob as G
+    res = {}
+    TICK = {"EUR": 5e-5, "JPY": 5e-7}
+    PARENTS = {"EUR": ("6E", ("6E_OPT", "EUU_OPT")), "JPY": ("6J", ("6J_OPT", "JPU_OPT"))}
+    cycles_all = {}
+    for ccy, (fut, opts) in PARENTS.items():
+        fpath = G.glob(os.path.join(a.dbn, f"F1_volume_{fut}_FUT.dbn.zst"))
+        if not fpath:
+            res[ccy] = {"status": "futures bars missing"}
+            continue
+        C, ret = futures_closes(fpath[0])
+        sig = har_month(ret)
+        defs, stats = [], []
+        for o in opts:
+            fd = os.path.join(a.compact, f"O1fx_defs_{o}.parquet")
+            fs = os.path.join(a.compact, f"O1fx_stats_{o}.parquet")
+            if os.path.exists(fd) and os.path.exists(fs):
+                defs.append(pd.read_parquet(fd))
+                stats.append(pd.read_parquet(fs))
+        if not defs:
+            res[ccy] = {"status": "option files missing"}
+            continue
+        D = pd.concat(defs).drop_duplicates("instrument_id", keep="last")
+        D = D[D["instrument_class"].astype(str).str.upper().isin(["C", "P", "CALL", "PUT"])].copy()
+        D["cp"] = D["instrument_class"].astype(str).str.upper().str[0]
+        D["exp"] = pd.DatetimeIndex(pd.to_datetime(D["expiration"], utc=True)).tz_convert("America/Chicago").tz_localize(None).normalize()
+        S = pd.concat(stats)
+        st_ = S["stat_type"].astype(str).str.upper()
+        S = S[st_.str.contains("3$|SETTLEMENT", regex=True)].copy()
+        ref = S["ts_ref"] if "ts_ref" in S else S["ts_event"]
+        S["date"] = pd.DatetimeIndex(pd.to_datetime(ref, utc=True)).tz_convert("America/Chicago").tz_localize(None).normalize()
+        S = S.sort_values("ts_event").drop_duplicates(["instrument_id", "date"], keep="last")
+        S = S.merge(D[["instrument_id", "strike_price", "cp", "exp", "underlying"]], on="instrument_id", how="inner")
+        S = S[(S.date <= S.exp) & (S.date >= S.exp - pd.Timedelta(days=500)) & (S.price > 0)]
+        # strike units vs the future's price: rescale by a power of ten if needed (checked on the data)
+        under_ok = S["underlying"].isin(C.columns)
+        S = S[under_ok]
+        fprice = np.array([C.at[d, u] if d in C.index else np.nan for d, u in zip(S.date, S.underlying)])
+        ratio = np.nanmedian(S.strike_price.values / fprice)
+        scale = 10.0 ** (-round(math.log10(ratio))) if np.isfinite(ratio) and ratio > 0 else 1.0
+        S["K"] = S.strike_price * scale
+        near = (S.K / fprice - 1).abs() < 0.01
+        pr = float(np.nanmedian(S.price.values[near.values] / fprice[near.values])) if near.any() else np.nan
+        pscale = 1.0 if (np.isfinite(pr) and 1e-4 <= pr <= 1e-1) else (10.0 ** (-round(math.log10(pr / 0.01))) if np.isfinite(pr) and pr > 0 else 1.0)
+        LOG.setdefault("o1_units_premium", {})[ccy] = {"atm_premium_over_future_median": pr, "scale": pscale}
+        S["P"] = S.price * pscale
+        S["F"] = fprice
+        LOG.setdefault("o1_units", {})[ccy] = {"strike_over_future_median": float(ratio), "scale": scale,
+                                              "settlement_rows": int(len(S))}
+        S = S.dropna(subset=["F"])
+        exps = sorted(e for e in S.exp.unique() if pd.Timestamp("2010-07-01") <= e <= DEV_END)
+        rows = []
+        for k in range(1, len(exps)):
+            E, t0 = pd.Timestamp(exps[k]), pd.Timestamp(exps[k - 1])
+            days_left = (E - t0).days
+            if days_left < 10 or days_left > 45:
+                continue
+            day0 = S[(S.date == t0) & (S.exp == E)]
+            if day0.empty:
+                later = S[(S.date > t0) & (S.date <= t0 + pd.Timedelta(days=4)) & (S.exp == E)]
+                if later.empty:
+                    continue
+                t0 = later.date.min()
+                day0 = later[later.date == t0]
+            u = day0.underlying.value_counts().index[0]
+            day0 = day0[day0.underlying == u]
+            F0 = float(day0.F.iloc[0])
+            Ks = sorted(set(day0[day0.cp == "C"].K) & set(day0[day0.cp == "P"].K))
+            if not Ks:
+                continue
+            K = min(Ks, key=lambda x: abs(x - F0))
+            c0 = float(day0[(day0.cp == "C") & (day0.K == K)].P.iloc[0])
+            p0 = float(day0[(day0.cp == "P") & (day0.K == K)].P.iloc[0])
+            T0 = days_left / 365.0
+            ivc, ivp = implied(F0, K, T0, c0, "C"), implied(F0, K, T0, p0, "P")
+            iv = np.nanmean([ivc, ivp])
+            if not np.isfinite(iv):
+                continue
+            fc = sig.asof(t0) if len(sig) else np.nan
+            # daily delta hedge with the underlying future at its close, entry implied vol, to expiry
+            path = C[u][(C.index >= t0) & (C.index <= E)].dropna()
+            if len(path) < 5:
+                continue
+            h_prev, hedge_pnl, turn = 0.0, 0.0, 0.0
+            for i in range(len(path) - 1):
+                Ft, dt = float(path.iloc[i]), path.index[i]
+                T = max((E - dt).days, 0) / 365.0
+                dc = bs76(Ft, K, T, iv, "C")[1]
+                dp = bs76(Ft, K, T, iv, "P")[1]
+                h = dc + dp                                  # the short straddle's delta is -(dc + dp): hold +h futures
+                turn += abs(h - h_prev)
+                hedge_pnl += h * (float(path.iloc[i + 1]) - Ft)
+                h_prev = h
+            turn += abs(h_prev)
+            FE = float(path.iloc[-1])
+            payoff = max(FE - K, 0.0) + max(K - FE, 0.0)
+            prem = c0 + p0
+            cost = 0.04 * prem + 0.5 * TICK[ccy] * turn
+            rows.append({"ccy": ccy, "entry": t0, "expiry": E, "F0": F0, "K": K, "iv": iv, "forecast": fc,
+                         "hedged": (prem - payoff + hedge_pnl - cost) / F0,
+                         "unhedged": (prem - payoff - 0.04 * prem) / F0, "premium_pct": prem / F0})
+        Rc = pd.DataFrame(rows)
+        cycles_all[ccy] = Rc
+        LOG.setdefault("o1_cycles", {})[ccy] = int(len(Rc))
+    if not cycles_all:
+        return {"status": "data missing", **res}
+    R = pd.concat(cycles_all.values(), ignore_index=True)
+    R.to_csv(os.path.join(a.out, "o1_cycles.csv"), index=False)
+    R["month"] = pd.DatetimeIndex(R.expiry).to_period("M")
+    R["rich"] = (R.iv - R.forecast) > 0.01
+
+    def pool(df, col):
+        x = df.groupby("month")[col].mean()
+        x.index = x.index.to_timestamp()
+        return x
+
+    def summ(x):
+        x = pd.Series(x).dropna()
+        if len(x) < 3:
+            return {"n": int(len(x))}
+        return {"n": int(len(x)), "mean_bp": float(x.mean() * 1e4), "t": float(x.mean() / x.std() * math.sqrt(len(x))),
+                "win": float((x > 0).mean()), "worst_bp": float(x.min() * 1e4), "sd_bp": float(x.std() * 1e4)}
+    chk = R[R.expiry >= "2018-01-01"]
+    out = {"cycles": {k: int(len(v)) for k, v in cycles_all.items()},
+           "iv_minus_forecast_vol_points_median": float((R.iv - R.forecast).median() * 100),
+           "share_rich": float(R.rich.mean())}
+    out["O1a sell when rich, hedged, 2018-2025 (count)"] = summ(pool(chk[chk.rich], "hedged"))
+    out["O1a 2010-2017 (reference)"] = summ(pool(R[(R.expiry < "2018-01-01") & R.rich], "hedged"))
+    out["O1b always sell, hedged, 2018-2025"] = summ(pool(chk, "hedged"))
+    out["O1b always sell, hedged, 2010-2017"] = summ(pool(R[R.expiry < "2018-01-01"], "hedged"))
+    out["O1c always sell, unhedged, 2018-2025"] = summ(pool(chk, "unhedged"))
+    out["per currency 2018-2025 hedged (always)"] = {c: summ(v[v.expiry >= "2018-01-01"].set_index("expiry").hedged)
+                                                     for c, v in cycles_all.items()}
+    o = out["O1a sell when rich, hedged, 2018-2025 (count)"]
+    out["counts_own_rule"] = bool(o.get("n", 0) > 2 and o.get("mean_bp", -1) > 0 and (o.get("t") or 0) >= 1.645)
+    return out
 
 
 if __name__ == "__main__":
