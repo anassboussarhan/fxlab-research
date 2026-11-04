@@ -44,6 +44,8 @@ from the user).
 | Japanese government bond auctions (E25) | done: MoF history file (659 auctions); both windows negative on 2019-2025 |
 | FOMC in the expected direction (E26) | done: 18 decisions, -18.6 bp (t -1.4), information only |
 | Retail positioning (OANDA) | **user**: needs a free OANDA practice token as the `OANDA_TOKEN` secret |
+| Flow, volume, positioning batch V1-V10 (futures / ETF volume, CFTC TFF and disaggregated, SNB deposits, GDELT tone, 2y yield gaps, fed funds futures, MoF interventions) | done: nothing counts; futures volume and GLD holdings unusable from free sources; V6 US-euro gap is a watch-list lead (`docs/edges_batch_results.md`) |
+| Daily forward-only data (DTCC option trades, Saxo option vols / risk reversals, GDELT, GLD) | collecting every weekday (`flow-collect`); testable after about a year |
 | Platinum, palladium | skipped (no mechanism) |
 | Gold breakout short side | forward only (chosen after seeing it) |
 

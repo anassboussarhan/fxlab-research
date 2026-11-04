@@ -329,3 +329,42 @@ missing years.
 | E16 EM carry (MXN, ZAR, CNH; SGD has no rate data) | 32 months, +30 / 22 months, -11 | 48 months, -29 bp / 32 months, +18 bp (t 0.5) | nothing |
 
 The complete files do not change either verdict. TRY carry stays untestable: there are no USD/TRY bars.
+
+## Flow, volume and positioning batch V1-V10 (CI runs 41788919761 first, 41790248811 after addendum 2; branch `misc-flowvol`)
+
+Rules: `docs/flow_volume_preregistration.md` (including addendum 2). Data: the free flow store built by
+`ci/flow_collect.py` (CI runs 41744538312 to 41787558752). Entry 17:05 New York the business day after the signal
+(16:55 on Fridays), exit N business days later, full fills and swaps. Direction from the fit period; check
+2019-2025 (60/40 by events when the series starts after 2008). Counts if check net > 0, month-clustered t >= 1.645
+and BH q <= 0.10 over the 34 counted rows.
+
+**Result: nothing counts.** The best check rows (all with q around 0.5):
+
+| Test | Check n | Check net | t |
+|---|---|---|---|
+| V10a SLV ETF volume z >= 2, fade, 5 days | 18 | +192.5 bp | 2.01 |
+| V5 GDELT tone reversal (2 low vs 2 high tone), 1 week | 20 | +5.2 bp | 1.74 |
+| V6 US-euro 2y gap 5-day change, EUR/USD follow, 5 days | 243 | +12.0 bp | 1.43 |
+| V3c managed money (gold, silver) change, fade, 1 week | 82 | +47.7 bp | 1.37 |
+| V10a FXE ETF volume, follow, 5 days | 50 | +22.3 bp | 1.17 |
+
+Large-sample rows are negative or flat: V10b lowest-volume currency ETFs 1 day (1,738 days) -7.6 bp (t -7.8),
+V3a leveraged-fund positioning -2.2 bp (252 weeks), V3b asset managers +6.2 bp (t 0.7), V4 SNB deposits +5.8 bp
+(t 0.6), V6 US-Japan gap -5.3 / -0.2 bp. The one-day trades lose mainly to cost: the 17:05 New York entry is at the
+daily rollover, where spreads are widest (V10b fit gross +0.6 bp, net -4.8 bp).
+
+**Not counted, with reasons:**
+- V1a / V1b (futures volume): Yahoo's continuous futures volume is about 100 times smaller from 2017, so it is not
+  the real volume; reported information only. The CME daily volume pages refuse automated access.
+- V2 / V9 (GLD holdings): the SPDR archive address now returns a PDF chart; data missing.
+- V7 (fed funds future change >= 5 bp): 26 fit and 9 check events (rates near zero for years); too few for a t.
+- V8 (MoF interventions, information only): 361 intervention rows since 1991, 8 events in the fit and 6 in the
+  check after 2007; fading the intervention for 5 days averaged +20 bp, for 20 days -285 bp (2022 and 2024 worked
+  as intended over 20 days).
+- V5 has only 50 weeks in all; GDELT tone for EUR and GBP did not parse (the queries matched too generic words) and
+  the API refused about half the history requests.
+
+Lessons: the free flow sources add no tradeable daily or weekly FX signal after costs at this resolution. The
+only leads worth keeping on the forward watch list are V6 US-euro (large n, consistent sign in both periods: fit
++16.0 bp, check +12.0 bp net at 5 days) and V3c managed money in metals (sign flipped between fit and check, so
+weak). Neither is traded.
