@@ -460,6 +460,41 @@ def push_data():
     return out
 
 
+PUSH_URLS2 = {
+    "metals/bbk_gold_pm.csv": "https://api.statistiken.bundesbank.de/rest/data/BBEX3/D.XAU.USD.EA.AC.C05?format=csv&lang=en",
+    "metals/bbk_gold_am.csv": "https://api.statistiken.bundesbank.de/rest/data/BBEX3/D.XAU.USD.EA.AC.C04?format=csv&lang=en",
+    "metals/bbk_silver.csv": "https://api.statistiken.bundesbank.de/rest/data/BBEX3/D.XAG.USD.EA.AC.C06?format=csv&lang=en",
+    "metals/bbk_gold_pm_its.csv": ("https://www.bundesbank.de/statistic-rmi/StatisticDownload?tsId=BBEX3.D.XAU.USD.EA.AC.C05"
+                                   "&its_csvFormat=en&its_fileFormat=csv&mode=its&its_from=1968"),
+    "metals/bbk_silver_its.csv": ("https://www.bundesbank.de/statistic-rmi/StatisticDownload?tsId=BBEX3.D.XAG.USD.EA.AC.C06"
+                                  "&its_csvFormat=en&its_fileFormat=csv&mode=its&its_from=1968"),
+    "yields/dbnomics_rbnz_b2.json": "https://api.db.nomics.world/v22/series/RBNZ/B2?observations=1&limit=200",
+    "yields/dbnomics_rbnz_b2_daily.json": "https://api.db.nomics.world/v22/series/RBNZ/B2_DAILY?observations=1&limit=200",
+}
+
+
+@source
+def push_data2():
+    out = {}
+    for rel, u in PUSH_URLS2.items():
+        try:
+            r = get(u)
+            save(f"history/push/{rel}", r.content)
+            out[rel] = {"bytes": len(r.content), "type": r.headers.get("content-type", "")[:60], **head_of(r.content)}
+        except Exception as ex:                                              # noqa: BLE001
+            out[rel] = {"error": repr(ex)[:160]}
+        time.sleep(1)
+    # GLD: addresses of data files or APIs mentioned in the fund page saved by push_data
+    import re as _re
+    f = os.path.join(STORE, "history/push/etf/gld_usa_historical.html")
+    if os.path.exists(f):
+        t = open(f, encoding="utf-8", errors="ignore").read()
+        hits = sorted(set(_re.findall(r'https?://[^"\'\s<>]+', t)))
+        out["gld_page_links"] = [h for h in hits if _re.search(r"(?i)archive|histor|holding|tonne|\.csv|\.xls|/api/", h)][:60]
+        out["gld_page_words"] = {w: t.lower().count(w) for w in ("tonnes", "archive", "holdings", "csv", "xlsx")}
+    return out
+
+
 if __name__ == "__main__":
     fns = {"--history": (yahoo_futures, yahoo_etfs, gld_holdings, cftc, tic, yields, intervention, snb_sight_deposits,
                          fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
@@ -467,6 +502,7 @@ if __name__ == "__main__":
            "--history3": (cftc_2006_2009, treasury_and_cboe, gdelt_history),
            "--history4": (treasury_and_cboe,),
            "--history5": (push_data,),
+           "--history6": (push_data2,),
            "--daily": (dtcc_options, oanda_books, gld_daily, saxo_fx_options, gdelt_daily)}[MODE]
     for fn in fns:
         fn()

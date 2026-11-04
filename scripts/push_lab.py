@@ -297,10 +297,28 @@ def p1(a):
 
 
 # ------------------------------------------------------------------------------------------- P2
+def bbk(store, names):
+    """The London fixing as republished by the Bundesbank (BBEX3): any CSV with date, value rows."""
+    for nm in names:
+        for f in find(store, "push", "metals", nm):
+            rows = {}
+            for l in open(f, encoding="utf-8", errors="ignore"):
+                m = re.match(r'\s*"?(\d{4}-\d{2}-\d{2})"?\s*[,;]\s*"?([0-9]+(?:\.[0-9]+)?)"?', l)
+                if m:
+                    rows[pd.Timestamp(m.group(1))] = float(m.group(2))
+            if len(rows) > 5000:
+                LOG.setdefault("metal_source", {})[nm] = len(rows)
+                s = pd.Series(rows).sort_index()
+                return s[s > 0]
+    return None
+
+
 def lbma(store, name):
+    alt = {"lbma_gold_pm.json": ("bbk_gold_pm.csv", "bbk_gold_pm_its.csv"),
+           "lbma_silver.json": ("bbk_silver.csv", "bbk_silver_its.csv")}[name]
     f = find(store, "push", "metals", name)
     if not f:
-        return None
+        return bbk(store, alt)
     j = json.load(open(f[0]))
     s = pd.Series({pd.Timestamp(r["d"]): (r["v"][0] if isinstance(r["v"], list) else r["v"]) for r in j
                    if r.get("v") and (r["v"][0] if isinstance(r["v"], list) else r["v"])}, dtype=float)
