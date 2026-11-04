@@ -8,8 +8,9 @@ pre-registration before its data is read; 2026 stays untouched until a frozen ru
 
 | ID | Test | Status |
 |---|---|---|
-| P3 | Frozen Gotobi basket B0 on 2003-2006 (Dukascopy, before the project's data) | CI run 41804760751 |
-| P4 | Post-fix yen reversal (short 09:55 -> 10:20 Tokyo): five other yen crosses 2019-2025, and 2003-2006 | same run |
+| P3 | Frozen Gotobi basket B0 on 2003-2006 (Dukascopy, before the project's data) | first run partial (USD/JPY 2003-2005: +4.2 bp, t 1.3); full download running (`early-gotobi`) |
+| P4 | Post-fix yen reversal | done: fails on the other crosses and on 2003-2005 |
+| Q | Queue batch: VS1-VS5, T1, BS1, C5E, P1 with Australia (`docs/queue_preregistration.md`) | CI runs 41822593590, 41822610046 |
 | Forward test | B0 live-data nights from 2026-11-05, monthly report on the 3rd | scheduled |
 
 ## A. Using the volatility forecast in spot FX (the one strongly predictable part of price)
@@ -49,7 +50,8 @@ implied variance), so the natural way to sell a volatility forecast is an option
 USD/JPY H4 high-confidence model (mostly a 2022 / 2024 trend ride); FS1 66 settings; the 60/40 rebalancing
 calendar (Sharpe 0.6 after publication); euro COT speculative pressure (1 of 52); ECB pre-decision drift (19
 meetings); USD/JPY CPI surprise (11 releases); gold breakout short; skipping the 25th and month-end (FW2); the
-forward-v1 / v2 win models.
+forward-v1 / v2 win models; the post-fix USD/JPY / EUR/JPY reversal as a second Gotobi leg (short 09:55 -> 10:20
+Tokyo; +1.6 / +0.8 bp on 2019-2025, absent in the other crosses and in 2003-2005).
 
 ## E. Dropped (tested on unseen data and failed; kept here so they are not re-run)
 
