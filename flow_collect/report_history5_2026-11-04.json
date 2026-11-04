@@ -1,0 +1,113 @@
+{
+ "push_data": {
+  "ok": true,
+  "yields/boc_2y.json": {
+   "bytes": 833918,
+   "type": "application/json; charset=utf-8",
+   "head": "{\n    \"terms\": {\n        \"url\": \"https://www.bankofcanada.ca/terms/\"\n    },\n    \"seriesDetail\": {\n        \"BD.CDN.2YR.DQ.YLD\": {\n            \"label\": \"Benchmark bond yield, 2-year\",\n            \"description\": \"The yield on the Government of Canada 2-year benchmark bond. This series reflects the prevailing interest rate for the 2-year term and is used to monitor short-term government borrowing cost"
+  },
+  "yields/rba_f02dhist.xls": {
+   "bytes": 598016,
+   "type": "application/octet-stream",
+   "xls_ole": true
+  },
+  "yields/rba_f02d.xlsx": {
+   "bytes": 6339507,
+   "type": "application/octet-stream",
+   "zip": [
+    "[trash]/0000.dat",
+    "_rels/.rels",
+    "docProps/app.xml",
+    "docProps/core.xml",
+    "xl/sharedStrings.xml",
+    "xl/styles.xml",
+    "xl/workbook.xml",
+    "xl/_rels/workbook.xml.rels",
+    "xl/worksheets/sheet1.xml",
+    "xl/worksheets/sheet2.xml",
+    "xl/theme/theme1.xml",
+    "customXml/item1.xml",
+    "customXml/itemProps1.xml",
+    "customXml/item2.xml",
+    "customXml/itemProps2.xml",
+    "customXml/item3.xml",
+    "customXml/itemProps3.xml",
+    "customXml/_rels/item1.xml.rels",
+    "customXml/_rels/item2.xml.rels",
+    "customXml/_rels/item3.xml.rels"
+   ]
+  },
+  "yields/boe_glcnominalddata.zip": {
+   "bytes": 39275836,
+   "type": "application/x-zip-compressed",
+   "zip": [
+    "GLC Nominal daily data_1979 to 1984.xlsx",
+    "GLC Nominal daily data_1985 to 1989.xlsx",
+    "GLC Nominal daily data_1990 to 1994.xlsx",
+    "GLC Nominal daily data_1995 to 1999.xlsx",
+    "GLC Nominal daily data_2000 to 2004.xlsx",
+    "GLC Nominal daily data_2005 to 2015.xlsx",
+    "GLC Nominal daily data_2016 to 2024.xlsx",
+    "GLC Nominal daily data_2025 to present.xlsx"
+   ]
+  },
+  "yields/boe_latest.zip": {
+   "bytes": 191446,
+   "type": "application/x-zip-compressed",
+   "zip": [
+    "GLC Inflation daily data current month.xlsx",
+    "GLC Nominal daily data current month.xlsx",
+    "GLC Real daily data current month.xlsx",
+    "OIS daily data current month.xlsx"
+   ]
+  },
+  "yields/snb_rendoblid.csv": {
+   "bytes": 5461632,
+   "type": "text/csv;charset=UTF-8",
+   "head": "\ufeff\"CubeId\";\"rendoblid\"\r\n\"PublishingDate\";\"2025-09-01 14:29\"\r\n\r\n\"Date\";\"D0\";\"Value\"\r\n\"1988-01-01\";\"1J\";\r\n\"1988-01-01\";\"2J\";\r\n\"1988-01-01\";\"3J\";\r\n\"1988-01-01\";\"4J\";\r\n\"1988-01-01\";\"5J\";\r\n\"1988-01-01\";\"6J\";\r\n\"1988-01-01\";\"7J\";\r\n\"1988-01-01\";\"8J\";\r\n\"1988-01-01\";\"9J\";\r\n\"1988-01-01\";\"10J0\";\r\n\"1988-01-01\";\"15J\";\r\n\"1988-01-01\";\"20J\";\r\n\"1988-01-01\";\"30J\";\r\n\"1988-01-01\";\"10J1\";\r\n\"1988-01-01\";\"E\";\r\n\"1988-01-"
+  },
+  "yields/snb_rendoblim.csv": {
+   "bytes": 142138,
+   "type": "text/csv;charset=UTF-8",
+   "head": "\ufeff\"CubeId\";\"rendoblim\"\r\n\"PublishingDate\";\"2025-09-01 14:29\"\r\n\r\n\"Date\";\"D0\";\"Value\"\r\n\"1988-01\";\"1J\";\"2.887\"\r\n\"1988-01\";\"2J\";\"3.218\"\r\n\"1988-01\";\"3J\";\"3.393\"\r\n\"1988-01\";\"4J\";\"3.554\"\r\n\"1988-01\";\"5J\";\"3.695\"\r\n\"1988-01\";\"6J\";\"3.81\"\r\n\"1988-01\";\"7J\";\"3.904\"\r\n\"1988-01\";\"8J\";\"3.98\"\r\n\"1988-01\";\"9J\";\"4.041\"\r\n\"1988-01\";\"10J\";\"4.092\"\r\n\"1988-01\";\"15J\";\"4.247\"\r\n\"1988-01\";\"20J\";\"4.326\"\r\n\"1988-01\";\"30J\";\r\n\"1988-02"
+  },
+  "yields/rbnz_hb2-daily.xlsx": {
+   "error": "RuntimeError('https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-daily.xlsx: HTTP 403')"
+  },
+  "yields/rbnz_hb2-daily-1990-2014.xlsx": {
+   "error": "RuntimeError('https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-daily-1990-2014.xlsx: HTTP 403')"
+  },
+  "yields/dbnomics_rba_f2.json": {
+   "bytes": 546963,
+   "type": "application/json",
+   "head": "{\"_meta\":{\"args\":{\"align_periods\":false,\"dataset_code\":\"F2\",\"dimensions\":{},\"facets\":false,\"format\":\"json\",\"limit\":100,\"metadata\":true,\"observations\":true,\"offset\":0,\"provider_code\":\"RBA\",\"q\":\"\",\"series_code\":null},\"version\":\"22.1.17\"},\"dataset\":{\"code\":\"F2\",\"dimensions_codes_order\":[\"FREQ\",\"units\"],\"dimensions_labels\":{\"FREQ\":\"Frequency\",\"units\":\"Units\"},\"dimensions_values_labels\":{\"FREQ\":{\"A\":\"A"
+  },
+  "metals/lbma_gold_pm.json": {
+   "error": "RuntimeError('https://prices.lbma.org.uk/json/gold_pm.json: HTTP 403')"
+  },
+  "metals/lbma_silver.json": {
+   "error": "RuntimeError('https://prices.lbma.org.uk/json/silver.json: HTTP 403')"
+  },
+  "rates/ff_factors.zip": {
+   "bytes": 13078,
+   "type": "application/x-zip-compressed",
+   "zip": [
+    "F-F_Research_Data_Factors.csv"
+   ]
+  },
+  "etf/gld_archive.xlsx": {
+   "error": "RuntimeError('https://www.spdrgoldshares.com/assets/dynamic/GLD/GLD_US_archive_EN.xlsx: HTTP 404')"
+  },
+  "etf/gld_archive_alt.csv": {
+   "bytes": 697565,
+   "type": "application/pdf",
+   "pdf": true
+  },
+  "etf/gld_usa_historical.html": {
+   "bytes": 1321653,
+   "type": "text/html; charset=utf-8",
+   "head": "<!DOCTYPE html><html lang=\"en\"><head><meta charSet=\"utf-8\" data-next-head=\"\"/><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\" data-next-head=\"\"/><link rel=\"canonical\" href=\"https://www.spdrgoldshares.com/usa/gld/\" data-next-head=\"\"/><title data-next-head=\"\">SPDR\u00ae Gold Shares (Ticker: GLD, New York Stock Exchange) | Charts, data and downloads | World Gold Trust Services</title>"
+  },
+  "seconds": 156.7
+ }
+}

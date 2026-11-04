@@ -15,25 +15,25 @@
  "gld_daily": {
   "ok": true,
   "bytes": 697565,
-  "seconds": 0.4
+  "seconds": 0.1
  },
  "saxo_fx_options": {
   "ok": true,
-  "bytes": 19222,
-  "seconds": 0.5
+  "bytes": 19219,
+  "seconds": 0.4
  },
  "gdelt_daily": {
   "ok": true,
-  "JPY": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "JPY": 3,
   "EUR": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
-  "USD": 21,
+  "USD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
   "GBP": 56,
   "CHF": 3,
   "AUD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
-  "CAD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "CAD": 21,
   "NZD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
   "GOLD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
   "SILVER": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
-  "seconds": 649.4
+  "seconds": 666.7
  }
 }
