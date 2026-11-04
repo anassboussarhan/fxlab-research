@@ -225,9 +225,11 @@ def treasury_and_cboe():
     out = {}
     for y in range(2000, TODAY.year + 1):
         u = ("https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/"
-             f"all/{y}?type=daily_treasury_yield_curve&field_tdr_date_value={y}&page&_format=csv")
+             f"{y}/all?type=daily_treasury_yield_curve&field_tdr_date_value={y}&page&_format=csv")
         try:
             r = get(u)
+            if len(r.content) < 200:
+                raise RuntimeError(f"empty ({len(r.content)} bytes)")
             save(f"history/yields/ust_curve_{y}.csv", r.content)
             out[y] = len(r.content)
         except Exception as ex:                                              # noqa: BLE001
