@@ -1,0 +1,23 @@
+{
+ "foreign_2y": {
+  "CA": [
+   "2001-01-02",
+   "2026-11-02",
+   6459
+  ],
+  "UK": [
+   "2005-01-04",
+   "2026-11-02",
+   5517
+  ],
+  "CH": [
+   "1988-01-04",
+   "2025-07-31",
+   7534
+  ]
+ },
+ "foreign_2y_errors": {
+  "AU": "StopIteration()",
+  "NZ": "ValueError('No objects to concatenate')"
+ }
+}
