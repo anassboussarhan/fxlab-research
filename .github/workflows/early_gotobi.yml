@@ -1,0 +1,88 @@
+name: early-gotobi
+# P3 / P4b of docs/push_preregistration.md: Dukascopy ticks for USD/JPY and EUR/JPY, May 2003 - December 2006, only
+# the hours the trades need (14:00-23:59 UTC on the evening before each Gotobi / control day, 00:00-01:59 UTC on the
+# day), one job per pair and year; then the lab. The data stays in artifacts (not redistributable).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/EARLY_GOTOBI"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix:
+        pair: [USDJPY, EURJPY]
+        year: [2003, 2004, 2005, 2006]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow holidays
+      - name: ${{ matrix.pair }} ${{ matrix.year }}
+        env:
+          PYTHONUNBUFFERED: "1"
+        run: |
+          Y=${{ matrix.year }}
+          python - <<EOF
+          import sys; sys.path.insert(0, "scripts")
+          import pandas as pd, push_lab as P
+          G, C = P.early_dates()
+          days = sorted(d for d in set(G) | set(C) if d.year == $Y)
+          open("day.txt", "w").write("\n".join(str(d.date()) for d in days) + "\n")
+          open("prev.txt", "w").write("\n".join(str((d - pd.Timedelta(days=1)).date()) for d in days) + "\n")
+          EOF
+          wc -l prev.txt day.txt
+          S=$((Y-1))-12-25T00:00:00; E=$((Y+1))-01-02T00:00:00
+          python -m fxlab.data.acquire_dukascopy --pairs ${{ matrix.pair }} --start $S --end $E --hours 0-1 --dates-file day.txt --suffix _ed$Y --workers 4 --deadline-min 120 || true
+          python -m fxlab.data.acquire_dukascopy --pairs ${{ matrix.pair }} --start $S --end $E --hours 14-23 --dates-file prev.txt --suffix _ep$Y --workers 4 --deadline-min 190 || true
+          mkdir -p part && cp data/m1/${{ matrix.pair }}/*.parquet part/ || true
+          ls -la part
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: early-${{ matrix.pair }}-${{ matrix.year }}
+          path: part
+          retention-days: 30
+          if-no-files-found: warn
+  lab:
+    needs: download
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: early-*
+          path: dl
+      - name: P3 / P4b
+        run: |
+          for P in USDJPY EURJPY; do mkdir -p data/m1_early/$P; cp dl/early-$P-*/*.parquet data/m1_early/$P/ 2>/dev/null || true; echo "$P: $(ls data/m1_early/$P | tr '\n' ' ')"; done
+          python -W ignore scripts/push_lab.py --p34 --early data/m1_early --out out/early 2>&1 | tee out_log.txt || true
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p out/early && cp out_log.txt out/early/ || true
+          cp -r out /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan early-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          cp -r /tmp/pub/* .
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > RUN.txt
+          git add -f early RUN.txt
+          git commit -qm "early gotobi (run ${{ github.run_id }})"
+          git push -f origin HEAD:early-gotobi

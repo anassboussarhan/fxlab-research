@@ -111,6 +111,17 @@ def postfix(bk, days):
     return pd.Series(out, dtype=float)
 
 
+def early_dates(y0="2003-05-01", y1="2006-12-31"):
+    """Gotobi days (not Mondays: the 14:00 UTC Sunday entry has no quotes) and the controls (every third other
+    Tuesday-Friday business day) of the early period; used by the download job and by P3 alike."""
+    import flows_lab as FL
+    hol = FL.jp_holidays(range(2002, 2008))
+    G = [d for d in FL.gotobi_days(y0, y1, hol) if d.weekday() != 0]
+    Gs = set(G)
+    C = [d for d in pd.bdate_range(y0, y1) if d not in Gs and d not in hol and d.weekday() != 0][::3]
+    return G, C
+
+
 def p34(a):
     import flow_edges_lab as F
     res = {"P3": {}, "P4b": {}, "P4a": {}, "reference_2019_2025": {}}
@@ -120,9 +131,7 @@ def p34(a):
         if bk is None:
             res["P3"][pair] = {"status": "data missing"}
             continue
-        G, C, _ = F.calendar(bk)
-        G = [d for d in G if pd.Timestamp(d) < pd.Timestamp("2007-01-01")]
-        C = [d for d in C if pd.Timestamp(d) < pd.Timestamp("2007-01-01")]
+        G, C = early_dates()
         nights[pair], ctrl[pair] = b0_nights(bk, G), b0_nights(bk, C)
         pf[pair] = postfix(bk, G)
         res["P3"][pair] = {"gotobi_fill": summary(nights[pair]["fill"], False) if len(nights[pair]) else {"n": 0},
