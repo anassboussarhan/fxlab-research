@@ -410,12 +410,63 @@ def gdelt_daily():
     return gdelt_tone(s, e, "daily")
 
 
+PUSH_URLS = {
+    # P1 foreign 2-year yields
+    "yields/boc_2y.json": "https://www.bankofcanada.ca/valet/observations/BD.CDN.2YR.DQ.YLD/json?start_date=2000-01-01",
+    "yields/rba_f02dhist.xls": "https://www.rba.gov.au/statistics/tables/xls-hist/f02dhist.xls",
+    "yields/rba_f02d.xlsx": "https://www.rba.gov.au/statistics/tables/xls/f02d.xlsx",
+    "yields/boe_glcnominalddata.zip": "https://www.bankofengland.co.uk/-/media/boe/files/statistics/yield-curves/glcnominalddata.zip",
+    "yields/boe_latest.zip": "https://www.bankofengland.co.uk/-/media/boe/files/statistics/yield-curves/latest-yield-curve-data.zip",
+    "yields/snb_rendoblid.csv": "https://data.snb.ch/api/cube/rendoblid/data/csv/en",
+    "yields/snb_rendoblim.csv": "https://data.snb.ch/api/cube/rendoblim/data/csv/en",
+    "yields/rbnz_hb2-daily.xlsx": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-daily.xlsx",
+    "yields/rbnz_hb2-daily-1990-2014.xlsx": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-daily-1990-2014.xlsx",
+    "yields/dbnomics_rba_f2.json": "https://api.db.nomics.world/v22/series/RBA/F2?observations=1&limit=100",
+    # P2 metals and the risk-free rate
+    "metals/lbma_gold_pm.json": "https://prices.lbma.org.uk/json/gold_pm.json",
+    "metals/lbma_silver.json": "https://prices.lbma.org.uk/json/silver.json",
+    "rates/ff_factors.zip": "https://mba.tuck.dartmouth.edu/pages/faculty/ken.french/ftp/F-F_Research_Data_Factors_CSV.zip",
+    # P5 GLD holdings, other addresses
+    "etf/gld_archive.xlsx": "https://www.spdrgoldshares.com/assets/dynamic/GLD/GLD_US_archive_EN.xlsx",
+    "etf/gld_archive_alt.csv": "https://www.spdrgoldshares.com/assets/dynamic/GLD/GLD_US_archive_EN.csv?download=1",
+    "etf/gld_usa_historical.html": "https://www.spdrgoldshares.com/usa/historical-data/",
+}
+
+
+def head_of(b):
+    if b[:2] == b"PK":
+        try:
+            return {"zip": zipfile.ZipFile(io.BytesIO(b)).namelist()[:20]}
+        except Exception as ex:                                              # noqa: BLE001
+            return {"zip_error": repr(ex)[:80]}
+    if b[:4] == b"%PDF":
+        return {"pdf": True}
+    if b[:8] == b"\xd0\xcf\x11\xe0\xa1\xb1\x1a\xe1":
+        return {"xls_ole": True}
+    return {"head": b[:400].decode("utf-8", "replace")}
+
+
+@source
+def push_data():
+    out = {}
+    for rel, u in PUSH_URLS.items():
+        try:
+            r = get(u)
+            save(f"history/push/{rel}", r.content)
+            out[rel] = {"bytes": len(r.content), "type": r.headers.get("content-type", "")[:60], **head_of(r.content)}
+        except Exception as ex:                                              # noqa: BLE001
+            out[rel] = {"error": repr(ex)[:160]}
+        time.sleep(1)
+    return out
+
+
 if __name__ == "__main__":
     fns = {"--history": (yahoo_futures, yahoo_etfs, gld_holdings, cftc, tic, yields, intervention, snb_sight_deposits,
                          fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
            "--history2": (snb_sight_deposits, fed_odds_and_vol, dairy_and_cls_probe, gdelt_history),
            "--history3": (cftc_2006_2009, treasury_and_cboe, gdelt_history),
            "--history4": (treasury_and_cboe,),
+           "--history5": (push_data,),
            "--daily": (dtcc_options, oanda_books, gld_daily, saxo_fx_options, gdelt_daily)}[MODE]
     for fn in fns:
         fn()
