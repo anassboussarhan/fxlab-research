@@ -1,0 +1,294 @@
+flow store from run 41787558752
+EURUSD 2025 1 parts 326590 minutes
+0 manifest records; 0 not ok
+EURUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+GBPUSD 2025 1 parts 344230 minutes
+0 manifest records; 0 not ok
+GBPUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDJPY 2025 1 parts 366567 minutes
+0 manifest records; 0 not ok
+USDJPY years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDCHF 2025 1 parts 342552 minutes
+0 manifest records; 0 not ok
+USDCHF years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDCAD 2025 1 parts 333038 minutes
+0 manifest records; 0 not ok
+USDCAD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+AUDUSD 2025 1 parts 231697 minutes
+0 manifest records; 0 not ok
+AUDUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+NZDUSD 2025 1 parts 334637 minutes
+0 manifest records; 0 not ok
+NZDUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDMXN 2022 1 parts 46668 minutes
+0 manifest records; 0 not ok
+USDMXN years: 2007 2008 2009 2010 2011 2012 2013 2014 2016 2017 2018 2019 2020 2021 2022 
+XAUUSD 2025 1 parts 332486 minutes
+0 manifest records; 0 not ok
+XAUUSD years: 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+XAGUSD 2025 1 parts 335626 minutes
+0 manifest records; 0 not ok
+XAGUSD years: 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+EURCHF 2025 1 parts 323453 minutes
+0 manifest records; 0 not ok
+EURCHF years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+v1 done 21
+v10 done 38
+v3 done 41
+v4 done 42
+v5 done 43
+v6 done 47
+v7 done 49
+v8 done 51
+trades to price: 59882
+priced AUDUSD 7746
+priced EURCHF 410
+priced EURUSD 9372
+priced GBPUSD 7964
+priced NZDUSD 5048
+priced USDCAD 7626
+priced USDCHF 8536
+priced USDJPY 9402
+priced XAGUSD 1936
+priced XAUUSD 1842
+v1 done 21
+v10 done 38
+v3 done 41
+v4 done 42
+v5 done 43
+v6 done 47
+v7 done 49
+v8 done 51
+                                                                                             test   fit_n direction  check_n  check_net_bp  check_t   bh_q  counts                    status
+0                                                                 V1a EUR volume z >= 2, 1 day(s)    41.0      fade      2.0        36.065      NaN    NaN   False                       NaN
+1                                                                 V1a EUR volume z >= 2, 5 day(s)    41.0    follow      4.0       -44.123      NaN    NaN   False                       NaN
+2                                                                 V1a JPY volume z >= 2, 1 day(s)    70.0      fade      0.0           NaN      NaN    NaN   False                       NaN
+3                                                                 V1a JPY volume z >= 2, 5 day(s)    70.0      fade      0.0           NaN      NaN    NaN   False                       NaN
+4                                                                 V1a GBP volume z >= 2, 1 day(s)    48.0    follow      0.0           NaN      NaN    NaN   False                       NaN
+5                                                                 V1a GBP volume z >= 2, 5 day(s)    48.0    follow      0.0           NaN      NaN    NaN   False                       NaN
+6                                                                 V1a AUD volume z >= 2, 1 day(s)    34.0    follow      0.0           NaN      NaN    NaN   False                       NaN
+7                                                                 V1a AUD volume z >= 2, 5 day(s)    37.0      fade      0.0           NaN      NaN    NaN   False                       NaN
+8                                                                 V1a NZD volume z >= 2, 1 day(s)    85.0      fade     40.0       -14.301   -2.016    NaN   False                       NaN
+9                                                                 V1a NZD volume z >= 2, 5 day(s)    85.0    follow     39.0       -13.393   -0.281    NaN   False                       NaN
+10                                                                V1a CAD volume z >= 2, 1 day(s)    10.0      fade      0.0           NaN      NaN    NaN   False                       NaN
+11                                                                V1a CAD volume z >= 2, 5 day(s)    10.0    follow      0.0           NaN      NaN    NaN   False                       NaN
+12                                                                V1a CHF volume z >= 2, 1 day(s)    59.0      fade     63.0        -8.145   -1.087    NaN   False                       NaN
+13                                                                V1a CHF volume z >= 2, 5 day(s)    58.0    follow     63.0        19.021    0.859    NaN   False                       NaN
+14                                                                V1a MXN volume z >= 2, 1 day(s)     NaN       NaN      NaN           NaN      NaN    NaN   False  no events / data missing
+15                                                                V1a MXN volume z >= 2, 5 day(s)     NaN       NaN      NaN           NaN      NaN    NaN   False  no events / data missing
+16                                                               V1a GOLD volume z >= 2, 1 day(s)     6.0    follow      4.0        25.098      NaN    NaN   False                       NaN
+17                                                               V1a GOLD volume z >= 2, 5 day(s)    19.0      fade     13.0       103.106    1.147    NaN   False                       NaN
+18                                                             V1a SILVER volume z >= 2, 1 day(s)     1.0      fade      1.0       773.155      NaN    NaN   False                       NaN
+19                                                             V1a SILVER volume z >= 2, 5 day(s)    18.0      fade     12.0       -91.357   -0.726    NaN   False                       NaN
+20                               V1b low-volume reversal, 3 lowest-volume currency futures, 1 day  2865.0    follow   1740.0        -8.888   -8.742    NaN   False                       NaN
+21                                                           V10a FXE ETF volume z >= 2, 1 day(s)   115.0      fade     52.0        -5.037   -1.051  1.000   False                       NaN
+22                                                           V10a FXE ETF volume z >= 2, 5 day(s)   114.0    follow     50.0        22.313    1.174  0.571   False                       NaN
+23                                                           V10a FXY ETF volume z >= 2, 1 day(s)    90.0      fade     77.0        -3.920   -0.578  1.000   False                       NaN
+24                                                           V10a FXY ETF volume z >= 2, 5 day(s)    89.0      fade     78.0        -7.506   -0.417  1.000   False                       NaN
+25                                                           V10a FXB ETF volume z >= 2, 1 day(s)   109.0      fade     45.0        -0.316   -0.046  1.000   False                       NaN
+26                                                           V10a FXB ETF volume z >= 2, 5 day(s)   109.0      fade     47.0        13.833    0.485  0.837   False                       NaN
+27                                                           V10a FXA ETF volume z >= 2, 1 day(s)    91.0    follow     53.0       -22.029   -1.695  1.000   False                       NaN
+28                                                           V10a FXA ETF volume z >= 2, 5 day(s)    97.0    follow     46.0       -45.940   -1.039  1.000   False                       NaN
+29                                                           V10a FXC ETF volume z >= 2, 1 day(s)   118.0    follow     58.0       -22.201   -3.236  1.000   False                       NaN
+30                                                           V10a FXC ETF volume z >= 2, 5 day(s)   114.0    follow     58.0       -50.860   -3.761  1.000   False                       NaN
+31                                                           V10a FXF ETF volume z >= 2, 1 day(s)   108.0      fade     63.0       -15.548   -2.182  1.000   False                       NaN
+32                                                           V10a FXF ETF volume z >= 2, 5 day(s)   108.0      fade     67.0       -24.235   -2.103  1.000   False                       NaN
+33                                                           V10a GLD ETF volume z >= 2, 1 day(s)     5.0      fade      4.0       161.368      NaN    NaN   False                       NaN
+34                                                           V10a GLD ETF volume z >= 2, 5 day(s)    18.0      fade     13.0         4.854    0.042  1.000   False                       NaN
+35                                                           V10a SLV ETF volume z >= 2, 1 day(s)     5.0    follow      4.0      -203.927      NaN    NaN   False                       NaN
+36                                                           V10a SLV ETF volume z >= 2, 5 day(s)    25.0      fade     18.0       192.542    2.008  0.487   False                       NaN
+37                                                      V10b 3 lowest-volume currency ETFs, 1 day  2873.0    follow   1738.0        -7.615   -7.754  1.000   False                       NaN
+38  V3a leveraged funds: weekly net-position change abs(z) >= 1.5, next week, 7 currencies pooled   498.0    follow    252.0        -2.186   -0.332  1.000   False                       NaN
+39   V3b asset managers: weekly net-position change abs(z) >= 1.5, next week, 7 currencies pooled   544.0      fade    304.0         6.174    0.716  0.812   False                       NaN
+40                       V3c managed money (gold, silver): weekly change abs(z) >= 1.5, next week   121.0      fade     82.0        47.678    1.366  0.516   False                       NaN
+41                V4 SNB sight deposits weekly change > fit 80th pct, EUR/CHF + USD/CHF next week   117.0    follow     79.0         5.811    0.590  0.832   False                       NaN
+42  V5 GDELT tone reversal: long 2 lowest-tone, short 2 highest-tone currencies vs USD, next week    30.0    follow     20.0         5.232    1.744  0.487   False                       NaN
+43                                   V6 US-JP 2y gap, 5-day change abs(z) >= 1.5, USDJPY 1 day(s)   306.0    follow    258.0        -5.262   -1.170  1.000   False                       NaN
+44                                   V6 US-JP 2y gap, 5-day change abs(z) >= 1.5, USDJPY 5 day(s)   312.0    follow    258.0        -0.217   -0.014  1.000   False                       NaN
+45                                   V6 US-EU 2y gap, 5-day change abs(z) >= 1.5, EURUSD 1 day(s)   409.0    follow    242.0         3.279    1.068  0.571   False                       NaN
+46                                   V6 US-EU 2y gap, 5-day change abs(z) >= 1.5, EURUSD 5 day(s)   408.0    follow    243.0        11.976    1.431  0.516   False                       NaN
+47                      V7 fed funds front implied rate change >= 5 bp, USD vs 4 majors, 1 day(s)    26.0      fade      9.0        38.840      NaN    NaN   False                       NaN
+48                      V7 fed funds front implied rate change >= 5 bp, USD vs 4 majors, 5 day(s)    26.0      fade      9.0       129.175      NaN    NaN   False                       NaN
+49                  V8 MoF intervention days, USD/JPY next 5 days in the intervention's direction     8.0      fade      6.0        19.970      NaN    NaN   False                       NaN
+50                 V8 MoF intervention days, USD/JPY next 20 days in the intervention's direction     8.0      fade      6.0      -284.684      NaN    NaN   False                       NaN
+51                                                                         V2 GLD holdings change     NaN       NaN      NaN           NaN      NaN    NaN   False  no events / data missing
+52                                                                  V9 GLD flow and managed money     NaN       NaN      NaN           NaN      NaN    NaN   False  no events / data missing
+{
+ "futures": {
+  "EUR": [
+   "2000-09-12",
+   "2026-11-03",
+   6599
+  ],
+  "JPY": [
+   "2000-09-13",
+   "2026-11-03",
+   6522
+  ],
+  "GBP": [
+   "2000-10-05",
+   "2026-11-03",
+   6513
+  ],
+  "AUD": [
+   "2000-11-08",
+   "2026-11-03",
+   6502
+  ],
+  "NZD": [
+   "2000-06-09",
+   "2026-11-03",
+   6491
+  ],
+  "CAD": [
+   "2000-05-23",
+   "2026-11-03",
+   6619
+  ],
+  "CHF": [
+   "2000-11-10",
+   "2026-11-03",
+   6507
+  ],
+  "MXN": [
+   "2001-06-18",
+   "2026-11-03",
+   6359
+  ],
+  "GOLD": [
+   "2000-08-30",
+   "2026-11-03",
+   6570
+  ],
+  "SILVER": [
+   "2000-08-30",
+   "2026-11-03",
+   6571
+  ]
+ },
+ "etf": {
+  "FXE": [
+   "2005-12-12",
+   "2026-11-03",
+   5256
+  ],
+  "FXY": [
+   "2007-02-13",
+   "2026-11-03",
+   4963
+  ],
+  "FXB": [
+   "2006-06-26",
+   "2026-11-03",
+   5122
+  ],
+  "FXA": [
+   "2006-06-26",
+   "2026-11-03",
+   5122
+  ],
+  "FXC": [
+   "2006-06-26",
+   "2026-11-03",
+   5122
+  ],
+  "FXF": [
+   "2006-06-26",
+   "2026-11-03",
+   5122
+  ],
+  "GLD": [
+   "2004-11-18",
+   "2026-11-03",
+   5524
+  ],
+  "SLV": [
+   "2006-04-28",
+   "2026-11-03",
+   5162
+  ]
+ },
+ "tff_years": [
+  2006,
+  2007,
+  2008,
+  2009,
+  2010,
+  2011,
+  2012,
+  2013,
+  2014,
+  2015,
+  2016,
+  2017,
+  2018,
+  2019,
+  2020,
+  2021,
+  2022,
+  2023,
+  2024,
+  2025,
+  2026
+ ],
+ "snb": [
+  "2009-01-09",
+  "2026-10-30",
+  930
+ ],
+ "gdelt": {
+  "EUR": [
+   "NaT",
+   "NaT",
+   0
+  ],
+  "JPY": [
+   "2017-01-01",
+   "2026-11-03",
+   3199
+  ],
+  "GBP": [
+   "NaT",
+   "NaT",
+   0
+  ],
+  "CHF": [
+   "2018-01-01",
+   "2026-11-03",
+   3184
+  ],
+  "AUD": [
+   "2017-01-01",
+   "2025-12-31",
+   2536
+  ],
+  "CAD": [
+   "2017-01-01",
+   "2026-11-03",
+   2451
+  ],
+  "NZD": [
+   "2018-01-01",
+   "2025-12-31",
+   1808
+  ]
+ },
+ "yields": {
+  "US": [
+   "2000-01-03",
+   "2026-11-03",
+   6713
+  ],
+  "JP": [
+   "1974-09-24",
+   "2026-11-02",
+   12970
+  ],
+  "EU": [
+   "2004-09-06",
+   "2026-11-02",
+   5665
+  ]
+ },
+ "intervention_rows": 361
+}
