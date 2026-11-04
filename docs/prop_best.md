@@ -263,7 +263,8 @@ limit / 1.2% where the daily reference is the end-of-day equity inside the trade
 out; instant-funding programmes look fastest in the raw scan (first payout within days) but the ones checked are
 unusable for this trade: FundingPips Zero caps the total floating loss at 1% and forbids holding through high-impact
 news (the basket is open 14:00 -> 00:53 UTC, through US and Japanese releases); Lark and Funded Trading Plus instant
-accounts cost $4,500 for 100k and return less than their fee.
+accounts cost $4,500 for 100k (Lark's price confirmed on three review sites; Lark re-run on its own rules below:
+positive on average, but the fee is about a year of the trade's 2026 profit).
 
 **Verified on the firm's terms and re-simulated (6,000 attempts, `docs/prop_best/prop_focus_lark_ftmo.csv`):**
 Lark Funding 1-Stage: 10% target, 5% daily loss from the **balance** at 5 PM New York, 6% static max loss, no
@@ -300,3 +301,44 @@ within 5-10 minutes of red-folder news.
   floating cap, gives +$542 at the 2026 edge.
 - Instant accounts are built for many small daily profits; a trade that earns on 5 nights a month cannot meet their
   payout conditions quickly. They are slower and less profitable here than Lark's 1-Stage evaluation.
+
+### Lark Funding Instant, on its published rules (2026-11-04)
+
+Checked on thetrustedprop.com, thegodfunded.com (rules and the 2026-03-02 drawdown change), propfirmmap.com (data of
+2026-05-18) and luxalgo.com; Lark's own help centre could not be opened from here. Rules: **no profit target, no
+minimum days, no consistency rule**, first payout on demand then every 30 days, $100 minimum, 90% split (older
+pages 80%), $40 payout fee (Rise, waivable), daily loss 5% of the initial balance reset at 5 PM New York, **max loss
+8% trailing the highest closed balance, locking at the initial balance once 8% up "or after the first payout"**,
+stop loss required, weekends need an add-on (the basket never holds one: its exits are Tuesday-Friday 00:53 UTC),
+news allowed, leverage 1:15 or more. Price: $5k $200, $10k $400, $25k $1,125, $50k $2,250 (one site $2,750),
+$100k $4,500. The pages do not say what the floor does after a payout, so three readings were run:
+**strict** (after the first payout the floor is the starting balance: the only cushion is the profit left in),
+**gentle** (the floor freezes where it was), and **reset** (a fresh 8% trail after each payout: the earlier
+directory scan's assumption, the most generous). Code `scripts/lark_instant.py`; one funded year (250 business
+days) from a random start in the real 2019-2025 nights; the payout policy (take the first payout at +T, then every
+21 business days withdraw everything above K) chosen on the development edge only; results
+`docs/prop_best/lark_instant.csv`.
+
+| Lark Instant 100k ($4,500), 4x, one funded year | Paid at least once: 2026 / dev | Mean net: 2026 / dev | Median net (2026) | Chance net > 0 (2026) | Median business days to 1st payout | Mean cash in first 3 months (2026) |
+|---|---|---|---|---|---|---|
+| gentle (first payout at +0.5%, then withdraw all) | 87% / 98% | **+$2,025 / +$5,603** | -$871 | 46% | 9 | $2,369 |
+| strict (first payout at +10%, keep 4%) | 42% / 53% | +$66 / +$2,638 | -$4,500 | 42% | 110 | $334 |
+| reset (information) | 71% / 94% | +$2,588 / +$6,535 | -$150 | 50% | 26 | $2,406 |
+| *Lark 1-Stage, 5x ($500), one funded year after passing* | *46% / 73%* | *+$6,156 / +$11,118* | | | *141* | |
+
+- **The trade fits Lark Instant's rules** (the earlier "instant does not work" came from other firms' 1% floating
+  caps, consistency rules and profitable-day counts, which Lark does not have). It is the fastest cash of any
+  option found: under the gentle reading the first payout comes after about 9 business days.
+- **It is not the better use of money.** The fee is 4.5% of the account; at 4x the trade earns about 4.9% a year at
+  the 2026 edge (2.04 bp x 60 nights x 4), so a year roughly buys the fee back: mean +$2,025 (gentle) or about
+  zero (strict) on $4,500 at risk, and in more than half of the attempts the fee is not fully recovered. The
+  1-Stage puts $500 at risk for a higher mean (+$6,156) with one funded year after passing.
+- Kept longer, the instant account pays more (2026 edge, gentle reading: mean +$5,728 and median +$2,728 over two
+  years; +$7,353 / +$3,070 over three), but most accounts are breached by then (alive after three years: 8%).
+- 5x (if the daily limit is from the previous day's closed balance, as one page says): gentle +$2,914, strict
+  +$970 at the 2026 edge. Smaller accounts are worse per dollar ($40 payout fee, $100 minimum): $25k gentle
+  +$394 at the 2026 edge. Below 2x (Lark's "ideally 1.5% risk per trade" guideline; 4x with the 80 bp stop risks
+  3.2%) the instant account loses money at the 2026 edge in every reading.
+- What decides it, to ask Lark before buying: "On an Instant account, where is the max-loss floor after the first
+  payout: the starting balance, or does it stay 8% below the highest closed balance?" Under the strict answer the
+  instant account is break-even at the 2026 edge.
