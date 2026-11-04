@@ -38,6 +38,9 @@ def main():
         json.dump({"error": "no DATABENTO_API_KEY secret"}, open(os.path.join(out, "cost.json"), "w"))
         return
     print("key format:", "starts with db-" if key.startswith("db-") else "does NOT start with db-", "| length", len(key))
+    if key and not key.startswith("db-"):
+        key = "db-" + key                                                # the prefix is often left out when pasting
+        print("prefix db- added")
     c = db.Historical(key)
     rep = {"dataset_range": None, "items": {}}
     try:
