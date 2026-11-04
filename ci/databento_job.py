@@ -137,13 +137,17 @@ def batch(c, items, rep, out):
                         cols = [x for x in ("ts_event", "ts_ref", "instrument_id", "stat_type", "price", "quantity")
                                 if x in df.columns]
                         parts.append(df.loc[keep, cols])
+                    elif r["schema"].startswith("ohlcv"):
+                        cols = [x for x in ("ts_event", "instrument_id", "open", "high", "low", "close", "volume",
+                                            "symbol") if x in df.columns]
+                        parts.append(df[cols])
                     else:
                         cols = [x for x in ("ts_recv", "instrument_id", "raw_symbol", "expiration", "strike_price",
                                             "instrument_class", "underlying", "asset", "group") if x in df.columns]
                         parts.append(df[cols].drop_duplicates("instrument_id", keep="last"))
             if parts:
                 T = pd.concat(parts, ignore_index=True)
-                if r["schema"] != "statistics":
+                if r["schema"] == "definition":
                     T = T.drop_duplicates("instrument_id", keep="last")
                 T["stat_type"] = T["stat_type"].astype(str) if "stat_type" in T else None
                 path = os.path.join(comp, f"{item}_{s.replace('.', '_')}.parquet")
