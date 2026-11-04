@@ -389,3 +389,22 @@ Chinese New Year has no free daily source before 2000.
 
 **What it means:** the US-euro yield-gap lead does not carry over to other dollar pairs, and the gold Chinese New
 Year lead does not exist before its own sample. Both leave the watch list.
+
+### P3 / P4 first run (CI run 41804760751, branch `misc-push34`): partial data
+
+Dukascopy throttled the candle download: USD/JPY got 549 of 1,149 days (2003-2005, nothing for 2006), EUR/JPY none.
+A second download (per pair and year, only the hours the trades need; workflow `early-gotobi`) is running; P3's
+rule is judged on the full basket when it finishes.
+
+| Test | Data | Result |
+|---|---|---|
+| P3, USD/JPY leg only, 2003-2005 | 99 Gotobi nights | fill-based +4.2 bp (t 1.3); mid +6.9 bp (t 2.2); control days +1.8 bp (82 nights). By year: 2003 -3.5, 2004 +6.5, 2005 +11.3 |
+| P4a post-fix reversal, five other yen crosses, 2019-2025 | about 500 Gotobi days | pooled -0.3 bp (t -0.9); GBP/JPY -0.2, AUD/JPY +0.3, CHF/JPY -0.3, CAD/JPY -0.4, NZD/JPY -0.8. **Does not count** |
+| P4b post-fix reversal, USD/JPY 2003-2005 | 119 days | -1.4 bp (t -1.4). **Does not count** |
+| Reference (seen before): post-fix reversal on 2019-2025 | 493 / 494 days | USD/JPY +1.6 bp (t 3.8, every year 2019-2025 positive), EUR/JPY +0.8 bp (t 2.3) |
+
+- The USD/JPY Gotobi leg on 2003-2005 is the same size as in 2007-2025 (+4.2 vs +4.9 bp) and beats its control
+  days, but 99 nights are too few for significance on their own.
+- The post-fix reversal is real after costs on USD/JPY and EUR/JPY since 2019, but it is absent from the other
+  yen crosses and from 2003-2005. It is a recent USD/JPY / EUR/JPY pattern, not a general one: forward watch only
+  (a possible second leg after the Gotobi exit: short 09:55 -> 10:20 Tokyo).
