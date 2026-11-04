@@ -116,6 +116,10 @@ def parse_month(v):
     return None
 
 
+def cells(row):
+    return ["" if (not isinstance(v, str) and pd.isna(v)) else str(v) for v in row]
+
+
 def ffaj_positions(d):
     """Month-end long / short open positions by currency from the FFAJ xls files (heuristic header search; every
     sheet's first rows are logged so the parser can be checked)."""
@@ -127,11 +131,12 @@ def ffaj_positions(d):
             heads[os.path.basename(f)] = repr(ex)[:200]
             continue
         for sh, X in book.items():
-            heads[f"{os.path.basename(f)}:{sh}"] = X.head(12).astype(str).values.tolist()
+            heads[f"{os.path.basename(f)}:{sh}"] = [cells(r) for r in X.head(14).values.tolist()]
+            LOG["ffaj_heads"] = heads
             X = X.astype(object)
             # find the header rows: one with currency tokens, the next (or the same) with buy / sell tokens
             for hr in range(min(30, len(X))):
-                row = X.iloc[hr].astype(str).str.upper().tolist()
+                row = [v.upper() for v in cells(X.iloc[hr].tolist())]
                 ccy_cols = {}
                 for j, v in enumerate(row):
                     for c, toks in CCY_TOKENS.items():
@@ -139,7 +144,7 @@ def ffaj_positions(d):
                             ccy_cols[c] = j
                 if len(ccy_cols) < 2:
                     continue
-                sub = X.iloc[min(hr + 1, len(X) - 1)].astype(str).str.upper().tolist()
+                sub = [v.upper() for v in cells(X.iloc[min(hr + 1, len(X) - 1)].tolist())]
                 cols = {}
                 for c, j in ccy_cols.items():
                     span = range(j, min(j + 4, len(sub)))
@@ -291,10 +296,13 @@ def main():
     ap.add_argument("--store", default="flow_store")
     ap.add_argument("--ffaj", default="")
     ap.add_argument("--out", required=True)
+    ap.add_argument("--only", default="")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     res = {}
     for nm, fn in (("FF2", ff2), ("FF1", ff1), ("FD1", fd1)):
+        if a.only and nm not in a.only.split(","):
+            continue
         try:
             res[nm] = fn(a)
         except Exception as ex:                                         # noqa: BLE001
@@ -302,7 +310,7 @@ def main():
             traceback.print_exc()
             res[nm] = {"status": f"error {ex!r}"[:300]}
         print(nm, json.dumps(res[nm], default=str)[:3000], flush=True)
-    json.dump(res, open(os.path.join(a.out, "free_flow.json"), "w"), indent=1, default=str)
+    json.dump(res, open(os.path.join(a.out, f"free_flow{'_' + a.only if a.only else ''}.json"), "w"), indent=1, default=str)
     json.dump(LOG, open(os.path.join(a.out, "log_free_flow.json"), "w"), indent=1, default=str, ensure_ascii=False)
 
 
