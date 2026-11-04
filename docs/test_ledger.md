@@ -4,6 +4,8 @@ Status words: **done** (result in the doc named), **running**, **written** (rule
 **open** (raised in the discussion, not yet written as rules), **untestable** (no data), **user** (needs an action
 from the user).
 
+The queue of what is still worth testing is in `docs/testing_list.md`.
+
 ## 1. The Gotobi trade
 
 | Item | Status | Where |
