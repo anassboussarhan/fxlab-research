@@ -33,13 +33,13 @@ jobs:
       - name: Publish the cost report
         if: always()
         run: |
-          mkdir -p pub && cp out/databento/cost.json pub/ 2>/dev/null || true; cp log.txt pub/
+          mkdir -p /tmp/pub && cp out/databento/cost.json /tmp/pub/ 2>/dev/null || true; cp log.txt /tmp/pub/
           git config user.name "fxlab-sweep"
           git config user.email "fxlab-sweep@users.noreply.github.com"
           git checkout --orphan db-tmp
           git rm -rq --cached . || true
           rm -rf ./* .github .gitignore || true
-          mkdir -p databento && cp pub/* databento/
+          mkdir -p databento && cp /tmp/pub/* databento/
           echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > databento/RUN.txt
           git add -f databento
           git commit -qm "databento (run ${{ github.run_id }})"

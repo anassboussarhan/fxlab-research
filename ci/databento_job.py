@@ -32,11 +32,12 @@ def main():
     mode = sys.argv[1]
     out = sys.argv[-1]
     os.makedirs(out, exist_ok=True)
-    key = os.environ.get("DATABENTO_API_KEY", "")
+    key = os.environ.get("DATABENTO_API_KEY", "").strip()
     if not key:
         print("no DATABENTO_API_KEY secret")
         json.dump({"error": "no DATABENTO_API_KEY secret"}, open(os.path.join(out, "cost.json"), "w"))
         return
+    print("key format:", "starts with db-" if key.startswith("db-") else "does NOT start with db-", "| length", len(key))
     c = db.Historical(key)
     rep = {"dataset_range": None, "items": {}}
     try:
