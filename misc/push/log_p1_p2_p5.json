@@ -1,0 +1,60 @@
+{
+ "fetch_extra": {
+  "gld_api": {
+   "status": 200,
+   "type": "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+   "bytes": 543189,
+   "head": "PK\u0003\u0004\u0014\u0000\u0000\b\b\u0000B\u0011d]\ufffd\ufffd\ufffd\ufffdw\u0001\u0000\u0000\"\u0006\u0000\u0000\u0013\u0000\u0004\u0000[Content_Types].xmlSV\u0000\u0000\u0154\ufffdN\ufffd0\u0010E\ufffd|E\ufffd-J\ufffdv\ufffd\u0010j\ufffd\u0005\ufffd%T\ufffd|\ufffd\ufffd'\ufffdU\ufffd\ufffdq_\u007f\ufffd$i\ufffd\"\u0011\ufffdR\ufffdM\ufffd(\ufffd\ufffdL\ufffd=3\ufffd\ufffdN6\u0010P9\ufffd\ufffda6`\t\ufffd\ufffdIe\ufffd9{]<\ufffd\ufffd,\ufffd(\ufffd\u0014\ufffdY\ufffd\ufffd\u001e\ufffdM'W\ufffd\ufffd\ufffd\u0003&$\ufffd\ufffd\ufffd*F\u007f\ufffd9\u0016\u0015\u0018\ufffd\ufffd\ufffd`\ufffdM\ufffd\u0011\ufffd\u001e\u00d2{Q\ufffd\ufffd\u0012\ufffdh0\ufffd\u1173\u0011lLc\ufffd\ufffd&\ufffdg\ufffd\u0007%!\ufffd\ufffd\u0010\ufffd\ufffd!\f\ufffdi\u001e\ufffd\r\ufffd\ufffd0#?\ufffd\u0737\u009a\ufffd3\ufffdV\ufffd\ufffdT8\ufffdX\ufffd\ufffd\ufffd\ufffd\ufffdT\u0005HW\ufffd\rI\ufffd\ufffd\ufffdv\ufffd?\u00021\ufffd5`o\u0014\ufffd\u0000Bb\u0005\u0010\ufffd\ufffdZ\ufffd#y\u0006\ufffdX\ufffd<\ufffd\u023d\ufffd<\ufffd\ufffd\ufffdx\ufffd03R6\ufffd`\ufffd|\u0017\ufffd\ufffd\ufffd"
+  },
+  "gld_sheet": "US GLD Historical Archive",
+  "gld_tonnes": [
+   "2004-11-18",
+   "2026-11-03",
+   5523
+  ],
+  "boe_XUDLGPD": {
+   "status": 200,
+   "bytes": 108371,
+   "head": "DATE,XUDLGPD\r\n02 Jan 1979,226.8\r\n03 Jan 1979,218.6\r\n04 Jan 1979,223.15\r\n05 Jan 1979,225.5\r\n08 Jan 1979,223.1\r\n09 Jan 1979,224\r\n10 Jan 1979,220.7\r\n11 Jan 1979,220.85\r\n12 Jan 1979,217.6\r\n15 Jan 1979,216"
+  },
+  "boe_XUDLGPS": {
+   "status": 200,
+   "bytes": 124323,
+   "head": "DATE,XUDLGPS\r\n02 Jan 1979,111.0458\r\n03 Jan 1979,108.4594\r\n04 Jan 1979,110.7994\r\n05 Jan 1979,111.7332\r\n08 Jan 1979,110.2\r\n09 Jan 1979,110.6774\r\n10 Jan 1979,110.0529\r\n11 Jan 1979,110.2926\r\n12 Jan 1979,1"
+  },
+  "boe_XUDLGOD": {
+   "status": 200,
+   "bytes": 18633,
+   "head": "<!DOCTYPE html>\r\n<html lang=\"en\" class=\"no-js\">\r\n    <head>\r\n    <meta charset=\"utf-8\">\r\n    <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\""
+  },
+  "boe_XUDLGLD": {
+   "status": 200,
+   "bytes": 18633,
+   "head": "<!DOCTYPE html>\r\n<html lang=\"en\" class=\"no-js\">\r\n    <head>\r\n    <meta charset=\"utf-8\">\r\n    <meta http-equiv=\"Content-type\" content=\"text/html; charset=utf-8\">\r\n    <meta http-equiv=\"X-UA-Compatible\""
+  }
+ },
+ "foreign_2y": {
+  "CA": [
+   "2001-01-02",
+   "2026-11-02",
+   6459
+  ],
+  "UK": [
+   "2005-01-04",
+   "2026-11-02",
+   5517
+  ],
+  "CH": [
+   "1988-01-04",
+   "2025-07-31",
+   7534
+  ]
+ },
+ "foreign_2y_errors": {
+  "AU": "ValueError(\"'FCMYGBAG2' is not in list\")",
+  "NZ": "ValueError('No objects to concatenate')"
+ },
+ "metal_source": {
+  "gold": "BoE boe_gold_XUDLGPD.csv"
+ }
+}
