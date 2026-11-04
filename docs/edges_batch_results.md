@@ -359,8 +359,8 @@ daily rollover, where spreads are widest (V10b fit gross +0.6 bp, net -4.8 bp).
 - V2 / V9 (GLD holdings): the SPDR archive address now returns a PDF chart; data missing.
 - V7 (fed funds future change >= 5 bp): 26 fit and 9 check events (rates near zero for years); too few for a t.
 - V8 (MoF interventions, information only): 361 intervention rows since 1991, 8 events in the fit and 6 in the
-  check after 2007; fading the intervention for 5 days averaged +20 bp, for 20 days -285 bp (2022 and 2024 worked
-  as intended over 20 days).
+  check after 2007; fading the intervention for 5 days averaged +20 bp, for 20 days -285 bp, i.e. over 20 days the
+  check-period interventions (2022 and 2024) moved USD/JPY in their intended direction.
 - V5 has only 50 weeks in all; GDELT tone for EUR and GBP did not parse (the queries matched too generic words) and
   the API refused about half the history requests.
 
