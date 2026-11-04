@@ -7,16 +7,6 @@
   "2026_10_31": "have",
   "seconds": 0.0
  },
- "cme_volume": {
-  "ok": false,
-  "error": "RuntimeError('{\"EUR\": \"RuntimeError(\\'https://www.cmegroup.com/CmeWS/mvc/Volume/Deta\", \"JPY\": \"RuntimeError(\\'https://www.cmegroup.com/CmeWS/mvc/Volume/Deta\", \"GBP\": \"RuntimeError(\\'https://www.cmegroup.com/CmeWS/mvc/Volume/Deta\", \"AUD\": \"RuntimeError(\\'https://www.cmegroup.com/CmeWS/mvc/Volume/Deta\", \"CAD\": \"Runtime')",
-  "seconds": 193.2
- },
- "myfxbook_outlook": {
-  "ok": false,
-  "error": "RuntimeError('https://www.myfxbook.com/community/outlook: HTTP 403')",
-  "seconds": 24.1
- },
  "oanda_books": {
   "ok": false,
   "error": "RuntimeError('no OANDA_TOKEN secret (a free OANDA practice account token is needed)')",
@@ -30,20 +20,20 @@
  "saxo_fx_options": {
   "ok": true,
   "bytes": 19222,
-  "seconds": 0.3
+  "seconds": 0.5
  },
  "gdelt_daily": {
   "ok": true,
   "JPY": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
   "EUR": 35,
   "USD": 21,
-  "GBP": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
-  "CHF": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "GBP": 56,
+  "CHF": 3,
   "AUD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
   "CAD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
   "NZD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
-  "GOLD": 21,
-  "SILVER": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
-  "seconds": 561.4
+  "GOLD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "SILVER": 3,
+  "seconds": 614.4
  }
 }
