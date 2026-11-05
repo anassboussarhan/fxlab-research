@@ -55,6 +55,28 @@ Speculative Positioning" (MDSP, from 1992); our weekly CFTC versions failed (V3)
 | K1 | Pre-FOMC dollar drift as published (Karnaukh) | Next-month fed funds futures history (paid) | Quote first |
 | F1 | Real futures volume / CLS flow | CME DataMine / CLS (paid) | Quote first |
 
+## F. Round 9 (2026-11-05): what nine rounds of search still had not tested
+
+Found by listing every tested item (`docs/test_ledger.md`, all pre-registrations) against what is known about where
+FX money comes from (forced flows at known times, risk premia, information in flows) and a new search
+(`docs/literature_check.md` section 11). Ranked by prior x value / cost.
+
+| ID | Idea | Why it might work | Data | Cost | Prior |
+|---|---|---|---|---|---|
+| **N1-N3** | **Economic surprises with real consensus forecasts.** N1: after a high-impact release with a large standardised surprise (actual - forecast), trade in its direction from release + 5 min for 1-4 hours. N2: per-currency surprise index (sum of the last 1-3 months' standardised surprises, our own "Citi index"), weekly / monthly G10 cross-section. N3: drift in the hours before high-impact releases (dates and times only) | The largest category never tested: earlier tests had fewer than 10 surprises (no consensus archive). Literature: most of the reaction is within minutes (low prior for N1); surprise momentum and pre-release positioning are less studied | Forex Factory calendar 2007-01 to 2025-04 with actual / forecast / previous / impact (HuggingFace `Tropstan/Forex_Factory_Calendar`, MIT licence); quality check first (time zone, forecast coverage) | Free | Low-medium |
+| **G1** | **The Gotobi trade on CME yen futures in a futures prop firm.** Futures firms force you flat each day (Topstep: by 3:10 PM CT, trading reopens 5:00 PM CT) but 5 PM CT is 22:00 / 23:00 UTC, so the fix leg (22:00 or 23:00 UTC -> 00:53 UTC) fits inside one of their trading days. Short 6J = long USD/JPY | The fix leg is 36% of B0's mean on 2019-2025 (t 2.7) with 24% of its variance, i.e. a better ratio than the whole night; futures firms have no swap, cheaper evaluations and allow several accounts. Risk: 6J costs (1 tick = 0.76 bp + commission, wide spreads at the 5 PM reopen) may take most of a 2-3 bp gross leg; payout rules (winning-day counts, 50% consistency) suit frequent traders | M1 USD/JPY in hand; the firms' rules (Topstep, Apex, Tradeify, MyFundedFutures, Lucid) to verify | Free | Medium (value high) |
+| **O3-O5** | **Signals from the CME option data already bought.** O3: 25-delta risk reversals (level and change) -> next 1-5 days of EUR/USD, USD/JPY. O4: pinning to the largest open-interest strike before the 10:00 New York cut on CME expiry days (makes E5 testable). O5: open interest x gamma near spot -> next day's intraday reversal or momentum (the Baltussen et al. switch) | Uses data paid for with the free credit (artifact kept to early February 2027). CME is a small part of FX options, so the signals are noisy proxies | Databento 6E / 6J option settlements, definitions, open interest 2010-2025 (in hand) | Free | Low |
+| **F2** | **Signed order flow from CME currency futures** (aggressor-side volume per hour / day) -> next hours' and days' returns (Evans-Lyons order flow, which was "untestable" because interbank flow is private) | Order flow explains most same-period FX moves and has some forecasting power at days to a month (Evans & Lyons 2005); CME flow is a public, partial proxy | Databento `trades` for 6E / 6J; price check first, download only inside the remaining free credit (about $50) | Free if it fits | Low-medium |
+| S1 | Same-calendar-month return seasonality and realised-skewness sorts across currencies | Keloharju et al. (2016) find it in commodities (t 1.9) but did not test currencies; currency skewness premia (Cambridge FX initiative) | FRED H.10 daily FX from 1971 | Free | Low |
+| S2 | Shanghai gold premium (SGE price in dollars minus London) -> gold over the next days | Chinese physical demand; the premium is reported to lead in Asian hours | SGE daily benchmark history (access to check) | Free if reachable | Low-medium |
+| S3 | Norges Bank's monthly announcement of its daily NOK purchases / sales -> EUR/NOK after the announcement | A pre-announced official flow | Norges Bank announcement history; NOK costs are high on prop accounts | Free | Low |
+| S4 | Bank of Japan JGB purchase operations (rinban, announced 10:10 Tokyo, right after the fix) -> USD/JPY | A known-time Tokyo event inside the post-fix window (the post-fix reversal lead) | BoJ operation results (scrape) | Free | Low |
+| S5 | Coupon conversion: US Treasury coupon dates (15th of Feb / May / Aug / Nov, month-ends) and Japanese holders' yen buying | A calendar flow of the Gotobi kind | Dates by rule, M1 | Free | Low |
+| S6 | New NISA month-start buying of foreign funds (from 2024) | Large, regular yen selling; too short a history (24 months) | M1 | Free | Forward only |
+
+Not tested on purpose: hedging opposite positions across prop firms (against every firm's terms), trading on slow
+prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ended in 2024), lunar cycles.
+
 ## D. Forward watch list (no new test; judged on live data only)
 
 USD/JPY H4 high-confidence model (mostly a 2022 / 2024 trend ride); FS1 66 settings; the 60/40 rebalancing

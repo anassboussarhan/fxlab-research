@@ -370,3 +370,33 @@ tomorrow"; Reuters / Yahoo, "Macro hedge funds end 2022 on high"; Business Insid
 killed it betting on the Swiss franc"; Finance Magnates on JPMorgan and the franc; FX News Group and Pulse on XTX
 Markets' results; FTMO blog, "How do our best FTMO traders trade?" and "Less is sometimes more"; Forex Factory and
 Myfxbook threads cited in the text.
+
+## 11. Round 9 (2026-11-05): what is still missing after eight rounds
+
+Method: every tested item (ledger, pre-registrations, labs) was listed against three sources of FX money: forced
+flows at known times, risk premia, and information in flows. The Gotobi result is a forced flow at a known time,
+so that list was searched hardest.
+
+- **Forced flows at known times, all tested:** Tokyo fix (Gotobi, other days, post-fix), London 4 pm and
+  month-end fix, ECB 14:15 fix, CNY fixing, MSCI review days, gold fixes and COMEX option expiry, US Treasury and
+  JGB auctions, toshin month starts, Japan's weekly portfolio flows, interventions, central-bank meetings, holiday-
+  moved Gotobi days. Not tested: NOK purchase announcements, BoJ rinban operations, coupon-conversion dates,
+  new-NISA month starts (too short), and the Gotobi fix leg on CME futures (G1).
+- **Information in flows:** CFTC, FFAJ, GLD, futures volume, ETF volume tested. Never available before: real
+  consensus forecasts (now: the Forex Factory calendar archive 2007-2025 on HuggingFace, MIT licence), signed CME
+  order flow (Databento trades, price to check), CME option open interest and skew (in hand).
+- **Risk premia:** carry, momentum, value, volatility (options) tested. Not tested: same-month seasonality and
+  skewness sorts in currencies.
+- **Who searched:** no new fund or trader method; the newest practitioner note (Nomura's 2025 time-zone analysis:
+  USD/JPY resilient in Asian hours from importer hedging and NISA flows) describes the local-hours effect, tested.
+
+The ranked list is section F of `docs/testing_list.md`.
+
+Sources: Keloharju, Linnainmaa & Nyberg, "Return Seasonalities" (NBER w20815; commodities 0.93% a month, t 1.93;
+currencies not studied); HuggingFace dataset Tropstan/Forex_Factory_Calendar (2007-01-01 to 2025-04-07; actual,
+forecast, previous, impact); Topstep help centre, "When and what products can I trade" (6J permitted; flat by 3:10
+PM CT; reopens 5:00 PM CT); proptradingvibes.com, Apex rules overview (no overnight holding, 50% payout consistency,
+up to 20 accounts, automation prohibited); Cambridge FX initiative, "Skewness risk premia and the cross section of
+currency returns"; investinglive.com, "Nomura's time-zone analysis for USD/JPY" (2025-02-26); LBMA Alchemist 83,
+"Links between the Chinese and international gold prices"; ING Think, "Norway: lower FX purchases suggest appetite
+for stronger NOK".
