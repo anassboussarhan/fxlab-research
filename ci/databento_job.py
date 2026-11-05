@@ -27,6 +27,11 @@ REQ = {
     "O1fx_defs": dict(schema="definition", symbols=["6E.OPT", "EUU.OPT", "6J.OPT", "JPU.OPT"]),
     "O1fx_under": dict(schema="ohlcv-1d", symbols=["6E.FUT", "6J.FUT"]),
     # F1: real daily volume of the currency and metal futures, every contract
+    # F2 (round 9): trades with the aggressor side, for signed order flow (price check first)
+    "F2_trades_6E": dict(schema="trades", symbols=["6E.FUT"]),
+    "F2_trades_6J": dict(schema="trades", symbols=["6J.FUT"]),
+    "F2_trades_6J_2019": dict(schema="trades", symbols=["6J.FUT"], start="2019-01-01"),
+    "F2_trades_6E_2019": dict(schema="trades", symbols=["6E.FUT"], start="2019-01-01"),
     "F1_volume": dict(schema="ohlcv-1d", symbols=["6E.FUT", "6J.FUT", "6B.FUT", "6A.FUT", "6C.FUT", "6S.FUT", "6N.FUT",
                                                   "6M.FUT", "GC.FUT", "SI.FUT"]),
 }
@@ -55,7 +60,8 @@ def main():
     for item, r in REQ.items():
         per = {}
         for s in r["symbols"]:
-            q = dict(dataset="GLBX.MDP3", symbols=[s], stype_in="parent", schema=r["schema"], start=START, end=END)
+            q = dict(dataset="GLBX.MDP3", symbols=[s], stype_in="parent", schema=r["schema"], start=r.get("start", START),
+                     end=END)
             try:
                 per[s] = {"usd": float(c.metadata.get_cost(**q)),
                           "gb": round(c.metadata.get_billable_size(**q) / 1e9, 4)}
