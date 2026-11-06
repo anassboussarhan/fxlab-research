@@ -849,6 +849,65 @@ def s2():
     print("S2", RES["S2"]["net"]["check"].get("mean_bp"), RES["S2"]["premium_median_pct"], flush=True)
 
 
+# ------------------------------------------------------------------------------------------- AT5
+def gdelt_month(name):
+    f = os.path.join(A.r9data, "gdelt", f"{name}.csv")
+    if not os.path.exists(f) or os.path.getsize(f) < 200:
+        return None
+    d = pd.read_csv(f)
+    dc = [c for c in d.columns if "date" in c.lower()][0]
+    vc = [c for c in d.columns if "value" in c.lower()][0]
+    x = pd.Series(pd.to_numeric(d[vc], errors="coerce").values, index=pd.to_datetime(d[dc], errors="coerce")).dropna()
+    x.index = nv(x.index)
+    return x.resample("ME").mean()
+
+
+def at5():
+    from sklearn.linear_model import LassoCV
+    from fxlab.data.rates import known_at
+    tone = {k: gdelt_month(k) for k in ("US", "DE", "FR", "JP", "UK", "CH", "CA", "AU", "NZ")}
+    LOG["at5_tone_months"] = {k: (int(v.notna().sum()) if v is not None else 0) for k, v in tone.items()}
+    if any(v is None or v.notna().sum() < 60 for v in tone.values()):
+        RES["AT5"] = {"status": "not tested (data): GDELT tone incomplete", "months": LOG["at5_tone_months"]}
+        return
+    T = pd.DataFrame(tone)
+    T["EZ"] = T[["DE", "FR"]].mean(axis=1)
+    T = T.drop(columns=["DE", "FR"])
+    feats = pd.concat([T.add_prefix("lvl_"), T.diff().add_prefix("chg_")], axis=1)
+    c7 = ["EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "NZD"]
+    daily = {c: fred_usd_per(c) for c in c7}
+    Dd = pd.DataFrame(daily).sort_index()
+    Dd = Dd[(Dd.index >= "2016-06-01") & (Dd.index <= DEV_END)]
+    ex = excess_monthly(Dd, c7, known_at)
+    nxt_idx = pd.DatetimeIndex([pd.Timestamp(t.year, t.month, 1, tz="UTC") + pd.DateOffset(months=1) for t in ex.index])
+    kn = known_at(nxt_idx)
+    kn.index = ex.index
+    fd = pd.DataFrame({c: (kn[c] - kn["USD"]) for c in c7})
+    months = [m for m in feats.dropna().index if m in ex.index]
+    fc = pd.DataFrame(index=months, columns=c7, dtype=float)
+    for k in range(36, len(months) - 1):
+        t = months[k]
+        for c in c7:
+            X = pd.concat([feats.loc[months[1:k + 1]], fd[c].reindex(months[1:k + 1]).rename("fd")], axis=1)
+            y = ex[c].shift(-1).reindex(months[1:k + 1])
+            ok = X.notna().all(axis=1) & y.notna()
+            X, y = X[ok], y[ok]
+            if len(y) < 30:
+                continue
+            mu, sd = X.mean(), X.std().replace(0, 1)
+            mdl = LassoCV(cv=5, n_alphas=30, max_iter=5000).fit(((X - mu) / sd).values, y.values)
+            xt = pd.concat([feats.loc[[t]], pd.Series({t: fd[c].get(t)}, name="fd")], axis=1)
+            if xt.isna().any(axis=None):
+                continue
+            fc.loc[t, c] = float(mdl.predict(((xt - mu) / sd).values)[0])
+    port = ls_portfolio(fc.dropna(how="all"), ex)
+    port.to_csv(os.path.join(A.out, "at5_monthly.csv"))
+    out = {"net": {"all": Q.summ(port, 12), "check": Q.summ(port, 12), "fit": {}}, "months_with_forecast": int(fc.notna().any(axis=1).sum())}
+    RES["AT5"] = out
+    RES.setdefault("_primary", {})["AT5"] = out["net"]
+    print("AT5", out["net"]["check"].get("mean_bp"), out["net"]["check"].get("t"), flush=True)
+
+
 def save():
     def clean(o):
         if isinstance(o, dict):
