@@ -1,0 +1,108 @@
+{
+ "fred": {
+  "DEXJPUS": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXUSUK": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXSZUS": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXCAUS": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXUSAL": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXUSNZ": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXSDUS": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXNOUS": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXDNUS": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXGEUS": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXUSEU": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ],
+  "DEXCHUS": [
+   -1,
+   "ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=120)\"))"
+  ]
+ },
+ "gdelt": {
+  "US": [
+   200,
+   104146
+  ],
+  "DE": [
+   200,
+   104141
+  ],
+  "FR": [
+   -1,
+   0
+  ],
+  "JP": [
+   200,
+   103307
+  ],
+  "UK": [
+   200,
+   103785
+  ],
+  "CH": [
+   200,
+   103070
+  ],
+  "CA": [
+   200,
+   103956
+  ],
+  "AU": [
+   200,
+   103709
+  ],
+  "NZ": [
+   200,
+   102959
+  ]
+ },
+ "boj": {
+  "index": [
+   200,
+   38021
+  ],
+  "y2009": [
+   200,
+   79618
+  ],
+  "y2016": [
+   200,
+   38424
+  ],
+  "ope_index": [
+   200,
+   43958
+  ]
+ }
+}
