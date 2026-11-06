@@ -1,0 +1,26 @@
+
+[notice] A new release of pip is available: 26.2.2 -> 26.3
+[notice] To update, run: pip install --upgrade pip
+17
+O1fx_defs_6E_OPT.parquet
+O1fx_defs_6J_OPT.parquet
+O1fx_defs_EUU_OPT.parquet
+O1fx_defs_JPU_OPT.parquet
+O1fx_stats_6E_OPT.parquet
+O1fx_stats_6J_OPT.parquet
+O1fx_stats_EUU_OPT.parquet
+O1fx_stats_JPU_OPT.parquet
+O1fx_under_6E_FUT.parquet
+O1fx_under_6J_FUT.parquet
+EURUSD 2025 1 parts 326590 minutes
+0 manifest records; 0 not ok
+EURUSD years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+USDJPY 2025 1 parts 366567 minutes
+0 manifest records; 0 not ok
+USDJPY years: 2007 2008 2009 2010 2011 2012 2013 2014 2015 2016 2017 2018 2019 2020 2021 2022 2023 2024 2025 
+/home/runner/work/fxlab-research/fxlab-research/scripts/round9_lab.py:428: Pandas4Warning: Sorting by default when concatenating all DatetimeIndex is deprecated.  In the future, pandas will respect the default of `sort=False`. Specify `sort=True` or `sort=False` to silence this message. If you see this warnings when not directly calling concat, report a bug to pandas.
+  pool = pd.concat([v.net_pos for v in series.values()], axis=1).mean(axis=1)
+O3 -6.882716262216955
+O4 4.395963887561551 187
+O5 -1.8828461633239484
+AT6 28.002244037919585 36.118528636646836
