@@ -1,0 +1,39 @@
+{
+ "dtcc_options": {
+  "ok": true,
+  "2026_11_05": 2838245,
+  "2026_11_04": "have",
+  "2026_11_03": "have",
+  "2026_11_02": "have",
+  "seconds": 0.5
+ },
+ "oanda_books": {
+  "ok": false,
+  "error": "RuntimeError('no OANDA_TOKEN secret (a free OANDA practice account token is needed)')",
+  "seconds": 0.0
+ },
+ "gld_daily": {
+  "ok": true,
+  "bytes": 697563,
+  "seconds": 0.3
+ },
+ "saxo_fx_options": {
+  "ok": true,
+  "bytes": 19333,
+  "seconds": 0.5
+ },
+ "gdelt_daily": {
+  "ok": true,
+  "JPY": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "EUR": 35,
+  "USD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "GBP": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "CHF": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "AUD": 284,
+  "CAD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "NZD": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "GOLD": 287,
+  "SILVER": "RuntimeError('https://api.gdeltproject.org/api/v2/doc/doc: H",
+  "seconds": 606.6
+ }
+}
