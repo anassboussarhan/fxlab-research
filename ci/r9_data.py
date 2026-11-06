@@ -16,9 +16,9 @@ LOG = {}
 
 
 def get(url, **kw):
-    for k in range(3):
+    for k in range(2):
         try:
-            r = requests.get(url, headers=UA, timeout=90, **kw)
+            r = requests.get(url, headers=UA, timeout=25, **kw)
             return r
         except Exception as ex:                                          # noqa: BLE001
             err = repr(ex)[:200]
@@ -107,7 +107,15 @@ def sge():
 
 
 def boj():
+    t_start = time.time()
+    probe = get("https://www.boj.or.jp/en/statistics/boj/fm/ope/m_release/2015/ope1501.htm")
+    LOG["boj_probe"] = [probe.status_code, len(probe.content)]
+    if probe.status_code != 200:
+        return
     for y in range(2007, 2026):
+        if time.time() - t_start > 1500:
+            LOG["boj_stopped"] = f"time limit at {y}"
+            break
         for m in range(1, 13):
             u = f"https://www.boj.or.jp/en/statistics/boj/fm/ope/m_release/{y}/ope{y % 100:02d}{m:02d}.htm"
             r = get(u)
@@ -118,7 +126,7 @@ def boj():
 
 def main():
     os.makedirs(OUT, exist_ok=True)
-    for f in (ff_calendar, fred, gdelt, norges, sge, boj):
+    for f in (ff_calendar, fred, sge, gdelt, norges, boj):
         try:
             f()
         except Exception as ex:                                          # noqa: BLE001

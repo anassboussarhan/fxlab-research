@@ -111,3 +111,10 @@ below the 20th -> short.
   discount as features; one LASSO per currency (cross-validated penalty) predicting next month's excess return,
   refitted each month on an expanding window starting with 36 months; long the 3 highest forecasts, short the 3
   lowest. Check period: every forecast month (2020-2025); counts if t >= 1.645 (no fit-period condition).
+
+**Addendum 1 (2026-11-06, after the first M1 run; rules otherwise unchanged).** S5's 09:05 Tokyo entry falls in the
+M1 store's hour-0 gap (no bars 00:00-01:00 UTC before 2019, `docs/flows_lab.md`), so no 2007-2018 trade was
+priced. S5 is rerun with entry at 10:05 Tokyo for every year. F2: the price check gives $261 (6J) and $456 (6E) for
+2010-2025 trades, $88 / $126 for 2019-2025; the span that fits in about $45 of the remaining credit is about 1.4
+years of both contracts (or 3.5 years of 6J only), too short for a daily test to have power, so nothing was bought
+and F2 is reported as not tested (the user can decide whether 3.5 years of 6J for about $44 is worth it).

@@ -296,7 +296,7 @@ def s5():
             td = next_bd(pay, jp)
             if td > DEV_END:
                 continue
-            t0, t1 = U.jst(td, 9, 5), U.jst(td, 15, 0)
+            t0, t1 = U.jst(td, 10, 5), U.jst(td, 15, 0)            # the M1 store has no bars 00:00-01:00 UTC before 2019
             r = bk.trade(t0, t1, -1, 5)
             if r is not None:
                 rows[td] = {"net": net_of(r), "gross": float(r[1])}
@@ -618,6 +618,237 @@ def at6():
     print("AT6", out["hedged"]["check"].get("mean_bp"), out["unhedged"]["check"].get("mean_bp"), flush=True)
 
 
+# ------------------------------------------------------------------------------------------- daily (S1, AT3)
+INV = {"JPY": "DEXJPUS", "CHF": "DEXSZUS", "CAD": "DEXCAUS", "SEK": "DEXSDUS", "NOK": "DEXNOUS", "DKK": "DEXDNUS",
+       "DEM": "DEXGEUS"}                                                 # foreign currency per USD
+DIR = {"GBP": "DEXUSUK", "AUD": "DEXUSAL", "NZD": "DEXUSNZ", "EUR": "DEXUSEU"}   # USD per foreign currency
+
+
+def fred_usd_per(ccy):
+    sid = INV.get(ccy) or DIR[ccy]
+    f = os.path.join(A.r9data, "fred", f"{sid}.csv")
+    if not os.path.exists(f):
+        return None
+    d = pd.read_csv(f)
+    x = pd.to_numeric(d.iloc[:, 1], errors="coerce")
+    x.index = pd.to_datetime(d.iloc[:, 0])
+    x = x.dropna()
+    x = x[x > 0]
+    return (1.0 / x if ccy in INV else x).rename(ccy)
+
+
+def monthly_ret(px):
+    m = px.resample("ME").last()
+    return m.pct_change()
+
+
+def ls_portfolio(signal, ret, n=3, cost=2e-4, low_long=False):
+    """Each month t: long the n highest signals (lowest if low_long), short the n lowest; return in month t+1 minus
+    cost x turnover. signal and ret: DataFrame[month x currency]; signal at t uses data up to the end of t."""
+    out, wprev = {}, pd.Series(0.0, index=ret.columns)
+    for t, nx in zip(signal.index[:-1], signal.index[1:]):
+        s = signal.loc[t].dropna()
+        r = ret.loc[nx] if nx in ret.index else None
+        if len(s) < 2 * n or r is None:
+            continue
+        s = s.sort_values(ascending=low_long)
+        w = pd.Series(0.0, index=ret.columns)
+        w[s.index[:n]] = 1.0 / n
+        w[s.index[-n:]] = -1.0 / n
+        rr = r.reindex(w.index)
+        if rr[w != 0].isna().any():
+            continue
+        out[nx] = float((w * rr.fillna(0)).sum() - cost * (w - wprev).abs().sum())
+        wprev = w
+    return pd.Series(out)
+
+
+def s1():
+    ccys = ["JPY", "GBP", "CHF", "CAD", "AUD", "NZD", "SEK", "NOK", "DKK"]
+    R = {c: monthly_ret(fred_usd_per(c)) for c in ccys if fred_usd_per(c) is not None}
+    dem, eur = fred_usd_per("DEM"), fred_usd_per("EUR")
+    if dem is not None and eur is not None:
+        rd, re_ = monthly_ret(dem), monthly_ret(eur)
+        R["EUR"] = pd.concat([rd[rd.index <= "1999-01-31"], re_[re_.index > "1999-01-31"]])
+    if len(R) < 6:
+        RES["S1"] = {"status": "data missing"}
+        return
+    M = pd.DataFrame(R).sort_index()
+    M = M[M.index <= DEV_END]
+    sig = pd.DataFrame(index=M.index, columns=M.columns, dtype=float)
+    for t in M.index:
+        nxt_month = (t + pd.offsets.MonthEnd(1)).month                 # the signal at t is for month t+1
+        past = M[(M.index.month == nxt_month) & (M.index < t) & (M.index >= t - pd.DateOffset(years=20))]
+        cnt = past.notna().sum()
+        sig.loc[t] = past.mean().where(cnt >= 10)
+    a = ls_portfolio(sig, M)
+    a = a[a.index >= "1991-01-01"]
+    a.to_csv(os.path.join(A.out, "s1a_monthly.csv"))
+    res = {"S1a seasonality": per(a, 12)}
+    RES.setdefault("_primary", {})["S1a"] = res["S1a seasonality"]
+    # S1b: realised skewness, excess returns, 7 currencies with rates
+    from fxlab.data.rates import known_at
+    c7 = ["EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "NZD"]
+    daily = {c: fred_usd_per(c) for c in c7}
+    if all(v is not None for v in daily.values()):
+        Dd = pd.DataFrame(daily).sort_index()
+        Dd = Dd[(Dd.index >= "2005-01-01") & (Dd.index <= DEV_END)]
+        lr = np.log(Dd).diff()
+        ex = excess_monthly(Dd, c7, known_at)
+        sk = pd.DataFrame({t: lr[(lr.index > t - pd.DateOffset(months=12)) & (lr.index <= t)].skew()
+                           for t in ex.index}).T
+        b = ls_portfolio(sk, ex, low_long=True)
+        b = b[b.index >= "2007-01-01"]
+        b.to_csv(os.path.join(A.out, "s1b_monthly.csv"))
+        res["S1b skewness"] = per(b, 12)
+        RES.setdefault("_primary", {})["S1b"] = res["S1b skewness"]
+    RES["S1"] = res
+    print("S1", {k: v["check"].get("mean_bp") for k, v in res.items()}, flush=True)
+
+
+def excess_monthly(Dd, ccys, known_at):
+    me = Dd.resample("ME").last()
+    spot = me.pct_change()
+    idx = pd.DatetimeIndex([pd.Timestamp(t.year, t.month, 1, tz="UTC") for t in me.index])
+    k = known_at(idx)                                                    # rates known at the start of month t
+    k.index = me.index
+    carry = pd.DataFrame({c: (k[c] - k["USD"]) / 12.0 for c in ccys})
+    return (spot + carry)[ccys].dropna(how="all")
+
+
+def at3():
+    from scipy.optimize import minimize
+    from fxlab.data.rates import known_at
+    c7 = ["EUR", "GBP", "JPY", "CHF", "CAD", "AUD", "NZD"]
+    daily = {c: fred_usd_per(c) for c in c7}
+    if any(v is None for v in daily.values()):
+        RES["AT3"] = {"status": "data missing"}
+        return
+    Dd = pd.DataFrame(daily).sort_index()
+    Dd = Dd[(Dd.index >= "2005-12-01") & (Dd.index <= DEV_END)]
+    ex = excess_monthly(Dd, c7, known_at)
+    me = ex.index
+    nxt_idx = pd.DatetimeIndex([pd.Timestamp(t.year, t.month, 1, tz="UTC") + pd.DateOffset(months=1) for t in me])
+    kn = known_at(nxt_idx)                                               # rates known at the start of month t+1
+    kn.index = me
+    mu_all = pd.DataFrame({c: (kn[c] - kn["USD"]) / 12.0 for c in c7})
+    kappa, cost = 3e-4, 3e-4
+    w_b_prev = np.zeros(7)
+    w_p_prev = np.zeros(7)
+    rows = {}
+    for k in range(36, len(me) - 1):
+        t, nx = me[k], me[k + 1]
+        hist = ex.iloc[k - 35:k + 1].dropna()
+        if len(hist) < 30:
+            continue
+        Sg = hist.cov().values
+        Sg = 0.5 * Sg + 0.5 * np.diag(np.diag(Sg))
+        mu = mu_all.loc[t].values
+        if not np.isfinite(mu).all():
+            continue
+        raw = np.linalg.solve(Sg, mu)
+        sc = 0.10 / math.sqrt(12 * raw @ Sg @ raw)
+        wb = sc * raw
+        gam = 1.0 / sc
+
+        def f(z):
+            u, v = z[:7], z[7:]
+            w = w_p_prev + u - v
+            val = -(mu @ w - 0.5 * gam * w @ Sg @ w - kappa * (u + v).sum())
+            g_w = -(mu - gam * Sg @ w)
+            return val, np.r_[g_w + kappa, -g_w + kappa]
+        z0 = np.r_[np.clip(wb - w_p_prev, 0, None), np.clip(w_p_prev - wb, 0, None)]
+        sol = minimize(f, z0, jac=True, method="L-BFGS-B", bounds=[(0, None)] * 14)
+        wp = w_p_prev + sol.x[:7] - sol.x[7:]
+        r = ex.loc[nx].values
+        if not np.isfinite(r).all():
+            continue
+        rk = pd.Series(mu, index=c7).sort_values()
+        wr = pd.Series(0.0, index=c7)
+        wr[rk.index[-3:]] = 1 / 3
+        wr[rk.index[:3]] = -1 / 3
+        rows[nx] = {"penalised": wp @ r - cost * np.abs(wp - w_p_prev).sum(),
+                    "blind": wb @ r - cost * np.abs(wb - w_b_prev).sum(),
+                    "rank": float(wr.values @ r), "turn_pen": np.abs(wp - w_p_prev).sum(),
+                    "turn_blind": np.abs(wb - w_b_prev).sum(), "gross_pen": wp @ r}
+        w_p_prev, w_b_prev = wp, wb
+    D = pd.DataFrame.from_dict(rows, orient="index")
+    D.to_csv(os.path.join(A.out, "at3_monthly.csv"))
+    out = {c: per(D[c], 12) for c in ("penalised", "blind", "rank", "gross_pen")}
+    out["turnover_median"] = {"penalised": float(D.turn_pen.median()), "blind": float(D.turn_blind.median())}
+    RES["AT3"] = out
+    RES.setdefault("_primary", {})["AT3"] = out["penalised"]
+    print("AT3", {c: out[c]["check"].get("sharpe") for c in ("penalised", "blind", "rank")}, flush=True)
+
+
+# ------------------------------------------------------------------------------------------- combine
+def combine(files):
+    from scipy.stats import norm
+    rows = []
+    for f in files:
+        J = json.load(open(f))["results"]
+        for name, P in J.get("_primary", {}).items():
+            c, ft = P.get("check", {}), P.get("fit", {})
+            t = c.get("t")
+            rows.append({"test": name, "n_check": c.get("n"), "mean_check_bp": c.get("mean_bp"), "t_check": t,
+                         "mean_fit_bp": ft.get("mean_bp"), "n_fit": ft.get("n"),
+                         "p_one_sided": float(1 - norm.cdf(t)) if t is not None and np.isfinite(t) else 1.0})
+        for name, P in J.get("_primary_g1", {}).items():
+            c, ft = P.get("check", {}), P.get("fit", {})
+            RES.setdefault("G1_separate", {})[name] = {"check": c, "fit": ft}
+    T = pd.DataFrame(rows).drop_duplicates("test", keep="last").sort_values("p_one_sided").reset_index(drop=True)
+    m = len(T)
+    T["bh_threshold"] = [0.10 * (k + 1) / m for k in range(m)]
+    passed = T.p_one_sided <= T.bh_threshold
+    kmax = passed[passed].index.max() if passed.any() else -1
+    T["bh_pass"] = T.index <= kmax
+    T["counts"] = T.bh_pass & (T.mean_check_bp > 0) & (T.t_check >= 1.645) & (T.mean_fit_bp.fillna(1) > 0)
+    T.to_csv(os.path.join(A.out, "round9_combined.csv"), index=False)
+    print(T.to_string())
+
+
+# ------------------------------------------------------------------------------------------- S2
+def s2():
+    f = os.path.join(A.r9data, "sge", "Au99.99.csv")
+    if not os.path.exists(f):
+        RES["S2"] = {"status": "not tested (data): no SGE history"}
+        return
+    S = pd.read_csv(f)
+    dcol = [c for c in S.columns if "date" in c.lower()][0]
+    ccol = [c for c in S.columns if c.lower() == "close"][0]
+    sge = pd.Series(pd.to_numeric(S[ccol], errors="coerce").values, index=pd.to_datetime(S[dcol])).dropna()
+    fx = os.path.join(A.r9data, "fred", "DEXCHUS.csv")
+    d = pd.read_csv(fx)
+    usdcny = pd.Series(pd.to_numeric(d.iloc[:, 1], errors="coerce").values, index=pd.to_datetime(d.iloc[:, 0])).dropna()
+    bk = book("XAUUSD")
+    rows = {}
+    for day, px in sge.items():
+        if day > DEV_END or day not in usdcny.index:
+            continue
+        i = bk.at(pd.Timestamp(day).tz_localize("UTC") + pd.Timedelta(hours=7, minutes=30), 15)
+        if i < 0:
+            continue
+        rows[pd.Timestamp(day)] = px * 31.1035 / usdcny[day] / mid(bk, i) - 1
+    P = pd.Series(rows).sort_index()
+    sig = P - P.rolling(20).mean()
+    out = {}
+    for day, v in sig.dropna().items():
+        t0 = pd.Timestamp(day).tz_localize("UTC") + pd.Timedelta(hours=21)
+        nxt = day + pd.offsets.BDay(1)
+        t1 = pd.Timestamp(nxt).tz_localize("UTC") + pd.Timedelta(hours=21)
+        r = bk.trade(t0, t1, 1 if v > 0 else -1, 10)
+        if r is not None:
+            out[pd.Timestamp(day)] = net_of(r)
+    X = pd.Series(out)
+    X.to_csv(os.path.join(A.out, "s2_daily.csv"))
+    n = len(X)
+    split = X.index[int(0.6 * n)] if n else FIT_END
+    RES["S2"] = {"net": per(X, 252, split), "premium_median_pct": float(P.median() * 100), "first_day": str(P.index.min())[:10],
+                 "split_day": str(split)[:10]}
+    RES.setdefault("_primary", {})["S2"] = RES["S2"]["net"]
+    print("S2", RES["S2"]["net"]["check"].get("mean_bp"), RES["S2"]["premium_median_pct"], flush=True)
+
+
 def save():
     def clean(o):
         if isinstance(o, dict):
@@ -649,11 +880,11 @@ def main():
     A.tag = "m1" if A.m1 else "opt" if A.opt else "daily" if A.daily else "combine"
     parts = []
     if A.m1:
-        parts = [g1, at1, at2, at4, s5] + [globals()[f] for f in ("n_tests", "s3", "s4") if f in globals()]
+        parts = [g1, at1, at2, at4, s5] + [globals()[f] for f in ("s2", "n_tests", "s3", "s4") if f in globals()]
     if A.opt:
         parts = [globals()[f] for f in ("o3", "o4", "o5", "at6") if f in globals()]
     if A.daily:
-        parts = [globals()[f] for f in ("s1", "s2", "at3", "at5") if f in globals()]
+        parts = [globals()[f] for f in ("s1", "at3", "at5") if f in globals()]
     only = set(A.only.split(",")) - {""}
     for f in parts:
         if only and f.__name__ not in only:
