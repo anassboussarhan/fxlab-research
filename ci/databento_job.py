@@ -35,6 +35,7 @@ REQ = {
     "F2_6J_2021": dict(schema="trades", symbols=["6J.FUT"], start="2021-01-01"),
     "F2_6J_2022": dict(schema="trades", symbols=["6J.FUT"], start="2022-01-01"),
     "F2_6J_2022h2": dict(schema="trades", symbols=["6J.FUT"], start="2022-07-01"),
+    "F2_6J_2023": dict(schema="trades", symbols=["6J.FUT"], start="2023-01-01"),
     "F2_6E_2024": dict(schema="trades", symbols=["6E.FUT"], start="2024-01-01"),
     "F1_volume": dict(schema="ohlcv-1d", symbols=["6E.FUT", "6J.FUT", "6B.FUT", "6A.FUT", "6C.FUT", "6S.FUT", "6N.FUT",
                                                   "6M.FUT", "GC.FUT", "SI.FUT"]),
@@ -107,7 +108,7 @@ def batch(c, items, rep, out):
     import databento as db
     import pandas as pd
     total = sum(rep["items"][i]["usd"] for i in items)
-    cap = float(os.environ.get("DATABENTO_CAP_USD", "80"))
+    cap = float(os.environ.get("DATABENTO_CAP_USD", "45"))             # what is left of the free credit
     print("batch items", items, "priced at USD", round(total, 2), "cap", cap, flush=True)
     if total > cap:
         print("ABORT: above the cap; nothing submitted")
@@ -147,6 +148,13 @@ def batch(c, items, rep, out):
                         cols = [x for x in ("ts_event", "ts_ref", "instrument_id", "stat_type", "price", "quantity")
                                 if x in df.columns]
                         parts.append(df.loc[keep, cols])
+                    elif r["schema"] == "trades":                    # F2: hourly aggressor volume per contract
+                        df["hour"] = pd.to_datetime(df["ts_event"], utc=True).dt.floor("h")
+                        sd = df["side"].astype(str).str.upper().str[0]
+                        df["buy"] = df["size"].where(sd == "B", 0)
+                        df["sell"] = df["size"].where(sd == "A", 0)
+                        df["none"] = df["size"].where(~sd.isin(["A", "B"]), 0)
+                        parts.append(df.groupby(["hour", "instrument_id"])[["buy", "sell", "none"]].sum().reset_index())
                     elif r["schema"].startswith("ohlcv"):
                         cols = [x for x in ("ts_event", "instrument_id", "open", "high", "low", "close", "volume",
                                             "symbol") if x in df.columns]
@@ -159,6 +167,8 @@ def batch(c, items, rep, out):
                 T = pd.concat(parts, ignore_index=True)
                 if r["schema"] == "definition":
                     T = T.drop_duplicates("instrument_id", keep="last")
+                if r["schema"] == "trades":
+                    T = T.groupby(["hour", "instrument_id"])[["buy", "sell", "none"]].sum().reset_index()
                 T["stat_type"] = T["stat_type"].astype(str) if "stat_type" in T else None
                 path = os.path.join(comp, f"{item}_{s.replace('.', '_')}.parquet")
                 T.to_parquet(path, index=False)

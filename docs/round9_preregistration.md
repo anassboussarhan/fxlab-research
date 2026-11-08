@@ -148,3 +148,10 @@ files (2007-2010 web pages, 2011-2025 zip / Excel), rows naming outright purchas
 rows up to and including the forecast month, whose label is the very return being forecast (a look-ahead): it
 showed +72.8 bp a month, t 4.6, which is not a result. Fixed to train only on months whose next-month return is
 already known; the rerun is the AT5 result.
+
+**Addendum 6 (2026-11-08, F2 with the user's approval to use the free credit).** Price check: 6J trades from
+2022-07 cost $48.96, more than the roughly $50 left could safely cover, so 6J from 2023-01 (about $42, cap $45) is
+bought. Rule unchanged (daily aggressor imbalance vs its trailing 250-day 20th / 80th percentiles, next day
+21:00 -> 21:00 UTC in spot USD/JPY; buying 6J = buying yen = short USD/JPY), split 60/40 by days after the
+250-day warm-up. Info: the same signal over the next hour (hourly imbalance of the last hour, trailing 30 days of
+the same hour).
