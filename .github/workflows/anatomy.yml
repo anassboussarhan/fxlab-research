@@ -1,0 +1,76 @@
+name: anatomy
+# Round 12 (docs/anatomy_preregistration.md): per instrument, every catalog strategy + the nine new systems +
+# placebos priced in every entry / exit variant (scripts/anatomy_lab.py); then the diagnosis, fix selection on
+# 2007-2018, one test on 2019-2025, BH (scripts/anatomy_combine.py). Trigger: ci/ANATOMY.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/ANATOMY"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  sym:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 7
+      matrix:
+        symbol: [EURUSD, GBPUSD, USDJPY, AUDUSD, USDCAD, USDCHF, XAUUSD]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 ${{ matrix.symbol }}
+      - name: Lab
+        run: python -W ignore scripts/anatomy_lab.py --symbol ${{ matrix.symbol }} --out out/anat 2>&1 | tee lab_${{ matrix.symbol }}.txt | grep -v "^  " | tail -400
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: anat-${{ matrix.symbol }}
+          path: |
+            out/anat
+            lab_${{ matrix.symbol }}.txt
+          retention-days: 60
+  combine:
+    needs: sym
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: anat-*
+          path: anat_in
+      - name: Combine
+        run: python -W ignore scripts/anatomy_combine.py --inp anat_in --out out/anatomy 2>&1 | tee out/combine_log.txt | tail -80 || true
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p out/anatomy && cp out/combine_log.txt out/anatomy/ 2>/dev/null || true
+          for f in anat_in/*/out/anat/log_*.json anat_in/*/out/anat/*/log_*.json anat_in/*/log_*.json; do [ -f "$f" ] && cp "$f" out/anatomy/; done
+          cp -r out/anatomy /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan anat-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p anatomy && cp -r /tmp/pub/* anatomy/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > anatomy/RUN.txt
+          git add -f anatomy
+          git commit -qm "anatomy (run ${{ github.run_id }})"
+          git push -f origin HEAD:anatomy
