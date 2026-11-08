@@ -1,0 +1,50 @@
+{
+ "units": 202,
+ "part_A_rows": 19,
+ "part_A_counts": 0,
+ "part_B_units": 196,
+ "part_B_counts": 0,
+ "part_B_check_t_ge_1645": 3,
+ "part_B_share_t_ge_1645": 0.015306122448979591,
+ "placebo_units": 5,
+ "placebo_t_ge_1645": 0,
+ "placebo_by_symbol_runs": 35,
+ "placebo_by_symbol_t_ge_1645": 0,
+ "placebo_by_symbol_share": 0.0,
+ "fix_fit_t_median": 1.1539861333739232,
+ "fix_check_t_median": -1.3709241019828085,
+ "labels": {
+  "no gross edge": 151,
+  "cost-bound": 25,
+  "decay": 14,
+  "skew trap": 5,
+  "weak": 2
+ },
+ "fix_variants": {
+  "n_FLIP": 54,
+  "n_E1X2": 22,
+  "n_E0X2": 20,
+  "n_E3X2": 18,
+  "n_E2X2": 18,
+  "n_E0X1": 14,
+  "n_E1X1": 11,
+  "n_E0X05": 10,
+  "n_E2X1": 8,
+  "n_E1X05": 6,
+  "n_E3X05": 6,
+  "n_E2X05": 6,
+  "n_E3X1": 3
+ },
+ "fix_filters": {
+  "f_ext": 35,
+  "f_spread": 30,
+  "f_atr": 24,
+  "f_wday": 23,
+  "f_tstr": 22,
+  "f_sess": 21,
+  "f_with": 15,
+  "f_cal": 13,
+  "f_round": 11,
+  "none": 2
+ }
+}
