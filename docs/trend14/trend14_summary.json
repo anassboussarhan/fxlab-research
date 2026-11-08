@@ -1,0 +1,87 @@
+{
+ "A_agree": {
+  "BH": true,
+  "L1": true,
+  "L10": true,
+  "L11": true,
+  "L2": false,
+  "L4": true,
+  "L5": true,
+  "L6": true,
+  "L7": true,
+  "L8": true,
+  "L9": true,
+  "PL2": false
+ },
+ "C2a": [
+  {
+   "predictor": "vr5",
+   "fit_t": -0.785,
+   "check_t_in_fit_sign": -0.132,
+   "bh_pass": false
+  },
+  {
+   "predictor": "ac1d",
+   "fit_t": -0.163,
+   "check_t_in_fit_sign": 0.616,
+   "bh_pass": false
+  },
+  {
+   "predictor": "ac1w",
+   "fit_t": -0.0,
+   "check_t_in_fit_sign": 0.478,
+   "bh_pass": false
+  },
+  {
+   "predictor": "er63",
+   "fit_t": 0.22,
+   "check_t_in_fit_sign": -0.732,
+   "bh_pass": false
+  },
+  {
+   "predictor": "er252",
+   "fit_t": 0.689,
+   "check_t_in_fit_sign": 0.148,
+   "bh_pass": false
+  },
+  {
+   "predictor": "adx",
+   "fit_t": 0.559,
+   "check_t_in_fit_sign": -1.922,
+   "bh_pass": false
+  },
+  {
+   "predictor": "tstrength",
+   "fit_t": 0.754,
+   "check_t_in_fit_sign": 0.069,
+   "bh_pass": false
+  },
+  {
+   "predictor": "vr1_12",
+   "fit_t": 0.342,
+   "check_t_in_fit_sign": -0.8,
+   "bh_pass": false
+  },
+  {
+   "predictor": "past_trend",
+   "fit_t": -0.366,
+   "check_t_in_fit_sign": 0.273,
+   "bh_pass": false
+  },
+  {
+   "predictor": "avgcorr",
+   "fit_t": -0.007,
+   "check_t_in_fit_sign": 1.016,
+   "bh_pass": false
+  },
+  {
+   "predictor": "disp",
+   "fit_t": 0.292,
+   "check_t_in_fit_sign": -1.449,
+   "bh_pass": false
+  }
+ ],
+ "BC_rows": 26,
+ "BC_counts": 0,
+ "BC_meets_rule": 0
+}
