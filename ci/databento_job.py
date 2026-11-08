@@ -32,6 +32,10 @@ REQ = {
     "F2_trades_6J": dict(schema="trades", symbols=["6J.FUT"]),
     "F2_trades_6J_2019": dict(schema="trades", symbols=["6J.FUT"], start="2019-01-01"),
     "F2_trades_6E_2019": dict(schema="trades", symbols=["6E.FUT"], start="2019-01-01"),
+    "F2_6J_2021": dict(schema="trades", symbols=["6J.FUT"], start="2021-01-01"),
+    "F2_6J_2022": dict(schema="trades", symbols=["6J.FUT"], start="2022-01-01"),
+    "F2_6J_2022h2": dict(schema="trades", symbols=["6J.FUT"], start="2022-07-01"),
+    "F2_6E_2024": dict(schema="trades", symbols=["6E.FUT"], start="2024-01-01"),
     "F1_volume": dict(schema="ohlcv-1d", symbols=["6E.FUT", "6J.FUT", "6B.FUT", "6A.FUT", "6C.FUT", "6S.FUT", "6N.FUT",
                                                   "6M.FUT", "GC.FUT", "SI.FUT"]),
 }
@@ -115,7 +119,7 @@ def batch(c, items, rep, out):
         for s in r["symbols"]:
             if "error" in rep["items"][item]["per_symbol"].get(s, {}):
                 continue
-            job = c.batch.submit_job(dataset="GLBX.MDP3", symbols=[s], schema=r["schema"], start=START, end=END,
+            job = c.batch.submit_job(dataset="GLBX.MDP3", symbols=[s], schema=r["schema"], start=r.get("start", START), end=END,
                                      stype_in="parent", split_duration="month", compression="zstd")
             jid = job["id"]
             print("submitted", item, s, jid, flush=True)
