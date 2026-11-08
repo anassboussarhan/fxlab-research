@@ -1312,6 +1312,42 @@ def at9():
     print("AT9", {k: (v["filtered"]["check"].get("mean_bp"), v["trend"]["check"].get("mean_bp")) for k, v in out.items() if k in ("EUR", "JPY")}, flush=True)
 
 
+def s3():
+    f = os.path.join(A.r9data, "norges_fx.csv")
+    if not os.path.exists(f):
+        RES["S3"] = {"status": "not tested (data)"}
+        return
+    N = pd.read_csv(f).dropna(subset=["amount"])
+    N["applies_to"] = pd.PeriodIndex(N.applies_to, freq="M")
+    N = N.drop_duplicates("applies_to").set_index("applies_to").sort_index()
+    bk = book("USDNOK")
+    if bk is None:
+        RES["S3"] = {"status": "data missing (USDNOK M1)"}
+        return
+    rows = {}
+    for per_, nxt_amt in N.amount.items():
+        prev = per_ - 1
+        if prev not in N.index:
+            continue
+        ch = nxt_amt - N.amount[prev]
+        if ch == 0:
+            continue
+        bd = pd.bdate_range(per_.start_time, per_.end_time)
+        if len(bd) == 0 or bd[-1] > DEV_END:
+            continue
+        t0 = pd.Timestamp(bd[0]).tz_localize("UTC") + pd.Timedelta(hours=7)
+        t1 = pd.Timestamp(bd[-1]).tz_localize("UTC") + pd.Timedelta(hours=16)
+        tr = bk.trade(t0, t1, 1 if ch > 0 else -1, 10)                   # more FX bought = more NOK sold -> long USD/NOK
+        if tr is not None:
+            rows[bd[-1]] = {"net": net_of(tr), "gross": float(tr[1]), "change": ch}
+    D = pd.DataFrame.from_dict(rows, orient="index").sort_index()
+    D.to_csv(os.path.join(A.out, "s3_monthly.csv"))
+    RES["S3"] = {c: per(D[c]) for c in ("net", "gross")}
+    RES["S3"]["months"] = int(len(N))
+    RES.setdefault("_primary", {})["S3"] = RES["S3"]["net"]
+    print("S3", RES["S3"]["net"]["check"], flush=True)
+
+
 def save():
     def clean(o):
         if isinstance(o, dict):
