@@ -57,6 +57,8 @@ Speculative Positioning" (MDSP, from 1992); our weekly CFTC versions failed (V3)
 
 ## F. Round 9 (2026-11-05): what nine rounds of search still had not tested
 
+**Done 2026-11-08: nothing counts** (`docs/round9_results.md`); F2, S3, S4 not tested for lack of data.
+
 Found by listing every tested item (`docs/test_ledger.md`, all pre-registrations) against what is known about where
 FX money comes from (forced flows at known times, risk premia, information in flows) and a new search
 (`docs/literature_check.md` section 11). Ranked by prior x value / cost.
