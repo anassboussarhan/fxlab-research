@@ -1,0 +1,167 @@
+panels 33 ['AUDCAD', 'AUDCHF', 'AUDJPY', 'AUDNZD', 'AUDUSD', 'CADCHF', 'CADJPY', 'CHFJPY', 'EURAUD', 'EURCAD', 'EURCHF', 'EURGBP', 'EURJPY', 'EURNZD', 'EURUSD', 'GBPAUD', 'GBPCAD', 'GBPCHF', 'GBPJPY', 'GBPNZD', 'GBPUSD', 'JPNIDXJPY', 'NZDCAD', 'NZDCHF', 'NZDJPY', 'NZDUSD', 'USA500IDXUSD', 'USATECHIDXUSD', 'USDCAD', 'USDCHF', 'USDJPY', 'XAGUSD', 'XAUUSD']
+part A fills x 13 s
+part A fills open 26 s
+system   row  new_fit_t  new_check_mean_pct  new_check_t  new_check_gross_t  r13_fit_t  r13_check_mean_pct  r13_check_t  r13_check_gross_t  corr_gross  corr_net agree  open_fill_check_t  r13_check_sum_R  new_check_sum_R
+    L1    FX      -0.56               -0.87        -4.60              -3.71      -0.86               -0.86        -3.90              -2.77        0.95      0.88  True              -5.25              NaN              NaN
+    L1 NONFX      -0.43                0.18         0.43               1.10      -0.10                0.30         0.70               1.37        0.98      0.97  True               0.13              NaN              NaN
+    L1   ALL      -0.64               -0.79        -4.10              -3.01      -0.84               -0.74        -3.23              -1.92        0.95      0.89  True              -4.77              NaN              NaN
+    L2    FX      -1.09               -1.15        -4.88              -3.79      -1.36               -1.20        -4.04              -2.57        0.94      0.87  True              -5.54              NaN              NaN
+    L2 NONFX      -1.38               -0.31        -0.87               0.06      -0.69                0.10         0.29               1.22        0.89      0.89 False              -1.26              NaN              NaN
+    L2   ALL      -1.33               -1.14        -5.09              -3.77      -1.45               -1.08        -3.78              -2.12        0.94      0.88  True              -5.79              NaN              NaN
+    L4    FX      -0.40               -0.49        -1.75              -1.02      -0.41               -0.47        -1.74              -0.92        1.00      1.00  True              -1.73              NaN              NaN
+    L4 NONFX      -0.35                0.51         1.17               1.82      -0.28                0.56         1.26               1.91        1.00      1.00  True               1.17              NaN              NaN
+    L4   ALL      -0.45               -0.34        -1.12              -0.28      -0.44               -0.32        -1.07              -0.15        1.00      1.00  True              -1.11              NaN              NaN
+    L5    FX      -0.94               -0.34        -0.93              -0.34      -0.94               -0.34        -0.93              -0.34        1.00      1.00  True              -0.82              NaN              NaN
+    L5 NONFX       0.73                0.83         1.48               2.05       0.73                0.83         1.48               2.05        1.00      1.00  True               1.42              NaN              NaN
+    L5   ALL      -0.75               -0.14        -0.38               0.33      -0.75               -0.14        -0.38               0.33        1.00      1.00  True              -0.29              NaN              NaN
+    L6    FX      -0.85               -0.23        -0.82               0.08      -0.78               -0.27        -0.93               0.08        0.97      0.97  True              -0.90              NaN              NaN
+    L6 NONFX       0.15                0.67         1.43               2.22       0.26                0.67         1.37               2.27        0.96      0.96  True               1.32              NaN              NaN
+    L6   ALL      -0.78               -0.09        -0.31               0.81      -0.69               -0.12        -0.42               0.83        0.97      0.97  True              -0.40              NaN              NaN
+    L7    FX       0.03               -0.30        -0.96              -0.21       0.06               -0.32        -1.01              -0.23        0.97      0.97  True              -1.10              NaN              NaN
+    L7 NONFX      -0.78                0.32         0.62               1.44      -0.66                0.29         0.55               1.47        0.95      0.94  True               0.54              NaN              NaN
+    L7   ALL      -0.11               -0.24        -0.69               0.19      -0.06               -0.26        -0.75               0.19        0.97      0.97  True              -0.83              NaN              NaN
+    L8    FX      -0.55               -0.36        -1.16              -0.37      -0.51               -0.39        -1.20              -0.37        0.97      0.97  True              -1.18              NaN              NaN
+    L8 NONFX       0.10                0.25         0.55               1.41       0.19                0.23         0.50               1.45        0.96      0.96  True               0.36              NaN              NaN
+    L8   ALL      -0.50               -0.30        -0.95               0.01      -0.46               -0.33        -1.00               0.01        0.97      0.97  True              -1.01              NaN              NaN
+    L9    FX      -0.55               -0.30        -1.21              -0.41      -0.51               -0.31        -1.22              -0.42        0.97      0.97  True              -1.25              NaN              NaN
+    L9 NONFX      -0.24                0.56         1.19               1.95      -0.17                0.56         1.16               1.99        0.96      0.95  True               0.95              NaN              NaN
+    L9   ALL      -0.59               -0.18        -0.68               0.34      -0.53               -0.19        -0.69               0.35        0.97      0.97  True              -0.80              NaN              NaN
+   L10    FX      -0.06               -0.69        -2.96              -2.09      -0.08               -0.71        -3.04              -2.02        1.00      1.00  True              -2.65              NaN              NaN
+   L10 NONFX      -1.91                0.11         0.27               0.89      -1.93                0.11         0.27               0.89        1.00      1.00  True               0.64              NaN              NaN
+   L10   ALL      -0.40               -0.65        -2.70              -1.71      -0.42               -0.67        -2.77              -1.64        1.00      1.00  True              -2.40              NaN              NaN
+   L11    FX      -0.69               -0.44        -1.29              -0.75      -0.68               -0.43        -1.28              -0.73        1.00      1.00  True              -1.30              NaN              NaN
+   L11 NONFX       0.33                0.44         0.90               1.44       0.27                0.43         0.89               1.44        1.00      1.00  True               0.87              NaN              NaN
+   L11   ALL      -0.59               -0.31        -0.86              -0.19      -0.59               -0.30        -0.85              -0.18        1.00      1.00  True              -0.86              NaN              NaN
+    BH    FX      -0.83                0.07         0.27               0.55      -0.86                0.05         0.19               0.53        0.98      0.98  True               0.25              NaN              NaN
+    BH NONFX       1.06                1.09         2.61               3.63       1.19                1.06         2.53               3.71        0.95      0.94  True               2.63              NaN              NaN
+    BH   ALL      -0.64                0.28         0.92               1.49      -0.64                0.27         0.84               1.50        0.98      0.98  True               0.91              NaN              NaN
+   PL2    FX      -0.28               -1.08        -2.78              -1.05      -2.86               -0.68        -2.72              -0.83       -0.33     -0.29 False              -1.85              NaN              NaN
+   PL2 NONFX      -2.03               -0.60        -1.10              -0.25       0.93               -0.50        -1.02               0.10        0.18      0.16 False              -0.59              NaN              NaN
+   PL2   ALL      -0.77               -1.19        -2.94              -1.06      -2.75               -0.75        -2.96              -0.76       -0.28     -0.25 False              -1.80              NaN              NaN
+   D7W    FX      -0.60                0.58         2.37               2.85        NaN                 NaN         2.37                NaN         NaN       NaN   NaN               2.46            39.64            39.68
+   D7W NONFX       1.08                2.30         2.53               3.32        NaN                 NaN          NaN                NaN         NaN       NaN   NaN               2.62              NaN              NaN
+   D7W   ALL      -0.35                0.95         3.61               4.46        NaN                 NaN         3.61                NaN         NaN       NaN   NaN               3.57            64.26            64.30
+system  ecb_1999_2007_mean_monthly_raw  ecb_1999_2007_t  ecb_fit_t  ecb_check_t  corr_with_store_gross_2008_2025
+    L5                           0.015            0.955     -0.185       -0.527                            0.828
+    L6                           0.109            1.029     -0.554        0.097                            0.896
+    L7                           0.026            0.314     -0.296       -0.286                            0.882
+    L8                           0.015            0.132     -0.263       -0.875                            0.882
+    L9                          -0.044           -0.773     -0.349       -1.199                            0.922
+   L4c                          -0.005           -0.412      0.388       -0.985                              NaN
+part B runs 4 s
+panel (6539, 30) 1 s
+models 5 s
+           rowname      member  fit_mean_pct  fit_t  check_mean_pct  check_t  check_gross_t  excess_check_t  alpha_fit_t  alpha_check_t  bh_pass  meets_rule  counts
+            B1a|FX          50         -0.06  -0.24           -0.69    -3.34          -2.37             NaN          NaN            NaN    False       False   False
+         B1a|NONFX         200          0.27   1.12            1.00     1.83           2.37           -0.26          NaN            NaN    False       False   False
+            B1b|FX      20/100         -0.08  -0.35           -0.71    -2.18          -1.44             NaN          NaN            NaN    False       False   False
+         B1b|NONFX      50/200          0.17   0.73            0.83     1.48           2.05           -0.65          NaN            NaN    False       False   False
+            B1c|FX           1          0.09   0.34           -0.48    -1.36          -0.51             NaN          NaN            NaN    False       False   False
+         B1c|NONFX           6          0.19   0.81            0.18     0.43           1.28           -2.66          NaN            NaN    False       False   False
+            B1d|FX      32/128         -0.10  -0.39           -0.18    -0.70          -0.03             NaN          NaN            NaN    False       False   False
+         B1d|NONFX      64/256          0.12   0.49            0.70     1.65           2.39           -1.06          NaN            NaN    False       False   False
+       B2_L5|NONFX          lf          0.26   1.15            1.52     2.30           2.86            1.10         0.68           0.85    False       False   False
+       B2_L6|NONFX          lf          0.16   0.69            1.28     2.45           3.29            0.72         0.11           0.57    False       False   False
+       B2_L8|NONFX          lf          0.21   0.95            0.99     2.02           2.91           -0.40         0.35          -0.12    False       False   False
+       B2_L9|NONFX          lf         -0.01  -0.02            0.99     1.95           2.70           -0.28        -0.75           0.52    False       False   False
+          B3_L6|FX         idx         -0.27  -1.15           -0.29    -0.89          -0.29             NaN          NaN            NaN    False       False   False
+          B3_L9|FX         idx         -0.40  -1.80            0.05     0.08           0.49             NaN          NaN            NaN    False       False   False
+          B3_BO|FX         idx         -0.04  -0.16            0.15     0.20           0.57             NaN          NaN            NaN    False       False   False
+             B4|FX ewmac+carry         -0.17  -0.80           -0.30    -0.75          -1.13             NaN          NaN            NaN    False       False   False
+             B5|FX     highvol         -0.36  -1.50           -0.31    -1.12          -0.29             NaN          NaN            NaN    False       False   False
+          B5|NONFX     highvol         -0.29  -1.48            0.56     1.13           1.60           -1.35          NaN            NaN    False       False   False
+       C1|ridge|FX       ridge         -0.75  -2.47           -0.75    -2.36          -0.42             NaN          NaN            NaN    False       False   False
+      C1|ridge|ALL       ridge         -0.78  -2.60           -0.56    -1.90           0.52             NaN          NaN            NaN    False       False   False
+ C2b_rev|ridge|ALL       ridge         -0.59  -1.94           -0.30    -1.41          -0.07             NaN          NaN            NaN    False       False   False
+C2b_flat|ridge|ALL       ridge         -0.38  -1.32           -0.13    -0.70           0.25             NaN          NaN            NaN    False       False   False
+         C1|gbm|FX         gbm         -0.46  -1.68           -0.77    -2.71          -0.52             NaN          NaN            NaN    False       False   False
+        C1|gbm|ALL         gbm         -0.49  -1.80           -0.78    -2.98          -0.47             NaN          NaN            NaN    False       False   False
+   C2b_rev|gbm|ALL         gbm         -0.20  -0.74           -0.43    -1.83          -0.36             NaN          NaN            NaN    False       False   False
+  C2b_flat|gbm|ALL         gbm         -0.13  -0.51           -0.20    -0.89           0.04             NaN          NaN            NaN    False       False   False
+{
+ "A_agree": {
+  "BH": true,
+  "L1": true,
+  "L10": true,
+  "L11": true,
+  "L2": false,
+  "L4": true,
+  "L5": true,
+  "L6": true,
+  "L7": true,
+  "L8": true,
+  "L9": true,
+  "PL2": false
+ },
+ "C2a": [
+  {
+   "predictor": "vr5",
+   "fit_t": -0.785,
+   "check_t_in_fit_sign": -0.132,
+   "bh_pass": false
+  },
+  {
+   "predictor": "ac1d",
+   "fit_t": -0.163,
+   "check_t_in_fit_sign": 0.616,
+   "bh_pass": false
+  },
+  {
+   "predictor": "ac1w",
+   "fit_t": -0.0,
+   "check_t_in_fit_sign": 0.478,
+   "bh_pass": false
+  },
+  {
+   "predictor": "er63",
+   "fit_t": 0.22,
+   "check_t_in_fit_sign": -0.732,
+   "bh_pass": false
+  },
+  {
+   "predictor": "er252",
+   "fit_t": 0.689,
+   "check_t_in_fit_sign": 0.148,
+   "bh_pass": false
+  },
+  {
+   "predictor": "adx",
+   "fit_t": 0.559,
+   "check_t_in_fit_sign": -1.922,
+   "bh_pass": false
+  },
+  {
+   "predictor": "tstrength",
+   "fit_t": 0.754,
+   "check_t_in_fit_sign": 0.069,
+   "bh_pass": false
+  },
+  {
+   "predictor": "vr1_12",
+   "fit_t": 0.342,
+   "check_t_in_fit_sign": -0.8,
+   "bh_pass": false
+  },
+  {
+   "predictor": "past_trend",
+   "fit_t": -0.366,
+   "check_t_in_fit_sign": 0.273,
+   "bh_pass": false
+  },
+  {
+   "predictor": "avgcorr",
+   "fit_t": -0.007,
+   "check_t_in_fit_sign": 1.016,
+   "bh_pass": false
+  },
+  {
+   "predictor": "disp",
+   "fit_t": 0.292,
+   "check_t_in_fit_sign": -1.449,
+   "bh_pass": false
+  }
+ ],
+ "BC_rows": 26,
+ "BC_counts": 0,
+ "BC_meets_rule": 0
+}
