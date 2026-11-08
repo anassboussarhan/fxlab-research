@@ -624,11 +624,35 @@ INV = {"JPY": "DEXJPUS", "CHF": "DEXSZUS", "CAD": "DEXCAUS", "SEK": "DEXSDUS", "
 DIR = {"GBP": "DEXUSUK", "AUD": "DEXUSAL", "NZD": "DEXUSNZ", "EUR": "DEXUSEU"}   # USD per foreign currency
 
 
+_ECB = {}
+
+
+def ecb_usd_per(ccy):
+    """USD per unit of ccy from the ECB euro reference rates (from 1999; addendum 3: FRED was unreachable)."""
+    f = os.path.join(A.r9data, "ecb", "exr.csv")
+    if not os.path.exists(f) or ccy == "DEM":
+        return None
+    if not _ECB:
+        E = pd.read_csv(f)
+        E = E[["CURRENCY", "TIME_PERIOD", "OBS_VALUE"]].dropna()
+        E["TIME_PERIOD"] = pd.to_datetime(E.TIME_PERIOD)
+        _ECB["p"] = E.pivot_table(index="TIME_PERIOD", columns="CURRENCY", values="OBS_VALUE")   # units per EUR
+    P = _ECB["p"]
+    if "USD" not in P:
+        return None
+    usd_per_eur = P["USD"]
+    if ccy == "EUR":
+        return usd_per_eur.dropna().rename("EUR")
+    if ccy not in P:
+        return None
+    return (usd_per_eur / P[ccy]).dropna().rename(ccy)
+
+
 def fred_usd_per(ccy):
     sid = INV.get(ccy) or DIR[ccy]
     f = os.path.join(A.r9data, "fred", f"{sid}.csv")
-    if not os.path.exists(f):
-        return None
+    if not os.path.exists(f) or os.path.getsize(f) < 1000:
+        return ecb_usd_per(ccy)
     d = pd.read_csv(f)
     x = pd.to_numeric(d.iloc[:, 1], errors="coerce")
     x.index = pd.to_datetime(d.iloc[:, 0])
@@ -682,7 +706,7 @@ def s1():
         cnt = past.notna().sum()
         sig.loc[t] = past.mean().where(cnt >= 10)
     a = ls_portfolio(sig, M)
-    a = a[a.index >= "1991-01-01"]
+    a = a[a.index >= "1991-01-01"]                                     # with ECB data the first signals are 2009
     a.to_csv(os.path.join(A.out, "s1a_monthly.csv"))
     res = {"S1a seasonality": per(a, 12)}
     RES.setdefault("_primary", {})["S1a"] = res["S1a seasonality"]
@@ -818,8 +842,12 @@ def s2():
     ccol = [c for c in S.columns if c.lower() == "close"][0]
     sge = pd.Series(pd.to_numeric(S[ccol], errors="coerce").values, index=pd.to_datetime(S[dcol])).dropna()
     fx = os.path.join(A.r9data, "fred", "DEXCHUS.csv")
-    d = pd.read_csv(fx)
-    usdcny = pd.Series(pd.to_numeric(d.iloc[:, 1], errors="coerce").values, index=pd.to_datetime(d.iloc[:, 0])).dropna()
+    if os.path.exists(fx) and os.path.getsize(fx) > 1000:
+        d = pd.read_csv(fx)
+        usdcny = pd.Series(pd.to_numeric(d.iloc[:, 1], errors="coerce").values, index=pd.to_datetime(d.iloc[:, 0])).dropna()
+    else:
+        cny = ecb_usd_per("CNY")
+        usdcny = 1.0 / cny if cny is not None else pd.Series(dtype=float)
     bk = book("XAUUSD")
     rows = {}
     for day, px in sge.items():
@@ -908,6 +936,234 @@ def at5():
     print("AT5", out["net"]["check"].get("mean_bp"), out["net"]["check"].get("t"), flush=True)
 
 
+# ------------------------------------------------------------------------------------------- N1-N3
+HOME = {"USD": "America/New_York", "EUR": "Europe/Berlin", "GBP": "Europe/London", "JPY": "Asia/Tokyo",
+        "AUD": "Australia/Sydney", "CAD": "America/Toronto", "CHF": "Europe/Zurich", "NZD": "Pacific/Auckland"}
+LEGS = {"EUR": [("EURUSD", 1)], "GBP": [("GBPUSD", 1)], "AUD": [("AUDUSD", 1)], "NZD": [("NZDUSD", 1)],
+        "CAD": [("USDCAD", -1)], "CHF": [("USDCHF", -1)], "JPY": [("USDJPY", -1)], "USD": [("EURUSD", -1), ("USDJPY", 1)]}
+BAD_UP = ("Unemployment", "Jobless", "Claimant")
+
+
+def num(v):
+    if not isinstance(v, str) or not v.strip():
+        return np.nan
+    v = v.strip().replace(",", "")
+    mult = {"K": 1e3, "M": 1e6, "B": 1e9, "T": 1e12}.get(v[-1:].upper(), 1.0)
+    v = v.rstrip("%KMBTkmbt|<>")
+    try:
+        return float(v) * mult
+    except ValueError:
+        return np.nan
+
+
+def ff_events():
+    f = os.path.join(A.r9data, "ff", "forex_factory_cache.csv")
+    F = pd.read_csv(f)
+    F = F[F.Currency.isin(list(HOME))].copy()
+    F["t"] = pd.to_datetime(F.DateTime, utc=True, errors="coerce")
+    F = F.dropna(subset=["t"])
+    known = ~F.DateTime.str[11:19].isin(["00:00:00", "23:59:59"])
+    # time imputation (addendum 2): the modal local release time of the same currency + title, if >= 80% of its
+    # known-time rows share it (at least 5 rows); otherwise the row is dropped
+    F["local_hm"] = [t.tz_convert(HOME[c]).strftime("%H:%M") for t, c in zip(F.t, F.Currency)]
+    F["known"] = known.values
+    mode = {}
+    for (c, e), g in F[F.known].groupby(["Currency", "Event"]):
+        vc = g.local_hm.value_counts()
+        if len(g) >= 5 and vc.iloc[0] / len(g) >= 0.8:
+            mode[(c, e)] = vc.index[0]
+    rows = []
+    for r in F.itertuples():
+        if r.known:
+            rows.append(r.t)
+            continue
+        hm = mode.get((r.Currency, r.Event))
+        if hm is None:
+            rows.append(pd.NaT)
+            continue
+        day = r.t.tz_convert(HOME[r.Currency]).normalize().tz_localize(None)
+        h, m = map(int, hm.split(":"))
+        try:
+            rows.append(pd.Timestamp(day.year, day.month, day.day, h, m).tz_localize(HOME[r.Currency]).tz_convert("UTC"))
+        except Exception:                                                # noqa: BLE001
+            rows.append(pd.NaT)
+    F["t"] = rows
+    LOG["ff_rows"] = {"all": int(len(F)), "time_known": int(F.known.sum()), "imputed": int((~F.known & F.t.notna()).sum()),
+                      "dropped_no_time": int(F.t.isna().sum())}
+    F = F.dropna(subset=["t"])
+    F["a"], F["f"] = F.Actual.map(num), F.Forecast.map(num)
+    F["imp"] = F.Impact.str.split().str[0]
+    F["dev"] = F.a - F.f
+    fit = F[(F.t <= pd.Timestamp(FIT_END, tz="UTC") + pd.Timedelta(days=1)) & F.dev.notna()]
+    sd = fit.groupby(["Currency", "Event"]).dev.agg(["std", "count"])
+    sd = sd[(sd["count"] >= 12) & (sd["std"] > 0)]["std"]
+    F = F.join(sd.rename("sd"), on=["Currency", "Event"])
+    F["s"] = F.dev / F.sd
+    F.loc[F.Event.str.contains("|".join(BAD_UP), na=False), "s"] *= -1
+    LOG["ff_with_surprise"] = int(F.s.notna().sum())
+    return F
+
+
+def n_tests():
+    F = ff_events()
+    hi = F[(F.imp == "High")]
+    # N1 / N3 event lists: one per (currency, minute)
+    E1 = hi.dropna(subset=["s"]).groupby(["Currency", "t"]).s.sum().reset_index()
+    E1 = E1[E1.s.abs() >= 1]
+    E3 = hi.groupby(["Currency", "t"]).size().reset_index()[["Currency", "t"]]
+    LOG["n_events"] = {"N1": int(len(E1)), "N3": int(len(E3))}
+    V1 = {"main": (15, 75), "fast": (5, 65), "long": (15, 240)}
+    need = {}
+    for k, r in E1.iterrows():
+        for pair, mlt in LEGS[r.Currency]:
+            need.setdefault(pair, []).append(("N1", k, r.t, int(np.sign(r.s) * mlt)))
+    for k, r in E3.iterrows():
+        for pair, mlt in LEGS[r.Currency]:
+            need.setdefault(pair, []).append(("N3", k, r.t, mlt))
+    res = {}
+    for pair, items in need.items():
+        bk = book(pair)
+        if bk is None:
+            continue
+        for test, k, t, side in items:
+            if t > pd.Timestamp(DEV_END, tz="UTC"):
+                continue
+            wins = V1 if test == "N1" else {"main": (-240, -15)}
+            for v, (a, b) in wins.items():
+                i, j = bk.at(t + pd.Timedelta(minutes=a), 3), bk.at(t + pd.Timedelta(minutes=b), 3)
+                if i < 0 or j <= i:
+                    continue
+                tr = bk.trade_ij(i, j, side)
+                if tr is not None:
+                    res.setdefault((test, v, k), []).append(net_of(tr))
+    out = {}
+    for test, E in (("N1", E1), ("N3", E3)):
+        for v in (V1 if test == "N1" else {"main": 0}):
+            x = {E.t[k].tz_convert("UTC").tz_localize(None): np.mean(vals) for (tt, vv, k), vals in res.items()
+                 if tt == test and vv == v}
+            X = pd.Series(x).sort_index()
+            X = X.groupby(level=0).mean()
+            X.to_csv(os.path.join(A.out, f"{test.lower()}_{v}.csv"))
+            out[f"{test}_{v}"] = per(X)
+    # N2: weekly surprise-index cross-section
+    MH = F[F.imp.isin(["High", "Medium"])].dropna(subset=["s"])
+    fridays = pd.date_range("2007-04-06", "2025-04-04", freq="W-FRI")
+    idx = {}
+    for fr in fridays:
+        t = pd.Timestamp(fr, tz="UTC") + pd.Timedelta(hours=20)
+        w = MH[(MH.t < t) & (MH.t >= t - pd.Timedelta(days=90))]
+        age = (t - w.t).dt.total_seconds() / 86400
+        idx[fr] = (w.s * np.exp(-age / 30)).groupby(w.Currency).sum().reindex(list(HOME)).fillna(0.0)
+    I = pd.DataFrame(idx).T
+    legs = {}
+    for c, lst in LEGS.items():
+        if c == "USD":
+            continue
+        pair, mlt = lst[0]
+        bk = book(pair)
+        if bk is None:
+            continue
+        for fr, nx in zip(fridays[:-1], fridays[1:]):
+            t0 = pd.Timestamp(fr, tz="UTC") + pd.Timedelta(hours=20)
+            t1 = pd.Timestamp(nx, tz="UTC") + pd.Timedelta(hours=20)
+            i, j = bk.at(t0, 10), bk.at(t1, 10)
+            if i < 0 or j <= i:
+                continue
+            L, S = bk.trade_ij(i, j, mlt), bk.trade_ij(i, j, -mlt)
+            if L is not None and S is not None:
+                legs[(c, fr)] = (net_of(L), net_of(S))
+    port = {}
+    for fr, nx in zip(fridays[:-1], fridays[1:]):
+        r = I.loc[fr].sort_values()
+        top, bot = list(r.index[-2:]), list(r.index[:2])
+        vals = []
+        for c in top:
+            vals.append(0.0 if c == "USD" else legs.get((c, fr), (np.nan,))[0])
+        for c in bot:
+            vals.append(0.0 if c == "USD" else legs.get((c, fr), (np.nan, np.nan))[1])
+        if np.isfinite(vals).all():
+            port[nx] = float(np.mean(vals))
+    P = pd.Series(port)
+    P.to_csv(os.path.join(A.out, "n2_weekly.csv"))
+    out["N2"] = per(P, 52)
+    RES["N"] = out
+    for k in ("N1_main", "N3_main"):
+        RES.setdefault("_primary", {})[k[:2]] = out[k]
+    RES["_primary"]["N2"] = out["N2"]
+    print("N", {k: (v["check"].get("n"), v["check"].get("mean_bp"), v["check"].get("t")) for k, v in out.items()}, flush=True)
+
+
+# ------------------------------------------------------------------------------------------- AT7, AT8 (third list)
+def at7():
+    import flows_lab as FL
+    SESS = [("asia", (-1, 18, 0), (0, 3, 0)), ("london", (0, 3, 0), (0, 8, 0)), ("us", (0, 8, 0), (0, 17, 0))]
+    out = {}
+    for sym in ("XAUUSD", "XAGUSD"):
+        bk = book(sym)
+        if bk is None:
+            out[sym] = {"status": "data missing"}
+            continue
+        rows, prev_ret = [], None
+        for d in pd.bdate_range("2010-01-04", DEV_END):
+            for name, (da, ha, ma), (db, hb, mb) in SESS:
+                t0 = FL.local_ts(d + pd.Timedelta(days=da), "America/New_York", ha, ma)
+                t1 = FL.local_ts(d + pd.Timedelta(days=db), "America/New_York", hb, mb)
+                i, j = bk.at(t0, 10), bk.at(t1, 10)
+                if i < 0 or j <= i:
+                    prev_ret = None
+                    continue
+                r_sess = mid(bk, j) / mid(bk, i) - 1
+                if prev_ret is not None and prev_ret > 0:
+                    tr = bk.trade_ij(i, j, 1)
+                    if tr is not None:
+                        rows.append({"day": pd.Timestamp(d), "session": name, "net": net_of(tr), "gross": float(tr[1])})
+                prev_ret = r_sess
+        D = pd.DataFrame(rows)
+        D.to_csv(os.path.join(A.out, f"at7_{sym}.csv"), index=False)
+        daily = D.groupby("day").net.sum()
+        out[sym] = {"all_sessions_daily": per(daily, 252), "gross_daily": per(D.groupby("day").gross.sum(), 252)}
+        for name, *_ in SESS:
+            out[sym][name] = per(D[D.session == name].set_index("day").net)
+        print("AT7", sym, out[sym]["all_sessions_daily"]["check"].get("mean_bp"), flush=True)
+    RES["AT7"] = out
+    if "all_sessions_daily" in out.get("XAUUSD", {}):
+        RES.setdefault("_primary", {})["AT7"] = out["XAUUSD"]["all_sessions_daily"]
+
+
+def at8():
+    out = {}
+    bdays = pd.bdate_range("2007-01-01", "2026-01-10")
+    ser = pd.Series(bdays, index=bdays)
+    for sym, side in (("XAUUSD", 1), ("EURUSD", -1), ("USDJPY", 1)):
+        bk = book(sym)
+        if bk is None:
+            continue
+        rows = {}
+        for m, g in ser.groupby(ser.index.to_period("M")):
+            if len(g) < 3:
+                continue
+            nxt = ser[ser.index.to_period("M") == m + 1]
+            if len(nxt) < 3:
+                continue
+            d0, d1 = g.iloc[-2], nxt.iloc[2]                               # close of the second-to-last day -> 3rd day
+            if d1 > DEV_END:
+                continue
+            t0 = pd.Timestamp(d0).tz_localize("UTC") + pd.Timedelta(hours=21)
+            t1 = pd.Timestamp(d1).tz_localize("UTC") + pd.Timedelta(hours=21)
+            tr = bk.trade(t0, t1, side, 15)
+            if tr is not None:
+                rows[pd.Timestamp(d1)] = {"net": net_of(tr), "gross": float(tr[1])}
+        D = pd.DataFrame.from_dict(rows, orient="index")
+        out[sym] = {c: per(D[c]) for c in D.columns}
+    usd = None
+    if "EURUSD" in out and "USDJPY" in out:
+        out["USD_basket_note"] = "long USD: mean of short EURUSD and long USDJPY, see the per-pair rows"
+    RES["AT8"] = out
+    if "XAUUSD" in out:
+        RES.setdefault("_primary", {})["AT8"] = out["XAUUSD"]["net"]
+        print("AT8", out["XAUUSD"]["net"]["check"].get("mean_bp"), flush=True)
+
+
 def save():
     def clean(o):
         if isinstance(o, dict):
@@ -939,7 +1195,7 @@ def main():
     A.tag = "m1" if A.m1 else "opt" if A.opt else "daily" if A.daily else "combine"
     parts = []
     if A.m1:
-        parts = [g1, at1, at2, at4, s5] + [globals()[f] for f in ("s2", "n_tests", "s3", "s4") if f in globals()]
+        parts = [g1, at1, at2, at4, s5] + [globals()[f] for f in ("s2", "n_tests", "at7", "at8", "s3", "s4") if f in globals()]
     if A.opt:
         parts = [globals()[f] for f in ("o3", "o4", "o5", "at6") if f in globals()]
     if A.daily:

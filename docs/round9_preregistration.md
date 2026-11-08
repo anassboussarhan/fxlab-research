@@ -118,3 +118,24 @@ priced. S5 is rerun with entry at 10:05 Tokyo for every year. F2: the price chec
 2010-2025 trades, $88 / $126 for 2019-2025; the span that fits in about $45 of the remaining credit is about 1.4
 years of both contracts (or 3.5 years of 6J only), too short for a daily test to have power, so nothing was bought
 and F2 is reported as not tested (the user can decide whether 3.5 years of 6J for about $44 is worth it).
+
+**Addendum 2 (2026-11-06, data formats, before any result was read).** The Forex Factory archive gives times with
+an Asia/Tehran offset that converts correctly (Non-Farm Payrolls at 08:30 New York), but 28,612 of its 83,427 rows
+(5,862 high-impact) carry no time (00:00 or 23:59:59). Rule: such a row takes the modal local release time of the
+same currency and title (in the currency's home time zone) if at least 80% of that title's timed rows share it
+(and at least 5 do); otherwise it is dropped. Values: K / M / B / T multiply, % is stripped.
+
+**Addendum 3 (2026-11-08).** FRED timed out from GitHub on two attempts, so S1, S1b, AT3 and AT5 use the ECB euro
+reference rates (daily from 1999; USD per unit = USD per EUR / currency per EUR). S1a therefore starts its signals
+in 2009 (10 years of history), fit 2009-2018, check 2019-2025, and has no DEM. Norges Bank (S3): only 20 monthly
+announcements could be found (MQL5, 2024-2025), too few, so S3 is not tested. The BoJ archive (S4) is reachable
+only through index pages; S4 waits for a parser.
+
+**Third user list (2026-11-08), added before testing:**
+- **AT7 (primary):** gold session momentum, long only: sessions Asia 18:00 -> 03:00 New York, London 03:00 -> 08:00,
+  US 08:00 -> 17:00; be long gold in a session only if the previous session's return was positive. Daily sum,
+  2010-2018 / 2019-2025. Info: per session; silver.
+- **AT8 (primary):** turn of the month in gold: long XAU/USD from 21:00 UTC on the second-to-last business day of a
+  month to 21:00 UTC on the third business day of the next. Info: long USD against EUR and JPY.
+- Gold "buy 18:00 New York, sell 9 hours later" is the A1 test of run 22 (18:00 New York -> 08:00 London): +2.4 bp
+  before costs (t 2.2), -4.4 bp after; not rerun.
