@@ -916,8 +916,8 @@ def at5():
     for k in range(36, len(months) - 1):
         t = months[k]
         for c in c7:
-            X = pd.concat([feats.loc[months[1:k + 1]], fd[c].reindex(months[1:k + 1]).rename("fd")], axis=1)
-            y = ex[c].shift(-1).reindex(months[1:k + 1])
+            X = pd.concat([feats.loc[months[1:k]], fd[c].reindex(months[1:k]).rename("fd")], axis=1)
+            y = ex[c].shift(-1).reindex(months[1:k])
             ok = X.notna().all(axis=1) & y.notna()
             X, y = X[ok], y[ok]
             if len(y) < 30:

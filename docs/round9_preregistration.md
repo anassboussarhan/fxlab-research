@@ -143,3 +143,8 @@ only through index pages; S4 waits for a parser.
 **Addendum 4 (2026-11-08).** AT8 priced only 59 of about 220 month turns because the M1 store has no bars in the
 21:00 UTC daily break; entry and exit move to 20:50 UTC. S4: offer dates are read from the BoJ's monthly operation
 files (2007-2010 web pages, 2011-2025 zip / Excel), rows naming outright purchases of JGBs.
+
+**Addendum 5 (2026-11-08, code error found in the first AT5 run).** The first AT5 run trained each month's LASSO on
+rows up to and including the forecast month, whose label is the very return being forecast (a look-ahead): it
+showed +72.8 bp a month, t 4.6, which is not a result. Fixed to train only on months whose next-month return is
+already known; the rerun is the AT5 result.
