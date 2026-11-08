@@ -923,7 +923,7 @@ def at5():
             if len(y) < 30:
                 continue
             mu, sd = X.mean(), X.std().replace(0, 1)
-            mdl = LassoCV(cv=5, n_alphas=30, max_iter=5000).fit(((X - mu) / sd).values, y.values)
+            mdl = LassoCV(cv=5, alphas=30, max_iter=5000).fit(((X - mu) / sd).values, y.values)
             xt = pd.concat([feats.loc[[t]], pd.Series({t: fd[c].get(t)}, name="fd")], axis=1)
             if xt.isna().any(axis=None):
                 continue
