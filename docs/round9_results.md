@@ -4,7 +4,7 @@ Rules: `docs/round9_preregistration.md` (with addenda 1-5, all written before th
 Code `scripts/round9_lab.py`; raw outputs on the `misc-r9m1`, `misc-r9m1b`, `misc-r9m1c`, `misc-r9opt`,
 `misc-r9daily`, `misc-r9at5` branches; the combined table `docs/round9/round9_combined.csv`. 2026 not used.
 
-**Nothing counts.** 18 primary rows, none passes Benjamini-Hochberg at q 0.10, and only one (AT8) reaches t 1.645 in
+**Nothing counts.** 22 primary rows (18 on 2026-11-08 morning, 4 added the same day), none passes Benjamini-Hochberg at q 0.10, and only one (AT8) reaches t 1.645 in
 its check period, with a negative fit period.
 
 | Test | Check period: n, mean net, t | Fit period mean | Verdict |
@@ -26,6 +26,10 @@ its check period, with a negative fit period.
 | AT7 gold session momentum, long only | 842 days, -3.5 bp, t -2.6 | -9.6 bp | fails; gross +0.1 bp; silver -17.4 bp |
 | O5 gamma switch | 2,095, -1.9 bp, t -4.4 | -0.7 bp | fails |
 | N3 pre-release drift | 3,001, -2.3 bp, t -4.6 | -2.4 bp | fails |
+| AT9 option-implied Hurst filter on weekly trend | 417 weeks, +1.7 bp, t 0.61 | +2.0 bp | fails as alpha; it does cut the worst drawdown (EUR -3,790 -> -2,077 bp, JPY -2,333 -> -1,827 bp), as the source claimed |
+| S4 BoJ scheduled JGB purchase days (2021-07 to 2025, quarterly schedules) | 71, +1.0 bp, t 0.55 | -1.8 bp | fails |
+| S3 Norges Bank daily-purchase changes (121 announcements found, 34 changes) | 14, +6.7 bp, t 0.06 | -5.6 bp | fails |
+| F2 CME 6J signed order flow, daily (2023-2025, bought for $40.89 of the free credit) | 56, -15.5 bp, t -4.1 (gross -1.9) | -3.0 bp (gross +6.7) | fails; entry at 16:05 Chicago falls in the rollover spread, but it fails before costs too; hourly version -1.6 bp, t -5.5 |
 | AT1 gold cost-gated z-score | 3,522, -3.7 bp, t -9.4 | -3.3 bp | fails; gross -0.4 bp, so the gate removes nothing that was there; -5.4 / -7.1 bp at 1.5x / 2x cost |
 
 **G1, the Gotobi window on CME yen futures (judged on its own):** the leg from the 5 PM Chicago reopen to 00:53 UTC
@@ -33,9 +37,7 @@ earns +2.4 bp before costs on 2019-2025 (t 3.3; +1.8 bp, t 2.0 on 2007-2018), co
 real, but 1.5 ticks plus commission (about 1.7 bp) leave +0.9 bp (t 1.2) and +0.6 bp (t 0.7): **fails**. The full
 B0 night on the same nights: +4.9 bp (t 3.2). A futures prop firm cannot hold the part that pays most.
 
-**Not tested:** F2 (CME signed order flow: the affordable span is 1.4 years, nothing bought); S3 (only 20 Norges Bank
-announcements found); S4 (the BoJ monthly files list short-term operations only, not the outright JGB purchase
-days). Gold "18:00 New York + 9 hours" was A1 in run 22 (+2.4 bp gross, -4.4 bp net).
+**Not tested:** retail order flow (needs broker data: an OANDA practice token or a vendor trial). Gold "18:00 New York + 9 hours" was A1 in run 22 (+2.4 bp gross, -4.4 bp net).
 
 What this round adds: the claims in the user's three lists that could be checked here (USD/JPY London-open momentum,
 gold session momentum, cost-gated gold mean reversion, Hurst on the gold / silver spread, cost-aware carry,
