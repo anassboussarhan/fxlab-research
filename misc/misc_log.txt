@@ -1,0 +1,224 @@
+anat-AUDUSD
+anat-EURUSD
+anat-GBPUSD
+anat-USDCAD
+anat-USDCHF
+anat-USDJPY
+anat-XAUUSD
+{
+ "filters": {
+  "f_atr": {
+   "pairs": 1140,
+   "corr_fit_check": -0.29361863762782286,
+   "same_sign_share": 0.5692982456140351,
+   "top_decile_fit_mean_check_bp": -1.6271662826438633
+  },
+  "f_cal": {
+   "pairs": 378,
+   "corr_fit_check": 0.02604920165408828,
+   "same_sign_share": 0.42592592592592593,
+   "top_decile_fit_mean_check_bp": -2.7088973888487597
+  },
+  "f_ext": {
+   "pairs": 1140,
+   "corr_fit_check": -0.11631542240792381,
+   "same_sign_share": 0.4824561403508772,
+   "top_decile_fit_mean_check_bp": -1.0919130386512839
+  },
+  "f_round": {
+   "pairs": 1140,
+   "corr_fit_check": 0.3739224133801617,
+   "same_sign_share": 0.5473684210526316,
+   "top_decile_fit_mean_check_bp": 4.299175365934253
+  },
+  "f_sess": {
+   "pairs": 1360,
+   "corr_fit_check": -0.21451101972373612,
+   "same_sign_share": 0.5588235294117647,
+   "top_decile_fit_mean_check_bp": -0.9027103059001234
+  },
+  "f_spread": {
+   "pairs": 1137,
+   "corr_fit_check": 0.11418403714217579,
+   "same_sign_share": 0.6033421284080914,
+   "top_decile_fit_mean_check_bp": 3.548611066740288
+  },
+  "f_tstr": {
+   "pairs": 1140,
+   "corr_fit_check": -0.06309363505726868,
+   "same_sign_share": 0.5070175438596491,
+   "top_decile_fit_mean_check_bp": -0.9639148598948359
+  },
+  "f_wday": {
+   "pairs": 1069,
+   "corr_fit_check": 0.23065273081438578,
+   "same_sign_share": 0.5996258185219832,
+   "top_decile_fit_mean_check_bp": 2.1412898342673694
+  },
+  "f_with": {
+   "pairs": 366,
+   "corr_fit_check": -0.163972839328599,
+   "same_sign_share": 0.48633879781420764,
+   "top_decile_fit_mean_check_bp": -1.1836698866521367
+  }
+ },
+ "filters_all": {
+  "pairs": 8870,
+  "corr_fit_check": -0.00797031946740228,
+  "same_sign_share": 0.5441939120631342
+ },
+ "variants": {
+  "n_E0X05": {
+   "units": 190,
+   "median_fit_delta_bp": 0.12634170928751648,
+   "median_check_delta_bp": 0.055109513885346344,
+   "share_better_fit": 0.5631578947368421,
+   "share_better_check": 0.5263157894736842,
+   "corr_fit_check": 0.2602948580373837,
+   "units_positive_level_both": 1
+  },
+  "n_E0X2": {
+   "units": 190,
+   "median_fit_delta_bp": -0.20535198926386433,
+   "median_check_delta_bp": -0.3269093635273781,
+   "share_better_fit": 0.38421052631578945,
+   "share_better_check": 0.3631578947368421,
+   "corr_fit_check": 0.11426630767334048,
+   "units_positive_level_both": 2
+  },
+  "n_E1X05": {
+   "units": 185,
+   "median_fit_delta_bp": 0.27767799799068776,
+   "median_check_delta_bp": 0.15438945951874097,
+   "share_better_fit": 0.6432432432432432,
+   "share_better_check": 0.572972972972973,
+   "corr_fit_check": 0.10407229107721146,
+   "units_positive_level_both": 1
+  },
+  "n_E1X1": {
+   "units": 185,
+   "median_fit_delta_bp": 0.07744822799464593,
+   "median_check_delta_bp": 0.0857065715842487,
+   "share_better_fit": 0.6054054054054054,
+   "share_better_check": 0.6432432432432432,
+   "corr_fit_check": -0.3203069556035924,
+   "units_positive_level_both": 1
+  },
+  "n_E1X2": {
+   "units": 185,
+   "median_fit_delta_bp": -0.17446522827436436,
+   "median_check_delta_bp": -0.2436196019994371,
+   "share_better_fit": 0.44324324324324327,
+   "share_better_check": 0.42702702702702705,
+   "corr_fit_check": 0.06997836195575358,
+   "units_positive_level_both": 3
+  },
+  "n_E2X05": {
+   "units": 185,
+   "median_fit_delta_bp": 6.248356817005183,
+   "median_check_delta_bp": 5.011116582053831,
+   "share_better_fit": 0.9513513513513514,
+   "share_better_check": 0.8918918918918919,
+   "corr_fit_check": -0.21211812675797476,
+   "units_positive_level_both": 6
+  },
+  "n_E2X1": {
+   "units": 185,
+   "median_fit_delta_bp": 6.110465838146969,
+   "median_check_delta_bp": 5.03688710702623,
+   "share_better_fit": 1.0,
+   "share_better_check": 1.0,
+   "corr_fit_check": 0.3340817498115717,
+   "units_positive_level_both": 9
+  },
+  "n_E2X2": {
+   "units": 185,
+   "median_fit_delta_bp": 5.704882908703238,
+   "median_check_delta_bp": 4.881586483156497,
+   "share_better_fit": 0.8918918918918919,
+   "share_better_check": 0.8972972972972973,
+   "corr_fit_check": -0.1604214949343586,
+   "units_positive_level_both": 8
+  },
+  "n_E3X05": {
+   "units": 185,
+   "median_fit_delta_bp": -4.010397584258226,
+   "median_check_delta_bp": -3.3780192692973183,
+   "share_better_fit": 0.13513513513513514,
+   "share_better_check": 0.14594594594594595,
+   "corr_fit_check": -0.026738093099997327,
+   "units_positive_level_both": 0
+  },
+  "n_E3X1": {
+   "units": 185,
+   "median_fit_delta_bp": -4.190465241736972,
+   "median_check_delta_bp": -3.4027209452898926,
+   "share_better_fit": 0.0,
+   "share_better_check": 0.0,
+   "corr_fit_check": 0.5895627484697824,
+   "units_positive_level_both": 2
+  },
+  "n_E3X2": {
+   "units": 185,
+   "median_fit_delta_bp": -4.688230952210318,
+   "median_check_delta_bp": -3.8901211941512535,
+   "share_better_fit": 0.07027027027027027,
+   "share_better_check": 0.10270270270270271,
+   "corr_fit_check": -0.30379332106879214,
+   "units_positive_level_both": 1
+  },
+  "n_FLIP": {
+   "units": 190,
+   "median_fit_delta_bp": 0.07300029007596101,
+   "median_check_delta_bp": 0.14755868163169694,
+   "share_better_fit": 0.5210526315789473,
+   "share_better_check": 0.5263157894736842,
+   "corr_fit_check": -0.34691829966836174,
+   "units_positive_level_both": 2
+  }
+ },
+ "cost_bound": [
+  {
+   "unit": "CL2_R_BREAKER|H1",
+   "gross_fit_bp": 1.997682229912239,
+   "cost_bp": 2.7979565225781124,
+   "net_fit_bp": -2.455843512737373,
+   "gross_check_bp": 0.7766424055432468,
+   "net_check_bp": -4.654123453948224,
+   "cost_cut_needed_pct": 28.60209893213348
+  },
+  {
+   "unit": "CL4_THERMOSTAT|H4",
+   "gross_fit_bp": 3.063820512625863,
+   "cost_bp": 2.612055997602963,
+   "net_fit_bp": -0.716418746934014,
+   "gross_check_bp": -3.6463147488897545,
+   "net_check_bp": -6.916715745649555,
+   "cost_cut_needed_pct": -17.29536102738516
+  },
+  {
+   "unit": "CL7_PURIA|H1",
+   "gross_fit_bp": 1.4320225466998944,
+   "cost_bp": 2.859738244867028,
+   "net_fit_bp": -1.7968222986613689,
+   "gross_check_bp": -0.5584303367371699,
+   "net_check_bp": -4.0
+                   units  no_gross  cost_bound  decay  skew  gross_fit_bp  cost_bp  win_rate  mfe_c  exit_problem  entry_problem  base_check_bp  fix_check_t
+family                                                                                                                                                      
+breakout              15        11           3      0     0          0.27     2.73      0.39  26.05          0.94           0.04          -3.44        -1.67
+classic               19        15           3      1     0          1.43     2.83      0.34  18.50          0.94           0.04          -4.65        -1.67
+daily                  9         8           0      1     0          3.72     5.66      0.56  18.25          0.94           0.03          -6.09         0.77
+event                  1         1           0      0     0         -0.84     4.55      0.39   3.46          0.71           0.18          -4.14        -1.54
+famous                25        17           6      2     0          0.69     2.88      0.37  13.77          0.91           0.05          -3.54        -1.63
+forum                  4         4           0      0     0         -0.06     2.94      0.22  12.50          0.86           0.11          -2.79        -0.37
+geometry              12        10           0      2     0         -0.24     3.09      0.40  26.16          0.93           0.04          -4.15        -1.12
+market_structure      16        13           2      1     0         -0.50     2.97      0.39  25.05          0.93           0.04          -3.66        -1.05
+mean_reversion        21        18           0      1     2         -0.67     2.77      0.59  21.64          0.94           0.03          -2.61        -0.61
+microstructure         4         4           0      0     0         -0.04     2.85      0.39   7.76          0.82           0.11          -3.42        -4.04
+regime                15        12           1      2     0         -0.11     3.00      0.42  11.90          0.88           0.08          -3.30        -1.02
+seasonality           12         5           6      1     0          0.61     2.97      0.47   6.99          0.83           0.09          -2.63        -1.81
+session                5         5           0      0     0         -0.10     2.61      0.47   5.27          0.78           0.13          -2.31        -3.48
+signal_processing      9         6           0      0     3         -1.79     2.91      0.58  22.01          0.94           0.03          -3.68        -0.72
+smart_money            6         5           1      0     0         -1.34     3.01      0.33  19.26          0.92           0.05          -3.72        -1.59
+trend                 15        10           2      2     0          0.79     2.97      0.34  21.36          0.91           0.06          -4.09        -1.63
+volatility             9         7           1      1     0          0.06     2.89      0.39  15.48          0.89           0.07          -3.62        -0.30
