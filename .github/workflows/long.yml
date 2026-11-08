@@ -1,0 +1,77 @@
+name: long
+# Round 13 (docs/long_preregistration.md): per instrument, the long-trend systems L1-L12 with controls, and the
+# catalog on D1 / W1 with let-winners-run exits (scripts/long_lab.py); then portfolios, Newey-West t, BH,
+# benchmark and placebos (scripts/long_combine.py). Trigger: ci/LONG.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/LONG"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  sym:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        symbol: [AUDCAD, AUDCHF, AUDJPY, AUDNZD, AUDUSD, CADCHF, CADJPY, CHFJPY, EURAUD, EURCAD, EURCHF, EURGBP, EURJPY, EURNZD, EURUSD, GBPAUD, GBPCAD, GBPCHF, GBPJPY, GBPNZD, GBPUSD, NZDCAD, NZDCHF, NZDJPY, NZDUSD, USDCAD, USDCHF, USDJPY, XAUUSD, XAGUSD, USA500IDXUSD, USATECHIDXUSD, JPNIDXJPY]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 ${{ matrix.symbol }}
+      - name: Lab
+        run: python -W ignore scripts/long_lab.py --symbol ${{ matrix.symbol }} --out out/long 2>&1 | tee lab_${{ matrix.symbol }}.txt | grep -v "^  " | tail -200
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: long-${{ matrix.symbol }}
+          path: |
+            out/long
+            lab_${{ matrix.symbol }}.txt
+          retention-days: 60
+  combine:
+    needs: sym
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: long-*
+          path: long_in
+      - name: Combine
+        run: mkdir -p out/longres && python -W ignore scripts/long_combine.py --inp long_in --out out/longres 2>&1 | tee out/combine_log.txt | tail -120 || true
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p out/longres && cp out/combine_log.txt out/longres/ 2>/dev/null || true
+          for f in $(find long_in -name 'log_*.json'); do cp "$f" out/longres/; done
+          for f in $(find long_in -name 'lab_*.txt'); do tail -60 "$f" > out/longres/$(basename "$f"); done
+          cp -r out/longres /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan long-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p long && cp -r /tmp/pub/* long/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > long/RUN.txt
+          git add -f long
+          git commit -qm "long (run ${{ github.run_id }})"
+          git push -f origin HEAD:long
