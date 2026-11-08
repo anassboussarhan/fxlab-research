@@ -1,0 +1,431 @@
+{
+"L1": {
+"trades": 135
+},
+"L2": {
+"trades": 225
+},
+"L3": {
+"trades": 67
+},
+"L4": {
+"trades": 47
+},
+"L5": {
+"trades": 30
+},
+"L6": {
+"changes": 206
+},
+"L7": {
+"changes": 206
+},
+"L8": {
+"changes": 209
+},
+"L9": {
+"changes": 1365
+},
+"L12": {
+"changes": 758
+},
+"L10": {
+"trades": 83
+},
+"L11": {
+"trades": 31
+},
+"PL1": {
+"trades": 80
+},
+"PL2": {
+"changes": 206
+},
+"BH": {
+"changes": 215
+},
+"S.TREND.REGRESSION|D1": {
+"s": 2.6
+},
+"S.TREND.REGRESSION|W1": {
+"s": 0.1
+},
+"S.TREND.MA_CROSS|D1": {
+"s": 0.1
+},
+"S.TREND.MA_CROSS|W1": {
+"s": 0.1
+},
+"S.TREND.ADAPTIVE|D1": {
+"s": 0.3
+},
+"S.TREND.ADAPTIVE|W1": {
+"s": 0.1
+},
+"S.TREND.TSMOM|D1": {
+"s": 0.1
+},
+"S.TREND.TSMOM|W1": {
+"s": 0.1
+},
+"S.TREND.DONCHIAN|D1": {
+"s": 0.1
+},
+"S.TREND.DONCHIAN|W1": {
+"s": 0.1
+},
+"S.TREND.KALMAN|D1": {
+"s": 0.2
+},
+"S.TREND.KALMAN|W1": {
+"s": 0.1
+},
+"S.MR.SHORT_REVERSAL|D1": {
+"s": 0.1
+},
+"S.MR.SHORT_REVERSAL|W1": {
+"s": 0.1
+},
+"S.MR.BOLLINGER|D1": {
+"s": 0.1
+},
+"S.MR.BOLLINGER|W1": {
+"s": 0.1
+},
+"S.MR.RSI_REVERSAL|D1": {
+"s": 0.1
+},
+"S.MR.RSI_REVERSAL|W1": {
+"s": 0.1
+},
+"S.MR.STOCH_REVERSAL|D1": {
+"s": 0.1
+},
+"S.MR.STOCH_REVERSAL|W1": {
+"s": 0.1
+},
+"S.MR.ZSCORE|D1": {
+"s": 0.1
+},
+"S.MR.ZSCORE|W1": {
+"s": 0.1
+},
+"S.MR.OU|D1": {
+"s": 1.6
+},
+"S.MR.OU|W1": {
+"s": 0.1
+},
+"S.MR.TWAP_REVERSION|D1": {
+"s": 0.1
+},
+"S.MR.TWAP_REVERSION|W1": {
+"s": 0.1
+},
+"S.BO.RANGE_EXPANSION|D1": {
+"s": 0.1
+},
+"S.BO.RANGE_EXPANSION|W1": {
+"s": 0.1
+},
+"S.BO.FALSE_BREAKOUT|D1": {
+"s": 0.1
+},
+"S.BO.FALSE_BREAKOUT|W1": {
+"s": 0.1
+},
+"S.BO.RETEST|D1": {
+"s": 0.1
+},
+"S.BO.RETEST|W1": {
+"s": 0.1
+},
+"S.ST.SR_REVERSAL|D1": {
+"s": 0.6
+},
+"S.ST.SR_REVERSAL|W1": {
+"s": 0.1
+},
+"S.ST.TRENDLINE_BREAK|D1": {
+"s": 0.3
+},
+"S.ST.TRENDLINE_BREAK|W1": {
+"s": 0.1
+},
+"S.ST.CHANNEL|D1": {
+"s": 0.7
+},
+"S.ST.CHANNEL|W1": {
+"s": 0.1
+},
+"S.ST.SWING_STRUCTURE|D1": {
+"s": 0.2
+},
+"S.ST.SWING_STRUCTURE|W1": {
+"s": 0.1
+},
+"S.ST.CANDLESTICK|D1": {
+"s": 0.1
+},
+"S.ST.CANDLESTICK|W1": {
+"s": 0.1
+},
+"S.GEO.HARMONIC|D1": {
+"s": 1.7
+},
+"S.GEO.HARMONIC|W1": {
+"s": 0.1
+},
+"S.GEO.FIB_RETRACE|D1": {
+"s": 0.1
+},
+"S.GEO.FIB_RETRACE|W1": {
+"s": 0.1
+},
+"S.GEO.FIB_EXTENSION|D1": {
+"s": 0.1
+},
+"S.GEO.FIB_EXTENSION|W1": {
+"s": 0.1
+},
+"S.GEO.GANN|D1": {
+"s": 0.1
+},
+"S.GEO.GANN|W1": {
+"s": 0.1
+},
+"S.SEAS.WEEKEND_GAP_FADE|D1": {
+"s": 0.1
+},
+"S.SEAS.WEEKEND_GAP_FADE|W1": {
+"s": 0.1
+},
+"S.SEAS.TURN_OF_MONTH|D1": {
+"s": 0.1
+},
+"S.SEAS.TURN_OF_MONTH|W1": {
+"s": 0.1
+},
+"S.VOL.COMPRESSION|D1": {
+"s": 0.1
+},
+"S.VOL.COMPRESSION|W1": {
+"s": 0.1
+},
+"S.VOL.EXPANSION|D1": {
+"s": 0.1
+},
+"S.VOL.EXPANSION|W1": {
+"s": 0.1
+},
+"S.VOL.REGIME_SWITCH|D1": {
+"s": 0.1
+},
+"S.VOL.REGIME_SWITCH|W1": {
+"s": 0.1
+},
+"S.RG.HMM|D1": {
+"s": 3.8
+},
+"S.RG.HMM|W1": {
+"s": 0.1
+},
+"S.RG.CHANGE_POINT|D1": {
+"s": 0.8
+},
+"S.RG.CHANGE_POINT|W1": {
+"s": 0.1
+},
+"S.RG.FRACTAL|D1": {
+"s": 1.0
+},
+"S.RG.FRACTAL|W1": {
+"s": 0.1
+},
+"S.RG.ENTROPY|D1": {
+"s": 1.7
+},
+"S.RG.ENTROPY|W1": {
+"s": 0.1
+},
+"S.RG.VOL_FORECAST|D1": {
+"s": 0.9
+},
+"S.RG.VOL_FORECAST|W1": {
+"s": 0.1
+},
+"S.SP.SPECTRAL_CYCLE|D1": {
+"s": 0.5
+},
+"S.SP.SPECTRAL_CYCLE|W1": {
+"s": 0.1
+},
+"S.SP.WAVELET|D1": {
+"s": 0.1
+},
+"S.SP.WAVELET|W1": {
+"s": 0.1
+},
+"S.MS.ORDER_FLOW|D1": {
+"s": 0.1
+},
+"S.MS.ORDER_FLOW|W1": {
+"s": 0.1
+},
+"S.MS.TICK_IMBALANCE|D1": {
+"s": 0.1
+},
+"S.MS.TICK_IMBALANCE|W1": {
+"s": 0.1
+},
+"S.MS.LIQUIDITY_FILTERED|D1": {
+"s": 0.1
+},
+"S.MS.LIQUIDITY_FILTERED|W1": {
+"s": 0.1
+},
+"S.TREND.INDICATOR_SIGNAL|D1": {
+"s": 0.1
+},
+"S.TREND.INDICATOR_SIGNAL|W1": {
+"s": 0.1
+},
+"S.SMC.FVG_RETRACE|D1": {
+"s": 0.2
+},
+"S.SMC.FVG_RETRACE|W1": {
+"s": 0.1
+},
+"S.SMC.SWEEP_REVERSAL|D1": {
+"s": 0.1
+},
+"S.SMC.SWEEP_REVERSAL|W1": {
+"s": 0.1
+},
+"S.FAMOUS.TURTLE|D1": {
+"s": 0.3
+},
+"S.FAMOUS.TURTLE|W1": {
+"s": 0.1
+},
+"S.FAMOUS.HOLY_GRAIL|D1": {
+"s": 0.1
+},
+"S.FAMOUS.HOLY_GRAIL|W1": {
+"s": 0.1
+},
+"S.FAMOUS.RASCHKE_8020|D1": {
+"s": 0.1
+},
+"S.FAMOUS.RASCHKE_8020|W1": {
+"s": 0.1
+},
+"S.FAMOUS.CONNORS_RSI2|D1": {
+"s": 0.1
+},
+"S.FAMOUS.CONNORS_RSI2|W1": {
+"s": 0.1
+},
+"S.FAMOUS.TTM_SQUEEZE|D1": {
+"s": 0.1
+},
+"S.FAMOUS.TTM_SQUEEZE|W1": {
+"s": 0.1
+},
+"S.FAMOUS.TD_SEQUENTIAL|D1": {
+"s": 0.1
+},
+"S.FAMOUS.TD_SEQUENTIAL|W1": {
+"s": 0.1
+},
+"S.FAMOUS.ALLIGATOR|D1": {
+"s": 0.1
+},
+"S.FAMOUS.ALLIGATOR|W1": {
+"s": 0.1
+},
+"S.FORUM.THREE_DUCKS|D1": {
+"s": 0.1
+},
+"S.FORUM.THREE_DUCKS|W1": {
+"s": 0.1
+},
+"S.DAILY.IBS|D1": {
+"s": 0.1
+},
+"S.DAILY.IBS|W1": {
+"s": 0.1
+},
+"S.DAILY.DOUBLE_SEVEN|D1": {
+"s": 0.1
+},
+"S.DAILY.DOUBLE_SEVEN|W1": {
+"s": 0.1
+},
+"S.DAILY.CUM_RSI|D1": {
+"s": 0.1
+},
+"S.DAILY.CUM_RSI|W1": {
+"s": 0.1
+},
+"S.DAILY.THREE_DOWN|D1": {
+"s": 0.1
+},
+"S.DAILY.THREE_DOWN|W1": {
+"s": 0.1
+},
+"S.DAILY.HIGH52|D1": {
+"s": 0.1
+},
+"S.DAILY.HIGH52|W1": {
+"s": 0.1
+},
+"S.DAILY.FABER|D1": {
+"s": 0.1
+},
+"S.DAILY.FABER|W1": {
+"s": 0.1
+},
+"S.DAILY.ABS_MOM|D1": {
+"s": 0.1
+},
+"S.DAILY.ABS_MOM|W1": {
+"s": 0.1
+},
+"S.DAILY.VOL_TARGET|D1": {
+"s": 0.1
+},
+"S.DAILY.VOL_TARGET|W1": {
+"s": 0.1
+},
+"S.DAILY.HALLOWEEN|D1": {
+"s": 0.1
+},
+"S.DAILY.HALLOWEEN|W1": {
+"s": 0.1
+},
+"S.DAILY.OPEX|D1": {
+"s": 0.1
+},
+"S.DAILY.OPEX|W1": {
+"s": 0.1
+},
+"PB_RANDOM_10|D1": {
+"s": 0.1
+},
+"PB_RANDOM_10|W1": {
+"s": 0.1
+},
+"PB_RANDOM_20|D1": {
+"s": 0.1
+},
+"PB_RANDOM_20|W1": {
+"s": 0.1
+},
+"PB_RANDOM_40|D1": {
+"s": 0.1
+},
+"PB_RANDOM_40|W1": {
+"s": 0.1
+}
+}

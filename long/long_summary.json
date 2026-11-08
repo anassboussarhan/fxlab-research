@@ -1,0 +1,96 @@
+{
+ "part_A": {
+  "rows": 23,
+  "counts": 0,
+  "meets_rule": 0,
+  "check_t_ge_1645": 0,
+  "placebo_pass": false,
+  "coverage": {
+   "FX": [
+    "AUDCAD",
+    "AUDCHF",
+    "AUDJPY",
+    "AUDNZD",
+    "AUDUSD",
+    "CADCHF",
+    "CADJPY",
+    "CHFJPY",
+    "EURAUD",
+    "EURCAD",
+    "EURCHF",
+    "EURGBP",
+    "EURJPY",
+    "EURNZD",
+    "EURUSD",
+    "GBPAUD",
+    "GBPCAD",
+    "GBPCHF",
+    "GBPJPY",
+    "GBPNZD",
+    "GBPUSD",
+    "NZDCAD",
+    "NZDCHF",
+    "NZDJPY",
+    "NZDUSD",
+    "USDCAD",
+    "USDCHF",
+    "USDJPY"
+   ],
+   "NONFX": [
+    "JPNIDXJPY",
+    "USA500IDXUSD",
+    "USATECHIDXUSD",
+    "XAGUSD",
+    "XAUUSD"
+   ]
+  }
+ },
+ "part_B": {
+  "units": 109,
+  "counts": 1,
+  "meets_rule": 4,
+  "share_meets_rule": 0.03669724770642202,
+  "placebo_units": 6,
+  "placebo_meets_rule": 0,
+  "placebo_share": 0.0,
+  "sel_fit_t_median": -0.4055078891240519,
+  "sel_check_t_median": -1.196947268829656,
+  "variant_chosen": {
+   "T0": 43,
+   "T2": 38,
+   "T3": 17,
+   "T4": 7,
+   "T1": 4
+  },
+  "long_exit_vs_T0": {
+   "T1": {
+    "units": 113,
+    "share_better_fit": 0.3805309734513274,
+    "share_better_check": 0.29464285714285715,
+    "median_dt_fit": -0.27653254886877765,
+    "median_dt_check": -0.46024300783418304
+   },
+   "T2": {
+    "units": 113,
+    "share_better_fit": 0.5309734513274337,
+    "share_better_check": 0.33035714285714285,
+    "median_dt_fit": 0.03793678003030268,
+    "median_dt_check": -0.43531476386696644
+   },
+   "T3": {
+    "units": 113,
+    "share_better_fit": 0.3805309734513274,
+    "share_better_check": 0.3482142857142857,
+    "median_dt_fit": -0.2648062241443405,
+    "median_dt_check": -0.44167754222192934
+   },
+   "T4": {
+    "units": 113,
+    "share_better_fit": 0.39823008849557523,
+    "share_better_check": 0.38392857142857145,
+    "median_dt_fit": -0.2546755249389847,
+    "median_dt_check": -0.2083186913427193
+   }
+  }
+ }
+}
