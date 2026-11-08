@@ -1,0 +1,50 @@
+r9data:
+boj
+ecb
+ff
+gdelt
+norges
+r9_data3_log.json
+r9_data_log.json
+sge
+
+r9data/boj:
+index.htm
+ope_index.htm
+y2009.htm
+y2016.htm
+
+r9data/ecb:
+exr.csv
+
+r9data/ff:
+README.md
+forex_factory_cache.csv
+
+r9data/gdelt:
+AU.csv
+CA.csv
+CH.csv
+DE.csv
+FR.csv
+JP.csv
+NZ.csv
+UK.csv
+US.csv
+
+r9data/norges:
+mql5_1.html
+mql5_2.html
+mql5_3.html
+mql5_4.html
+mql5_5.html
+S1 {'S1a seasonality': -2.655314552760063, 'S1b skewness': 8.27110589455063}
+AT3 {'penalised': 0.2902960358489727, 'blind': 0.21901040832820864, 'rank': 0.365327656636055}
+Traceback (most recent call last):
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/round9_lab.py", line 1208, in main
+    f()
+    ~^^
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/round9_lab.py", line 926, in at5
+    mdl = LassoCV(cv=5, n_alphas=30, max_iter=5000).fit(((X - mu) / sd).values, y.values)
+          ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: LassoCV.__init__() got an unexpected keyword argument 'n_alphas'. Did you mean 'alphas'?
