@@ -57,7 +57,7 @@ jobs:
           pattern: anat-*
           path: anat_in
       - name: Combine
-        run: python -W ignore scripts/anatomy_combine.py --inp anat_in --out out/anatomy 2>&1 | tee out/combine_log.txt | tail -80 || true
+        run: mkdir -p out/anatomy && python -W ignore scripts/anatomy_combine.py --inp anat_in --out out/anatomy 2>&1 | tee out/combine_log.txt | tail -80 || true
       - name: Publish
         if: always()
         run: |
