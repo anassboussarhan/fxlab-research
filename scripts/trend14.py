@@ -98,7 +98,8 @@ def as_f(x):
 @njit(cache=True)
 def stop_engine(o_bid, o_ask, pre_bh, pre_bl, pre_ah, pre_al, x_ok, x_bid, x_ask, x_slip,
                 post_bh, post_bl, post_ah, post_al, c_mid, roll, swl, sws, N,
-                mode, tgt, ent, mxl, mxs, el, es, xl, xs, upd, risk, stop_mult, trail_mult, max_units, add_step, comm):
+                mode, tgt, ent, mxl, mxs, el, es, xl, xs, upd, risk, stop_mult, trail_mult, max_units, add_step, comm,
+                worst=True):
     """Daily-bar engine: each day = pre-fill segment, the 08:00 London fill, post-fill segment, close."""
     nb = len(c_mid)
     pnl = np.zeros(nb)
@@ -225,6 +226,7 @@ def stop_engine(o_bid, o_ask, pre_bh, pre_bl, pre_ah, pre_al, x_ok, x_bid, x_ask
                 if pos == 0:
                     continue
                 # adds (worst case: added, then the stop is checked against the whole segment)
+                added = False
                 while nu < max_units and np.isfinite(add_lv) and ((pos > 0 and ah_ >= add_lv) or (pos < 0 and al_ <= add_lv)):
                     px = max(add_lv, soa) + slip if pos > 0 else min(add_lv, sob) - slip
                     e[nu] = px
@@ -235,8 +237,11 @@ def stop_engine(o_bid, o_ask, pre_bh, pre_bl, pre_ah, pre_al, x_ok, x_bid, x_ask
                     t_net -= comm * w[nu]
                     nu += 1
                     add_lv = add_lv + pos * add_step * N0
+                    added = True
                     if stop_mult > 0:
                         stop = px - pos * stop_mult * N0
+                if not worst and (entered or added):
+                    break
                 # exits: stop or resting channel level
                 if pos > 0:
                     lev = stop
@@ -345,7 +350,7 @@ def cont_engine(x_ok, x_mid, x_cost, c_mid, roll, swl, sws, ptg, buf):
 
 
 def run_stop(d: pd.DataFrame, N, mode=1, tgt=None, ent=None, mxl=None, mxs=None, el=None, es=None, xl=None, xs=None,
-             upd=None, stop_mult=2.0, trail_mult=0.0, max_units=1, add_step=0.5, fill="x"):
+             upd=None, stop_mult=2.0, trail_mult=0.0, max_units=1, add_step=0.5, fill="x", worst=True):
     nb = len(d)
     nan = np.full(nb, np.nan)
     f = lambda a: as_f(nan if a is None else a)                          # noqa: E731
@@ -366,7 +371,7 @@ def run_stop(d: pd.DataFrame, N, mode=1, tgt=None, ent=None, mxl=None, mxs=None,
     return stop_engine(*seg, as_f(d.c_mid), np.ascontiguousarray(d.roll.to_numpy(np.int64)), as_f(d.swl), as_f(d.sws),
                        as_f(N), int(mode), f(tgt), f(ent), b(mxl), b(mxs), f(el), f(es), f(xl), f(xs),
                        b(np.ones(nb, bool) if upd is None else upd), RISK, float(stop_mult), float(trail_mult),
-                       int(max_units), float(add_step), COMM)
+                       int(max_units), float(add_step), COMM, bool(worst))
 
 
 def run_cont(d: pd.DataFrame, ptg, buf=None, fill="x"):
