@@ -1,0 +1,79 @@
+name: trend14
+# Round 14 (docs/trend14_preregistration.md): daily panels split at the 08:00 London fill per instrument
+# (scripts/trend14_prep.py), then the independent re-check, trend variants and trend prediction (scripts/trend14.py).
+# Trigger: ci/TREND14.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/TREND14"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  prep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        symbol: [AUDCAD, AUDCHF, AUDJPY, AUDNZD, AUDUSD, CADCHF, CADJPY, CHFJPY, EURAUD, EURCAD, EURCHF, EURGBP, EURJPY, EURNZD, EURUSD, GBPAUD, GBPCAD, GBPCHF, GBPJPY, GBPNZD, GBPUSD, NZDCAD, NZDCHF, NZDJPY, NZDUSD, USDCAD, USDCHF, USDJPY, XAUUSD, XAGUSD, USA500IDXUSD, USATECHIDXUSD, JPNIDXJPY]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 ${{ matrix.symbol }}
+      - name: Prep
+        run: python -W ignore scripts/trend14_prep.py --symbol ${{ matrix.symbol }} --out out/d1p
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d1p-${{ matrix.symbol }}
+          path: out/d1p
+          retention-days: 60
+  analyze:
+    needs: prep
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: d1p-*
+          path: d1p_in
+      - name: Analyze
+        run: |
+          mkdir -p out/trend14 ref
+          git show origin/long:long/A_monthly_by_symbol.csv > ref/r13_monthly.csv
+          git show origin/misc-longdiag:misc/longdiag/diag_groups.json > ref/r13_diag.json
+          git show origin/misc-r9data4:misc/r9data/ecb/exr.csv > ref/ecb_exr.csv
+          python -W ignore scripts/trend14.py --inp d1p_in --r13 ref/r13_monthly.csv --r13diag ref/r13_diag.json --ecb ref/ecb_exr.csv --out out/trend14 2>&1 | tee out/trend14/log.txt | tail -150 || true
+      - name: Publish
+        if: always()
+        run: |
+          rm -f out/trend14/C_panel.parquet out/trend14/C_panel_pred.parquet out/trend14/A_trades_new.parquet
+          cp -r out/trend14 /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan t14-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p trend14 && cp -r /tmp/pub/* trend14/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > trend14/RUN.txt
+          git add -f trend14
+          git commit -qm "trend14 (run ${{ github.run_id }})"
+          git push -f origin HEAD:trend14
