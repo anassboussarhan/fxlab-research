@@ -157,6 +157,10 @@ class Mkt:
 
     def end_index(self, spec, kf, xm):
         tf_ = self.t[kf]
+        if xm == 0.5 and spec.get("signal_exit"):
+            if spec.get("half_end") is None:
+                return -1
+            return min(int(np.searchsorted(self.t, spec["half_end"])), len(self.t) - 1)
         if spec.get("t_end") is not None and not pd.isna(spec.get("t_end")):
             te = spec["t_end"]
         else:
@@ -240,7 +244,29 @@ def specs_from_state(side: pd.Series, bars: pd.DataFrame) -> pd.DataFrame:
             k = m
         else:
             k += 1
-    return pd.DataFrame(rows, columns=["t0", "d", "etype", "px", "t_valid", "sl", "tp", "hold", "t_end"])
+    S = pd.DataFrame(rows, columns=["t0", "d", "etype", "px", "t_valid", "sl", "tp", "hold", "t_end"])
+    return add_half_end(S)
+
+
+def add_half_end(S: pd.DataFrame) -> pd.DataFrame:
+    """For trades that end on a later signal (the exit time is not known at entry), the half-hold exit X05 must be
+    causal: entry + half the median duration of the unit's earlier trades that had already ended by this entry
+    (at least 10), capped by the signal exit. (The first run used half the trade's own duration: a look-ahead.)"""
+    if not len(S):
+        S["half_end"] = pd.Series(dtype="datetime64[ns, UTC]")
+        return S
+    t0 = pd.DatetimeIndex(S.t0).as_unit("ns").asi8
+    te = pd.DatetimeIndex(S.t_end).as_unit("ns").asi8
+    dur = te - t0
+    order = np.argsort(te)
+    te_sorted, dur_sorted = te[order], dur[order]
+    half = np.full(len(S), np.nan)
+    for i in range(len(S)):
+        k = int(np.searchsorted(te_sorted, t0[i], "right"))           # trades already closed at this entry
+        if k >= 10:
+            half[i] = t0[i] + 0.5 * np.median(dur_sorted[:k])
+    S["half_end"] = pd.to_datetime(np.where(np.isfinite(half), np.minimum(half, te), np.nan), utc=True)
+    return S
 
 
 def specs_from_trade(sig: pd.DataFrame, bars: pd.DataFrame, extra: dict, tf: str) -> pd.DataFrame:
@@ -426,7 +452,7 @@ def run_symbol(sym, out_dir, only=None, per_unit_s=240, budget_s=17400):
     print("saved", sym, len(D))
 
 
-SPEC_COLS = ["t0", "d", "etype", "px", "t_valid", "sl", "tp", "hold", "t_end"]
+SPEC_COLS = ["t0", "d", "etype", "px", "t_valid", "sl", "tp", "hold", "t_end", "half_end"]
 
 
 def price_specs(M, F, S, uid, sym, deadline):
@@ -441,7 +467,9 @@ def price_specs(M, F, S, uid, sym, deadline):
                 "t_valid": pd.Timestamp(r.t_valid).value if not pd.isna(r.t_valid) else None,
                 "sl": float(r.sl) if np.isfinite(r.sl) else np.nan, "tp": float(r.tp) if np.isfinite(r.tp) else np.nan,
                 "hold": pd.Timedelta(r.hold).value if not pd.isna(r.hold) else None,
-                "t_end": pd.Timestamp(r.t_end).value if not pd.isna(r.t_end) else None}
+                "t_end": pd.Timestamp(r.t_end).value if not pd.isna(r.t_end) else None,
+                "signal_exit": not pd.isna(r.t_end) and pd.isna(r.hold) and r.etype == "mkt" and np.isnan(r.sl),
+                "half_end": pd.Timestamp(r.half_end).value if not pd.isna(r.half_end) else None}
         if spec["hold"] is None and spec["t_end"] is None:
             continue
         f = F.at(spec["t0"], spec["d"])

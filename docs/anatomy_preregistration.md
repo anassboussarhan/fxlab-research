@@ -70,3 +70,12 @@ at q 0.10 across all non-placebo units of part B. The placebo units measure how 
 "passes" by luck; if the placebos pass as often as the strategies, no fix is credited, whatever the BH result.
 Parameter changes are not searched here (the catalog's joint optimisation already searched about 762,000
 parameter x entry x exit candidates; `docs/conclusions.md` 8.1c).
+
+**Addendum 1 (2026-11-08, a look-ahead found in the first run; no result of that run is used).** For trades that
+end on a later signal (the state-mode strategies and the always-in systems), the first run defined the half-hold
+exit X1 as entry + half of the trade's own duration, which is not known at entry. On those units it produced
+impossible "fixes" (e.g. an H1 moving-average cross: base -3 bp, half-hold +29 bp a trade, t 13), while the
+placebos, whose holding times are fixed at entry, showed none (0 of 35). Fixed before the rerun: for signal-exit
+trades the half-hold exit is entry + half the median duration of the unit's earlier trades that had already closed
+(at least 10), capped by the signal exit; the double-hold exit (entry + 2 x the duration, decided when the signal
+exit arrives) is causal and unchanged. Everything else is unchanged.
