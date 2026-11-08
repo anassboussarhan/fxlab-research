@@ -79,6 +79,14 @@ FX money comes from (forced flows at known times, risk premia, information in fl
 Not tested on purpose: hedging opposite positions across prop firms (against every firm's terms), trading on slow
 prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ended in 2024), lunar cycles.
 
+## G. Round 10 (2026-11-08): two rule families from the multilingual sweep
+
+| ID | Idea | Rule sketch (to be pre-registered) | Data | Prior |
+|---|---|---|---|---|
+| MS1 | Malaysian SNR | H4 line-chart turns -> A-levels (resistance) / V-levels (support) at the body price; fresh until a wick touches; fade the first revisit of a fresh level in the direction of the D1 storyline, stop beyond the level, target the next fresh level | M1 in hand | Low (support / resistance family) |
+| QM1 | Quasimodo (QM) pattern | Zigzag high - low - higher high - lower low (bearish QM; mirror for bullish); limit at the left shoulder level, stop beyond the head, target 2R | M1 in hand | Low |
+| R1 | OANDA position / order books | Needs a v20 (not MT4 / MT5) OANDA account's API token | User | Medium |
+
 ## D. Forward watch list (no new test; judged on live data only)
 
 USD/JPY H4 high-confidence model (mostly a 2022 / 2024 trend ride); FS1 66 settings; the 60/40 rebalancing
