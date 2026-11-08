@@ -42,8 +42,8 @@ for y, l in links:
     mm = int(re.search(r"ope\d{2}(\d{2})", l).group(1))
     for df in frames(l.lower(), data):
         cur_md = None
-        for vals in df.astype(str).values.tolist():
-            line = " ".join(vals)
+        for vals in df.values.tolist():
+            line = " ".join("" if (isinstance(v, float) and v != v) else str(v) for v in vals)
             md = re.search(r"\b(\d{1,2})/(\d{1,2})\b", line)
             if md: cur_md = md
             if re.search(r"outright purchases? of (jgbs|japanese government bonds)", line, re.I) or \
