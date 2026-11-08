@@ -30,12 +30,12 @@ for y in range(2008, 2026):
         if not hit:
             print("miss", y, m, flush=True); continue
         d, slug, t = hit
-        am = re.search(r"(purchas\w*|buy\w*|sell\w*)\s+(foreign currency|NOK)[^.]{0,200}?(?:NOK\s*)?([\d,\.]+)\s*(million|billion)[^.]{0,30}?(?:per|each|a)\s*(?:trading )?day", t, re.I)
-        none = re.search(r"(no|not make any|will not make any) (foreign exchange|currency) (purchases|transactions|sales)", t, re.I)
+        am = re.search(r"(purchas\w*|buy\w*|sell\w*)\s+(foreign exchange|foreign currency|currency|NOK|kroner)[^.]{0,200}?NOK\s*([\d,\.]+)\s*(million|billion)[^.]{0,40}?(?:per|each|a)\s*(?:trading\s*)?day", t, re.I)
+        none = re.search(r"(will not (purchase|buy|sell|make)|no (foreign exchange|currency) (purchases|transactions|sales)|not (purchase|buy|sell) any)", t, re.I)
         if am:
             v = float(am.group(3).replace(",", "")) * (1000 if am.group(4).lower() == "billion" else 1)
             buy = am.group(1).lower().startswith(("purchas", "buy"))
-            fc = am.group(2).lower().startswith("foreign")
+            fc = not am.group(2).lower().startswith(("nok", "kroner"))
             sign = 1 if (buy == fc) else -1
             amt = sign * v
         elif none:
@@ -43,7 +43,7 @@ for y in range(2008, 2026):
         else:
             amt = None
         rows.append({"release": d.date(), "applies_to": (d + pd.offsets.MonthBegin(1)).strftime("%Y-%m"), "amount": amt,
-                     "slug": slug, "snippet": (am.group(0) if am else t[:200])[:250]})
+                     "slug": slug, "snippet": (am.group(0) if am else t[t.find("Norges Bank will"):][:250] if "Norges Bank will" in t else t[200:450])[:250]})
         print(y, m, slug, amt, flush=True)
         time.sleep(0.2)
 pd.DataFrame(rows).to_csv(os.path.join(OUT, "norges_fx.csv"), index=False)
