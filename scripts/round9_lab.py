@@ -1148,8 +1148,8 @@ def at8():
             d0, d1 = g.iloc[-2], nxt.iloc[2]                               # close of the second-to-last day -> 3rd day
             if d1 > DEV_END:
                 continue
-            t0 = pd.Timestamp(d0).tz_localize("UTC") + pd.Timedelta(hours=21)
-            t1 = pd.Timestamp(d1).tz_localize("UTC") + pd.Timedelta(hours=21)
+            t0 = pd.Timestamp(d0).tz_localize("UTC") + pd.Timedelta(hours=20, minutes=50)   # addendum 4
+            t1 = pd.Timestamp(d1).tz_localize("UTC") + pd.Timedelta(hours=20, minutes=50)
             tr = bk.trade(t0, t1, side, 15)
             if tr is not None:
                 rows[pd.Timestamp(d1)] = {"net": net_of(tr), "gross": float(tr[1])}
@@ -1162,6 +1162,30 @@ def at8():
     if "XAUUSD" in out:
         RES.setdefault("_primary", {})["AT8"] = out["XAUUSD"]["net"]
         print("AT8", out["XAUUSD"]["net"]["check"].get("mean_bp"), flush=True)
+
+
+def s4():
+    import untested_intraday_lab as U
+    f = os.path.join(A.r9data, "boj_rinban_dates.csv")
+    if not os.path.exists(f):
+        RES["S4"] = {"status": "not tested (data)"}
+        return
+    R = pd.read_csv(f, parse_dates=["date"])
+    bk = book("USDJPY")
+    rows = {}
+    for d in R.date:
+        if d > DEV_END:
+            continue
+        tr = bk.trade(U.jst(d, 10, 12), U.jst(d, 12, 0), 1, 5)
+        if tr is not None:
+            rows[pd.Timestamp(d)] = {"net": net_of(tr), "gross": float(tr[1])}
+    D = pd.DataFrame.from_dict(rows, orient="index").sort_index()
+    D.to_csv(os.path.join(A.out, "s4_rinban.csv"))
+    split = D.index[int(0.6 * len(D))] if D.index.min() > pd.Timestamp("2008-01-01") else FIT_END
+    RES["S4"] = {c: per(D[c], None, split) for c in D.columns}
+    RES["S4"]["first_day"], RES["S4"]["split_day"] = str(D.index.min())[:10], str(split)[:10]
+    RES.setdefault("_primary", {})["S4"] = RES["S4"]["net"]
+    print("S4", RES["S4"]["net"]["check"].get("mean_bp"), RES["S4"]["net"]["all"].get("n"), flush=True)
 
 
 def save():

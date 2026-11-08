@@ -139,3 +139,7 @@ only through index pages; S4 waits for a parser.
   month to 21:00 UTC on the third business day of the next. Info: long USD against EUR and JPY.
 - Gold "buy 18:00 New York, sell 9 hours later" is the A1 test of run 22 (18:00 New York -> 08:00 London): +2.4 bp
   before costs (t 2.2), -4.4 bp after; not rerun.
+
+**Addendum 4 (2026-11-08).** AT8 priced only 59 of about 220 month turns because the M1 store has no bars in the
+21:00 UTC daily break; entry and exit move to 20:50 UTC. S4: offer dates are read from the BoJ's monthly operation
+files (2007-2010 web pages, 2011-2025 zip / Excel), rows naming outright purchases of JGBs.
