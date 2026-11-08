@@ -1188,6 +1188,130 @@ def s4():
     print("S4", RES["S4"]["net"]["check"].get("mean_bp"), RES["S4"]["net"]["all"].get("n"), flush=True)
 
 
+# ------------------------------------------------------------------------------------------- F2, AT9
+def f2():
+    import flows_lab as FL
+    fs = glob.glob(os.path.join(A.compact, "F2_6J_2023_6J_FUT.parquet"))
+    if not fs:
+        RES["F2"] = {"status": "not tested (data)"}
+        return
+    H = pd.read_parquet(fs[0])
+    H["hour"] = pd.to_datetime(H["hour"], utc=True)
+    h = H.groupby("hour")[["buy", "sell"]].sum()
+    h = h[h.index <= pd.Timestamp(DEV_END, tz="UTC") + pd.Timedelta(days=1)]
+    # CME trade date: the session from 17:00 Chicago the evening before to 16:00 Chicago
+    ct = h.index.tz_convert("America/Chicago")
+    tdate = (ct + pd.Timedelta(hours=7)).normalize().tz_localize(None)
+    d = h.groupby(tdate).sum()
+    d = d[(d.buy + d.sell) > 0]
+    imb = (d.buy - d.sell) / (d.buy + d.sell)
+    hi = imb.rolling(250, min_periods=250).quantile(0.8).shift(1)
+    lo = imb.rolling(250, min_periods=250).quantile(0.2).shift(1)
+    bk = book("USDJPY")
+    rows = {}
+    for day in imb.index:
+        if not np.isfinite(hi.get(day, np.nan)):
+            continue
+        sig = 1 if imb[day] > hi[day] else (-1 if imb[day] < lo[day] else 0)
+        if sig == 0 or day > DEV_END:
+            continue
+        side = -sig                                                      # buying 6J = buying yen = short USD/JPY
+        t0 = FL.local_ts(day, "America/Chicago", 16, 5)
+        t1 = t0 + pd.Timedelta(days=1)
+        if t1.weekday() >= 5:
+            t1 = t1 + pd.Timedelta(days=7 - t1.weekday())
+        tr = bk.trade(t0, t1, side, 15)
+        if tr is not None:
+            rows[pd.Timestamp(day)] = {"net": net_of(tr), "gross": float(tr[1]), "imb": float(imb[day])}
+    D = pd.DataFrame.from_dict(rows, orient="index").sort_index()
+    D.to_csv(os.path.join(A.out, "f2_daily.csv"))
+    split = D.index[int(0.6 * len(D))] if len(D) else FIT_END
+    # info: hourly, the last hour's imbalance vs the trailing 30 days of the same hour, next hour
+    hh = h.copy()
+    hh["imb"] = (hh.buy - hh.sell) / (hh.buy + hh.sell).replace(0, np.nan)
+    hh["hod"] = hh.index.hour
+    hrows = {}
+    for hod, g in hh.groupby("hod"):
+        q8 = g.imb.rolling(30, min_periods=20).quantile(0.8).shift(1)
+        q2 = g.imb.rolling(30, min_periods=20).quantile(0.2).shift(1)
+        for t, v in g.imb.items():
+            if not np.isfinite(q8.get(t, np.nan)) or not np.isfinite(v) or t > pd.Timestamp(DEV_END, tz="UTC"):
+                continue
+            sig = 1 if v > q8[t] else (-1 if v < q2[t] else 0)
+            if sig:
+                tr = bk.trade(t + pd.Timedelta(hours=1), t + pd.Timedelta(hours=2), -sig, 3)
+                if tr is not None:
+                    hrows[t.tz_localize(None)] = net_of(tr)
+    HR = pd.Series(hrows).sort_index()
+    hs = HR.index[int(0.6 * len(HR))] if len(HR) else FIT_END
+    RES["F2"] = {"daily": {c: per(D[c], 252, split) for c in ("net", "gross")}, "split_day": str(split)[:10],
+                 "hourly_info": per(HR, None, hs), "days_with_flow": int(len(imb))}
+    RES.setdefault("_primary", {})["F2"] = RES["F2"]["daily"]["net"]
+    print("F2", RES["F2"]["daily"]["net"]["check"], flush=True)
+
+
+def at9():
+    import databento_lab as DL
+    out, allr = {}, []
+    for ccy in ("EUR", "JPY"):
+        L = load_opts(ccy)
+        if L is None:
+            continue
+        S, O, C = L
+        dates = pd.Series(sorted(S.date.unique()))
+        wk = [pd.Timestamp(x) for x in dates.groupby(dates.dt.to_period("W-FRI")).max().values]
+        Hs = {}
+        for d in wk:
+            day = S[S.date == d]
+            pts = []
+            for E, g in day.groupby("exp"):
+                T = (pd.Timestamp(E) - d).days / 365.0
+                if not (7 / 365 <= T <= 180 / 365):
+                    continue
+                F = float(g.F.iloc[0])
+                Ka = g.K.values[np.argmin(np.abs(g.K.values - F))]
+                ivs = [DL.implied(F, Ka, T, float(g[(g.cp == cp) & (g.K == Ka)].P.iloc[0]), cp)
+                       for cp in ("C", "P") if len(g[(g.cp == cp) & (g.K == Ka)])]
+                iv = np.nanmean(ivs) if ivs else np.nan
+                if np.isfinite(iv) and iv > 0:
+                    pts.append((math.log(T), math.log(iv)))
+            if len(pts) >= 2:
+                x, y = np.array(pts).T
+                if np.ptp(x) > 0.3:
+                    Hs[d] = 0.5 + float(np.polyfit(x, y, 1)[0])
+        Hs = pd.Series(Hs).sort_index()
+        # front-future weekly returns (most traded underlying = the nearest quarterly)
+        fut = C.ffill()
+        rows = {}
+        for d, nx in zip(Hs.index[:-1], Hs.index[1:]):
+            cols = [c for c in fut.columns if np.isfinite(fut.at[d, c]) and np.isfinite(fut.at[nx, c])] if d in fut.index and nx in fut.index else []
+            if not cols:
+                continue
+            act = C.loc[(C.index > d - pd.Timedelta(days=30)) & (C.index <= d), cols].notna().sum()
+            u = act.idxmax()
+            past = fut[u].loc[:d].dropna()
+            if len(past) < 60:
+                continue
+            sig = np.sign(past.iloc[-1] / past.iloc[-60] - 1)
+            r = fut.at[nx, u] / fut.at[d, u] - 1
+            tick = TICK[ccy] / fut.at[d, u]
+            rows[nx] = {"H": Hs[d], "trend": sig * r, "filtered": (sig * r if Hs[d] > 0.5 else 0.0), "tick": tick,
+                        "pos_t": sig, "pos_f": sig if Hs[d] > 0.5 else 0.0}
+        D = pd.DataFrame.from_dict(rows, orient="index")
+        for c, pc in (("trend", "pos_t"), ("filtered", "pos_f")):
+            D[c] = D[c] - (D[pc] - D[pc].shift(1).fillna(0)).abs() * D.tick
+        D.to_csv(os.path.join(A.out, f"at9_{ccy}.csv"))
+        out[ccy] = {c: opt_per(D[c]) for c in ("trend", "filtered")}
+        out[ccy]["share_H_above_half"] = float((D.H > 0.5).mean())
+        out[ccy]["maxdd"] = {c: float(((D[c].cumsum()) - D[c].cumsum().cummax()).min() * 1e4) for c in ("trend", "filtered")}
+        allr.append(D.filtered)
+    if allr:
+        out["pooled_filtered"] = opt_per(pd.concat(allr, axis=1).mean(axis=1))
+        RES.setdefault("_primary", {})["AT9"] = out["pooled_filtered"]
+    RES["AT9"] = out
+    print("AT9", {k: (v["filtered"]["check"].get("mean_bp"), v["trend"]["check"].get("mean_bp")) for k, v in out.items() if k in ("EUR", "JPY")}, flush=True)
+
+
 def save():
     def clean(o):
         if isinstance(o, dict):
@@ -1221,7 +1345,7 @@ def main():
     if A.m1:
         parts = [g1, at1, at2, at4, s5] + [globals()[f] for f in ("s2", "n_tests", "at7", "at8", "s3", "s4") if f in globals()]
     if A.opt:
-        parts = [globals()[f] for f in ("o3", "o4", "o5", "at6") if f in globals()]
+        parts = [globals()[f] for f in ("o3", "o4", "o5", "at6", "f2", "at9") if f in globals()]
     if A.daily:
         parts = [globals()[f] for f in ("s1", "at3", "at5") if f in globals()]
     only = set(A.only.split(",")) - {""}

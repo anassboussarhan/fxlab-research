@@ -155,3 +155,10 @@ bought. Rule unchanged (daily aggressor imbalance vs its trailing 250-day 20th /
 21:00 -> 21:00 UTC in spot USD/JPY; buying 6J = buying yen = short USD/JPY), split 60/40 by days after the
 250-day warm-up. Info: the same signal over the next hour (hourly imbalance of the last hour, trailing 30 days of
 the same hour).
+
+**AT9 (from the third user list, added 2026-11-08 before testing): option-implied Hurst.** Each Friday, H = 0.5 +
+the slope of log ATM implied volatility on log maturity across the CME euro / yen option expiries 7-180 days away
+(at least two, spanning at least a factor 1.35 in maturity). Trend rule: the sign of the front future's 60-day
+return, held one week; AT9 holds it only when H > 0.5. Primary: AT9 pooled over EUR and JPY, 2010-2017 / 2018-2025,
+1 tick a side on changes. Info: the unfiltered trend, volatility and maximum drawdown of both. S3 and S4 are retried
+with new sources (Norges Bank press releases, BoJ quarterly purchase schedules) under the rules already written.
