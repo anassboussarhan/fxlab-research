@@ -85,6 +85,13 @@ prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ende
 |---|---|---|---|---|
 | MS1 | Malaysian SNR | H4 line-chart turns -> A-levels (resistance) / V-levels (support) at the body price; fresh until a wick touches; fade the first revisit of a fresh level in the direction of the D1 storyline, stop beyond the level, target the next fresh level | M1 in hand | Low (support / resistance family) |
 | QM1 | Quasimodo (QM) pattern | Zigzag high - low - higher high - lower low (bearish QM; mirror for bullish); limit at the left shoulder level, stop beyond the head, target 2R | M1 in hand | Low |
+| CL1 | Dual Thrust (N 4, k 0.5) on FX majors, gold, indices H1 | As published; daily open triggers | M1 in hand | Low |
+| CL2 | R-Breaker and the Fiali four-price breakout, intraday, flat at the close | As published | M1 in hand | Low |
+| CL3 | Aberration (35-bar Bollinger, 2 sd) and King Keltner, D1 / H4 | As published | M1 in hand | Low |
+| CL4 | Thermostat (choppiness switch) and Bollinger Bandit | Pruitt & Hill rules | M1 in hand | Low |
+| CL5 | Camarilla pivots: fade H3 / L3, breakout H4 / L4 | As published | M1 in hand | Low |
+| CL6 | Elder triple screen | Weekly MACD-histogram slope + daily force index / stochastic + intraday stop entry | M1 in hand | Low |
+| CL7 | Bill Williams Alligator + fractals; Puria | As published | M1 in hand | Low |
 | R1 | OANDA position / order books | Needs a v20 (not MT4 / MT5) OANDA account's API token | User | Medium |
 
 ## D. Forward watch list (no new test; judged on live data only)

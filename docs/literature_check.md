@@ -430,3 +430,44 @@ has already been filtered" (777995); ザイFX! "FX会社出禁トレーダー" (
 (26040); 外為どっとコム Spasiba interview (2025); LuxAlgo library "Malaysian SnR"; forex.in.rs on Fabio Valentini's
 order flow; backtrex.com prop pass-rate statistics (Topstep 2025 figures); CFTC customer advisory on AI trading
 bots; Deriv blog on synthetic indices; zikoko.com Nigerian gold trader interview.
+
+## 13. Round 11 (2026-11-08): Trustpilot, MQL5 Market / forum / blogs beyond the popular, classic named systems
+
+Builds on `docs/mql5_review.md` (105 MQL5 sources read earlier). New this round: Trustpilot pages of EA vendors,
+signal sellers and prop firms; MQL5 Market listings with uncommon logic; the Russian "grail" and "from theory to
+practice" threads; the classic named systems of the Chinese and Russian quant communities.
+
+**Trustpilot (EA vendors and signal sellers).**
+
+| Page | What users report | Pattern |
+|---|---|---|
+| Forex Fury (216 reviews, 3.8) | Vendor: "93% win rate"; reviews 14 negative of 24 on one page: 99 gold trades in 20 minutes (-€372), blown demos, idle for weeks then bursts | High win rate, rare large losses, settings-dependent |
+| Propfirm-EA (37 reviews, 54% one-star) | "Both accounts blew almost instantly"; no reviewer reports a funded payout; resale of a cheap MQL5 EA alleged | Prop-pass EAs |
+| Gold signal seller (goldtradermo, 2,935 reviews) | Stops 80-100+ pips against 20-40 pip targets, stops widened after entry, "layering", about 40% wins by one count, broker affiliate commissions | The "high win rate" is a wide stop and a small target; income from affiliates |
+| Others found (Fueledbyforex, WolfxSignals, FXPremiere, Goldsignals.io) | Same mix of short-run praise and blow-up / refund complaints | - |
+
+**MQL5 beyond the popular.** Market listings with uncommon logic: correlated-pair hedge baskets (EUR/USD vs
+USD/CHF "hedge 2 pairs", "Insured Currency Basket"), Friday / Monday time-based entries, weekend-gap traders,
+binary hedgers. None publishes a long out-of-sample record; the families are tested here (pairs / statistical
+arbitrage, weekday seasonality, weekend gaps: negative). The Russian "From theory to practice" thread (1,900+ pages):
+"50% a month, drawdown under 10%, no stops", with no account or method shown.
+
+**Classic named systems not yet run in their exact published form** (their families are tested here, all negative
+after costs: breakouts, channels, pivots, MA crosses, fractals):
+
+| System | Community | Rule in one line | Published evidence |
+|---|---|---|---|
+| Dual Thrust | Chinese futures CTA | Range = max(HH - LC, HC - LL) over N days; long above open + k1 x range, short below open - k2 x range, always in | QuantConnect on SPY 2004-2017: Sharpe -0.17, drawdown 41% |
+| R-Breaker | Chinese futures CTA | Six pivot levels from yesterday's high / low / close; breakout beyond the outer levels, reversal from the inner ones, flat at the close | None found |
+| 菲阿里四价 (Fiali four prices) | Chinese futures CTA | Break of yesterday's high / low, flat at the close | None found |
+| Aberration | Chinese / US CTA | Close outside a 35-bar Bollinger band (2 sd) -> follow, exit at the mid-line | None found |
+| Thermostat, Bollinger Bandit, King Keltner | US (Pruitt & Hill) | Choppiness switch between trend and range; Bollinger / Keltner breakouts with moving exits | Book backtests, no costs |
+| Camarilla pivots | Global retail | Fade at H3 / L3, breakout beyond H4 / L4 | None found |
+| Elder triple screen, Bill Williams Alligator + fractals, Puria | Russian retail | Weekly trend + daily oscillator + intraday entry; Alligator lines with fractal breaks; 75 / 85 LWMA + 5 EMA crossing with MACD | None found |
+
+These, with MS1 and QM1 from round 10, are queued as one batch (CL1-CL7) under one multiple-testing correction.
+
+Sources: Trustpilot pages for forexfury.com, propfirm-ea.com, goldtradermo.com, fueledbyforex.com,
+wolfxsignals.com, fxpremiere.com, goldsignals.io; MQL5 Market listings (Correlated MT5, Hedge 2 pare, Insured
+Currency Basket, Friday Monday, FridayGap Trader); MQL5 forum threads 221552 and 404831; TqSdk strategy library
+(41 classic Chinese strategies); QuantConnect strategy library, Dual Thrust.
