@@ -85,7 +85,7 @@ def row_stats(net: pd.Series, gross: pd.Series, swp: pd.Series):
          "check_swap_mean_pct": wc.mean() * sc * 100, "fit_swap_mean_pct": wf.mean() * sc * 100,
          "max_dd_pct_at_10vol": float((eq - eq.cummax()).min() * 100),
          "check_ann_return_pct_at_10vol": c.mean() * sc * 1200,
-         "by_year_pct_at_10vol": {int(y): round(float(v * sc * 100), 1) for y, v in
+         "by_year_pct_at_10vol": {int(y): round(float(v * 100), 1) for y, v in
                                   x.groupby(x.index.str[:4]).sum().items()}}
     r["p"] = float(1 - st.norm.cdf(r["check_t"])) if np.isfinite(r["check_t"]) else np.nan
     return r, sc

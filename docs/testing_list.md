@@ -79,6 +79,12 @@ FX money comes from (forced flows at known times, risk premia, information in fl
 Not tested on purpose: hedging opposite positions across prop firms (against every firm's terms), trading on slow
 prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ended in 2024), lunar cycles.
 
+## H. Round 13 (2026-11-08): long trades that let winners run
+
+**Done 2026-11-08: nothing in part A counts** (`docs/long_results.md`): 12 long-trend systems on 28 FX crosses and
+on gold, silver and three indices; FX loses before costs, non-FX earns less than holding long. In part B, one weekly
+mean-reversion unit counts by its rule but lost in 2008-2018 (forward watch list).
+
 ## G. Round 10 (2026-11-08): two rule families from the multilingual sweep
 
 **Done 2026-11-08 (round 12): nothing counts** (`docs/anatomy_results.md`). MS1, QM1 and CL1-CL7 were tested as
@@ -104,7 +110,9 @@ USD/JPY H4 high-confidence model (mostly a 2022 / 2024 trend ride); FS1 66 setti
 calendar (Sharpe 0.6 after publication); euro COT speculative pressure (1 of 52); ECB pre-decision drift (19
 meetings); USD/JPY CPI surprise (11 releases); gold breakout short; skipping the 25th and month-end (FW2); the
 forward-v1 / v2 win models; the post-fix USD/JPY / EUR/JPY reversal as a second Gotobi leg (short 09:55 -> 10:20
-Tokyo; +1.6 / +0.8 bp on 2019-2025, absent in the other crosses and in 2003-2005).
+Tokyo; +1.6 / +0.8 bp on 2019-2025, absent in the other crosses and in 2003-2005); Double Seven on weekly bars
+(round 13: buy a 7-week closing low above the 200-week average, sell a 7-week closing high; +64R, t 3.61 on
+2019-2025 over 33 instruments, but t -0.35 on 2008-2018; `docs/long_results.md`).
 
 ## E. Dropped (tested on unseen data and failed; kept here so they are not re-run)
 
