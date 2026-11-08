@@ -80,3 +80,12 @@ The queue of what is still worth testing is in `docs/testing_list.md`.
 | Mixed-source M1 files (missing spread columns) | fixed (`fxlab/data/store.py`) |
 | API rate limit in parallel jobs | fixed (`m1-stage`, one artifact per symbol); bonds to be staged once downloaded |
 | Local test suite: 96 tests fail only because `hmmlearn` is not installed here | open (environment) |
+
+## 7. Rounds 9-12 (2026-11-05 to 2026-11-08)
+
+| Item | Status |
+|---|---|
+| Round 9 gaps (forced flows, premia, news, options, BoJ / Norges flows, CME futures volume and order flow) | done, nothing counts (`docs/round9_results.md`) |
+| MS1 Malaysian SNR, QM1 Quasimodo, CL1-CL7 (Dual Thrust, R-Breaker, Fiali, Aberration, King Keltner, Thermostat, Bollinger Bandit, Camarilla, Elder, Puria) | done, 0 of 19 count (`docs/anatomy_results.md`) |
+| Why each failed strategy fails, and a fix search (entry, exit, reversal, one filter) per strategy | done: 151 of 197 have no gross edge, 25 are cost-bound, 14 decayed, 5 are skew traps; 0 of 196 fixes count (`docs/anatomy_results.md`) |
+| Retail positioning (OANDA order / position books) | **user**: needs a v20 API token as the `OANDA_TOKEN` secret |

@@ -81,6 +81,10 @@ prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ende
 
 ## G. Round 10 (2026-11-08): two rule families from the multilingual sweep
 
+**Done 2026-11-08 (round 12): nothing counts** (`docs/anatomy_results.md`). MS1, QM1 and CL1-CL7 were tested as
+published (0 of 19 rows count), together with a failure anatomy and a fix search over every catalog strategy (0 of
+196 count). R1 still needs the user's OANDA v20 token.
+
 | ID | Idea | Rule sketch (to be pre-registered) | Data | Prior |
 |---|---|---|---|---|
 | MS1 | Malaysian SNR | H4 line-chart turns -> A-levels (resistance) / V-levels (support) at the body price; fresh until a wick touches; fade the first revisit of a fresh level in the direction of the D1 storyline, stop beyond the level, target the next fresh level | M1 in hand | Low (support / resistance family) |
