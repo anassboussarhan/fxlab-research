@@ -79,6 +79,13 @@ FX money comes from (forced flows at known times, risk premia, information in fl
 Not tested on purpose: hedging opposite positions across prop firms (against every firm's terms), trading on slow
 prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ended in 2024), lunar cycles.
 
+## I. Round 14 (2026-11-09): re-check, missed trend variants, trend prediction, Double Seven on 2026
+
+**Done 2026-11-09** (`docs/trend14_results.md`). Round 13 reproduced by an independent engine and by ECB fixings;
+0 of 18 trend variants and 0 of 8 prediction rows count; no trendiness predictor works. Double Seven on weekly
+bars passed its pre-registered 2026 check (33 trades, +0.78R, t 5.4 clustered) but lost heavily in 2008-2010 and
+2015-2016; next step is a live forward test at small size with a written crash rule.
+
 ## H. Round 13 (2026-11-08): long trades that let winners run
 
 **Done 2026-11-08: nothing in part A counts** (`docs/long_results.md`): 12 long-trend systems on 28 FX crosses and
@@ -112,7 +119,8 @@ meetings); USD/JPY CPI surprise (11 releases); gold breakout short; skipping the
 forward-v1 / v2 win models; the post-fix USD/JPY / EUR/JPY reversal as a second Gotobi leg (short 09:55 -> 10:20
 Tokyo; +1.6 / +0.8 bp on 2019-2025, absent in the other crosses and in 2003-2005); Double Seven on weekly bars
 (round 13: buy a 7-week closing low above the 200-week average, sell a 7-week closing high; +64R, t 3.61 on
-2019-2025 over 33 instruments, but t -0.35 on 2008-2018; `docs/long_results.md`).
+2019-2025 over 33 instruments, but t -0.35 on 2008-2018; round 14: supported on 2026, 33 FX trades, +0.78R,
+t 5.4 clustered, with heavy losses in 2008-2010 and 2015-2016; `docs/trend14_results.md`).
 
 ## E. Dropped (tested on unseen data and failed; kept here so they are not re-run)
 
