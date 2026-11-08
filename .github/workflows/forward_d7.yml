@@ -1,0 +1,43 @@
+name: forward-d7
+# Forward test of Double Seven on weekly bars (docs/forward_d7_preregistration.md). Paper only: ECB fixings each
+# Saturday; publishes the closed forward trades, open positions and next signals to the forward-d7 branch.
+on:
+  schedule:
+    - cron: "41 6 * * 6"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FORWARD_D7"]
+permissions:
+  contents: write
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas numpy requests
+      - name: Forward test
+        run: |
+          set -o pipefail
+          mkdir -p out && python scripts/forward_d7.py --out out 2>&1 | tee run_log.txt
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p out && cp run_log.txt out/ 2>/dev/null || true
+          cp -r out /tmp/fd7
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan fd7-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p forward_d7 && cp -r /tmp/fd7/* forward_d7/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > forward_d7/RUN.txt
+          git add -f forward_d7
+          git commit -qm "forward-d7 (run ${{ github.run_id }})"
+          git push -f origin HEAD:forward-d7
