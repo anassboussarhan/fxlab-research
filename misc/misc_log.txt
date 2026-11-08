@@ -1,0 +1,288 @@
+long-AUDCAD
+long-AUDCHF
+long-AUDJPY
+long-AUDNZD
+long-AUDUSD
+long-CADCHF
+long-CADJPY
+long-CHFJPY
+long-EURAUD
+long-EURCAD
+{
+ "S.DAILY.DOUBLE_SEVEN|W1|T0": {
+  "FX": {
+   "fit_sum_R": -12.632841110229492,
+   "check_sum_R": 39.64192199707031,
+   "fit_t": -0.6033942982409154,
+   "check_t": 2.3749751282948237,
+   "check_trades": 247.0,
+   "corr_check_with_long_only": 0.2692549151217899
+  },
+  "metals": {
+   "fit_sum_R": -2.104694366455078,
+   "check_sum_R": 10.53709602355957,
+   "fit_t": -0.9445226932751751,
+   "check_t": 2.3450047126562987,
+   "check_trades": 36.0,
+   "corr_check_with_long_only": 0.4653813383935185
+  },
+  "indices": {
+   "fit_sum_R": 7.798135280609131,
+   "check_sum_R": 14.081831932067871,
+   "fit_t": 1.5563736256273144,
+   "check_t": 1.7192630970681697,
+   "check_trades": 44.0,
+   "corr_check_with_long_only": 0.6031578456749158
+  },
+  "all": {
+   "fit_sum_R": -6.939397811889648,
+   "check_sum_R": 64.26085662841797,
+   "fit_t": -0.35071137485232096,
+   "check_t": 3.6109386210926777,
+   "check_trades": 327.0,
+   "corr_check_with_long_only": 0.3814573785688981
+  }
+ },
+ "S.DAILY.CUM_RSI|W1|T0": {
+  "FX": {
+   "fit_sum_R": 12.111836433410645,
+   "check_sum_R": 23.709259033203125,
+   "fit_t": 1.1576139013875477,
+   "check_t": 2.0542383103952404,
+   "check_trades": 196.0,
+   "corr_check_with_long_only": 0.14097762082577409
+  },
+  "metals": {
+   "fit_sum_R": -0.9232258796691895,
+   "check_sum_R": 2.5682766437530518,
+   "fit_t": -0.7510197213104383,
+   "check_t": 1.0104878409492406,
+   "check_trades": 28.0,
+   "corr_check_with_long_only": 0.33983141537283895
+  },
+  "indices": {
+   "fit_sum_R": 4.611483573913574,
+   "check_sum_R": 8.924484252929688,
+   "fit_t": 1.8818980383282633,
+   "check_t": 2.12155700160918,
+   "check_trades": 42.0,
+   "corr_check_with_long_only": 0.4115007990380573
+  },
+  "all": {
+   "fit_sum_R": 15.800091743469238,
+   "check_sum_R": 35.202022552490234,
+   "fit_t": 1.4421535943629487,
+   "check_t": 2.7891181332009403,
+   "check_trades": 266.0,
+   "corr_check_with_long_only": 0.20128433503526302
+  }
+ },
+ "S.FAMOUS.CONNORS_RSI2|W1|T0": {
+  "FX": {
+   "fit_sum_R": -3.5266716480255127,
+   "check_sum_R": 41.30592346191406,
+   "fit_t": -0.16977773940690682,
+   "check_t": 2.4936411519004014,
+   "check_trades": 412.0,
+   "corr_check_with_long_only": -0.11669719469260979
+  },
+  "metals": {
+   "fit_sum_R": 0.15862397849559784,
+   "check_sum_R": -1.6774015426635742,
+   "fit_t": 0.06914830210967657,
+   "check_t": -0.3320552583536856,
+   "check_trades": 28.0,
+   "corr_check_with_long_only": -0.16986157230192353
+  },
+  "indices": {
+   "fit_sum_R": 4.929237365722656,
+   "check_sum_R": 3.0932247638702393,
+   "fit_t": 1.7958603313939556,
+   "check_t": 0.5747981576167097,
+   "check_trades": 36.0,
+   "corr_check_with_long_only": 0.3295890965194994
+  },
+  "all": {
+   "fit_sum_R": 1.5611919164657593,
+   "check_sum_R": 42.72174835205078,
+   "fit_t": 0.0747555236638577,
+   "check_t": 2.2889836685269214,
+   "check_trades": 476.0,
+   "corr_check_with_long_only": -0.06702447480610983
+  }
+ },
+ "S.DAILY.ABS_MOM|D1|T0": {
+  "FX": {
+   "fit_sum_R": -55.437496185302734,
+   "check_sum_R": 35.56853485107422,
+   "fit_t": -0.4502897297890373,
+   "check_t": 0.31549076105592816,
+   "check_trades": 174.0,
+   "corr_check_with_long_only": 0.6286462172281791
+  },
+  "metals": {
+   "fit_sum_R": -29.441329956054688,
+   "check_sum_R": 91.63156127929688,
+   "fit_t": -2.533634261524306,
+   "check_t": 1.9828150232069015,
+   "check_trades": 9.0,
+   "corr_check_with_long_only": 0.7609769437458037
+  },
+  "indices": {
+   "fit_sum_R": 36.27556228637695,
+   "check_sum_R": 100.59434509277344,
+   "fit_t": 1.5083210061662127,
+   "check_t": 1.852764710987223,
+   "check_trades": 7.0,
+   "corr_check_with_long_only": 0.7950628614719415
+  },
+  "all": {
+   "fit_sum_R": -48.603271484375,
+   "check_sum_R": 227.79441833496094,
+   "fit_t": -0.3688457756165005,
+   "check_t": 1.67212974512011,
+   "check_trades": 190.0,
+   "corr_check_with_long_only": 0.7296520130675506
+  }
+ }
+}
+S.DAILY.ABS_MOM|D1|T0
+                 unit        symbol  fit_sum_R  check_sum_R  check_t  check_trades
+S.DAILY.ABS_MOM|D1|T0 USATECHIDXUSD  29.580000    76.889999     1.85           1.0
+S.DAILY.ABS_MOM|D1|T0        XAUUSD -15.130000    46.880001     2.19           5.0
+S.DAILY.ABS_MOM|D1|T0        XAGUSD -14.320000    44.759998     1.44           4.0
+S.DAILY.ABS_MOM|D1|T0        USDJPY  27.139999    42.369999     1.50           9.0
+S.DAILY.ABS_MOM|D1|T0        CHFJPY   6.760000    38.759998     3.20           3.0
+S.DAILY.ABS_MOM|D1|T0        GBPJPY  24.139999    31.190001     1.97           5.0
+S.DAILY.ABS_MOM|D1|T0     JPNIDXJPY   0.680000    19.010000     1.50           2.0
+S.DAILY.ABS_MOM|D1|T0        EURJPY   3.080000    16.770000     1.89           3.0
+S.DAILY.ABS_MOM|D1|T0        NZDJPY   8.180000    15.560000     1.73           3.0
+S.DAILY.ABS_MOM|D1|T0        CADJPY  -3.810000     9.620000     0.59           9.0
+S.DAILY.ABS_MOM|D1|T0        AUDJPY  -7.500000     8.670000     1.01           8.0
+S.DAILY.ABS_MOM|D1|T0        EURCAD  -7.860000     5.690000     0.57           4.0
+S.DAILY.ABS_MOM|D1|T0  USA500IDXUSD   6.020000     4.690000     0.34           4.0
+S.DAILY.ABS_MOM|D1|T0        GBPCAD   4.680000     2.140000     0.32           5.0
+S.DAILY.ABS_MOM|D1|T0        GBPNZD -12.700000     2.140000     0.21           8.0
+S.DAILY.ABS_MOM|D1|T0        GBPAUD  -2.170000    -0.030000    -0.00           5.0
+S.DAILY.ABS_MOM|D1|T0        EURAUD  -4.320000    -1.940000    -0.20           6.0
+S.DAILY.ABS_MOM|D1|T0        EURNZD  -8.990000    -3.140000    -0.29           8.0
+S.DAILY.ABS_MOM|D1|T0        NZDUSD -10.720000    -3.700000    -0.60           5.0
+S.DAILY.ABS_MOM|D1|T0        USDCAD  16.590000    -4.050000    -0.38          10.0
+S.DAILY.ABS_MOM|D1|T0        EURCHF   3.890000    -4.470000    -0.80           7.0
+S.DAILY.ABS_MOM|D1|T0        AUDCAD  -8.800000    -4.830000    -0.93           6.0
+S.DAILY.ABS_MOM|D1|T0        AUDUSD  -2.680000    -5.550000    -0.86           4.0
+S.DAILY.ABS_MOM|D1|T0        GBPUSD -16.379999    -7.660000    -0.82           7.0
+S.DAILY.ABS_MOM|D1|T0        AUDNZD -10.910000    -7.940000    -0.79           9.0
+S.DAILY.ABS_MOM|D1|T0        CADCHF -16.410000    -8.970000    -1.20           7.0
+S.DAILY.ABS_MOM|D1|T0        NZDCAD  13.470000    -9.290000    -1.51           6.0
+S.DAILY.ABS_MOM|D1|T0        USDCHF  -7.130000    -9.510000    -1.06           8.0
+S.DAILY.ABS_MOM|D1|T0        EURUSD -16.520000    -9.590000    -1.28           5.0
+S.DAILY.ABS_MOM|D1|T0        NZDCHF  -5.830000   -10.960000    -1.71           4.0
+S.DAILY.ABS_MOM|D1|T0        GBPCHF -12.620000   -11.490000    -2.15           7.0
+S.DAILY.ABS_MOM|D1|T0        EURGBP   1.850000   -15.150000    -2.08           6.0
+S.DAILY.ABS_MOM|D1|T0        AUDCHF  -9.850000   -19.040001    -1.95           7.0
+S.DAILY.CUM_RSI|W1|T0
+                 unit        symbol  fit_sum_R  check_sum_R  check_t  check_trades
+S.DAILY.CUM_RSI|W1|T0        GBPJPY       2.57         8.05     3.48          15.0
+S.DAILY.CUM_RSI|W1|T0        CHFJPY       4.90         5.48     2.14          12.0
+S.DAILY.CUM_RSI|W1|T0        EURAUD      -0.61         4.24     2.16          18.0
+S.DAILY.CUM_RSI|W1|T0     JPNIDXJPY       0.74         3.63     2.12          11.0
+S.DAILY.CUM_RSI|W1|T0        AUDJPY      -1.11         3.24     2.26          13.0
+S.DAILY.CUM_RSI|W1|T0 USATECHIDXUSD       1.81         2.84     1.43          17.0
+S.DAILY.CUM_RSI|W1|T0        NZDJPY       0.91         2.51     1.33          13.0
+S.DAILY.CUM_RSI|W1|T0  USA500IDXUSD       2.06         2.46     1.45          14.0
+S.DAILY.CUM_RSI|W1|T0        GBPCAD      -0.81         2.33     1.36           8.0
+S.DAILY.CUM_RSI|W1|T0        XAUUSD      -0.92         2.08     1.38          16.0
+S.DAILY.CUM_RSI|W1|T0        EURJPY       1.99         1.82     1.33           8.0
+S.DAILY.CUM_RSI|W1|T0        EURCAD       1.69         0.90     0.40           7.0
+S.DAILY.CUM_RSI|W1|T0        USDCHF       2.04         0.69     0.66           3.0
+S.DAILY.CUM_RSI|W1|T0        CADJPY      -0.95         0.67     0.48           8.0
+S.DAILY.CUM_RSI|W1|T0        GBPAUD       1.58         0.61     0.20          12.0
+S.DAILY.CUM_RSI|W1|T0        XAGUSD       0.00         0.49     0.31          12.0
+S.DAILY.CUM_RSI|W1|T0        GBPCHF      -0.01         0.31     1.18           2.0
+S.DAILY.CUM_RSI|W1|T0        USDCAD      -0.46         0.28     0.18          13.0
+S.DAILY.CUM_RSI|W1|T0        CADCHF       0.28         0.23     1.03           1.0
+S.DAILY.CUM_RSI|W1|T0        AUDCHF       0.00         0.22     1.10           1.0
+S.DAILY.CUM_RSI|W1|T0        EURNZD       0.13         0.15     0.07          11.0
+S.DAILY.CUM_RSI|W1|T0        NZDUSD       1.76         0.12     0.14           3.0
+S.DAILY.CUM_RSI|W1|T0        AUDUSD       2.91         0.04     0.07           3.0
+S.DAILY.CUM_RSI|W1|T0        EURUSD      -2.18         0.00     0.01           3.0
+S.DAILY.CUM_RSI|W1|T0        NZDCHF       0.22         0.00      NaN           0.0
+S.DAILY.CUM_RSI|W1|T0        NZDCAD      -3.17         0.00      NaN           0.0
+S.DAILY.CUM_RSI|W1|T0        GBPNZD       0.45        -0.03    -0.02          11.0
+S.DAILY.CUM_RSI|W1|T0        EURGBP       0.86        -0.32    -0.16           6.0
+S.DAILY.CUM_RSI|W1|T0        AUDCAD       0.27        -0.61    -0.77           2.0
+S.DAILY.CUM_RSI|W1|T0        EURCHF      -0.75        -1.24    -1.06           3.0
+S.DAILY.CUM_RSI|W1|T0        AUDNZD       0.29        -1.93    -1.04           8.0
+S.DAILY.CUM_RSI|W1|T0        GBPUSD      -2.72        -1.96    -1.12           5.0
+S.DAILY.CUM_RSI|W1|T0        USDJPY       2.04        -2.09    -0.97           7.0
+S.DAILY.DOUBLE_SEVEN|W1|T0
+                      unit        symbol  fit_sum_R  check_sum_R  check_t  check_trades
+S.DAILY.DOUBLE_SEVEN|W1|T0        GBPJPY       1.49         9.53     3.26          16.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        EURAUD      -2.39         7.38     2.09          21.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        XAUUSD      -2.10         6.86     2.24          21.0
+S.DAILY.DOUBLE_SEVEN|W1|T0  USA500IDXUSD       1.66         5.87     1.68          15.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        CHFJPY       3.03         5.49     2.10          13.0
+S.DAILY.DOUBLE_SEVEN|W1|T0 USATECHIDXUSD       3.98         4.82     1.64          15.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        GBPAUD       0.34         4.47     1.11          15.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        CADJPY      -0.20         4.33     1.74          12.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        EURJPY       0.94         4.23     1.85          13.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        AUDJPY      -0.85         4.06     1.79          14.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        XAGUSD       0.00         3.68     1.37          15.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        NZDJPY       0.94         3.65     1.56          13.0
+S.DAILY.DOUBLE_SEVEN|W1|T0     JPNIDXJPY       2.15         3.39     0.91          14.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        USDJPY      -1.86         3.30     1.03          11.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        GBPCAD      -1.15         3.13     1.23          10.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        EURCAD       0.58         2.77     0.87          12.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        USDCHF       2.81         2.04     1.34           5.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        EURNZD      -0.43         1.69     0.66          14.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        GBPNZD      -3.52         1.59     0.73          14.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        NZDUSD      -2.24         0.38     0.35           4.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        CADCHF       0.87         0.26     0.54           3.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        GBPCHF       1.04         0.21     0.28           3.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        NZDCHF       0.32         0.00      NaN           0.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        NZDCAD      -2.23        -0.74    -0.61           2.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        AUDCHF       0.00        -0.79    -0.90           1.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        AUDUSD       0.63        -1.00    -0.91           3.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        EURUSD      -7.87        -1.12    -0.85           5.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        EURGBP       2.71        -1.23    -0.48           8.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        USDCAD      -1.25        -1.75    -0.58          12.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        AUDNZD      -0.84        -1.75    -0.70          10.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        EURCHF      -0.63        -1.99    -1.40           2.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        AUDCAD       0.19        -2.77    -1.40           4.0
+S.DAILY.DOUBLE_SEVEN|W1|T0        GBPUSD      -3.05        -5.73    -1.53           7.0
+S.FAMOUS.CONNORS_RSI2|W1|T0
+                       unit        symbol  fit_sum_R  check_sum_R  check_t  check_trades
+S.FAMOUS.CONNORS_RSI2|W1|T0        GBPJPY       2.80         8.57     3.23          21.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        GBPCHF       3.11         5.23     2.09          18.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        EURAUD       1.07         4.96     2.58          22.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        CHFJPY       5.30         4.44     2.44          14.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        AUDUSD      -0.03         4.31     2.18          17.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        NZDJPY      -1.05         4.28     1.99          16.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        GBPCAD      -1.72         3.48     2.29          12.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        EURCHF      -2.90         2.61     1.12          20.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        XAUUSD       0.40         2.61     2.02          13.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        NZDCHF       1.41         2.34     1.26          15.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        EURCAD       2.40         1.98     1.01          12.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        NZDUSD       0.52         1.91     0.91          13.0
+S.FAMOUS.CONNORS_RSI2|W1|T0 USATECHIDXUSD       1.66         1.22     0.61          14.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        USDCAD       0.49         1.22     0.75          16.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        AUDCHF       6.13         1.10     0.54          16.0
+S.FAMOUS.CONNORS_RSI2|W1|T0  USA500IDXUSD       2.52         1.02     0.44          12.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        EURJPY      -1.94         0.99     0.73          10.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        CADJPY      -2.14         0.97     0.43          16.0
+S.FAMOUS.CONNORS_RSI2|W1|T0     JPNIDXJPY       0.74         0.85     0.51          10.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        CADCHF       0.56         0.65     0.44          12.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        EURNZD      -2.05         0.62     0.28          17.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        GBPUSD       0.28         0.30     0.16          17.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        EURUSD      -3.44         0.29     0.07          14.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        EURGBP       0.12         0.14     0.06          10.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        NZDCAD      -2.48        -0.04    -0.02          12.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        AUDJPY      -2.98        -0.20    -0.14          16.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        GBPAUD      -0.82        -0.25    -0.09          15.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        AUDCAD      -0.39        -0.36    -0.18          13.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        USDCHF       0.11        -0.48    -0.25          12.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        AUDNZD       1.26        -2.14    -0.83          14.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        USDJPY      -7.10        -2.63    -1.01          10.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        GBPNZD      -0.05        -2.97    -1.61          12.0
+S.FAMOUS.CONNORS_RSI2|W1|T0        XAGUSD      -0.24        -4.29    -0.92          15.0

@@ -1,0 +1,138 @@
+{
+ "S.DAILY.DOUBLE_SEVEN|W1|T0": {
+  "FX": {
+   "fit_sum_R": -12.632841110229492,
+   "check_sum_R": 39.64192199707031,
+   "fit_t": -0.6033942982409154,
+   "check_t": 2.3749751282948237,
+   "check_trades": 247.0,
+   "corr_check_with_long_only": 0.2692549151217899
+  },
+  "metals": {
+   "fit_sum_R": -2.104694366455078,
+   "check_sum_R": 10.53709602355957,
+   "fit_t": -0.9445226932751751,
+   "check_t": 2.3450047126562987,
+   "check_trades": 36.0,
+   "corr_check_with_long_only": 0.4653813383935185
+  },
+  "indices": {
+   "fit_sum_R": 7.798135280609131,
+   "check_sum_R": 14.081831932067871,
+   "fit_t": 1.5563736256273144,
+   "check_t": 1.7192630970681697,
+   "check_trades": 44.0,
+   "corr_check_with_long_only": 0.6031578456749158
+  },
+  "all": {
+   "fit_sum_R": -6.939397811889648,
+   "check_sum_R": 64.26085662841797,
+   "fit_t": -0.35071137485232096,
+   "check_t": 3.6109386210926777,
+   "check_trades": 327.0,
+   "corr_check_with_long_only": 0.3814573785688981
+  }
+ },
+ "S.DAILY.CUM_RSI|W1|T0": {
+  "FX": {
+   "fit_sum_R": 12.111836433410645,
+   "check_sum_R": 23.709259033203125,
+   "fit_t": 1.1576139013875477,
+   "check_t": 2.0542383103952404,
+   "check_trades": 196.0,
+   "corr_check_with_long_only": 0.14097762082577409
+  },
+  "metals": {
+   "fit_sum_R": -0.9232258796691895,
+   "check_sum_R": 2.5682766437530518,
+   "fit_t": -0.7510197213104383,
+   "check_t": 1.0104878409492406,
+   "check_trades": 28.0,
+   "corr_check_with_long_only": 0.33983141537283895
+  },
+  "indices": {
+   "fit_sum_R": 4.611483573913574,
+   "check_sum_R": 8.924484252929688,
+   "fit_t": 1.8818980383282633,
+   "check_t": 2.12155700160918,
+   "check_trades": 42.0,
+   "corr_check_with_long_only": 0.4115007990380573
+  },
+  "all": {
+   "fit_sum_R": 15.800091743469238,
+   "check_sum_R": 35.202022552490234,
+   "fit_t": 1.4421535943629487,
+   "check_t": 2.7891181332009403,
+   "check_trades": 266.0,
+   "corr_check_with_long_only": 0.20128433503526302
+  }
+ },
+ "S.FAMOUS.CONNORS_RSI2|W1|T0": {
+  "FX": {
+   "fit_sum_R": -3.5266716480255127,
+   "check_sum_R": 41.30592346191406,
+   "fit_t": -0.16977773940690682,
+   "check_t": 2.4936411519004014,
+   "check_trades": 412.0,
+   "corr_check_with_long_only": -0.11669719469260979
+  },
+  "metals": {
+   "fit_sum_R": 0.15862397849559784,
+   "check_sum_R": -1.6774015426635742,
+   "fit_t": 0.06914830210967657,
+   "check_t": -0.3320552583536856,
+   "check_trades": 28.0,
+   "corr_check_with_long_only": -0.16986157230192353
+  },
+  "indices": {
+   "fit_sum_R": 4.929237365722656,
+   "check_sum_R": 3.0932247638702393,
+   "fit_t": 1.7958603313939556,
+   "check_t": 0.5747981576167097,
+   "check_trades": 36.0,
+   "corr_check_with_long_only": 0.3295890965194994
+  },
+  "all": {
+   "fit_sum_R": 1.5611919164657593,
+   "check_sum_R": 42.72174835205078,
+   "fit_t": 0.0747555236638577,
+   "check_t": 2.2889836685269214,
+   "check_trades": 476.0,
+   "corr_check_with_long_only": -0.06702447480610983
+  }
+ },
+ "S.DAILY.ABS_MOM|D1|T0": {
+  "FX": {
+   "fit_sum_R": -55.437496185302734,
+   "check_sum_R": 35.56853485107422,
+   "fit_t": -0.4502897297890373,
+   "check_t": 0.31549076105592816,
+   "check_trades": 174.0,
+   "corr_check_with_long_only": 0.6286462172281791
+  },
+  "metals": {
+   "fit_sum_R": -29.441329956054688,
+   "check_sum_R": 91.63156127929688,
+   "fit_t": -2.533634261524306,
+   "check_t": 1.9828150232069015,
+   "check_trades": 9.0,
+   "corr_check_with_long_only": 0.7609769437458037
+  },
+  "indices": {
+   "fit_sum_R": 36.27556228637695,
+   "check_sum_R": 100.59434509277344,
+   "fit_t": 1.5083210061662127,
+   "check_t": 1.852764710987223,
+   "check_trades": 7.0,
+   "corr_check_with_long_only": 0.7950628614719415
+  },
+  "all": {
+   "fit_sum_R": -48.603271484375,
+   "check_sum_R": 227.79441833496094,
+   "fit_t": -0.3688457756165005,
+   "check_t": 1.67212974512011,
+   "check_trades": 190.0,
+   "corr_check_with_long_only": 0.7296520130675506
+  }
+ }
+}
