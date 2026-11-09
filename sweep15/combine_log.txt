@@ -1,0 +1,320 @@
+read s15_in/s15-AUDCAD/SAB_AUDCAD.parquet 523038
+read s15_in/s15-AUDCHF/SAB_AUDCHF.parquet 537648
+read s15_in/s15-AUDJPY/SAB_AUDJPY.parquet 610698
+read s15_in/s15-AUDNZD/SAB_AUDNZD.parquet 578556
+read s15_in/s15-AUDUSD/SAB_AUDUSD.parquet 610698
+read s15_in/s15-CADCHF/SAB_CADCHF.parquet 537648
+read s15_in/s15-CADJPY/SAB_CADJPY.parquet 610698
+read s15_in/s15-CHFJPY/SAB_CHFJPY.parquet 610698
+read s15_in/s15-EURAUD/SAB_EURAUD.parquet 613620
+read s15_in/s15-EURCAD/SAB_EURCAD.parquet 590244
+read s15_in/s15-EURCHF/SAB_EURCHF.parquet 613620
+read s15_in/s15-EURGBP/SAB_EURGBP.parquet 613620
+read s15_in/s15-EURJPY/SAB_EURJPY.parquet 613620
+read s15_in/s15-EURNZD/SAB_EURNZD.parquet 540570
+read s15_in/s15-EURUSD/SAB_EURUSD.parquet 631152
+read s15_in/s15-GBPAUD/SAB_GBPAUD.parquet 540570
+read s15_in/s15-GBPCAD/SAB_GBPCAD.parquet 540570
+read s15_in/s15-GBPCHF/SAB_GBPCHF.parquet 613620
+read s15_in/s15-GBPJPY/SAB_GBPJPY.parquet 613620
+read s15_in/s15-GBPNZD/SAB_GBPNZD.parquet 540570
+read s15_in/s15-GBPUSD/SAB_GBPUSD.parquet 613620
+read s15_in/s15-NZDCAD/SAB_NZDCAD.parquet 540570
+read s15_in/s15-NZDCHF/SAB_NZDCHF.parquet 540570
+read s15_in/s15-NZDJPY/SAB_NZDJPY.parquet 540570
+read s15_in/s15-NZDUSD/SAB_NZDUSD.parquet 613620
+read s15_in/s15-USDCAD/SAB_USDCAD.parquet 613620
+read s15_in/s15-USDCHF/SAB_USDCHF.parquet 613620
+read s15_in/s15-USDJPY/SAB_USDJPY.parquet 613620
+read s15_in/s15-AUDCAD/SC_AUDCAD.parquet 316114
+read s15_in/s15-AUDCHF/SC_AUDCHF.parquet 324944
+read s15_in/s15-AUDJPY/SC_AUDJPY.parquet 387486
+read s15_in/s15-AUDNZD/SC_AUDNZD.parquet 353232
+read s15_in/s15-AUDUSD/SC_AUDUSD.parquet 388740
+read s15_in/s15-CADCHF/SC_CADCHF.parquet 326416
+read s15_in/s15-CADJPY/SC_CADJPY.parquet 387486
+read s15_in/s15-CHFJPY/SC_CHFJPY.parquet 387486
+read s15_in/s15-EURAUD/SC_EURAUD.parquet 389340
+read s15_in/s15-EURCAD/SC_EURCAD.parquet 359560
+read s15_in/s15-EURCHF/SC_EURCHF.parquet 388080
+read s15_in/s15-EURGBP/SC_EURGBP.parquet 389760
+read s15_in/s15-EURJPY/SC_EURJPY.parquet 391020
+read s15_in/s15-EURNZD/SC_EURNZD.parquet 328190
+read s15_in/s15-EURUSD/SC_EURUSD.parquet 402192
+read s15_in/s15-GBPAUD/SC_GBPAUD.parquet 327820
+read s15_in/s15-GBPCAD/SC_GBPCAD.parquet 328190
+read s15_in/s15-GBPCHF/SC_GBPCHF.parquet 389760
+read s15_in/s15-GBPJPY/SC_GBPJPY.parquet 389760
+read s15_in/s15-GBPNZD/SC_GBPNZD.parquet 329300
+read s15_in/s15-GBPUSD/SC_GBPUSD.parquet 390180
+read s15_in/s15-NZDCAD/SC_NZDCAD.parquet 328560
+read s15_in/s15-NZDCHF/SC_NZDCHF.parquet 328560
+read s15_in/s15-NZDJPY/SC_NZDJPY.parquet 328560
+read s15_in/s15-NZDUSD/SC_NZDUSD.parquet 390600
+read s15_in/s15-USDCAD/SC_USDCAD.parquet 390600
+read s15_in/s15-USDCHF/SC_USDCHF.parquet 389760
+read s15_in/s15-USDJPY/SC_USDJPY.parquet 390180
+read s15_in/s15-JPNIDXJPY/SAB_JPNIDXJPY.parquet 371094
+read s15_in/s15-USA500IDXUSD/SAB_USA500IDXUSD.parquet 429534
+read s15_in/s15-USATECHIDXUSD/SAB_USATECHIDXUSD.parquet 455832
+read s15_in/s15-XAGUSD/SAB_XAGUSD.parquet 511350
+read s15_in/s15-XAUUSD/SAB_XAUUSD.parquet 496740
+read s15_in/s15-JPNIDXJPY/SC_JPNIDXJPY.parquet 205994
+read s15_in/s15-USA500IDXUSD/SC_USA500IDXUSD.parquet 255192
+read s15_in/s15-USATECHIDXUSD/SC_USATECHIDXUSD.parquet 260208
+read s15_in/s15-XAGUSD/SC_XAGUSD.parquet 305550
+read s15_in/s15-XAUUSD/SC_XAUUSD.parquet 295800
+files FX 56 non-FX 10
+{
+ "units_real": 1071,
+ "units_placebo": 150,
+ "counts_strict": 0,
+ "regime_candidates": 0,
+ "rates": {
+  "strict_rule": {
+   "real": 0.003734827264239029,
+   "placebo": 0.0,
+   "real_rules": 0.012875536480686695,
+   "placebo_rules": 0.0,
+   "real_features": 0.0011933174224343676,
+   "placebo_features": 0.0
+  },
+  "regime_rule": {
+   "real": 0.006535947712418301,
+   "placebo": 0.0,
+   "real_rules": 0.02145922746781116,
+   "placebo_rules": 0.0,
+   "real_features": 0.002386634844868735,
+   "placebo_features": 0.0
+  }
+ },
+ "strict_list": [],
+ "regime_list": [],
+ "top_check": [
+  {
+   "unit": "S.ST.CHANNEL|W1",
+   "cfg": "k=2.0,n=50",
+   "dir": 1,
+   "fit_t": -0.2483,
+   "check_t": 2.7219,
+   "p": 0.0032,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.DAILY.CUM_RSI|W1",
+   "cfg": "k=3,lo=50,short=0,x=65",
+   "dir": 1,
+   "fit_t": 1.2283,
+   "check_t": 2.6502,
+   "p": 0.004,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.MR.TWAP_REVERSION|W1",
+   "cfg": "k=2.0,n=12",
+   "dir": 1,
+   "fit_t": -0.0943,
+   "check_t": 2.0529,
+   "p": 0.02,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.TREND.ADAPTIVE|W1",
+   "cfg": "e_min=0.4,n=20",
+   "dir": -1,
+   "fit_t": 0.0482,
+   "check_t": 2.0465,
+   "p": 0.0204,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.BOOK.CONNORS_R3|W1",
+   "cfg": "short=0",
+   "dir": 1,
+   "fit_t": 0.7628,
+   "check_t": 1.9976,
+   "p": 0.0229,
+   "bh_pass": false
+  },
+  {
+   "unit": "FEAT:F.ES.LUNAR_PHASE:cos|W1",
+   "cfg": "terciles",
+   "dir": 1,
+   "fit_t": -1.1076,
+   "check_t": 1.862,
+   "p": 0.0313,
+   "bh_pass": false
+  },
+  {
+   "unit": "FEAT:F.TR.RIBBON:disp|MN",
+   "cfg": "terciles",
+   "dir": 1,
+   "fit_t": 1.3624,
+   "check_t": 1.8437,
+   "p": 0.0326,
+   "bh_pass": false
+  },
+  {
+   "unit": "FEAT:F.IN.PIT_RANK|W1",
+   "cfg": "terciles",
+   "dir": 1,
+   "fit_t": -0.0158,
+   "check_t": 1.6266,
+   "p": 0.0519,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.BOOK.WILDER_DMI|D1",
+   "cfg": "thr=25",
+   "dir": -1,
+   "fit_t": 0.033,
+   "check_t": 1.6017,
+   "p": 0.0546,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.DAILY.THREE_DOWN|D1",
+   "cfg": "f=1,n=3,short=0",
+   "dir": 1,
+   "fit_t": 0.253,
+   "check_t": 1.3777,
+   "p": 0.0841,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.BOOK.CONNORS_3DAY|W1",
+   "cfg": "short=0",
+   "dir": 1,
+   "fit_t": 0.6859,
+   "check_t": 1.3185,
+   "p": 0.0937,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.FAMOUS.HOLY_GRAIL|W1",
+   "cfg": "thr=35",
+   "dir": -1,
+   "fit_t": 0.2426,
+   "check_t": 1.3163,
+   "p": 0.094,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.FAMOUS.CONNORS_RSI2|W1",
+   "cfg": "lo=5",
+   "dir": 1,
+   "fit_t": 0.0741,
+   "check_t": 1.2661,
+   "p": 0.1027,
+   "bh_pass": false
+  },
+  {
+   "unit": "FEAT:F.TS.WEEKDAY:cos|MN",
+   "cfg": "terciles",
+   "dir": -1,
+   "fit_t": 0.8415,
+   "check_t": 1.218,
+   "p": 0.1116,
+   "bh_pass": false
+  },
+  {
+   "unit": "FEAT:F.MO.MASS_INDEX|MN",
+   "cfg": "terciles",
+   "dir": 1,
+   "fit_t": 0.1338,
+   "check_t": 1.1951,
+   "p": 0.116,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.FAMOUS.HOLY_GRAIL|D1",
+   "cfg": "thr=35",
+   "dir": -1,
+   "fit_t": 1.2379,
+   "check_t": 1.1738,
+   "p": 0.1202,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.FAMOUS.TD_SEQUENTIAL|D1",
+   "cfg": "n=13",
+   "dir": 1,
+   "fit_t": 0.3263,
+   "check_t": 1.1594,
+   "p": 0.1231,
+   "bh_pass": false
+  },
+  {
+   "unit": "FEAT:F.SP.FFT_DOMINANT:power_share|W1",
+   "cfg": "terciles",
+   "dir": -1,
+   "fit_t": 0.4286,
+   "check_t": 1.1536,
+   "p": 0.1243,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.GEO.FIB_EXTENSION|W1",
+   "cfg": "zz=0.005",
+   "dir": 1,
+   "fit_t": -0.1228,
+   "check_t": 1.1147,
+   "p": 0.1325,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.BOOK.WILDER_VOLSYS|D1",
+   "cfg": "k=4.0",
+   "dir": -1,
+   "fit_t": -0.6143,
+   "check_t": 1.0862,
+   "p": 0.1387,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.DAILY.THREE_DOWN|W1",
+   "cfg": "f=0,n=4,short=0",
+   "dir": 1,
+   "fit_t": 0.4473,
+   "check_t": 1.082,
+   "p": 0.1396,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.VOL.EXPANSION|D1",
+   "cfg": "k=1.8,s=3",
+   "dir": -1,
+   "fit_t": 1.4296,
+   "check_t": 1.074,
+   "p": 0.1414,
+   "bh_pass": false
+  },
+  {
+   "unit": "CL3_ABERRATION|D1",
+   "cfg": "default",
+   "dir": -1,
+   "fit_t": -0.5035,
+   "check_t": 1.0171,
+   "p": 0.1546,
+   "bh_pass": false
+  },
+  {
+   "unit": "S.BOOK.LIEN_PERFECT_ORDER|D1",
+   "cfg": "thr=20",
+   "dir": -1,
+   "fit_t": -0.2091,
+   "check_t": 0.9436,
+   "p": 0.1727,
+   "bh_pass": false
+  },
+  {
+   "unit": "FEAT:F.VO.CLUSTERING|MN",
+   "cfg": "terciles",
+   "dir": -1,
+   "fit_t": 0.363,
+   "check_t": 0.908,
+   "p": 0.1819,
+   "bh_pass": false
+  }
+ ]
+}
