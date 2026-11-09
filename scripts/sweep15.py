@@ -34,6 +34,13 @@ STEP = {"D1": 1, "W1": 5, "MN": 21}
 N_PLACEBO = 20
 PERSIST = (0.8, 0.9, 0.95, 0.98)
 LOG = {}
+DAILY = {"on": False, "last": None, "rows": {}}          # round 17: daily P&L per (unit, cfg, dir) when --daily
+
+
+def keep_daily(unit, cfg, d, pnl=None):
+    if DAILY["on"]:
+        x = DAILY["last"] if pnl is None else pnl
+        DAILY["rows"][(unit, cfg, int(d))] = np.asarray(x, np.float32)
 
 
 class Timeout(Exception):
@@ -155,6 +162,7 @@ def price(M, G, tf, sd, sig, mode, risk):
         kw = dict(ent=ent, sld=sl, tpd=tp, hld=np.full(nb, hold), stop_mult=2.0)
     kw["upd"] = G["upd"]
     pnl, gp, sw, T = LL.run_ev(M, G["N"], **kw)
+    DAILY["last"] = pnl
     return LL.to_monthly(M, pnl, gp, sw, T)[["pnl", "gpnl", "n"]]
 
 
@@ -202,6 +210,7 @@ def run_rules(M, G, sym, t_job, budget, only=None):
                     for d in (1, -1):
                         g = price(M, G[tf], tf, sd0 * d, sig, mode, risk)
                         g["unit"], g["cfg"], g["dir"] = key, cfg_name(p), d
+                        keep_daily(key, cfg_name(p), d)
                         rows.append(g.reset_index())
                         nconf += 1
                 signal.alarm(0)
@@ -229,6 +238,7 @@ def run_rules(M, G, sym, t_job, budget, only=None):
                 for d in (1, -1):
                     g = price(M, G[tf], tf, sd * d, None, "state", {})
                     g["unit"], g["cfg"], g["dir"] = f"PLACEBO_{k:02d}|{tf}", f"p={p}", d
+                    keep_daily(f"PLACEBO_{k:02d}|{tf}", f"p={p}", d)
                     rows.append(g.reset_index())
     return pd.concat(rows, ignore_index=True) if rows else pd.DataFrame()
 
@@ -268,6 +278,7 @@ def run_features(M, G, sym, t_job, budget):
             act = (np.nan_to_num(ptg) != 0).astype(np.int64)                # days with a position
             g = pd.DataFrame({"pnl": pnl, "gpnl": gp, "n": act, "month": M.tday.to_period("M").astype(str)}).groupby("month").sum()
             g["unit"], g["cfg"], g["dir"] = f"{name}|{tf}", "terciles", d
+            keep_daily(f"{name}|{tf}", "terciles", d, pnl)
             rows.append(g.reset_index())
 
     fl = feature_columns()
@@ -311,7 +322,9 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--parts", default="AB,C")
     ap.add_argument("--only", default="")
+    ap.add_argument("--daily", action="store_true", help="round 17: also save daily P&L per configuration")
     a = ap.parse_args()
+    DAILY["on"] = a.daily
     os.makedirs(a.out, exist_ok=True)
     t_job = time.time()
     signal.signal(signal.SIGALRM, _alarm)
@@ -344,6 +357,13 @@ def main():
                 df[col] = df[col].astype("category")
             df.to_parquet(os.path.join(a.out, f"S{part}_{a.symbol}.parquet"), index=False)
         print(a.symbol, part, "rows", len(df), round(time.time() - t_job), "s", flush=True)
+    if a.daily and DAILY["rows"]:
+        keys = list(DAILY["rows"])
+        np.savez_compressed(os.path.join(a.out, f"daily15_{a.symbol}.npz"),
+                            unit=np.array([k[0] for k in keys]), cfg=np.array([k[1] for k in keys]),
+                            dir=np.array([k[2] for k in keys], np.int8), days=np.array(M.tday.strftime("%Y-%m-%d")),
+                            pnl=np.vstack([DAILY["rows"][k] for k in keys]))
+        print(a.symbol, "daily rows", len(keys), flush=True)
     json.dump(LOG, open(os.path.join(a.out, f"log15_{a.symbol}.json"), "w"), indent=0, default=str)
     print("done", a.symbol, round(time.time() - t_job), "s", flush=True)
 
