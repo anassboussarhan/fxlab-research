@@ -1,0 +1,172 @@
+| Feature | First month | Last month | Missing months 2008-2025 |
+|---|---|---|---|
+| RV21 | 2008-01 | 2025-12 | 0 |
+| RV_CHG | 2008-01 | 2025-12 | 0 |
+| RV252 | 2008-01 | 2025-12 | 0 |
+| DISP21 | 2008-01 | 2025-12 | 7 |
+| ER63 | 2008-01 | 2025-12 | 0 |
+| CORR63 | 2008-01 | 2025-12 | 0 |
+| VR5 | 2008-03 | 2025-12 | 2 |
+| AC_W | 2008-03 | 2025-12 | 2 |
+| CARRY_SD | 2008-01 | 2025-12 | 7 |
+| USD3 | 2008-01 | 2025-12 | 0 |
+| SPX3 | 2008-01 | 2025-12 | 0 |
+| GOLD3 | 2008-01 | 2025-12 | 0 |
+| SPX_RV21 | 2008-01 | 2025-12 | 0 |
+| RV21_EURUSD | 2008-01 | 2025-12 | 0 |
+| RV21_USDJPY | 2008-01 | 2025-12 | 7 |
+| VIX | 2008-01 | 2025-12 | 0 |
+| VIX_TS | 2008-01 | 2025-12 | 0 |
+| VVIX | 2008-01 | 2025-12 | 0 |
+| SKEW | 2008-01 | 2025-12 | 0 |
+| GVZ | 2008-06 | 2025-12 | 5 |
+| OVX | 2008-01 | 2025-12 | 0 |
+| EVZ | None | None | 216 |
+| DVIX | 2008-01 | 2025-12 | 0 |
+| EUR_IV | 2010-06 | 2025-12 | 29 |
+| EUR_RR25 | 2010-06 | 2025-12 | 29 |
+| JPY_IV | 2010-06 | 2025-12 | 30 |
+| JPY_RR25 | 2010-06 | 2025-12 | 29 |
+| FX_VRP | 2010-06 | 2025-12 | 37 |
+| VRP_SPX | 2008-01 | 2025-12 | 0 |
+| US2Y_CHG3 | 2008-01 | 2025-12 | 0 |
+| SLOPE | 2008-01 | 2025-12 | 0 |
+| NFCI | 2008-01 | 2025-12 | 0 |
+| EPU | 2008-01 | 2025-12 | 0 |
+{
+ "evz_used": false,
+ "factors_nonzero_months": {
+  "F1": 216,
+  "F2": 213,
+  "F3": 216,
+  "F4": 216,
+  "F5": 216,
+  "F6": 216,
+  "F7": 180,
+  "F8": 216,
+  "F9": 216
+ },
+ "lib_meta": {
+  "files": 56,
+  "configs_real": 4140,
+  "configs_placebo": 660,
+  "units_real": 1129,
+  "f7_rows": {
+   "S.DAILY.DOUBLE_SEVEN": "n=7,short=0",
+   "S.DAILY.CUM_RSI": "k=2,lo=35,short=0,x=65",
+   "S.FAMOUS.CONNORS_RSI2": "lo=10",
+   "S.BOOK.CONNORS_R3": "short=0",
+   "S.BOOK.CONNORS_PCTB": "short=0",
+   "S.BOOK.CONNORS_CRSI": "lo=10,short=0",
+   "S.DAILY.THREE_DOWN": "f=1,n=3,short=0"
+  }
+ },
+ "web_meta": {
+  "VIX": {
+   "source": "cboe",
+   "first": "1990-01-02",
+   "last": "2025-12-31",
+   "rows": 9091
+  },
+  "VIX3M": {
+   "source": "cboe; Yahoo Finance before 2009-09-18 (800 days)",
+   "first": "2006-07-17",
+   "last": "2025-12-31",
+   "rows": 4897
+  },
+  "VVIX": {
+   "source": "cboe",
+   "first": "2006-03-06",
+   "last": "2025-12-31",
+   "rows": 4928
+  },
+  "SKEW": {
+   "source": "cboe",
+   "first": "1990-01-02",
+   "last": "2025-12-31",
+   "rows": 9051
+  },
+  "GVZ": {
+   "source": "cboe; Yahoo Finance before 2009-09-18 (327 days)",
+   "first": "2008-06-03",
+   "last": "2025-12-31",
+   "rows": 4422
+  },
+  "OVX": {
+   "source": "cboe; Yahoo Finance before 2009-09-18 (595 days)",
+   "first": "2007-05-10",
+   "last": "2025-12-31",
+   "rows": 4690
+  },
+  "GSPC": {
+   "source": "Yahoo Finance ()",
+   "first": "2005-01-03",
+   "last": "2025-12-31",
+   "rows": 5283
+  },
+  "GLD": {
+   "source": "Yahoo Finance ()",
+   "first": "2005-01-03",
+   "last": "2025-12-31",
+   "rows": 5283
+  },
+  "DGS2": {
+   "source": "US Treasury par yield curve",
+   "first": "2006-01-03",
+   "last": "2025-12-31",
+   "rows": 5003
+  },
+  "DGS10": {
+   "source": "US Treasury par yield curve",
+   "first": "2006-01-03",
+   "last": "2025-12-31",
+   "rows": 5003
+  },
+  "NFCI": {
+   "source": "Chicago Fed",
+   "first": "1971-01-08",
+   "last": "2025-12-26",
+   "rows": 2869
+  },
+  "EPU": {
+   "source": "policyuncertainty.com (Baker, Bloom and Davis), daily US",
+   "first": "1985-01-01",
+   "last": "2025-12-31",
+   "rows": 14975
+  },
+  "EVZ": {
+   "source": "cboe failed: HTTP 403; fred failed: ReadTimeout(ReadTimeoutError(\"HTTPSConnectionPool(host='fred.stlouisfed.org', port=443): Read timed out. (read timeout=20)\"))",
+   "rows": 0
+  }
+ },
+ "cme_meta": {
+  "EUR": {
+   "months": 187,
+   "with_iv": 187,
+   "first": "2010-06",
+   "last": "2025-12",
+   "s": 385.8,
+   "units": {
+    "strike_scale": 1.0,
+    "premium_scale": 1.0,
+    "settle_rows": 4182242,
+    "oi_rows": 1668598,
+    "oi_median": 80.0
+   }
+  },
+  "JPY": {
+   "months": 187,
+   "with_iv": 186,
+   "first": "2010-06",
+   "last": "2025-12",
+   "s": 373.3,
+   "units": {
+    "strike_scale": 1.0,
+    "premium_scale": 1.0,
+    "settle_rows": 3414347,
+    "oi_rows": 1179782,
+    "oi_median": 49.0
+   }
+  }
+ }
+}
