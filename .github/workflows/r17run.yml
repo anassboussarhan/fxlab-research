@@ -1,0 +1,89 @@
+name: r17run
+# Round 17 engine (docs/round17_preregistration.md; scripts/regime17.py): one job per (tier, frequency, family group)
+# from ci/r17_jobs.json, then the combine (BH over all tests, long-only timing tests). ci/R17RUN: "<r17data run id>".
+# Results go to branch round17. Trigger: ci/R17RUN.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R17RUN"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/r17_jobs.json)" >> "$GITHUB_OUTPUT"
+  run:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - run: python -m pytest -q tests/test_regime17.py -p no:warnings
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download $(awk '{print $1}' ci/R17RUN) -n r17data -D r17data && du -sh r17data
+      - name: Engine
+        run: |
+          mkdir -p out
+          timeout 20400 python -W ignore scripts/regime17.py --data r17data --tier ${{ matrix.tier }} --freq ${{ matrix.freq }} --fams ${{ matrix.fams }} --out out --placebos 200 --jobs 4 2>&1 | grep -v "^\[ *[0-9]*s\]     " | tail -80
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r17-${{ matrix.tier }}-${{ matrix.freq }}-${{ matrix.fams }}
+          path: out
+          retention-days: 30
+  combine:
+    needs: run
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r17-*-*
+          path: r17_out
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download $(awk '{print $1}' ci/R17RUN) -n r17data -D r17data
+      - run: |
+          mkdir -p out/round17
+          python -W ignore scripts/regime17.py --combine r17_out --data r17data --out out/round17 2>&1 | tee out/round17/combine_log.txt | tail -60
+          for f in r17_out/*/chosen_*.csv r17_out/*/surface_*.csv.gz; do cp "$f" out/round17/; done
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p /tmp/pub && cp -r out/round17/. /tmp/pub/
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r17-pub
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round17 && cp -r /tmp/pub/. round17/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round17/RUN.txt
+          git add -f round17
+          git commit -qm "round 17 (run ${{ github.run_id }})"
+          git push -f origin HEAD:round17
