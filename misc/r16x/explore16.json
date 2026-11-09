@@ -1,0 +1,252 @@
+{
+ "X1": [
+  {
+   "tier": "UNIT",
+   "feature": "JPY_IV",
+   "rho": 0.2669,
+   "draws": 2000,
+   "null_p95": 0.1255,
+   "null_p99": 0.2134,
+   "p": 0.0005,
+   "bh_threshold_rank1_of_33": 0.003
+  },
+  {
+   "tier": "UNIT",
+   "feature": "JPY_RR25",
+   "rho": 0.2887,
+   "draws": 2000,
+   "null_p95": 0.1795,
+   "null_p99": 0.2381,
+   "p": 0.0075,
+   "bh_threshold_rank1_of_33": 0.003
+  },
+  {
+   "tier": "UNIT",
+   "feature": "USD3",
+   "rho": 0.1969,
+   "draws": 2000,
+   "null_p95": 0.1976,
+   "null_p99": 0.3048,
+   "p": 0.0535,
+   "bh_threshold_rank1_of_33": 0.003
+  },
+  {
+   "tier": "UNIT",
+   "feature": "FX_VRP",
+   "rho": 0.1315,
+   "draws": 2000,
+   "null_p95": 0.1618,
+   "null_p99": 0.224,
+   "p": 0.0665,
+   "bh_threshold_rank1_of_33": 0.003
+  },
+  {
+   "tier": "FACTOR",
+   "feature": "DVIX",
+   "rho": 0.6564,
+   "draws": 2000,
+   "null_p95": 0.4705,
+   "null_p99": 0.6347,
+   "p": 0.0005,
+   "bh_threshold_rank1_of_33": 0.003
+  },
+  {
+   "tier": "FACTOR",
+   "feature": "VR5",
+   "rho": 0.5094,
+   "draws": 2000,
+   "null_p95": 0.4871,
+   "null_p99": 0.5607,
+   "p": 0.048,
+   "bh_threshold_rank1_of_33": 0.003
+  },
+  {
+   "tier": "FACTOR",
+   "feature": "JPY_IV",
+   "rho": 0.5025,
+   "draws": 2000,
+   "null_p95": 0.4404,
+   "null_p99": 0.5517,
+   "p": 0.021,
+   "bh_threshold_rank1_of_33": 0.003
+  },
+  {
+   "tier": "FACTOR",
+   "feature": "JPY_RR25",
+   "rho": 0.4505,
+   "draws": 2000,
+   "null_p95": 0.3586,
+   "null_p99": 0.534,
+   "p": 0.016,
+   "bh_threshold_rank1_of_33": 0.003
+  }
+ ],
+ "X2_top": [
+  {
+   "group": "PRICE",
+   "feature": "USD3",
+   "factor": "F7",
+   "fit_slope": 0.1732,
+   "check_mean": 0.1311,
+   "check_t": 2.3766,
+   "check_minus_always_t": 1.4846,
+   "p": 0.0087,
+   "bh_pass": false
+  },
+  {
+   "group": "PRICE",
+   "feature": "RV252",
+   "factor": "F7",
+   "fit_slope": -0.0785,
+   "check_mean": 0.232,
+   "check_t": 2.2914,
+   "check_minus_always_t": 1.1654,
+   "p": 0.011,
+   "bh_pass": false
+  },
+  {
+   "group": "PRICE",
+   "feature": "SPX3",
+   "factor": "F7",
+   "fit_slope": 0.0151,
+   "check_mean": 0.1625,
+   "check_t": 2.1446,
+   "check_minus_always_t": 1.4653,
+   "p": 0.016,
+   "bh_pass": false
+  },
+  {
+   "group": "CME",
+   "feature": "EUR_RR25",
+   "factor": "F7",
+   "fit_slope": 0.0784,
+   "check_mean": 0.1516,
+   "check_t": 2.0139,
+   "check_minus_always_t": 0.8993,
+   "p": 0.022,
+   "bh_pass": false
+  },
+  {
+   "group": "OPT",
+   "feature": "VIX",
+   "factor": "F9",
+   "fit_slope": -0.1374,
+   "check_mean": 0.0759,
+   "check_t": 1.9857,
+   "check_minus_always_t": 1.3384,
+   "p": 0.0235,
+   "bh_pass": false
+  },
+  {
+   "group": "PRICE",
+   "feature": "SPX_RV21",
+   "factor": "F7",
+   "fit_slope": -0.1572,
+   "check_mean": 0.0704,
+   "check_t": 1.9453,
+   "check_minus_always_t": 0.9045,
+   "p": 0.0259,
+   "bh_pass": false
+  },
+  {
+   "group": "OPT",
+   "feature": "VIX_TS",
+   "factor": "F9",
+   "fit_slope": -0.0267,
+   "check_mean": 0.1596,
+   "check_t": 1.9418,
+   "check_minus_always_t": 1.6627,
+   "p": 0.0261,
+   "bh_pass": false
+  },
+  {
+   "group": "OPT",
+   "feature": "DVIX",
+   "factor": "F7",
+   "fit_slope": 0.1542,
+   "check_mean": 0.1628,
+   "check_t": 1.8339,
+   "check_minus_always_t": 1.0998,
+   "p": 0.0333,
+   "bh_pass": false
+  },
+  {
+   "group": "PRICE",
+   "feature": "SPX_RV21",
+   "factor": "F9",
+   "fit_slope": -0.0295,
+   "check_mean": 0.0531,
+   "check_t": 1.7487,
+   "check_minus_always_t": 0.7887,
+   "p": 0.0402,
+   "bh_pass": false
+  },
+  {
+   "group": "MACRO",
+   "feature": "US2Y_CHG3",
+   "factor": "F7",
+   "fit_slope": -0.1912,
+   "check_mean": 0.1702,
+   "check_t": 1.7052,
+   "check_minus_always_t": 1.1346,
+   "p": 0.0441,
+   "bh_pass": false
+  },
+  {
+   "group": "CME",
+   "feature": "JPY_IV",
+   "factor": "F7",
+   "fit_slope": 0.1566,
+   "check_mean": 0.1304,
+   "check_t": 1.6873,
+   "check_minus_always_t": 1.2116,
+   "p": 0.0458,
+   "bh_pass": false
+  },
+  {
+   "group": "PRICE",
+   "feature": "CARRY6",
+   "factor": "F7",
+   "fit_slope": -0.1915,
+   "check_mean": 0.0999,
+   "check_t": 1.5467,
+   "check_minus_always_t": 0.6003,
+   "p": 0.061,
+   "bh_pass": false
+  },
+  {
+   "group": "PRICE",
+   "feature": "DISP21",
+   "factor": "F7",
+   "fit_slope": 0.1557,
+   "check_mean": 0.0938,
+   "check_t": 1.5071,
+   "check_minus_always_t": 0.6137,
+   "p": 0.0659,
+   "bh_pass": false
+  },
+  {
+   "group": "MACRO",
+   "feature": "NFCI",
+   "factor": "F9",
+   "fit_slope": -0.1052,
+   "check_mean": 0.0532,
+   "check_t": 1.4725,
+   "check_minus_always_t": 0.909,
+   "p": 0.0704,
+   "bh_pass": false
+  },
+  {
+   "group": "PRICE",
+   "feature": "ER63",
+   "factor": "F7",
+   "fit_slope": 0.3291,
+   "check_mean": 0.1103,
+   "check_t": 1.4503,
+   "check_minus_always_t": 0.8873,
+   "p": 0.0735,
+   "bh_pass": false
+  }
+ ],
+ "X2_bh_pass": []
+}

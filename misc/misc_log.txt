@@ -1,0 +1,32 @@
+coverage.json
+coverage.md
+factor_f7.parquet
+factors.parquet
+features.parquet
+lib_cfg.parquet
+lib_placebo.parquet
+merge_log.txt
+{'tier': 'UNIT', 'feature': 'JPY_IV', 'rho': 0.26685475518969687, 'draws': 2000, 'null_p95': 0.12546452803951968, 'null_p99': 0.21335098853007162, 'p': np.float64(0.0004997501249375312)}
+{'tier': 'UNIT', 'feature': 'JPY_RR25', 'rho': 0.2887180719815216, 'draws': 2000, 'null_p95': 0.17951301178190382, 'null_p99': 0.23808008838573028, 'p': np.float64(0.0074962518740629685)}
+{'tier': 'UNIT', 'feature': 'USD3', 'rho': 0.19686731654824544, 'draws': 2000, 'null_p95': 0.19762581106017116, 'null_p99': 0.304829004947956, 'p': np.float64(0.05347326336831584)}
+{'tier': 'UNIT', 'feature': 'FX_VRP', 'rho': 0.13153703805980013, 'draws': 2000, 'null_p95': 0.16175740150173673, 'null_p99': 0.22401995042316192, 'p': np.float64(0.06646676661669165)}
+{'tier': 'FACTOR', 'feature': 'DVIX', 'rho': 0.6563776249122518, 'draws': 2000, 'null_p95': 0.4704621697329957, 'null_p99': 0.6346795775165595, 'p': np.float64(0.0004997501249375312)}
+{'tier': 'FACTOR', 'feature': 'VR5', 'rho': 0.5094491086273016, 'draws': 2000, 'null_p95': 0.48710449012817086, 'null_p99': 0.5606610748538533, 'p': np.float64(0.047976011994003)}
+{'tier': 'FACTOR', 'feature': 'JPY_IV', 'rho': 0.5024793008813041, 'draws': 2000, 'null_p95': 0.44035374060417737, 'null_p99': 0.5517487913580293, 'p': np.float64(0.020989505247376312)}
+{'tier': 'FACTOR', 'feature': 'JPY_RR25', 'rho': 0.4505317170115393, 'draws': 2000, 'null_p95': 0.3585577358456817, 'null_p99': 0.5339878272591605, 'p': np.float64(0.015992003998001)}
+     group    feature factor  fit_slope  check_mean  check_t  check_minus_always_t      p bh_pass
+114  PRICE       USD3     F7      0.173       0.131    2.377                 1.485  0.009   False
+24   PRICE      RV252     F7     -0.078       0.232    2.291                 1.165  0.011   False
+123  PRICE       SPX3     F7      0.015       0.163    2.145                 1.465  0.016   False
+231    CME   EUR_RR25     F7      0.078       0.152    2.014                 0.899  0.022   False
+152    OPT        VIX     F9     -0.137       0.076    1.986                 1.338  0.024   False
+132  PRICE   SPX_RV21     F7     -0.157       0.070    1.945                 0.904  0.026   False
+161    OPT     VIX_TS     F9     -0.027       0.160    1.942                 1.663  0.026   False
+213    OPT       DVIX     F7      0.154       0.163    1.834                 1.100  0.033   False
+134  PRICE   SPX_RV21     F9     -0.030       0.053    1.749                 0.789  0.040   False
+267  MACRO  US2Y_CHG3     F7     -0.191       0.170    1.705                 1.135  0.044   False
+240    CME     JPY_IV     F7      0.157       0.130    1.687                 1.212  0.046   False
+105  PRICE     CARRY6     F7     -0.191       0.100    1.547                 0.600  0.061   False
+42   PRICE     DISP21     F7      0.156       0.094    1.507                 0.614  0.066   False
+287  MACRO       NFCI     F9     -0.105       0.053    1.473                 0.909  0.070   False
+51   PRICE       ER63     F7      0.329       0.110    1.450                 0.887  0.073   False
