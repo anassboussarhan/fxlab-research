@@ -268,17 +268,29 @@ def cmd_cme(a):
 
 
 # ================================================================================================ web
-def get(url, tries=5, timeout=90):
+def get(url, tries=3, deadline=60):
+    """GET with a hard total deadline per attempt (a slow, trickling response cannot hang the job)."""
     import requests
     last = None
     for k in range(tries):
+        t0 = time.time()
         try:
-            r = requests.get(url, headers=UA, timeout=timeout)
-            if r.status_code == 200 and len(r.content) > 200:
-                return r.text
-            last = f"HTTP {r.status_code}"
+            with requests.get(url, headers=UA, timeout=(10, 20), stream=True) as r:
+                if r.status_code != 200:
+                    last = f"HTTP {r.status_code}"
+                else:
+                    buf = bytearray()
+                    for chunk in r.iter_content(65536):
+                        buf.extend(chunk)
+                        if time.time() - t0 > deadline:
+                            raise TimeoutError(f"deadline {deadline}s after {len(buf)} bytes")
+                    if len(buf) > 200:
+                        print(f"  got {url} {len(buf)} bytes in {time.time() - t0:.1f}s", flush=True)
+                        return buf.decode("utf-8", "replace")
+                    last = f"short body {len(buf)}"
         except Exception as ex:                                            # noqa: BLE001
             last = repr(ex)[:160]
+        print(f"  attempt {k + 1} {url}: {last} ({time.time() - t0:.1f}s)", flush=True)
         time.sleep(3 * (k + 1))
     raise RuntimeError(last)
 

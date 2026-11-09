@@ -14,7 +14,17 @@ permissions:
 env:
   PYTHONUNBUFFERED: "1"
 jobs:
+  cfg:
+    runs-on: ubuntu-latest
+    outputs:
+      reuse: ${{ steps.c.outputs.reuse }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        run: echo "reuse=$(grep -o 'reuse=[0-9]*' ci/R16DATA | cut -d= -f2)" >> "$GITHUB_OUTPUT"
   lib:
+    needs: cfg
+    if: needs.cfg.outputs.reuse == ''
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -36,6 +46,8 @@ jobs:
           path: out/lib
           retention-days: 60
   fx:
+    needs: cfg
+    if: needs.cfg.outputs.reuse == ''
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -57,6 +69,8 @@ jobs:
           path: out/fx
           retention-days: 60
   cme:
+    needs: cfg
+    if: needs.cfg.outputs.reuse == ''
     runs-on: ubuntu-latest
     timeout-minutes: 150
     steps:
@@ -86,14 +100,14 @@ jobs:
         with:
           python-version: "3.13"
       - run: pip install -q pandas pyarrow requests
-      - run: python -W ignore scripts/r16_data.py web --out out/web 2>&1 | tail -80
+      - run: timeout 1500 python -W ignore scripts/r16_data.py web --out out/web || true
       - uses: actions/upload-artifact@v4
         with:
           name: r16-web
           path: out/web
           retention-days: 60
   merge:
-    needs: [lib, fx, cme, web]
+    needs: [cfg, lib, fx, cme, web]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 30
@@ -107,6 +121,11 @@ jobs:
         with:
           pattern: r16-*
           path: r16_in
+      - name: Earlier lib / fx / cme artifacts (ci/R16DATA reuse=RUN)
+        if: needs.cfg.outputs.reuse != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: for n in r16-lib r16-fx r16-cme; do gh run download ${{ needs.cfg.outputs.reuse }} -n $n -D r16_in/$n; done; ls -R r16_in | head -30
       - run: |
           mkdir -p out/r16data
           python -W ignore scripts/r16_data.py merge --inp r16_in --out out/r16data 2>&1 | tee out/r16data/merge_log.txt | tail -80
