@@ -143,3 +143,38 @@ cannot be had that way is reported as not available.
   round 12). The weekday rule stays, at D1 only.
 - **The book module has 26 systems.** The Raschke Anti uses %K(7) and %D(10 or 14). All 26 passed the causality
   test (`tests/test_books.py`) before any market data was read.
+
+## Addendum 2 (2026-11-09, after the part A-C sweep and before any part-E computation): the weekly dip-buying family on 2026
+
+**Why.**
+- The sweep found no unit that survives Benjamini-Hochberg. So, by the rule above, part E has nothing to check.
+- But the published-direction weekly versions of the Connors dip-buying rules lost in 2008-2018 and won in
+  2019-2025, nearly all of them. Double Seven passed its own 2026 check.
+- A single family test answers whether weekly dip-buying is a family effect or one lucky rule. Picking the
+  best-looking rules from the sweep instead would be a search.
+
+**The family, fixed now.** Every close-only Connors rule in the catalog, at its published default and long only,
+on W1 bars:
+
+| Rule | Published default |
+|---|---|
+| Double Seven | n = 7 |
+| Cumulative RSI | k = 2, lo = 35, x = 65 |
+| RSI(2) | lo = 10 |
+| R3 | - |
+| %b | - |
+| ConnorsRSI | lo = 10 |
+| Three down closes | the catalog default |
+
+**Data and rules.**
+- The same data and fills as the 2026 Double Seven check: ECB fixings for the 28 crosses, fills at the next
+  fixing after the signal week, 3 bp a round trip, no swap.
+- Results in R per trade (2 x the close-based weekly N).
+- One book: every trade of every rule, equal weight.
+
+**Verdicts on 2026** (entries from 2026-01-01, exits by 2026-10-31), as in round 14 part D:
+- **Supported:** mean R > 0 with t >= 1.645, clustered by exit month.
+- **Contradicted:** below the 2019-2025 mean with t <= -1.645.
+- **Otherwise inconclusive.**
+- The 2019-2025 comparator must be positive. Double Seven is reported inside and outside the family; the family
+  result without it is the new information.
