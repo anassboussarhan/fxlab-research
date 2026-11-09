@@ -1,0 +1,132 @@
+name: r16data
+# Round 16 data (docs/round16_preregistration.md, sections 1-2; scripts/r16_data.py): the strategy library from the
+# round-15 sweep artifacts, the FACTOR tier and PRICE features from the round-14 daily panels, CME implied
+# volatility and risk reversals from the round-9 Databento artifacts, and free CBOE / FRED series. Data stays in the
+# r16data artifact (not redistributed); only the coverage report goes to branch round16-data. Trigger: ci/R16DATA.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R16DATA"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  lib:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: s15-*
+          path: s15_in
+          run-id: 42585859892
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: python -W ignore scripts/r16_data.py lib --inp s15_in --out out/lib 2>&1 | tail -20
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r16-lib
+          path: out/lib
+          retention-days: 60
+  fx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: d1p-*
+          path: d1p_in
+          run-id: 42534301711
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+      - run: python -W ignore scripts/r16_data.py fx --inp d1p_in --out out/fx 2>&1 | tail -60
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r16-fx
+          path: out/fx
+          retention-days: 60
+  cme:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays databento==0.90.0
+      - name: Databento artifacts (round 9)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download 41846466839 -n databento-data -D dbn && ls dbn | head -40
+          gh run download 41854224685 -n databento-compact -D compact && ls compact
+      - run: python -W ignore scripts/r16_data.py cme --dbn dbn --compact compact --out out/cme 2>&1 | tail -30
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r16-cme
+          path: out/cme
+          retention-days: 60
+  web:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas pyarrow requests
+      - run: python -W ignore scripts/r16_data.py web --out out/web 2>&1 | tail -80
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r16-web
+          path: out/web
+          retention-days: 60
+  merge:
+    needs: [lib, fx, cme, web]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r16-*
+          path: r16_in
+      - run: |
+          mkdir -p out/r16data
+          python -W ignore scripts/r16_data.py merge --inp r16_in --out out/r16data 2>&1 | tee out/r16data/merge_log.txt | tail -80
+          cp r16_in/r16-lib/*.parquet out/r16data/ || true
+          ls -la out/r16data
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r16data
+          path: out/r16data
+          retention-days: 60
+      - name: Publish the coverage report
+        run: |
+          mkdir -p /tmp/pub && cp out/r16data/coverage.* out/r16data/merge_log.txt /tmp/pub/ || true
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r16-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p r16data && cp /tmp/pub/* r16data/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > r16data/RUN.txt
+          git add -f r16data
+          git commit -qm "round 16 data coverage (run ${{ github.run_id }})"
+          git push -f origin HEAD:round16-data
