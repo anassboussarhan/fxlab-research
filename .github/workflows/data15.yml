@@ -1,0 +1,110 @@
+name: data15
+# Round 15 part D (docs/round15_preregistration.md, addendum 3): new Dukascopy instruments with the fixed round-13
+# systems (D2); economic surprises from the Forex Factory archive (D1a, D1b); CBOE option-selling indices (D4);
+# two-year rate-differential momentum (D5). Trigger: ci/DATA15.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/DATA15"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  d2:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      max-parallel: 13
+      matrix:
+        symbol: [BRENTCMDUSD, LIGHTCMDUSD, GASCMDUSD, COPPERCMDUSD, DEUIDXEUR, GBRIDXGBP, FRAIDXEUR, EUSIDXEUR, HKGIDXHKD, CHEIDXCHF, BUNDTREUR, USTBONDTRUSD, UKGILTTRGBP]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Download Dukascopy candles 2011-2025
+        run: python -m fxlab.data.acquire_dukascopy_candles --pairs ${{ matrix.symbol }} --start 2011-01-01 --end 2026-01-01 --workers 12 --deadline-min 150 && ls -la data/m1/${{ matrix.symbol }}
+      - name: Round-13 systems
+        run: python -W ignore scripts/long_lab.py --symbol ${{ matrix.symbol }} --out out/d2 --no-catalog 2>&1 | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d2-${{ matrix.symbol }}
+          path: out/d2
+          retention-days: 60
+  d2combine:
+    needs: d2
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: d2-*
+          path: d2_in
+      - run: mkdir -p out/data15 && python -W ignore scripts/data15_tests.py --part d2 --d2 d2_in --out out/data15 2>&1 | tee out/data15/d2_log.txt | tail -60 || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: data15-d2
+          path: out/data15
+  dtests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays yfinance requests
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -sSL -o ff.csv "https://huggingface.co/datasets/Tropstan/Forex_Factory_Calendar/resolve/main/forex_factory_cache.csv" && ls -la ff.csv
+          gh run download 42534301711 -p "d1p-*" -D d1p_in
+          bash ci/fetch_m1.sh 41447353092 EURUSD GBPUSD USDJPY AUDUSD NZDUSD USDCAD USDCHF
+      - name: Tests
+        run: |
+          mkdir -p out/data15
+          for P in d4 d5 d1b d1a; do
+            python -W ignore scripts/data15_tests.py --part $P --ff ff.csv --panels d1p_in --out out/data15 2>&1 | tee out/data15/${P}_log.txt | tail -40 || true
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: data15-dt
+          path: out/data15
+  publish:
+    needs: [d2combine, dtests]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: data15-*
+          path: pub
+          merge-multiple: true
+      - run: |
+          rm -f pub/D1a_trades.csv.gz pub/D2_monthly_by_symbol.csv
+          cp -r pub /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan d15-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p data15 && cp -r /tmp/pub/* data15/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > data15/RUN.txt
+          git add -f data15
+          git commit -qm "data15 (run ${{ github.run_id }})"
+          git push -f origin HEAD:data15

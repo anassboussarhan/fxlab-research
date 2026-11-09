@@ -118,7 +118,7 @@ class Mkt:
             self.swl = (rd - FX_MARKUP) / 365.0
             self.sws = (-rd - FX_MARKUP) / 365.0
         else:
-            q = "JPY" if sym.endswith("JPY") else "USD"
+            q = sym[-3:] if sym[-3:] in FX8 else "USD"           # quote currency (HKD and US cents -> USD)
             rq = known_at(idx)[q].to_numpy(float)
             self.rd = -rq
             self.swl = (-rq - NONFX_MARKUP) / 365.0
