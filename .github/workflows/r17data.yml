@@ -25,8 +25,12 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          R=$(awk '{print $1}' ci/R17DATA)
-          for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep '^s17-'); do gh run download $R -n $n -D s17_in/$n || true; done
+          # ci/R17DATA: sweep17 run ids (the words that are numbers), later runs replacing earlier ones' artifacts
+          for R in $(tr ' ' '\n' < ci/R17DATA | grep -E '^[0-9]+$'); do
+            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep '^s17-'); do
+              rm -rf s17_in/$n; gh run download $R -n $n -D s17_in/$n || true
+            done
+          done
           du -sh s17_in; ls s17_in | wc -l
       - run: python -W ignore scripts/r17_data.py book --inp s17_in --out out/book 2>&1 | tail -45
       - uses: actions/upload-artifact@v4

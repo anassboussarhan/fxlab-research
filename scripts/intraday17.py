@@ -115,9 +115,14 @@ def main():
     from fxlab.execution.costs import BASE
     from fxlab.execution.simulator import rollover_counts, vector_backtest
     sym = a.symbol
-    pip = instrument(sym).pip
     m1 = load_m1(sym)
     m1 = m1[m1.index <= DEV_END]
+    try:
+        pip = instrument(sym).pip
+    except KeyError:                                                       # index CFDs: about 1 bp of price, as the
+        from fxlab.data.instruments import INSTRUMENTS, Instrument         # round-13 engine (edges_lab2) uses
+        pip = float(1e-4 * np.median(0.5 * (m1.bid_c + m1.ask_c)))
+        INSTRUMENTS[sym] = Instrument(sym, sym[:-3], sym[-3:], pip, 1.0, "index")
     print(sym, "M1 rows", len(m1), m1.index[0], m1.index[-1], flush=True)
     try:
         F = intraday_features(m1)

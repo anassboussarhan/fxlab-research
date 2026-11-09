@@ -13,14 +13,23 @@ permissions:
 env:
   PYTHONUNBUFFERED: "1"
 jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/sweep17_syms.json)" >> "$GITHUB_OUTPUT"
   sym:
+    needs: list
     runs-on: ubuntu-latest
     timeout-minutes: 340
     strategy:
       fail-fast: false
       max-parallel: 20
       matrix:
-        symbol: [AUDCAD, AUDCHF, AUDJPY, AUDNZD, AUDUSD, CADCHF, CADJPY, CHFJPY, EURAUD, EURCAD, EURCHF, EURGBP, EURJPY, EURNZD, EURUSD, GBPAUD, GBPCAD, GBPCHF, GBPJPY, GBPNZD, GBPUSD, NZDCAD, NZDCHF, NZDJPY, NZDUSD, USDCAD, USDCHF, USDJPY, XAUUSD, XAGUSD, USA500IDXUSD, USATECHIDXUSD, JPNIDXJPY]
+        symbol: ${{ fromJSON(needs.list.outputs.m) }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
