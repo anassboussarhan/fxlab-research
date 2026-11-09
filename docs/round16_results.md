@@ -21,7 +21,7 @@ and ridge / boosting meta-models, each in three library tiers.
 **The number of regimes.**
 - **Information criterion (BIC) on 2008-2018:** 2 regimes for the price features and for the options features;
   1 (no regimes at all) for the full feature set.
-- **Out of sample:** no number of regimes, from 2 to 8, beat having none.
+- **Out of sample:** no number of regimes from 2 to 8 beat having none (static selection) by a significant margin.
 
 **Options data.**
 - The CME euro and yen implied volatility and risk reversals bought in round 9, and the free CBOE indices (VIX,
