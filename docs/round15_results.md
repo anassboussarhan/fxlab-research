@@ -19,10 +19,11 @@ Runs: sweep 42585859892, data 42589646502 and misc `data15b`. Tables are in `doc
   also **supported on 2026** (175 trades, +0.38R, t 2.2). It now runs as a third forward-test track.
 - **Free data:**
   - The paid-data gaps that could be filled for free were filled: the economic-calendar archive, CBOE strategy
-    indices, two-year yields, and commodity / index / bond CFDs.
+    indices, two-year yields, and commodity / index / bond CFDs (the last still downloading).
   - Only the one-day drift after big economic surprises came close (+5.4 bp a trade, t 2.2 on 2019-2025), and it
     does not survive the correction across the data tests.
-  - Option-selling indices, yield momentum and a surprise index fail.
+  - Option-selling indices, yield momentum and a surprise index fail. The option-selling indices' 2019-2025 Sharpe
+    ratios (-0.17 to 1.08) are no better than the S&P 500's (1.05) once their market exposure is taken out.
 
 ## The coverage audit: why Double Seven was missed
 
@@ -115,7 +116,7 @@ forward signal (`docs/forward_d7_preregistration.md`).
 | CBOE option-selling indices (dealer option data) | yes (cdn.cboe.com) | D4: alpha against the S&P 500 total return (BXM, BXMD, PUT, CNDR, BFLY, CLL, CMBO, WPUT, PPUT, CLLZ) | alpha t -1.3 to +0.1 | alpha t -2.1 to +0.5 | fails (all 10) |
 | Two-year yields (Bloomberg curves) | yes: US Treasury, ECB, Bank of Canada, RBA (from 2013), SNB, Japan MoF | D5: 4-week rate-differential momentum, 15 crosses | t -1.63 | t 0.23 | fails |
 | | | D5: 13-week | t -1.32 | t -0.22 | fails |
-| Commodity, index and bond CFDs | yes (Dukascopy, mostly from 2013; bonds from 2019) | D2: round-13 trend systems | see below | see below | see below |
+| Commodity, index and bond CFDs | yes (Dukascopy, mostly from 2013; bonds from 2019), but the feed throttles | D2: round-13 trend systems | running | running | running (see D2) |
 | Retail sentiment (Dukascopy SWFX, IG, Myfxbook) | no: SWFX blocked (403), no public history elsewhere | - | - | - | data missing |
 | Google Trends | no (rate-limited, 429) | - | - | - | data missing |
 | Japanese retail futures (TFX Click 365) | only a current file, no history | - | - | - | data missing |
@@ -136,6 +137,11 @@ after the release to the same time the next day. It met its own rule: positive i
 | Copy-trading and signal services | Their track records are survivor-selected. They were reviewed in the MQL5 and Trustpilot rounds. |
 | OANDA order and position books | They need your API token. |
 
-## D2. Commodities, indices and bonds
+## D2. Commodities, indices and bonds (running)
 
-PENDING
+**First attempt (run 42589646502):** Dukascopy refused or timed out on most requests under 13 parallel jobs.
+- Commodities and indices came back only for 2011-2015, bonds not at all, so it has no 2019-2025 result.
+- On those early years the fixed trend systems were mixed: commodities t -1.1 to +0.7, indices -1.6 to +1.1.
+
+**Second attempt (run 42610347008, workflow `d2dl`):** one instrument-year per job with 3 connections, as the
+earlier EM downloads did. The results will be added here when it finishes. The rules are unchanged (addendum 3).
