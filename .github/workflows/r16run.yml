@@ -1,0 +1,53 @@
+name: r16run
+# Round 16 engine (docs/round16_preregistration.md; scripts/regime16.py): the walk-forward regime methods, their
+# benchmarks and placebos, parts A, O and D, on the r16data artifact of the data run named in ci/R16RUN (first
+# word). Results go to branch round16. Trigger: ci/R16RUN.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R16RUN"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - run: python -m pytest -q tests/test_regime16.py -p no:warnings
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download $(awk '{print $1}' ci/R16RUN) -n r16data -D r16data && ls -la r16data
+      - name: Engine
+        run: |
+          mkdir -p out/round16
+          python -W ignore scripts/regime16.py --data r16data --out out/round16 --placebos 200 --jobs 4 2>&1 | tee out/round16/log.txt | grep -v "^  " | tail -120
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: round16
+          path: out/round16
+          retention-days: 60
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p /tmp/pub && cp -r out/round16/. /tmp/pub/
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r16-pub
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round16 && cp -r /tmp/pub/. round16/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round16/RUN.txt
+          git add -f round16
+          git commit -qm "round 16 (run ${{ github.run_id }})"
+          git push -f origin HEAD:round16

@@ -285,3 +285,29 @@ state with these variables and methods.
 - **Engine:** `scripts/regime16.py`, workflow `r16run`, results on branch `round16`. Tests are in
   `tests/test_regime16.py`.
 - **Write-up:** `docs/round16_results.md`.
+
+## Addendum 1 (2026-11-09, data collection; before any regime model was run on the real library)
+
+These are data-availability facts and fixes. No regime result had been computed when they were written.
+
+**Sources**
+- **FRED refuses connections from the GitHub runners** (HTTP/2 stream errors). The FRED fallbacks were replaced by
+  the original publishers:
+  - yields: the US Treasury par yield curve (2- and 10-year);
+  - NFCI: the Chicago Fed's own file;
+  - EPU: policyuncertainty.com (Baker, Bloom and Davis).
+- **CBOE's own files for VIX3M, GVZ and OVX now start on 2009-09-18.** Their earlier history (VIX3M from 2006,
+  GVZ from 2008-06, OVX from 2007-05) is the same index series from Yahoo Finance, used only before CBOE's first
+  date.
+- **EVZ is no longer served** (CBOE: access denied; Yahoo: no data). By the rule of feature 23 it is dropped.
+
+**Extra CME options.** The Databento cost check priced sterling, Australian and Canadian dollar and Swiss franc
+options (definitions and settlements) at **USD 60.29**. That is above the USD 10 limit, so nothing was bought.
+
+**Fix to the FX features.** The first build sampled every symbol on the union of all symbols' days. The S&P 500 and
+gold CFDs, and a few FX month ends, came out missing on days their own series had no close. Each symbol is now
+sampled at its own last close on or before the FX month end, at most 7 days old. Month ends come from the FX
+calendar: days with at least 20 of the 28 crosses.
+
+**P4 in code.** The placebo library "passes P1" if its chosen setting has mean > 0 and t >= 1.645 on 2019-2025,
+without BH. This is stricter than P1, so it can only remove a pass.

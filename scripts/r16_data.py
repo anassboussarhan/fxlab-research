@@ -100,32 +100,40 @@ def cmd_fx(a):
     fx = [s for s in LL.FX_SYMBOLS if s in P]
     closes = {}
     for s, d in P.items():
-        closes[s] = pd.Series(d.c_mid.to_numpy(float), index=pd.DatetimeIndex(d.tday))
+        x = pd.Series(d.c_mid.to_numpy(float), index=pd.DatetimeIndex(d.tday)).dropna()
+        closes[s] = x[x.index <= DEV_END]
     C = pd.DataFrame(closes).sort_index()
-    C = C[C.index <= DEV_END]
-    R = np.log(C).diff()
-    mkey = C.index.to_period("M")
-    is_me = pd.Series(np.r_[mkey[1:] != mkey[:-1], True], index=C.index)
-    me_dates = C.index[is_me.to_numpy()]
+    # the FX calendar: days on which at least 20 of the 28 crosses have a close; month ends from it
+    cal = C.index[C[fx].notna().sum(axis=1) >= 20]
+    mkey = cal.to_period("M")
+    me_dates = cal[np.r_[mkey[1:] != mkey[:-1], True]]
     months = me_dates.to_period("M").astype(str)
-    rv21 = np.sqrt(252 * (R ** 2).rolling(21, min_periods=18).mean())
-    rv252 = np.sqrt(252 * (R ** 2).rolling(252, min_periods=200).mean())
+    tol = pd.Timedelta(days=7)
+
+    def at_me(x: pd.Series):
+        """Value at each FX month end from the symbol's own trading days (last value at most 7 days old)."""
+        x = x.dropna()
+        return x.reindex(me_dates, method="ffill", tolerance=tol).to_numpy() if len(x) else np.full(len(me_dates), np.nan)
+
+    own = {s: closes[s] for s in C.columns}
+    lr = {s: np.log(c).diff() for s, c in own.items()}
+    rv21 = {s: np.sqrt(252 * (r ** 2).rolling(21, min_periods=18).mean()) for s, r in lr.items()}
+    rv252 = {s: np.sqrt(252 * (r ** 2).rolling(252, min_periods=200).mean()) for s, r in lr.items()}
+    M21 = pd.DataFrame({s: at_me(rv21[s]) for s in fx}, index=months)
     out = pd.DataFrame(index=months)
-    out["RV21"] = rv21.loc[me_dates, fx].median(axis=1).to_numpy()
+    out["RV21"] = M21.median(axis=1).to_numpy()
     out["RV_CHG"] = np.log(out.RV21 / out.RV21.shift(3))
-    out["RV252"] = rv252.loc[me_dates, fx].median(axis=1).to_numpy()
+    out["RV252"] = pd.DataFrame({s: at_me(rv252[s]) for s in fx}, index=months).median(axis=1).to_numpy()
+    L21 = pd.DataFrame({s: at_me(np.log(own[s]).diff(21)) for s in fx}, index=months)
+    out["DISP21"] = (L21.std(axis=1) / (out.RV21 * math.sqrt(21 / 252))).to_numpy()
+    er = {s: np.log(own[s]).diff(63).abs() / lr[s].abs().rolling(63, min_periods=60).sum() for s in fx}
+    out["ER63"] = pd.DataFrame({s: at_me(er[s]) for s in fx}, index=months).median(axis=1).to_numpy()
+    R = pd.DataFrame({s: lr[s] for s in fx}).reindex(cal)
     U = pd.DataFrame({s[:3] if sg == 1 else s[3:]: sg * R[s] for s, sg in USD_PAIRS.items() if s in R})
-    L21 = np.log(C).diff(21)
-    out["DISP21"] = (L21.loc[me_dates, fx].std(axis=1) / (out.RV21.to_numpy() * math.sqrt(21 / 252))).to_numpy()
-    absr = R[fx].abs()
-    er = (np.log(C[fx]).diff(63).abs() / absr.rolling(63, min_periods=60).sum())
-    out["ER63"] = er.loc[me_dates].median(axis=1).to_numpy()
-    # weekly closes (last close of each ISO week)
-    iso = C.index.isocalendar()
+    iso = cal.isocalendar()
     wk = (iso.year * 100 + iso.week).to_numpy()
     wend = np.r_[wk[1:] != wk[:-1], True]
-    Wc = C[wend]
-    Wr = np.log(Wc[fx]).diff()
+    Wr = np.log(C[fx].reindex(cal).ffill(limit=3)[wend]).diff()
     corr, vr, acw = [], [], []
     for e in me_dates:
         u = U.loc[:e].dropna().tail(63)
@@ -135,7 +143,7 @@ def cmd_fx(a):
             corr.append(float((cm.sum() - k) / (k * (k - 1))))
         else:
             corr.append(np.nan)
-        r = R.loc[:e, fx].tail(250)
+        r = R.loc[:e].tail(250)
         vals = []
         if len(r) >= 250:
             for s in fx:
@@ -159,18 +167,21 @@ def cmd_fx(a):
     out["CORR63"] = corr
     out["VR5"] = vr
     out["AC_W"] = acw
-    rd = pd.DataFrame({s: pd.Series(P[s].rd.to_numpy(float), index=pd.DatetimeIndex(P[s].tday)) for s in fx}).sort_index()
-    rd = rd.reindex(C.index).ffill()
-    out["CARRY_SD"] = rd.loc[me_dates].std(axis=1).to_numpy()
+    rd = pd.DataFrame({s: at_me(pd.Series(P[s].rd.to_numpy(float), index=pd.DatetimeIndex(P[s].tday))) for s in fx},
+                      index=months)
+    out["CARRY_SD"] = rd.std(axis=1).to_numpy()
     usd = -U.rolling(63, min_periods=60).sum().mean(axis=1)
-    out["USD3"] = usd.loc[me_dates].to_numpy()
+    out["USD3"] = at_me(usd)
     for s, col in (("USA500IDXUSD", "SPX3"), ("XAUUSD", "GOLD3")):
-        out[col] = np.log(C[s]).diff(63).loc[me_dates].to_numpy() if s in C else np.nan
-    out["SPX_RV21"] = rv21.loc[me_dates, "USA500IDXUSD"].to_numpy() if "USA500IDXUSD" in C else np.nan
+        out[col] = at_me(np.log(own[s]).diff(63)) if s in own else np.nan
+    out["SPX_RV21"] = at_me(rv21["USA500IDXUSD"]) if "USA500IDXUSD" in own else np.nan
     for s in ("EURUSD", "USDJPY"):
-        out[f"RV21_{s}"] = rv21.loc[me_dates, s].to_numpy()
+        out[f"RV21_{s}"] = at_me(rv21[s])
     out.index.name = "month"
     os.makedirs(a.out, exist_ok=True)
+    cover = {s: [str(own[s].index.min().date()), str(own[s].index.max().date()), int(len(own[s]))] for s in own}
+    json.dump(cover, open(os.path.join(a.out, "fx_panel_cover.json"), "w"), indent=1)
+    print("panel coverage", json.dumps(cover), flush=True)
     out.to_parquet(os.path.join(a.out, "fx_features.parquet"))
     print(out.describe().T.round(4).to_string(), flush=True)
     # ---------------------------------------------------------------- factors F1-F6, F8, F9 on the 28 crosses
@@ -339,6 +350,25 @@ def cmd_web(a):
                 src[k] = f"fred {fred_fb[k]} ({src[k]})"
             except Exception as ex:                                        # noqa: BLE001
                 src[k] = str(src[k]) + f"; fred failed: {ex}"
+    # FRED (the pre-registered fallback) refuses connections from the runners: earlier history of the same CBOE
+    # indices comes from Yahoo Finance where CBOE's own file starts later (VIX3M, GVZ, OVX start 2009-09-18 there)
+    try:
+        import yfinance as yf
+        for k in ("VIX", "VIX3M", "VVIX", "SKEW", "GVZ", "OVX", "EVZ"):
+            h = yf.Ticker("^" + k).history(start="2005-01-01", end="2026-01-01", auto_adjust=False)
+            if not len(h):
+                continue
+            y = pd.Series(h["Close"].to_numpy(float), index=pd.DatetimeIndex(h.index).tz_localize(None).normalize()).dropna()
+            if k in series and len(series[k]):
+                first = series[k].index.min()
+                pre = y[y.index < first]
+                if len(pre):
+                    series[k] = pd.concat([pre, series[k]]).sort_index()
+                    src[k] = f"{src[k]}; Yahoo Finance before {first.date()} ({len(pre)} days)"
+            else:
+                series[k], src[k] = y, f"Yahoo Finance ({src.get(k, '')})"
+    except Exception as ex:                                                # noqa: BLE001
+        print("yahoo failed", repr(ex)[:200], flush=True)
     try:
         series["DGS2"], series["DGS10"] = treasury_yields(range(2006, 2026))
         src["DGS2"] = src["DGS10"] = "US Treasury par yield curve"

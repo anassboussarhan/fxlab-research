@@ -46,8 +46,6 @@ jobs:
           path: out/lib
           retention-days: 60
   fx:
-    needs: cfg
-    if: needs.cfg.outputs.reuse == ''
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
@@ -99,7 +97,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - run: pip install -q pandas pyarrow requests
+      - run: pip install -q pandas pyarrow requests yfinance
       - run: timeout 1500 python -W ignore scripts/r16_data.py web --out out/web || true
       - uses: actions/upload-artifact@v4
         with:
@@ -125,7 +123,7 @@ jobs:
         if: needs.cfg.outputs.reuse != ''
         env:
           GH_TOKEN: ${{ github.token }}
-        run: for n in r16-lib r16-fx r16-cme; do gh run download ${{ needs.cfg.outputs.reuse }} -n $n -D r16_in/$n; done; ls -R r16_in | head -30
+        run: for n in r16-lib r16-cme; do gh run download ${{ needs.cfg.outputs.reuse }} -n $n -D r16_in/$n; done; ls -R r16_in | head -30
       - run: |
           mkdir -p out/r16data
           python -W ignore scripts/r16_data.py merge --inp r16_in --out out/r16data 2>&1 | tee out/r16data/merge_log.txt | tail -80
