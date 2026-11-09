@@ -68,7 +68,7 @@ def agg_periods(mat: np.ndarray, keys: np.ndarray):
 
 # ================================================================================================ book
 def load_npz(path):
-    z = np.load(path, allow_pickle=False)
+    z = np.load(path, allow_pickle=True)
     days = fold(z["days"])
     ok = days <= DEV_END
     return z["unit"].astype(str), z["cfg"].astype(str), z["dir"].astype(int), days[ok], z["pnl"][:, ok]
@@ -88,7 +88,7 @@ def cmd_book(a):
         if sym not in fx:
             continue
         for f in files[sym]:
-            d = fold(np.load(f, allow_pickle=False)["days"])
+            d = fold(np.load(f, allow_pickle=True)["days"])
             d = d[d <= DEV_END]
             cal = d.unique() if cal is None else cal.union(d.unique())
     cal = pd.DatetimeIndex(sorted(cal))

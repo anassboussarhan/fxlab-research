@@ -59,7 +59,17 @@ jobs:
           name: r17-fx
           path: out/fx
           retention-days: 30
+  cfg:
+    runs-on: ubuntu-latest
+    outputs:
+      cme: ${{ steps.c.outputs.cme }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: c
+        run: echo "cme=$(grep -o 'cme=[0-9]*' ci/R17DATA | cut -d= -f2)" >> "$GITHUB_OUTPUT"
   cme:
+    needs: cfg
+    if: needs.cfg.outputs.cme == ''
     runs-on: ubuntu-latest
     timeout-minutes: 300
     steps:
@@ -81,7 +91,7 @@ jobs:
           path: out/cme
           retention-days: 30
   merge:
-    needs: [book, fx, cme]
+    needs: [cfg, book, fx, cme]
     if: always()
     runs-on: ubuntu-latest
     timeout-minutes: 60
@@ -99,6 +109,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: gh run download 42669526702 -n r16-web -D web
+      - name: Earlier CME artifact (ci/R17DATA cme=RUN)
+        if: needs.cfg.outputs.cme != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download ${{ needs.cfg.outputs.cme }} -n r17-cme -D r17_in/r17-cme
       - run: |
           mkdir -p out/r17data
           python -W ignore scripts/r17_data.py merge --inp r17_in --web web --out out/r17data 2>&1 | tee out/r17data/merge_log.txt | tail -70
