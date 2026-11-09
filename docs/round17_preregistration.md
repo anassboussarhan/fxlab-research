@@ -214,3 +214,35 @@ frequency, is timed by each OPT, CME and INTRA feature:
 | Engine | `scripts/regime17.py` |
 | Tests | `tests/test_regime17.py` |
 | Write-up | `docs/round17_results.md` |
+
+## Addendum 1 (2026-11-09, implementation; before the engine ran on real data)
+
+These are implementation details. None changes a rule above.
+
+**Placebos (P3 and P4)**
+- **When they run:** only for chosen settings whose 2019-2025 mean is above 0 with t >= 1.645. A setting that
+  fails this cannot count anyway, and the BH p-values do not depend on P3 or P4, so the verdicts are the same as
+  computing them everywhere.
+- **What is shifted:**
+  - M1 / M1b / M6 / M8: the trailing-performance input;
+  - M2 / M3 / M4 / M5: the feature rows;
+  - M9: both, by the same offset.
+
+**Tiers**
+- **PAIR-UNIT returns:** the mean of the unit's settings' raw P&L on that instrument. BOOK-UNIT averages scaled
+  returns, as in round 16.
+- **Calendars:**
+  - the FACTOR tier uses the FX-panel trading calendar;
+  - the BOOK and PAIR tiers use the libraries' calendar;
+  - features are taken at each period's end from the last value at most 7 days old.
+- **Start:** periods start with the libraries (2007), so training uses every earlier month with data.
+- **Known data gap:** the M1 store has no AUDCAD data for 2018 (also true in round 15).
+
+**Methods**
+- **HMM on the tier's own returns (RET):** uses at most 3,000 of the tier's strategies, drawn with a fixed seed, to
+  keep the principal components tractable.
+- **M9:** the catalog family is a categorical input. Training rows are drawn uniformly from all earlier (period,
+  strategy) pairs with a finite target, at most 400,000.
+- **M6:** includes the cash expert; its weights are used as they are.
+- **Scores:** a static or regime score needs at least the minimum regime size of periods (6 / 26 / 126). Otherwise
+  the strategy is not eligible that period.
