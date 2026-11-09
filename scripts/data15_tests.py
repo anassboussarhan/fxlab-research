@@ -217,8 +217,8 @@ def part_d1b(a, out):
     W = F.pivot_table(index="wk", columns="Currency", values="zc", aggfunc="sum").sort_index()
     W = W.reindex(pd.period_range(W.index.min(), W.index.max(), freq="W-FRI")).fillna(0.0)
     I = W.rolling(13, min_periods=13).sum()
-    sd = I.std(axis=1)
     I.index = I.index.end_time.normalize()                                # the Friday of each week
+    sd = I.std(axis=1)                                                    # cross-sectional, on the same index
 
     def sig(s, d):
         x, y = s[:3], s[3:]
@@ -299,9 +299,13 @@ def yields2y():
             lines = raw.splitlines()
             hdr = next(k for k, l in enumerate(lines) if l.startswith("Series ID"))
             ids = lines[hdr].split(",")
-            titles = next(l for l in lines if l.startswith("Title")).split(",")
+            import csv as _csv
+            titles = next(_csv.reader([next(l for l in lines if l.startswith("Title"))]))
             col = next(k for k, t in enumerate(titles) if "2 years" in t or "2 year" in t)
-            body = pd.read_csv(io.StringIO("\n".join(lines[hdr + 1:])), header=None)
+            import csv
+            rows_ = [r for r in csv.reader(lines[hdr + 1:]) if r]
+            width = max(len(r) for r in rows_)
+            body = pd.DataFrame([r + [""] * (width - len(r)) for r in rows_])
             au.append(pd.Series(pd.to_numeric(body.iloc[:, col], errors="coerce").to_numpy(),
                                 index=pd.to_datetime(body.iloc[:, 0], format="%d-%b-%Y", errors="coerce")))
             del ids
