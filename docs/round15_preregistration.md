@@ -134,3 +134,12 @@ cannot be had that way is reported as not available.
   - Contradicted: below the 2019-2025 mean with t <= -1.645.
   - Otherwise inconclusive.
 - **Use:** only "supported" moves a rule to the forward test.
+
+## Addendum 1 (2026-11-09, before any data of this round is read)
+
+- **Three of the four "intraday-filed bar rules" are left out:** Crabel NR, the Williams volatility breakout and
+  the volatility breakout. On reading their code, each trades a breakout from the day's own open inside the same
+  day. A daily bar cannot express that: it needs intraday bars, where these rules were tested (the M5-H4 sweep and
+  round 12). The weekday rule stays, at D1 only.
+- **The book module has 26 systems.** The Raschke Anti uses %K(7) and %D(10 or 14). All 26 passed the causality
+  test (`tests/test_books.py`) before any market data was read.
