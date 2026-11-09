@@ -274,7 +274,7 @@ def run_features(M, G, sym, t_job, budget):
         p_d1 = to_d1(pos, G[tf], False)
         for d in (1, -1):
             ptg = p_d1 * d * size
-            pnl, gp, sw, _ = LL.cont_run(M, ptg, zero)
+            pnl, gp, sw, _ = (LL.cont_run_close if DAILY.get("close") else LL.cont_run)(M, ptg, zero)
             act = (np.nan_to_num(ptg) != 0).astype(np.int64)                # days with a position
             g = pd.DataFrame({"pnl": pnl, "gpnl": gp, "n": act, "month": M.tday.to_period("M").astype(str)}).groupby("month").sum()
             g["unit"], g["cfg"], g["dir"] = f"{name}|{tf}", "terciles", d
@@ -323,8 +323,11 @@ def main():
     ap.add_argument("--parts", default="AB,C")
     ap.add_argument("--only", default="")
     ap.add_argument("--daily", action="store_true", help="round 17: also save daily P&L per configuration")
+    ap.add_argument("--close-marks", action="store_true",
+                    help="round 17 fix: part C marked close to close (long_lab.cont_run_close); output daily15c_")
     a = ap.parse_args()
     DAILY["on"] = a.daily
+    DAILY["close"] = a.close_marks
     os.makedirs(a.out, exist_ok=True)
     t_job = time.time()
     signal.signal(signal.SIGALRM, _alarm)
@@ -359,7 +362,7 @@ def main():
         print(a.symbol, part, "rows", len(df), round(time.time() - t_job), "s", flush=True)
     if a.daily and DAILY["rows"]:
         keys = list(DAILY["rows"])
-        np.savez_compressed(os.path.join(a.out, f"daily15_{a.symbol}.npz"),
+        np.savez_compressed(os.path.join(a.out, f"daily15{'c' if a.close_marks else ''}_{a.symbol}.npz"),
                             unit=np.array([k[0] for k in keys]), cfg=np.array([k[1] for k in keys]),
                             dir=np.array([k[2] for k in keys], np.int8), days=np.array(M.tday.strftime("%Y-%m-%d")),
                             pnl=np.vstack([DAILY["rows"][k] for k in keys]))

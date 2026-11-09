@@ -246,3 +246,34 @@ These are implementation details. None changes a rule above.
 - **M6:** includes the cash expert; its weights are used as they are.
 - **Scores:** a static or regime score needs at least the minimum regime size of periods (6 / 26 / 126). Otherwise
   the strategy is not eligible that period.
+
+## Addendum 2 (2026-11-09, after the first engine run): a timing flaw in part of the library, and the fix
+
+**What was found.** In the first run (42697499365), the closest miss was the daily single-feature split on 5-day
+dispersion. With the feature lagged one more day its Sharpe ratio fell from +0.76 to -3.2. That is not how a real
+effect behaves.
+
+**The cause.** The round-15 feature-tercile units and their placebos (sweep part C) were priced by
+`long_lab.cont_run`, which marks P&L from one 08:00 London fill to the next.
+- Day k's P&L therefore runs from 08:00 London of day k-1 to 08:00 London of day k.
+- A decision taken at the close of day k-1 (17:00 New York) uses features that already contain 14 of those 24
+  hours.
+- Standalone tests (round 15) were not affected: there the position is decided at the previous close and earns
+  only later fills.
+- Combining these returns with close-of-day features gives a look-ahead of up to 14 hours. It is large for daily
+  decisions, about 12% of a week for weekly ones and about 2.6% of a month for monthly ones (rounds 16 and 17).
+- **Not affected:**
+  - the rule units (`ev_run`), marked at the closes;
+  - the nine styles (round-14 engine, marked at the closes);
+  - the intraday library (bar marks);
+  - the PAIR tier, which has no feature units.
+
+**The fix.**
+- Part C is re-run with `long_lab.cont_run_close`: the same decisions and fills, marked close to close (the old
+  position earns the previous close to the fill, the new one the fill to the close).
+- Its rows replace the fill-to-fill rows in the book matrices.
+- Every BOOK test (D, W, M) is re-run, with all rules unchanged. FACTOR and PAIR are re-run as well and should
+  reproduce.
+- The second run's results replace the first's.
+- **Round 16** used the same fill-to-fill monthly P&L for its feature units (an overlap of about 2.6% of a month).
+  This can only have flattered its regime methods, so its null result stands. This is noted in its results.

@@ -81,6 +81,13 @@ def cmd_book(a):
     for f in glob.glob(os.path.join(a.inp, "**", "daily1[57]_*.npz"), recursive=True):
         sym = os.path.basename(f).split("_", 1)[1][:-4]
         files.setdefault(sym, []).append(f)
+    # round-17 fix: part C (feature terciles and their placebos) re-marked close to close (daily15c_), replacing the
+    # fill-to-fill rows of daily15_
+    cfix = {os.path.basename(f).split("_", 1)[1][:-4]: f
+            for f in glob.glob(os.path.join(a.inp, "**", "daily15c_*.npz"), recursive=True)}
+    print("close-marked part C files", len(cfix), flush=True)
+    for sym, f in cfix.items():
+        files.setdefault(sym, []).append(f)
     print("symbols", len(files), sorted(files), flush=True)
     # the calendar: every (folded) trading day of any FX file
     cal = None
@@ -104,6 +111,9 @@ def cmd_book(a):
         for f in files[sym]:
             eng = "D" if os.path.basename(f).startswith("daily15") else "I"
             unit, cfg, dr, days, P = load_npz(f)
+            if os.path.basename(f).startswith("daily15_") and sym in cfix:
+                keep = ~np.char.startswith(unit.astype(str), "FEAT:") & ~np.char.startswith(unit.astype(str), "PLACEBOF_")
+                unit, cfg, dr, P = unit[keep], cfg[keep], dr[keep], P[keep]
             # fold duplicates created by weekend folding
             dser = pd.Series(np.arange(len(days)), index=days)
             if dser.index.has_duplicates:

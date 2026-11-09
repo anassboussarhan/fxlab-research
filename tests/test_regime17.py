@@ -88,3 +88,28 @@ def test_costs_by_frequency():
     1 / sqrt(periods per year)) is constant."""
     v = [G.FREQ[f]["cost"] / math.sqrt(G.FREQ[f]["ppy"]) for f in ("M", "W", "D")]
     assert max(v) / min(v) < 1.01
+
+
+def test_cont_run_close_is_close_to_close():
+    """Round-17 fix: the close-marked continuous engine books day k's P&L from close k-1 to close k."""
+    import types
+    import long_lab as LL
+    rng = np.random.default_rng(3)
+    n = 300
+    close = 1.2 * np.exp(np.cumsum(rng.normal(0, 0.005, n)))
+    fill = close * np.exp(rng.normal(0, 0.002, n))                       # 08:00 London prices inside each day
+    M = types.SimpleNamespace(mclose=close, me=fill, mcost=np.zeros(n), exec=np.arange(n), swl=np.zeros(n),
+                              sws=np.zeros(n), roll=np.zeros(n))
+    tgt = np.r_[np.zeros(5), np.ones(n - 5)]                              # long from day 5's fill
+    pnl, gp, sw, ch = LL.cont_run_close(M, tgt, np.zeros(n))
+    assert ch == 1
+    assert np.allclose(gp[6:], close[6:] / close[5:-1] - 1.0)            # held days: close-to-close
+    assert np.isclose(gp[5], close[5] / fill[5] - 1.0)                   # entry day: fill to close
+    # changing prices after close k does not change day k's P&L
+    close2 = close.copy()
+    close2[150:] *= 1.1
+    fill2 = fill.copy()
+    fill2[150:] *= 1.1
+    M2 = types.SimpleNamespace(**{**M.__dict__, "mclose": close2, "me": fill2})
+    pnl2 = LL.cont_run_close(M2, tgt, np.zeros(n))[0]
+    assert np.allclose(pnl[:150], pnl2[:150])

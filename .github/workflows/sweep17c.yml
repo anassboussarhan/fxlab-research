@@ -1,0 +1,39 @@
+name: sweep17c
+# Round 17 fix (docs/round17_preregistration.md, addendum 2): part C of the round-15 sweep (feature terciles and their
+# placebos) re-run with daily P&L marked close to close (scripts/sweep15.py --parts C --daily --close-marks), FX
+# crosses only. Trigger: ci/SWEEP17C.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/SWEEP17C"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  sym:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix:
+        symbol: [AUDCAD, AUDCHF, AUDJPY, AUDNZD, AUDUSD, CADCHF, CADJPY, CHFJPY, EURAUD, EURCAD, EURCHF, EURGBP, EURJPY, EURNZD, EURUSD, GBPAUD, GBPCAD, GBPCHF, GBPJPY, GBPNZD, GBPUSD, NZDCAD, NZDCHF, NZDJPY, NZDUSD, USDCAD, USDCHF, USDJPY]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 ${{ matrix.symbol }}
+      - run: python -W ignore scripts/sweep15.py --symbol ${{ matrix.symbol }} --out out/s17c --parts C --daily --close-marks 2>&1 | grep -v "^  " | tail -10
+      - uses: actions/upload-artifact@v4
+        with:
+          name: s17c-${{ matrix.symbol }}
+          path: out/s17c/daily15c_*.npz
+          retention-days: 30

@@ -27,7 +27,7 @@ jobs:
         run: |
           # ci/R17DATA: sweep17 run ids (the words that are numbers), later runs replacing earlier ones' artifacts
           for R in $(tr ' ' '\n' < ci/R17DATA | grep -E '^[0-9]+$'); do
-            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep '^s17-'); do
+            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep '^s17'); do
               rm -rf s17_in/$n; gh run download $R -n $n -D s17_in/$n || true
             done
           done

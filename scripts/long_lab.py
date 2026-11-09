@@ -397,6 +397,41 @@ def ev_run(bo, bh, bl, ao, ah, al, slip, spr, dk, first, ex_m1, roll, swl, sws, 
 
 
 # ============================================================================================ continuous engine
+def cont_run_close(M: Mkt, p_target: np.ndarray, buf: np.ndarray):
+    """Round 17: as cont_run (decided on the previous close, traded at each day's 08:00 London fill), but marked at
+    the closes: on day k the old position earns close(k-1) -> fill(k) and the new one fill(k) -> close(k). Day k's
+    P&L is then the close-to-close return, aligned with close-of-day features (cont_run's fill-to-fill marks start
+    14 hours before the previous close)."""
+    nb = len(M.mclose)
+    pnl, gpnl, swp = np.zeros(nb), np.zeros(nb), np.zeros(nb)
+    p, changes = 0.0, 0
+    for k in range(nb):
+        if k > 0 and p != 0.0:
+            s_ = abs(p) * (M.swl[k - 1] if p > 0 else M.sws[k - 1]) * M.roll[k]
+            pnl[k] += s_
+            swp[k] += s_
+        newp = p
+        if M.exec[k] >= 0:
+            tg = p_target[k]
+            if np.isfinite(tg) and abs(tg - p) > (buf[k] if np.isfinite(buf[k]) else 0.0):
+                newp = float(tg)
+        if k == 0:
+            p = newp
+            continue
+        if M.exec[k] >= 0 and newp != p:
+            r_old = p * (M.me[k] / M.mclose[k - 1] - 1.0)
+            r_new = newp * (M.mclose[k] / M.me[k] - 1.0)
+            pnl[k] += r_old + r_new - abs(newp - p) * M.mcost[k]
+            gpnl[k] += r_old + r_new
+            changes += 1
+        else:
+            r = p * (M.mclose[k] / M.mclose[k - 1] - 1.0)
+            pnl[k] += r
+            gpnl[k] += r
+        p = newp
+    return pnl, gpnl, swp, changes
+
+
 def cont_run(M: Mkt, p_target: np.ndarray, buf: np.ndarray):
     """Target notional p (equity fraction, signed) decided on information to the previous close, traded at each
     day's 08:00 London fill when the change exceeds buf. Returns daily net, gross, swap and number of changes."""
