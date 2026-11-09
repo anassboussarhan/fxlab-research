@@ -6,6 +6,11 @@ Rules: `docs/round16_preregistration.md` (addenda 1-2), committed before the eng
 - Runs: data 42669526702 (reusing the library and CME artifacts of 42662594180), engine 42670029876, follow-ups
   42674038581. Outputs are on branches `round16`, `round16-data` and `misc-r16x`.
 
+> **Note (added 2026-11-09, round 17 addendum 2).** The feature-tercile units' monthly P&L was measured from
+> 08:00 London fills. It therefore started about 14 hours before each decision's close-of-month features, an
+> overlap of about 2.6% of a month. An overlap like that can only flatter the regime methods, and no method
+> counted, so the null result stands. Round 17 re-marks these units close to close.
+
 ## The answer
 
 **No regime method works.** In 18 tests, the method, number of regimes and setting were chosen on 2011-2018. The
