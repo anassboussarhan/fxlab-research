@@ -17,9 +17,13 @@ os.makedirs(OUT, exist_ok=True)
 R = {}
 
 
+def save():
+    json.dump(R, open(f"{OUT}/probe15.json", "w"), indent=1, default=str)
+
+
 def get(url, **kw):
     try:
-        r = requests.get(url, headers=UA, timeout=60, **kw)
+        r = requests.get(url, headers=UA, timeout=30, **kw)
         return r
     except Exception as ex:                                               # noqa: BLE001
         return ex
@@ -77,55 +81,7 @@ for ds in ("Tropstan/Forex_Factory_Calendar", "obrotowy/Forex_Factory_Calendar",
                 break
     R[f"hf:{ds}"] = rec
 
-# D2 Dukascopy instruments not in the store: first year with data and the integer scale of one candle
-DT = np.dtype([("t", ">u4"), ("o", ">u4"), ("c", ">u4"), ("l", ">u4"), ("h", ">u4"), ("v", ">f4")])
-cands = ["BRENTCMDUSD", "LIGHTCMDUSD", "GASCMDUSD", "COPPERCMDUSD", "DIESELCMDUSD", "XPTCMDUSD", "XPDCMDUSD",
-         "SOYBEANCMDUSX", "WHEATCMDUSX", "CORNCMDUSX", "SUGARCMDUSD", "COCOACMDUSD", "COFFEECMDUSX", "COTTONCMDUSX",
-         "BUNDTREUR", "USTBONDTRUSD", "UKGILTTRGBP", "SCHATZTREUR", "BOBLTREUR",
-         "DEUIDXEUR", "GBRIDXGBP", "FRAIDXEUR", "EUSIDXEUR", "HKGIDXHKD", "AUSIDXAUD", "USA30IDXUSD", "CHEIDXCHF",
-         "ESPIDXEUR", "NLDIDXEUR", "ITAIDXEUR",
-         "EURSEK", "EURNOK", "USDSEK", "USDNOK", "USDMXN", "USDZAR", "USDPLN", "EURPLN", "USDTRY", "EURTRY", "USDSGD",
-         "USDHKD", "USDHUF", "EURHUF", "USDCZK", "EURCZK", "USDDKK", "XPTUSD", "XPDUSD", "BTCUSD", "ETHUSD"]
-
-
-def duka_day(pair, d):
-    url = f"https://datafeed.dukascopy.com/datafeed/{pair}/{d.year:04d}/{d.month - 1:02d}/{d.day:02d}/BID_candles_min_1.bi5"
-    for k in range(4):
-        try:
-            r = requests.get(url, headers=UA, timeout=40)
-            if r.status_code == 404:
-                return b""
-            if r.status_code == 200:
-                return r.content
-        except Exception:                                                 # noqa: BLE001
-            pass
-        time.sleep(2 ** k)
-    return None
-
-
-duka = {}
-for p in cands:
-    rec = {}
-    first = None
-    for y in range(2003, 2025):
-        raw = duka_day(p, date(y, 3, 12) if date(y, 3, 12).weekday() < 5 else date(y, 3, 14))
-        if raw:
-            try:
-                a = np.frombuffer(lzma.decompress(raw)[: (len(lzma.decompress(raw)) // 24) * 24], dtype=DT)
-                if len(a):
-                    first = y
-                    rec["raw_close_int_magnitude"] = int(np.log10(max(int(a["c"][len(a) // 2]), 1)))
-                    break
-            except Exception as ex:                                       # noqa: BLE001
-                rec["decode_error"] = repr(ex)[:100]
-                break
-    rec["first_year"] = first
-    if first:
-        raw = duka_day(p, date(2025, 12, 10))
-        rec["has_2025"] = bool(raw)
-    duka[p] = rec
-R["dukascopy"] = duka
-
+save()
 # D3 Tokyo Financial Exchange (Click 365) historical pages
 for nm, url in (("tfx_hist", "https://www.tfx.co.jp/historical/fx/"), ("tfx_hist_en", "https://www.tfx.co.jp/en/historical/fx/"),
                 ("tfx_root", "https://www.tfx.co.jp/historical/")):
@@ -164,5 +120,62 @@ for k, u in (("swfx_feed", "https://freeserv.dukascopy.com/2.0/?path=api/sentime
 # D8 Google Trends (unofficial endpoint)
 info("gtrends:explore", "https://trends.google.com/trends/api/explore?hl=en-US&tz=0&req=%7B%22comparisonItem%22:%5B%7B%22keyword%22:%22forex%22,%22geo%22:%22%22,%22time%22:%22all%22%7D%5D,%22category%22:0,%22property%22:%22%22%7D")
 
-json.dump(R, open(f"{OUT}/probe15.json", "w"), indent=1, default=str)
+save()
+# D2 Dukascopy instruments not in the store: years with data (sampled) and the integer scale of one candle
+DT = np.dtype([("t", ">u4"), ("o", ">u4"), ("c", ">u4"), ("l", ">u4"), ("h", ">u4"), ("v", ">f4")])
+cands = ["BRENTCMDUSD", "LIGHTCMDUSD", "GASCMDUSD", "COPPERCMDUSD", "DIESELCMDUSD", "XPTCMDUSD", "XPDCMDUSD",
+         "SOYBEANCMDUSX", "WHEATCMDUSX", "CORNCMDUSX", "SUGARCMDUSD", "COCOACMDUSD", "COFFEECMDUSX", "COTTONCMDUSX",
+         "BUNDTREUR", "USTBONDTRUSD", "UKGILTTRGBP", "SCHATZTREUR", "BOBLTREUR",
+         "DEUIDXEUR", "GBRIDXGBP", "FRAIDXEUR", "EUSIDXEUR", "HKGIDXHKD", "AUSIDXAUD", "USA30IDXUSD", "CHEIDXCHF",
+         "ESPIDXEUR", "NLDIDXEUR", "ITAIDXEUR",
+         "EURSEK", "EURNOK", "USDSEK", "USDNOK", "USDMXN", "USDZAR", "USDPLN", "EURPLN", "USDTRY", "EURTRY", "USDSGD",
+         "USDHKD", "USDHUF", "EURHUF", "USDCZK", "EURCZK", "USDDKK", "XPTUSD", "XPDUSD", "BTCUSD", "ETHUSD"]
+YEARS = (2004, 2007, 2010, 2013, 2016, 2019, 2022, 2025)
+
+
+def duka_day(pair, d):
+    url = f"https://datafeed.dukascopy.com/datafeed/{pair}/{d.year:04d}/{d.month - 1:02d}/{d.day:02d}/BID_candles_min_1.bi5"
+    for k in range(2):
+        try:
+            r = requests.get(url, headers=UA, timeout=15)
+            if r.status_code == 404:
+                return b""
+            if r.status_code == 200:
+                return r.content
+        except Exception:                                                 # noqa: BLE001
+            pass
+    return None
+
+
+def probe_pair(p):
+    rec = {"years": {}}
+    for y in YEARS:
+        d = date(y, 3, 11)
+        while d.weekday() >= 5:
+            d = date(y, 3, d.day + 1)
+        raw = duka_day(p, d)
+        if raw is None:
+            rec["years"][y] = "no answer"
+            continue
+        if not raw:
+            rec["years"][y] = 0
+            continue
+        try:
+            data = lzma.decompress(raw)
+            a = np.frombuffer(data[: (len(data) // 24) * 24], dtype=DT)
+            rec["years"][y] = int(len(a))
+            if len(a):
+                rec["raw_close_int_magnitude"] = int(np.log10(max(int(a["c"][len(a) // 2]), 1)))
+        except Exception as ex:                                           # noqa: BLE001
+            rec["years"][y] = "decode error"
+    have = [y for y, v in rec["years"].items() if isinstance(v, int) and v > 0]
+    rec["first_year_sampled"] = min(have) if have else None
+    return p, rec
+
+
+from concurrent.futures import ThreadPoolExecutor                         # noqa: E402
+with ThreadPoolExecutor(12) as ex:
+    R["dukascopy"] = dict(ex.map(probe_pair, cands))
+save()
+
 print(json.dumps(R, indent=1, default=str)[:20000])
