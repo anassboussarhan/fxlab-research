@@ -22,7 +22,7 @@ def f(x, n=2):
 def yn(x):
     if x is None or (isinstance(x, float) and not np.isfinite(x)):
         return "-"
-    return "yes" if str(x) in ("True", "true", "1") or x is True else "no"
+    return "yes" if str(x) in ("True", "true", "1", "1.0") or x is True else "no"
 
 
 order = {"FACTOR": 0, "BOOK-UNIT": 1, "BOOK-CFG": 2, "PAIR-UNIT": 3}
