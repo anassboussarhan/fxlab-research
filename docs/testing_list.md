@@ -79,6 +79,19 @@ FX money comes from (forced flows at known times, risk premia, information in fl
 Not tested on purpose: hedging opposite positions across prop firms (against every firm's terms), trading on slow
 prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ended in 2024), lunar cycles.
 
+## K. Round 16 (2026-11-09): market regimes, the best strategy per regime, options data
+
+**Done 2026-11-09** (`docs/round16_results.md`).
+- **Methods tested:** six regime-method families (strategy momentum, performance filter, clusters with 2-8 regimes,
+  single-feature splits, HMM, ridge / boosting) in three library tiers. Each family's method, number of regimes
+  and setting was chosen on 2011-2018.
+- **Result on 2019-2025:** 0 of 18 count. None beats static selection or its time-shifted placebo.
+- **Options data:** as regime inputs, timing signals and a dip-buying filter, it adds nothing.
+- **Number of regimes:** BIC prefers 1-2, and none out of sample.
+- **Exploratory:** regime effects tied to yen implied volatility repeat across decades (p = 0.0005 with 2,000
+  shifts), but they cannot be traded.
+- **Not bought:** sterling / AUD / CAD / CHF CME options (USD 60.29).
+
 ## J. Round 15 (2026-11-09): every rule at D1 / W1 / MN, the book systems, every feature, free data
 
 **Done 2026-11-09** (`docs/round15_results.md`). 233 rule units (91 rules incl. 26 new book systems) and 838 feature
