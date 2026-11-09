@@ -1,0 +1,1180 @@
+{
+ "hf:Tropstan/Forex_Factory_Calendar": {
+  "files": [
+   ".gitattributes",
+   "README.md",
+   "forex_factory_cache.csv"
+  ],
+  "license": "mit",
+  "lastModified": "2026-01-30T15:56:13.000Z",
+  "file": "forex_factory_cache.csv",
+  "bytes": 68231084,
+  "columns": [
+   "DateTime",
+   "Currency",
+   "Impact",
+   "Event",
+   "Actual",
+   "Forecast",
+   "Previous",
+   "Detail"
+  ],
+  "rows": 83427,
+  "first": "2007-01-01T04:30:00+03:30",
+  "last": "2025-04-07T22:30:00+04:30",
+  "currencies": [
+   "AUD",
+   "All",
+   "CAD",
+   "CHF",
+   "CNY",
+   "EUR",
+   "GBP",
+   "JPY",
+   "NZD",
+   "USD"
+  ],
+  "forecast_nonnull_share": 0.6553993311517854
+ },
+ "hf:obrotowy/Forex_Factory_Calendar": {
+  "files": [
+   ".gitattributes",
+   "README.md",
+   "forex_factory_cache.csv"
+  ],
+  "license": "mit",
+  "lastModified": "2026-04-14T19:36:47.000Z",
+  "file": "forex_factory_cache.csv",
+  "bytes": 68231084,
+  "columns": [
+   "DateTime",
+   "Currency",
+   "Impact",
+   "Event",
+   "Actual",
+   "Forecast",
+   "Previous",
+   "Detail"
+  ],
+  "rows": 83427,
+  "first": "2007-01-01T04:30:00+03:30",
+  "last": "2025-04-07T22:30:00+04:30",
+  "currencies": [
+   "AUD",
+   "All",
+   "CAD",
+   "CHF",
+   "CNY",
+   "EUR",
+   "GBP",
+   "JPY",
+   "NZD",
+   "USD"
+  ],
+  "forecast_nonnull_share": 0.6553993311517854
+ },
+ "hf:Ehsanrs2/Forex_Factory_Calendar": {
+  "files": [
+   ".gitattributes",
+   "README.md",
+   "forex_factory_cache.csv"
+  ],
+  "license": "mit",
+  "lastModified": "2026-10-13T10:14:39.000Z",
+  "file": "forex_factory_cache.csv",
+  "bytes": 68231084,
+  "columns": [
+   "DateTime",
+   "Currency",
+   "Impact",
+   "Event",
+   "Actual",
+   "Forecast",
+   "Previous",
+   "Detail"
+  ],
+  "rows": 83427,
+  "first": "2007-01-01T04:30:00+03:30",
+  "last": "2025-04-07T22:30:00+04:30",
+  "currencies": [
+   "AUD",
+   "All",
+   "CAD",
+   "CHF",
+   "CNY",
+   "EUR",
+   "GBP",
+   "JPY",
+   "NZD",
+   "USD"
+  ],
+  "forecast_nonnull_share": 0.6553993311517854
+ },
+ "hf:oprizzle/Forex_Factory_Calendar": {
+  "files": [
+   ".gitattributes",
+   "README.md",
+   "forex_factory_cache.csv"
+  ],
+  "license": "mit",
+  "lastModified": "2026-06-04T19:38:24.000Z",
+  "file": "forex_factory_cache.csv",
+  "bytes": 68231084,
+  "columns": [
+   "DateTime",
+   "Currency",
+   "Impact",
+   "Event",
+   "Actual",
+   "Forecast",
+   "Previous",
+   "Detail"
+  ],
+  "rows": 83427,
+  "first": "2007-01-01T04:30:00+03:30",
+  "last": "2025-04-07T22:30:00+04:30",
+  "currencies": [
+   "AUD",
+   "All",
+   "CAD",
+   "CHF",
+   "CNY",
+   "EUR",
+   "GBP",
+   "JPY",
+   "NZD",
+   "USD"
+  ],
+  "forecast_nonnull_share": 0.6553993311517854
+ },
+ "hf:stephanyuran/Forex_Factory_Calendar": {
+  "files": [
+   ".gitattributes",
+   "README.md",
+   "forex_factory_cache.csv"
+  ],
+  "license": "mit",
+  "lastModified": "2025-12-24T00:08:46.000Z",
+  "file": "forex_factory_cache.csv",
+  "bytes": 68231084,
+  "columns": [
+   "DateTime",
+   "Currency",
+   "Impact",
+   "Event",
+   "Actual",
+   "Forecast",
+   "Previous",
+   "Detail"
+  ],
+  "rows": 83427,
+  "first": "2007-01-01T04:30:00+03:30",
+  "last": "2025-04-07T22:30:00+04:30",
+  "currencies": [
+   "AUD",
+   "All",
+   "CAD",
+   "CHF",
+   "CNY",
+   "EUR",
+   "GBP",
+   "JPY",
+   "NZD",
+   "USD"
+  ],
+  "forecast_nonnull_share": 0.6553993311517854
+ },
+ "tfx_hist": {
+  "url": "https://www.tfx.co.jp/historical/fx/",
+  "status": 200,
+  "bytes": 555261,
+  "type": "text/html; charset=UTF-8",
+  "lines": 826,
+  "head": [
+   "<!doctype html>",
+   "<html>"
+  ],
+  "data_links": [
+   "https://www.click365.jp/resorces/doc/fxfile.xls"
+  ]
+ },
+ "tfx_hist_en": {
+  "url": "https://www.tfx.co.jp/en/historical/fx/",
+  "status": 200,
+  "bytes": 404611,
+  "type": "text/html; charset=UTF-8",
+  "lines": 693,
+  "head": [
+   "<!doctype html>",
+   "<html>"
+  ],
+  "data_links": []
+ },
+ "tfx_root": {
+  "url": "https://www.tfx.co.jp/historical/",
+  "status": 200,
+  "bytes": 22946,
+  "type": "text/html; charset=UTF-8",
+  "lines": 300,
+  "head": [
+   "<!doctype html>",
+   "<html>"
+  ],
+  "data_links": []
+ },
+ "cboe:BXM": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/BXM_History.csv",
+  "status": 200,
+  "bytes": 139542,
+  "type": "text/csv",
+  "lines": 6196,
+  "head": [
+   "DATE,BXM",
+   "03/22/2002,584.300000"
+  ]
+ },
+ "cboe:BXMD": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/BXMD_History.csv",
+  "status": 200,
+  "bytes": 228731,
+  "type": "text/csv",
+  "lines": 10170,
+  "head": [
+   "DATE,BXMD",
+   "06/20/1986,100.000000"
+  ]
+ },
+ "cboe:PUT": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/PUT_History.csv",
+  "status": 200,
+  "bytes": 114158,
+  "type": "text/csv",
+  "lines": 5002,
+  "head": [
+   "DATE,PUT",
+   "03/04/1991,153.500000"
+  ]
+ },
+ "cboe:CNDR": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/CNDR_History.csv",
+  "status": 200,
+  "bytes": 223550,
+  "type": "text/csv",
+  "lines": 10170,
+  "head": [
+   "DATE,CNDR",
+   "06/20/1986,100.000000"
+  ]
+ },
+ "cboe:BFLY": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/BFLY_History.csv",
+  "status": 200,
+  "bytes": 223494,
+  "type": "text/csv",
+  "lines": 10170,
+  "head": [
+   "DATE,BFLY",
+   "06/20/1986,100.000000"
+  ]
+ },
+ "cboe:CLL": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/CLL_History.csv",
+  "status": 200,
+  "bytes": 101539,
+  "type": "text/csv",
+  "lines": 4539,
+  "head": [
+   "DATE,CLL",
+   "08/26/2008,597.670000"
+  ]
+ },
+ "cboe:CMBO": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/CMBO_History.csv",
+  "status": 200,
+  "bytes": 227675,
+  "type": "text/csv",
+  "lines": 10164,
+  "head": [
+   "DATE,CMBO",
+   "06/30/1986,100.000000"
+  ]
+ },
+ "cboe:WPUT": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/WPUT_History.csv",
+  "status": 200,
+  "bytes": 114851,
+  "type": "text/csv",
+  "lines": 5224,
+  "head": [
+   "DATE,WPUT",
+   "01/31/2006,100.000000"
+  ]
+ },
+ "cboe:PPUT": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/PPUT_History.csv",
+  "status": 200,
+  "bytes": 225185,
+  "type": "text/csv",
+  "lines": 10164,
+  "head": [
+   "DATE,PPUT",
+   "06/30/1986,100.000000"
+  ]
+ },
+ "cboe:BXY": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/BXY_History.csv",
+  "status": 200,
+  "bytes": 216849,
+  "type": "text/csv",
+  "lines": 9678,
+  "head": [
+   "DATE,BXY",
+   "06/01/1988,100.000000"
+  ]
+ },
+ "cboe:CLLZ": {
+  "url": "https://cdn.cboe.com/api/global/us_indices/daily_prices/CLLZ_History.csv",
+  "status": 200,
+  "bytes": 225508,
+  "type": "text/csv",
+  "lines": 10170,
+  "head": [
+   "DATE,CLLZ",
+   "06/20/1986,100.000000"
+  ]
+ },
+ "yield:us_treasury_2024": {
+  "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/2024/all?type=daily_treasury_yield_curve&field_tdr_date_value=2024&page&_format=csv",
+  "status": 200,
+  "bytes": 19098,
+  "type": "text/csv; charset=UTF-8",
+  "lines": 251,
+  "head": [
+   "Date,\"1 Mo\",\"2 Mo\",\"3 Mo\",\"4 Mo\",\"6 Mo\",\"1 Yr\",\"2 Yr\",\"3 Yr\",\"5 Yr\",\"7 Yr\",\"10 Yr\",\"20 Yr\",\"30 Yr\"",
+   "12/31/2024,4.40,4.39,4.37,4.32,4.24,4.16,4.25,4.27,4.38,4.48,4.58,4.86,4.78"
+  ]
+ },
+ "yield:ecb_yc_2y": {
+  "url": "https://data-api.ecb.europa.eu/service/data/YC/B.U2.EUR.4F.G_N_A.SV_C_YM.SR_2Y?format=csvdata",
+  "status": 200,
+  "bytes": 3159599,
+  "type": "text/csv",
+  "lines": 5669,
+  "head": [
+   "KEY,FREQ,REF_AREA,CURRENCY,PROVIDER_FM,INSTRUMENT_FM,PROVIDER_FM_ID,DATA_TYPE_FM,TIME_PERIOD,OBS_VALUE,OBS_STATUS,OBS_CONF,OBS_PRE_BREAK,OBS_COM,TIME_FORMAT,BREAKS,COLLECTION,COMPILING_ORG,DISS_ORG,DO",
+   "YC.B.U2.EUR.4F.G_N_A.SV_C_YM.SR_2Y,B,U2,EUR,4F,G_N_A,SV_C_YM,SR_2Y,2004-09-06,2.64126153598198,A,F,,,P1D,,E,,,,,,,,,,,,,,,Technical notes are available at the following link: https://www.ecb.europa.eu"
+  ]
+ },
+ "yield:boc_2y": {
+  "url": "https://www.bankofcanada.ca/valet/observations/BD.CDN.2YR.DQ.YLD/csv",
+  "status": 200,
+  "bytes": 136122,
+  "type": "text/csv; charset=utf-8",
+  "lines": 6471,
+  "head": [
+   "\ufeff\"TERMS AND CONDITIONS\"",
+   "\"https://www.bankofcanada.ca/terms/\""
+  ]
+ },
+ "yield:rba_f2": {
+  "url": "https://www.rba.gov.au/statistics/tables/csv/f2-data.csv",
+  "status": 200,
+  "bytes": 202060,
+  "type": "application/octet-stream",
+  "lines": 64778,
+  "head": [
+   "F2 CAPITAL MARKET YIELDS \u2013 GOVERNMENT BONDS",
+   "Title,Australian Government 2 year bond,Australian Government 3 year bond,Australian Government 5 year bond,Australian Government 10 year bond,Australian Government Indexed Bond"
+  ]
+ },
+ "yield:rba_f2_hist": {
+  "url": "https://www.rba.gov.au/statistics/tables/csv/f2.1-data.csv",
+  "status": 200,
+  "bytes": 72251,
+  "type": "application/octet-stream",
+  "lines": 64778,
+  "head": [
+   "F2.1 CAPITAL MARKET YIELDS \u2013 GOVERNMENT BONDS",
+   "Title,Australian Government 2 year bond,Australian Government 3 year bond,Australian Government 5 year bond,Australian Government 10 year bond,Australian Government Indexed Bond"
+  ]
+ },
+ "yield:snb_rendoblid": {
+  "url": "https://data.snb.ch/api/cube/rendoblid/data/csv/en",
+  "status": 200,
+  "bytes": 5461632,
+  "type": "text/csv;charset=UTF-8",
+  "lines": 215714,
+  "head": [
+   "\ufeff\"CubeId\";\"rendoblid\"",
+   "\"PublishingDate\";\"2025-09-01 14:29\""
+  ]
+ },
+ "yield:mof_jgb_all": {
+  "url": "https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/historical/jgbcme_all.csv",
+  "status": 200,
+  "bytes": 1197657,
+  "type": "text/csv",
+  "lines": 13332,
+  "head": [
+   "Interest Rate,,,,,,,,,,,,,,,(Unit : %)",
+   "Date,1Y,2Y,3Y,4Y,5Y,6Y,7Y,8Y,9Y,10Y,15Y,20Y,25Y,30Y,40Y"
+  ]
+ },
+ "yield:mof_jgb_recent": {
+  "url": "https://www.mof.go.jp/english/policy/jgbs/reference/interest_rate/jgbcme.csv",
+  "status": 200,
+  "bytes": 644,
+  "type": "text/csv",
+  "lines": 8,
+  "head": [
+   "Interest Rate (November 2026),,,,,,,,,,,,,,,(Unit : %)",
+   "Date,1Y,2Y,3Y,4Y,5Y,6Y,7Y,8Y,9Y,10Y,15Y,20Y,25Y,30Y,40Y"
+  ]
+ },
+ "yield:boe_2y": {
+  "url": "https://www.bankofengland.co.uk/boeapps/database/fromshowcolumns.asp?Travel=NIxAZxSUx&FromSeries=1&ToSeries=50&DAT=RNG&FD=1&FM=Jan&FY=2006&TD=31&TM=Dec&TY=2025&FNY=Y&CSVF=TT&html.x=66&html.y=26&SeriesCodes=IUDSNZC&UsingCodes=Y&Filter=N&title=IUDSNZC&VPD=Y",
+  "status": 200,
+  "bytes": 659728,
+  "type": "text/html",
+  "lines": 11007,
+  "head": [
+   "<!DOCTYPE html>",
+   "<html lang=\"en\" class=\"no-js\">"
+  ]
+ },
+ "yield:rbnz_b2": {
+  "url": "https://www.rbnz.govt.nz/-/media/project/sites/rbnz/files/statistics/series/b/b2/hb2-daily.xlsx",
+  "status": 403,
+  "bytes": 31470,
+  "type": "text/html; charset=UTF-8"
+ },
+ "yield:bundesbank_2y": {
+  "url": "https://api.statistiken.bundesbank.de/rest/data/BBSIS/D.I.ZST.ZI.EUR.S1311.B.A604.R02XX.R.A.A._Z._Z.A?format=csv",
+  "status": 200,
+  "bytes": 236523,
+  "type": "application/vnd.bbk.data+csv;version=1.0.0;charset=UTF-8",
+  "lines": 10700,
+  "head": [
+   "\ufeff\"\";BBSIS.D.I.ZST.ZI.EUR.S1311.B.A604.R02XX.R.A.A._Z._Z.A;BBSIS.D.I.ZST.ZI.EUR.S1311.B.A604.R02XX.R.A.A._Z._Z.A_FLAGS",
+   "\"\";Zinsstrukturkurve (Svensson-Methode) / B\u00f6rsennotierte             Bundeswertpapiere / 2,0 Jahr(e) RLZ / Tageswerte;"
+  ]
+ },
+ "sentiment:swfx_feed": {
+  "url": "https://freeserv.dukascopy.com/2.0/?path=api/sentimentIndex&type=swfx&jsonp=_",
+  "status": 403,
+  "bytes": 0,
+  "type": "text/html; charset=UTF-8"
+ },
+ "sentiment:swfx_page": {
+  "url": "https://www.dukascopy.com/swiss/english/marketwatch/sentiment/",
+  "status": 200,
+  "bytes": 152486,
+  "type": "text/html; charset=utf-8",
+  "lines": 1864,
+  "head": [
+   "<!DOCTYPE html>",
+   ""
+  ]
+ },
+ "gtrends:explore": {
+  "url": "https://trends.google.com/trends/api/explore?hl=en-US&tz=0&req=%7B%22comparisonItem%22:%5B%7B%22keyword%22:%22forex%22,%22geo%22:%22%22,%22time%22:%22all%22%7D%5D,%22category%22:0,%22property%22:%22%22%7D",
+  "status": 429,
+  "bytes": 1701,
+  "type": "text/html; charset=utf-8"
+ },
+ "dukascopy": {
+  "BRENTCMDUSD": {
+   "years": {
+    "2004": 0,
+    "2007": "no answer",
+    "2010": 0,
+    "2013": 1440,
+    "2016": 1440,
+    "2019": 1440,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 4,
+   "first_year_sampled": 2013
+  },
+  "LIGHTCMDUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": 0,
+    "2013": "no answer",
+    "2016": 1440,
+    "2019": 1440,
+    "2022": "no answer",
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 4,
+   "first_year_sampled": 2016
+  },
+  "GASCMDUSD": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": 0,
+    "2013": 1440,
+    "2016": "no answer",
+    "2019": 1440,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 4,
+   "first_year_sampled": 2013
+  },
+  "COPPERCMDUSD": {
+   "years": {
+    "2004": 0,
+    "2007": "no answer",
+    "2010": 0,
+    "2013": 1440,
+    "2016": 1440,
+    "2019": 1440,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 4,
+   "first_year_sampled": 2013
+  },
+  "DIESELCMDUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": 0,
+    "2013": "no answer",
+    "2016": 0,
+    "2019": "no answer",
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2022
+  },
+  "XPTCMDUSD": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": 0,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2022
+  },
+  "XPDCMDUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": 0,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2022
+  },
+  "SOYBEANCMDUSX": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": "no answer",
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 6,
+   "first_year_sampled": 2022
+  },
+  "WHEATCMDUSX": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": "no answer",
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2022
+  },
+  "CORNCMDUSX": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": 1440,
+    "2022": "no answer",
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2019
+  },
+  "SUGARCMDUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": 1440,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2019
+  },
+  "COCOACMDUSD": {
+   "years": {
+    "2004": 0,
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": 0,
+    "2016": 0,
+    "2019": "no answer",
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 6,
+   "first_year_sampled": 2022
+  },
+  "COFFEECMDUSX": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": "no answer",
+    "2013": 0,
+    "2016": 0,
+    "2019": 1440,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2019
+  },
+  "COTTONCMDUSX": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": "no answer",
+    "2013": 0,
+    "2016": 0,
+    "2019": 1440,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 4,
+   "first_year_sampled": 2019
+  },
+  "BUNDTREUR": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": 0,
+    "2013": "no answer",
+    "2016": 0,
+    "2019": 1440,
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2019
+  },
+  "USTBONDTRUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": 1440,
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2019
+  },
+  "UKGILTTRGBP": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": 1440,
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 4,
+   "first_year_sampled": 2019
+  },
+  "SCHATZTREUR": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": 0,
+    "2013": 0,
+    "2016": 0,
+    "2019": 0,
+    "2022": 0,
+    "2025": 0
+   },
+   "first_year_sampled": null
+  },
+  "BOBLTREUR": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": 0,
+    "2019": 1440,
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2019
+  },
+  "DEUIDXEUR": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": "no answer",
+    "2013": 0,
+    "2016": 1440,
+    "2019": 1440,
+    "2022": 1440,
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 7,
+   "first_year_sampled": 2016
+  },
+  "GBRIDXGBP": {
+   "years": {
+    "2004": 0,
+    "2007": "no answer",
+    "2010": 0,
+    "2013": 1440,
+    "2016": 1440,
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 6,
+   "first_year_sampled": 2013
+  },
+  "FRAIDXEUR": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": 0,
+    "2013": 1440,
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 6,
+   "first_year_sampled": 2013
+  },
+  "EUSIDXEUR": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": "no answer",
+    "2013": 1440,
+    "2016": 1440,
+    "2019": 1440,
+    "2022": 1440,
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 6,
+   "first_year_sampled": 2013
+  },
+  "HKGIDXHKD": {
+   "years": {
+    "2004": "no answer",
+    "2007": 0,
+    "2010": 0,
+    "2013": 1440,
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 7,
+   "first_year_sampled": 2013
+  },
+  "AUSIDXAUD": {
+   "years": {
+    "2004": 0,
+    "2007": 0,
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USA30IDXUSD": {
+   "years": {
+    "2004": 0,
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "CHEIDXCHF": {
+   "years": {
+    "2004": 0,
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": 1440,
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 6,
+   "first_year_sampled": 2013
+  },
+  "ESPIDXEUR": {
+   "years": {
+    "2004": 0,
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "NLDIDXEUR": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "ITAIDXEUR": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": 1440,
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 7,
+   "first_year_sampled": 2019
+  },
+  "EURSEK": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "EURNOK": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USDSEK": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USDNOK": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USDMXN": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USDZAR": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USDPLN": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "EURPLN": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USDTRY": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "EURTRY": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": 1440,
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2013
+  },
+  "USDSGD": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USDHKD": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "USDHUF": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "EURHUF": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": 1440,
+    "2019": "no answer",
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2016
+  },
+  "USDCZK": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "EURCZK": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2025
+  },
+  "USDDKK": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "XPTUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": "no answer",
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "XPDUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": 0,
+    "2016": 0,
+    "2019": 0,
+    "2022": 0,
+    "2025": "no answer"
+   },
+   "first_year_sampled": null
+  },
+  "BTCUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": 1440,
+    "2025": "no answer"
+   },
+   "raw_close_int_magnitude": 5,
+   "first_year_sampled": 2022
+  },
+  "ETHUSD": {
+   "years": {
+    "2004": "no answer",
+    "2007": "no answer",
+    "2010": "no answer",
+    "2013": "no answer",
+    "2016": "no answer",
+    "2019": "no answer",
+    "2022": 1440,
+    "2025": 1440
+   },
+   "raw_close_int_magnitude": 4,
+   "first_year_sampled": 2022
+  }
+ }
+}
