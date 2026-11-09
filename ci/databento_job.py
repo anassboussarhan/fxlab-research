@@ -26,6 +26,12 @@ REQ = {
     "O1fx_stats": dict(schema="statistics", symbols=["6E.OPT", "EUU.OPT", "6J.OPT", "JPU.OPT"]),
     "O1fx_defs": dict(schema="definition", symbols=["6E.OPT", "EUU.OPT", "6J.OPT", "JPU.OPT"]),
     "O1fx_under": dict(schema="ohlcv-1d", symbols=["6E.FUT", "6J.FUT"]),
+    # round 16 (docs/round16_preregistration.md, section 2): CME options on sterling, the Australian and Canadian
+    # dollars and the Swiss franc; bought only if the pair of items costs at most USD 10 (inside the free credit)
+    "O2fx_defs": dict(schema="definition", symbols=["6B.OPT", "GBU.OPT", "6A.OPT", "ADU.OPT", "6C.OPT", "CAU.OPT",
+                                                    "6S.OPT", "CHU.OPT"]),
+    "O2fx_stats": dict(schema="statistics", symbols=["6B.OPT", "GBU.OPT", "6A.OPT", "ADU.OPT", "6C.OPT", "CAU.OPT",
+                                                     "6S.OPT", "CHU.OPT"]),
     # F1: real daily volume of the currency and metal futures, every contract
     # F2 (round 9): trades with the aggressor side, for signed order flow (price check first)
     "F2_trades_6E": dict(schema="trades", symbols=["6E.FUT"]),
@@ -62,7 +68,10 @@ def main():
         rep["dataset_range"] = str(c.metadata.get_dataset_range(dataset="GLBX.MDP3"))
     except Exception as ex:                                              # noqa: BLE001
         rep["dataset_range"] = repr(ex)[:200]
+    named = [i for i in sys.argv[2:-1] if i in REQ]
     for item, r in REQ.items():
+        if named and item not in named:                                  # price only the items named, when any
+            continue
         per = {}
         for s in r["symbols"]:
             q = dict(dataset="GLBX.MDP3", symbols=[s], stype_in="parent", schema=r["schema"], start=r.get("start", START),

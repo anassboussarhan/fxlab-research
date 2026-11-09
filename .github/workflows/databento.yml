@@ -22,6 +22,7 @@ jobs:
       - name: Job
         env:
           DATABENTO_API_KEY: ${{ secrets.DATABENTO_API_KEY }}
+          DATABENTO_CAP_USD: "10"
         run: python ci/databento_job.py $(cat ci/DATABENTO) out/databento 2>&1 | tee log.txt
       - uses: actions/upload-artifact@v4
         if: always()
