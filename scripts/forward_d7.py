@@ -27,8 +27,17 @@ def load(ecb):
     if ecb:
         raw = pd.read_csv(ecb, usecols=["CURRENCY", "TIME_PERIOD", "OBS_VALUE"])
     else:
+        import time
         import requests
-        r = requests.get(URL, timeout=120, headers={"User-Agent": "fxlab-research/1.0 (research data collection)"})
+        r = None
+        for k in range(8):                                   # the ECB API times out now and then (504)
+            try:
+                r = requests.get(URL, timeout=180, headers={"User-Agent": "fxlab-research/1.0 (research data collection)"})
+                if r.status_code == 200:
+                    break
+            except Exception:                                # noqa: BLE001
+                pass
+            time.sleep(min(600, 30 * 2 ** k))
         r.raise_for_status()
         raw = pd.read_csv(io.StringIO(r.text), usecols=["CURRENCY", "TIME_PERIOD", "OBS_VALUE"])
     raw["TIME_PERIOD"] = pd.to_datetime(raw.TIME_PERIOD)

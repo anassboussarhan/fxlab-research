@@ -178,3 +178,59 @@ on W1 bars:
 - **Otherwise inconclusive.**
 - The 2019-2025 comparator must be positive. Double Seven is reported inside and outside the family; the family
   result without it is the new information.
+
+## Addendum 3 (2026-11-09, after the availability probe and before any value of these datasets is read): the part-D tests
+
+**What the probe found.**
+- Available:
+  - the Forex Factory calendar archive (83,427 releases, 2007-01 to 2025-04, actual / forecast / previous; MIT);
+  - all CBOE strategy indices;
+  - two-year yields for USD, EUR, CAD, AUD, CHF and JPY;
+  - Dukascopy commodities and indices from about 2013, and bonds from 2019.
+- Not available: the Bank of England and RBNZ files, Dukascopy sentiment (403), Google Trends (429), and
+  Scandinavian / EM FX candles. TFX shows only a current file.
+- D3 and D6-D8 are reported as data missing.
+
+**D1. Economic surprises (Forex Factory archive).**
+- **Releases used:** High-impact releases of the eight currencies where both actual and forecast parse as
+  numbers. The units (%, K, M, B, T) are stripped.
+- **Surprise z:** (actual - forecast) divided by the standard deviation of that event's earlier surprises (at
+  least 8 earlier releases, expanding). It is multiplied by -1 when the event name contains "Unemployment",
+  "Jobless" or "Claimant", where a higher number is bad news.
+- **D1a, drift after the release** (|z| >= 1):
+  - Buy the currency in the surprise direction against USD. For USD releases, trade EUR/USD, USD/JPY and
+    GBP/USD in the USD direction, equal weight.
+  - Enter at the first M1 bar 5 minutes after the release time, at the store's bid / ask.
+  - Two rows: exit after 60 minutes, and after 1 day (the same time the next trading day).
+- **D1b, weekly surprise index:**
+  - For each currency, the sum over the last 13 weeks of capped z (+-3) of High- and Medium-impact releases.
+  - Each Friday close, cross XY holds (I_X - I_Y) / the cross-sectional standard deviation of I, capped at +-2,
+    times 0.10 / volatility, for one week. It runs on the 28 crosses through the round-14 continuous engine.
+- **Periods:** fit 2008-2018, check 2019-2025 (the archive ends in April 2025).
+
+**D2. New asset classes on Dukascopy (commodities, indices, bonds).**
+- **Instruments:**
+  - commodities: Brent, WTI, natural gas, copper;
+  - indices: DAX, FTSE 100, CAC 40, Euro Stoxx 50, Hang Seng, SMI;
+  - government bonds: Bund, US T-bond, Gilt.
+  - Each is used from its first full year. The price scale is set by matching one date against Yahoo.
+- **Systems:** the fixed round-13 systems L1-L11 and the long-only benchmark. They need no fitting, so they can be
+  judged on 2019-2025 directly, with 2013-2018 reported.
+- **A row counts** (commodity, index and bond books) if all of these hold:
+  - 2019-2025 mean > 0 with t >= 1.645;
+  - excess over long-only with t >= 1.645;
+  - BH across the D rows.
+- Swaps use the quote currency's rate plus a 2.5% mark-up, as for metals.
+
+**D4. CBOE option-selling indices (the O5 comparison).**
+- **Data:** monthly returns of BXM, BXMD, PUT, CNDR, BFLY, CLL, CMBO, WPUT, PPUT and CLLZ, regressed on the
+  S&P 500 total return.
+- **Counts** if alpha > 0 on 2008-2018 and alpha t >= 1.645 (Newey-West) on 2019-2025, with BH across the indices.
+- Index returns carry no trading costs, so a pass is an upper bound on what a trader could keep.
+
+**D5. Two-year rate-differential momentum** (USD, EUR, CAD, AUD, CHF, JPY; 15 crosses).
+- Each Friday close, cross XY holds sign(change in (y2_X - y2_Y) over 4 weeks) x 0.10 / volatility, for one
+  week. A second row uses 13 weeks.
+- Fit 2008-2018, check 2019-2025; count rule as in part A, with BH across the D rows.
+
+**The D family.** BH runs over the rows D1a (2), D1b, D2 (3 books x 11 systems), D4 (10) and D5 (2).
