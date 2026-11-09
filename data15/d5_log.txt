@@ -1,0 +1,10 @@
+RBA https://www.rba.gov.au/statistics/tables/csv/f2.1-data.csv ParserError('Error tokenizing data. C error: Expected 5 fields in line 19, saw 6\n')
+RBA https://www.rba.gov.au/statistics/tables/csv/f2-data.csv ParserError('Error tokenizing data. C error: Expected 5 fields in line 385, saw 6\n')
+yield USD 5004 2006-01-03 2025-12-31
+yield EUR 5366 2005-01-03 2025-12-31
+yield CAD 5245 2005-01-04 2025-12-31
+yield CHF 5172 2005-01-03 2025-07-31
+yield JPY 5141 2005-01-04 2025-12-30
+   row  fit_mean  fit_t  check_mean  check_t  check_gross_t  instruments          currencies
+ D5|4w    -0.028 -1.611      -0.002   -0.149          1.120           10 USD,EUR,CAD,CHF,JPY
+D5|13w    -0.024 -1.201       0.004    0.232          1.166           10 USD,EUR,CAD,CHF,JPY
