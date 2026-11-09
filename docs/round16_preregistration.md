@@ -311,3 +311,14 @@ calendar: days with at least 20 of the 28 crosses.
 
 **P4 in code.** The placebo library "passes P1" if its chosen setting has mean > 0 and t >= 1.645 on 2019-2025,
 without BH. This is stricter than P1, so it can only remove a pass.
+
+## Addendum 2 (2026-11-09, data collection; still before any regime model was run on the real library)
+
+**FX calendar.** Ten of the 28 crosses only start in 2010-02 in the M1 store, and two in 2008. The "20 of 28"
+calendar of addendum 1 therefore removed 2008-2010. Month ends now come from EURUSD's trading days. Cross-sectional
+features use the crosses available at the time, as the library's FX book does.
+
+**S&P 500 and gold.** The CFD panels cover only 2012-01 to 2024-05 (S&P 500) and 2011-05 onward (gold). That would
+leave the PRICE set incomplete for most of the sample. Features 14-16 (SPX3, SPX_RV21, GOLD3), and so VRP_SPX
+(feature 24), are computed from the S&P 500 index (^GSPC) and the GLD gold ETF (Yahoo Finance), throughout
+2007-2025.

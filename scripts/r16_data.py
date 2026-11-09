@@ -103,8 +103,8 @@ def cmd_fx(a):
         x = pd.Series(d.c_mid.to_numpy(float), index=pd.DatetimeIndex(d.tday)).dropna()
         closes[s] = x[x.index <= DEV_END]
     C = pd.DataFrame(closes).sort_index()
-    # the FX calendar: days on which at least 20 of the 28 crosses have a close; month ends from it
-    cal = C.index[C[fx].notna().sum(axis=1) >= 20]
+    # the FX calendar: EURUSD's trading days (ten of the crosses only start in 2010); month ends from it
+    cal = closes["EURUSD"].index
     mkey = cal.to_period("M")
     me_dates = cal[np.r_[mkey[1:] != mkey[:-1], True]]
     months = me_dates.to_period("M").astype(str)
@@ -354,8 +354,8 @@ def cmd_web(a):
     # indices comes from Yahoo Finance where CBOE's own file starts later (VIX3M, GVZ, OVX start 2009-09-18 there)
     try:
         import yfinance as yf
-        for k in ("VIX", "VIX3M", "VVIX", "SKEW", "GVZ", "OVX", "EVZ"):
-            h = yf.Ticker("^" + k).history(start="2005-01-01", end="2026-01-01", auto_adjust=False)
+        for k in ("VIX", "VIX3M", "VVIX", "SKEW", "GVZ", "OVX", "EVZ", "GSPC", "GLD"):
+            h = yf.Ticker(("^" + k) if k != "GLD" else k).history(start="2005-01-01", end="2026-01-01", auto_adjust=False)
             if not len(h):
                 continue
             y = pd.Series(h["Close"].to_numpy(float), index=pd.DatetimeIndex(h.index).tz_localize(None).normalize()).dropna()
@@ -433,7 +433,6 @@ def cmd_merge(a):
     X["OVX"] = np.log(col("OVX"))
     evz = col("EVZ")
     X["EVZ"] = np.log(evz)
-    X["VRP_SPX"] = vix / 100 - X["SPX_RV21"].to_numpy()
     X["DVIX"] = np.r_[np.nan, np.diff(np.log(vix))]
     cme = glob.glob(os.path.join(a.inp, "**", "cme_iv.parquet"), recursive=True)
     if cme:
@@ -449,6 +448,16 @@ def cmd_merge(a):
             parts.append(X["JPY_IV"] - X["RV21_USDJPY"])
         if parts:
             X["FX_VRP"] = pd.concat(parts, axis=1).mean(axis=1, skipna=False)
+    # S&P 500 and gold: the CFD panels cover only 2012-01 to 2024-05 and 2011-05 on, so features 14-16 come from
+    # the S&P 500 index (^GSPC) and the GLD gold ETF (Yahoo Finance) throughout (addendum 2)
+    for k, c3, crv in (("GSPC", "SPX3", "SPX_RV21"), ("GLD", "GOLD3", None)):
+        if k in W and W[k].notna().sum() > 1000:
+            px = W[k].dropna()
+            lr_ = np.log(px).diff()
+            X[c3] = month_end_value(np.log(px).diff(63).dropna(), months)
+            if crv:
+                X[crv] = month_end_value(np.sqrt(252 * (lr_ ** 2).rolling(21, min_periods=18).mean()).dropna(), months)
+    X["VRP_SPX"] = vix / 100 - X["SPX_RV21"].to_numpy()
     dgs2, dgs10 = col("DGS2"), col("DGS10")
     X["US2Y_CHG3"] = dgs2 - np.r_[np.full(3, np.nan), dgs2[:-3]]
     X["SLOPE"] = dgs10 - dgs2
