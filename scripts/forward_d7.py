@@ -91,7 +91,7 @@ def sim(W, k_stop=0.0, cap=0, cur_cap=0):
     return pd.DataFrame(trades), pd.DataFrame(opens), pd.DataFrame(signals), last_week
 
 
-def stats(T):
+def stats(T, dev_mean=DEV_MEAN):
     if not len(T):
         return {"trades": 0}
     x = T.R
@@ -103,7 +103,7 @@ def stats(T):
         g = (x - m).groupby(pd.to_datetime(T.exit).dt.to_period("M")).sum()
         se = math.sqrt((g ** 2).sum()) / n
         out["t_clustered_month"] = float(m / se) if se > 0 else None
-        out["t_vs_dev"] = float((m - DEV_MEAN) / se) if se > 0 else None
+        out["t_vs_dev"] = float((m - dev_mean) / se) if se > 0 else None
         eq = x.cumsum()
         out["max_dd_R"] = float((eq - eq.cummax()).min())
     return out
@@ -131,6 +131,52 @@ def main():
                      "history_2019_2025": stats(T[(T.entry >= "2019-01-01") & (pd.to_datetime(T.exit) <= "2025-12-31")]) if len(T) else {}}
         if len(O):
             O.to_csv(os.path.join(a.out, f"{name}_open_incl_pre_start.csv"), index=False)
+    # D7-family (addendum 2026-11-09): the seven close-only Connors weekly rules, long only, equal weight
+    try:
+        import sys
+        sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+        import fxlab.strategies  # noqa: F401
+        from fxlab.registry import CATALOG
+        fam = ["S.DAILY.DOUBLE_SEVEN", "S.DAILY.CUM_RSI", "S.FAMOUS.CONNORS_RSI2", "S.BOOK.CONNORS_R3", "S.BOOK.CONNORS_PCTB",
+               "S.BOOK.CONNORS_CRSI", "S.DAILY.THREE_DOWN"]
+        rows, opens, sigs = [], [], []
+        for s_, d in W.items():
+            wv = d.c.to_numpy(float)
+            bars = pd.DataFrame({"open": np.r_[wv[0], wv[:-1]], "high": wv, "low": wv, "close": wv},
+                                index=pd.DatetimeIndex(d.index).tz_localize("UTC"))
+            for rid in fam:
+                e = CATALOG[rid]
+                side = e.fn(bars.copy(), **e.params)["side"].clip(lower=0).to_numpy()
+                state, ent = 0, None
+                for i in range(len(side)):
+                    if state == 0 and side[i] > 0 and np.isfinite(d.N.iloc[i]):
+                        if pd.isna(d.fill_px.iloc[i]):
+                            sigs.append({"week": d.index[i], "rule": rid, "symbol": s_, "action": "buy"})
+                            break
+                        state, ent = 1, (d.fill_t.iloc[i], d.fill_px.iloc[i], d.N.iloc[i] / wv[i])
+                    elif state == 1 and side[i] <= 0:
+                        if pd.isna(d.fill_px.iloc[i]):
+                            sigs.append({"week": d.index[i], "rule": rid, "symbol": s_, "action": "exit"})
+                            break
+                        r = d.fill_px.iloc[i] / ent[1] - 1 - COST
+                        rows.append({"rule": rid, "symbol": s_, "entry": ent[0], "exit": d.fill_t.iloc[i], "ret": r, "R": r / (2 * ent[2])})
+                        state, ent = 0, None
+                if state == 1 and ent is not None:
+                    opens.append({"rule": rid, "symbol": s_, "entry": ent[0], "entry_px": ent[1]})
+        TF = pd.DataFrame(rows)
+        TF["entry"] = pd.to_datetime(TF.entry)
+        Ffw = TF[TF.entry >= START]
+        Ofw = pd.DataFrame(opens)
+        if len(Ofw):
+            Ofw = Ofw[pd.to_datetime(Ofw.entry) >= START]
+        Ffw.to_csv(os.path.join(a.out, "D7-family_closed.csv"), index=False)
+        Ofw.to_csv(os.path.join(a.out, "D7-family_open.csv"), index=False)
+        rep["D7-family"] = {"forward": stats(Ffw, 0.24), "forward_without_double_seven": stats(Ffw[Ffw.rule != "S.DAILY.DOUBLE_SEVEN"], 0.20),
+                            "open_positions": int(len(Ofw)), "next_signals": sigs,
+                            "history_2019_2025": stats(TF[(TF.entry >= "2019-01-01") & (pd.to_datetime(TF.exit) <= "2025-12-31")], 0.24),
+                            "dev_mean_R": 0.24}
+    except Exception as ex:                                                  # noqa: BLE001
+        rep["D7-family"] = {"error": repr(ex)[:300]}
     json.dump(rep, open(os.path.join(a.out, "forward_d7.json"), "w"), indent=1, default=str)
     print(json.dumps(rep, indent=1, default=str))
 

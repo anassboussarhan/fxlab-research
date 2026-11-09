@@ -72,3 +72,15 @@ crisis year like 2008 would most likely end in "not supported" or "contradicted"
   - open positions, closed forward trades and running statistics for both tracks;
   - next Monday's signals.
 - The monthly forward report (the 3rd) includes it from 2026-12-03.
+
+## Addendum (2026-11-09, still before the first forward signal): D7-family
+
+Round 15 (`docs/round15_preregistration.md`, addendum 2) tested the whole weekly Connors dip-buying family on 2026.
+The seven close-only catalog rules (Double Seven, cumulative RSI, RSI(2), R3, %b, ConnorsRSI, three down closes)
+ran at their published defaults, long only. The family was **supported**: 175 trades, +0.38R, t 2.23 clustered
+by month. Without Double Seven it was inconclusive (+0.29R, t 1.47).
+
+**D7-family track (secondary):**
+- Every trade of the seven rules on the 28 crosses, equal weight, same data and fills as D7-base.
+- **FD4:** the FD1 table applied to the family, with a 2019-2025 comparator of +0.24R.
+- **FD5 (information only):** the family without Double Seven.

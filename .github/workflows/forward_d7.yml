@@ -21,7 +21,7 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.13"
-      - run: pip install -q pandas numpy requests
+      - run: pip install -q -r ci/requirements-ci.txt requests
       - name: Forward test
         run: |
           set -o pipefail
