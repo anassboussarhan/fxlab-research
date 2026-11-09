@@ -310,36 +310,60 @@ def parse_fred(txt):
     return s[s.index.notna()].dropna().sort_index()
 
 
+def treasury_yields(years):
+    """US Treasury par yield curve (home.treasury.gov), one CSV per year: the 2- and 10-year columns."""
+    parts = []
+    for y in years:
+        url = (f"https://home.treasury.gov/resource-center/data-chart-center/interest-rates/daily-treasury-rates.csv/{y}/all"
+               f"?type=daily_treasury_yield_curve&field_tdr_date_value={y}&page&_format=csv")
+        d = pd.read_csv(io.StringIO(get(url)))
+        d["Date"] = pd.to_datetime(d["Date"])
+        parts.append(d.set_index("Date")[["2 Yr", "10 Yr"]])
+    D = pd.concat(parts).sort_index()
+    return D["2 Yr"].astype(float).dropna(), D["10 Yr"].astype(float).dropna()
+
+
 def cmd_web(a):
     os.makedirs(a.out, exist_ok=True)
     cboe = ["VIX", "VIX3M", "VVIX", "SKEW", "GVZ", "OVX", "EVZ"]
     fred_fb = {"VIX": "VIXCLS", "VIX3M": "VXVCLS", "GVZ": "GVZCLS", "OVX": "OVXCLS", "EVZ": "EVZCLS"}
-    fred = {"DGS2": "DGS2", "DGS10": "DGS10", "NFCI": "NFCI", "EPU": "USEPUINDXD"}
     series, src = {}, {}
     for k in cboe:
         try:
-            s = parse_cboe(get(f"https://cdn.cboe.com/api/global/us_indices/daily_prices/{k}_History.csv"))
-            series[k], src[k] = s, "cboe"
+            series[k], src[k] = parse_cboe(get(f"https://cdn.cboe.com/api/global/us_indices/daily_prices/{k}_History.csv")), "cboe"
         except Exception as ex:                                            # noqa: BLE001
             src[k] = f"cboe failed: {ex}"
-        if k in fred_fb and (k not in series or series[k].index.max() < pd.Timestamp("2025-06-30")):
+        if k in fred_fb and k not in series:
             try:
-                s = parse_fred(get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={fred_fb[k]}"))
-                if k not in series or s.index.max() > series[k].index.max():
-                    series[k], src[k] = s, f"fred {fred_fb[k]}" + (f" (cboe: {src[k]})" if k in src else "")
+                series[k] = parse_fred(get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={fred_fb[k]}", tries=1, deadline=30))
+                src[k] = f"fred {fred_fb[k]} ({src[k]})"
             except Exception as ex:                                        # noqa: BLE001
-                src[k] = str(src.get(k, "")) + f"; fred failed: {ex}"
-    for k, sid in fred.items():
-        try:
-            series[k], src[k] = parse_fred(get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}")), f"fred {sid}"
-        except Exception as ex:                                            # noqa: BLE001
-            src[k] = f"fred failed: {ex}"
+                src[k] = str(src[k]) + f"; fred failed: {ex}"
+    try:
+        series["DGS2"], series["DGS10"] = treasury_yields(range(2006, 2026))
+        src["DGS2"] = src["DGS10"] = "US Treasury par yield curve"
+    except Exception as ex:                                                # noqa: BLE001
+        src["DGS2"] = src["DGS10"] = f"treasury failed: {ex}"
+    try:
+        d = pd.read_csv(io.StringIO(get("https://www.chicagofed.org/-/media/publications/nfci/nfci-data-series-csv.csv")))
+        series["NFCI"] = pd.Series(pd.to_numeric(d["NFCI"], errors="coerce").to_numpy(),
+                                   index=pd.to_datetime(d["Friday_of_Week"])).dropna().sort_index()
+        src["NFCI"] = "Chicago Fed"
+    except Exception as ex:                                                # noqa: BLE001
+        src["NFCI"] = f"chicagofed failed: {ex}"
+    try:
+        d = pd.read_csv(io.StringIO(get("https://www.policyuncertainty.com/media/All_Daily_Policy_Data.csv")))
+        idx = pd.to_datetime(dict(year=d.year, month=d.month, day=d.day), errors="coerce")
+        series["EPU"] = pd.Series(pd.to_numeric(d["daily_policy_index"], errors="coerce").to_numpy(), index=idx).dropna().sort_index()
+        src["EPU"] = "policyuncertainty.com (Baker, Bloom and Davis), daily US"
+    except Exception as ex:                                                # noqa: BLE001
+        src["EPU"] = f"policyuncertainty failed: {ex}"
     meta = {}
-    for k, s in series.items():
-        s = s[s.index <= DEV_END]                                          # development data only
-        series[k] = s
-        meta[k] = {"source": src[k], "first": str(s.index.min().date()) if len(s) else None,
-                   "last": str(s.index.max().date()) if len(s) else None, "rows": int(len(s))}
+    for k, s_ in series.items():
+        s_ = s_[s_.index <= DEV_END]                                       # development data only
+        series[k] = s_
+        meta[k] = {"source": src[k], "first": str(s_.index.min().date()) if len(s_) else None,
+                   "last": str(s_.index.max().date()) if len(s_) else None, "rows": int(len(s_))}
     for k in set(src) - set(series):
         meta[k] = {"source": src[k], "rows": 0}
     D = pd.DataFrame(series).sort_index()
