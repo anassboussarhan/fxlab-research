@@ -79,6 +79,17 @@ FX money comes from (forced flows at known times, risk premia, information in fl
 Not tested on purpose: hedging opposite positions across prop firms (against every firm's terms), trading on slow
 prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ended in 2024), lunar cycles.
 
+## J. Round 15 (2026-11-09): every rule at D1 / W1 / MN, the book systems, every feature, free data
+
+**Done 2026-11-09** (`docs/round15_results.md`). 233 rule units (91 rules incl. 26 new book systems) and 838 feature
+units, full grids and both directions, on 33 instruments: 0 survive BH. The weekly dip-buying family was supported
+on 2026 (175 trades, +0.38R, t 2.2) and is the forward test's D7-family track. Free data:
+- the Forex Factory archive: the one-day surprise drift is +5.4 bp, t 2.2 on 2019-2025, not significant after the
+  correction;
+- CBOE strategy indices, two-year yields and the surprise index: fail;
+- commodities, indices and bonds: see the results.
+Still missing: retail sentiment history, Google Trends, TFX history, and the OANDA books (needs a token).
+
 ## I. Round 14 (2026-11-09): re-check, missed trend variants, trend prediction, Double Seven on 2026
 
 **Done 2026-11-09** (`docs/trend14_results.md`). Round 13 reproduced by an independent engine and by ECB fixings;

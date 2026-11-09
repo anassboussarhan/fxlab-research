@@ -388,7 +388,9 @@ def part_d2(a, out):
             sc = 0.10 / (pre.std() * math.sqrt(12)) if pre.std() > 0 else np.nan
             bs = 0.10 / (b[b.index < "2019-01"].std() * math.sqrt(12)) if b[b.index < "2019-01"].std() > 0 else np.nan
             ex = (m * sc - b * bs)[m.index >= "2019-01"]
-            res.append({"row": f"D2|{g}|{sysn}", "instruments": ",".join(have), "pre_2013_2018_t": nw_t(pre),
+            span = Mo[Mo.symbol.isin(have) & (Mo.system == "BH") & (Mo.pnl != 0)].groupby("symbol").month.agg(["min", "max"])
+            res.append({"row": f"D2|{g}|{sysn}", "instruments": ",".join(have),
+                        "coverage": ";".join(f"{k}:{v['min']}..{v['max']}" for k, v in span.iterrows()), "pre_2013_2018_t": nw_t(pre),
                         "fit_mean": float(pre.mean()), "fit_t": nw_t(pre), "check_mean": float(chk.mean()), "check_t": nw_t(chk),
                         "check_gross_t": nw_t(gm[gm.index >= "2019-01"]), "excess_check_t": nw_t(ex) if sysn != "BH" else np.nan,
                         "check_mean_pct_at_10vol": float(chk.mean() * sc * 100)})

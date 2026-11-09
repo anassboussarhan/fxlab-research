@@ -1,0 +1,109 @@
+name: d2dl
+# Round 15 part D2 (docs/round15_preregistration.md, addendum 3), second attempt: Dukascopy candles one instrument-year
+# per job with 3 connections (the feed throttles), then the fixed round-13 systems per instrument, then the
+# combine. Trigger: ci/D2DL.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/D2DL"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/d2_years.json)" >> "$GITHUB_OUTPUT"
+  dl:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q polars numpy pandas pyarrow
+      - run: |
+          Y=${{ matrix.year }}; N=$((Y+1))
+          python -m fxlab.data.acquire_dukascopy_candles --pairs ${{ matrix.pair }} --start $Y-01-01 --end $N-01-01 --workers 3 --deadline-min 280 || true
+          ls -la data/m1/${{ matrix.pair }} || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: d2c-${{ matrix.pair }}-${{ matrix.year }}
+          path: data/m1/${{ matrix.pair }}
+          retention-days: 60
+          if-no-files-found: ignore
+  lab:
+    needs: dl
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 13
+      matrix:
+        symbol: [BRENTCMDUSD, LIGHTCMDUSD, GASCMDUSD, COPPERCMDUSD, DEUIDXEUR, GBRIDXGBP, FRAIDXEUR, EUSIDXEUR, HKGIDXHKD, CHEIDXCHF, BUNDTREUR, USTBONDTRUSD, UKGILTTRGBP]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: d2c-${{ matrix.symbol }}-*
+          path: data/m1/${{ matrix.symbol }}
+          merge-multiple: true
+      - name: Round-13 systems
+        run: |
+          ls -la data/m1/${{ matrix.symbol }} || true
+          python -W ignore scripts/long_lab.py --symbol ${{ matrix.symbol }} --out out/d2 --no-catalog 2>&1 | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: d2-${{ matrix.symbol }}
+          path: out/d2
+          retention-days: 60
+          if-no-files-found: ignore
+  combine:
+    needs: lab
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: d2-*
+          path: d2_in
+      - run: |
+          mkdir -p out/d2res && python -W ignore scripts/data15_tests.py --part d2 --d2 d2_in --out out/d2res 2>&1 | tee out/d2res/d2_log.txt | tail -60 || true
+          for f in $(find d2_in -name 'log_*.json'); do cp "$f" out/d2res/; done
+          rm -f out/d2res/D2_monthly_by_symbol.csv
+          cp -r out/d2res /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan d2-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p d2 && cp -r /tmp/pub/* d2/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > d2/RUN.txt
+          git add -f d2
+          git commit -qm "d2 (run ${{ github.run_id }})"
+          git push -f origin HEAD:data15-d2
