@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+BOOK-UNIT,M,M3,"M3:f=RV21,K=3,n0=0,window=exp,k=1","{""f"": ""RV21"", ""K"": 3, ""n0"": 0, ""window"": ""exp""}",1,0.24009742021269623,2.429015009322021,0.6888166172766814,-0.05677310247949911,-0.4442791330652704,-0.16344195255899796,"B1:window=exp,k=20",-2.1193333885097676,-0.7785855135932699,0.052364856498094185,0.4027480855239267,False,,,

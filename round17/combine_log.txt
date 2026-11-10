@@ -1,0 +1,85 @@
+{
+ "tests": 93,
+ "counts": 0,
+ "p1_pre": 1,
+ "bh_pass": 0,
+ "overall_pick": {
+  "BOOK-CFG|D": {
+   "family": "M3",
+   "variant": "M3:f=SLOPE,K=3,n0=0,window=exp,k=10",
+   "inner_t": 1.3940301026096915,
+   "check_t": -2.919516586261081,
+   "counts": false
+  },
+  "BOOK-CFG|M": {
+   "family": "M3",
+   "variant": "M3:f=GOLD63,K=2,n0=12,window=exp,k=1",
+   "inner_t": 1.6731847298428626,
+   "check_t": 0.0643366997652932,
+   "counts": false
+  },
+  "BOOK-CFG|W": {
+   "family": "M5",
+   "variant": "M5:set=INTRA,alpha=1000,k=10",
+   "inner_t": 0.7744829901758616,
+   "check_t": -0.9117099157695456,
+   "counts": false
+  },
+  "BOOK-UNIT|D": {
+   "family": "M3",
+   "variant": "M3:f=SLOPE,K=3,n0=0,window=exp,k=5",
+   "inner_t": 2.002320733199227,
+   "check_t": -2.4706398297183503,
+   "counts": false
+  },
+  "BOOK-UNIT|M": {
+   "family": "M3",
+   "variant": "M3:f=RV21,K=3,n0=0,window=exp,k=1",
+   "inner_t": 2.429015009322021,
+   "check_t": -0.4442791330652704,
+   "counts": false
+  },
+  "BOOK-UNIT|W": {
+   "family": "M5",
+   "variant": "M5:set=INTRA,alpha=1000,k=5",
+   "inner_t": 1.9916634152977897,
+   "check_t": -1.19887770294564,
+   "counts": false
+  },
+  "FACTOR|D": {
+   "family": "M3",
+   "variant": "M3:f=EPU,K=2,n0=0,window=long,k=1",
+   "inner_t": 0.9761768289443796,
+   "check_t": 0.2978694488559166,
+   "counts": false
+  },
+  "FACTOR|M": {
+   "family": "M3",
+   "variant": "M3:f=RV_CHG,K=3,n0=12,window=exp,k=1",
+   "inner_t": 1.0690125040449645,
+   "check_t": 1.2564507185388167,
+   "counts": false
+  },
+  "FACTOR|W": {
+   "family": "M3",
+   "variant": "M3:f=CARRY6,K=2,n0=0,window=long,k=1",
+   "inner_t": 0.5840291193638243,
+   "check_t": 0.6112527123447796,
+   "counts": false
+  },
+  "PAIR-UNIT|M": {
+   "family": "M1",
+   "variant": "M1:L=3,k=1",
+   "inner_t": 0.2661641140576873,
+   "check_t": -1.5537637647928748,
+   "counts": false
+  },
+  "PAIR-UNIT|W": {
+   "family": "M8",
+   "variant": "M8:h=8,k=1",
+   "inner_t": 0.4178959651177721,
+   "check_t": -1.3629672620837978,
+   "counts": false
+  }
+ }
+}

@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+PAIR-UNIT,W,M3,"M3:f=PAIR:AC_D,K=2,n0=0,window=exp,k=1","{""f"": ""PAIR:AC_D"", ""K"": 2, ""n0"": 0, ""window"": ""exp""}",1,0.03351820998644228,0.4074238227638283,0.1337109538860693,-0.0009614474243799968,-0.008882847095083864,-0.004071301785820373,"B1:window=exp,k=50",0.3260355839937814,0.12945550514998777,-0.012052794725982767,-0.12163169776310546,False,,,

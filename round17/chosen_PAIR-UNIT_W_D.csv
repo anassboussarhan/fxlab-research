@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+PAIR-UNIT,W,M9,"M9:set=ALLC,k=1","{""set"": ""ALLC""}",1,-0.11024464713004742,-1.0067575470091275,-0.38460930698215434,-0.20005617542523138,-1.687899914164744,-0.690125644022286,"B1:window=exp,k=50",0.32603551857551943,0.12945547967290943,-0.21114752051557917,-1.8476463889741765,False,,,

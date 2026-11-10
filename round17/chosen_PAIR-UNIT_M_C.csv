@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+PAIR-UNIT,M,M3,"M3:f=RV_CHG,K=3,n0=0,window=exp,k=1","{""f"": ""RV_CHG"", ""K"": 3, ""n0"": 0, ""window"": ""exp""}",1,-0.04820918805586801,-0.24644720643983356,-0.07974584395459793,-6.320196248234729e-05,-0.00042309534454492825,-0.00016618009329155982,"B1:window=exp,k=10",-0.5675779967353507,-0.21027155751998272,0.04556535050805119,0.2828678198055318,False,,,

@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+BOOK-CFG,W,M3,"M3:f=DISP21,K=3,n0=0,window=long,k=1","{""f"": ""DISP21"", ""K"": 3, ""n0"": 0, ""window"": ""long""}",1,0.03887694315678871,0.6375617930466423,0.24021548752076333,-0.1951317396791031,-2.7761210206056193,-1.0775613225048695,"B1:window=exp,k=50",-2.0615500701675042,-0.7895617672611833,-0.13590048035082555,-1.9753785518589495,False,,,

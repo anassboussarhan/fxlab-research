@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+BOOK-UNIT,W,M3,"M3:f=SPX_RV21,K=3,n0=0,window=exp,k=5","{""f"": ""SPX_RV21"", ""K"": 3, ""n0"": 0, ""window"": ""exp""}",5,0.04717991485403364,1.3868853104239487,0.4746599976677929,-0.05905744538749339,-1.9731319631625015,-0.6988412771998908,"B1:window=exp,k=20",-1.9989570552646172,-0.7734127325493864,0.009779143565756782,0.2725138600757809,False,,,

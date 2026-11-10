@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+BOOK-UNIT,D,M3,"M3:f=SLOPE,K=3,n0=0,window=exp,k=5","{""f"": ""SLOPE"", ""K"": 3, ""n0"": 0, ""window"": ""exp""}",5,0.03335794354254499,2.002320733199227,0.6951491134216737,-0.04627862958168471,-2.4706398297183503,-0.9627256160320214,"B1:window=exp,k=1",-2.43510766393685,-0.9388163813149465,0.013076357612847042,0.5073540774269705,False,,,

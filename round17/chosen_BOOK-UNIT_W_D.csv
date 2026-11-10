@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+BOOK-UNIT,W,M9,"M9:set=PRICE,k=1","{""set"": ""PRICE""}",1,-0.15287161786533554,-1.507008657140794,-0.5628608549385214,-0.2921738584966099,-4.336713948536922,-1.5475988857274368,"B1:window=exp,k=20",-1.9989570552646172,-0.7734127325493864,-0.22333726954335967,-3.3050170378452335,False,,,

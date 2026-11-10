@@ -1,0 +1,2 @@
+tier,freq,family,variant,params,k,inner_mean,inner_t,inner_sharpe,check_mean,check_t,check_sharpe,b1,b1_check_t,b1_check_sharpe,diff_check_mean,diff_check_t,p1_pre,placebo_p95,P3,P4
+BOOK-CFG,M,M3,"M3:f=GOLD63,K=2,n0=12,window=exp,k=1","{""f"": ""GOLD63"", ""K"": 2, ""n0"": 12, ""window"": ""exp""}",1,0.24675093138221804,1.6731847298428626,0.5342676395825516,0.010090944764337325,0.06433669976529328,0.024908699134909687,"B1:window=exp,k=1",0.709150375276521,0.2505989825488155,-0.09398450657725335,-1.0702861332303686,False,,,
