@@ -79,6 +79,20 @@ FX money comes from (forced flows at known times, risk premia, information in fl
 Not tested on purpose: hedging opposite positions across prop firms (against every firm's terms), trading on slow
 prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ended in 2024), lunar cycles.
 
+## L. Round 17 (2026-11-10): regimes, harder
+
+**Done 2026-11-10** (`docs/round17_results.md`).
+- **What was added over round 16:**
+  - intraday rules at H4 / H1 / M30 / M15;
+  - daily, weekly and monthly switching;
+  - regimes per instrument for 33 instruments;
+  - Hedge with forgetting, CUSUM resets and pooled boosting;
+  - intraday-state features (5-minute volatility, jumps, autocorrelation, Asian-session share) and daily CME
+    implied volatility / risk reversals.
+- **Result:** 0 of 93 tests count, and 0 of 486 timing tests.
+- **A flaw found and fixed:** a 14-hour look-ahead in the feature-tercile units (fill-to-fill marks), caught by a
+  one-day-lag check and fixed before the final run.
+
 ## K. Round 16 (2026-11-09): market regimes, the best strategy per regime, options data
 
 **Done 2026-11-09** (`docs/round16_results.md`).
