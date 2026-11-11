@@ -114,7 +114,8 @@ on 2026 (175 trades, +0.38R, t 2.2) and is the forward test's D7-family track. F
 - the Forex Factory archive: the one-day surprise drift is +5.4 bp, t 2.2 on 2019-2025, not significant after the
   correction;
 - CBOE strategy indices, two-year yields and the surprise index: fail;
-- commodities, indices and bonds: see the results.
+- commodities, indices and bonds (D2, finished 2026-11-11): the round-13 trend systems fail (0 of 33 rows; 2019-2025
+  t at most 0.53); no row of the D family passes BH.
 Still missing: retail sentiment history, Google Trends, TFX history, and the OANDA books (needs a token).
 
 ## I. Round 14 (2026-11-09): re-check, missed trend variants, trend prediction, Double Seven on 2026
