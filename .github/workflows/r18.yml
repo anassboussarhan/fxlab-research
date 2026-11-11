@@ -1,0 +1,111 @@
+name: r18
+# Round 18 (docs/round18_preregistration.md): parts G and C per symbol on M1 data (scripts/r18_m1.py), part R0
+# (scripts/r18_regime0.py, on the round-16 and round-17 data artifacts), part L (scripts/r18_long.py, Bank of England
+# and OECD data), then the combine with one BH correction. Results on branch round18. Trigger: ci/R18.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R18"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  m1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        symbol: [XAUUSD, XAGUSD, EURUSD, GBPUSD, AUDUSD, NZDUSD, USDJPY, USDCAD, USDCHF, USA500IDXUSD, USATECHIDXUSD]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r18_m1.py --symbol ${{ matrix.symbol }} --out out/m1
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r18m-${{ matrix.symbol }}
+          path: out/m1
+          retention-days: 30
+  long:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays requests
+      - run: python -W ignore scripts/r18_long.py --out out/long --placebos 200
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r18-long
+          path: out/long
+          retention-days: 30
+  regime0:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download 42669526702 -n r16data -D r16data
+          gh run download 42711158127 -n r17data -D r17data
+      - run: python -W ignore scripts/r18_regime0.py --r16 r16data --r17 r17data --out out/regime0 --perms 300
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r18-regime0
+          path: out/regime0
+          retention-days: 30
+  combine:
+    needs: [m1, long, regime0]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r18*
+          path: r18_in
+      - run: |
+          mkdir -p out/round18
+          python -W ignore scripts/r18_combine.py --inp r18_in --long r18_in/r18-long --out out/round18 2>&1 | tee out/round18/combine_log.txt
+          cp r18_in/r18-long/*.json r18_in/r18-long/*.csv out/round18/ 2>/dev/null || true
+          cp r18_in/r18-regime0/* out/round18/ 2>/dev/null || true
+          cp r18_in/r18m-*/r18_*.json out/round18/ 2>/dev/null || true
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p /tmp/pub && cp -r out/round18/. /tmp/pub/
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r18-pub
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round18 && cp -r /tmp/pub/. round18/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round18/RUN.txt
+          git add -f round18
+          git commit -qm "round 18 (run ${{ github.run_id }})"
+          git push -f origin HEAD:round18
