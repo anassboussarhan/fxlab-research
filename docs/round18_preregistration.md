@@ -194,3 +194,41 @@ R0 is a diagnostic with its own permutation p-values.
 | Combine, BH | `scripts/r18_combine.py` |
 | Workflow | `.github/workflows/r18.yml`, results on branch `round18` |
 | Write-up | `docs/round18_results.md` |
+
+## Addendum 1 (2026-11-13, after the first round-18 run 43027200926; before C2b was run)
+
+**What the first run showed** (reported in full in `docs/round18_results.md`): nothing in the family counts. Two
+things need a follow-up.
+
+**C2b: the VWAP trend rule with fewer trades (pre-registered now).**
+- **Why:** C2 flips its position at any minute, about 38 units of turnover a day. Before costs it made +6.4 bp a
+  day on the US500 (t 2.6) and +12.5 bp on the NAS100 (t 4.7) in 2019-2025, and was also positive in 2012-2018
+  (t 4.0 and 2.1). Costs took 30-64 bp a day. The gross edge is real in both periods, so the open question is
+  whether it survives when the rule trades less often.
+- **Rule:** the same signal (mid against the session VWAP), but decided only every N minutes; executed at the next
+  minute's open; flat at 16:00 New York; the same costs.
+- **Grid (6 settings per index):** N = 15, 30 or 60 minutes; first decision at the close of the 09:30 bar or of the
+  10:00 bar.
+- **Selection:** per index, the setting with the best net t on 2012-2018.
+- **Counts if all hold:**
+  - 2019-2025 net mean > 0 with t >= 1.645;
+  - the chosen setting's 2012-2018 net mean > 0;
+  - BH at q = 0.10 over the round-18 family extended by these two tests (18 tests).
+- **Caveat:** 2019-2025 is not fully unseen for this rule. The one-minute version's gross result on it is known,
+  and the slower versions are correlated with it.
+- **If it counts:** one check on 2026 index data (Dukascopy, January to October 2026, downloaded only then), with
+  the chosen setting and the same costs. Supported: net mean > 0 with t >= 1.645; inconclusive: positive with a
+  smaller t; contradicted: negative. This would be the fifth use of the 2026 holdout.
+
+**Exploratory follow-ups (reported, not counted).**
+- **R0x, the intraday units' persistence.** Part R0 found no persistent states in the monthly library or the daily
+  library as a whole. A split by engine (in the code, not in the text above, so exploratory) showed strong
+  persistence in the 814 intraday units (variance ratio 2.96 at 252 days, p = 0.003). The likely cause is the cost
+  regime: spreads relative to volatility move slowly, and intraday strategies pay them on every trade. R0x checks
+  this three ways:
+  - do the intraday placebo units show the same persistence?
+  - does it remain after removing the placebo units' common daily return for the same timeframe?
+  - is the intraday units' average return positive in any state (quintiles of its trailing 63-day mean)?
+- **Gx, gold costs by hour.** G-A1's cost was 7.2 bp a round trip in both periods, so costs in basis points did not
+  fall. Gx reports gold's median quoted spread by New York hour and the Asian-hours trade entered at 19:00, 20:00
+  and 21:00 New York, not at the 18:00 reopen.
