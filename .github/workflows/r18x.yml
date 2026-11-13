@@ -1,0 +1,110 @@
+name: r18x
+# Round 18 addendum 1 (docs/round18_preregistration.md; scripts/r18x.py): C2b (pre-registered), and the exploratory
+# R0x and Gx. Results on branch round18x. Trigger: ci/R18X.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R18X"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  c2b:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    strategy:
+      fail-fast: false
+      matrix:
+        symbol: [USA500IDXUSD, USATECHIDXUSD]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r18x.py c2b --symbol ${{ matrix.symbol }} --out out/c2b
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r18x-c2b-${{ matrix.symbol }}
+          path: out/c2b
+          retention-days: 30
+  gold:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 XAUUSD
+      - run: python -W ignore scripts/r18x.py gold --out out/gold
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r18x-gold
+          path: out/gold
+          retention-days: 30
+  r0x:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 42711158127 -n r17data -D r17data
+      - run: python -W ignore scripts/r18x.py r0x --r17 r17data --out out/r0x
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r18x-r0x
+          path: out/r0x
+          retention-days: 30
+  combine:
+    needs: [c2b, gold, r0x]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r18x-*
+          path: r18x_in
+      - run: |
+          git fetch -q origin +round18:refs/remotes/origin/round18
+          git show origin/round18:round18/r18_family.csv > fam.csv
+          mkdir -p out/round18x
+          python -W ignore scripts/r18x.py c2b-combine --inp r18x_in --family fam.csv --out out/round18x 2>&1 | tee out/round18x/c2b_log.txt
+          cp r18x_in/r18x-gold/*.json r18x_in/r18x-r0x/*.json out/round18x/ 2>/dev/null || true
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p /tmp/pub && cp -r out/round18x/. /tmp/pub/
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r18x-pub
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round18x && cp -r /tmp/pub/. round18x/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round18x/RUN.txt
+          git add -f round18x
+          git commit -qm "round 18 addendum 1 (run ${{ github.run_id }})"
+          git push -f origin HEAD:round18x
