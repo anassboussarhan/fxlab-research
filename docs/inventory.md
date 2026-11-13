@@ -82,6 +82,7 @@ The status of every single item is in `docs/test_ledger.md`.
 | Regime models as return predictors (HMM, Markov switching, regime-gated ensembles) | catalog models | no better than linear | `catalog_models.md` |
 | Round 16: six regime-method families, monthly, three library tiers, 33 features incl. options | 18 tests | 0 count; none beats static selection or its placebo | `round16_results.md` |
 | Round 17: intraday libraries, daily / weekly / monthly switching, per-instrument regimes, Hedge, CUSUM, pooled boosting | 93 + 486 tests | 0 count; faster switching is worse; a 14-hour look-ahead found and fixed | `round17_results.md` |
+| Round 18: a feature-free test for performance regimes; a regime detector on 1976-2025 | permutation tests; 3 tests | no persistent states in D1 / W1 / MN strategies; intraday states are cost states; on 50 years no detector beats static selection | `round18_results.md` |
 
 ### 2.5 Prop firms and execution
 
@@ -155,6 +156,10 @@ the library is slightly worse than chance, because costs push everything down.
 | FX seasonality "that still works" (home hours, month-end, January, August in USD/JPY, fiscal year-end) | FXEmpire | covered: local hours, month-end fix, same-month seasonality (round 9) |
 | Carry, value and momentum over 200 years | Quantpedia | supports part L: momentum and value worked only in some eras |
 | Opening-range breakout, intraday momentum, crypto trend, industry trend | Zarattini's papers | covered: ORB5, intraday momentum, crypto trend (daily) |
+
+**Outcome of the new items (`docs/round18_results.md`).** None counts. Gold's Asian-hours rise is real before
+costs and loses after them, and in 2019-2025 it is no longer different from Western hours. The index VWAP trend is
+real before costs and loses after them. The long-history regime test and the volatility-dollar test fail.
 
 **Three corrections to the previous summary.** Daily dip-buying on index ETFs, daily crypto trend, and the Nasdaq
 opening-range breakout at futures costs had all been tested (`untested_batch.md`). Only their weekly / CFD forms

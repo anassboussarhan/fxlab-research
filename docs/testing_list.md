@@ -79,6 +79,17 @@ FX money comes from (forced flows at known times, risk premia, information in fl
 Not tested on purpose: hedging opposite positions across prop firms (against every firm's terms), trading on slow
 prop price feeds (prohibited), the BoJ's ETF purchases on falling mornings (ended in 2024), lunar cycles.
 
+## M. Round 18 (2026-11-13): the full review, second-sample checks, and two new regime tests
+
+**Done 2026-11-13** (`docs/round18_results.md`; inventory in `docs/inventory.md`).
+- **Result:** 0 of 18 tests count.
+- **Second-sample checks:** the cost-bound published effects keep their gross edge in 2019-2025 and still lose
+  after costs. Gold's Asian-hours anomaly is gone.
+- **New effects:** the overnight currency reversal has decayed; the index VWAP trend is cost-bound.
+- **Regimes:** no persistent performance states exist in the D1 / W1 / MN strategies; the intraday ones are cost
+  states. On 1976-2025, trend and carry paid until about 2005 and no detector beats static selection.
+- **Dip-buying:** Sharpe -0.15 over 50 years, with alternating decades.
+
 ## L. Round 17 (2026-11-10): regimes, harder
 
 **Done 2026-11-10** (`docs/round17_results.md`).
