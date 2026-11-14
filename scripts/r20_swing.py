@@ -29,9 +29,14 @@ def membership():
     """Point-in-time S&P 500 members from the public fja05680/sp500 history (date, comma-separated tickers)."""
     import requests
     lst = requests.get("https://api.github.com/repos/fja05680/sp500/contents", headers=UA, timeout=60).json()
-    cand = sorted([f for f in lst if f["name"].startswith("S&P 500 Historical Components") and f["name"].endswith(".csv")],
-                  key=lambda f: f["name"])
-    f = cand[-1]
+    import re
+    cand = []
+    for f in lst:
+        m = re.search(r"\((\d{2})-(\d{2})-(\d{4})\)\.csv$", f["name"])
+        if f["name"].startswith("S&P 500 Historical Components") and m:
+            cand.append((pd.Timestamp(f"{m.group(3)}-{m.group(1)}-{m.group(2)}"), f))
+    print("candidates", [(str(d.date()), f["name"]) for d, f in cand], flush=True)
+    f = max(cand, key=lambda x: x[0])[1]
     print("membership file", f["name"], flush=True)
     H = pd.read_csv(io.StringIO(requests.get(f["download_url"], headers=UA, timeout=120).text))
     H["date"] = pd.to_datetime(H["date"])
