@@ -27,15 +27,20 @@ P1_START = pd.Timestamp("2005-01-01")
 # ============================================================================================ data
 def membership():
     import requests
-    html = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=UA, timeout=60).text
-    T = pd.read_html(io.StringIO(html))
-    cur = T[0]
-    now = set(cur["Symbol"].astype(str).str.replace(".", "-", regex=False))
-    ch = T[1]
-    ch.columns = ["_".join(c) if isinstance(c, tuple) else c for c in ch.columns]
-    dcol = [c for c in ch.columns if c.lower().startswith("date") or c.lower().startswith("effective")][0]
-    acol = [c for c in ch.columns if "added" in c.lower() and "ticker" in c.lower()][0]
-    rcol = [c for c in ch.columns if "removed" in c.lower() and "ticker" in c.lower()][0]
+    r = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=UA, timeout=60)
+    print("wikipedia", r.status_code, len(r.text), flush=True)
+    T = pd.read_html(io.StringIO(r.text))
+    for i, t in enumerate(T[:4]):
+        print("table", i, [str(c) for c in t.columns][:8], len(t), flush=True)
+    cur = [t for t in T if any(str(c).lower() in ("symbol", "ticker") for c in t.columns)][0]
+    now = set(cur[[c for c in cur.columns if str(c).lower() in ("symbol", "ticker")][0]].astype(str).str.replace(".", "-", regex=False))
+    flat = lambda t: ["_".join(map(str, c)) if isinstance(c, tuple) else str(c) for c in t.columns]  # noqa: E731
+    ch = [t for t in T if any("added" in x.lower() for x in flat(t)) and any("removed" in x.lower() for x in flat(t))][0].copy()
+    ch.columns = flat(ch)
+    dcol = ch.columns[0]
+    acol = [c for c in ch.columns if "added" in c.lower() and ("ticker" in c.lower() or "symbol" in c.lower())][0]
+    rcol = [c for c in ch.columns if "removed" in c.lower() and ("ticker" in c.lower() or "symbol" in c.lower())][0]
+    print("changes columns", dcol, acol, rcol, flush=True)
     ch["date"] = pd.to_datetime(ch[dcol], errors="coerce")
     ch = ch.dropna(subset=["date"]).sort_values("date", ascending=False)
     days = pd.bdate_range("2003-01-01", DEV_END)
