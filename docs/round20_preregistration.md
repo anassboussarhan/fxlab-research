@@ -66,6 +66,9 @@ All signals use data up to the close of day t; entries are on day t+1 or later.
 
 Not financial advice.
 
+**Note (2026-11-14, before data):** Wikipedia no longer carries the table of changes, so the point-in-time
+membership comes from the public `fja05680/sp500` history file (daily member lists) instead.
+
 ## Addendum W (2026-11-14, before any data): Warrior-style small-cap gap trading
 
 This part runs only after the user approves the data cost.

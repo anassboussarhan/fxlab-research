@@ -26,40 +26,29 @@ P1_START = pd.Timestamp("2005-01-01")
 
 # ============================================================================================ data
 def membership():
+    """Point-in-time S&P 500 members from the public fja05680/sp500 history (date, comma-separated tickers)."""
     import requests
-    r = requests.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies", headers=UA, timeout=60)
-    print("wikipedia", r.status_code, len(r.text), flush=True)
-    T = pd.read_html(io.StringIO(r.text))
-    for i, t in enumerate(T[:4]):
-        print("table", i, [str(c) for c in t.columns][:8], len(t), flush=True)
-    cur = [t for t in T if any(str(c).lower() in ("symbol", "ticker") for c in t.columns)][0]
-    now = set(cur[[c for c in cur.columns if str(c).lower() in ("symbol", "ticker")][0]].astype(str).str.replace(".", "-", regex=False))
-    flat = lambda t: ["_".join(map(str, c)) if isinstance(c, tuple) else str(c) for c in t.columns]  # noqa: E731
-    ch = [t for t in T if any("added" in x.lower() for x in flat(t)) and any("removed" in x.lower() for x in flat(t))][0].copy()
-    ch.columns = flat(ch)
-    dcol = ch.columns[0]
-    acol = [c for c in ch.columns if "added" in c.lower() and ("ticker" in c.lower() or "symbol" in c.lower())][0]
-    rcol = [c for c in ch.columns if "removed" in c.lower() and ("ticker" in c.lower() or "symbol" in c.lower())][0]
-    print("changes columns", dcol, acol, rcol, flush=True)
-    ch["date"] = pd.to_datetime(ch[dcol], errors="coerce")
-    ch = ch.dropna(subset=["date"]).sort_values("date", ascending=False)
+    lst = requests.get("https://api.github.com/repos/fja05680/sp500/contents", headers=UA, timeout=60).json()
+    cand = sorted([f for f in lst if f["name"].startswith("S&P 500 Historical Components") and f["name"].endswith(".csv")],
+                  key=lambda f: f["name"])
+    f = cand[-1]
+    print("membership file", f["name"], flush=True)
+    H = pd.read_csv(io.StringIO(requests.get(f["download_url"], headers=UA, timeout=120).text))
+    H["date"] = pd.to_datetime(H["date"])
+    H = H.sort_values("date")
     days = pd.bdate_range("2003-01-01", DEV_END)
-    rows, members, j = {}, set(now), 0
-    ev = ch[["date", acol, rcol]].to_numpy()
-    for d in days[::-1]:
-        while j < len(ev) and ev[j][0] > d:                             # undo changes that happened after d
-            add, rem = ev[j][1], ev[j][2]
-            if isinstance(add, str) and add.strip():
-                members.discard(add.strip().replace(".", "-"))
-            if isinstance(rem, str) and rem.strip():
-                members.add(rem.strip().replace(".", "-"))
-            j += 1
-        rows[d] = frozenset(members)
-    tick = sorted(set().union(*rows.values()))
+    sets = [frozenset(t.strip().replace(".", "-") for t in str(x).split(",") if t.strip()) for x in H["tickers"]]
+    tick = sorted(set().union(*sets))
     M = pd.DataFrame(False, index=days, columns=tick)
-    for d, s in rows.items():
-        M.loc[d, list(s)] = True
-    return M, {"current": len(now), "changes": int(len(ch)), "tickers_ever": len(tick), "first_change": str(ch.date.min())}
+    pos = H["date"].searchsorted(days, side="right") - 1
+    col = {t: i for i, t in enumerate(tick)}
+    arr = np.zeros((len(days), len(tick)), bool)
+    for i, p_ in enumerate(pos):
+        if p_ >= 0:
+            arr[i, [col[t] for t in sets[p_]]] = True
+    M = pd.DataFrame(arr, index=days, columns=tick)
+    return M, {"source": f["name"], "snapshots": int(len(H)), "first": str(H.date.min()), "last": str(H.date.max()),
+               "tickers_ever": len(tick)}
 
 
 def cmd_data(a):
