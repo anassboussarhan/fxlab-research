@@ -86,6 +86,8 @@ The status of every single item is in `docs/test_ledger.md`.
 
 | Round 19: verified gaps — index rules at futures costs, dip × carry, EIA oil, crypto funding times, prior-day stop runs; the library on 13 commodity / index / bond CFDs and crypto | 22 tests + 21,000 units | 0 count; noise-area breakout on NAS100 passes its own rule, fails BH; EIA oil, crypto funding times and stop runs lose after costs (no stable gross edge); costs dominate the library | `round19_results.md` |
 
+| Round 20: famous stock traders' setups (Kullamaegi, Minervini) on S&P 500 stocks; 2026 check of the noise-area breakout | 3 tests + 1 holdout test | swing setups lose against SPY; the breakout 2026 is inconclusive (+2.6 bp, t 0.7) and goes to a forward test; Warrior-style small caps wait for data | `round20_results.md` |
+
 ### 2.5 Prop firms and execution
 
 | What | Result | Where |
