@@ -164,6 +164,8 @@ p from the P2 t.
   their random-state placebos.
 - **Unit:** rule × timeframe × direction × instrument. P&L = the mean over the unit's settings (no selection
   inside a unit).
+- **Rules only:** the daily engine's feature-tercile units are left out, as in round 17's PAIR-UNIT tier. They
+  are not rules, and their fill-to-fill marks had the 14-hour look-ahead.
 - **Periods:**
   - P1 2013-2018 and P2 2019-2025;
   - bonds: P1 2019-2021, P2 2022-2025;

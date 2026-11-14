@@ -1,0 +1,215 @@
+name: r19
+# Round 19 (docs/round19_preregistration.md; scripts/r19.py). Results on branch round19. Trigger: ci/R19.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R19"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  D2RUN: "42610347008"
+jobs:
+  idx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        symbol: [USA500IDXUSD, USATECHIDXUSD]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r19.py idx --symbol ${{ matrix.symbol }} --out out/idx
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r19-idx-${{ matrix.symbol }}
+          path: out/idx
+          retention-days: 30
+  runs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        symbol: [USA500IDXUSD, USATECHIDXUSD, JPNIDXJPY, XAUUSD, XAGUSD]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r19.py runs --symbol ${{ matrix.symbol }} --out out/runs
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r19-runs-${{ matrix.symbol }}
+          path: out/runs
+          retention-days: 30
+  eia:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays xlrd
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for S in LIGHTCMDUSD BRENTCMDUSD; do
+            gh run download $D2RUN -p "d2c-$S-*" -D dl_$S || true
+            mkdir -p data/m1/$S && find dl_$S -name "*.parquet" -exec mv {} data/m1/$S/ \;
+            echo "$S: $(ls data/m1/$S | tr '\n' ' ')"
+          done
+      - run: python -W ignore scripts/r19.py eia --out out/eia
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r19-eia
+          path: out/eia
+          retention-days: 30
+  carry:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - run: python -W ignore scripts/r19.py carry --out out/carry
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r19-carry
+          path: out/carry
+          retention-days: 30
+  cdata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - run: python -W ignore scripts/r19.py cdata --out out/cdata
+      - uses: actions/upload-artifact@v4
+        with:
+          name: cdata
+          path: out/cdata
+          retention-days: 30
+  crypto:
+    needs: cdata
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          name: cdata
+          path: cdata
+      - run: |
+          python -W ignore scripts/r19.py crypto --funding cdata --out out/crypto
+          cp cdata/cdata_meta.json out/crypto/ || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r19-crypto
+          path: out/crypto
+          retention-days: 30
+  lib:
+    needs: cdata
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 15
+      matrix:
+        symbol: [BRENTCMDUSD, LIGHTCMDUSD, GASCMDUSD, COPPERCMDUSD, DEUIDXEUR, GBRIDXGBP, FRAIDXEUR, EUSIDXEUR, HKGIDXHKD,
+                 CHEIDXCHF, BUNDTREUR, USTBONDTRUSD, UKGILTTRGBP, BTCUSDT, ETHUSDT]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        if: endsWith(matrix.symbol, 'USDT')
+        with:
+          name: cdata
+          path: cdata
+      - name: Data
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          S=${{ matrix.symbol }}
+          mkdir -p data/m1/$S
+          if [ -d cdata ]; then cp cdata/m1/$S/*.parquet data/m1/$S/; else
+            gh run download $D2RUN -p "d2c-$S-*" -D dl_$S || true
+            find dl_$S -name "*.parquet" -exec mv {} data/m1/$S/ \;
+          fi
+          echo "$S: $(ls data/m1/$S | tr '\n' ' ')"
+      - name: Daily-engine library (D1 / W1 / MN)
+        run: python -W ignore scripts/sweep15.py --symbol ${{ matrix.symbol }} --out out/lib --daily 2>&1 | grep -v "^  " | tail -20
+      - name: Intraday library (H4 / H1 / M30 / M15)
+        run: timeout 15500 python -W ignore scripts/intraday17.py --symbol ${{ matrix.symbol }} --out out/lib --budget 14500 2>&1 | grep -v "converging" | tail -30
+      - run: rm -f out/lib/S*_${{ matrix.symbol }}.parquet
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r19-lib-${{ matrix.symbol }}
+          path: out/lib
+          retention-days: 30
+  combine:
+    needs: [idx, runs, eia, carry, crypto, lib]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r19-*
+          path: r19_in
+      - run: |
+          mkdir -p out/round19
+          python -W ignore scripts/r19.py lib --inp r19_in --out out/round19 2>&1 | tee out/round19/lib_log.txt || true
+          python -W ignore scripts/r19.py combine --inp r19_in --out out/round19 2>&1 | tee out/round19/H_log.txt || true
+          for f in $(find r19_in -name "*.json" -o -name "eia_timing.csv"); do cp "$f" out/round19/ 2>/dev/null || true; done
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p /tmp/pub && cp -r out/round19/. /tmp/pub/
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r19-pub
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round19 && cp -r /tmp/pub/. round19/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round19/RUN.txt
+          git add -f round19
+          git commit -qm "round 19 (run ${{ github.run_id }})"
+          git push -f origin HEAD:round19
