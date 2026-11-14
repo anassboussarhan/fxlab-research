@@ -1,0 +1,745 @@
+{
+ "units": 21000,
+ "placebo_units": 3000,
+ "own_rule": 68,
+ "bh": 0,
+ "counts": 0,
+ "first_bh_threshold": 4.761904761904762e-06,
+ "p2_t_ge_1645_and_p1_pos": 68,
+ "top": [
+  {
+   "symbol": "ETHUSDT",
+   "engine": "I",
+   "unit": "S.VOL.EXPANSION|M30",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": 0.0002,
+   "p2_mean": 0.0002,
+   "p1_t": 4.0922,
+   "p2_t": 3.0722,
+   "n1": 1096,
+   "n2": 1096,
+   "settings": 3,
+   "placebo_p95": 0.5501,
+   "p": 0.0011,
+   "bh": false,
+   "own": true,
+   "counts": false
+  },
+  {
+   "symbol": "ETHUSDT",
+   "engine": "D",
+   "unit": "S.MR.STOCH_REVERSAL|MN",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -0.8679,
+   "p2_t": 3.0338,
+   "n1": 1096,
+   "n2": 1096,
+   "settings": 4,
+   "placebo_p95": 1.3572,
+   "p": 0.0012,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "EUSIDXEUR",
+   "engine": "D",
+   "unit": "S.VOL.COMPRESSION|D1",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0001,
+   "p1_t": -0.5556,
+   "p2_t": 2.88,
+   "n1": 1392,
+   "n2": 1391,
+   "settings": 3,
+   "placebo_p95": 0.6859,
+   "p": 0.002,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "USTBONDTRUSD",
+   "engine": "D",
+   "unit": "S.SMC.FVG_RETRACE|MN",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": 0.0,
+   "p2_mean": 0.0,
+   "p1_t": 0.0021,
+   "p2_t": 2.8776,
+   "n1": 783,
+   "n2": 1030,
+   "settings": 6,
+   "placebo_p95": 1.0636,
+   "p": 0.002,
+   "bh": false,
+   "own": true,
+   "counts": false
+  },
+  {
+   "symbol": "BUNDTREUR",
+   "engine": "D",
+   "unit": "S.BOOK.CONNORS_R3|W1",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": NaN,
+   "p2_mean": 0.0,
+   "p1_t": NaN,
+   "p2_t": 2.8265,
+   "n1": 0,
+   "n2": 1780,
+   "settings": 2,
+   "placebo_p95": 0.4745,
+   "p": 0.0024,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "BTCUSDT",
+   "engine": "I",
+   "unit": "S.VOL.EXPANSION|M30",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": 0.0001,
+   "p2_mean": 0.0002,
+   "p1_t": 1.8082,
+   "p2_t": 2.8189,
+   "n1": 1096,
+   "n2": 1096,
+   "settings": 3,
+   "placebo_p95": 0.6932,
+   "p": 0.0024,
+   "bh": false,
+   "own": true,
+   "counts": false
+  },
+  {
+   "symbol": "USTBONDTRUSD",
+   "engine": "D",
+   "unit": "S.RG.FRACTAL|W1",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": 0.0,
+   "p2_mean": 0.0,
+   "p1_t": NaN,
+   "p2_t": 2.7686,
+   "n1": 783,
+   "n2": 1030,
+   "settings": 4,
+   "placebo_p95": 1.0636,
+   "p": 0.0028,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "CHEIDXCHF",
+   "engine": "D",
+   "unit": "S.GEO.HARMONIC|W1",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -2.4326,
+   "p2_t": 2.7395,
+   "n1": 1324,
+   "n2": 1666,
+   "settings": 3,
+   "placebo_p95": 0.3759,
+   "p": 0.0031,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "BRENTCMDUSD",
+   "engine": "D",
+   "unit": "S.ST.CANDLESTICK|D1",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": 0.0,
+   "p2_mean": 0.0001,
+   "p1_t": 1.0579,
+   "p2_t": 2.7269,
+   "n1": 1408,
+   "n2": 1637,
+   "settings": 3,
+   "placebo_p95": 1.0279,
+   "p": 0.0032,
+   "bh": false,
+   "own": true,
+   "counts": false
+  },
+  {
+   "symbol": "HKGIDXHKD",
+   "engine": "D",
+   "unit": "S.BOOK.TURTLE_SOUP|W1",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -2.1266,
+   "p2_t": 2.6159,
+   "n1": 1303,
+   "n2": 1532,
+   "settings": 2,
+   "placebo_p95": 0.6739,
+   "p": 0.0044,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "COPPERCMDUSD",
+   "engine": "D",
+   "unit": "S.FAMOUS.RASCHKE_8020|MN",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -0.0322,
+   "p2_t": 2.597,
+   "n1": 1533,
+   "n2": 1788,
+   "settings": 2,
+   "placebo_p95": 0.7743,
+   "p": 0.0047,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "USTBONDTRUSD",
+   "engine": "D",
+   "unit": "S.FAMOUS.TD_SEQUENTIAL|MN",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -0.4606,
+   "p2_t": 2.5787,
+   "n1": 783,
+   "n2": 1030,
+   "settings": 2,
+   "placebo_p95": 1.0636,
+   "p": 0.005,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "COPPERCMDUSD",
+   "engine": "D",
+   "unit": "S.VOL.EXPANSION|W1",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -0.6389,
+   "p2_t": 2.5565,
+   "n1": 1533,
+   "n2": 1788,
+   "settings": 3,
+   "placebo_p95": 0.7743,
+   "p": 0.0053,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "BRENTCMDUSD",
+   "engine": "D",
+   "unit": "S.BOOK.TURTLE_SOUP|W1",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -1.6205,
+   "p2_t": 2.5386,
+   "n1": 1408,
+   "n2": 1637,
+   "settings": 2,
+   "placebo_p95": 1.0279,
+   "p": 0.0056,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "USTBONDTRUSD",
+   "engine": "D",
+   "unit": "S.ST.CHANNEL|W1",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -1.1691,
+   "p2_t": 2.4918,
+   "n1": 783,
+   "n2": 1030,
+   "settings": 6,
+   "placebo_p95": 1.0636,
+   "p": 0.0064,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "UKGILTTRGBP",
+   "engine": "D",
+   "unit": "S.DAILY.DOUBLE_SEVEN|W1",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": 0.0,
+   "p2_mean": 0.0,
+   "p1_t": NaN,
+   "p2_t": 2.4682,
+   "n1": 734,
+   "n2": 935,
+   "settings": 6,
+   "placebo_p95": 1.1167,
+   "p": 0.0068,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "USTBONDTRUSD",
+   "engine": "D",
+   "unit": "S.BOOK.TURTLE_SOUP|MN",
+   "dir": -1,
+   "placebo": false,
+   "p1_mean": 0.0,
+   "p2_mean": 0.0,
+   "p1_t": NaN,
+   "p2_t": 2.4653,
+   "n1": 783,
+   "n2": 1030,
+   "settings": 2,
+   "placebo_p95": 1.0636,
+   "p": 0.0068,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "DEUIDXEUR",
+   "engine": "D",
+   "unit": "S.ST.CHANNEL|MN",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -1.1894,
+   "p2_t": 2.4624,
+   "n1": 1254,
+   "n2": 1776,
+   "settings": 6,
+   "placebo_p95": 1.1209,
+   "p": 0.0069,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "GASCMDUSD",
+   "engine": "D",
+   "unit": "S.DAILY.OPEX|W1",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -1.2585,
+   "p2_t": 2.447,
+   "n1": 1532,
+   "n2": 1778,
+   "settings": 1,
+   "placebo_p95": 0.9079,
+   "p": 0.0072,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "ETHUSDT",
+   "engine": "D",
+   "unit": "S.GEO.FIB_RETRACE|MN",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -1.8634,
+   "p2_t": 2.4349,
+   "n1": 1096,
+   "n2": 1096,
+   "settings": 3,
+   "placebo_p95": 1.3572,
+   "p": 0.0074,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "GASCMDUSD",
+   "engine": "D",
+   "unit": "S.BOOK.HEAD_SHOULDERS|D1",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": -0.0,
+   "p2_mean": 0.0,
+   "p1_t": -2.1234,
+   "p2_t": 2.4156,
+   "n1": 1532,
+   "n2": 1778,
+   "settings": 2,
+   "placebo_p95": 0.9079,
+   "p": 0.0079,
+   "bh": false,
+   "own": false,
+   "counts": false
+  },
+  {
+   "symbol": "GASCMDUSD",
+   "engine": "D",
+   "unit": "S.BOOK.RASCHKE_ANTI|MN",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": 0.0,
+   "p2_mean": 0.0,
+   "p1_t": 0.8646,
+   "p2_t": 2.387,
+   "n1": 1532,
+   "n2": 1778,
+   "settings": 2,
+   "placebo_p95": 0.9079,
+   "p": 0.0085,
+   "bh": false,
+   "own": true,
+   "counts": false
+  },
+  {
+   "symbol": "BTCUSDT",
+   "engine": "I",
+   "unit": "S.DAILY.VOL_TARGET|M15",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": 0.0011,
+   "p2_mean": 0.0017,
+   "p1_t": 0.9844,
+   "p2_t": 2.3694,
+   "n1": 1096,
+   "n2": 1096,
+   "settings": 4,
+   "placebo_p95": 0.6932,
+   "p": 0.0089,
+   "bh": false,
+   "own": true,
+   "counts": false
+  },
+  {
+   "symbol": "BTCUSDT",
+   "engine": "I",
+   "unit": "S.DAILY.VOL_TARGET|M30",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": 0.0013,
+   "p2_mean": 0.0017,
+   "p1_t": 1.1596,
+   "p2_t": 2.361,
+   "n1": 1096,
+   "n2": 1096,
+   "settings": 4,
+   "placebo_p95": 0.6932,
+   "p": 0.0091,
+   "bh": false,
+   "own": true,
+   "counts": false
+  },
+  {
+   "symbol": "UKGILTTRGBP",
+   "engine": "D",
+   "unit": "S.FAMOUS.CONNORS_RSI2|W1",
+   "dir": 1,
+   "placebo": false,
+   "p1_mean": 0.0,
+   "p2_mean": 0.0,
+   "p1_t": NaN,
+   "p2_t": 2.3398,
+   "n1": 734,
+   "n2": 935,
+   "settings": 3,
+   "placebo_p95": 1.1167,
+   "p": 0.0096,
+   "bh": false,
+   "own": false,
+   "counts": false
+  }
+ ],
+ "by_symbol": [
+  {
+   "symbol": "BRENTCMDUSD",
+   "units": 1400,
+   "own": 4,
+   "med_p2_t": -1.457,
+   "max_p2_t": 2.727
+  },
+  {
+   "symbol": "BTCUSDT",
+   "units": 1400,
+   "own": 11,
+   "med_p2_t": -1.335,
+   "max_p2_t": 2.819
+  },
+  {
+   "symbol": "BUNDTREUR",
+   "units": 1400,
+   "own": 0,
+   "med_p2_t": -2.684,
+   "max_p2_t": 2.827
+  },
+  {
+   "symbol": "CHEIDXCHF",
+   "units": 1400,
+   "own": 4,
+   "med_p2_t": -1.622,
+   "max_p2_t": 2.739
+  },
+  {
+   "symbol": "COPPERCMDUSD",
+   "units": 1400,
+   "own": 2,
+   "med_p2_t": -2.785,
+   "max_p2_t": 2.597
+  },
+  {
+   "symbol": "DEUIDXEUR",
+   "units": 1400,
+   "own": 11,
+   "med_p2_t": -1.183,
+   "max_p2_t": 2.462
+  },
+  {
+   "symbol": "ETHUSDT",
+   "units": 1400,
+   "own": 5,
+   "med_p2_t": -1.07,
+   "max_p2_t": 3.072
+  },
+  {
+   "symbol": "EUSIDXEUR",
+   "units": 1400,
+   "own": 1,
+   "med_p2_t": -1.575,
+   "max_p2_t": 2.88
+  },
+  {
+   "symbol": "FRAIDXEUR",
+   "units": 1400,
+   "own": 7,
+   "med_p2_t": -1.219,
+   "max_p2_t": 2.292
+  },
+  {
+   "symbol": "GASCMDUSD",
+   "units": 1400,
+   "own": 3,
+   "med_p2_t": -2.293,
+   "max_p2_t": 2.447
+  },
+  {
+   "symbol": "GBRIDXGBP",
+   "units": 1400,
+   "own": 6,
+   "med_p2_t": -1.825,
+   "max_p2_t": 2.096
+  },
+  {
+   "symbol": "HKGIDXHKD",
+   "units": 1400,
+   "own": 0,
+   "med_p2_t": -1.178,
+   "max_p2_t": 2.616
+  },
+  {
+   "symbol": "LIGHTCMDUSD",
+   "units": 1400,
+   "own": 3,
+   "med_p2_t": -1.261,
+   "max_p2_t": 2.188
+  },
+  {
+   "symbol": "UKGILTTRGBP",
+   "units": 1400,
+   "own": 8,
+   "med_p2_t": -1.725,
+   "max_p2_t": 2.468
+  },
+  {
+   "symbol": "USTBONDTRUSD",
+   "units": 1400,
+   "own": 3,
+   "med_p2_t": -2.304,
+   "max_p2_t": 2.878
+  }
+ ],
+ "placebo_p95": [
+  {
+   "symbol": "BRENTCMDUSD",
+   "engine": "D",
+   "placebo_p95": 1.028
+  },
+  {
+   "symbol": "BRENTCMDUSD",
+   "engine": "I",
+   "placebo_p95": -0.222
+  },
+  {
+   "symbol": "BTCUSDT",
+   "engine": "D",
+   "placebo_p95": 1.572
+  },
+  {
+   "symbol": "BTCUSDT",
+   "engine": "I",
+   "placebo_p95": 0.693
+  },
+  {
+   "symbol": "BUNDTREUR",
+   "engine": "D",
+   "placebo_p95": 0.474
+  },
+  {
+   "symbol": "BUNDTREUR",
+   "engine": "I",
+   "placebo_p95": -1.354
+  },
+  {
+   "symbol": "CHEIDXCHF",
+   "engine": "D",
+   "placebo_p95": 0.376
+  },
+  {
+   "symbol": "CHEIDXCHF",
+   "engine": "I",
+   "placebo_p95": -0.136
+  },
+  {
+   "symbol": "COPPERCMDUSD",
+   "engine": "D",
+   "placebo_p95": 0.774
+  },
+  {
+   "symbol": "COPPERCMDUSD",
+   "engine": "I",
+   "placebo_p95": -0.662
+  },
+  {
+   "symbol": "DEUIDXEUR",
+   "engine": "D",
+   "placebo_p95": 1.121
+  },
+  {
+   "symbol": "DEUIDXEUR",
+   "engine": "I",
+   "placebo_p95": 0.061
+  },
+  {
+   "symbol": "ETHUSDT",
+   "engine": "D",
+   "placebo_p95": 1.357
+  },
+  {
+   "symbol": "ETHUSDT",
+   "engine": "I",
+   "placebo_p95": 0.55
+  },
+  {
+   "symbol": "EUSIDXEUR",
+   "engine": "D",
+   "placebo_p95": 0.686
+  },
+  {
+   "symbol": "EUSIDXEUR",
+   "engine": "I",
+   "placebo_p95": -0.095
+  },
+  {
+   "symbol": "FRAIDXEUR",
+   "engine": "D",
+   "placebo_p95": 0.735
+  },
+  {
+   "symbol": "FRAIDXEUR",
+   "engine": "I",
+   "placebo_p95": 0.321
+  },
+  {
+   "symbol": "GASCMDUSD",
+   "engine": "D",
+   "placebo_p95": 0.908
+  },
+  {
+   "symbol": "GASCMDUSD",
+   "engine": "I",
+   "placebo_p95": -0.705
+  },
+  {
+   "symbol": "GBRIDXGBP",
+   "engine": "D",
+   "placebo_p95": 0.571
+  },
+  {
+   "symbol": "GBRIDXGBP",
+   "engine": "I",
+   "placebo_p95": -0.541
+  },
+  {
+   "symbol": "HKGIDXHKD",
+   "engine": "D",
+   "placebo_p95": 0.674
+  },
+  {
+   "symbol": "HKGIDXHKD",
+   "engine": "I",
+   "placebo_p95": 0.449
+  },
+  {
+   "symbol": "LIGHTCMDUSD",
+   "engine": "D",
+   "placebo_p95": 1.337
+  },
+  {
+   "symbol": "LIGHTCMDUSD",
+   "engine": "I",
+   "placebo_p95": 0.661
+  },
+  {
+   "symbol": "UKGILTTRGBP",
+   "engine": "D",
+   "placebo_p95": 1.117
+  },
+  {
+   "symbol": "UKGILTTRGBP",
+   "engine": "I",
+   "placebo_p95": -0.131
+  },
+  {
+   "symbol": "USTBONDTRUSD",
+   "engine": "D",
+   "placebo_p95": 1.064
+  },
+  {
+   "symbol": "USTBONDTRUSD",
+   "engine": "I",
+   "placebo_p95": -0.578
+  }
+ ]
+}

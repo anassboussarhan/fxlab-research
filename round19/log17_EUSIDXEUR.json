@@ -1,0 +1,1682 @@
+{
+"S.BO.FALSE_BREAKOUT|H4": {
+"configs": 8,
+"s": 3.5
+},
+"S.BO.OPENING_RANGE|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.BO.RANGE_EXPANSION|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.BO.RETEST|H4": {
+"configs": 16,
+"s": 0.5
+},
+"S.BO.VOL_BREAKOUT|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.BOOK.BW_AO|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.BW_FRACTAL|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.CONNORS_3DAY|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.CONNORS_CRSI|H4": {
+"configs": 12,
+"s": 0.8
+},
+"S.BOOK.CONNORS_PCTB|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.CONNORS_R3|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.DOUBLE_TOP_BOTTOM|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.ELDER_IMPULSE|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.GANN_HILO|H4": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.HEAD_SHOULDERS|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.HEIKIN_ASHI|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.ICHIMOKU_KUMO|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.LIEN_CHANNEL|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.LIEN_DBB|H4": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.LIEN_FADER|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.LIEN_INSIDE2|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.LIEN_PERFECT_ORDER|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.PNF_DOUBLE|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.PRIOR_PERIOD_BO|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.RASCHKE_ANTI|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.TURTLE_SOUP|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.WILDER_DMI|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.BOOK.WILDER_VOLSYS|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.BOOK.WILLIAMS_OOPS|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BOOK.WILLIAMS_R|H4": {
+"configs": 8,
+"s": 0.2
+},
+"S.BOOK.WILLIAMS_SMASH|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.DAILY.ABS_MOM|H4": {
+"configs": 12,
+"s": 0.2
+},
+"S.DAILY.CUM_RSI|H4": {
+"configs": 48,
+"s": 1.2
+},
+"S.DAILY.DOUBLE_SEVEN|H4": {
+"configs": 12,
+"s": 0.3
+},
+"S.DAILY.FABER|H4": {
+"configs": 16,
+"s": 0.4
+},
+"S.DAILY.HALLOWEEN|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.DAILY.HIGH52|H4": {
+"configs": 24,
+"s": 0.5
+},
+"S.DAILY.IBS|H4": {
+"configs": 24,
+"s": 1.6
+},
+"S.DAILY.OPEX|H4": {
+"configs": 2,
+"s": 0.0
+},
+"S.DAILY.THREE_DOWN|H4": {
+"configs": 24,
+"s": 0.8
+},
+"S.DAILY.VOL_TARGET|H4": {
+"configs": 8,
+"s": 0.1
+},
+"S.FAMOUS.ALLIGATOR|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.FAMOUS.CONNORS_RSI2|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.FAMOUS.CRABEL_NR|H4": {
+"configs": 12,
+"s": 0.5
+},
+"S.FAMOUS.HOLY_GRAIL|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.FAMOUS.RASCHKE_8020|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.FAMOUS.TD_SEQUENTIAL|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.FAMOUS.TTM_SQUEEZE|H4": {
+"configs": 12,
+"s": 0.7
+},
+"S.FAMOUS.TURTLE|H4": {
+"configs": 4,
+"s": 0.6
+},
+"S.FAMOUS.WILLIAMS_VBO|H4": {
+"configs": 8,
+"s": 0.5
+},
+"S.FORUM.NEWS_STRADDLE|H4": {
+"configs": 18,
+"s": 2.1
+},
+"S.FORUM.THREE_DUCKS|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.GEO.FIB_EXTENSION|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.GEO.FIB_RETRACE|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.GEO.GANN|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.GEO.HARMONIC|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.MR.BOLLINGER|H4": {
+"configs": 8,
+"s": 0.2
+},
+"S.MR.OU|H4": {
+"configs": 12,
+"s": 1.8
+},
+"S.MR.RSI_REVERSAL|H4": {
+"configs": 18,
+"s": 0.7
+},
+"S.MR.SHORT_REVERSAL|H4": {
+"configs": 54,
+"s": 1.4
+},
+"S.MR.STOCH_REVERSAL|H4": {
+"configs": 8,
+"s": 0.2
+},
+"S.MR.TWAP_REVERSION|H4": {
+"configs": 18,
+"s": 0.5
+},
+"S.MR.ZSCORE|H4": {
+"configs": 18,
+"s": 0.4
+},
+"S.MS.LIQUIDITY_FILTERED|H4": {
+"configs": 6,
+"s": 0.3
+},
+"S.MS.ORDER_FLOW|H4": {
+"configs": 18,
+"s": 0.3
+},
+"S.MS.TICK_IMBALANCE|H4": {
+"configs": 18,
+"s": 0.3
+},
+"S.RG.CHANGE_POINT|H4": {
+"configs": 4,
+"s": 0.4
+},
+"S.RG.ENTROPY|H4": {
+"configs": 6,
+"s": 1.2
+},
+"S.RG.FRACTAL|H4": {
+"configs": 8,
+"s": 0.3
+},
+"S.RG.HMM|H4": {
+"configs": 6,
+"s": 2.3
+},
+"S.RG.VOL_FORECAST|H4": {
+"configs": 6,
+"s": 0.9
+},
+"S.SEAS.FIX_REVERSAL|H4": {
+"configs": 6,
+"s": 0.1
+},
+"S.SEAS.INTRADAY|H4": {
+"configs": 12,
+"s": 4.9
+},
+"S.SEAS.MONTH_END_FIX|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.SEAS.TURN_OF_MONTH|H4": {
+"configs": 6,
+"s": 0.1
+},
+"S.SEAS.WEEKDAY|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.SEAS.WEEKEND_GAP_FADE|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.SES.ASIAN_RANGE|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.SES.LONDON_BREAKOUT|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.SES.NY_OPEN_REVERSAL|H4": {
+"configs": 6,
+"s": 0.1
+},
+"S.SES.OVERLAP_MOMENTUM|H4": {
+"configs": 6,
+"s": 0.5
+},
+"S.SES.SESSION_MOMENTUM|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.SMC.FVG_RETRACE|H4": {
+"configs": 12,
+"s": 0.5
+},
+"S.SMC.SILVER_BULLET|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.SMC.SWEEP_REVERSAL|H4": {
+"configs": 12,
+"s": 0.3
+},
+"S.SP.SPECTRAL_CYCLE|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.SP.WAVELET|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.ST.CANDLESTICK|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.ST.CHANNEL|H4": {
+"configs": 12,
+"s": 0.3
+},
+"S.ST.PIVOT_POINTS|H4": {
+"configs": 2,
+"s": 0.1
+},
+"S.ST.SR_REVERSAL|H4": {
+"configs": 8,
+"s": 0.2
+},
+"S.ST.SWING_STRUCTURE|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.ST.TRENDLINE_BREAK|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.TREND.ADAPTIVE|H4": {
+"configs": 12,
+"s": 0.5
+},
+"S.TREND.DONCHIAN|H4": {
+"configs": 12,
+"s": 0.3
+},
+"S.TREND.INDICATOR_SIGNAL|H4": {
+"configs": 14,
+"s": 0.5
+},
+"S.TREND.KALMAN|H4": {
+"configs": 12,
+"s": 0.3
+},
+"S.TREND.MA_CROSS|H4": {
+"configs": 18,
+"s": 0.4
+},
+"S.TREND.REGRESSION|H4": {
+"configs": 18,
+"s": 0.3
+},
+"S.TREND.TSMOM|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.VOL.COMPRESSION|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.VOL.EXPANSION|H4": {
+"configs": 6,
+"s": 0.2
+},
+"S.VOL.REGIME_SWITCH|H4": {
+"configs": 8,
+"s": 0.2
+},
+"S.WEIRD.LUNAR|H4": {
+"configs": 16,
+"s": 3.4
+},
+"S.WEIRD.MERCURY_RETRO|H4": {
+"configs": 4,
+"s": 0.1
+},
+"S.BO.FALSE_BREAKOUT|H1": {
+"configs": 8,
+"s": 0.4
+},
+"S.BO.OPENING_RANGE|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.BO.RANGE_EXPANSION|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.BO.RETEST|H1": {
+"configs": 16,
+"s": 0.8
+},
+"S.BO.VOL_BREAKOUT|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.BOOK.BW_AO|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.BW_FRACTAL|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.CONNORS_3DAY|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.CONNORS_CRSI|H1": {
+"configs": 12,
+"s": 2.0
+},
+"S.BOOK.CONNORS_PCTB|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.CONNORS_R3|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.DOUBLE_TOP_BOTTOM|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.ELDER_IMPULSE|H1": {
+"configs": 2,
+"s": 0.4
+},
+"S.BOOK.GANN_HILO|H1": {
+"configs": 4,
+"s": 0.6
+},
+"S.BOOK.HEAD_SHOULDERS|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.HEIKIN_ASHI|H1": {
+"configs": 2,
+"s": 0.3
+},
+"S.BOOK.ICHIMOKU_KUMO|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.LIEN_CHANNEL|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.LIEN_DBB|H1": {
+"configs": 4,
+"s": 0.4
+},
+"S.BOOK.LIEN_FADER|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.LIEN_INSIDE2|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.LIEN_PERFECT_ORDER|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.PNF_DOUBLE|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.PRIOR_PERIOD_BO|H1": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.RASCHKE_ANTI|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.TURTLE_SOUP|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.WILDER_DMI|H1": {
+"configs": 6,
+"s": 0.4
+},
+"S.BOOK.WILDER_VOLSYS|H1": {
+"configs": 6,
+"s": 0.4
+},
+"S.BOOK.WILLIAMS_OOPS|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BOOK.WILLIAMS_R|H1": {
+"configs": 8,
+"s": 0.4
+},
+"S.BOOK.WILLIAMS_SMASH|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.DAILY.ABS_MOM|H1": {
+"configs": 12,
+"s": 0.5
+},
+"S.DAILY.CUM_RSI|H1": {
+"configs": 48,
+"s": 2.4
+},
+"S.DAILY.DOUBLE_SEVEN|H1": {
+"configs": 12,
+"s": 0.8
+},
+"S.DAILY.FABER|H1": {
+"configs": 16,
+"s": 0.9
+},
+"S.DAILY.HALLOWEEN|H1": {
+"configs": 4,
+"s": 0.1
+},
+"S.DAILY.HIGH52|H1": {
+"configs": 24,
+"s": 1.0
+},
+"S.DAILY.IBS|H1": {
+"configs": 24,
+"s": 4.7
+},
+"S.DAILY.OPEX|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.DAILY.THREE_DOWN|H1": {
+"configs": 24,
+"s": 2.2
+},
+"S.DAILY.VOL_TARGET|H1": {
+"configs": 8,
+"s": 0.3
+},
+"S.FAMOUS.ALLIGATOR|H1": {
+"configs": 6,
+"s": 0.4
+},
+"S.FAMOUS.CONNORS_RSI2|H1": {
+"configs": 6,
+"s": 0.4
+},
+"S.FAMOUS.CRABEL_NR|H1": {
+"configs": 12,
+"s": 0.6
+},
+"S.FAMOUS.HOLY_GRAIL|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.FAMOUS.RASCHKE_8020|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.FAMOUS.TD_SEQUENTIAL|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.FAMOUS.TTM_SQUEEZE|H1": {
+"configs": 12,
+"s": 1.9
+},
+"S.FAMOUS.TURTLE|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.FAMOUS.WILLIAMS_VBO|H1": {
+"configs": 8,
+"s": 0.5
+},
+"S.FORUM.NEWS_STRADDLE|H1": {
+"configs": 18,
+"s": 5.6
+},
+"S.FORUM.THREE_DUCKS|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.GEO.FIB_EXTENSION|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.GEO.FIB_RETRACE|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.GEO.GANN|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.GEO.HARMONIC|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.MR.BOLLINGER|H1": {
+"configs": 8,
+"s": 0.4
+},
+"S.MR.OU|H1": {
+"configs": 12,
+"s": 0.7
+},
+"S.MR.RSI_REVERSAL|H1": {
+"configs": 18,
+"s": 1.8
+},
+"S.MR.SHORT_REVERSAL|H1": {
+"configs": 54,
+"s": 2.5
+},
+"S.MR.STOCH_REVERSAL|H1": {
+"configs": 8,
+"s": 0.4
+},
+"S.MR.TWAP_REVERSION|H1": {
+"configs": 18,
+"s": 1.2
+},
+"S.MR.ZSCORE|H1": {
+"configs": 18,
+"s": 0.8
+},
+"S.MS.LIQUIDITY_FILTERED|H1": {
+"configs": 6,
+"s": 0.5
+},
+"S.MS.ORDER_FLOW|H1": {
+"configs": 18,
+"s": 0.5
+},
+"S.MS.TICK_IMBALANCE|H1": {
+"configs": 18,
+"s": 0.5
+},
+"S.RG.CHANGE_POINT|H1": {
+"configs": 4,
+"s": 1.1
+},
+"S.RG.ENTROPY|H1": {
+"configs": 6,
+"s": 2.6
+},
+"S.RG.FRACTAL|H1": {
+"configs": 8,
+"s": 0.7
+},
+"S.RG.HMM|H1": {
+"configs": 6,
+"s": 6.3
+},
+"S.RG.VOL_FORECAST|H1": {
+"configs": 6,
+"s": 1.8
+},
+"S.SEAS.FIX_REVERSAL|H1": {
+"configs": 6,
+"s": 0.4
+},
+"S.SEAS.INTRADAY|H1": {
+"configs": 12,
+"s": 13.5
+},
+"S.SEAS.MONTH_END_FIX|H1": {
+"configs": 6,
+"s": 0.6
+},
+"S.SEAS.TURN_OF_MONTH|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.SEAS.WEEKDAY|H1": {
+"configs": 6,
+"s": 0.6
+},
+"S.SEAS.WEEKEND_GAP_FADE|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.SES.ASIAN_RANGE|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.SES.LONDON_BREAKOUT|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.SES.NY_OPEN_REVERSAL|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.SES.OVERLAP_MOMENTUM|H1": {
+"configs": 6,
+"s": 0.8
+},
+"S.SES.SESSION_MOMENTUM|H1": {
+"configs": 6,
+"s": 0.7
+},
+"S.SMC.FVG_RETRACE|H1": {
+"configs": 12,
+"s": 0.6
+},
+"S.SMC.SILVER_BULLET|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.SMC.SWEEP_REVERSAL|H1": {
+"configs": 12,
+"s": 0.6
+},
+"S.SP.SPECTRAL_CYCLE|H1": {
+"configs": 6,
+"s": 0.6
+},
+"S.SP.WAVELET|H1": {
+"configs": 6,
+"s": 0.4
+},
+"S.ST.CANDLESTICK|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.ST.CHANNEL|H1": {
+"configs": 12,
+"s": 0.7
+},
+"S.ST.PIVOT_POINTS|H1": {
+"configs": 2,
+"s": 0.1
+},
+"S.ST.SR_REVERSAL|H1": {
+"configs": 8,
+"s": 0.5
+},
+"S.ST.SWING_STRUCTURE|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.ST.TRENDLINE_BREAK|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.TREND.ADAPTIVE|H1": {
+"configs": 12,
+"s": 1.3
+},
+"S.TREND.DONCHIAN|H1": {
+"configs": 12,
+"s": 0.6
+},
+"S.TREND.INDICATOR_SIGNAL|H1": {
+"configs": 14,
+"s": 1.4
+},
+"S.TREND.KALMAN|H1": {
+"configs": 12,
+"s": 0.7
+},
+"S.TREND.MA_CROSS|H1": {
+"configs": 18,
+"s": 0.8
+},
+"S.TREND.REGRESSION|H1": {
+"configs": 18,
+"s": 0.7
+},
+"S.TREND.TSMOM|H1": {
+"configs": 6,
+"s": 0.5
+},
+"S.VOL.COMPRESSION|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.VOL.EXPANSION|H1": {
+"configs": 6,
+"s": 0.3
+},
+"S.VOL.REGIME_SWITCH|H1": {
+"configs": 8,
+"s": 0.5
+},
+"S.WEIRD.LUNAR|H1": {
+"configs": 16,
+"s": 0.6
+},
+"S.WEIRD.MERCURY_RETRO|H1": {
+"configs": 4,
+"s": 0.2
+},
+"S.BO.FALSE_BREAKOUT|M30": {
+"configs": 8,
+"s": 0.6
+},
+"S.BO.OPENING_RANGE|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.BO.RANGE_EXPANSION|M30": {
+"configs": 6,
+"s": 0.4
+},
+"S.BO.RETEST|M30": {
+"configs": 16,
+"s": 1.3
+},
+"S.BO.VOL_BREAKOUT|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.BOOK.BW_AO|M30": {
+"configs": 2,
+"s": 0.2
+},
+"S.BOOK.BW_FRACTAL|M30": {
+"configs": 2,
+"s": 0.3
+},
+"S.BOOK.CONNORS_3DAY|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.CONNORS_CRSI|M30": {
+"configs": 12,
+"s": 3.9
+},
+"S.BOOK.CONNORS_PCTB|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.CONNORS_R3|M30": {
+"configs": 4,
+"s": 0.4
+},
+"S.BOOK.DOUBLE_TOP_BOTTOM|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.ELDER_IMPULSE|M30": {
+"configs": 2,
+"s": 0.8
+},
+"S.BOOK.GANN_HILO|M30": {
+"configs": 4,
+"s": 0.9
+},
+"S.BOOK.HEAD_SHOULDERS|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.HEIKIN_ASHI|M30": {
+"configs": 2,
+"s": 0.6
+},
+"S.BOOK.ICHIMOKU_KUMO|M30": {
+"configs": 2,
+"s": 0.4
+},
+"S.BOOK.LIEN_CHANNEL|M30": {
+"configs": 4,
+"s": 0.4
+},
+"S.BOOK.LIEN_DBB|M30": {
+"configs": 4,
+"s": 0.8
+},
+"S.BOOK.LIEN_FADER|M30": {
+"configs": 2,
+"s": 0.2
+},
+"S.BOOK.LIEN_INSIDE2|M30": {
+"configs": 2,
+"s": 0.1
+},
+"S.BOOK.LIEN_PERFECT_ORDER|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.PNF_DOUBLE|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.PRIOR_PERIOD_BO|M30": {
+"configs": 4,
+"s": 0.5
+},
+"S.BOOK.RASCHKE_ANTI|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.TURTLE_SOUP|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.WILDER_DMI|M30": {
+"configs": 6,
+"s": 0.7
+},
+"S.BOOK.WILDER_VOLSYS|M30": {
+"configs": 6,
+"s": 0.8
+},
+"S.BOOK.WILLIAMS_OOPS|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BOOK.WILLIAMS_R|M30": {
+"configs": 8,
+"s": 0.8
+},
+"S.BOOK.WILLIAMS_SMASH|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.DAILY.ABS_MOM|M30": {
+"configs": 12,
+"s": 0.8
+},
+"S.DAILY.CUM_RSI|M30": {
+"configs": 48,
+"s": 4.3
+},
+"S.DAILY.DOUBLE_SEVEN|M30": {
+"configs": 12,
+"s": 1.6
+},
+"S.DAILY.FABER|M30": {
+"configs": 16,
+"s": 1.6
+},
+"S.DAILY.HALLOWEEN|M30": {
+"configs": 4,
+"s": 0.2
+},
+"S.DAILY.HIGH52|M30": {
+"configs": 24,
+"s": 1.7
+},
+"S.DAILY.IBS|M30": {
+"configs": 24,
+"s": 9.3
+},
+"S.DAILY.OPEX|M30": {
+"configs": 2,
+"s": 0.1
+},
+"S.DAILY.THREE_DOWN|M30": {
+"configs": 24,
+"s": 3.9
+},
+"S.DAILY.VOL_TARGET|M30": {
+"configs": 8,
+"s": 0.5
+},
+"S.FAMOUS.ALLIGATOR|M30": {
+"configs": 6,
+"s": 0.9
+},
+"S.FAMOUS.CONNORS_RSI2|M30": {
+"configs": 6,
+"s": 0.7
+},
+"S.FAMOUS.CRABEL_NR|M30": {
+"configs": 12,
+"s": 0.9
+},
+"S.FAMOUS.HOLY_GRAIL|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.FAMOUS.RASCHKE_8020|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.FAMOUS.TD_SEQUENTIAL|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.FAMOUS.TTM_SQUEEZE|M30": {
+"configs": 12,
+"s": 3.6
+},
+"S.FAMOUS.TURTLE|M30": {
+"configs": 4,
+"s": 0.4
+},
+"S.FAMOUS.WILLIAMS_VBO|M30": {
+"configs": 8,
+"s": 0.7
+},
+"S.FORUM.NEWS_STRADDLE|M30": {
+"configs": 18,
+"s": 10.6
+},
+"S.FORUM.THREE_DUCKS|M30": {
+"configs": 4,
+"s": 0.4
+},
+"S.GEO.FIB_EXTENSION|M30": {
+"configs": 4,
+"s": 0.4
+},
+"S.GEO.FIB_RETRACE|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.GEO.GANN|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.GEO.HARMONIC|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.MR.BOLLINGER|M30": {
+"configs": 8,
+"s": 0.7
+},
+"S.MR.OU|M30": {
+"configs": 12,
+"s": 1.3
+},
+"S.MR.RSI_REVERSAL|M30": {
+"configs": 18,
+"s": 3.4
+},
+"S.MR.SHORT_REVERSAL|M30": {
+"configs": 54,
+"s": 4.2
+},
+"S.MR.STOCH_REVERSAL|M30": {
+"configs": 8,
+"s": 0.6
+},
+"S.MR.TWAP_REVERSION|M30": {
+"configs": 18,
+"s": 2.1
+},
+"S.MR.ZSCORE|M30": {
+"configs": 18,
+"s": 1.3
+},
+"S.MS.LIQUIDITY_FILTERED|M30": {
+"configs": 6,
+"s": 0.8
+},
+"S.MS.ORDER_FLOW|M30": {
+"configs": 18,
+"s": 0.9
+},
+"S.MS.TICK_IMBALANCE|M30": {
+"configs": 18,
+"s": 0.9
+},
+"S.RG.CHANGE_POINT|M30": {
+"configs": 4,
+"s": 2.0
+},
+"S.RG.ENTROPY|M30": {
+"configs": 6,
+"s": 4.7
+},
+"S.RG.FRACTAL|M30": {
+"configs": 8,
+"s": 1.4
+},
+"S.RG.HMM|M30": {
+"configs": 6,
+"s": 13.1
+},
+"S.RG.VOL_FORECAST|M30": {
+"configs": 6,
+"s": 3.4
+},
+"S.SEAS.FIX_REVERSAL|M30": {
+"configs": 6,
+"s": 0.6
+},
+"S.SEAS.INTRADAY|M30": {
+"configs": 12,
+"s": 26.6
+},
+"S.SEAS.MONTH_END_FIX|M30": {
+"configs": 6,
+"s": 0.9
+},
+"S.SEAS.TURN_OF_MONTH|M30": {
+"configs": 6,
+"s": 0.4
+},
+"S.SEAS.WEEKDAY|M30": {
+"configs": 6,
+"s": 0.7
+},
+"S.SEAS.WEEKEND_GAP_FADE|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.SES.ASIAN_RANGE|M30": {
+"configs": 2,
+"s": 0.1
+},
+"S.SES.LONDON_BREAKOUT|M30": {
+"configs": 2,
+"s": 0.2
+},
+"S.SES.NY_OPEN_REVERSAL|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.SES.OVERLAP_MOMENTUM|M30": {
+"configs": 6,
+"s": 1.5
+},
+"S.SES.SESSION_MOMENTUM|M30": {
+"configs": 6,
+"s": 0.7
+},
+"S.SMC.FVG_RETRACE|M30": {
+"configs": 12,
+"s": 1.0
+},
+"S.SMC.SILVER_BULLET|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.SMC.SWEEP_REVERSAL|M30": {
+"configs": 12,
+"s": 0.9
+},
+"S.SP.SPECTRAL_CYCLE|M30": {
+"configs": 6,
+"s": 1.0
+},
+"S.SP.WAVELET|M30": {
+"configs": 6,
+"s": 0.8
+},
+"S.ST.CANDLESTICK|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.ST.CHANNEL|M30": {
+"configs": 12,
+"s": 1.2
+},
+"S.ST.PIVOT_POINTS|M30": {
+"configs": 2,
+"s": 0.2
+},
+"S.ST.SR_REVERSAL|M30": {
+"configs": 8,
+"s": 0.9
+},
+"S.ST.SWING_STRUCTURE|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.ST.TRENDLINE_BREAK|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.TREND.ADAPTIVE|M30": {
+"configs": 12,
+"s": 2.5
+},
+"S.TREND.DONCHIAN|M30": {
+"configs": 12,
+"s": 1.1
+},
+"S.TREND.INDICATOR_SIGNAL|M30": {
+"configs": 14,
+"s": 2.8
+},
+"S.TREND.KALMAN|M30": {
+"configs": 12,
+"s": 1.2
+},
+"S.TREND.MA_CROSS|M30": {
+"configs": 18,
+"s": 1.4
+},
+"S.TREND.REGRESSION|M30": {
+"configs": 18,
+"s": 1.1
+},
+"S.TREND.TSMOM|M30": {
+"configs": 6,
+"s": 0.9
+},
+"S.VOL.COMPRESSION|M30": {
+"configs": 6,
+"s": 0.6
+},
+"S.VOL.EXPANSION|M30": {
+"configs": 6,
+"s": 0.5
+},
+"S.VOL.REGIME_SWITCH|M30": {
+"configs": 8,
+"s": 1.0
+},
+"S.WEIRD.LUNAR|M30": {
+"configs": 16,
+"s": 1.0
+},
+"S.WEIRD.MERCURY_RETRO|M30": {
+"configs": 4,
+"s": 0.3
+},
+"S.BO.FALSE_BREAKOUT|M15": {
+"configs": 8,
+"s": 1.1
+},
+"S.BO.OPENING_RANGE|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.BO.RANGE_EXPANSION|M15": {
+"configs": 6,
+"s": 0.8
+},
+"S.BO.RETEST|M15": {
+"configs": 16,
+"s": 2.4
+},
+"S.BO.VOL_BREAKOUT|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.BOOK.BW_AO|M15": {
+"configs": 2,
+"s": 0.5
+},
+"S.BOOK.BW_FRACTAL|M15": {
+"configs": 2,
+"s": 0.5
+},
+"S.BOOK.CONNORS_3DAY|M15": {
+"configs": 4,
+"s": 0.8
+},
+"S.BOOK.CONNORS_CRSI|M15": {
+"configs": 12,
+"s": 7.5
+},
+"S.BOOK.CONNORS_PCTB|M15": {
+"configs": 4,
+"s": 0.5
+},
+"S.BOOK.CONNORS_R3|M15": {
+"configs": 4,
+"s": 0.7
+},
+"S.BOOK.DOUBLE_TOP_BOTTOM|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.BOOK.ELDER_IMPULSE|M15": {
+"configs": 2,
+"s": 1.6
+},
+"S.BOOK.GANN_HILO|M15": {
+"configs": 4,
+"s": 1.9
+},
+"S.BOOK.HEAD_SHOULDERS|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.BOOK.HEIKIN_ASHI|M15": {
+"configs": 2,
+"s": 1.2
+},
+"S.BOOK.ICHIMOKU_KUMO|M15": {
+"configs": 2,
+"s": 0.5
+},
+"S.BOOK.LIEN_CHANNEL|M15": {
+"configs": 4,
+"s": 0.7
+},
+"S.BOOK.LIEN_DBB|M15": {
+"configs": 4,
+"s": 1.6
+},
+"S.BOOK.LIEN_FADER|M15": {
+"configs": 2,
+"s": 0.3
+},
+"S.BOOK.LIEN_INSIDE2|M15": {
+"configs": 2,
+"s": 0.3
+},
+"S.BOOK.LIEN_PERFECT_ORDER|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.BOOK.PNF_DOUBLE|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.BOOK.PRIOR_PERIOD_BO|M15": {
+"configs": 4,
+"s": 0.9
+},
+"S.BOOK.RASCHKE_ANTI|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.BOOK.TURTLE_SOUP|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.BOOK.WILDER_DMI|M15": {
+"configs": 6,
+"s": 1.4
+},
+"S.BOOK.WILDER_VOLSYS|M15": {
+"configs": 6,
+"s": 1.3
+},
+"S.BOOK.WILLIAMS_OOPS|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.BOOK.WILLIAMS_R|M15": {
+"configs": 8,
+"s": 1.6
+},
+"S.BOOK.WILLIAMS_SMASH|M15": {
+"configs": 4,
+"s": 0.5
+},
+"S.DAILY.ABS_MOM|M15": {
+"configs": 12,
+"s": 1.5
+},
+"S.DAILY.CUM_RSI|M15": {
+"configs": 48,
+"s": 8.3
+},
+"S.DAILY.DOUBLE_SEVEN|M15": {
+"configs": 12,
+"s": 2.9
+},
+"S.DAILY.FABER|M15": {
+"configs": 16,
+"s": 3.0
+},
+"S.DAILY.HALLOWEEN|M15": {
+"configs": 4,
+"s": 0.4
+},
+"S.DAILY.HIGH52|M15": {
+"configs": 24,
+"s": 2.9
+},
+"S.DAILY.IBS|M15": {
+"configs": 24,
+"s": 18.8
+},
+"S.DAILY.OPEX|M15": {
+"configs": 2,
+"s": 0.2
+},
+"S.DAILY.THREE_DOWN|M15": {
+"configs": 24,
+"s": 7.7
+},
+"S.DAILY.VOL_TARGET|M15": {
+"configs": 8,
+"s": 0.9
+},
+"S.FAMOUS.ALLIGATOR|M15": {
+"configs": 6,
+"s": 1.7
+},
+"S.FAMOUS.CONNORS_RSI2|M15": {
+"configs": 6,
+"s": 1.4
+},
+"S.FAMOUS.CRABEL_NR|M15": {
+"configs": 12,
+"s": 1.6
+},
+"S.FAMOUS.HOLY_GRAIL|M15": {
+"configs": 6,
+"s": 0.8
+},
+"S.FAMOUS.RASCHKE_8020|M15": {
+"configs": 4,
+"s": 0.5
+},
+"S.FAMOUS.TD_SEQUENTIAL|M15": {
+"configs": 4,
+"s": 0.5
+},
+"S.FAMOUS.TTM_SQUEEZE|M15": {
+"configs": 12,
+"s": 7.0
+},
+"S.FAMOUS.TURTLE|M15": {
+"configs": 4,
+"s": 0.7
+},
+"S.FAMOUS.WILLIAMS_VBO|M15": {
+"configs": 8,
+"s": 1.1
+},
+"S.FORUM.NEWS_STRADDLE|M15": {
+"configs": 18,
+"s": 20.4
+},
+"S.FORUM.THREE_DUCKS|M15": {
+"configs": 4,
+"s": 0.8
+},
+"S.GEO.FIB_EXTENSION|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.GEO.FIB_RETRACE|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.GEO.GANN|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.GEO.HARMONIC|M15": {
+"configs": 6,
+"s": 0.8
+},
+"S.MR.BOLLINGER|M15": {
+"configs": 8,
+"s": 1.3
+},
+"S.MR.OU|M15": {
+"configs": 12,
+"s": 2.4
+},
+"S.MR.RSI_REVERSAL|M15": {
+"configs": 18,
+"s": 6.5
+},
+"S.MR.SHORT_REVERSAL|M15": {
+"configs": 54,
+"s": 7.3
+},
+"S.MR.STOCH_REVERSAL|M15": {
+"configs": 8,
+"s": 1.1
+},
+"S.MR.TWAP_REVERSION|M15": {
+"configs": 18,
+"s": 4.0
+},
+"S.MR.ZSCORE|M15": {
+"configs": 18,
+"s": 2.4
+},
+"S.MS.LIQUIDITY_FILTERED|M15": {
+"configs": 6,
+"s": 1.0
+},
+"S.MS.ORDER_FLOW|M15": {
+"configs": 18,
+"s": 1.7
+},
+"S.MS.TICK_IMBALANCE|M15": {
+"configs": 18,
+"s": 1.7
+},
+"S.RG.CHANGE_POINT|M15": {
+"configs": 4,
+"s": 4.0
+},
+"S.RG.ENTROPY|M15": {
+"configs": 6,
+"s": 10.2
+},
+"S.RG.FRACTAL|M15": {
+"configs": 8,
+"s": 2.6
+},
+"S.RG.HMM|M15": {
+"configs": 6,
+"s": 24.5
+},
+"S.RG.VOL_FORECAST|M15": {
+"configs": 6,
+"s": 6.5
+},
+"S.SEAS.FIX_REVERSAL|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.SEAS.INTRADAY|M15": {
+"configs": 12,
+"s": 53.0
+},
+"S.SEAS.MONTH_END_FIX|M15": {
+"configs": 6,
+"s": 1.8
+},
+"S.SEAS.TURN_OF_MONTH|M15": {
+"configs": 6,
+"s": 0.7
+},
+"S.SEAS.WEEKDAY|M15": {
+"configs": 6,
+"s": 1.1
+},
+"S.SEAS.WEEKEND_GAP_FADE|M15": {
+"configs": 6,
+"s": 0.8
+},
+"S.SES.ASIAN_RANGE|M15": {
+"configs": 2,
+"s": 0.2
+},
+"S.SES.LONDON_BREAKOUT|M15": {
+"configs": 2,
+"s": 0.3
+},
+"S.SES.NY_OPEN_REVERSAL|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.SES.OVERLAP_MOMENTUM|M15": {
+"configs": 6,
+"s": 2.5
+},
+"S.SES.SESSION_MOMENTUM|M15": {
+"configs": 6,
+"s": 1.1
+},
+"S.SMC.FVG_RETRACE|M15": {
+"configs": 12,
+"s": 1.7
+},
+"S.SMC.SILVER_BULLET|M15": {
+"configs": 4,
+"s": 0.6
+},
+"S.SMC.SWEEP_REVERSAL|M15": {
+"configs": 12,
+"s": 1.7
+},
+"S.SP.SPECTRAL_CYCLE|M15": {
+"configs": 6,
+"s": 2.0
+},
+"S.SP.WAVELET|M15": {
+"configs": 6,
+"s": 1.6
+},
+"S.ST.CANDLESTICK|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.ST.CHANNEL|M15": {
+"configs": 12,
+"s": 2.4
+},
+"S.ST.PIVOT_POINTS|M15": {
+"configs": 2,
+"s": 0.3
+},
+"S.ST.SR_REVERSAL|M15": {
+"configs": 8,
+"s": 1.7
+},
+"S.ST.SWING_STRUCTURE|M15": {
+"configs": 6,
+"s": 0.8
+},
+"S.ST.TRENDLINE_BREAK|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.TREND.ADAPTIVE|M15": {
+"configs": 12,
+"s": 5.0
+},
+"S.TREND.DONCHIAN|M15": {
+"configs": 12,
+"s": 2.1
+},
+"S.TREND.INDICATOR_SIGNAL|M15": {
+"configs": 14,
+"s": 5.4
+},
+"S.TREND.KALMAN|M15": {
+"configs": 12,
+"s": 2.0
+},
+"S.TREND.MA_CROSS|M15": {
+"configs": 18,
+"s": 2.7
+},
+"S.TREND.REGRESSION|M15": {
+"configs": 18,
+"s": 2.1
+},
+"S.TREND.TSMOM|M15": {
+"configs": 6,
+"s": 1.7
+},
+"S.VOL.COMPRESSION|M15": {
+"configs": 6,
+"s": 1.0
+},
+"S.VOL.EXPANSION|M15": {
+"configs": 6,
+"s": 0.9
+},
+"S.VOL.REGIME_SWITCH|M15": {
+"configs": 8,
+"s": 2.0
+},
+"S.WEIRD.LUNAR|M15": {
+"configs": 16,
+"s": 1.8
+},
+"S.WEIRD.MERCURY_RETRO|M15": {
+"configs": 4,
+"s": 0.5
+}
+}
