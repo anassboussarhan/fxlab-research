@@ -111,3 +111,4 @@ These approximate Ross Cameron's "five pillars". Float and news are not availabl
   - P2 net mean > 0 with t ≥ 1.645 at base costs;
   - it passes BH at q = 0.10 over the 4 tests.
 - **Caveat:** with 18 months this is a first look, not a decision.
+- 2026-11-14: the user approved using the remaining Databento credit ("Use remaining databento credit"); cap USD 9.

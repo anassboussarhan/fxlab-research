@@ -1,0 +1,52 @@
+name: r20w
+# Round 20 part W (docs/round20_preregistration.md, addendum W; scripts/r20_w.py). Databento data, priced first,
+# capped at USD 9 (the user's remaining free credit, approved 2026-11-14). Data stay in an artifact (licence);
+# only the summary statistics are published to branch round20w. Trigger: ci/R20W.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R20W"]
+permissions:
+  contents: write
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q databento==0.90.0 pandas pyarrow numpy scipy
+      - name: Fetch (priced first, cap USD 9)
+        env:
+          DATABENTO_API_KEY: ${{ secrets.DATABENTO_API_KEY }}
+        run: python scripts/r20_w.py fetch --out wdata --cap 9 2>&1 | tee fetch_log.txt
+      - name: Tests
+        run: |
+          mkdir -p out && cp fetch_log.txt out/ && cp wdata/spend.json out/ || true
+          python -W ignore scripts/r20_w.py run --data wdata --out out 2>&1 | tee out/log.txt
+          rm -f out/w_trades.csv
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r20w-data
+          path: wdata
+          retention-days: 30
+      - name: Publish
+        if: always()
+        run: |
+          cp -r out /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r20w-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round20w && cp -r /tmp/pub/* round20w/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round20w/RUN.txt
+          git add -f round20w
+          git commit -qm "round 20 W (run ${{ github.run_id }})"
+          git push -f origin HEAD:round20w
