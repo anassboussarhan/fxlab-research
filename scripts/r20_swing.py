@@ -37,7 +37,8 @@ def membership():
         if "Historical Components" in f["name"] and f["name"].endswith(".csv") and m:
             cand.append((pd.Timestamp(f"{m.group(3)}-{m.group(1)}-{m.group(2)}"), f))
     print("candidates", [(str(d.date()), f["name"]) for d, f in cand], flush=True)
-    f = max(cand, key=lambda x: x[0])[1]
+    upd = [f for f in lst if "Historical Components" in f["name"] and "Updated" in f["name"]]
+    f = upd[0] if upd else max(cand, key=lambda x: x[0])[1]
     print("membership file", f["name"], flush=True)
     H = pd.read_csv(io.StringIO(requests.get(f["download_url"], headers=UA, timeout=120).text))
     H["date"] = pd.to_datetime(H["date"])
