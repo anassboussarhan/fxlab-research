@@ -1,0 +1,27 @@
+total 20
+drwxr-xr-x  2 runner runner 4096 Nov 14 19:06 .
+drwxr-xr-x 15 runner runner 4096 Nov 14 19:06 ..
+-rw-r--r--  1 runner runner 3848 Nov 14 19:06 daily.parquet
+-rw-r--r--  1 runner runner 4969 Nov 14 19:06 events.parquet
+symbol            object
+date      datetime64[ns]
+open             float64
+high             float64
+low              float64
+close            float64
+volume            uint64
+dtype: object
+Empty DataFrame
+Columns: [symbol, date, open, high, low, close, volume]
+Index: []
+0 0 NaT NaT
+      date  open  high  low  close  volume
+count    0   0.0   0.0  0.0    0.0     0.0
+mean   NaT   NaN   NaN  NaN    NaN     NaN
+min    NaT   NaN   NaN  NaN    NaN     NaN
+25%    NaT   NaN   NaN  NaN    NaN     NaN
+50%    NaT   NaN   NaN  NaN    NaN     NaN
+75%    NaT   NaN   NaN  NaN    NaN     NaN
+max    NaT   NaN   NaN  NaN    NaN     NaN
+std    NaN   NaN   NaN  NaN    NaN     NaN
+symbols null: nan
