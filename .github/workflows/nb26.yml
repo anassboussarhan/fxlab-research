@@ -1,0 +1,75 @@
+name: nb26
+# The one-time 2026 check of the noise-area breakout (docs/nb2026_preregistration.md). Trigger: ci/NB26.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/NB26"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  download:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        month: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q polars numpy pandas pyarrow
+      - run: |
+          S=$(printf "2026-%02d-01" ${{ matrix.month }})
+          E=$(date -u -d "$S +1 month" +%Y-%m-%d)
+          python -m fxlab.data.acquire_dukascopy --pairs USATECHIDXUSD --start ${S}T00:00:00 --end ${E}T00:00:00 --hours 13-21 --weekdays 0-4
+          M=$(printf "%02d" ${{ matrix.month }})
+          mkdir -p part && mv data/m1/USATECHIDXUSD/USATECHIDXUSD_2026*.parquet part/NAS_2026_$M.parquet
+          ls -la part
+      - uses: actions/upload-artifact@v4
+        with:
+          name: nb26-${{ matrix.month }}
+          path: part
+          retention-days: 30
+  analyse:
+    needs: download
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: nb26-*
+          path: extra
+      - name: Development store (December 2025 warm-up)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 USATECHIDXUSD
+      - run: |
+          mkdir -p out
+          python -W ignore scripts/nb_forward.py --extra extra --from 2026-01-01 --to 2026-10-31 --out out --label h26 2>&1 | tee out/log.txt
+      - name: Publish
+        if: always()
+        run: |
+          cp -r out /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan nb26-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p nb26 && cp -r /tmp/pub/* nb26/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > nb26/RUN.txt
+          git add -f nb26
+          git commit -qm "nb26 (run ${{ github.run_id }})"
+          git push -f origin HEAD:nb26

@@ -1,0 +1,47 @@
+name: forward-nb
+# Weekly paper forward test of the noise-area breakout on the Nasdaq from 2026-11-16
+# (docs/nb2026_preregistration.md, part B). Results on branch forward-nb.
+on:
+  schedule:
+    - cron: "17 7 * * 6"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FORWARD_NB"]
+permissions:
+  contents: write
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt polars
+      - name: Download NAS100 minutes since the warm-up start
+        run: |
+          E=$(date -u +%Y-%m-%d)
+          python -m fxlab.data.acquire_dukascopy --pairs USATECHIDXUSD --start 2026-10-15T00:00:00 --end ${E}T00:00:00 --hours 13-21 --weekdays 0-4
+          mkdir -p extra && mv data/m1/USATECHIDXUSD/USATECHIDXUSD_20*.parquet extra/
+          ls -la extra
+      - run: |
+          set -o pipefail
+          mkdir -p out && python -W ignore scripts/nb_forward.py --extra extra --from 2026-11-16 --to 2099-12-31 --out out --label fwd 2>&1 | tee out/log.txt
+      - name: Publish
+        if: always()
+        run: |
+          cp -r out /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan fnb-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p forward_nb && cp -r /tmp/pub/* forward_nb/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > forward_nb/RUN.txt
+          git add -f forward_nb
+          git commit -qm "forward-nb (run ${{ github.run_id }})"
+          git push -f origin HEAD:forward-nb
