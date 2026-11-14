@@ -65,3 +65,46 @@ All signals use data up to the close of day t; entries are on day t+1 or later.
 - **2026:** only for a test that counts, once, and reported as for earlier holdout checks.
 
 Not financial advice.
+
+## Addendum W (2026-11-14, before any data): Warrior-style small-cap gap trading
+
+This part runs only after the user approves the data cost.
+
+### Data
+
+- **Daily bars:** Databento consolidated daily bars (EQUS.SUMMARY, unadjusted, every listed US stock, delisted
+  ones included), 2024-07-01 to 2025-12-31. This dataset starts in July 2024, so only 18 months are available.
+- **Minute bars:** Nasdaq ITCH minute bars (pre-market from 04:00 New York) for the event stock-days only.
+- **Spending:** every request is priced first; the total is capped at USD 9.
+
+### Events (known at the open)
+
+- the open is ≥ 10% above the previous close;
+- the previous close is between USD 1 and 20;
+- previous-day volume is ≥ 100,000 shares.
+
+These approximate Ross Cameron's "five pillars". Float and news are not available.
+
+### Tests
+
+| ID | Rule |
+|---|---|
+| W1 gap-and-go (long) | - **Condition:** pre-market volume (04:00-09:29) ≥ 50,000 shares.<br>- **Entry:** the first minute from 09:30 to 10:29 whose high exceeds the pre-market high; buy at max(that minute's open, the pre-market high).<br>- **Stop:** the lowest low of the entry minute and the 5 before it, at most 10% and, if no lower low exists, 5% below entry.<br>- **Target:** 2 × the risk.<br>- **Exit:** the stop or target, otherwise out at 11:00. |
+| W2 opening momentum (base rate) | Buy at the open, sell at 10:30. |
+| W3 gap-up short (Steven Dux style) | - **Condition:** gap ≥ 50% and open ≥ USD 3.<br>- **Entry:** at 10:30, if the price is at least 10% below the high so far, short.<br>- **Stop:** that high.<br>- **Exit:** cover at 15:55 otherwise. |
+| W4 fade (base rate) | Gap ≥ 30% and open ≥ USD 2: short at the open, cover at 15:55. |
+
+### Costs
+
+- **Base:** 0.30% per side (small-cap spread plus slippage).
+- **Stress:** 0.60% per side.
+- **Shorts:** plus 0.5% borrow for the day.
+
+### Periods and counting
+
+- **Periods:** P1 2024-07 to 2025-03, P2 2025-04 to 2025-12. The t is from daily means.
+- **Counting rule:** a test counts if:
+  - P1 net mean > 0;
+  - P2 net mean > 0 with t ≥ 1.645 at base costs;
+  - it passes BH at q = 0.10 over the 4 tests.
+- **Caveat:** with 18 months this is a first look, not a decision.
