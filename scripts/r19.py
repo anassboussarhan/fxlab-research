@@ -466,19 +466,17 @@ def cmd_crypto(a):
         M = pd.concat([pd.read_parquet(x, columns=["ts", "bid_o", "ask_o"]) for x in files]).drop_duplicates("ts")
         mid = pd.Series(0.5 * (M.bid_o.to_numpy() + M.ask_o.to_numpy()), index=pd.DatetimeIndex(M.ts)).sort_index()
         F = F[F.ts <= pd.Timestamp(DEV_END + " 23:59", tz="UTC")].reset_index(drop=True)
-        for i in range(1, len(F)):
-            T, prev = F.ts[i], F.rate[i - 1]
-            if not np.isfinite(prev) or abs(prev - 1e-4) < 1e-9:
-                continue
-            crowd = 1 if prev > 1e-4 else -1                               # +1: longs pay above the baseline
-            p = mid.reindex([T - pd.Timedelta(minutes=60), T, T + pd.Timedelta(minutes=60)]).to_numpy()
-            if not np.isfinite(p).all():
-                continue
-            for test, d, e, x in (("PRE", -crowd, p[0], p[1]), ("POST", crowd, p[1], p[2])):
-                g = d * (x / e - 1)
-                rows.append({"pair": sym, "day": pd.Timestamp(T.date()), "test": test, "gross": g, "net": g - 10e-4,
-                             "net_maker": g - 4e-4})
-    R = pd.DataFrame(rows)
+        prev = F.rate.shift(1).to_numpy()
+        T = pd.DatetimeIndex(F.ts)
+        h = pd.Timedelta(minutes=60)
+        P = np.vstack([mid.reindex(T - h).to_numpy(), mid.reindex(T).to_numpy(), mid.reindex(T + h).to_numpy()]).T
+        crowd = np.where(prev > 1e-4 + 1e-9, 1, np.where(prev < 1e-4 - 1e-9, -1, 0))
+        ok = np.isfinite(prev) & (crowd != 0) & np.isfinite(P).all(axis=1)
+        for test, d, e, x in (("PRE", -crowd, P[:, 0], P[:, 1]), ("POST", crowd, P[:, 1], P[:, 2])):
+            g = d * (x / e - 1)
+            rows.append(pd.DataFrame({"pair": sym, "day": T.tz_convert(None).normalize(), "test": test, "gross": g,
+                                      "net": g - 10e-4, "net_maker": g - 4e-4})[ok])
+    R = pd.concat(rows, ignore_index=True) if rows else pd.DataFrame()
     os.makedirs(a.out, exist_ok=True)
     R.to_parquet(os.path.join(a.out, "crypto_trades.parquet"))
     if len(R):

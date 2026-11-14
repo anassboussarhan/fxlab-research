@@ -1,0 +1,81 @@
+name: r19c
+# Round 19, part E rerun (the r19b crypto job hit its time limit; vectorised) and the combine over r19 and r19b.
+# Trigger: ci/R19C.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R19C"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  R1: "43601331590"
+  R2: "43601520485"
+jobs:
+  crypto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download $R2 -n cdata -D cdata
+      - run: |
+          python -W ignore scripts/r19.py crypto --funding cdata --out out/crypto
+          cp cdata/cdata_meta.json out/crypto/ || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r19-crypto
+          path: out/crypto
+          retention-days: 30
+  combine:
+    needs: crypto
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r19-*
+          path: r19_in
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R1/artifacts?per_page=100" -q '.artifacts[].name' | grep -E '^r19-(idx|runs|lib)-'); do
+            case $n in *USDT) continue;; esac
+            gh run download $R1 -n $n -D r19_in/$n || true
+          done
+          for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R2/artifacts?per_page=100" -q '.artifacts[].name' | grep -E '^r19-(eia|carry|lib-)'); do
+            gh run download $R2 -n $n -D r19_in/$n || true
+          done
+          ls r19_in
+      - run: |
+          mkdir -p out/round19
+          python -W ignore scripts/r19.py lib --inp r19_in --out out/round19 2>&1 | tee out/round19/lib_log.txt || true
+          python -W ignore scripts/r19.py combine --inp r19_in --out out/round19 2>&1 | tee out/round19/H_log.txt || true
+          for f in $(find r19_in -name "*.json" -o -name "eia_timing.csv"); do cp "$f" out/round19/ 2>/dev/null || true; done
+      - name: Publish
+        if: always()
+        run: |
+          mkdir -p /tmp/pub && cp -r out/round19/. /tmp/pub/
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r19c-pub
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round19 && cp -r /tmp/pub/. round19/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round19/RUN.txt
+          git add -f round19
+          git commit -qm "round 19 (run ${{ github.run_id }})"
+          git push -f origin HEAD:round19
