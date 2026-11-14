@@ -50,11 +50,38 @@ def cmd_fetch(a):
         print("ABORT daily above cap")
         json.dump(log, open(os.path.join(a.out, "spend.json"), "w"))
         return
-    st = c.timeseries.get_range(**q)
-    spent += cost
-    D = st.to_df(map_symbols=True).reset_index()
+    raw = os.path.join(a.out, "daily.dbn.zst")
+    if a.reuse and os.path.exists(a.reuse):                              # a raw file bought earlier: no new purchase
+        st = db.DBNStore.from_file(a.reuse)
+        log[-1]["reused"] = a.reuse
+    else:
+        st = c.timeseries.get_range(**q, path=raw)                       # keep the raw file: never pay twice
+        spent += cost
+    D = st.to_df(map_symbols=False).reset_index()
+    print("daily rows", len(D), "columns", list(D.columns), flush=True)
+    # ALL_SYMBOLS requests carry no symbol mappings: resolve instrument ids -> tickers (free symbology call)
+    ids = sorted(D.instrument_id.unique().astype(int))
+    mp = {}
+    for i in range(0, len(ids), 2000):
+        r = c.symbology.resolve(dataset="EQUS.SUMMARY", symbols=[str(x) for x in ids[i:i + 2000]], stype_in="instrument_id",
+                                stype_out="raw_symbol", start_date=START, end_date=END)
+        for k, v in r.get("result", {}).items():
+            mp[int(k)] = [(pd.Timestamp(x["d0"]), pd.Timestamp(x["d1"]), x["s"]) for x in v]
     D["date"] = pd.to_datetime(D.ts_event).dt.tz_convert(None).dt.normalize()
-    D = D[["symbol", "date", "open", "high", "low", "close", "volume"]].dropna()
+
+    def sym(row_id, d):
+        for d0, d1, s_ in mp.get(int(row_id), []):
+            if d0 <= d < d1:
+                return s_
+        return None
+    D["symbol"] = [sym(i, d) for i, d in zip(D.instrument_id.to_numpy(), D.date)]
+    print("symbol resolved share", float(D.symbol.notna().mean()), flush=True)
+    D = D[["symbol", "instrument_id", "date", "open", "high", "low", "close", "volume"]]
+    if len(D) == 0 or D.symbol.notna().mean() < 0.9:
+        print("ABORT: daily file empty or symbols unresolved; minutes not bought")
+        json.dump(log, open(os.path.join(a.out, "spend.json"), "w"))
+        return
+    D = D.dropna(subset=["symbol", "open", "close"])
     D.to_parquet(os.path.join(a.out, "daily.parquet"))
     E = events_from_daily(D)
     E.to_parquet(os.path.join(a.out, "events.parquet"))
@@ -196,6 +223,7 @@ def main():
     ap.add_argument("--data", default="")
     ap.add_argument("--out", required=True)
     ap.add_argument("--cap", type=float, default=9.0)
+    ap.add_argument("--reuse", default="")
     a = ap.parse_args()
     {"fetch": cmd_fetch, "run": cmd_run}[a.cmd](a)
 

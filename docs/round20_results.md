@@ -73,7 +73,21 @@ SPY over the same days by 0.5-1.6% per trade.
   Daily bars on the S&P 500 test the setups where prop-firm stock CFDs are available, not their whole universe.
 - The episodic pivot without the earnings filter is what the outside model also found to have no edge.
 
-## 4. Part W (Warrior-style small-cap intraday): waiting for data approval
+## 4. Part W (Warrior-style small-cap intraday): data purchase lost to a bug, not run
+
+- **What happened (run 43629956478):**
+  - The approved fetch bought the consolidated daily bars for USD 6.75, as priced.
+  - My code then lost them. A request for ALL_SYMBOLS carries no ticker mappings, so the symbol column was empty,
+    and my `dropna()` deleted every row before anything was saved.
+  - The guard stopped the minute purchase, so no events were tested.
+  - The fix (in `scripts/r20_w.py`) keeps the raw file (`--reuse`), resolves the tickers with the free symbology
+    call, and aborts if the symbols are not resolved.
+  - Streaming requests are billed again when repeated, so the USD 6.75 is spent.
+- **Lesson:** save the raw purchase to disk before any processing, and test the full fetch path on a tiny paid
+  request first.
+
+### Original plan
+
 
 - Pre-registered as addendum W, with the code in `scripts/r20_w.py`. Not run.
 - It needs minute bars of small caps, including delisted ones. On Databento this costs about USD 10-11 for July
