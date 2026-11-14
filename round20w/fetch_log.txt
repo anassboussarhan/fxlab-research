@@ -1,0 +1,22 @@
+daily cost 6.752786189318
+/home/runner/work/fxlab-research/fxlab-research/scripts/r20_w.py:53: BentoWarning: The streaming request contained one or more days which have reduced quality: 2025-12-15 (degraded). See: https://databento.com/docs/api-reference-historical/metadata/metadata-get-dataset-condition
+  st = c.timeseries.get_range(**q)
+/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/databento/common/dbnstore.py:1538: Pandas4Warning: The inplace keyword in DataFrame.set_index is deprecated and will be removed in a future version (PDEP-8).
+See https://pandas.pydata.org/docs/dev/whatsnew/v3.1.0.html#deprecation-inplace for more details.
+  df.set_index(index_column, inplace=True)
+events 0 days 0
+minute cost 0 cap left 2.247213810682
+Traceback (most recent call last):
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/r20_w.py", line 204, in <module>
+    main()
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/r20_w.py", line 200, in main
+    {"fetch": cmd_fetch, "run": cmd_run}[a.cmd](a)
+  File "/home/runner/work/fxlab-research/fxlab-research/scripts/r20_w.py", line 88, in cmd_fetch
+    pd.concat(parts).to_parquet(os.path.join(a.out, "minutes.parquet"))
+    ^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/reshape/concat.py", line 426, in concat
+    objs, keys, ndims = _clean_keys_and_objs(objs, keys)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/hostedtoolcache/Python/3.12.16/x64/lib/python3.12/site-packages/pandas/core/reshape/concat.py", line 842, in _clean_keys_and_objs
+    raise ValueError("No objects to concatenate")
+ValueError: No objects to concatenate
