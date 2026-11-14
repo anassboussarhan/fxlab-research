@@ -31,9 +31,10 @@ def membership():
     lst = requests.get("https://api.github.com/repos/fja05680/sp500/contents", headers=UA, timeout=60).json()
     import re
     cand = []
+    print("files", [f["name"] for f in lst], flush=True)
     for f in lst:
-        m = re.search(r"\((\d{2})-(\d{2})-(\d{4})\)\.csv$", f["name"])
-        if f["name"].startswith("S&P 500 Historical Components") and m:
+        m = re.search(r"(\d{2})-(\d{2})-(\d{4})", f["name"])
+        if "Historical Components" in f["name"] and f["name"].endswith(".csv") and m:
             cand.append((pd.Timestamp(f"{m.group(3)}-{m.group(1)}-{m.group(2)}"), f))
     print("candidates", [(str(d.date()), f["name"]) for d, f in cand], flush=True)
     f = max(cand, key=lambda x: x[0])[1]
