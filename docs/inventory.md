@@ -84,6 +84,8 @@ The status of every single item is in `docs/test_ledger.md`.
 | Round 17: intraday libraries, daily / weekly / monthly switching, per-instrument regimes, Hedge, CUSUM, pooled boosting | 93 + 486 tests | 0 count; faster switching is worse; a 14-hour look-ahead found and fixed | `round17_results.md` |
 | Round 18: a feature-free test for performance regimes; a regime detector on 1976-2025 | permutation tests; 3 tests | no persistent states in D1 / W1 / MN strategies; intraday states are cost states; on 50 years no detector beats static selection | `round18_results.md` |
 
+| Round 19: verified gaps — index rules at futures costs, dip × carry, EIA oil, crypto funding times, prior-day stop runs; the library on 13 commodity / index / bond CFDs and crypto | 22 tests + 21,000 units | 0 count; noise-area breakout on NAS100 passes its own rule, fails BH; EIA, funding times, stop runs have no gross edge; costs dominate the library | `round19_results.md` |
+
 ### 2.5 Prop firms and execution
 
 | What | Result | Where |
