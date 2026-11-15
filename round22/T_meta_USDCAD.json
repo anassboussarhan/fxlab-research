@@ -1,0 +1,395 @@
+{
+ "symbol": "USDCAD",
+ "days": 5527,
+ "first": "2007-03-30",
+ "last": "2025-12-30",
+ "choices": {
+  "2010": [
+   {
+    "cfg": "11|2|long|month_end",
+    "train_t": 2.86
+   },
+   {
+    "cfg": "11|3|long|month_end",
+    "train_t": 2.78
+   },
+   {
+    "cfg": "10|3|long|month_end",
+    "train_t": 2.7
+   },
+   {
+    "cfg": "10|4|long|month_end",
+    "train_t": 2.57
+   },
+   {
+    "cfg": "11|4|long|month_end",
+    "train_t": 2.54
+   }
+  ],
+  "2011": [
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.98
+   },
+   {
+    "cfg": "16|3|short|fomc",
+    "train_t": 2.8
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.73
+   },
+   {
+    "cfg": "11|3|long|month_end",
+    "train_t": 2.7
+   },
+   {
+    "cfg": "11|4|long|month_end",
+    "train_t": 2.65
+   }
+  ],
+  "2012": [
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.59
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.51
+   },
+   {
+    "cfg": "12|8|short|fomc",
+    "train_t": 2.41
+   },
+   {
+    "cfg": "13|6|short|fomc",
+    "train_t": 2.4
+   },
+   {
+    "cfg": "16|24|fade4|month_end",
+    "train_t": 2.39
+   }
+  ],
+  "2013": [
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.71
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.7
+   },
+   {
+    "cfg": "16|3|short|fomc",
+    "train_t": 2.57
+   },
+   {
+    "cfg": "16|24|fade4|month_end",
+    "train_t": 2.55
+   },
+   {
+    "cfg": "12|8|short|fomc",
+    "train_t": 2.52
+   }
+  ],
+  "2014": [
+   {
+    "cfg": "16|24|fade4|month_end",
+    "train_t": 2.74
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.57
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.57
+   },
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 2.52
+   },
+   {
+    "cfg": "3|16|short|fomc",
+    "train_t": 2.47
+   }
+  ],
+  "2015": [
+   {
+    "cfg": "16|24|fade4|month_end",
+    "train_t": 2.85
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.35
+   },
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 2.25
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.21
+   },
+   {
+    "cfg": "19|24|fade4|month_end",
+    "train_t": 2.16
+   }
+  ],
+  "2016": [
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 2.83
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.81
+   },
+   {
+    "cfg": "13|6|short|fomc",
+    "train_t": 2.51
+   },
+   {
+    "cfg": "3|16|short|fomc",
+    "train_t": 2.43
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.34
+   }
+  ],
+  "2017": [
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.74
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.63
+   },
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.61
+   },
+   {
+    "cfg": "3|16|short|fomc",
+    "train_t": 2.49
+   },
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 2.43
+   }
+  ],
+  "2018": [
+   {
+    "cfg": "7|16|fade1|month_end",
+    "train_t": 2.76
+   },
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.69
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.67
+   },
+   {
+    "cfg": "7|24|fade1|month_end",
+    "train_t": 2.65
+   },
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 2.61
+   }
+  ],
+  "2019": [
+   {
+    "cfg": "7|16|fade1|month_end",
+    "train_t": 2.74
+   },
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.73
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.69
+   },
+   {
+    "cfg": "7|24|fade1|month_end",
+    "train_t": 2.66
+   },
+   {
+    "cfg": "3|16|short|fomc",
+    "train_t": 2.6
+   }
+  ],
+  "2020": [
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.81
+   },
+   {
+    "cfg": "7|16|fade1|month_end",
+    "train_t": 2.76
+   },
+   {
+    "cfg": "7|24|fade1|month_end",
+    "train_t": 2.61
+   },
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 2.52
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.52
+   }
+  ],
+  "2021": [
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 2.81
+   },
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.71
+   },
+   {
+    "cfg": "7|16|fade1|month_end",
+    "train_t": 2.69
+   },
+   {
+    "cfg": "7|24|fade1|month_end",
+    "train_t": 2.65
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.57
+   }
+  ],
+  "2022": [
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 2.77
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.6
+   },
+   {
+    "cfg": "3|16|short|fomc",
+    "train_t": 2.53
+   },
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.52
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.47
+   }
+  ],
+  "2023": [
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 3.04
+   },
+   {
+    "cfg": "3|16|short|fomc",
+    "train_t": 2.65
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.64
+   },
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.63
+   },
+   {
+    "cfg": "11|8|short|fomc",
+    "train_t": 2.53
+   }
+  ],
+  "2024": [
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 3.04
+   },
+   {
+    "cfg": "3|16|short|fomc",
+    "train_t": 2.65
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.64
+   },
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.63
+   },
+   {
+    "cfg": "8|16|short|month_end",
+    "train_t": 2.6
+   }
+  ],
+  "2025": [
+   {
+    "cfg": "20|24|long|fomc",
+    "train_t": 3.04
+   },
+   {
+    "cfg": "3|16|short|fomc",
+    "train_t": 2.65
+   },
+   {
+    "cfg": "15|4|short|fomc",
+    "train_t": 2.64
+   },
+   {
+    "cfg": "19|16|follow4|fomc",
+    "train_t": 2.62
+   },
+   {
+    "cfg": "10|6|fade4|month_end",
+    "train_t": 2.61
+   }
+  ]
+ },
+ "masks": {
+  "all": 5527,
+  "mon": 929,
+  "tue": 919,
+  "wed": 918,
+  "thu": 921,
+  "fri": 926,
+  "gotobi": 1271,
+  "month_end": 218,
+  "month_start": 213,
+  "fomc": 116,
+  "nfp": 214
+ },
+ "fomc_days": 124,
+ "fomc_report": {
+  "2007": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2008": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2009": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2010": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2011": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2012": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2013": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2014": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2015": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2016": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']",
+  "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']",
+  "2019": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

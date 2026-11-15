@@ -1,0 +1,96 @@
+{
+ "symbol": "BTCUSDT",
+ "days": 2192,
+ "first": "2020-01-01",
+ "last": "2025-12-31",
+ "choices": {
+  "2023": [
+   {
+    "cfg": "22|3|fade1|tue",
+    "train_t": 3.94
+   },
+   {
+    "cfg": "6|12|follow4|thu",
+    "train_t": 3.19
+   },
+   {
+    "cfg": "16|12|follow1|wed",
+    "train_t": 2.7
+   },
+   {
+    "cfg": "8|16|follow4|wed",
+    "train_t": 2.69
+   },
+   {
+    "cfg": "22|8|fade1|tue",
+    "train_t": 2.67
+   }
+  ],
+  "2024": [
+   {
+    "cfg": "22|3|fade1|tue",
+    "train_t": 3.52
+   },
+   {
+    "cfg": "8|16|follow4|wed",
+    "train_t": 3.33
+   },
+   {
+    "cfg": "2|16|follow4|mon",
+    "train_t": 2.91
+   },
+   {
+    "cfg": "18|24|fade4|month_start",
+    "train_t": 2.82
+   },
+   {
+    "cfg": "6|12|follow4|thu",
+    "train_t": 2.81
+   }
+  ],
+  "2025": [
+   {
+    "cfg": "8|16|follow4|wed",
+    "train_t": 3.9
+   },
+   {
+    "cfg": "8|12|follow4|wed",
+    "train_t": 3.46
+   },
+   {
+    "cfg": "8|24|follow4|wed",
+    "train_t": 3.06
+   },
+   {
+    "cfg": "22|3|fade1|tue",
+    "train_t": 3.03
+   },
+   {
+    "cfg": "2|16|follow4|mon",
+    "train_t": 2.92
+   }
+  ]
+ },
+ "masks": {
+  "all": 2192,
+  "mon": 313,
+  "tue": 313,
+  "wed": 314,
+  "thu": 313,
+  "fri": 313,
+  "gotobi": 431,
+  "month_end": 72,
+  "month_start": 72,
+  "fomc": 23,
+  "nfp": 72
+ },
+ "fomc_days": 23,
+ "fomc_report": {
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

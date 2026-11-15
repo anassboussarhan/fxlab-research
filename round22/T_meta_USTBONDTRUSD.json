@@ -1,0 +1,119 @@
+{
+ "symbol": "USTBONDTRUSD",
+ "days": 2122,
+ "first": "2019-01-21",
+ "last": "2025-12-31",
+ "choices": {
+  "2022": [
+   {
+    "cfg": "0|24|follow1|tue",
+    "train_t": 2.71
+   },
+   {
+    "cfg": "19|16|long|wed",
+    "train_t": 2.27
+   },
+   {
+    "cfg": "14|8|follow1|gotobi",
+    "train_t": 2.19
+   },
+   {
+    "cfg": "5|16|fade4|mon",
+    "train_t": 2.1
+   },
+   {
+    "cfg": "12|8|fade1|gotobi",
+    "train_t": 1.99
+   }
+  ],
+  "2023": [
+   {
+    "cfg": "8|16|long|month_start",
+    "train_t": 2.22
+   },
+   {
+    "cfg": "6|24|short|mon",
+    "train_t": 2.21
+   },
+   {
+    "cfg": "0|16|fade1|nfp",
+    "train_t": 2.2
+   },
+   {
+    "cfg": "4|16|follow4|nfp",
+    "train_t": 2.05
+   },
+   {
+    "cfg": "5|24|short|mon",
+    "train_t": 2.03
+   }
+  ],
+  "2024": [
+   {
+    "cfg": "0|16|fade1|nfp",
+    "train_t": 2.62
+   },
+   {
+    "cfg": "0|12|fade1|nfp",
+    "train_t": 2.19
+   },
+   {
+    "cfg": "4|16|follow4|nfp",
+    "train_t": 2.15
+   },
+   {
+    "cfg": "4|12|follow4|nfp",
+    "train_t": 2.11
+   },
+   {
+    "cfg": "8|16|long|month_start",
+    "train_t": 2.04
+   }
+  ],
+  "2025": [
+   {
+    "cfg": "4|12|follow4|nfp",
+    "train_t": 3.0
+   },
+   {
+    "cfg": "4|16|follow4|nfp",
+    "train_t": 2.89
+   },
+   {
+    "cfg": "0|16|fade1|nfp",
+    "train_t": 2.23
+   },
+   {
+    "cfg": "8|16|long|month_start",
+    "train_t": 2.1
+   },
+   {
+    "cfg": "0|12|fade1|nfp",
+    "train_t": 2.07
+   }
+  ]
+ },
+ "masks": {
+  "all": 2122,
+  "mon": 356,
+  "tue": 355,
+  "wed": 358,
+  "thu": 359,
+  "fri": 348,
+  "gotobi": 479,
+  "month_end": 81,
+  "month_start": 82,
+  "fomc": 31,
+  "nfp": 82
+ },
+ "fomc_days": 31,
+ "fomc_report": {
+  "2019": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

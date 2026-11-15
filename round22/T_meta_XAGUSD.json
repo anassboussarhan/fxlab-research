@@ -1,0 +1,326 @@
+{
+ "symbol": "XAGUSD",
+ "days": 4278,
+ "first": "2010-11-11",
+ "last": "2025-12-30",
+ "choices": {
+  "2013": [
+   {
+    "cfg": "20|24|follow1|wed",
+    "train_t": 2.5
+   },
+   {
+    "cfg": "22|24|follow4|wed",
+    "train_t": 2.46
+   },
+   {
+    "cfg": "5|24|fade1|thu",
+    "train_t": 1.99
+   },
+   {
+    "cfg": "0|16|fade4|fri",
+    "train_t": 1.96
+   },
+   {
+    "cfg": "0|16|fade4|all",
+    "train_t": 1.62
+   }
+  ],
+  "2014": [
+   {
+    "cfg": "22|24|follow4|wed",
+    "train_t": 2.59
+   },
+   {
+    "cfg": "0|16|fade4|fri",
+    "train_t": 1.74
+   },
+   {
+    "cfg": "8|3|follow1|month_start",
+    "train_t": 1.74
+   },
+   {
+    "cfg": "20|24|follow1|wed",
+    "train_t": 1.73
+   },
+   {
+    "cfg": "17|24|fade4|thu",
+    "train_t": 1.61
+   }
+  ],
+  "2015": [
+   {
+    "cfg": "22|24|follow4|wed",
+    "train_t": 1.99
+   },
+   {
+    "cfg": "11|24|fade1|fomc",
+    "train_t": 1.9
+   },
+   {
+    "cfg": "16|12|fade4|fomc",
+    "train_t": 1.89
+   },
+   {
+    "cfg": "3|24|follow1|fomc",
+    "train_t": 1.88
+   },
+   {
+    "cfg": "19|24|short|fomc",
+    "train_t": 1.84
+   }
+  ],
+  "2016": [
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.76
+   },
+   {
+    "cfg": "20|24|short|fomc",
+    "train_t": 2.26
+   },
+   {
+    "cfg": "19|24|short|fomc",
+    "train_t": 2.23
+   },
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.05
+   },
+   {
+    "cfg": "13|6|long|fomc",
+    "train_t": 1.97
+   }
+  ],
+  "2017": [
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.51
+   },
+   {
+    "cfg": "20|24|short|fomc",
+    "train_t": 2.36
+   },
+   {
+    "cfg": "19|24|short|fomc",
+    "train_t": 2.23
+   },
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.19
+   },
+   {
+    "cfg": "13|6|long|fomc",
+    "train_t": 2.07
+   }
+  ],
+  "2018": [
+   {
+    "cfg": "20|24|short|fomc",
+    "train_t": 2.49
+   },
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.45
+   },
+   {
+    "cfg": "19|24|short|fomc",
+    "train_t": 2.31
+   },
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.16
+   },
+   {
+    "cfg": "22|16|follow4|fomc",
+    "train_t": 2.11
+   }
+  ],
+  "2019": [
+   {
+    "cfg": "20|24|short|fomc",
+    "train_t": 2.47
+   },
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.4
+   },
+   {
+    "cfg": "19|24|short|fomc",
+    "train_t": 2.26
+   },
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.13
+   },
+   {
+    "cfg": "13|6|long|fomc",
+    "train_t": 2.11
+   }
+  ],
+  "2020": [
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.38
+   },
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.22
+   },
+   {
+    "cfg": "22|16|follow4|fomc",
+    "train_t": 2.21
+   },
+   {
+    "cfg": "20|24|short|fomc",
+    "train_t": 2.13
+   },
+   {
+    "cfg": "0|24|short|month_end",
+    "train_t": 1.92
+   }
+  ],
+  "2021": [
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.52
+   },
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.44
+   },
+   {
+    "cfg": "20|24|short|fomc",
+    "train_t": 2.03
+   },
+   {
+    "cfg": "22|16|follow4|fomc",
+    "train_t": 1.9
+   },
+   {
+    "cfg": "0|24|short|month_end",
+    "train_t": 1.76
+   }
+  ],
+  "2022": [
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.54
+   },
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.46
+   },
+   {
+    "cfg": "22|16|follow4|fomc",
+    "train_t": 2.05
+   },
+   {
+    "cfg": "21|16|follow4|fomc",
+    "train_t": 1.74
+   },
+   {
+    "cfg": "1|16|fade4|nfp",
+    "train_t": 1.72
+   }
+  ],
+  "2023": [
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.51
+   },
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.22
+   },
+   {
+    "cfg": "22|16|follow4|fomc",
+    "train_t": 2.08
+   },
+   {
+    "cfg": "21|16|follow4|fomc",
+    "train_t": 2.03
+   },
+   {
+    "cfg": "20|16|follow1|fomc",
+    "train_t": 1.82
+   }
+  ],
+  "2024": [
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.51
+   },
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.22
+   },
+   {
+    "cfg": "22|16|follow4|fomc",
+    "train_t": 2.08
+   },
+   {
+    "cfg": "21|16|follow4|fomc",
+    "train_t": 2.03
+   },
+   {
+    "cfg": "20|16|follow1|fomc",
+    "train_t": 1.82
+   }
+  ],
+  "2025": [
+   {
+    "cfg": "23|16|follow4|fomc",
+    "train_t": 2.51
+   },
+   {
+    "cfg": "23|24|follow4|fomc",
+    "train_t": 2.22
+   },
+   {
+    "cfg": "22|16|follow4|fomc",
+    "train_t": 2.08
+   },
+   {
+    "cfg": "21|16|follow4|fomc",
+    "train_t": 2.03
+   },
+   {
+    "cfg": "20|16|follow1|fomc",
+    "train_t": 1.82
+   }
+  ]
+ },
+ "masks": {
+  "all": 4278,
+  "mon": 727,
+  "tue": 727,
+  "wed": 724,
+  "thu": 726,
+  "fri": 708,
+  "gotobi": 981,
+  "month_end": 163,
+  "month_start": 164,
+  "fomc": 89,
+  "nfp": 161
+ },
+ "fomc_days": 100,
+ "fomc_report": {
+  "2010": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2011": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2012": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2013": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2014": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2015": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2016": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']",
+  "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']",
+  "2019": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

@@ -1,0 +1,70 @@
+{
+ "streams": 78709,
+ "real_streams_tested": 64503,
+ "own_rule": 345,
+ "bh": 4,
+ "counts": 4,
+ "first_bh_threshold": 1.5503154892020527e-06,
+ "placebo": {
+  "streams": 9849,
+  "own_rule": 34,
+  "median_p2_t": -1.1882847670315484,
+  "p95_p2_t": 0.8622773725423749
+ },
+ "real_own_share": 0.005348588437747081
+}
+   part  streams  own  med_p2_t  max_p2_t
+0     B        1    0     1.594     1.594
+1     C        5    0    -0.793     1.192
+2     D        1    0    -0.044    -0.044
+3     E        5    0    -2.088    -0.258
+4     I       85    4    -1.642     6.681
+5     K        3    2    20.322    21.650
+6     L    64292  332    -1.710     3.561
+7     M        1    0    -1.311    -1.311
+8     P       25    5     0.859     2.244
+9     S        3    0     0.572     0.650
+10    T       49    1    -0.354     2.091
+11    V        3    0     0.541     1.406
+12    X       30    1    -2.196     1.906
+      part                          family         symbol   oos_first       p1_mean   p2_mean       p2_t    own     bh
+78662    K                K-cash-and-carry        BTCUSDT  2023-01-01           NaN  0.000214  21.650017   True   True
+78663    K                K-cash-and-carry        ETHUSDT  2023-01-01           NaN  0.000194  20.321504   True   True
+78583    I                           I-FVG  USATECHIDXUSD  2015-01-02  2.262897e-04  0.000788   6.680963   True   True
+78698    I                           I-FVG         POOLED  2010-01-01  2.452270e-05  0.000090   4.934847   True   True
+45187    L          D:S.DAILY.CUM_RSI|W1:1         GBPJPY  2010-01-01 -3.640707e-06  0.000013   3.561184  False  False
+34198    L       D:S.SMC.FVG_RETRACE|D1:-1         EURUSD  2010-01-01 -1.569557e-05  0.000047   3.358028  False  False
+22907    L      D:S.MR.STOCH_REVERSAL|MN:1        ETHUSDT  2023-01-01           NaN  0.000014   3.333675   True  False
+1825     L    D:S.BOOK.HEAD_SHOULDERS|W1:1         AUDCHF  2013-01-01  4.384736e-06  0.000007   3.284553   True  False
+30885    L           D:S.GEO.HARMONIC|D1:1         EURJPY  2010-01-03  8.762945e-06  0.000030   3.211951   True  False
+78603    I                           I-FVG         USDJPY  2010-01-03  7.119313e-05  0.000093   3.170203   True  False
+76379    L       I:S.DAILY.VOL_TARGET|H4:1         XAUUSD  2014-01-01  7.539352e-05  0.000608   3.136303   True  False
+76381    L      I:S.DAILY.VOL_TARGET|M15:1         XAUUSD  2014-01-01  6.852906e-05  0.000611   3.129832   True  False
+72496    L  D:S.FAMOUS.TD_SEQUENTIAL|MN:-1   USTBONDTRUSD  2022-01-02           NaN  0.000019   3.125708   True  False
+76383    L      I:S.DAILY.VOL_TARGET|M30:1         XAUUSD  2014-01-01  6.816532e-05  0.000608   3.116359   True  False
+76377    L       I:S.DAILY.VOL_TARGET|H1:1         XAUUSD  2014-01-01  6.811280e-05  0.000608   3.112900   True  False
+45247    L    D:S.FAMOUS.CONNORS_RSI2|W1:1         GBPJPY  2010-01-01 -1.052795e-06  0.000016   3.093725  False  False
+33883    L      D:S.BOOK.LIEN_CHANNEL|W1:1         EURUSD  2010-01-01 -1.287784e-05  0.000021   3.088723  False  False
+24005    L         I:S.VOL.EXPANSION|M30:1        ETHUSDT  2023-01-01           NaN  0.000242   3.072184   True  False
+70740    L       D:S.BOOK.LIEN_FADER|W1:-1         USDJPY  2010-01-03 -6.296389e-06  0.000062   2.941419  False  False
+41839    L      D:S.BOOK.CONNORS_CRSI|W1:1         GBPCAD  2013-01-01 -4.886804e-06  0.000005   2.924637  False  False
+62869    L    D:S.FAMOUS.CONNORS_RSI2|W1:1    UKGILTTRGBP  2022-01-04           NaN  0.000022   2.909473   True  False
+35896    L       D:S.VOL.COMPRESSION|D1:-1      EUSIDXEUR  2016-01-04 -2.921486e-05  0.000060   2.880037  False  False
+72649    L        D:S.SMC.FVG_RETRACE|MN:1   USTBONDTRUSD  2022-01-02           NaN  0.000019   2.875923   True  False
+42221    L      D:S.SP.SPECTRAL_CYCLE|D1:1         GBPCAD  2013-01-01 -2.986296e-05  0.000087   2.872020  False  False
+45055    L        D:S.BOOK.CONNORS_R3|W1:1         GBPJPY  2010-01-01  2.858919e-06  0.000014   2.833512   True  False
+66227    L     D:S.SEAS.TURN_OF_MONTH|MN:1  USATECHIDXUSD  2015-01-02  1.893386e-05  0.000017   2.832313   True  False
+71386    L     I:S.BOOK.LIEN_CHANNEL|H1:-1         USDJPY  2010-01-03 -2.338195e-05  0.000183   2.827920  False  False
+45331    L      D:S.MR.SHORT_REVERSAL|W1:1         GBPJPY  2010-01-01 -2.878120e-06  0.000006   2.823011  False  False
+11189    L         I:S.VOL.EXPANSION|M30:1        BTCUSDT  2023-01-01           NaN  0.000231   2.818900   True  False
+16470    L          D:S.GEO.HARMONIC|W1:-1      CHEIDXCHF  2016-01-04 -5.251456e-05  0.000011   2.739463  False  False
+8590     L        D:S.ST.CANDLESTICK|D1:-1    BRENTCMDUSD  2016-01-04  1.705541e-05  0.000064   2.726891   True  False
+41983    L          D:S.DAILY.CUM_RSI|W1:1         GBPCAD  2013-01-01 -1.758010e-06  0.000003   2.711876  False  False
+67732    L          D:S.GEO.HARMONIC|MN:-1         USDCAD  2010-01-01  8.201689e-07  0.000005   2.710710   True  False
+28850    L    D:CL4_BOLLINGER_BANDIT|D1:-1         EURGBP  2010-01-01  3.649896e-05  0.000073   2.701854   True  False
+66719    L            I:S.DAILY.FABER|H4:1  USATECHIDXUSD  2015-01-02 -9.203904e-05  0.000490   2.698994  False  False
+18192    L     D:S.SP.SPECTRAL_CYCLE|MN:-1         CHFJPY  2010-01-01 -1.532699e-06  0.000028   2.693557  False  False
+17999    L       D:S.DAILY.VOL_TARGET|MN:1         CHFJPY  2010-01-01  2.937602e-06  0.000028   2.682221   True  False
+77539    L       D:S.TREND.REGRESSION|MN:1         POOLED  2010-01-01 -9.757056e-07  0.000003   2.672752  False  False
+78596    I                           I-FVG         USDCHF  2010-01-01  6.928476e-05  0.000050   2.654644   True  False
+18001    L       D:S.DAILY.VOL_TARGET|W1:1         CHFJPY  2010-01-01  6.580702e-06  0.000076   2.652030   True  False

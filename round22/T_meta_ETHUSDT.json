@@ -1,0 +1,96 @@
+{
+ "symbol": "ETHUSDT",
+ "days": 2192,
+ "first": "2020-01-01",
+ "last": "2025-12-31",
+ "choices": {
+  "2023": [
+   {
+    "cfg": "18|12|long|month_end",
+    "train_t": 3.33
+   },
+   {
+    "cfg": "19|12|long|month_end",
+    "train_t": 3.04
+   },
+   {
+    "cfg": "15|12|follow4|mon",
+    "train_t": 3.03
+   },
+   {
+    "cfg": "20|4|fade4|tue",
+    "train_t": 3.03
+   },
+   {
+    "cfg": "18|8|long|month_end",
+    "train_t": 2.99
+   }
+  ],
+  "2024": [
+   {
+    "cfg": "18|12|long|month_end",
+    "train_t": 3.16
+   },
+   {
+    "cfg": "8|16|follow4|wed",
+    "train_t": 3.07
+   },
+   {
+    "cfg": "20|4|fade4|tue",
+    "train_t": 2.94
+   },
+   {
+    "cfg": "18|8|long|month_end",
+    "train_t": 2.88
+   },
+   {
+    "cfg": "10|24|long|month_end",
+    "train_t": 2.81
+   }
+  ],
+  "2025": [
+   {
+    "cfg": "8|16|follow4|wed",
+    "train_t": 3.52
+   },
+   {
+    "cfg": "20|4|fade4|tue",
+    "train_t": 3.19
+   },
+   {
+    "cfg": "8|12|follow4|wed",
+    "train_t": 2.9
+   },
+   {
+    "cfg": "5|24|long|gotobi",
+    "train_t": 2.75
+   },
+   {
+    "cfg": "18|12|long|month_end",
+    "train_t": 2.72
+   }
+  ]
+ },
+ "masks": {
+  "all": 2192,
+  "mon": 313,
+  "tue": 313,
+  "wed": 314,
+  "thu": 313,
+  "fri": 313,
+  "gotobi": 431,
+  "month_end": 72,
+  "month_start": 72,
+  "fomc": 23,
+  "nfp": 72
+ },
+ "fomc_days": 23,
+ "fomc_report": {
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}
