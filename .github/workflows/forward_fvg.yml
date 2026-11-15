@@ -1,0 +1,43 @@
+name: forward-fvg
+# Weekly paper forward test of the fair-value-gap trade on Nasdaq futures (docs/fvg_forward_preregistration.md).
+on:
+  schedule:
+    - cron: "41 7 * * 6"
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FORWARD_FVG"]
+permissions:
+  contents: write
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt polars
+      - run: |
+          E=$(date -u +%Y-%m-%d)
+          python -m fxlab.data.acquire_dukascopy_candles --pairs USATECHIDXUSD --start 2026-11-02 --end $E --workers 6 --deadline-min 60
+          mkdir -p extra && find data -name "USATECHIDXUSD_20*.parquet" -exec cp {} extra/ \;
+          ls -la extra
+      - run: mkdir -p out && python -W ignore scripts/fvg_forward.py --extra extra --from 2026-11-16 --out out 2>&1 | tee out/log.txt
+      - name: Publish
+        if: always()
+        run: |
+          cp -r out /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan ffvg-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p forward_fvg && cp -r /tmp/pub/* forward_fvg/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > forward_fvg/RUN.txt
+          git add -f forward_fvg
+          git commit -qm "forward-fvg (run ${{ github.run_id }})"
+          git push -f origin HEAD:forward-fvg
