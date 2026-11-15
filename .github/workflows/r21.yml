@@ -1,0 +1,133 @@
+name: r21
+# Round 21 (docs/round21_preregistration.md; scripts/r21_intraday.py, scripts/r21_rest.py). Branch round21. Trigger: ci/R21.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R21"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  idx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 USA500IDXUSD USATECHIDXUSD
+      - run: python -W ignore scripts/r21_intraday.py idx --out out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r21-idx
+          path: out
+          retention-days: 30
+  fx:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/fetch_m1.sh 41447353092 EURUSD GBPUSD USDJPY AUDUSD XAUUSD USDCAD
+      - run: python -W ignore scripts/r21_intraday.py fx --out out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r21-fx
+          path: out
+          retention-days: 30
+  macro:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt requests
+      - run: python -W ignore scripts/r21_rest.py macro --out out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r21-macro
+          path: out
+          retention-days: 30
+  stocks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 43624416126 -n r20s-data -D sdata
+      - run: python -W ignore scripts/r21_rest.py stocks --data sdata --out out
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r21-stocks
+          path: out
+          retention-days: 30
+  crypto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt requests
+      - run: |
+          python -W ignore scripts/r21_rest.py cdata --out cd
+          python -W ignore scripts/r21_rest.py crypto --data cd --out out
+          cp cd/cdata_meta.json out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r21-crypto
+          path: out
+          retention-days: 30
+  combine:
+    needs: [idx, fx, macro, stocks, crypto]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - uses: actions/download-artifact@v4
+        with:
+          pattern: r21-*
+          path: inp
+      - run: |
+          mkdir -p res
+          python -W ignore scripts/r21_rest.py combine --inp inp --out res 2>&1 | tee res/log.txt || true
+          cp inp/r21-macro/r21_macro_meta.json inp/r21-crypto/cdata_meta.json res/ 2>/dev/null || true
+      - name: Publish
+        if: always()
+        run: |
+          cp -r res /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r21-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round21 && cp -r /tmp/pub/* round21/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round21/RUN.txt
+          git add -f round21
+          git commit -qm "round 21 (run ${{ github.run_id }})"
+          git push -f origin HEAD:round21
