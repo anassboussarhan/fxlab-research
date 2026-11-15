@@ -1,0 +1,48 @@
+name: r22d
+# Round 22 combine over runs listed in ci/R22D (one run id per line). Results on branch round22. Trigger: ci/R22D.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R22D"]
+permissions:
+  contents: write
+  actions: read
+jobs:
+  combine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p inp
+          for R in $(grep -E '^[0-9]+' ci/R22D | cut -d' ' -f1); do
+            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep -E '^r22'); do
+              case $n in r22-chains) continue;; esac
+              gh run download $R -n $n -D inp/$n || true
+            done
+          done
+          find inp -name "*.npz" -delete; find inp -name "P_matrix_*" -size +50M -delete; du -sh inp
+      - run: |
+          mkdir -p res
+          python -W ignore scripts/r22_combine.py --inp inp --out res 2>&1 | tee res/log.txt
+          for f in $(find inp -name "*_rows.csv" -o -name "*_row_*.csv" -o -name "T_meta_*.json" -o -name "C_etf_starts.json"); do cp "$f" res/ 2>/dev/null || true; done
+      - name: Publish
+        run: |
+          cp -r res /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r22d-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round22 && cp -r /tmp/pub/* round22/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round22/RUN.txt
+          git add -f round22
+          git commit -qm "round 22 combine (run ${{ github.run_id }})"
+          git push -f origin HEAD:round22
