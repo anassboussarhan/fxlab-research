@@ -174,19 +174,21 @@ def cmd_idx(a):
             a0, a1 = S[d]
             mm = mod[a0:a1]
             at = {int(m): a0 + k for k, m in enumerate(mm)}
-            if 1019 not in at or 1080 not in at:
+            pre = [m for m in range(1019, 989, -1) if m in at]              # last bar 16:30-16:59
+            post = [m for m in range(1080, 1110) if m in at]                # first bar 18:00-18:29
+            if not pre or not post:
                 continue
             nd = days[j + 1]
             b0, b1 = S[nd]
             at2 = {int(m): b0 + k for k, m in enumerate(mod[b0:b1])}
             if 570 not in at2:
                 continue
-            cl, op = c[at[1019]], o[at[1080]]
+            cl, op = c[at[pre[0]]], o[at[post[0]]]
             gap = op / cl - 1
             if abs(gap) < 0.0005:
                 continue
             dd = -1 if gap > 0 else 1
-            iin, pin = at[1080], op
+            iin, pin = at[post[0]], op
             iout, pout = at2[570], o[at2[570]]
             for k in range(iin, at2[570]):
                 if (dd < 0 and l[k] <= cl) or (dd > 0 and h[k] >= cl):

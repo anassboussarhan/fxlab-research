@@ -85,6 +85,10 @@ FX periods: P1 2007-2018, P2 2019-2025 (gold 2011-2018 only where the store has 
 | K1 Momentum | Rank by the past 28-day return |
 | K2 Reversal | Long the past 7-day losers, short the winners |
 
+**Note (2026-11-15, after the first run):** X2 found no 16:59 and 18:00 minute bars after 2018 in the CFD
+files. It is rerun with the last bar from 16:30 to 16:59 and the first bar from 18:00 to 18:29, the same rule
+with a tolerance. Nothing else changes.
+
 ## Not in this round
 
 - Net foreign assets (annual, 9 currencies; too little data).
