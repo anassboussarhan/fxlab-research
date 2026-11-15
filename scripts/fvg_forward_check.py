@@ -39,6 +39,8 @@ def main():
         d = (f - sh).abs()
         rows.append({"month": str(m), "days": int(len(f)), "max_abs_diff_bp": float(d.max().max() * 1e4),
                      "days_identical_book": int((d.book < 1e-12).sum()),
+                     "differing_days": [str(x.date()) for x in d.index[d.book >= 1e-12]],
+                     "last_day": str(f.index.max().date()) if len(f) else None,
                      "full_mean_bp": float(f.book.mean() * 1e4), "short_mean_bp": float(sh.book.mean() * 1e4)})
         print(json.dumps(rows[-1]), flush=True)
     json.dump(rows, open(os.path.join(a.out, "fvg_forward_check.json"), "w"), indent=1)
