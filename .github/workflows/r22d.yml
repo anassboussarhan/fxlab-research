@@ -25,6 +25,7 @@ jobs:
           for R in $(grep -E '^[0-9]+' ci/R22D | cut -d' ' -f1); do
             for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep -E '^r22'); do
               case $n in r22-chains) continue;; esac
+              grep -q "^skip $n$" ci/R22D && continue
               gh run download $R -n $n -D inp/$n || true
             done
           done
