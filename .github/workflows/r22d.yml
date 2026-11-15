@@ -23,9 +23,10 @@ jobs:
         run: |
           mkdir -p inp
           for R in $(grep -E '^[0-9]+' ci/R22D | cut -d' ' -f1); do
-            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep -E '^r22'); do
+            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep -E '^(r22|h26)'); do
               case $n in r22-chains) continue;; esac
-              grep -q "^skip $n$" ci/R22D && continue
+              sk=0; for tok in $(grep '^skip ' ci/R22D | cut -d' ' -f2); do case $n in $tok*) sk=1;; esac; done
+              [ $sk = 1 ] && continue
               gh run download $R -n $n -D inp/$n || true
             done
           done
@@ -33,7 +34,7 @@ jobs:
       - run: |
           mkdir -p res
           python -W ignore scripts/r22_combine.py --inp inp --out res 2>&1 | tee res/log.txt
-          for f in $(find inp -name "*_rows.csv" -o -name "*_row_*.csv" -o -name "T_meta_*.json" -o -name "C_etf_starts.json"); do cp "$f" res/ 2>/dev/null || true; done
+          for f in $(find inp -name "*_rows*.csv" -o -name "*_row_*.csv" -o -name "T_meta_*.json" -o -name "C_etf_starts.json" -o -name "h26_*.json" -o -name "fvg_check_*.json"); do cp "$f" res/ 2>/dev/null || true; done
       - name: Publish
         run: |
           cp -r res /tmp/pub
