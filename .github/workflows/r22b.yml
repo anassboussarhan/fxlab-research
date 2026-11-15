@@ -1,0 +1,62 @@
+name: r22b
+# Round 22 parts I and X (docs/round22_preregistration.md). Results on branch round22b. Trigger: ci/R22B.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R22B"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  I:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 13
+      matrix:
+        symbol: [EURUSD, GBPUSD, USDJPY, AUDUSD, NZDUSD, USDCAD, USDCHF, XAUUSD, XAGUSD, USA500IDXUSD, USATECHIDXUSD,
+                 "EURUSD+GBPUSD", "USA500IDXUSD+USATECHIDXUSD"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: for S in $(echo "${{ matrix.symbol }}" | tr '+' ' '); do bash ci/r22_place.sh $S; done
+      - run: python -W ignore scripts/r22_I.py --symbol "${{ matrix.symbol }}" --out out
+      - run: echo "TAG=$(echo '${{ matrix.symbol }}' | tr '+' '_')" >> $GITHUB_ENV
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22I-${{ env.TAG }}
+          path: out
+          retention-days: 30
+  X:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        symbol: [USA500IDXUSD, USATECHIDXUSD, DEUIDXEUR, GBRIDXGBP, FRAIDXEUR, EUSIDXEUR, CHEIDXCHF, HKGIDXHKD, JPNIDXJPY]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/r22_place.sh ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r22_X.py --symbol ${{ matrix.symbol }} --out out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22X-${{ matrix.symbol }}
+          path: out
+          retention-days: 30
