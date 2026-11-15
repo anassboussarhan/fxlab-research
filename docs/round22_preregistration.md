@@ -201,3 +201,28 @@ supported / inconclusive / contradicted as before.
   assets (see the audit).
 
 Not financial advice.
+
+## Addendum 2 (2026-11-15): the 2026 check, as pre-registered
+
+**What counted:** four streams met the counting rule on development data:
+- I-FVG on NAS100;
+- I-FVG pooled over the 11 instruments of part I;
+- K cash-and-carry on BTC;
+- K cash-and-carry on ETH.
+
+**The check:**
+- The pre-registered one-time 2026 check runs for these four, with the configurations the walk-forward selects
+  on data up to 2025.
+- This is the fifth use of the 2026 holdout.
+
+**Data:**
+- Dukascopy M1 candles 2026-01 to 2026-10 for the 11 instruments;
+- Binance public daily klines and funding for 2026.
+
+**Before running, a robustness check on development data only** (`scripts/r22_fvg_check.py`, branch
+`misc-r22fvg`):
+- I-FVG on NAS100 stays positive and meets the rule under CFD costs, limits that must trade through by one tick,
+  one tick of stop slippage and twice the futures cost: 2019-2025 t 3.2 to 5.4.
+- It is positive in every year except 2016.
+
+The verdict rules are unchanged.
