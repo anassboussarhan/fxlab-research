@@ -70,7 +70,7 @@ The queue of what is still worth testing is in `docs/testing_list.md`.
 | Item | Status |
 |---|---|
 | Index option premium selling (short variance) | tested earlier: the strongest premium; not set up as a plan |
-| Crypto cash-and-carry | tested earlier (+0.69% a month 2019-2025); not set up |
+| Crypto cash-and-carry | tested earlier (+0.69% a month 2019-2025); round 22 counts (t 21.7, 2023-2025); 2026 supported but about 2.4% a year on BTC; not set up |
 | Real-money track record (Myfxbook / FX Blue) | **user** |
 
 ## 6. Data and infrastructure
@@ -109,3 +109,6 @@ The queue of what is still worth testing is in `docs/testing_list.md`.
 | Round 20 S: Kullamaegi breakout, episodic pivot, Minervini trend template on point-in-time S&P 500 stocks, daily, 2005-2025 | done: 0 of 3 count; breakout and template lose 0.5-1.6% per trade against SPY; base rates no better (`docs/round20_results.md`) |
 | Round 20 W: Warrior-style small-cap gap trading (gap-and-go, fade, Dux short) | pre-registered; waits for data (Databento about USD 10-11, or Alpaca keys) |
 | Round 21: ICT on indices (Silver Bullet, Judas, midnight-open bias), SMT (FX, indices), OTE, CBDR, breakers, NDOG; real-rate carry, curve slope; S&P 500 momentum, reversal, 52-week high, low vol, overnight momentum, deletions, pairs; crypto cross-sectional momentum / reversal (23 tests) | done: 0 count, 0 meet their own rule; NDOG not testable after 2018 (no evening bars) (`docs/round21_results.md`) |
+| Round 22: every parameter optimised walk-forward (Sobol configurations, yearly top-5 re-selection) in 13 parts: strategy libraries (64,292 units), time windows, ICT / SMC families (levels, FVG, order blocks, OTE, breakers, CBDR, sessions, SMT), index breakouts, dip-buying / D7, EIA and funding events, monthly FX and bond signals, commodity spreads / CFTC / cross-section, S&P 500 anomalies / deletions / pairs, crypto cross-section and cash-and-carry, volatility selling, options structures on real quotes | done: 4 streams count (FVG NAS100, FVG pooled, cash-and-carry BTC / ETH); the rest fail; placebo pass rate 0.35% against 0.53% real (`docs/round22_results.md`) |
+| Round 22 2026 check (fifth use of the holdout) of the 4 counting streams | all 4 supported: FVG NAS100 +10.0 bp a day (t 3.2), FVG pooled t 3.4; cash-and-carry positive but about a third of 2023-2025 |
+| Fair-value-gap pullback on NQ, paper forward test | weekly from 2026-11-16, five frozen configurations (`docs/fvg_forward_preregistration.md`, branch `forward-fvg`) |

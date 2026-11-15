@@ -7,10 +7,11 @@ The status of every single item is in `docs/test_ledger.md`.
 
 | Result | Evidence | Status |
 |---|---|---|
+| **Fair-value-gap pullback on Nasdaq futures** (NQ, New York session, 5 / 15-minute bars; enter on a pullback into a fresh three-candle gap in its direction; parameters chosen walk-forward) | 2019-2025 +7.9 bp a day after futures costs (t 6.7), passes the multiple-testing correction; t 3.2-5.4 under harsher fills; **2026 check supported** (+10.0 bp a day, t 3.2, 189 days) | paper forward test from 2026-11-16 |
 | **Gotobi** (long USD/JPY and EUR/JPY from 23:00 Tokyo before a Gotobi day to the 09:53 fix) | +4.45 bp a trade after costs (t 3.9) over 2007-2025; confirmed on 2019-2025 and on 2003-2006; a forced flow at a known time | forward test since 2026-11-05 |
 | **Weekly dip-buying in currencies** (Double Seven and the Connors family, weekly bars, long only) | won in 2019-2025 (t 3.0) and on the 2026 holdout (175 trades, +0.38R, t 2.2); **lost in 2008-2018** (t -1.5) | forward test, three tracks |
 | Selling index volatility (the variance premium) | SPY / DIA delta-hedged: t 1.7-2.5; real but crash-prone; needs an options account | not set up |
-| Crypto cash-and-carry (long spot, short perpetual) | +0.69% a month, t 4.6, 2019-2025; exchange risk | not set up |
+| Crypto cash-and-carry (long spot, short perpetual) | +0.69% a month, t 4.6, 2019-2025; round 22 (funding filter optimised) t 21.7 in 2023-2025; **2026 supported but shrunk to about 2.4% a year** on BTC; exchange risk | not worth setting up at current yields |
 | Equity overnight returns, turn of the month, TLT into month-end, daily dip-buying in US index ETFs | significant on long samples; mostly the equity premium; weaker after 2018 | not FX; not set up |
 
 ## 2. Everything tested, by area
@@ -89,6 +90,8 @@ The status of every single item is in `docs/test_ledger.md`.
 | Round 20: famous stock traders' setups (Kullamaegi, Minervini) on S&P 500 stocks; 2026 check of the noise-area breakout | 3 tests + 1 holdout test | swing setups lose against SPY; the breakout 2026 is inconclusive (+2.6 bp, t 0.7) and goes to a forward test; Warrior-style small caps wait for data | `round20_results.md` |
 
 | Round 21: ICT pieces never coded (Silver Bullet, Judas, midnight open, SMT, OTE, CBDR, breakers), real-rate carry, curve slope, S&P 500 anomalies, crypto cross-section | 23 tests | 0 count; ICT rules have no gross edge; macro signals worked before 2005 only; stock and crypto anomalies flat since 2015 / 2022 | `round21_results.md` |
+
+| Round 22: every parameter optimised walk-forward (yearly re-selection, no fixed settings) across all parts: libraries, time windows, ICT / SMC families, index breakouts, dip-buying, events, monthly FX and bond signals, commodities, stocks, crypto, volatility, options structures | 64,499 streams + 2026 check of 4 | **2 count and held on 2026: the fair-value-gap pullback on NQ and crypto cash-and-carry (shrunk)**; everything else fails; real streams pass their own rule at about the placebo rate | `round22_results.md` |
 
 ### 2.5 Prop firms and execution
 
