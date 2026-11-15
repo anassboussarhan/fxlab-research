@@ -226,3 +226,16 @@ Not financial advice.
 - It is positive in every year except 2016.
 
 The verdict rules are unchanged.
+
+## Addendum 3 (2026-11-15): two bugs fixed, reruns
+
+1. **The minimum-history rule (`scripts/wf22.py`).** The walk-forward required 50 valid periods of training
+   history. That rule was written for daily series, and for monthly families it blocked the first years:
+   - part P traded nothing in 2021-2023;
+   - S-anomalies and S-pairs nothing in 2008-2009;
+   - V-btc nothing at all.
+
+   The rule is now a parameter (12 for monthly families). P, S, C3 and V are rerun (`r22f`). No other rule
+   changes.
+2. **The 2026 cash-and-carry check** stopped on Binance files that mix millisecond and microsecond timestamps.
+   It now converts each row. Nothing about the rule changes.

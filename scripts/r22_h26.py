@@ -116,9 +116,11 @@ def bin_daily(kind, sym, months):
         d = d.iloc[:, [0, 4]].astype(float)
         rows.append(d)
     D = pd.concat(rows)
-    t = D.iloc[:, 0]
-    idx = pd.to_datetime(t, unit="us" if t.max() > 1e14 else "ms").dt.normalize()
-    return pd.Series(D.iloc[:, 1].to_numpy(), index=pd.DatetimeIndex(idx)).sort_index()
+    t = D.iloc[:, 0].to_numpy(float)
+    ms = np.where(t > 1e14, t / 1000.0, t)                                  # files from 2025 on are in microseconds
+    idx = pd.to_datetime(ms, unit="ms").normalize()
+    s = pd.Series(D.iloc[:, 1].to_numpy(), index=pd.DatetimeIndex(idx)).sort_index()
+    return s[~s.index.duplicated(keep="last")]
 
 
 def bin_funding(sym, months):
@@ -132,8 +134,8 @@ def bin_funding(sym, months):
         z = zipfile.ZipFile(io.BytesIO(r.content))
         rows.append(pd.read_csv(io.StringIO(z.read(z.namelist()[0]).decode())))
     F = pd.concat(rows)
-    ct = pd.to_numeric(F.iloc[:, 0])
-    F["ts"] = pd.to_datetime(ct, unit="us" if ct.max() > 1e14 else "ms")
+    ct = pd.to_numeric(F.iloc[:, 0]).to_numpy(float)
+    F["ts"] = pd.to_datetime(np.where(ct > 1e14, ct / 1000.0, ct), unit="ms")
     F["rate"] = pd.to_numeric(F.iloc[:, 2])
     return F.groupby(F.ts.dt.normalize()).rate.sum()
 

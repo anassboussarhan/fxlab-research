@@ -212,7 +212,7 @@ def main():
             print(sym, ci, kind, len(vals), round(time.time() - t0), "s", flush=True)
     Mx = np.vstack(M)
     dates = months.to_timestamp(how="end").normalize()
-    s5, s1, ch = wf22.walk_forward(Mx, dates, 2021, min_active=12, min_train_years=2)
+    s5, s1, ch = wf22.walk_forward(Mx, dates, 2021, min_active=12, min_train_years=2, min_valid=12)
     st, st1 = wf22.stream_stats(s5), wf22.stream_stats(s1)
     row = {"part": "P", "family": "P-options", "symbol": sym, "placebo": False, "n_cfg": int(Mx.shape[0]), **st,
            "top1_p2_mean": st1["p2_mean"], "top1_p2_t": st1["p2_t"], "own": wf22.counts_rule(st),

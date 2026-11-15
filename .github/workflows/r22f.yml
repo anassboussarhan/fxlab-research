@@ -1,0 +1,77 @@
+name: r22f
+# Round 22 reruns after the minimum-history fix for monthly families (P, S, C3, V) and the 2026 cash-and-carry
+# check after the timestamp fix (addendum 3). Trigger: ci/R22F.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R22F"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  P:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        symbol: [SPY, DIA, XLF, XLE, AAPL, MSFT, AMZN, NVDA, TSLA, META, GOOGL, AMD, NFLX, JPM, BAC, XOM, INTC, BA, DIS, KO, PFE, WMT, CVX, CSCO]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 43741219550 -n r22-chains -D chains
+      - run: python -W ignore scripts/r22_P.py --chain chains --closes chains/closes.csv --symbol ${{ matrix.symbol }} --out out 2>&1 | tail -10
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22fP-${{ matrix.symbol }}
+          path: out
+          retention-days: 30
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [stocks, vol, commod]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests yfinance numba lxml xlrd openpyxl
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: if [ "${{ matrix.cmd }}" = stocks ]; then gh run download 43624416126 -n r20s-data -D sdata; fi; true
+      - run: python -W ignore scripts/r22_daily.py ${{ matrix.cmd }} --data sdata --out out 2>&1 | tail -30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22f-${{ matrix.cmd }}
+          path: out
+          retention-days: 30
+  cc26:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt requests
+      - run: python -W ignore scripts/r22_h26.py cc --out out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: h26f-cc
+          path: out
+          retention-days: 30

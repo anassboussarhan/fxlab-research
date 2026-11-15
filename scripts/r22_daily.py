@@ -52,8 +52,8 @@ def sobol(d, n, seed):
     return qmc.Sobol(d, scramble=True, seed=seed).random(n)
 
 
-def run_wf(rows, ser, part, family, symbol, M, dates, first, extra=None, min_active=30, desc=None):
-    s5, s1, ch = wf22.walk_forward(M, dates, first, min_active=min_active)
+def run_wf(rows, ser, part, family, symbol, M, dates, first, extra=None, min_active=30, desc=None, min_valid=50):
+    s5, s1, ch = wf22.walk_forward(M, dates, first, min_active=min_active, min_valid=min_valid)
     st, st1 = wf22.stream_stats(s5), wf22.stream_stats(s1)
     r = {"part": part, "family": family, "symbol": symbol, "placebo": False, "n_cfg": int(M.shape[0]), **st,
          "top1_p2_mean": st1["p2_mean"], "top1_p2_t": st1["p2_t"], "own": wf22.counts_rule(st),
@@ -261,7 +261,7 @@ def cmd_macro(a):
     W = pd.concat(M, axis=1)
     W.index = W.index.to_timestamp(how="end").normalize()
     W = W[(W.index >= "1976-01-01") & (W.index <= DEV_END)]
-    run_wf(rows, ser, "M", "M-fx-signals", "G8", W.to_numpy().T, W.index, 1985, desc=desc, min_active=24)
+    run_wf(rows, ser, "M", "M-fx-signals", "G8", W.to_numpy().T, W.index, 1985, desc=desc, min_active=24, min_valid=12)
     # B: bonds, local currency, duration 7
     bret = Lg.shift(1) / 12 - 7 * (Lg - Lg.shift(1))
     bret_next = bret.shift(-1)
@@ -281,7 +281,7 @@ def cmd_macro(a):
     W = pd.concat(M, axis=1)
     W.index = W.index.to_timestamp(how="end").normalize()
     W = W[(W.index >= "1976-01-01") & (W.index <= DEV_END)]
-    run_wf(rows, ser, "B", "B-bonds", "G8", W.to_numpy().T, W.index, 1985, desc=desc, min_active=24)
+    run_wf(rows, ser, "B", "B-bonds", "G8", W.to_numpy().T, W.index, 1985, desc=desc, min_active=24, min_valid=12)
     save(a.out, "MB", rows, ser)
 
 
@@ -394,7 +394,7 @@ def cmd_commod(a):
         desc.append({"sig": sig, "lb": lb, "skip": sk, "n": n, "long_short": ls, "years": yrs})
     W = pd.concat(M, axis=1)
     W = W[W.index <= DEV_END]
-    run_wf(rows, ser, "C", "C3-commodity-xs", "ETFs", W.to_numpy().T, W.index, 2010, desc=desc, min_active=24)
+    run_wf(rows, ser, "C", "C3-commodity-xs", "ETFs", W.to_numpy().T, W.index, 2010, desc=desc, min_active=24, min_valid=12)
     # C2: CFTC managed money, weekly (report Tuesday, public Friday; traded from the next Monday close)
     try:
         X = cftc_mm()
@@ -531,7 +531,7 @@ def cmd_stocks(a):
         Mx.append(pd.Series(out, index=pd.DatetimeIndex(me[1:])))
         desc.append({"sig": sig, "lb": lb, "skip": sk, "q": round(qn, 2), "hold": hold})
     W = pd.concat(Mx, axis=1)
-    run_wf(rows, ser, "S", "S-anomalies", "SP500", W.to_numpy().T, W.index, 2008, desc=desc, min_active=24)
+    run_wf(rows, ser, "S", "S-anomalies", "SP500", W.to_numpy().T, W.index, 2008, desc=desc, min_active=24, min_valid=12)
     # S-DEL
     Mv = M.to_numpy()
     flat = np.flatnonzero(((~Mv[1:]) & Mv[:-1]).ravel())
@@ -558,7 +558,7 @@ def cmd_stocks(a):
         Mx.append(s)
         desc.append({"hold": hold})
     W = pd.concat(Mx, axis=1).reindex(pd.date_range("2005-01-31", DEV_END, freq="ME")).fillna(0.0)
-    run_wf(rows, ser, "S", "S-deletions", "SP500", W.to_numpy().T, W.index, 2008, desc=desc, min_active=12)
+    run_wf(rows, ser, "S", "S-deletions", "SP500", W.to_numpy().T, W.index, 2008, desc=desc, min_active=12, min_valid=12)
     # S-PAIRS
     Mv = M.to_numpy()
     pos_of = {t: idx.get_loc(t) for t in me}
@@ -611,7 +611,7 @@ def cmd_stocks(a):
         Mx.append(s)
         desc.append({"F": F, "entry_z": round(ez, 2), "exit_z": round(xz, 2), "pairs": npair, "months": Tm})
     W = pd.concat(Mx, axis=1).reindex(pd.date_range("2005-01-31", DEV_END, freq="ME")).fillna(0.0)
-    run_wf(rows, ser, "S", "S-pairs", "SP500", W.to_numpy().T, W.index, 2008, desc=desc, min_active=24)
+    run_wf(rows, ser, "S", "S-pairs", "SP500", W.to_numpy().T, W.index, 2008, desc=desc, min_active=24, min_valid=12)
     save(a.out, "S", rows, ser)
 
 
@@ -751,7 +751,7 @@ def cmd_vol(a):
         desc.append({"ratio_filter": round(rcut, 3) if use_r else None, "gap_filter": round(gcut, 1) if use_g else None,
                      "vix_max": round(vhi, 1)})
     W = pd.concat(Mx, axis=1)
-    run_wf(rows, ser, "V", "V-spx-variance", "SPX", W.to_numpy().T, W.index, 1995, desc=desc, min_active=24)
+    run_wf(rows, ser, "V", "V-spx-variance", "SPX", W.to_numpy().T, W.index, 1995, desc=desc, min_active=24, min_valid=12)
     if "SVXY" in Y:
         sv = Y["SVXY"]["Adj Close"] if "Adj Close" in Y["SVXY"] else Y["SVXY"]["Close"]
         r = sv.pct_change(fill_method=None)
@@ -786,7 +786,7 @@ def cmd_vol(a):
         Mx.append(Bm.pnl)
         desc.append({"gap_filter": None})
         W = pd.concat(Mx, axis=1)
-        run_wf(rows, ser, "V", "V-btc-dvol", "BTC", W.to_numpy().T, W.index, 2023, desc=desc, min_active=12)
+        run_wf(rows, ser, "V", "V-btc-dvol", "BTC", W.to_numpy().T, W.index, 2023, desc=desc, min_active=12, min_valid=12)
     except Exception as ex:                                                # noqa: BLE001
         print("V-btc failed", repr(ex)[:200], flush=True)
     save(a.out, "V", rows, ser)

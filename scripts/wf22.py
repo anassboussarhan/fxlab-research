@@ -16,7 +16,7 @@ DEV_END = pd.Timestamp("2025-12-31")
 SPLIT = pd.Timestamp("2019-01-01")
 
 
-def walk_forward(P, dates, first_oos_year, top=5, min_active=30, last_year=2025, min_train_years=3):
+def walk_forward(P, dates, first_oos_year, top=5, min_active=30, last_year=2025, min_train_years=3, min_valid=50):
     P = np.asarray(P, np.float64)
     dates = pd.DatetimeIndex(dates)
     yrs = dates.year.to_numpy()
@@ -44,7 +44,7 @@ def walk_forward(P, dates, first_oos_year, top=5, min_active=30, last_year=2025,
             mu = cs / n
             var = np.maximum(cq / n - mu ** 2, 1e-30) * n / np.maximum(n - 1, 1)
             t = mu / np.sqrt(var / n)
-            t[(ca < min_active) | (cv < 50)] = -np.inf
+            t[(ca < min_active) | (cv < min_valid)] = -np.inf
             order = np.argsort(-t)
             pick = [int(i) for i in order[:top] if np.isfinite(t[i])]
             m = yrs == y
