@@ -22,6 +22,10 @@
   2026-11-02 (warm-up) to the last Friday.
 - **Ledger:** it writes the daily ledger from 2026-11-16 to branch `forward-fvg`.
 - **Review:** after 125 and 250 trading days. A one-sided t ≥ 1.645 on forward days alone counts as support.
+- **Weekly rebuild:** each run rebuilds the ledger from the warm-up. A trade still open at the end of the data is
+  marked at the last bar and settled in the next week's run, so the last day of each week can be revised once.
+  A short warm-up gives the same trades as the full history; `scripts/fvg_forward_check.py` checks this on the
+  last six months of 2025 (development data).
 - **Rules:** no rule changes; a change starts a new track.
 - **Prop simulation:** a futures-prop simulation (NQ / MNQ) follows only if the forward test supports it.
 

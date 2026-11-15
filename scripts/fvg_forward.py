@@ -27,15 +27,9 @@ FROZEN = [64, 56, 8, 40, 88]
 COLS = ["bid_o", "bid_h", "bid_l", "bid_c", "ask_o", "ask_h", "ask_l", "ask_c"]
 
 
-def main():
-    ap = argparse.ArgumentParser()
-    ap.add_argument("--extra", required=True)
-    ap.add_argument("--from", dest="start", required=True)
-    ap.add_argument("--out", required=True)
-    a = ap.parse_args()
-    os.makedirs(a.out, exist_ok=True)
+def load_extra(extra):
     parts = []
-    for f in sorted(glob.glob(os.path.join(a.extra, "**", "*.parquet"), recursive=True)):
+    for f in sorted(glob.glob(os.path.join(extra, "**", "*.parquet"), recursive=True)):
         x = pd.read_parquet(f)
         if "ts" in x.columns:
             x = x.set_index("ts")
@@ -47,8 +41,12 @@ def main():
     m = m[~m.index.duplicated(keep="last")]
     mid = pd.DataFrame({k: 0.5 * (m[f"bid_{k}"] + m[f"ask_{k}"]) for k in "ohlc"})
     mid["spr"] = (m.ask_o - m.bid_o).clip(lower=0)
-    mid = mid[np.isfinite(mid.o) & (mid.o > 0)]
-    pip = float(1e-4 * np.nanmedian(mid.c))
+    return mid[np.isfinite(mid.o) & (mid.o > 0)]
+
+
+def book(mid, start):
+    """Daily ledger (one column per frozen configuration, plus the equal-weight book) and trades from `start`."""
+    pip = float(1e-4 * np.nanmedian(mid.c))                               # used only by the CFD cost path, not here
     BB = {tf: I.Bars(I.bars(mid, tf, True), SYM, pip) for tf in ("5min", "15min")}
     cal = pd.DatetimeIndex(sorted(set(BB["15min"].day)))
     U = qmc.Sobol(I.FAMS["FVG"] + 1, scramble=True, seed=22 + len("FVG")).random(128)
@@ -59,13 +57,25 @@ def main():
         tr = I.fam_FVG(BB[tf], u)
         cols[f"cfg{i}"] = I.daily(tr, BB[tf], cal)
         for t in tr:
-            trades.append({"cfg": i, "tf": tf, "day": BB[tf].day[t[0]], "entry": BB[tf].idx[t[0]], "net": t[1], "gross": t[2]})
+            trades.append({"cfg": i, "tf": tf, "day": BB[tf].day[t[0]], "entry": BB[tf].idx[t[0]],
+                           "exit": BB[tf].idx[t[3]], "net": t[1], "gross": t[2]})
     D = pd.DataFrame(cols)
     D["book"] = D.mean(axis=1)
-    D = D[D.index >= pd.Timestamp(a.start)]
+    D = D[D.index >= pd.Timestamp(start)]
     T = pd.DataFrame(trades)
     if len(T):
-        T = T[T.day >= pd.Timestamp(a.start)]
+        T = T[T.day >= pd.Timestamp(start)]
+    return D, T
+
+
+def main():
+    ap = argparse.ArgumentParser()
+    ap.add_argument("--extra", required=True)
+    ap.add_argument("--from", dest="start", required=True)
+    ap.add_argument("--out", required=True)
+    a = ap.parse_args()
+    os.makedirs(a.out, exist_ok=True)
+    D, T = book(load_extra(a.extra), a.start)
     D.to_csv(os.path.join(a.out, "fvg_forward_days.csv"))
     T.to_csv(os.path.join(a.out, "fvg_forward_trades.csv"), index=False)
     x = D.book.to_numpy(float)
