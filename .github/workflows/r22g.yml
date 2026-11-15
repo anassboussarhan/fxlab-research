@@ -1,0 +1,32 @@
+name: r22g
+# Round 22: E-FUND rerun with progress output (the r22e job ran past two hours without output). Trigger: ci/R22G.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R22G"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  fund:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests yfinance numba lxml xlrd openpyxl holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 43601520485 -n cdata -D fdata && find fdata -maxdepth 4 | head -30 && du -sh fdata
+      - run: timeout 80m python -W ignore scripts/r22_E.py fund --funding fdata --out out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22g-fund
+          path: out
+          retention-days: 30
