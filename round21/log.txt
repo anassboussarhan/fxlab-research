@@ -1,0 +1,49 @@
+                         id    p1_n  p1_mean      p1_t    p2_n  p2_mean     p2_t  p2_gross_mean  p2_gross_t  p1_gross_mean   trades  p2_net_alt_bp                             symbols                  note  events
+0    I1_silver_bullet-US500   395.0 -0.00030  -4.09936   959.0 -0.00013 -1.86440        0.00003     0.38928       -0.00001   1354.0       -2.30955                        USA500IDXUSD                   NaN     NaN
+1   I1_silver_bullet-NAS100   259.0 -0.00018  -1.47622  1283.0 -0.00011 -1.43998       -0.00005    -0.69415        0.00003   1542.0       -2.85843                       USATECHIDXUSD                   NaN     NaN
+2            I2_judas-US500   281.0 -0.00045  -1.67463   706.0  0.00001  0.02251        0.00017     0.71382       -0.00016    987.0       -0.92765                        USA500IDXUSD                   NaN     NaN
+3           I2_judas-NAS100   225.0 -0.00059  -1.65201  1015.0  0.00025  0.99574        0.00031     1.23485       -0.00039   1240.0        0.71501                       USATECHIDXUSD                   NaN     NaN
+4    I3_midnight_bias-US500   154.0  0.00020   0.31724   399.0 -0.00065 -1.37336       -0.00049    -1.03964        0.00049    553.0       -7.73302                        USA500IDXUSD                   NaN     NaN
+5   I3_midnight_bias-NAS100    96.0 -0.00022  -0.26733   609.0 -0.00088 -1.74241       -0.00082    -1.62625       -0.00001    705.0      -11.54001                       USATECHIDXUSD                   NaN     NaN
+6               X1b_smt_idx  1312.0 -0.00031 -10.60745  1230.0 -0.00018 -3.82468       -0.00007    -1.44939       -0.00006  13714.0       -3.22218          USA500IDXUSD,USATECHIDXUSD                   NaN     NaN
+7                   X2_ndog   108.0 -0.00019  -0.99458     0.0      NaN      NaN            NaN         NaN        0.00007    147.0            NaN          USA500IDXUSD,USATECHIDXUSD                   NaN     NaN
+8                X1a_smt_fx  2857.0 -0.00022  -3.04444  1474.0 -0.00025 -3.14509       -0.00007    -0.88995       -0.00002   7054.0       -2.51958                       EURUSD,GBPUSD                   NaN     NaN
+9                    X3_ote  1018.0 -0.00026  -2.51009   679.0 -0.00019 -1.67495        0.00004     0.32552       -0.00001   2222.0       -1.94703  AUDUSD,EURUSD,GBPUSD,USDJPY,XAUUSD                   NaN     NaN
+10                  X4_cbdr  1825.0 -0.00016  -2.86065  1068.0 -0.00012 -1.92073        0.00007     1.11850        0.00007   7409.0       -1.23886  AUDUSD,EURUSD,GBPUSD,USDCAD,USDJPY                   NaN     NaN
+11               X5_breaker  2311.0 -0.00039  -3.99481  1425.0 -0.00062 -6.10024       -0.00038    -3.75284       -0.00014   6242.0       -6.23714  AUDUSD,EURUSD,GBPUSD,USDJPY,XAUUSD                   NaN     NaN
+12         M0_nominal_carry     NaN  0.00458       NaN     NaN  0.00071  0.44951            NaN         NaN            NaN      NaN            NaN                                 NaN  reported, not a test     NaN
+13            M1_real_carry   225.0  0.00376   2.68299   199.0 -0.00255 -2.06709            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+14           M2_curve_slope   240.0  0.00605   3.98479   229.0  0.00012  0.09031            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+15              S1_mom_12_1   120.0 -0.00285  -0.89615   132.0  0.00052  0.22574            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+16           S2_reversal_1m   120.0 -0.00138  -0.43389   132.0 -0.00008 -0.02927            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+17              S3_52w_high   120.0 -0.00420  -1.39127   132.0 -0.00318 -1.41609            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+18               S4_low_vol   120.0 -0.00197  -0.57499   132.0 -0.00170 -0.62283            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+19         S5_overnight_mom   120.0 -0.00171  -0.58603   132.0 -0.00345 -1.71440            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+20                 S7_pairs   120.0  0.00054   0.98546   132.0 -0.00062 -1.24163            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+21              S6_deletion    28.0  0.07378   1.38675    50.0  0.00902  0.18141            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN   137.0
+22              K1_momentum   135.0  0.01443   1.28663   209.0 -0.00605 -1.11516            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+23              K2_reversal   135.0 -0.02525  -2.78812   209.0 -0.00214 -0.38978            NaN         NaN            NaN      NaN            NaN                                 NaN                   NaN     NaN
+                         id       t    own       p     bh  counts
+0    I1_silver_bullet-US500 -1.8644  False  0.9689  False   False
+1   I1_silver_bullet-NAS100 -1.4400  False  0.9251  False   False
+2            I2_judas-US500  0.0225  False  0.4910  False   False
+3           I2_judas-NAS100  0.9957  False  0.1597  False   False
+4    I3_midnight_bias-US500 -1.3734  False  0.9152  False   False
+5   I3_midnight_bias-NAS100 -1.7424  False  0.9593  False   False
+6               X1b_smt_idx -3.8247  False  0.9999  False   False
+7                   X2_ndog     NaN  False  1.0000  False   False
+8                X1a_smt_fx -3.1451  False  0.9992  False   False
+9                    X3_ote -1.6750  False  0.9530  False   False
+10                  X4_cbdr -1.9207  False  0.9726  False   False
+11               X5_breaker -6.1002  False  1.0000  False   False
+12            M1_real_carry -2.0671  False  0.9806  False   False
+13           M2_curve_slope  0.0903  False  0.4640  False   False
+14              S1_mom_12_1  0.2257  False  0.4107  False   False
+15           S2_reversal_1m -0.0293  False  0.5117  False   False
+16              S3_52w_high -1.4161  False  0.9216  False   False
+17               S4_low_vol -0.6228  False  0.7333  False   False
+18         S5_overnight_mom -1.7144  False  0.9568  False   False
+19                 S7_pairs -1.2416  False  0.8928  False   False
+20              S6_deletion  0.1814  False  0.4280  False   False
+21              K1_momentum -1.1152  False  0.8676  False   False
+22              K2_reversal -0.3898  False  0.6517  False   False
