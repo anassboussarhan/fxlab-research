@@ -88,6 +88,8 @@ The status of every single item is in `docs/test_ledger.md`.
 
 | Round 20: famous stock traders' setups (Kullamaegi, Minervini) on S&P 500 stocks; 2026 check of the noise-area breakout | 3 tests + 1 holdout test | swing setups lose against SPY; the breakout 2026 is inconclusive (+2.6 bp, t 0.7) and goes to a forward test; Warrior-style small caps wait for data | `round20_results.md` |
 
+| Round 21: ICT pieces never coded (Silver Bullet, Judas, midnight open, SMT, OTE, CBDR, breakers), real-rate carry, curve slope, S&P 500 anomalies, crypto cross-section | 23 tests | 0 count; ICT rules have no gross edge; macro signals worked before 2005 only; stock and crypto anomalies flat since 2015 / 2022 | `round21_results.md` |
+
 ### 2.5 Prop firms and execution
 
 | What | Result | Where |
