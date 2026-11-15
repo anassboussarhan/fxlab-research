@@ -51,6 +51,8 @@ supported / inconclusive / contradicted as before.
     and the 15 of round 19;
   - rules only, no feature-tercile units.
 - **Families:** each rule × timeframe × direction is a family whose grid is its configurations.
+- **ALL:** one more family per instrument, the whole library (every real configuration) as one grid.
+- **Placebos:** the engines' placebo units get the same walk-forward as a null.
 
 ## Part T. Every time window (flows, fixes, sessions, calendars)
 
