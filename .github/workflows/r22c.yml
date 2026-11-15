@@ -1,0 +1,133 @@
+name: r22c
+# Round 22 parts D, M/B, C, S, K, V, E and P (docs/round22_preregistration.md). Trigger: ci/R22C.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R22C"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  PSYMS: SPY,DIA,XLF,XLE,AAPL,MSFT,AMZN,NVDA,TSLA,META,GOOGL,AMD,NFLX,JPM,BAC,XOM,INTC,BA,DIS,KO,PFE,WMT,CVX,CSCO
+jobs:
+  daily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [d7, macro, commod, stocks, crypto, vol]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests yfinance numba lxml xlrd openpyxl
+      - name: Inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ matrix.cmd }}" = stocks ]; then gh run download 43624416126 -n r20s-data -D sdata; fi
+          if [ "${{ matrix.cmd }}" = crypto ]; then gh run download 43601520485 -n cdata -D fdata; fi
+          true
+      - run: python -W ignore scripts/r22_daily.py ${{ matrix.cmd }} --data sdata --funding fdata --out out 2>&1 | tail -60
+      - run: rm -rf out/cd
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22c-${{ matrix.cmd }}
+          path: out
+          retention-days: 30
+  events:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [eia, fund, spread]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests holidays xlrd openpyxl numba
+      - name: Inputs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          case ${{ matrix.cmd }} in
+            eia) for S in LIGHTCMDUSD BRENTCMDUSD GASCMDUSD; do bash ci/r22_place.sh $S; done ;;
+            fund) gh run download 43601520485 -n cdata -D fdata ;;
+            spread) for S in BRENTCMDUSD LIGHTCMDUSD XAUUSD XAGUSD COPPERCMDUSD; do bash ci/r22_place.sh $S; done ;;
+          esac
+      - run: python -W ignore scripts/r22_E.py ${{ matrix.cmd }} --funding fdata --out out 2>&1 | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22c-${{ matrix.cmd }}
+          path: out
+          retention-days: 30
+  pdata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow yfinance
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+      - name: Clone DoltHub options and export the chains
+        run: |
+          curl -sSL https://github.com/dolthub/dolt/releases/latest/download/install.sh -o /tmp/install.sh
+          sudo bash /tmp/install.sh
+          dolt config --global --add user.email ci@example.com
+          dolt config --global --add user.name ci
+          mkdir -p /tmp/d && cd /tmp/d
+          dolt clone post-no-preference/options > /tmp/clone.log 2>&1; tail -1 /tmp/clone.log
+          mkdir -p /tmp/raw
+          cd /tmp/d/options
+          for s in $(echo $PSYMS | tr ',' ' '); do
+            dolt sql -q "SELECT * FROM option_chain WHERE act_symbol='$s' AND date <= '2025-12-31'" -r csv > /tmp/raw/raw_$s.csv
+            echo "$s $(wc -l < /tmp/raw/raw_$s.csv)"
+          done
+      - name: Normalise chains and fetch closes
+        run: |
+          mkdir -p chains
+          python scripts/options_chain_fetch.py --raw /tmp/raw --out chains | tail -3
+          python scripts/options_closes_fetch.py --symbols $PSYMS --out chains/closes.csv | tail -3
+          du -sh chains
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r22-chains
+          path: chains
+          retention-days: 10
+  P:
+    needs: pdata
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 12
+      matrix:
+        symbol: [SPY, DIA, XLF, XLE, AAPL, MSFT, AMZN, NVDA, TSLA, META, GOOGL, AMD, NFLX, JPM, BAC, XOM, INTC, BA, DIS, KO, PFE, WMT, CVX, CSCO]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow
+      - uses: actions/download-artifact@v4
+        with:
+          name: r22-chains
+          path: chains
+      - run: python -W ignore scripts/r22_P.py --chain chains --closes chains/closes.csv --symbol ${{ matrix.symbol }} --out out 2>&1 | tail -30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22P-${{ matrix.symbol }}
+          path: out
+          retention-days: 30

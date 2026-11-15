@@ -178,6 +178,19 @@ supported / inconclusive / contradicted as before.
   - for hedged structures, a hedge band 0.05-0.5 delta and daily / weekly hedging.
 - **Calendar:** monthly entries. Training starts in 2019, so the out-of-sample years are 2021-2025.
 
+## Addendum 1 (2026-11-15, before the data of parts D-P were read)
+
+- **Compute limits:** fewer configurations where each costs minutes:
+  - S-pairs: 64 configurations;
+  - V-BTC: a 32-point grid on its single filter;
+  - S-deletions: a 24-point grid of holding periods.
+- **S-SWING is not run in this round:** each configuration re-simulates every stock, and the round-20 rules
+  failed against their own base rates by 0.5-1.6% a trade.
+- **D runs on the ECB-fixing book only** (28 crosses, daily or weekly as a parameter). The 33-instrument daily
+  bars are covered by part L's daily engine.
+- **P:** the database lists about three expiries per date, so the maturity parameter picks the nearest listed
+  expiry. Entries follow the engine's calendar for that maturity (monthly from 21 days, weekly below).
+
 ## Notes
 
 - **Frozen forward tests stay frozen:** Gotobi B0, Double Seven, the D7 family, the noise-area breakout. An
