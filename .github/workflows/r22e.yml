@@ -1,0 +1,38 @@
+name: r22e
+# Round 22 reruns after fixes: C2 (CFTC history file), V-btc (DVOL alignment), E-FUND (date bug). Trigger: ci/R22E.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R22E"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [commod, vol, fund]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests yfinance numba lxml xlrd openpyxl holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: if [ "${{ matrix.cmd }}" = fund ]; then gh run download 43601520485 -n cdata -D fdata; fi; true
+      - run: |
+          if [ "${{ matrix.cmd }}" = fund ]; then python -W ignore scripts/r22_E.py fund --funding fdata --out out 2>&1 | tail -20
+          else python -W ignore scripts/r22_daily.py ${{ matrix.cmd }} --out out 2>&1 | tail -40; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r22e-${{ matrix.cmd }}
+          path: out
+          retention-days: 30

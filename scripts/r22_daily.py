@@ -316,22 +316,25 @@ def yahoo_adj(symbols, start="1999-01-01"):
 def cftc_mm():
     import requests
     rows = []
-    for y in range(2006, 2026):
-        url = f"https://www.cftc.gov/files/dea/history/fut_disagg_txt_{y}.zip"
+    urls = ["https://www.cftc.gov/files/dea/history/fut_disagg_txt_hist_2006_2016.zip"] + \
+        [f"https://www.cftc.gov/files/dea/history/fut_disagg_txt_{y}.zip" for y in range(2017, 2026)]
+    for url in urls:
         try:
-            r = requests.get(url, headers=UA, timeout=120)
+            r = requests.get(url, headers=UA, timeout=180)
             z = zipfile.ZipFile(io.BytesIO(r.content))
             d = pd.read_csv(z.open(z.namelist()[0]), low_memory=False)
         except Exception as ex:                                            # noqa: BLE001
-            print("cftc", y, repr(ex)[:100], flush=True)
+            print("cftc", url[-30:], repr(ex)[:100], flush=True)
             continue
         code = d["CFTC_Contract_Market_Code"].astype(str).str.strip().str.zfill(6)
-        d = d[code.isin(CFTC)]
+        keep = code.isin(CFTC)
+        d = d[keep]
         dc = [c for c in d.columns if c.startswith("Report_Date_as_YYYY")][0]
-        rows.append(pd.DataFrame({"date": pd.to_datetime(d[dc]), "code": code[code.isin(CFTC)],
+        rows.append(pd.DataFrame({"date": pd.to_datetime(d[dc]), "code": code[keep],
                                   "net": d["M_Money_Positions_Long_All"] - d["M_Money_Positions_Short_All"],
                                   "oi": d["Open_Interest_All"]}))
-    D = pd.concat(rows)
+        print("cftc", url[-30:], len(d), flush=True)
+    D = pd.concat(rows).drop_duplicates(["date", "code"])
     D["etf"] = D.code.map(CFTC)
     D["x"] = D.net / D.oi
     return D.pivot_table(index="date", columns="etf", values="x").sort_index()
@@ -773,19 +776,9 @@ def cmd_vol(a):
         import crypto_vrp_lab as CV
         dv = CV.dvol("BTC")
         px = CV.spot("BTC-USD")
-        dlr = np.log(px).diff()
-        rv30 = np.sqrt(365 * (dlr ** 2).rolling(30).mean()) * 100
-        mm = dv.groupby(dv.index.to_period("M")).apply(lambda s: s.index[0])
-        recs = []
-        for i in range(len(mm) - 1):
-            t0, t1 = mm.iloc[i], mm.iloc[i + 1]
-            K = dv.asof(t0)
-            seg = dlr[(dlr.index > t0) & (dlr.index <= t1)]
-            if len(seg) < 20:
-                continue
-            RV = math.sqrt(365 * (seg ** 2).mean()) * 100
-            recs.append({"m": t1, "pnl": (K ** 2 - RV ** 2) / (2 * K) - 2.0, "gap": K - rv30.asof(t0)})
-        Bm = pd.DataFrame(recs).set_index("m")
+        Mo2 = CV.months(dv, px)
+        Bm = pd.DataFrame({"pnl": Mo2.net_vp, "gap": Mo2.K - Mo2.rv_prev})
+        print("V-btc months", len(Bm), flush=True)
         Mx, desc = [], []
         for g in np.linspace(-10, 20, 31):
             Mx.append(Bm.pnl.where(Bm.gap > g, 0.0))

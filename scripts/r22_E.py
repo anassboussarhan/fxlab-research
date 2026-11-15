@@ -174,7 +174,7 @@ def cmd_fund(a):
         if not ff or not pf:
             continue
         F = pd.read_csv(ff[0], parse_dates=["ts"])
-        F = F[F.ts <= pd.Timestamp(wf22.DEV_END + " 23:59", tz="UTC")].reset_index(drop=True)
+        F = F[F.ts <= pd.Timestamp("2025-12-31 23:59", tz="UTC")].reset_index(drop=True)
         P = pd.concat([pd.read_parquet(x, columns=["ts", "bid_o", "ask_o"]) for x in pf]).drop_duplicates("ts")
         mid = pd.Series(0.5 * (P.bid_o.to_numpy() + P.ask_o.to_numpy()), index=pd.DatetimeIndex(P.ts)).sort_index()
         T = pd.DatetimeIndex(F.ts)
