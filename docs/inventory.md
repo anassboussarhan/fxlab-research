@@ -7,7 +7,6 @@ The status of every single item is in `docs/test_ledger.md`.
 
 | Result | Evidence | Status |
 |---|---|---|
-| **Fair-value-gap pullback on Nasdaq futures** (NQ, New York session, 5 / 15-minute bars; enter on a pullback into a fresh three-candle gap in its direction; parameters chosen walk-forward) | 2019-2025 +7.9 bp a day after futures costs (t 6.7), passes the multiple-testing correction; t 3.2-5.4 under harsher fills; **2026 check supported** (+10.0 bp a day, t 3.2, 189 days) | paper forward test from 2026-11-16 |
 | **Gotobi** (long USD/JPY and EUR/JPY from 23:00 Tokyo before a Gotobi day to the 09:53 fix) | +4.45 bp a trade after costs (t 3.9) over 2007-2025; confirmed on 2019-2025 and on 2003-2006; a forced flow at a known time | forward test since 2026-11-05 |
 | **Weekly dip-buying in currencies** (Double Seven and the Connors family, weekly bars, long only) | won in 2019-2025 (t 3.0) and on the 2026 holdout (175 trades, +0.38R, t 2.2); **lost in 2008-2018** (t -1.5) | forward test, three tracks |
 | Selling index volatility (the variance premium) | SPY / DIA delta-hedged: t 1.7-2.5; real but crash-prone; needs an options account | not set up |
@@ -91,7 +90,7 @@ The status of every single item is in `docs/test_ledger.md`.
 
 | Round 21: ICT pieces never coded (Silver Bullet, Judas, midnight open, SMT, OTE, CBDR, breakers), real-rate carry, curve slope, S&P 500 anomalies, crypto cross-section | 23 tests | 0 count; ICT rules have no gross edge; macro signals worked before 2005 only; stock and crypto anomalies flat since 2015 / 2022 | `round21_results.md` |
 
-| Round 22: every parameter optimised walk-forward (yearly re-selection, no fixed settings) across all parts: libraries, time windows, ICT / SMC families, index breakouts, dip-buying, events, monthly FX and bond signals, commodities, stocks, crypto, volatility, options structures | 64,499 streams + 2026 check of 4 | **2 count and held on 2026: the fair-value-gap pullback on NQ and crypto cash-and-carry (shrunk)**; everything else fails; real streams pass their own rule at about the placebo rate | `round22_results.md` |
+| Round 22: every parameter optimised walk-forward (yearly re-selection, no fixed settings) across all parts: libraries, time windows, ICT / SMC families, index breakouts, dip-buying, events, monthly FX and bond signals, commodities, stocks, crypto, volatility, options structures | 64,499 streams + 2026 check | **only crypto cash-and-carry counts** (held on 2026 but shrunk to about 2.4% a year); the fair-value-gap pass on NQ came from a look-ahead in the simulator and is withdrawn (`fvg_audit_results.md`); everything else fails | `round22_results.md` |
 
 ### 2.5 Prop firms and execution
 

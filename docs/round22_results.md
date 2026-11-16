@@ -14,23 +14,29 @@
 - **Code:** `scripts/wf22.py` (walk-forward core), `scripts/r22_*.py`, `scripts/r22_combine.py`,
   `scripts/r22_fvg_check.py`, `scripts/r22_h26.py`.
 - **2026:** used once, as pre-registered, for the four streams that counted (the fifth use of the holdout).
+- **Correction:** `docs/fvg_audit_results.md` (2026-11-16) withdraws the fair-value-gap streams.
 
 ## Summary
 
-**4 of 64,503 real streams count** (the counting rule plus the multiple-testing correction). They are two
-results, each on two streams.
+> **Correction 2026-11-16: the fair-value-gap result is withdrawn.**
+> - **Cause:** a look-ahead in the I-FVG simulator (`docs/fvg_audit_results.md`). With a causal simulator, NAS100
+>   2019-2025 is −0.2 bp a day (t −0.3).
+> - **Void:** its 2026 check, the robustness table and the per-instrument passes below. They are kept only for
+>   the record and are marked void.
+> - **Still standing:** crypto cash-and-carry. It uses market orders on lagged funding and is unaffected.
 
-**Two things count, and both held on 2026:**
+**What counts now: 2 of 64,503 real streams** (the counting rule plus the multiple-testing correction).
+They are one result on two streams.
 
-1. **The fair-value-gap pullback on Nasdaq futures (I-FVG, NAS100).**
-   - Development data: 2019-2025 +7.9 bp a day after futures costs, t 6.7; 2015-2018 +2.3 bp.
-   - It stays significant under every harsher execution tried (t 3.2 to 5.4).
-   - 2026 (January-October, configurations chosen on data up to 2025): +10.0 bp a day, t 3.2, 189 days.
-     **Supported.**
-2. **Crypto cash-and-carry** (long spot, short perpetual when funding is high; BTC, ETH).
-   - Development data: 2023-2025 +2.1 bp a day, t 21.7 (BTC); +1.9 bp, t 20.3 (ETH).
-   - 2026: still positive (BTC +0.65 bp a day, t 7.1; ETH +0.25 bp, t 2.9), so **supported**, but the yield has
-     shrunk to a third (BTC) and an eighth (ETH) of 2023-2025: roughly 2.4% a year on BTC, below a cash rate.
+**Crypto cash-and-carry** (long spot, short perpetual when funding is high; BTC, ETH):
+- **2023-2025:** +2.1 bp a day, t 21.7 (BTC); +1.9 bp, t 20.3 (ETH).
+- **2026:** still positive (BTC +0.65 bp a day, t 7.1; ETH +0.25 bp, t 2.9), so **supported**.
+- **But shrunk:** to a third (BTC) and an eighth (ETH) of 2023-2025, roughly 2.4% a year on BTC, below a cash
+  rate.
+
+**~~The fair-value-gap pullback on Nasdaq futures~~ (withdrawn).**
+- The round-22 simulator gave +7.9 bp a day (t 6.7), and the 2026 check gave +10.0 bp (t 3.2).
+- Both came from the look-ahead.
 
 **Everything else fails** once each method's parameters are chosen walk-forward, with no fixed settings:
 - the strategy libraries (64,292 units), every time window, the other ICT / SMC families;
@@ -38,7 +44,7 @@ results, each on two streams.
 - stock anomalies, volatility selling and options structures.
 
 The real streams met their own rule (345 of 64,503) at about the placebo rate (0.53% against 0.35%), so most
-single passes are noise. The two results above are far outside that noise and survived the correction.
+single passes are noise.
 
 ## The protocol
 
@@ -55,7 +61,7 @@ single passes are noise. The two results above are far outside that noise and su
 |---|---|---|---|---|---|
 | L | The strategy libraries, re-selected every year, per engine / unit / direction | 64,292 | 332 (0.52%) | 3.56 (GBP/JPY weekly cumulative RSI; 2010-2018 negative) | nothing passes BH |
 | T | Every time window: 14,256 entry / exit / weekday / calendar configurations per instrument | 49 | 1 | 2.09 (GBP/USD; 2010-2018 negative) | nothing |
-| I | ICT / SMC families with all parameters free: levels, FVG, order blocks, OTE, breakers, CBDR, sessions, SMT | 85 | 4 | **6.68 (FVG, NAS100)** | **FVG NAS100 and FVG pooled count**; all other families negative pooled (t −0.6 to −8.7) |
+| I | ICT / SMC families with all parameters free: levels, FVG, order blocks, OTE, breakers, CBDR, sessions, SMT | 85 | 4 | ~~6.68 (FVG, NAS100)~~ | **nothing**: the FVG passes came from a look-ahead (causal simulator: t −0.3); all other families negative pooled (t −0.6 to −8.7) |
 | X | Index breakouts: noise area, ORB, VWAP trend on 9 indices | 30 | 1 | 1.91 (noise-area, NAS100) | nothing passes BH |
 | D | Dip-buying and the D7 family, every parameter (ECB fixings) | 1 | 0 | −0.04 | nothing |
 | E | EIA crude and natural-gas reports; trading around crypto funding stamps (BTC, ETH) | 5 | 0 | −0.26 (funding, ETH) | nothing; EIA t −2.1 to −3.1 |
@@ -76,7 +82,7 @@ Notes:
 - **L:** the best units are weekly rules on crosses whose 2010-2018 half lost; the share passing is at the
   placebo rate.
 
-## The fair-value-gap result in detail
+## The fair-value-gap result in detail (VOID: look-ahead in the simulator, see `docs/fvg_audit_results.md`)
 
 ### Per instrument (2019-2025, bp a day after costs)
 
@@ -156,9 +162,8 @@ None of these changed a rule or was found by looking at 2026 results.
 
 ## What follows
 
-- **Fair-value gap on NQ:** a frozen paper forward test from 2026-11-16, weekly
-  (`docs/fvg_forward_preregistration.md`, workflow `forward_fvg.yml`, branch `forward-fvg`). A futures
-  prop-firm simulation follows only if the forward test supports it.
+- **Fair-value gap:** withdrawn. The forward test (`docs/fvg_forward_preregistration.md`) was stopped before its
+  first forward day.
 - **Cash-and-carry:** the 2026 yield (about 2.4% a year on BTC) is below a cash rate after exchange risk; not
   worth setting up at present.
 

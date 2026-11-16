@@ -1,4 +1,7 @@
-# Fair-value-gap trade on Nasdaq futures: paper forward test (pre-registered 2026-11-15)
+# Fair-value-gap trade on Nasdaq futures: paper forward test (pre-registered 2026-11-15) — WITHDRAWN
+
+> **Withdrawn 2026-11-16, before the first forward day.** The result it was meant to test came from a
+> look-ahead in the round-22 simulator (`docs/fvg_audit_results.md`). The weekly schedule is removed.
 
 **Origin:**
 - Round 22 part I (`docs/round22_results.md`): I-FVG on NAS100 met the counting rule on 2010-2025 (2019-2025

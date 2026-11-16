@@ -1,12 +1,8 @@
 name: forward-fvg
-# Weekly paper forward test of the fair-value-gap trade on Nasdaq futures (docs/fvg_forward_preregistration.md).
+# WITHDRAWN 2026-11-16 before its first forward day: the round-22 fair-value-gap result came from a look-ahead in
+# the simulator (docs/fvg_audit_results.md). The schedule is removed; kept for the record, manual runs only.
 on:
-  schedule:
-    - cron: "41 7 * * 6"
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths: ["ci/FORWARD_FVG"]
 permissions:
   contents: write
 env:
