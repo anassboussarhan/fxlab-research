@@ -91,6 +91,7 @@ The status of every single item is in `docs/test_ledger.md`.
 | Round 21: ICT pieces never coded (Silver Bullet, Judas, midnight open, SMT, OTE, CBDR, breakers), real-rate carry, curve slope, S&P 500 anomalies, crypto cross-section | 23 tests | 0 count; ICT rules have no gross edge; macro signals worked before 2005 only; stock and crypto anomalies flat since 2015 / 2022 | `round21_results.md` |
 
 | Round 22: every parameter optimised walk-forward (yearly re-selection, no fixed settings) across all parts: libraries, time windows, ICT / SMC families, index breakouts, dip-buying, events, monthly FX and bond signals, commodities, stocks, crypto, volatility, options structures | 64,499 streams + 2026 check | **only crypto cash-and-carry counts** (held on 2026 but shrunk to about 2.4% a year); the fair-value-gap pass on NQ came from a look-ahead in the simulator and is withdrawn (`fvg_audit_results.md`); everything else fails | `round22_results.md` |
+| Round 23 audit: what was never searched (library parameters beyond tiny grids, continuous entries / exits, walk-forward settings, ~30-currency monthly signals, event-day filters, half-hour windows, index-review auctions, ETF rotation, the live candidates together) | audit | 11 ranked gaps; nothing new run yet | `round23_audit.md` |
 
 ### 2.5 Prop firms and execution
 

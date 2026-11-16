@@ -1,0 +1,33 @@
+{
+ "NB_noise_area_breakout": {
+  "paths": "4 x 600 sessions, minute bars from 5-second random walks",
+  "trades": 2262,
+  "gross_bp_per_trade": 0.026,
+  "t": 0.06
+ },
+ "D7_family_as_coded": {
+  "note": "geometric random walk, trades open at the end dropped (as family_d7.py), 40-60 paths",
+  "double_seven_bp": 19.5,
+  "crsi_bp": 34.7,
+  "three_down_bp": 7.3
+ },
+ "D7_family_martingale_open_marked_400_paths": {
+  "double_seven": {
+   "bp": 1.34,
+   "t": 0.34
+  },
+  "connors_crsi": {
+   "bp": 4.94,
+   "t": 0.84
+  },
+  "three_down": {
+   "bp": 1.82,
+   "t": 0.99
+  },
+  "cum_rsi": {
+   "bp": 3.58,
+   "t": 1.15
+  }
+ },
+ "reading": "No look-ahead in either. The D7 'as coded' figures are positive because a geometric walk drifts up in arithmetic terms (sigma^2/2 a period, real for any long book) and because trades still open at the end of a window are dropped; with an arithmetic martingale and open trades marked they go to about zero."
+}
