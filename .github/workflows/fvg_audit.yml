@@ -1,0 +1,81 @@
+name: fvg-audit
+# Second audit of the fair-value-gap result (docs/fvg_audit_preregistration.md). Trigger: ci/FVG_AUDIT.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/FVG_AUDIT"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  cfd:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt numba
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/r22_place.sh USATECHIDXUSD
+      - run: python -W ignore scripts/fvg_audit.py --source cfd --out out
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fvga-cfd
+          path: out
+          retention-days: 30
+  nq:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt numba databento==0.90.0
+      - env:
+          DATABENTO_API_KEY: ${{ secrets.DATABENTO_API_KEY }}
+        run: python ci/nq_fetch.py nqdata 2.50
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fvga-nqdata
+          path: nqdata
+          retention-days: 60
+      - run: |
+          mkdir -p out && cp nqdata/nq_cost.json out/
+          if [ -f nqdata/nq_1m.parquet ]; then python -W ignore scripts/fvg_audit.py --source nq --nq nqdata/nq_1m.parquet --out out; fi
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: fvga-nq
+          path: out
+          retention-days: 30
+  publish:
+    needs: [cfd, nq]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p /tmp/pub
+          for A in fvga-cfd fvga-nq; do gh run download ${{ github.run_id }} -n $A -D /tmp/pub/$A || true; done
+          find /tmp/pub -type f | sort
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan fvga-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p fvg_audit && cp -r /tmp/pub/* fvg_audit/ 2>/dev/null || true
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > fvg_audit/RUN.txt
+          git add -f fvg_audit
+          git commit -qm "fvg-audit (run ${{ github.run_id }})"
+          git push -f origin HEAD:fvg-audit
