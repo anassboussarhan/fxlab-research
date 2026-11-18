@@ -61,8 +61,15 @@ def run_wf(rows, ser, part, family, symbol, M, dates, first, extra=None, min_act
                                default=str)[:4000]}
     if extra:
         r.update(extra)
+    r["selection"] = "default"
     rows.append(r)
     ser[f"{family}|{symbol}"] = s5
+    if os.environ.get("R23_NESTED"):                                       # round 23 part N
+        import wf23
+        rn, sn = wf23.nested_row(r, M, dates, first, min_active=min_active, min_valid=min_valid)
+        rows.append(rn)
+        ser[f"{family}|{symbol}|nested"] = sn
+        print(family, symbol, "nested", json.dumps({k: rn[k] for k in ("oos_first", "p1_mean", "p2_mean", "p2_t", "own")}), flush=True)
     print(family, symbol, json.dumps({k: r[k] for k in ("oos_first", "p1_mean", "p2_mean", "p2_t", "own")}), flush=True)
 
 

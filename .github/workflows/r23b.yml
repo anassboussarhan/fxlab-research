@@ -1,0 +1,91 @@
+name: r23b
+# Round 23 parts IC and T2 (docs/round23_preregistration.md). Trigger: ci/R23B (line 1: IC matrix file, line 2: T2
+# matrix file).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23B"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      ic: ${{ steps.m.outputs.ic }}
+      t2: ${{ steps.m.outputs.t2 }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: |
+          echo "ic=$(cat $(sed -n 1p ci/R23B))" >> "$GITHUB_OUTPUT"
+          echo "t2=$(cat $(sed -n 2p ci/R23B))" >> "$GITHUB_OUTPUT"
+  events:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas requests
+      - run: python ci/r23_events.py events && rm -rf events/_cal && ls -la events
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r23-events
+          path: events
+  ic:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.list.outputs.ic) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: for S in $(echo "${{ matrix.symbol }}" | tr '+' ' '); do bash ci/r23_place.sh $S; done
+      - run: python -W ignore scripts/r23_IC.py --symbol "${{ matrix.symbol }}" --out out 2>&1 | tail -60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23IC-${{ matrix.tag }}
+          path: out
+          retention-days: 60
+  t2:
+    needs: [list, events]
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.list.outputs.t2) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with:
+          name: r23-events
+          path: events
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/r23_place.sh ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r23_T2.py --symbol ${{ matrix.symbol }} --events events --out out 2>&1 | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23T2-${{ matrix.symbol }}
+          path: out
+          retention-days: 60

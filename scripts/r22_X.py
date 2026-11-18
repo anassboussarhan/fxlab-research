@@ -233,6 +233,12 @@ def main():
                      "top1_p2_mean": st1["p2_mean"], "top1_p2_t": st1["p2_t"], "own": wf22.counts_rule(st),
                      "choices": json.dumps({str(k): [[round(float(x), 3) for x in U[i]] for i in v["cfg"]] for k, v in ch.items()})})
         ser[f"X-{fam}"] = s5
+        rows[-1]["selection"] = "default"
+        if os.environ.get("R23_NESTED"):                                   # round 23 part N
+            import wf23
+            rn, sn = wf23.nested_row(rows[-1], M, days, first, min_active=20)
+            rows.append(rn)
+            ser[f"X-{fam}|nested"] = sn
         print(a.symbol, fam, round(time.time() - t0), "s", json.dumps({k: rows[-1][k] for k in ("p1_mean", "p2_mean", "p2_t", "own")}), flush=True)
     pd.DataFrame(rows).to_csv(os.path.join(a.out, f"X_rows_{a.symbol}.csv"), index=False)
     pd.DataFrame(ser).to_parquet(os.path.join(a.out, f"X_series_{a.symbol}.parquet"))

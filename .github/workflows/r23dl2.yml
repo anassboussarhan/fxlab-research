@@ -1,0 +1,63 @@
+name: r23dl2
+# Round 23: Dukascopy hour candles for the new instruments (ci/r23_hours.py), one job per instrument, plus a format
+# check against the M1 store on EURUSD 2024. Trigger: ci/R23DL2.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23DL2"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          bash ci/fetch_m1.sh 41447353092 EURUSD
+          mkdir -p chk && cp -r data/m1/EURUSD chk/store
+          rm -rf data/m1/EURUSD
+          python ci/r23_hours.py --pair EURUSD --start 2024 --end 2024
+          python - <<'PY'
+          import glob, pandas as pd, numpy as np
+          s = pd.concat([pd.read_parquet(f) for f in glob.glob("chk/store/*2024*.parquet")])
+          s = s.set_index(pd.DatetimeIndex(s.ts) if "ts" in s else s.index)
+          hc = ((s.bid_c + s.ask_c) / 2).resample("1h").last().dropna()
+          h = pd.read_parquet("data/m1/EURUSD/EURUSD_2024.parquet").set_index("ts")
+          hh = (h.bid_c + h.ask_c) / 2
+          j = pd.concat([hc.rename("m1"), hh.rename("hour")], axis=1).dropna()
+          d = (j.hour / j.m1 - 1).abs()
+          print("hours compared", len(j), "median abs diff bp", float(d.median() * 1e4), "99th pct bp", float(d.quantile(0.99) * 1e4))
+          PY
+  dl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 10
+      matrix:
+        pair: [USDSEK, USDNOK, EURSEK, EURNOK, USDMXN, USDZAR, USDTRY, USDPLN, EURPLN, USDHUF, EURHUF, USDCZK, USDSGD,
+               USDCNH, USA30IDXUSD, USSC2000IDXUSD, AUSIDXAUD, ESPIDXEUR, XPTUSD, XPDUSD]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q polars numpy pandas pyarrow
+      - run: python ci/r23_hours.py --pair ${{ matrix.pair }} --start 2007 --end 2025 && ls -la data/m1/${{ matrix.pair }} || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r23h-${{ matrix.pair }}
+          path: data/m1/${{ matrix.pair }}
+          retention-days: 90
+          if-no-files-found: ignore

@@ -1,0 +1,46 @@
+name: r23a
+# Round 23 part LW (docs/round23_preregistration.md): the library with every parameter free, one job per instrument
+# and timeframe group. Trigger: ci/R23A (its content is the matrix file).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23A"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat $(cat ci/R23A))" >> "$GITHUB_OUTPUT"
+  lw:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 14
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/r23_place.sh ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r23_LW.py --symbol ${{ matrix.symbol }} --tfs ${{ matrix.tfs }} --budget 19500 --out out 2>&1 | grep -v Warning | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23LW-${{ matrix.tag }}
+          path: out
+          retention-days: 60

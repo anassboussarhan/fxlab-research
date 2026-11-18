@@ -217,8 +217,15 @@ def main():
     row = {"part": "P", "family": "P-options", "symbol": sym, "placebo": False, "n_cfg": int(Mx.shape[0]), **st,
            "top1_p2_mean": st1["p2_mean"], "top1_p2_t": st1["p2_t"], "own": wf22.counts_rule(st),
            "choices": json.dumps({str(k): [desc[i] for i in v["cfg"]] for k, v in ch.items()}, default=str)[:4000]}
-    pd.DataFrame([row]).to_csv(os.path.join(a.out, f"P_row_{sym}.csv"), index=False)
-    pd.DataFrame({f"P-options|{sym}": s5}).to_parquet(os.path.join(a.out, f"P_series_{sym}.parquet"))
+    row["selection"] = "default"
+    prow, pser = [row], {f"P-options|{sym}": s5}
+    if os.environ.get("R23_NESTED"):                                       # round 23 part N
+        import wf23
+        rn, sn = wf23.nested_row(row, Mx, dates, 2021, min_active=12, min_train_years=2, min_valid=12)
+        prow.append(rn)
+        pser[f"P-options|{sym}|nested"] = sn
+    pd.DataFrame(prow).to_csv(os.path.join(a.out, f"P_row_{sym}.csv"), index=False)
+    pd.DataFrame(pser).to_parquet(os.path.join(a.out, f"P_series_{sym}.parquet"))
     pd.DataFrame(Mx, columns=[str(m) for m in months]).assign(desc=[json.dumps(d) for d in desc]).to_csv(
         os.path.join(a.out, f"P_matrix_{sym}.csv.gz"), index=False)
     print(json.dumps({k: row[k] for k in ("symbol", "oos_first", "p2_mean", "p2_t", "own")}), round(time.time() - t0), "s")

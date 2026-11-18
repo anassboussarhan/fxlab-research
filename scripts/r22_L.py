@@ -85,6 +85,19 @@ def main():
                          "own": wf22.counts_rule(st),
                          "choices": json.dumps({str(k): [K.cfg.iloc[ii[j]] + "|" + K.unit.iloc[ii[j]] for j in v["cfg"][:5]]
                                                 for k, v in ch.items()})[:2000] if fam == "ALL" else ""})
+            rows[-1]["selection"] = "default"
+            if os.environ.get("R23_NESTED"):                               # round 23 part N
+                import wf23
+                rn, sn = wf23.nested_row(rows[-1], M[ii], cal, first)
+                rows.append(rn)
+                if fam in ("ALL", "PLACEBO_ALL"):
+                    ser[fam + "|nested"] = sn
+                nk = fam + "|nested"
+                if nk in pool_sum:
+                    pool_sum[nk] = pool_sum[nk].add(sn, fill_value=0.0)
+                    pool_n[nk] = pool_n[nk].add(sn.notna().astype(float), fill_value=0.0)
+                elif len(sn):
+                    pool_sum[nk], pool_n[nk] = sn.copy(), sn.notna().astype(float)
             if fam in ("ALL", "PLACEBO_ALL"):
                 ser[fam] = s5
             key = fam.split(":", 1)[1] if ":" in fam else fam          # pooled across instruments (both engines' units)
@@ -101,7 +114,9 @@ def main():
         n = pool_n[fam]
         s5 = (pool_sum[fam] / n.where(n > 0)).dropna()
         st = wf22.stream_stats(s5)
-        rows.append({"part": "L", "family": fam, "symbol": "POOLED", "placebo": fam.startswith("PLACEBO") or ":PLACEBO" in fam,
+        base = fam[:-len("|nested")] if fam.endswith("|nested") else fam
+        rows.append({"part": "L", "family": base, "symbol": "POOLED", "placebo": base.startswith("PLACEBO") or ":PLACEBO" in base,
+                     "selection": "nested" if fam.endswith("|nested") else "default",
                      "n_cfg": int(n.max()), **st, "own": wf22.counts_rule(st), "choices": ""})
         if fam in ("ALL", "PLACEBO_ALL"):
             pd.DataFrame({fam: s5}).to_parquet(os.path.join(a.out, f"L_series_POOLED_{fam}.parquet"))

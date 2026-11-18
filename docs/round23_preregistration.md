@@ -247,3 +247,31 @@ the real calendar.
 That would be the sixth use of the holdout. Part A recomputes earlier figures and is not a use.
 
 Not financial advice.
+
+## Addendum 1 (2026-11-18, before any real data was run): implementation details
+
+1. **New instruments come from hour candles.**
+   - The Dukascopy minute feed throttled the probe to 5 instruments in 30 minutes (run 44323400795, cancelled).
+   - Hour candles (one file per month and side, `ci/r23_hours.py`) are used instead. They are checked against the
+     M1 store on EURUSD 2024 (`r23dl2.yml`).
+   - The new instruments therefore enter:
+     - LW at H1, H2, H4, H8, H12, D1, D2 and W1 only;
+     - T2 at whole-hour entries only (half-hour slots have no price and are ineligible);
+     - not IC.
+   - **Instruments:** USDSEK, USDNOK, EURSEK, EURNOK, USDMXN, USDZAR, USDTRY, USDPLN, EURPLN, USDHUF, EURHUF, USDCZK,
+     USDSGD, USDCNH, USA30IDXUSD, USSC2000IDXUSD, AUSIDXAUD, ESPIDXEUR, XPTUSD, XPDUSD, whichever exist.
+   - **Price scale:** rescaled by the power of ten that matches `ci/r23_expected_2024.json`.
+2. **T2 has no BoE filter (20 filters, 63,360 configurations).** There is no free machine-readable list of past MPC
+   dates. The Bank Rate page lists only the days the rate changed, and filtering on those would be a look-ahead.
+3. **IC sessions and exits.**
+   - **Sessions:** only US index CFDs (US500, NAS100, and the Dow and Russell when present) use the 09:30-16:00
+     New York session. Every other instrument, including the European and Asian index CFDs, uses full-day bars, as
+     the FX instruments do.
+   - **Exits:** as round 22. Positions are not forced flat at the session end, except by the families' own time
+     exits.
+4. **LW details.**
+   - **Session-window entries** end at midnight London at the latest.
+   - **Excluded from the rewrite:** the 3 strategies whose rewritten functions did not reproduce the original
+     output (S.RG.VOL_FORECAST, S.WEIRD.LUNAR, S.WEIRD.MERCURY_RETRO) keep their constants fixed. So do the 29
+     that have no constants in their own body.
+   - **Configurations that fail:** one that raises or exceeds 300 s is treated as no data.

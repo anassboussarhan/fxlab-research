@@ -1,0 +1,221 @@
+name: r23c
+# Round 23 parts A, C30, ETF, PF and N (docs/round23_preregistration.md). Trigger: ci/R23C.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23C"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  R23_NESTED: "1"
+jobs:
+  A:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt requests
+      - run: python -W ignore scripts/r23_A.py --out out 2>&1 | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23c-A
+          path: out
+          retention-days: 60
+  small:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [C30, ETF]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests yfinance
+      - run: python -W ignore scripts/r23_${{ matrix.part }}.py --out out 2>&1 | tail -30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23c-${{ matrix.part }}
+          path: out
+          retention-days: 60
+  PF:
+    needs: A
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt requests
+      - uses: actions/download-artifact@v4
+        with:
+          name: r23c-A
+          path: adir
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          git fetch -q origin gotobi-oos && git show origin/gotobi-oos:gotobi_oos/series.csv > /tmp/gotobi_series.csv
+          bash ci/r23_place.sh USATECHIDXUSD
+      - run: python -W ignore scripts/r23_PF.py --gotobi /tmp/gotobi_series.csv --a adir/r23_A.json --out out 2>&1 | tail -30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23c-PF
+          path: out
+          retention-days: 60
+  Ndaily:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [d7, macro, commod, stocks, crypto, vol]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests yfinance numba lxml xlrd openpyxl
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if [ "${{ matrix.cmd }}" = stocks ]; then gh run download 43624416126 -n r20s-data -D sdata; fi
+          if [ "${{ matrix.cmd }}" = crypto ]; then gh run download 43601520485 -n cdata -D fdata; fi
+          true
+      - run: python -W ignore scripts/r22_daily.py ${{ matrix.cmd }} --data sdata --funding fdata --out out 2>&1 | tail -60
+      - run: rm -rf out/cd
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23N-${{ matrix.cmd }}
+          path: out
+          retention-days: 60
+  Nevents:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [eia, fund, spread]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests holidays xlrd openpyxl numba
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          case ${{ matrix.cmd }} in
+            eia) for S in LIGHTCMDUSD BRENTCMDUSD GASCMDUSD; do bash ci/r22_place.sh $S; done ;;
+            fund) gh run download 43601520485 -n cdata -D fdata ;;
+            spread) for S in BRENTCMDUSD LIGHTCMDUSD XAUUSD XAGUSD COPPERCMDUSD; do bash ci/r22_place.sh $S; done ;;
+          esac
+      - run: python -W ignore scripts/r22_E.py ${{ matrix.cmd }} --funding fdata --out out 2>&1 | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23N-${{ matrix.cmd }}
+          path: out
+          retention-days: 60
+  NX:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        symbol: [USA500IDXUSD, USATECHIDXUSD, DEUIDXEUR, GBRIDXGBP, FRAIDXEUR, EUSIDXEUR, CHEIDXCHF, HKGIDXHKD, JPNIDXJPY]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/r22_place.sh ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r22_X.py --symbol ${{ matrix.symbol }} --out out 2>&1 | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23N-X-${{ matrix.symbol }}
+          path: out
+          retention-days: 60
+  NP:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      max-parallel: 5
+      matrix:
+        symbol: [SPY, DIA, XLF, XLE, AAPL, MSFT, AMZN, NVDA, TSLA, META, GOOGL, AMD, NFLX, JPM, BAC, XOM, INTC, BA, DIS, KO, PFE, WMT, CVX, CSCO]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -q numpy pandas scipy pyarrow
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 43741219550 -n r22-chains -D chains
+      - run: python -W ignore scripts/r22_P.py --chain chains --closes chains/closes.csv --symbol ${{ matrix.symbol }} --out out 2>&1 | tail -10
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23N-P-${{ matrix.symbol }}
+          path: out
+          retention-days: 60
+  NL:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.lsyms.outputs.m) }}
+    needs: lsyms
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          S=${{ matrix.symbol }}
+          mkdir -p lib
+          for R in 42677782642 42690296819 42709504619 43601331590 43601520485; do
+            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" -q '.artifacts[].name' | grep -E "^(s17|s17c|r19-lib)-$S$"); do
+              gh run download $R -n $n -D tmp_$n && find tmp_$n -name "daily1*_$S.npz" -exec mv {} lib/ \; ; rm -rf tmp_$n
+            done
+          done
+          ls lib
+      - run: python -W ignore scripts/r22_L.py --files lib --out out 2>&1 | tail -10
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23N-L-${{ matrix.symbol }}
+          path: out
+          retention-days: 60
+  lsyms:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(cat ci/r23c_L_syms.json)" >> "$GITHUB_OUTPUT"
