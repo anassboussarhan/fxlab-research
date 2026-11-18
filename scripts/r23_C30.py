@@ -79,12 +79,22 @@ def oecd(subjects, measure, code, freqs=("M",)):
 
 
 def vix_monthly():
-    r = get("https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS")
-    v = pd.read_csv(io.StringIO(r.text))
-    v.columns = ["d", "v"]
-    v["d"] = pd.to_datetime(v.d)
-    v["v"] = pd.to_numeric(v.v, errors="coerce")
-    s = v.set_index("d").v.dropna().resample("ME").last()
+    """VIX month-end close: FRED VIXCLS, or Yahoo ^VIX when FRED times out."""
+    try:
+        r = get("https://fred.stlouisfed.org/graph/fredgraph.csv?id=VIXCLS", tries=3, timeout=60)
+        v = pd.read_csv(io.StringIO(r.text))
+        v.columns = ["d", "v"]
+        v["d"] = pd.to_datetime(v.d)
+        v["v"] = pd.to_numeric(v.v, errors="coerce")
+        s = v.set_index("d").v.dropna()
+    except Exception:                                                      # noqa: BLE001
+        import yfinance as yf
+        h = yf.download("^VIX", start="1990-01-01", end="2026-01-01", progress=False, auto_adjust=False)
+        if isinstance(h.columns, pd.MultiIndex):
+            h.columns = h.columns.get_level_values(0)
+        s = h["Close"].dropna()
+        s.index = pd.to_datetime(s.index).tz_localize(None) if getattr(s.index, "tz", None) else pd.to_datetime(s.index)
+    s = s.resample("ME").last()
     s.index = s.index.to_period("M")
     return s
 
