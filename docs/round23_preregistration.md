@@ -275,3 +275,12 @@ Not financial advice.
      output (S.RG.VOL_FORECAST, S.WEIRD.LUNAR, S.WEIRD.MERCURY_RETRO) keep their constants fixed. So do the 29
      that have no constants in their own body.
    - **Configurations that fail:** one that raises or exceeds 300 s is treated as no data.
+
+## Addendum 2 (2026-11-18): C30 fixes after its first run crashed (no results)
+
+- **CPI:** OECD MEI has only quarterly CPI for AUD and NZD (and none for RON).
+  - The quarterly value is placed at the quarter's last month and carried forward.
+  - Currencies without CPI get no value or real-carry signal.
+- **Publication lag:** the value signal now uses CPI lagged two months, for the delay before CPI is published.
+  - The same lag was missing in round 22 part M. That part is rerun unchanged in part N, so the lag is still
+    missing there.

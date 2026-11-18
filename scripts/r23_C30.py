@@ -61,15 +61,20 @@ def ecb_monthly():
     return P
 
 
-def oecd(subjects, measure, code):
+def oecd(subjects, measure, code, freqs=("M",)):
     for subj in subjects:
-        try:
-            doc = get(f"https://api.db.nomics.world/v22/series/OECD/MEI/{code}.{subj}.{measure}.M?observations=1",
-                      tries=3).json()["series"]["docs"][0]
-            return pd.Series(pd.to_numeric(pd.Series(doc["value"]), errors="coerce").to_numpy(),
-                             index=pd.PeriodIndex(doc["period"], freq="M")).dropna(), subj
-        except Exception:                                                  # noqa: BLE001
-            continue
+        for fq in freqs:
+            try:
+                doc = get(f"https://api.db.nomics.world/v22/series/OECD/MEI/{code}.{subj}.{measure}.{fq}?observations=1",
+                          tries=3).json()["series"]["docs"][0]
+                v = pd.Series(pd.to_numeric(pd.Series(doc["value"]), errors="coerce").to_numpy(),
+                              index=pd.PeriodIndex(doc["period"], freq=fq)).dropna()
+                if fq == "Q":                                              # quarterly CPI (AUD, NZD): at the quarter's
+                    v.index = v.index.asfreq("M", how="end")               # last month, carried forward
+                    v = v.resample("M").ffill() if hasattr(v, "resample") else v
+                return v, subj
+            except Exception:                                              # noqa: BLE001
+                continue
     return None, None
 
 
@@ -118,7 +123,7 @@ def main():
                 S[c], src[c] = s / 100.0, subj
                 break
         for cc in codes:
-            x, _ = oecd(("CPALTT01",), "IXOB", cc)
+            x, _ = oecd(("CPALTT01",), "IXOB", cc, freqs=("M", "Q"))
             if x is not None:
                 CPI[c] = x
                 break
@@ -129,7 +134,9 @@ def main():
     P, S1 = P[cur], S[cur].shift(1)
     Susd = S["USD"].shift(1)
     R = (P.shift(-1) / P - 1) + S1.sub(Susd, axis=0) / 12.0
-    realP = np.log(P * (CPI[cur] / CPI["USD"].to_numpy()[:, None]).reindex(columns=cur))
+    CPI = CPI.reindex(columns=cur + ["USD"]).ffill(limit=3)                 # quarterly series carried within the quarter
+    Cl = CPI.shift(2)                                                      # CPI is published with a lag of about 1-2 months
+    realP = np.log(P * (Cl[cur] / Cl["USD"].to_numpy()[:, None]))
     vix = vix_monthly().reindex(months)
     cost = pd.Series({c: 5e-4 if c in G10 else 15e-4 for c in cur})
     U = qmc.Sobol(9, scramble=True, seed=2301).random(256)

@@ -1,0 +1,30 @@
+name: r23c2
+# Round 23 parts A, C30, ETF, PF and N (docs/round23_preregistration.md). Trigger: ci/R23C2 (C30 rerun after addendum 2).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23C2"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  R23_NESTED: "1"
+jobs:
+  small:
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -q -r ci/requirements-ci.txt requests yfinance
+      - run: python -W ignore scripts/r23_C30.py --out out 2>&1 | tail -30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23c-C30
+          path: out
+          retention-days: 60
