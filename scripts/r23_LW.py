@@ -285,30 +285,47 @@ def main():
     units = [(e.id, tf, a.n) for tf in tfs for e in S] + [(f"PLACEBO_{k:02d}", tf, a.n) for tf in tfs for k in range(N_PLACEBO)]
     rows, done, skipped, timing = [], set(), [], {}
     pooled = {}
+
+    def write(final):
+        """Write rows, pooled sums and meta (also as a checkpoint, so a job killed at its time limit keeps its work)."""
+        sk = [f"{k}|{t}" for k, t, _ in units if (k, t) not in done]
+        pd.DataFrame(rows).to_csv(os.path.join(a.out, f"LW_rows_{sym}.csv"), index=False)
+        P = {}
+        for (key, kind), (sm, ct) in pooled.items():
+            P[f"{key}|{kind}|sum"] = sm.astype(np.float32)
+            P[f"{key}|{kind}|n"] = ct.astype(np.float32)
+        if P:
+            pd.DataFrame(P).to_parquet(os.path.join(a.out, f"LW_pooled_{sym}.parquet"))
+        json.dump({"symbol": sym, "tfs": tfs, "units": len(units), "done": len(done), "skipped": sk, "final": final,
+                   "seconds": round(time.time() - t_job), "exposure": expo, "unit_seconds": timing},
+                  open(os.path.join(a.out, f"LW_meta_{sym}.json"), "w"), indent=0)
+        return sk
+    deadline = t_job + a.budget
+    t_ck = time.time()
     ctx = mp.get_context("fork")
-    with ctx.Pool(a.procs, maxtasksperchild=20) as pool:
-        it = pool.imap_unordered(run_unit, units)
-        for key, tf, rr, pl, sec in it:
-            rows.extend(rr)
-            done.add((key, tf))
-            timing[f"{key}|{tf}"] = round(sec, 1)
-            for kind, s in pl.items():
-                p = pooled.setdefault((key, kind), [pd.Series(dtype=np.float64), pd.Series(dtype=np.float64)])
-                p[0] = p[0].add(s.astype(np.float64), fill_value=0.0)
-                p[1] = p[1].add(pd.Series(1.0, index=s.index), fill_value=0.0)
-            if time.time() - t_job > a.budget:
-                pool.terminate()
-                break
-    skipped = [f"{k}|{t}" for k, t, _ in units if (k, t) not in done]
-    pd.DataFrame(rows).to_csv(os.path.join(a.out, f"LW_rows_{sym}.csv"), index=False)
-    P = {}
-    for (key, kind), (sm, ct) in pooled.items():
-        P[f"{key}|{kind}|sum"] = sm.astype(np.float32)
-        P[f"{key}|{kind}|n"] = ct.astype(np.float32)
-    if P:
-        pd.DataFrame(P).to_parquet(os.path.join(a.out, f"LW_pooled_{sym}.parquet"))
-    json.dump({"symbol": sym, "units": len(units), "done": len(done), "skipped": skipped, "seconds": round(time.time() - t_job),
-               "exposure": expo, "unit_seconds": timing}, open(os.path.join(a.out, f"LW_meta_{sym}.json"), "w"), indent=0)
+    pool = ctx.Pool(a.procs, maxtasksperchild=20)
+    it = pool.imap_unordered(run_unit, units)
+    while True:
+        try:
+            key, tf, rr, pl, sec = it.next(timeout=max(1.0, deadline - time.time()))
+        except StopIteration:
+            break
+        except mp.TimeoutError:                                            # hard stop at the budget
+            break
+        rows.extend(rr)
+        done.add((key, tf))
+        timing[f"{key}|{tf}"] = round(sec, 1)
+        for kind, s_ in pl.items():
+            p_ = pooled.setdefault((key, kind), [pd.Series(dtype=np.float64), pd.Series(dtype=np.float64)])
+            p_[0] = p_[0].add(s_.astype(np.float64), fill_value=0.0)
+            p_[1] = p_[1].add(pd.Series(1.0, index=s_.index), fill_value=0.0)
+        if time.time() - t_ck > 900:
+            write(False)
+            t_ck = time.time()
+        if time.time() > deadline:
+            break
+    pool.terminate()
+    skipped = write(True)
     print(sym, "units", len(units), "done", len(done), "skipped", len(skipped), "seconds", round(time.time() - t_job), flush=True)
 
 

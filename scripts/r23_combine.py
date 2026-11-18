@@ -31,7 +31,19 @@ def main():
     ap.add_argument("--out", required=True)
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
-    g = lambda p: sorted(glob.glob(os.path.join(a.inp, "**", p), recursive=True))      # noqa: E731
+    def g(p):
+        """Files matching p. Artifacts sit at inp/RUN/ARTIFACT/...: when the same artifact file exists in two runs
+        (a job rerun), only the later run's copy is used."""
+        fs = sorted(glob.glob(os.path.join(a.inp, "**", p), recursive=True))
+        best = {}
+        for f in fs:
+            rel = os.path.relpath(f, a.inp).split(os.sep)
+            run, rest = (rel[0], os.sep.join(rel[1:])) if rel[0].isdigit() else ("0", os.sep.join(rel))
+            if rest not in best or int(run) > int(best[rest][0]):
+                best[rest] = (run, f)
+        if len(best) < len(fs):
+            print(p, "files replaced by a later run:", len(fs) - len(best))
+        return sorted(f for _, f in best.values())
     parts = []
     pats = {"LW_rows_*.csv": "LW", "IC_rows_*.csv": "IC", "T2_rows_*.csv": "T2", "C30_rows.csv": "C30", "ETF_rows.csv": "ETF",
             "D_rows.csv": "N", "MB_rows.csv": "N", "C_rows.csv": "N", "C1_rows.csv": "N", "S_rows.csv": "N", "K_rows.csv": "N",
