@@ -284,3 +284,15 @@ Not financial advice.
 - **Publication lag:** the value signal now uses CPI lagged two months, for the delay before CPI is published.
   - The same lag was missing in round 22 part M. That part is rerun unchanged in part N, so the lag is still
     missing there.
+
+## Addendum 3 (2026-11-18): wave 2 data pass and a count correction (no new-instrument results read)
+
+- **Missing months.** The first hour-candle pass (run 44329462758) lost about 4% of months to throttling (for
+  example 9 of 228 for USDZAR, 8 for USDSGD). A gap would put a month of price change into one bar.
+  - A fill pass (`r23w2.yml`, `ci/r23_hours.py --fill`) re-fetches only the missing months from each instrument's
+    first month on, at lower concurrency, before any strategy runs on these instruments.
+  - Months still missing after the fill stay missing; the coverage per instrument is reported with the results.
+- **Wave 2 instruments:** those with at least 5 calendar years of data after the fill.
+- **Count correction for T2.** Addendum 1 said 20 filters and 63,360 configurations. That was a miscount: the list
+  without BoE has 21 filters (the 11 of round 22 plus 3 pre-holiday, options expiry, quad witching, quarter-end,
+  MSCI review, BoJ, ECB and US CPI), so 66,528 configurations. The code always used this list.

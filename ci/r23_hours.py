@@ -3,7 +3,9 @@ schema with one row per hour, so the store loader and the resampler work for H1 
 too hard for 18 instruments x 19 years in reasonable time (the probe of run 44323400795 fetched 5 in 30 minutes).
 URL: https://datafeed.dukascopy.com/datafeed/{PAIR}/{YYYY}/{MM-1:02d}/{BID|ASK}_candles_hour_1.bi5 (t = seconds from the
 month start). --check SYM compares the hourly closes with the M1 store's resampled closes for one known instrument.
-Usage: python ci/r23_hours.py --pair SYM --start 2007 --end 2025 [--check-store]"""
+--fill re-fetches only the months missing from data/m1/SYM (from the instrument's first month on), for months that
+failed under throttling in the first pass, and rewrites the yearly files with them merged in.
+Usage: python ci/r23_hours.py --pair SYM --start 2007 --end 2025 [--fill]"""
 import argparse
 import json
 import lzma
@@ -77,12 +79,24 @@ def main():
     ap.add_argument("--start", type=int, default=2007)
     ap.add_argument("--end", type=int, default=2025)
     ap.add_argument("--workers", type=int, default=4)
+    ap.add_argument("--fill", action="store_true")
     a = ap.parse_args()
     cells = [(y, m) for y in range(a.start, a.end + 1) for m in range(1, 13)]
+    old = []
+    if a.fill:
+        import glob
+        fs = sorted(glob.glob(f"data/m1/{a.pair}/*.parquet"))
+        old = [pd.read_parquet(f) for f in fs]
+        if old:
+            ts = pd.concat([o.ts for o in old])
+            have = set(zip(ts.dt.year, ts.dt.month))
+            first = min(have)
+            cells = [c for c in cells if c >= first and c not in have]
+        print(json.dumps({"pair": a.pair, "fill_months": [f"{y}-{m:02d}" for y, m in cells]}), flush=True)
     with ThreadPoolExecutor(a.workers) as ex:
         res = list(ex.map(lambda c: (c, *month(a.pair, *c)), cells))
     rep = {"pair": a.pair, "months": len(cells), "ok": 0, "empty": 0, "failed": 0}
-    frames = []
+    frames = list(old)
     for (y, m), st, df in res:
         rep[st] += 1
         if df is not None:
