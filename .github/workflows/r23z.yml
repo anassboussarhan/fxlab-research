@@ -1,0 +1,55 @@
+name: r23z
+# Round 23 combine (scripts/r23_combine.py): artifacts of the runs listed in ci/R23Z ("RUNID note" lines, "skip PREFIX"
+# lines), Benjamini-Hochberg over all real streams, statistics to branch round23. Trigger: ci/R23Z.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23Z"]
+permissions:
+  contents: write
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  combine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - name: Free disk space
+        run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL || true
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p inp
+          for R in $(grep -E '^[0-9]+' ci/R23Z | cut -d' ' -f1); do
+            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" --paginate -q '.artifacts[].name' | grep -E '^r23(LW|IC|T2|c-|N-|N)'); do
+              case $n in r23c-A|r23c-PF) ;; esac
+              sk=0; for tok in $(grep '^skip ' ci/R23Z | cut -d' ' -f2); do case $n in $tok*) sk=1;; esac; done
+              [ $sk = 1 ] && continue
+              gh run download $R -n $n -D inp/$n || true
+            done
+          done
+          find inp -name "*.npz" -delete; find inp -name "P_matrix_*" -delete; du -sh inp
+      - run: |
+          mkdir -p res
+          python -W ignore scripts/r23_combine.py --inp inp --out res 2>&1 | tee res/log.txt
+          for f in $(find inp -name "r23_A.json" -o -name "PF_summary.json" -o -name "C30_meta.json" -o -name "ETF_meta.json" -o -name "T2_meta_*.json" -o -name "LW_meta_*.json"); do cp "$f" res/ 2>/dev/null || true; done
+      - name: Publish
+        run: |
+          cp -r res /tmp/pub
+          git config user.name "fxlab-sweep"
+          git config user.email "fxlab-sweep@users.noreply.github.com"
+          git checkout --orphan r23z-tmp
+          git rm -rq --cached . || true
+          rm -rf ./* .github .gitignore || true
+          mkdir -p round23 && cp -r /tmp/pub/* round23/
+          echo "run ${{ github.run_id }} $(date -u +%FT%TZ)" > round23/RUN.txt
+          git add -f round23
+          git commit -qm "round 23 combine (run ${{ github.run_id }})"
+          git push -f origin HEAD:round23
