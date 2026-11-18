@@ -35,9 +35,22 @@ jobs:
             done
           done
           find inp -name "*.npz" -delete; find inp -name "P_matrix_*" -delete; du -sh inp
+      - name: X10 data rule for the wave-2 instruments (hour candles of the run on the "x10 RUNID" line)
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          mkdir -p h res
+          R=$(grep -E '^x10 ' ci/R23Z | cut -d' ' -f2)
+          if [ -n "$R" ]; then
+            for n in $(gh api "repos/${{ github.repository }}/actions/runs/$R/artifacts?per_page=100" --paginate -q '.artifacts[].name' | grep -E '^r23h-'); do
+              gh run download $R -n $n -D h/$n || true
+            done
+            python ci/r23_x10.py h res/x10.json
+          fi
+          rm -rf h
       - run: |
           mkdir -p res
-          python -W ignore scripts/r23_combine.py --inp inp --out res 2>&1 | tee res/log.txt
+          python -W ignore scripts/r23_combine.py --inp inp --out res --x10 res/x10.json 2>&1 | tee res/log.txt
           for f in $(find inp -name "r23_A.json" -o -name "PF_summary.json" -o -name "C30_meta.json" -o -name "ETF_meta.json" -o -name "T2_meta_*.json" -o -name "LW_meta_*.json"); do cp "$f" "res/$(basename $(dirname "$f"))_$(basename "$f")" 2>/dev/null || true; done
       - name: Publish
         run: |

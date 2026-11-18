@@ -29,8 +29,20 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--inp", required=True)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--x10", default=None, help="ci/r23_x10.py output: wave-2 instruments with used=false are reported, "
+                                               "not counted, and left out of the pooled streams")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
+    unused = set()
+    if a.x10 and os.path.exists(a.x10):
+        unused = {k for k, v in json.load(open(a.x10)).items() if not v.get("used", False)}
+    print("X10 instruments not used:", sorted(unused))
+    def fsym(f):
+        b = os.path.basename(f).rsplit(".", 1)[0]
+        for pre in ("LW_pooled_", "LW_rows_", "IC_series_", "IC_rows_", "T2_series_", "T2_rows_"):
+            if b.startswith(pre):
+                return b[len(pre):]
+        return None
     def g(p):
         """Files matching p. Artifacts sit at inp/RUN/ARTIFACT/...: when the same artifact file exists in two runs
         (a job rerun), only the later run's copy is used."""
@@ -56,6 +68,8 @@ def main():
                 print("skip", f, repr(ex)[:80])
                 continue
             x["group"] = grp
+            if fsym(f) in unused:
+                x["counted"] = False
             if pat == "L_rows.csv":
                 x = x[x.symbol != "POOLED"]                                # per-instrument jobs: pooled below
             parts.append(x)
@@ -66,6 +80,8 @@ def main():
     # LW: each strategy pooled over instruments and timeframes (sum / count of unit streams per day)
     acc = {}
     for f in g("LW_pooled_*.parquet"):
+        if fsym(f) in unused:
+            continue
         x = pd.read_parquet(f)
         for c in x.columns:
             key, kind, what = c.rsplit("|", 2)
@@ -97,7 +113,7 @@ def main():
                       ("N", "P_series_*.parquet"), ("N", "L_series_*.parquet")):
         S = {}
         for f in g(pat):
-            if "POOLED" in os.path.basename(f):
+            if "POOLED" in os.path.basename(f) or fsym(f) in unused:
                 continue
             x = pd.read_parquet(f)
             for c in x.columns:
@@ -131,7 +147,7 @@ def main():
     R.drop(columns=["choices"], errors="ignore").to_csv(os.path.join(a.out, "r23_streams.csv.gz"), index=False)
     pl = R[R.placebo & R.p2_t.notna()]
     keep = ["group", "part", "family", "symbol", "unit", "selection", "oos_first", "p1_mean", "p2_mean", "p2_t", "own", "bh"]
-    summ = {"streams": int(len(R)), "real_streams_tested": int(len(real)), "own_rule": int(real.own.sum()),
+    summ = {"x10_not_used": sorted(unused), "streams": int(len(R)), "real_streams_tested": int(len(real)), "own_rule": int(real.own.sum()),
             "bh": int(real.bh.sum()), "counts": int(real.counts.sum()), "first_bh_threshold_p": 0.10 / max(len(real), 1),
             "first_bh_threshold_t": float(norm.ppf(1 - 0.10 / max(len(real), 1))),
             "by_group": real.groupby(["group", "selection"]).agg(streams=("p", "size"), own=("own", "sum"),

@@ -296,3 +296,21 @@ Not financial advice.
 - **Count correction for T2.** Addendum 1 said 20 filters and 63,360 configurations. That was a miscount: the list
   without BoE has 21 filters (the 11 of round 22 plus 3 pre-holiday, options expiry, quad witching, quarter-end,
   MSCI review, BoJ, ECB and US CPI), so 66,528 configurations. The code always used this list.
+
+## Addendum 4 (2026-11-18): the X10 data rule applied to wave 2 (no wave-2 result read)
+
+- **What was missing.** Section X10 says a downloaded instrument is used only if its median price is consistent with
+  the probe and its history starts at least 3 years before 2019. The wave-2 list (addendum 3) checks only "at least 5
+  calendar years", so an instrument starting in 2019 or later would have entered. USSC2000IDXUSD starts in 2019
+  (seen in the fill-pass coverage, a data property).
+- **Fix.** `ci/r23_x10.py` runs in the combine on the filled hour candles and marks an instrument as used only if:
+  - its first month with data is January 2016 or earlier;
+  - its 2024 median close, after the power-of-ten rescale, is within a factor of 2 of `ci/r23_expected_2024.json`.
+- **Effect.** The wave-2 jobs still run for every listed instrument. For an instrument that is not used:
+  - its streams are reported but not counted (they are left out of Benjamini-Hochberg);
+  - it is left out of every pooled stream.
+- **What had been seen.** When this was written, the wave-1 IC and T2 per-instrument lines had been read in the job
+  logs. No LW or T2 job had started on a wave-2 instrument. The rule touches only wave-2 instruments and follows the
+  X10 text as written before any data was run.
+- **Coverage.** The months still missing after the fill and the hours per year are written to `x10.json` with the
+  results.
