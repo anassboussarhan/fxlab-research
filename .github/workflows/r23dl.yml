@@ -1,0 +1,80 @@
+name: r23dl
+# Round 23 (docs/round23_preregistration.md): Dukascopy minute candles for new instruments, one instrument-year per
+# job. Probe first (which names exist, their price scale), then two download matrices. Trigger: ci/R23DL.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23DL"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    outputs:
+      a: ${{ steps.p.outputs.a }}
+      b: ${{ steps.p.outputs.b }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q polars numpy pandas pyarrow
+      - id: p
+        run: python ci/r23_probe.py
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r23-probe
+          path: probe
+  dla:
+    needs: probe
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 8
+      matrix: ${{ fromJSON(needs.probe.outputs.a) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q polars numpy pandas pyarrow
+      - run: |
+          Y=${{ matrix.year }}; N=$((Y+1))
+          python -m fxlab.data.acquire_dukascopy_candles --pairs ${{ matrix.pair }} --start $Y-01-01 --end $N-01-01 --workers 3 --deadline-min 280 || true
+          ls -la data/m1/${{ matrix.pair }} || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r23c-${{ matrix.pair }}-${{ matrix.year }}
+          path: data/m1/${{ matrix.pair }}
+          retention-days: 90
+          if-no-files-found: ignore
+  dlb:
+    needs: probe
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.probe.outputs.b) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q polars numpy pandas pyarrow
+      - run: |
+          Y=${{ matrix.year }}; N=$((Y+1))
+          python -m fxlab.data.acquire_dukascopy_candles --pairs ${{ matrix.pair }} --start $Y-01-01 --end $N-01-01 --workers 3 --deadline-min 280 || true
+          ls -la data/m1/${{ matrix.pair }} || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r23c-${{ matrix.pair }}-${{ matrix.year }}
+          path: data/m1/${{ matrix.pair }}
+          retention-days: 90
+          if-no-files-found: ignore
