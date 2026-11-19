@@ -345,3 +345,10 @@ Not financial advice.
 - **Relaunch** (`r23a3.yml`): cancels r23a2 and the first wave-2 strategy run, then runs every wave-1 LW tag not
   finished in full (success and "skipped 0") in the earlier runs. Wave 2 is rerun with `r23w3.yml` and the new
   runner. Jobs that finished in full under the old runner are kept as they are.
+
+## Addendum 7 (2026-11-19): scheduling only
+
+- `r23a4.yml` replaces r23a3: the same jobs and runner, 20 jobs at a time instead of 14, longest jobs first.
+- The first wave-2 jobs on the new runner show where the lost unit came from: S.RG.HMM at H1 is stuck past its alarm
+  on every instrument with a long history and is killed 2,700 s after it starts. It is lost (no data) there, as
+  addendum 6 provides.

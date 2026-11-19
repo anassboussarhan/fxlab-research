@@ -1,0 +1,63 @@
+name: r23a4
+# Round 23 part LW relaunch 3 (docs/round23_preregistration.md, addenda 6 and 7): the same jobs as r23a3, scheduled
+# with 20 jobs at a time (r23a3 had 14) and the longest first. Cancels r23a3 (44453139882), then runs every wave-1 LW
+# tag not finished in full in the earlier runs. Trigger: ci/R23A4.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23A4"]
+permissions:
+  contents: read
+  actions: write
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          R=44453139882
+          gh api -X POST repos/$GITHUB_REPOSITORY/actions/runs/$R/cancel || true
+          for k in $(seq 1 60); do
+            a=$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$R -q .status); echo "status $a"; [ "$a" = "completed" ] && exit 0; sleep 30
+          done
+          gh api -X POST repos/$GITHUB_REPOSITORY/actions/runs/$R/force-cancel || true
+  list:
+    needs: cancel
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "m=$(python ci/r23a3_list.py 44329485816 44398094254 44453139882)" >> "$GITHUB_OUTPUT"
+  lw:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/r23_place.sh ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r23_LW.py --symbol ${{ matrix.symbol }} --tfs ${{ matrix.tfs }} --budget 19500 --out out 2>&1 | grep -v Warning | tail -400
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23LW-${{ matrix.tag }}
+          path: out
+          retention-days: 60

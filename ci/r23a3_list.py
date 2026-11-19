@@ -49,5 +49,7 @@ for j in json.load(open("ci/r23a_wave1.json"))["include"]:
                 inc.append({"symbol": j["symbol"], "tfs": tf, "tag": t})
     else:
         inc.append(j)
+W = {"M15": 0, "M30": 1, "H1": 3}                                         # longest jobs first (group 0: 2)
+inc.sort(key=lambda j: W.get(j["tfs"], 2))
 print(json.dumps({"include": inc}))
 print(f"finished in full: {len(full)}; partial (rerun): {partial}; to run: {len(inc)}", file=sys.stderr)
