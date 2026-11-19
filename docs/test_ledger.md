@@ -1,4 +1,4 @@
-# Ledger: everything raised so far and its status (2026-11-03, 16:30 UTC)
+# Ledger: everything raised so far and its status (2026-11-20)
 
 Status words: **done** (result in the doc named), **running**, **written** (rules fixed, code not yet built),
 **open** (raised in the discussion, not yet written as rules), **untestable** (no data), **user** (needs an action
@@ -93,7 +93,7 @@ The queue of what is still worth testing is in `docs/testing_list.md`.
 | Round 14: independent re-check of round 13 (second engine, ECB fixings 1999-2025, fill at the close); 23 trend speeds, long-or-flat, currency-strength indices, trend + carry, high-volatility trend; direction and trendiness prediction | done: round 13 reproduced; 0 of 26 rows count; no trendiness predictor works (`docs/trend14_results.md`) |
 | Double Seven on weekly bars, 2026 holdout (third use, ECB fixings, FX) | supported: 33 trades, +0.78R, t 5.4 clustered; crash-prone (2008-2010, 2015-2016); forward test next |
 | Round 15: every rule (91, incl. 26 new book systems) and feature (315 columns) at D1 / W1 / MN, full grids, both directions, 33 instruments | done: 0 of 1,071 units survive BH; placebos 0 of 150 |
-| Weekly Connors dip-buying family on 2026 (7 rules, published defaults) | supported: 175 trades, +0.38R, t 2.2; forward-test track D7-family |
+| Weekly Connors dip-buying family on 2026 (7 rules, published defaults) | supported as first computed (175 trades, +0.38R, t 2.2); with open trades marked (round 23 A) 219 trades, +0.11R, t 0.4: weak; forward-test track D7-family |
 | Free data: Forex Factory surprises (drift 60 m / 1 d, surprise index), CBOE option-selling indices, 2y rate momentum | done: 1-day surprise drift +5.4 bp t 2.2 (2019-2025) fails the correction; the rest fail |
 | Free data: commodity / index / bond CFDs with the round-13 trend systems | done: fails (0 of 33 rows; 2019-2025 t at most 0.53); no D row passes BH (`docs/round15_results.md`, D2) |
 | Round 16: regime detection and the best strategy per regime (strategy momentum, performance filter, k-means / Gaussian-mixture clusters with 2-8 regimes, single-feature splits, HMM, ridge / boosting), over 4,140 configurations, 2,258 units and 9 FX styles; 33 regime features incl. VIX family and CME euro / yen IV and risk reversals | done: 0 of 18 count; none beats static selection or its placebo; no number of regimes beats none (`docs/round16_results.md`) |
@@ -114,3 +114,5 @@ The queue of what is still worth testing is in `docs/testing_list.md`.
 | Fair-value-gap pullback on NQ, paper forward test | withdrawn 2026-11-16 before its first forward day (`docs/fvg_forward_preregistration.md`) |
 | Fair-value-gap second audit: causal simulator, random-walk null, flat-daily and harsh variants (NQ futures data priced at USD 9-19, above the cap, not bought) | done: round-22 logic earns +0.85 bp a trade on random walks; causal NAS100 2019-2025 −0.2 bp a day (t −0.3); result withdrawn (`docs/fvg_audit_results.md`) |
 | Round 23 audit: every strategy, entry type, exit, parameter, timeframe, instrument and selection setting | done (`docs/round23_audit.md`): library grids median 3 configurations, entries / exits as menus, walk-forward settings never optimised; 11 ranked gaps; live forward tests pass random-walk nulls; D7 statistics drop open trades (to fix) |
+| Round 23: every audit gap run, pre-registered: LW (105 strategies, constants free, continuous entries / exits, M15-W1, 66 instruments), IC on a causal simulator, T2 half-hour windows with 21 day filters, C30 (24 currencies), ETF rotation, nested walk-forward everywhere (N), PF, D7 open-trade fix (A), 18 new instruments | done: nothing new counts (2 of 240,953 real streams: cash-and-carry BTC / ETH, as round 22); 1,452 first-pass counts void (LW session-rule look-ahead from decoupled constants; USD/TRY without carry); IC-SMT did not run (round-22 result stands) (`docs/round23_results.md`) |
+| D7 statistics with open trades marked (round 23 A) | done: 2019-2025 unchanged (t 3.2); 2026 D7-base t 5.4 → 0.6, family t 2.2 → 0.4: the 2026 support is now weak |
