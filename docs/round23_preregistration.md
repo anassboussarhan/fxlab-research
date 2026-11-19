@@ -363,3 +363,27 @@ Not financial advice.
   the number of workers. A job in which no worker reports in within 900 s now stops and fails instead of waiting.
   Reproduced and checked locally with a parent holding 3.2 GB.
 - **Relaunch.** `r23a5.yml` cancels r23a4 and runs the same tags.
+
+## Addendum 9 (2026-11-19): jobs that ran on part of their data (no result of these jobs read)
+
+- **What happened.** Some artifact downloads failed with "HTTP 503 Egress is over the account limit". The
+  round-22 placement step downloaded each instrument's yearly artifacts with one pattern download that stops at
+  the first failure, and it went on with the files it had.
+- **How they were found.** All 674 finished jobs of the round-23 runs were checked in their logs: placed files
+  against the most placed for the same instrument, download errors, and the LW summary line. Seven jobs ran on part
+  of their data:
+
+  | Job | Files placed |
+  |---|---|
+  | LW FRAIDXEUR M30 | 1 of 13 |
+  | LW GASCMDUSD M15 | 8 of 13 |
+  | LW GBRIDXGBP M15 | 11 of 13 |
+  | LW GBRIDXGBP M30 | 3 of 13 |
+  | LW HKGIDXHKD M30 | 0 of 13 (no output) |
+  | LW LIGHTCMDUSD M15 | 8 of 13 |
+  | part N, NX EUSIDXEUR | 9 of 12 |
+
+- **Fix.** `ci/dl_each.sh` downloads every artifact one by one with retries. The job fails if any artifact is still
+  missing, and its steps run with pipefail so a failing script fails the job.
+- **Rerun.** `r23a6.yml` reruns these seven jobs (`ci/r23a6.json`). Their artifacts replace the earlier ones in the
+  combine.
