@@ -7,6 +7,7 @@ import os
 import re
 import subprocess
 import sys
+import time
 
 repo = os.environ["GITHUB_REPOSITORY"]
 
@@ -14,7 +15,9 @@ repo = os.environ["GITHUB_REPOSITORY"]
 def gh(*a, raw=False):
     """gh api; raw output (job logs) needs --allow-escape-sequences on newer gh versions, which older ones lack."""
     flags = [["--allow-escape-sequences"], []] if raw else [[]]
-    for _ in range(4):
+    for k in range(10):                                                    # the API returns HTTP 502 at times
+        if k:
+            time.sleep(min(120, 10 * k))
         for f in flags:
             r = subprocess.run(["gh", "api", *f, *a], capture_output=True, text=True, errors="replace")
             if r.returncode == 0:
@@ -26,7 +29,7 @@ def gh(*a, raw=False):
 
 full, partial = set(), {}
 for run in sys.argv[1:]:
-    out = gh(f"repos/{repo}/actions/runs/{run}/jobs?per_page=100", "--paginate", "-q",
+    out = gh(f"repos/{repo}/actions/runs/{run}/jobs?per_page=50", "--paginate", "-q",
              '.jobs[] | select(.conclusion=="success") | "\\(.id)\\t\\(.name)"')
     for line in out.splitlines():
         jid, name = line.split("\t", 1)
