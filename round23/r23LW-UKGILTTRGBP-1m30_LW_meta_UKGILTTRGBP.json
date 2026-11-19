@@ -1,0 +1,1213 @@
+{
+"symbol": "UKGILTTRGBP",
+"tfs": [
+"M30"
+],
+"units": 115,
+"done": 114,
+"skipped": [
+"S.RG.HMM|M30"
+],
+"final": true,
+"seconds": 2928,
+"lost": [
+"S.RG.HMM|M30"
+],
+"unit_cap": 1800,
+"exposure": {
+"S.BO.FALSE_BREAKOUT": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"m"
+]
+},
+"S.BO.OPENING_RANGE": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"max_hold",
+"__c0",
+"__c1"
+]
+},
+"S.BO.RANGE_EXPANSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"n",
+"__c0",
+"__c1"
+]
+},
+"S.BO.RETEST": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"n",
+"m",
+"tol",
+"__c0"
+]
+},
+"S.BO.VOL_BREAKOUT": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1"
+]
+},
+"S.BOOK.BW_AO": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.BW_FRACTAL": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.CONNORS_3DAY": {
+"constants_exposed": 14,
+"verified": true,
+"params": [
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8",
+"__c9",
+"__c10",
+"__c11",
+"__c12",
+"__c13"
+]
+},
+"S.BOOK.CONNORS_CRSI": {
+"constants_exposed": 8,
+"verified": true,
+"params": [
+"lo",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7"
+]
+},
+"S.BOOK.CONNORS_PCTB": {
+"constants_exposed": 15,
+"verified": true,
+"params": [
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8",
+"__c9",
+"__c10",
+"__c11",
+"__c12",
+"__c13",
+"__c14"
+]
+},
+"S.BOOK.CONNORS_R3": {
+"constants_exposed": 16,
+"verified": true,
+"params": [
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8",
+"__c9",
+"__c10",
+"__c11",
+"__c12",
+"__c13",
+"__c14",
+"__c15"
+]
+},
+"S.BOOK.DOUBLE_TOP_BOTTOM": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"k",
+"__c0"
+]
+},
+"S.BOOK.ELDER_IMPULSE": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.BOOK.GANN_HILO": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n"
+]
+},
+"S.BOOK.HEAD_SHOULDERS": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"k",
+"__c0"
+]
+},
+"S.BOOK.HEIKIN_ASHI": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.ICHIMOKU_KUMO": {
+"constants_exposed": 6,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5"
+]
+},
+"S.BOOK.LIEN_CHANNEL": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"thr",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.BOOK.LIEN_DBB": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n"
+]
+},
+"S.BOOK.LIEN_FADER": {
+"constants_exposed": 9,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8"
+]
+},
+"S.BOOK.LIEN_INSIDE2": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"__c0",
+"__c1"
+]
+},
+"S.BOOK.LIEN_PERFECT_ORDER": {
+"constants_exposed": 6,
+"verified": true,
+"params": [
+"thr",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5"
+]
+},
+"S.BOOK.PNF_DOUBLE": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"rev",
+"__c0"
+]
+},
+"S.BOOK.PRIOR_PERIOD_BO": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"m"
+]
+},
+"S.BOOK.RASCHKE_ANTI": {
+"constants_exposed": 7,
+"verified": true,
+"params": [
+"k",
+"d",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6"
+]
+},
+"S.BOOK.TURTLE_SOUP": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"n",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.BOOK.WILDER_DMI": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"thr",
+"__c0"
+]
+},
+"S.BOOK.WILDER_VOLSYS": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"k",
+"__c0"
+]
+},
+"S.BOOK.WILLIAMS_OOPS": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1"
+]
+},
+"S.BOOK.WILLIAMS_R": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"n",
+"m",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.BOOK.WILLIAMS_SMASH": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n"
+]
+},
+"S.DAILY.ABS_MOM": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"L",
+"short"
+]
+},
+"S.DAILY.CUM_RSI": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"k",
+"lo",
+"x",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.DAILY.DOUBLE_SEVEN": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"n",
+"short",
+"__c0"
+]
+},
+"S.DAILY.FABER": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"short"
+]
+},
+"S.DAILY.HALLOWEEN": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.DAILY.HIGH52": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"tol",
+"m",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.DAILY.IBS": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"lo",
+"x",
+"short"
+]
+},
+"S.DAILY.OPEX": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.DAILY.THREE_DOWN": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"n",
+"f",
+"short",
+"__c0"
+]
+},
+"S.DAILY.VOL_TARGET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"tv",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.FAMOUS.ALLIGATOR": {
+"constants_exposed": 7,
+"verified": true,
+"params": [
+"scale",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6"
+]
+},
+"S.FAMOUS.CONNORS_RSI2": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"lo",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.FAMOUS.CRABEL_NR": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"k",
+"x"
+]
+},
+"S.FAMOUS.HOLY_GRAIL": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"thr",
+"__c0"
+]
+},
+"S.FAMOUS.RASCHKE_8020": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"q"
+]
+},
+"S.FAMOUS.TD_SEQUENTIAL": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"n",
+"__c0",
+"__c1"
+]
+},
+"S.FAMOUS.TTM_SQUEEZE": {
+"constants_exposed": 18,
+"verified": true,
+"params": [
+"k",
+"m",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8",
+"__c9",
+"__c10",
+"__c11",
+"__c12",
+"__c13",
+"__c14",
+"__c15",
+"__c16",
+"__c17"
+]
+},
+"S.FAMOUS.TURTLE": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"system",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.FAMOUS.WILLIAMS_VBO": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"k"
+]
+},
+"S.FORUM.NEWS_STRADDLE": {
+"constants_exposed": 6,
+"verified": true,
+"params": [
+"k",
+"hold",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5"
+]
+},
+"S.FORUM.THREE_DUCKS": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"mult",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.GEO.FIB_EXTENSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"zz",
+"__c0",
+"__c1"
+]
+},
+"S.GEO.FIB_RETRACE": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"zz",
+"__c0",
+"__c1"
+]
+},
+"S.GEO.GANN": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"zz"
+]
+},
+"S.GEO.HARMONIC": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"thr",
+"zz"
+]
+},
+"S.MR.BOLLINGER": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"k"
+]
+},
+"S.MR.OU": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"n",
+"k",
+"hl_min",
+"hl_max",
+"__c0",
+"__c1"
+]
+},
+"S.MR.RSI_REVERSAL": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"n",
+"lo",
+"hi",
+"__c0",
+"__c1"
+]
+},
+"S.MR.SHORT_REVERSAL": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"thr",
+"h",
+"n",
+"__c0",
+"__c1"
+]
+},
+"S.MR.STOCH_REVERSAL": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"lo",
+"hi"
+]
+},
+"S.MR.TWAP_REVERSION": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"k"
+]
+},
+"S.MR.ZSCORE": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"k"
+]
+},
+"S.MS.LIQUIDITY_FILTERED": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"m",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.MS.ORDER_FLOW": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"thr"
+]
+},
+"S.MS.TICK_IMBALANCE": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"thr"
+]
+},
+"S.RG.CHANGE_POINT": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"p",
+"__c0"
+]
+},
+"S.RG.ENTROPY": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"q",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.RG.FRACTAL": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"h_lo",
+"h_hi",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.RG.HMM": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"p",
+"__c0"
+]
+},
+"S.RG.VOL_FORECAST": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"m",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.SEAS.FIX_REVERSAL": {
+"constants_exposed": 7,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6"
+]
+},
+"S.SEAS.INTRADAY": {
+"constants_exposed": 8,
+"verified": true,
+"params": [
+"D",
+"thr",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7"
+]
+},
+"S.SEAS.MONTH_END_FIX": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"start",
+"__c0",
+"__c1"
+]
+},
+"S.SEAS.TURN_OF_MONTH": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"Y",
+"__c0"
+]
+},
+"S.SEAS.WEEKDAY": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"W",
+"thr",
+"__c0"
+]
+},
+"S.SEAS.WEEKEND_GAP_FADE": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.SES.ASIAN_RANGE": {
+"constants_exposed": 7,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6"
+]
+},
+"S.SES.LONDON_BREAKOUT": {
+"constants_exposed": 7,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6"
+]
+},
+"S.SES.NY_OPEN_REVERSAL": {
+"constants_exposed": 8,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7"
+]
+},
+"S.SES.OVERLAP_MOMENTUM": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n"
+]
+},
+"S.SES.SESSION_MOMENTUM": {
+"constants_exposed": 6,
+"verified": true,
+"params": [
+"h",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5"
+]
+},
+"S.SMC.FVG_RETRACE": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"tol",
+"max_age",
+"__c0"
+]
+},
+"S.SMC.SILVER_BULLET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"window",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.SMC.SWEEP_REVERSAL": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"filt",
+"__c0",
+"__c1"
+]
+},
+"S.SP.SPECTRAL_CYCLE": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"s"
+]
+},
+"S.SP.WAVELET": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"k",
+"w"
+]
+},
+"S.ST.CANDLESTICK": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n"
+]
+},
+"S.ST.CHANNEL": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"k"
+]
+},
+"S.ST.PIVOT_POINTS": {
+"constants_exposed": 0,
+"verified": false,
+"params": []
+},
+"S.ST.SR_REVERSAL": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"t",
+"k",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.ST.SWING_STRUCTURE": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1"
+]
+},
+"S.ST.TRENDLINE_BREAK": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"k"
+]
+},
+"S.TREND.ADAPTIVE": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"n",
+"e_min",
+"__c0",
+"__c1"
+]
+},
+"S.TREND.DONCHIAN": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"m"
+]
+},
+"S.TREND.INDICATOR_SIGNAL": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"kind",
+"__c0"
+]
+},
+"S.TREND.KALMAN": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"thr",
+"q_slope"
+]
+},
+"S.TREND.MA_CROSS": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"f",
+"s"
+]
+},
+"S.TREND.REGRESSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"n",
+"thr",
+"__c0",
+"__c1"
+]
+},
+"S.TREND.TSMOM": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"n",
+"vol_n",
+"__c0",
+"__c1"
+]
+},
+"S.VOL.COMPRESSION": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"q",
+"n",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.VOL.EXPANSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"s",
+"__c0",
+"__c1"
+]
+},
+"S.VOL.REGIME_SWITCH": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"lo",
+"hi",
+"__c0",
+"__c1"
+]
+},
+"S.WEIRD.LUNAR": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"phase",
+"w",
+"dir",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.WEIRD.MERCURY_RETRO": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"mode",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.BO.FALSE_BREAKOUT|M30": 11.2,
+"S.BO.RANGE_EXPANSION|M30": 10.6,
+"S.BO.OPENING_RANGE|M30": 12.6,
+"S.BO.RETEST|M30": 12.1,
+"S.BO.VOL_BREAKOUT|M30": 8.5,
+"S.BOOK.CONNORS_3DAY|M30": 6.7,
+"S.BOOK.BW_AO|M30": 9.4,
+"S.BOOK.BW_FRACTAL|M30": 8.3,
+"S.BOOK.CONNORS_PCTB|M30": 6.4,
+"S.BOOK.CONNORS_R3|M30": 7.0,
+"S.BOOK.DOUBLE_TOP_BOTTOM|M30": 8.3,
+"S.BOOK.ELDER_IMPULSE|M30": 12.2,
+"S.BOOK.GANN_HILO|M30": 10.0,
+"S.BOOK.HEAD_SHOULDERS|M30": 8.3,
+"S.BOOK.HEIKIN_ASHI|M30": 9.2,
+"S.BOOK.ICHIMOKU_KUMO|M30": 7.8,
+"S.BOOK.LIEN_CHANNEL|M30": 7.8,
+"S.BOOK.LIEN_DBB|M30": 9.4,
+"S.BOOK.LIEN_INSIDE2|M30": 7.2,
+"S.BOOK.LIEN_FADER|M30": 9.9,
+"S.BOOK.CONNORS_CRSI|M30": 41.1,
+"S.BOOK.LIEN_PERFECT_ORDER|M30": 8.1,
+"S.BOOK.PNF_DOUBLE|M30": 7.5,
+"S.BOOK.PRIOR_PERIOD_BO|M30": 8.5,
+"S.BOOK.RASCHKE_ANTI|M30": 7.5,
+"S.BOOK.TURTLE_SOUP|M30": 8.6,
+"S.BOOK.WILDER_DMI|M30": 9.2,
+"S.BOOK.WILDER_VOLSYS|M30": 8.1,
+"S.BOOK.WILLIAMS_OOPS|M30": 8.1,
+"S.BOOK.WILLIAMS_R|M30": 7.5,
+"S.BOOK.WILLIAMS_SMASH|M30": 7.5,
+"S.DAILY.ABS_MOM|M30": 8.2,
+"S.DAILY.CUM_RSI|M30": 7.3,
+"S.DAILY.HIGH52|M30": 1.8,
+"S.DAILY.DOUBLE_SEVEN|M30": 8.6,
+"S.DAILY.FABER|M30": 7.2,
+"S.DAILY.HALLOWEEN|M30": 6.3,
+"S.DAILY.VOL_TARGET|M30": 3.4,
+"S.DAILY.OPEX|M30": 7.9,
+"S.DAILY.THREE_DOWN|M30": 8.0,
+"S.DAILY.IBS|M30": 12.7,
+"S.FAMOUS.ALLIGATOR|M30": 7.1,
+"S.FAMOUS.CONNORS_RSI2|M30": 7.7,
+"S.FAMOUS.CRABEL_NR|M30": 8.0,
+"S.FAMOUS.HOLY_GRAIL|M30": 7.9,
+"S.FAMOUS.RASCHKE_8020|M30": 7.1,
+"S.FAMOUS.TTM_SQUEEZE|M30": 1.1,
+"S.FAMOUS.TD_SEQUENTIAL|M30": 7.4,
+"S.FAMOUS.TURTLE|M30": 8.6,
+"S.FAMOUS.WILLIAMS_VBO|M30": 8.0,
+"S.FORUM.THREE_DUCKS|M30": 7.6,
+"S.GEO.FIB_EXTENSION|M30": 9.4,
+"S.GEO.FIB_RETRACE|M30": 9.5,
+"S.GEO.GANN|M30": 8.2,
+"S.GEO.HARMONIC|M30": 7.5,
+"S.MR.BOLLINGER|M30": 7.0,
+"S.MR.SHORT_REVERSAL|M30": 7.3,
+"S.MR.RSI_REVERSAL|M30": 7.6,
+"S.MR.STOCH_REVERSAL|M30": 7.7,
+"S.MR.TWAP_REVERSION|M30": 8.5,
+"S.MR.OU|M30": 21.7,
+"S.MR.ZSCORE|M30": 7.0,
+"S.MS.ORDER_FLOW|M30": 6.4,
+"S.MS.LIQUIDITY_FILTERED|M30": 11.0,
+"S.MS.TICK_IMBALANCE|M30": 6.1,
+"S.FORUM.NEWS_STRADDLE|M30": 68.5,
+"S.RG.FRACTAL|M30": 24.6,
+"S.RG.CHANGE_POINT|M30": 40.1,
+"S.SEAS.FIX_REVERSAL|M30": 5.4,
+"S.SEAS.INTRADAY|M30": 25.7,
+"S.SEAS.MONTH_END_FIX|M30": 20.8,
+"S.SEAS.TURN_OF_MONTH|M30": 7.8,
+"S.SEAS.WEEKDAY|M30": 11.6,
+"S.RG.VOL_FORECAST|M30": 87.6,
+"S.SEAS.WEEKEND_GAP_FADE|M30": 7.7,
+"S.SES.ASIAN_RANGE|M30": 6.7,
+"S.SES.LONDON_BREAKOUT|M30": 8.3,
+"S.SES.NY_OPEN_REVERSAL|M30": 7.9,
+"S.SES.OVERLAP_MOMENTUM|M30": 9.5,
+"S.SES.SESSION_MOMENTUM|M30": 6.0,
+"S.SMC.FVG_RETRACE|M30": 5.6,
+"S.SMC.SILVER_BULLET|M30": 8.2,
+"S.SMC.SWEEP_REVERSAL|M30": 8.2,
+"S.SP.SPECTRAL_CYCLE|M30": 20.4,
+"S.ST.CANDLESTICK|M30": 8.1,
+"S.SP.WAVELET|M30": 32.0,
+"S.ST.CHANNEL|M30": 12.3,
+"S.ST.PIVOT_POINTS|M30": 5.4,
+"S.ST.SWING_STRUCTURE|M30": 5.6,
+"S.ST.SR_REVERSAL|M30": 14.4,
+"S.ST.TRENDLINE_BREAK|M30": 6.1,
+"S.TREND.DONCHIAN|M30": 5.1,
+"S.TREND.ADAPTIVE|M30": 7.5,
+"S.TREND.KALMAN|M30": 6.9,
+"S.TREND.INDICATOR_SIGNAL|M30": 9.2,
+"S.TREND.MA_CROSS|M30": 6.4,
+"S.TREND.REGRESSION|M30": 6.7,
+"S.VOL.COMPRESSION|M30": 5.7,
+"S.TREND.TSMOM|M30": 9.4,
+"S.VOL.EXPANSION|M30": 6.0,
+"S.VOL.REGIME_SWITCH|M30": 8.7,
+"S.WEIRD.LUNAR|M30": 5.5,
+"PLACEBO_00|M30": 4.6,
+"S.WEIRD.MERCURY_RETRO|M30": 7.2,
+"PLACEBO_01|M30": 4.5,
+"PLACEBO_02|M30": 6.3,
+"PLACEBO_03|M30": 4.5,
+"PLACEBO_05|M30": 4.7,
+"PLACEBO_04|M30": 6.3,
+"PLACEBO_06|M30": 4.4,
+"PLACEBO_07|M30": 6.3,
+"PLACEBO_08|M30": 4.9,
+"PLACEBO_09|M30": 5.0,
+"S.RG.ENTROPY|M30": 316.7
+}
+}

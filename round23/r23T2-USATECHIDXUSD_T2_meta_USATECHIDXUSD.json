@@ -1,0 +1,85 @@
+{
+ "symbol": "USATECHIDXUSD",
+ "days": 3521,
+ "n_cfg": 66528,
+ "filters": [
+  "all",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "gotobi",
+  "month_end",
+  "month_start",
+  "fomc",
+  "nfp",
+  "pre_hol_us",
+  "pre_hol_uk",
+  "pre_hol_jp",
+  "opex",
+  "quad_witching",
+  "quarter_end",
+  "msci_review",
+  "boj",
+  "ecb",
+  "cpi_us"
+ ],
+ "filter_days": {
+  "all": 3521,
+  "mon": 617,
+  "tue": 623,
+  "wed": 627,
+  "thu": 636,
+  "fri": 625,
+  "gotobi": 857,
+  "month_end": 147,
+  "month_start": 138,
+  "fomc": 74,
+  "nfp": 140,
+  "pre_hol_us": 115,
+  "pre_hol_uk": 59,
+  "pre_hol_jp": 160,
+  "opex": 143,
+  "quad_witching": 48,
+  "quarter_end": 46,
+  "msci_review": 50,
+  "boj": 118,
+  "ecb": 41,
+  "cpi_us": 62
+ },
+ "events": {
+  "boj": {
+   "dates": 168,
+   "first": "2010-01-26",
+   "last": "2025-12-19"
+  },
+  "ecb": {
+   "dates": 49,
+   "first": "2017-01-19",
+   "last": "2023-02-02"
+  },
+  "cpi_us": {
+   "dates": 74,
+   "first": "2017-01-18",
+   "last": "2023-02-14"
+  }
+ },
+ "fomc_days": 84,
+ "fomc_report": {
+  "2012": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2013": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2014": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2015": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2016": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']",
+  "2018": "parsed 7; not in fallback: []; fallback not parsed: ['2018-08-01']",
+  "2019": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

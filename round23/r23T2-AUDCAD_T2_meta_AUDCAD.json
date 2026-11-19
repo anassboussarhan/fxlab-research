@@ -1,0 +1,86 @@
+{
+ "symbol": "AUDCAD",
+ "days": 4437,
+ "n_cfg": 66528,
+ "filters": [
+  "all",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "gotobi",
+  "month_end",
+  "month_start",
+  "fomc",
+  "nfp",
+  "pre_hol_us",
+  "pre_hol_uk",
+  "pre_hol_jp",
+  "opex",
+  "quad_witching",
+  "quarter_end",
+  "msci_review",
+  "boj",
+  "ecb",
+  "cpi_us"
+ ],
+ "filter_days": {
+  "all": 4437,
+  "mon": 738,
+  "tue": 741,
+  "wed": 741,
+  "thu": 744,
+  "fri": 741,
+  "gotobi": 1022,
+  "month_end": 171,
+  "month_start": 172,
+  "fomc": 89,
+  "nfp": 170,
+  "pre_hol_us": 130,
+  "pre_hol_uk": 74,
+  "pre_hol_jp": 185,
+  "opex": 172,
+  "quad_witching": 56,
+  "quarter_end": 56,
+  "msci_review": 59,
+  "boj": 153,
+  "ecb": 39,
+  "cpi_us": 55
+ },
+ "events": {
+  "boj": {
+   "dates": 168,
+   "first": "2010-01-26",
+   "last": "2025-12-19"
+  },
+  "ecb": {
+   "dates": 49,
+   "first": "2017-01-19",
+   "last": "2023-02-02"
+  },
+  "cpi_us": {
+   "dates": 74,
+   "first": "2017-01-18",
+   "last": "2023-02-14"
+  }
+ },
+ "fomc_days": 93,
+ "fomc_report": {
+  "2010": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2011": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2012": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2013": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2014": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2015": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2016": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']",
+  "2019": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

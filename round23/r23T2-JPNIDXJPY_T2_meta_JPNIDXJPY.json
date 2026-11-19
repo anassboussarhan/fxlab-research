@@ -1,0 +1,83 @@
+{
+ "symbol": "JPNIDXJPY",
+ "days": 2761,
+ "n_cfg": 66528,
+ "filters": [
+  "all",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "gotobi",
+  "month_end",
+  "month_start",
+  "fomc",
+  "nfp",
+  "pre_hol_us",
+  "pre_hol_uk",
+  "pre_hol_jp",
+  "opex",
+  "quad_witching",
+  "quarter_end",
+  "msci_review",
+  "boj",
+  "ecb",
+  "cpi_us"
+ ],
+ "filter_days": {
+  "all": 2761,
+  "mon": 493,
+  "tue": 491,
+  "wed": 500,
+  "thu": 499,
+  "fri": 484,
+  "gotobi": 671,
+  "month_end": 113,
+  "month_start": 107,
+  "fomc": 66,
+  "nfp": 108,
+  "pre_hol_us": 88,
+  "pre_hol_uk": 47,
+  "pre_hol_jp": 121,
+  "opex": 110,
+  "quad_witching": 36,
+  "quarter_end": 36,
+  "msci_review": 40,
+  "boj": 98,
+  "ecb": 34,
+  "cpi_us": 50
+ },
+ "events": {
+  "boj": {
+   "dates": 168,
+   "first": "2010-01-26",
+   "last": "2025-12-19"
+  },
+  "ecb": {
+   "dates": 49,
+   "first": "2017-01-19",
+   "last": "2023-02-02"
+  },
+  "cpi_us": {
+   "dates": 74,
+   "first": "2017-01-18",
+   "last": "2023-02-14"
+  }
+ },
+ "fomc_days": 77,
+ "fomc_report": {
+  "2012": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2013": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2014": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2015": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2016": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2017": "parsed 6; not in fallback: []; fallback not parsed: ['2017-02-01', '2017-11-01']",
+  "2019": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

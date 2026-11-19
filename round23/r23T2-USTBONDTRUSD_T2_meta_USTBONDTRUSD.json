@@ -1,0 +1,78 @@
+{
+ "symbol": "USTBONDTRUSD",
+ "days": 2123,
+ "n_cfg": 66528,
+ "filters": [
+  "all",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "gotobi",
+  "month_end",
+  "month_start",
+  "fomc",
+  "nfp",
+  "pre_hol_us",
+  "pre_hol_uk",
+  "pre_hol_jp",
+  "opex",
+  "quad_witching",
+  "quarter_end",
+  "msci_review",
+  "boj",
+  "ecb",
+  "cpi_us"
+ ],
+ "filter_days": {
+  "all": 2123,
+  "mon": 356,
+  "tue": 355,
+  "wed": 358,
+  "thu": 359,
+  "fri": 348,
+  "gotobi": 479,
+  "month_end": 81,
+  "month_start": 82,
+  "fomc": 31,
+  "nfp": 82,
+  "pre_hol_us": 65,
+  "pre_hol_uk": 35,
+  "pre_hol_jp": 89,
+  "opex": 79,
+  "quad_witching": 28,
+  "quarter_end": 26,
+  "msci_review": 28,
+  "boj": 57,
+  "ecb": 33,
+  "cpi_us": 47
+ },
+ "events": {
+  "boj": {
+   "dates": 168,
+   "first": "2010-01-26",
+   "last": "2025-12-19"
+  },
+  "ecb": {
+   "dates": 49,
+   "first": "2017-01-19",
+   "last": "2023-02-02"
+  },
+  "cpi_us": {
+   "dates": 74,
+   "first": "2017-01-18",
+   "last": "2023-02-14"
+  }
+ },
+ "fomc_days": 31,
+ "fomc_report": {
+  "2019": "parsed 8; not in fallback: []; fallback not parsed: []",
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

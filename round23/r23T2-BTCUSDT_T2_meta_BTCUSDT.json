@@ -1,0 +1,77 @@
+{
+ "symbol": "BTCUSDT",
+ "days": 2192,
+ "n_cfg": 66528,
+ "filters": [
+  "all",
+  "mon",
+  "tue",
+  "wed",
+  "thu",
+  "fri",
+  "gotobi",
+  "month_end",
+  "month_start",
+  "fomc",
+  "nfp",
+  "pre_hol_us",
+  "pre_hol_uk",
+  "pre_hol_jp",
+  "opex",
+  "quad_witching",
+  "quarter_end",
+  "msci_review",
+  "boj",
+  "ecb",
+  "cpi_us"
+ ],
+ "filter_days": {
+  "all": 2192,
+  "mon": 313,
+  "tue": 313,
+  "wed": 314,
+  "thu": 313,
+  "fri": 313,
+  "gotobi": 431,
+  "month_end": 72,
+  "month_start": 72,
+  "fomc": 23,
+  "nfp": 72,
+  "pre_hol_us": 58,
+  "pre_hol_uk": 32,
+  "pre_hol_jp": 81,
+  "opex": 72,
+  "quad_witching": 24,
+  "quarter_end": 24,
+  "msci_review": 24,
+  "boj": 49,
+  "ecb": 25,
+  "cpi_us": 38
+ },
+ "events": {
+  "boj": {
+   "dates": 168,
+   "first": "2010-01-26",
+   "last": "2025-12-19"
+  },
+  "ecb": {
+   "dates": 49,
+   "first": "2017-01-19",
+   "last": "2023-02-02"
+  },
+  "cpi_us": {
+   "dates": 74,
+   "first": "2017-01-18",
+   "last": "2023-02-14"
+  }
+ },
+ "fomc_days": 23,
+ "fomc_report": {
+  "2020": "parsed 8; not in fallback: ['2020-03-15']; fallback not parsed: []",
+  "2021": "fetch failed: HTTP Error 404: Not Found",
+  "2022": "fetch failed: HTTP Error 404: Not Found",
+  "2023": "fetch failed: HTTP Error 404: Not Found",
+  "2024": "fetch failed: HTTP Error 404: Not Found",
+  "2025": "fetch failed: HTTP Error 404: Not Found"
+ }
+}

@@ -1,0 +1,275 @@
+{
+ "inputs": {
+  "G": {
+   "active_days": 413,
+   "mean_bp": 2.128564110341399,
+   "sd_bp": 21.117693025317735,
+   "edge_ratio_2026": 0.9583925567892836
+  },
+  "D": {
+   "active_days": 1755,
+   "mean_bp": 1.0661518729745854,
+   "sd_bp": 25.49134308437251,
+   "edge_ratio_2026": 0.6724329700935369
+  },
+  "N": {
+   "active_days": 967,
+   "mean_bp": 5.394581235818833,
+   "sd_bp": 76.74036591347534,
+   "edge_ratio_2026": 0.4819651213585535
+  }
+ },
+ "corr": {
+  "G": {
+   "G": 1.0,
+   "D": 0.178,
+   "N": -0.001
+  },
+  "D": {
+   "G": 0.178,
+   "D": 1.0,
+   "N": 0.025
+  },
+  "N": {
+   "G": -0.001,
+   "D": 0.025,
+   "N": 1.0
+  }
+ },
+ "as_2019_2025": {
+  "chosen_on_2019_2022": {
+   "G": 4,
+   "D": 1,
+   "N": 2
+  },
+  "train": {
+   "lev_G": 4.0,
+   "lev_D": 1.0,
+   "lev_N": 2.0,
+   "pass_phase1": 0.98275,
+   "pass_both": 0.765,
+   "any_payout": 0.762,
+   "mean_payouts_usd": 17183.84763919218,
+   "mean_net_usd": 17044.61763919218,
+   "median_net_usd": 11652.497187520663,
+   "share_net_positive": 0.762,
+   "p90_net_usd": 40207.56197424248,
+   "p99_net_usd": 40617.59119551014,
+   "fail_daily_loss_share": 0.43125,
+   "fail_max_loss_share": 0.05225
+  },
+  "test_2023_2025": {
+   "pass_phase1": 0.8365,
+   "pass_both": 0.80625,
+   "any_payout": 0.658,
+   "mean_payouts_usd": 11766.328910447459,
+   "mean_net_usd": 11566.25891044746,
+   "median_net_usd": 6872.115285185428,
+   "share_net_positive": 0.658,
+   "p90_net_usd": 28147.802715486843,
+   "p99_net_usd": 30987.080269160804,
+   "fail_daily_loss_share": 0.39525,
+   "fail_max_loss_share": 0.3155
+  },
+  "best_full_period_in_sample": [
+   {
+    "lev_G": 3,
+    "lev_D": 1,
+    "lev_N": 2,
+    "pass_phase1": 0.9555,
+    "pass_both": 0.78675,
+    "any_payout": 0.76375,
+    "mean_payouts_usd": 16712.664701027992,
+    "mean_net_usd": 16574.458451027993,
+    "median_net_usd": 16651.978938427284,
+    "share_net_positive": 0.76375,
+    "p90_net_usd": 35732.97976711323,
+    "p99_net_usd": 38365.38559018215,
+    "fail_daily_loss_share": 0.247,
+    "fail_max_loss_share": 0.2495
+   },
+   {
+    "lev_G": 2,
+    "lev_D": 1,
+    "lev_N": 2,
+    "pass_phase1": 0.9505,
+    "pass_both": 0.774,
+    "any_payout": 0.773,
+    "mean_payouts_usd": 16335.529411796917,
+    "mean_net_usd": 16202.734411796917,
+    "median_net_usd": 17555.995814067122,
+    "share_net_positive": 0.773,
+    "p90_net_usd": 31153.552499377543,
+    "p99_net_usd": 36174.020434309234,
+    "fail_daily_loss_share": 0.248,
+    "fail_max_loss_share": 0.2225
+   },
+   {
+    "lev_G": 1,
+    "lev_D": 1,
+    "lev_N": 2,
+    "pass_phase1": 0.95825,
+    "pass_both": 0.773,
+    "any_payout": 0.7485,
+    "mean_payouts_usd": 15627.114119448654,
+    "mean_net_usd": 15479.986619448655,
+    "median_net_usd": 18340.22785949798,
+    "share_net_positive": 0.7485,
+    "p90_net_usd": 28546.466445535825,
+    "p99_net_usd": 34157.24966434261,
+    "fail_daily_loss_share": 0.2685,
+    "fail_max_loss_share": 0.175
+   },
+   {
+    "lev_G": 4,
+    "lev_D": 1,
+    "lev_N": 2,
+    "pass_phase1": 0.92025,
+    "pass_both": 0.78375,
+    "any_payout": 0.71775,
+    "mean_payouts_usd": 15242.394818134942,
+    "mean_net_usd": 15077.278568134943,
+    "median_net_usd": 8338.810671928399,
+    "share_net_positive": 0.71775,
+    "p90_net_usd": 38605.932902744426,
+    "p99_net_usd": 40617.59119551014,
+    "fail_daily_loss_share": 0.41575,
+    "fail_max_loss_share": 0.157
+   },
+   {
+    "lev_G": 0,
+    "lev_D": 1,
+    "lev_N": 2,
+    "pass_phase1": 0.95575,
+    "pass_both": 0.731,
+    "any_payout": 0.71575,
+    "mean_payouts_usd": 14666.449070571989,
+    "mean_net_usd": 14500.162820571988,
+    "median_net_usd": 17662.950863624334,
+    "share_net_positive": 0.71575,
+    "p90_net_usd": 27724.156885644486,
+    "p99_net_usd": 32140.478894375985,
+    "fail_daily_loss_share": 0.27225,
+    "fail_max_loss_share": 0.159
+   }
+  ]
+ },
+ "at_2026_edges": {
+  "chosen_on_2019_2022": {
+   "G": 6,
+   "D": 1,
+   "N": 1
+  },
+  "train": {
+   "lev_G": 6.0,
+   "lev_D": 1.0,
+   "lev_N": 1.0,
+   "pass_phase1": 0.94575,
+   "pass_both": 0.64625,
+   "any_payout": 0.64625,
+   "mean_payouts_usd": 11729.186291624948,
+   "mean_net_usd": 11522.242541624948,
+   "median_net_usd": 13688.077211501082,
+   "share_net_positive": 0.64625,
+   "p90_net_usd": 24885.67630013534,
+   "p99_net_usd": 27817.749649916244,
+   "fail_daily_loss_share": 0.4445,
+   "fail_max_loss_share": 0.0
+  },
+  "test_2023_2025": {
+   "pass_phase1": 0.76225,
+   "pass_both": 0.499,
+   "any_payout": 0.46875,
+   "mean_payouts_usd": 3787.2739228480327,
+   "mean_net_usd": 3476.4926728480327,
+   "median_net_usd": -585.0,
+   "share_net_positive": 0.46875,
+   "p90_net_usd": 11195.767934780475,
+   "p99_net_usd": 11195.767934780475,
+   "fail_daily_loss_share": 0.58425,
+   "fail_max_loss_share": 0.30525
+  },
+  "best_full_period_in_sample": [
+   {
+    "lev_G": 6,
+    "lev_D": 2,
+    "lev_N": 1,
+    "pass_phase1": 0.88225,
+    "pass_both": 0.57225,
+    "any_payout": 0.54725,
+    "mean_payouts_usd": 9235.530090916283,
+    "mean_net_usd": 8970.671340916284,
+    "median_net_usd": 2149.6109506231696,
+    "share_net_positive": 0.54725,
+    "p90_net_usd": 25133.458699119165,
+    "p99_net_usd": 26109.36857207517,
+    "fail_daily_loss_share": 0.4385,
+    "fail_max_loss_share": 0.14575
+   },
+   {
+    "lev_G": 6,
+    "lev_D": 1,
+    "lev_N": 1,
+    "pass_phase1": 0.8635,
+    "pass_both": 0.53975,
+    "any_payout": 0.52275,
+    "mean_payouts_usd": 8661.87305885996,
+    "mean_net_usd": 8382.68180885996,
+    "median_net_usd": 2384.0985107799097,
+    "share_net_positive": 0.52275,
+    "p90_net_usd": 24663.123177681613,
+    "p99_net_usd": 27817.749649916244,
+    "fail_daily_loss_share": 0.47325,
+    "fail_max_loss_share": 0.1225
+   },
+   {
+    "lev_G": 4,
+    "lev_D": 1,
+    "lev_N": 2,
+    "pass_phase1": 0.82875,
+    "pass_both": 0.4855,
+    "any_payout": 0.444,
+    "mean_payouts_usd": 8232.49617991701,
+    "mean_net_usd": 7907.236179917011,
+    "median_net_usd": -585.0,
+    "share_net_positive": 0.444,
+    "p90_net_usd": 26237.093608558607,
+    "p99_net_usd": 31179.544210797998,
+    "fail_daily_loss_share": 0.73475,
+    "fail_max_loss_share": 0.1965
+   },
+   {
+    "lev_G": 3,
+    "lev_D": 1,
+    "lev_N": 2,
+    "pass_phase1": 0.83775,
+    "pass_both": 0.538,
+    "any_payout": 0.49425,
+    "mean_payouts_usd": 7978.82251194988,
+    "mean_net_usd": 7682.95876194988,
+    "median_net_usd": -585.0,
+    "share_net_positive": 0.49425,
+    "p90_net_usd": 22183.871022069343,
+    "p99_net_usd": 26851.810439250694,
+    "fail_daily_loss_share": 0.5705,
+    "fail_max_loss_share": 0.348
+   },
+   {
+    "lev_G": 6,
+    "lev_D": 0,
+    "lev_N": 1,
+    "pass_phase1": 0.92575,
+    "pass_both": 0.52975,
+    "any_payout": 0.52975,
+    "mean_payouts_usd": 7518.998985198098,
+    "mean_net_usd": 7243.9027351980985,
+    "median_net_usd": 1104.932173916775,
+    "share_net_positive": 0.52975,
+    "p90_net_usd": 24290.682128244276,
+    "p99_net_usd": 26819.94444546231,
+    "fail_daily_loss_share": 0.248,
+    "fail_max_loss_share": 0.3665
+   }
+  ]
+ }
+}
