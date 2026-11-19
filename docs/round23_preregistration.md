@@ -352,3 +352,14 @@ Not financial advice.
 - The first wave-2 jobs on the new runner show where the lost unit came from: S.RG.HMM at H1 is stuck past its alarm
   on every instrument with a long history and is killed 2,700 s after it starts. It is lost (no data) there, as
   addendum 6 provides.
+
+## Addendum 8 (2026-11-19): memory-limit bug in the addendum-6 runner (no LW result read)
+
+- **What happened.** In r23a4 every wave-1 job ran to its budget with no unit done ("units 115 done 0 skipped 115").
+  The per-worker data limit of addendum 6 was an absolute 80% of RAM divided by the number of workers. A worker
+  forked from a parent holding the M1 data already used more than that, so every allocation in it failed and no
+  unit started. The wave-2 jobs on hour candles have a much smaller parent and ran normally.
+- **Fix.** The limit is now what the worker inherited plus 80% of the available memory at pool start, divided by
+  the number of workers. A job in which no worker reports in within 900 s now stops and fails instead of waiting.
+  Reproduced and checked locally with a parent holding 3.2 GB.
+- **Relaunch.** `r23a5.yml` cancels r23a4 and runs the same tags.

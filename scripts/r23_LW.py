@@ -165,16 +165,29 @@ def evaluate_one(e, fn, bars, sym, params, u_exec, placebo_side=None):
     return r["returns"]
 
 
+def _proc_kb(path, field):
+    """A kB field of /proc/self/status or /proc/meminfo."""
+    try:
+        for line in open(path):
+            if line.startswith(field + ":"):
+                return int(line.split()[1])
+    except OSError:
+        return None
+    return None
+
+
 def run_unit(args):
     """One unit: strategy (or placebo k) x timeframe. Returns rows, pooled daily sums and the time taken."""
     key, tf, n = args
     warnings.filterwarnings("ignore")
     signal.signal(signal.SIGALRM, _alarm)
-    if G.get("mem_limit"):                                                 # a runaway allocation raises MemoryError in
-        try:                                                               # this config instead of the kernel killing
-            resource.setrlimit(resource.RLIMIT_DATA, (G["mem_limit"], G["mem_limit"]))  # the worker
-        except (ValueError, OSError):
-            pass
+    if G.get("mem_allow") and not G.get("_lim"):                           # once per worker: a runaway allocation
+        try:                                                               # raises MemoryError in its configuration
+            lim = _proc_kb("/proc/self/status", "VmData") * 1024 + G["mem_allow"]   # instead of the kernel killing
+            resource.setrlimit(resource.RLIMIT_DATA, (lim, lim))           # the worker. The limit is on top of what
+            G["_lim"] = lim                                                # the worker inherited from the parent.
+        except (ValueError, OSError, TypeError):
+            G["_lim"] = -1
     G["q"].put((key, tf, os.getpid(), time.time()))
     bars, day, dd, sym = G["bars"][tf], G["day"][tf], G["dd"][tf], G["sym"]
     t0 = time.time()
@@ -328,12 +341,15 @@ def main():
     t_ck = time.time()
     ctx = mp.get_context("fork")
     G["q"], G["unit_cap"] = ctx.Queue(), a.unit_cap
-    try:                                                                   # memory per worker: 80% of RAM / procs
-        G["mem_limit"] = int(0.8 * os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / a.procs)
-    except (ValueError, OSError):
-        G["mem_limit"] = None
+    try:                                                                   # new memory per worker: 80% of the
+        G["mem_allow"] = int(0.8 * _proc_kb("/proc/meminfo", "MemAvailable") * 1024 / a.procs)   # available / procs
+    except (ValueError, OSError, TypeError):
+        G["mem_allow"] = None
+    print("memory allowance per worker GB", round((G["mem_allow"] or 0) / 1e9, 2), "parent VmData GB",
+          round(_proc_kb("/proc/self/status", "VmData") * 1024 / 1e9, 2), flush=True)
     pool = ctx.Pool(a.procs, maxtasksperchild=20)
     pend = {(k, t): pool.apply_async(run_unit, ((k, t, n),)) for k, t, n in units}
+    t_pool = time.time()
     started, lost, sus = {}, [], {}
     while pend and time.time() < deadline:
         time.sleep(2)
@@ -376,6 +392,11 @@ def main():
                     del pend[u_]
                     lost.append(f"{u_[0]}|{u_[1]}")
                     print("LOST (worker died)", u_, flush=True)
+        if not started and not done and time.time() - t_pool > 900:        # no worker has reported in: fail loudly
+            print("NO UNIT STARTED in 900 s: the workers are not running", flush=True)
+            pool.terminate()
+            write(True)
+            sys.exit(3)
         if time.time() - t_ck > 900:
             write(False)
             t_ck = time.time()
