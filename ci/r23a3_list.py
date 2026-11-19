@@ -11,11 +11,16 @@ import sys
 repo = os.environ["GITHUB_REPOSITORY"]
 
 
-def gh(*a):
+def gh(*a, raw=False):
+    """gh api; raw output (job logs) needs --allow-escape-sequences on newer gh versions, which older ones lack."""
+    flags = [["--allow-escape-sequences"], []] if raw else [[]]
     for _ in range(4):
-        r = subprocess.run(["gh", "api", *a], capture_output=True, text=True)
-        if r.returncode == 0:
-            return r.stdout
+        for f in flags:
+            r = subprocess.run(["gh", "api", *f, *a], capture_output=True, text=True, errors="replace")
+            if r.returncode == 0:
+                return r.stdout
+            if "unknown flag" in r.stderr:
+                continue
     raise RuntimeError(f"gh api {a}: {r.stderr[:300]}")
 
 
@@ -28,7 +33,7 @@ for run in sys.argv[1:]:
         if not name.startswith("lw ("):
             continue
         tag = name.rsplit(", ", 1)[-1].rstrip(")")
-        m = re.search(r" units (\d+) done (\d+) skipped (\d+) ", gh(f"repos/{repo}/actions/jobs/{jid}/logs"))
+        m = re.search(r" units (\d+) done (\d+) skipped (\d+) ", gh(f"repos/{repo}/actions/jobs/{jid}/logs", raw=True))
         if m and int(m.group(3)) == 0:
             full.add(tag)
         else:
