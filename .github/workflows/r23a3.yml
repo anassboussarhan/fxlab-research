@@ -1,0 +1,64 @@
+name: r23a3
+# Round 23 part LW relaunch 2 (docs/round23_preregistration.md, addendum 6). Every long LW job of r23a2 lost one unit
+# and then waited for it until its time budget. This cancels r23a2 (44398094254) and the first wave-2 strategy run
+# (r23w3, 44445437216; rerun separately with the same runner), then runs every wave-1 LW tag not finished in full,
+# with the runner that caps a unit's time, detects a dead worker and kills a stuck one. Trigger: ci/R23A3.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23A3"]
+permissions:
+  contents: read
+  actions: write
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for R in 44398094254 44445437216; do gh api -X POST repos/$GITHUB_REPOSITORY/actions/runs/$R/cancel || true; done
+          for k in $(seq 1 60); do
+            a=$(gh api repos/$GITHUB_REPOSITORY/actions/runs/44398094254 -q .status); b=$(gh api repos/$GITHUB_REPOSITORY/actions/runs/44445437216 -q .status)
+            echo "status $a $b"; [ "$a" = "completed" ] && [ "$b" = "completed" ] && exit 0; sleep 30
+          done
+          for R in 44398094254 44445437216; do gh api -X POST repos/$GITHUB_REPOSITORY/actions/runs/$R/force-cancel || true; done
+  list:
+    needs: cancel
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: echo "m=$(python ci/r23a3_list.py 44329485816 44398094254)" >> "$GITHUB_OUTPUT"
+  lw:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 14
+      matrix: ${{ fromJSON(needs.list.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: bash ci/r23_place.sh ${{ matrix.symbol }}
+      - run: python -W ignore scripts/r23_LW.py --symbol ${{ matrix.symbol }} --tfs ${{ matrix.tfs }} --budget 19500 --out out 2>&1 | grep -v Warning | tail -400
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23LW-${{ matrix.tag }}
+          path: out
+          retention-days: 60

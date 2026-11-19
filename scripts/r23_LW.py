@@ -7,7 +7,9 @@ Usage: python scripts/r23_LW.py --symbol SYM --out DIR [--n 128] [--budget 19000
 from __future__ import annotations
 
 import argparse
+import faulthandler
 import inspect
+import resource
 import json
 import math
 import multiprocessing as mp
@@ -31,6 +33,7 @@ import wf23  # noqa: E402
 TFS = ("W1", "D2", "D1", "H12", "H8", "H4", "H2", "H1", "M30", "M15")    # cheapest first: a budget cut drops M15 first
 N_EXEC = 19
 N_PLACEBO = 10
+KILL_MARGIN = 900                                                          # s past the unit cap before a stuck worker is killed
 DEV_END = pd.Timestamp("2025-12-31 23:59", tz="UTC")
 G = {}                                                                     # bars per timeframe etc. (inherited by fork)
 
@@ -167,6 +170,12 @@ def run_unit(args):
     key, tf, n = args
     warnings.filterwarnings("ignore")
     signal.signal(signal.SIGALRM, _alarm)
+    if G.get("mem_limit"):                                                 # a runaway allocation raises MemoryError in
+        try:                                                               # this config instead of the kernel killing
+            resource.setrlimit(resource.RLIMIT_DATA, (G["mem_limit"], G["mem_limit"]))  # the worker
+        except (ValueError, OSError):
+            pass
+    G["q"].put((key, tf, os.getpid(), time.time()))
     bars, day, dd, sym = G["bars"][tf], G["day"][tf], G["dd"][tf], G["sym"]
     t0 = time.time()
     seed = zlib.crc32(f"LW|{key}|{tf}".encode()) & 0x7FFFFFFF
@@ -176,8 +185,11 @@ def run_unit(args):
         e, fn, sps = G["cat"][key], G["fn"][key], G["specs"][key]
     U = qmc.Sobol(len(sps) + N_EXEC, scramble=True, seed=seed).random(n)
     M = np.full((n, len(dd)), np.nan, np.float32)
-    errors = 0
+    errors, timeouts, n_run = 0, 0, 0
     for i, u in enumerate(U):
+        if time.time() - t0 > G["unit_cap"]:                               # unit cap: the remaining configurations
+            break                                                          # are no data
+        n_run += 1
         params = {s["name"]: draw(s, u[j]) for j, s in enumerate(sps)}
         ps = None
         if e is None:
@@ -191,22 +203,32 @@ def run_unit(args):
             params = {}
         try:
             signal.alarm(300)
+            faulthandler.dump_traceback_later(600, exit=False)              # a configuration stuck past its alarm
             r = evaluate_one(e, fn, bars, sym, params, u[len(sps):], ps)
             signal.alarm(0)
             M[i] = I17.daily_sum(r, day, dd)
-        except Exception:                                                  # noqa: BLE001  (incl. Timeout)
+        except Timeout:
+            signal.alarm(0)
+            timeouts += 1
+            errors += 1
+        except Exception:                                                  # noqa: BLE001
             signal.alarm(0)
             errors += 1
+        finally:
+            faulthandler.cancel_dump_traceback_later()
+    sec = time.time() - t0
+    if sec > 600 or n_run < n:
+        print("SLOW", key, tf, "seconds", round(sec), "configs", n_run, "of", n, "timeouts", timeouts, "errors", errors, flush=True)
     cal = pd.DatetimeIndex(pd.to_datetime(dd))
     first = max(2010, int(cal.year.min()) + 3)
     res = wf23.both(wf23.Agg(cal, P=M.astype(np.float64)), first, min_active=30, min_valid=50)
     rows, pooled = [], {}
     for kind, (s, st, own, ch) in res.items():
         rows.append({"part": "LW", "family": f"LW-{key}", "unit": f"{key}|{tf}", "tf": tf, "symbol": sym,
-                     "placebo": key.startswith("PLACEBO"), "selection": kind, "n_cfg": n, "errors": errors, **st, "own": own,
+                     "placebo": key.startswith("PLACEBO"), "selection": kind, "n_cfg": n, "n_run": n_run, "errors": errors, "timeouts": timeouts, **st, "own": own,
                      "n_params": len(sps), "choices": json.dumps({str(k): v for k, v in list(ch.items())[-1:]})[:600]})
         pooled[kind] = s.astype(np.float32)
-    return key, tf, rows, pooled, time.time() - t0
+    return key, tf, rows, pooled, sec
 
 
 def higher(d1, kind):
@@ -234,6 +256,7 @@ def main():
     ap.add_argument("--n", type=int, default=128)
     ap.add_argument("--budget", type=float, default=19000)
     ap.add_argument("--procs", type=int, default=4)
+    ap.add_argument("--unit-cap", type=float, default=1800, help="seconds; a unit stops drawing configurations after this")
     ap.add_argument("--tfs", default=",".join(TFS))
     ap.add_argument("--only", default="", help="test runs: comma-separated strategy ids")
     a = ap.parse_args()
@@ -297,35 +320,71 @@ def main():
         if P:
             pd.DataFrame(P).to_parquet(os.path.join(a.out, f"LW_pooled_{sym}.parquet"))
         json.dump({"symbol": sym, "tfs": tfs, "units": len(units), "done": len(done), "skipped": sk, "final": final,
-                   "seconds": round(time.time() - t_job), "exposure": expo, "unit_seconds": timing},
+                   "seconds": round(time.time() - t_job), "lost": G.get("lost", []), "unit_cap": a.unit_cap,
+                   "exposure": expo, "unit_seconds": timing},
                   open(os.path.join(a.out, f"LW_meta_{sym}.json"), "w"), indent=0)
         return sk
     deadline = t_job + a.budget
     t_ck = time.time()
     ctx = mp.get_context("fork")
+    G["q"], G["unit_cap"] = ctx.Queue(), a.unit_cap
+    try:                                                                   # memory per worker: 80% of RAM / procs
+        G["mem_limit"] = int(0.8 * os.sysconf("SC_PAGE_SIZE") * os.sysconf("SC_PHYS_PAGES") / a.procs)
+    except (ValueError, OSError):
+        G["mem_limit"] = None
     pool = ctx.Pool(a.procs, maxtasksperchild=20)
-    it = pool.imap_unordered(run_unit, units)
-    while True:
-        try:
-            key, tf, rr, pl, sec = it.next(timeout=max(1.0, deadline - time.time()))
-        except StopIteration:
-            break
-        except mp.TimeoutError:                                            # hard stop at the budget
-            break
-        rows.extend(rr)
-        done.add((key, tf))
-        timing[f"{key}|{tf}"] = round(sec, 1)
-        for kind, s_ in pl.items():
-            p_ = pooled.setdefault((key, kind), [pd.Series(dtype=np.float64), pd.Series(dtype=np.float64)])
-            p_[0] = p_[0].add(s_.astype(np.float64), fill_value=0.0)
-            p_[1] = p_[1].add(pd.Series(1.0, index=s_.index), fill_value=0.0)
+    pend = {(k, t): pool.apply_async(run_unit, ((k, t, n),)) for k, t, n in units}
+    started, lost, sus = {}, [], {}
+    while pend and time.time() < deadline:
+        time.sleep(2)
+        while True:
+            try:
+                k_, t_, pid, ts = G["q"].get_nowait()
+                started[(k_, t_)] = (pid, ts)
+            except Exception:                                              # noqa: BLE001  (queue empty)
+                break
+        alive = {w.pid for w in pool._pool if w.is_alive()}
+        cur = {}                                                           # the unit each worker is running now
+        for u_, (pid, ts) in started.items():
+            if u_ in pend and (pid not in cur or ts > cur[pid][1]):
+                cur[pid] = (u_, ts)
+        for pid, (u_, ts) in cur.items():                                  # a configuration stuck where its alarm
+            if pid in alive and time.time() - ts > a.unit_cap + KILL_MARGIN and not pend[u_].ready():   # cannot reach it:
+                print("KILL (stuck unit)", u_, "pid", pid, flush=True)     # kill the worker; the unit is then lost
+                try:
+                    os.kill(pid, signal.SIGKILL)
+                except OSError:
+                    pass
+        for u_, r_ in list(pend.items()):
+            if r_.ready():
+                del pend[u_]
+                try:
+                    key, tf, rr, pl, sec = r_.get()
+                except Exception as ex:                                    # noqa: BLE001
+                    print("UNIT ERROR", u_, repr(ex)[:200], flush=True)
+                    continue
+                rows.extend(rr)
+                done.add((key, tf))
+                timing[f"{key}|{tf}"] = round(sec, 1)
+                for kind, s_ in pl.items():
+                    p_ = pooled.setdefault((key, kind), [pd.Series(dtype=np.float64), pd.Series(dtype=np.float64)])
+                    p_[0] = p_[0].add(s_.astype(np.float64), fill_value=0.0)
+                    p_[1] = p_[1].add(pd.Series(1.0, index=s_.index), fill_value=0.0)
+            elif u_ in started and started[u_][0] not in alive:                # its worker is gone: if the result
+                sus.setdefault(u_, time.time())                                # has not arrived 30 s later, the
+                if time.time() - sus[u_] > 30:                                 # worker died and it never will
+                    del pend[u_]
+                    lost.append(f"{u_[0]}|{u_[1]}")
+                    print("LOST (worker died)", u_, flush=True)
         if time.time() - t_ck > 900:
             write(False)
             t_ck = time.time()
-        if time.time() > deadline:
-            break
     pool.terminate()
+    G["lost"] = lost
     skipped = write(True)
+    slow = sorted(timing.items(), key=lambda kv: -kv[1])[:10]
+    print("slowest units", slow, flush=True)
+    print("skipped units", skipped[:30], "lost", lost[:30], flush=True)
     print(sym, "units", len(units), "done", len(done), "skipped", len(skipped), "seconds", round(time.time() - t_job), flush=True)
 
 

@@ -324,3 +324,24 @@ Not financial advice.
   other instruments.
 - **Rerun.** `r23w3.yml` runs the same list, LW and T2 steps on the filled hour candles of the r23w2 run
   (`ci/r23_w2_run.txt`). The method is unchanged.
+
+## Addendum 6 (2026-11-19): LW runner fix and second relaunch (no LW result read)
+
+- **What happened.** Every LW job of the first relaunch (r23a2) that ran long ended at its time budget with exactly
+  one unit not done ("units 115 done 114 skipped 1"; AUDUSD H1+M30+M15: 345, 344, 1). Its other units had finished
+  long before. One unit was lost, most likely because its worker process died (a result that never arrives keeps
+  the pool waiting), or it was stuck in one configuration where the 300 s alarm could not reach it. Only the
+  per-job unit counts in the logs were read, no LW statistic.
+- **Runner changes** (`scripts/r23_LW.py`):
+  - **Unit cap:** a unit stops drawing configurations after 1,800 s. The remaining configurations are no data (as
+    for one that exceeds 300 s). Each row records how many configurations ran (`n_run`) and how many timed out.
+  - **Memory limit:** each worker gets a data limit of 80% of RAM divided by the number of workers, so a runaway
+    allocation is a failed configuration instead of a killed worker.
+  - **Dead worker:** a unit whose worker is gone and whose result has not arrived 30 s later is marked lost and the
+    job goes on.
+  - **Stuck worker:** a unit still running 900 s past the unit cap has its worker killed and is marked lost.
+  - **Diagnostics:** slow units, lost units and a traceback of any configuration running past 600 s are printed in
+    the job log.
+- **Relaunch** (`r23a3.yml`): cancels r23a2 and the first wave-2 strategy run, then runs every wave-1 LW tag not
+  finished in full (success and "skipped 0") in the earlier runs. Wave 2 is rerun with `r23w3.yml` and the new
+  runner. Jobs that finished in full under the old runner are kept as they are.
