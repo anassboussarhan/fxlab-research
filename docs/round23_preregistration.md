@@ -314,3 +314,13 @@ Not financial advice.
   X10 text as written before any data was run.
 - **Coverage.** The months still missing after the fill and the hours per year are written to `x10.json` with the
   results.
+
+## Addendum 5 (2026-11-19): wave-2 strategy jobs rerun (no wave-2 result read)
+
+- **XPDUSD and XPTUSD have no data.** The first hour-candle pass returned 0 of 228 months for each (225 empty, 3
+  failed), so the fill pass tried every month and hit its 4-hour limit. Both are left out ("whichever exist").
+- **The wave-2 LW and T2 jobs did not run.** Those two cancelled fill jobs made GitHub skip the lw and t2 jobs of
+  `r23w2.yml` (they depend on the fill through the list job), although the list job itself ran and listed the 18
+  other instruments.
+- **Rerun.** `r23w3.yml` runs the same list, LW and T2 steps on the filled hour candles of the r23w2 run
+  (`ci/r23_w2_run.txt`). The method is unchanged.

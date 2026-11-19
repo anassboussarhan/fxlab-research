@@ -1,0 +1,95 @@
+name: r23w3
+# Round 23 wave 2, strategy jobs (docs/round23_preregistration.md, addenda 1, 3 and 5): the new instruments from the
+# filled hour candles of the r23w2 run in ci/r23_w2_run.txt. In r23w2 two fill jobs (XPDUSD, XPTUSD: no data) hit the
+# time limit and GitHub skipped the lw and t2 jobs that depended on the fill; this runs them.
+# list: the instruments with at least 5 years of data; lw: LW at H1 and above; t2: T2 at whole hours. No IC.
+# Trigger: ci/R23W3.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23W3"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      lw: ${{ steps.m.outputs.lw }}
+      t2: ${{ steps.m.outputs.t2 }}
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download $(cat ci/r23_w2_run.txt) -p 'r23h-*' -D h && ls h
+      - id: m
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import glob, json, os
+          syms = []
+          for d in sorted(glob.glob("h/r23h-*")):
+              s = os.path.basename(d)[5:]
+              years = {os.path.basename(f)[len(s) + 1:len(s) + 5] for f in glob.glob(os.path.join(d, "*.parquet"))}
+              if len(years) >= 5:
+                  syms.append(s)
+          lw = [{"symbol": s, "tfs": t, "tag": f"{s}-{k}"} for s in syms for k, t in enumerate(("W1,D2,D1,H12,H8,H4,H2", "H1"))]
+          print("lw=" + json.dumps({"include": lw}))
+          print("t2=" + json.dumps({"include": [{"symbol": s} for s in syms]}))
+          PY
+          cat "$GITHUB_OUTPUT"
+  lw:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 14
+      matrix: ${{ fromJSON(needs.list.outputs.lw) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download $(cat ci/r23_w2_run.txt) -n r23h-${{ matrix.symbol }} -D data/m1/${{ matrix.symbol }}
+      - run: python ci/r23_rescale.py ${{ matrix.symbol }} && ls data/m1/${{ matrix.symbol }}
+      - run: python -W ignore scripts/r23_LW.py --symbol ${{ matrix.symbol }} --tfs ${{ matrix.tfs }} --budget 19500 --out out 2>&1 | grep -v Warning | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23LW-${{ matrix.tag }}
+          path: out
+          retention-days: 60
+  t2:
+    needs: list
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      max-parallel: 6
+      matrix: ${{ fromJSON(needs.list.outputs.t2) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download 44329485826 -n r23-events -D events && ls events
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh run download $(cat ci/r23_w2_run.txt) -n r23h-${{ matrix.symbol }} -D data/m1/${{ matrix.symbol }}
+      - run: python ci/r23_rescale.py ${{ matrix.symbol }} && ls data/m1/${{ matrix.symbol }}
+      - run: python -W ignore scripts/r23_T2.py --symbol ${{ matrix.symbol }} --events events --out out 2>&1 | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23T2-${{ matrix.symbol }}
+          path: out
+          retention-days: 60
