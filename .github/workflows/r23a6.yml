@@ -1,0 +1,80 @@
+name: r23a6
+# Round 23 data reruns (docs/round23_preregistration.md, addendum 9): jobs that ran on part of their data because an
+# artifact download failed ("HTTP 503 Egress is over the account limit") while the job went on. The jobs are listed
+# in ci/r23a6.json from the job logs; each now downloads every data artifact with retries and fails if any is
+# missing. Trigger: ci/R23A6.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23A6"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  list:
+    runs-on: ubuntu-latest
+    outputs:
+      lw: ${{ steps.m.outputs.lw }}
+      nx: ${{ steps.m.outputs.nx }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: |
+          python -c "import json; d=json.load(open('ci/r23a6.json')); print('lw=' + json.dumps({'include': d['lw']})); print('nx=' + json.dumps({'symbol': d['nx'] or ['none']}))" >> "$GITHUB_OUTPUT"
+          cat "$GITHUB_OUTPUT"
+  lw:
+    needs: list
+    if: ${{ fromJSON(needs.list.outputs.lw).include[0] != null }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.list.outputs.lw) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: bash ci/r23_place.sh ${{ matrix.symbol }}
+      - shell: bash
+        run: python -W ignore scripts/r23_LW.py --symbol ${{ matrix.symbol }} --tfs ${{ matrix.tfs }} --budget 19500 --out out 2>&1 | grep -v Warning | tail -400
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23LW-${{ matrix.tag }}
+          path: out
+          retention-days: 60
+  nx:
+    needs: list
+    if: ${{ fromJSON(needs.list.outputs.nx).symbol[0] != 'none' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.list.outputs.nx) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: bash ci/r22_place.sh ${{ matrix.symbol }}
+      - shell: bash
+        run: python -W ignore scripts/r22_X.py --symbol ${{ matrix.symbol }} --out out 2>&1 | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23N-X-${{ matrix.symbol }}
+          path: out
+          retention-days: 60

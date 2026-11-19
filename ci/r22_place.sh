@@ -7,7 +7,7 @@ if python -c "import json,sys; d=json.load(open('ci/r22_syms.json')); sys.exit(0
   bash ci/fetch_m1.sh 41447353092 $S
 elif python -c "import json,sys; d=json.load(open('ci/r22_syms.json')); sys.exit(0 if '$S' in d['d2'] else 1)"; then
   mkdir -p data/m1/$S dl_$S
-  gh run download 42610347008 -p "d2c-$S-*" -D dl_$S || true
+  bash ci/dl_each.sh 42610347008 "^d2c-$S-[0-9]{4}$" dl_$S || { echo "data download incomplete for $S"; exit 1; }
   find dl_$S -name "*.parquet" -exec mv {} data/m1/$S/ \;
   rm -rf dl_$S
 else
