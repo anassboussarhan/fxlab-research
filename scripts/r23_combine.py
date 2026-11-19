@@ -55,6 +55,14 @@ def main():
                 best[rest] = (run, f)
         if len(best) < len(fs):
             print(p, "files replaced by a later run:", len(fs) - len(best))
+        # an LW group-1 job split by timeframe in a relaunch (r23LW-SYM-1 -> r23LW-SYM-1h1, -1m30, -1m15): the
+        # combined artifact of the earlier run is replaced by the split ones
+        arts = {rest.split(os.sep)[0] for rest in best}
+        drop = [rest for rest in best if rest.split(os.sep)[0].startswith("r23LW-") and rest.split(os.sep)[0].endswith("-1")
+                and any(f"{rest.split(os.sep)[0]}{t}" in arts for t in ("h1", "m30", "m15"))]
+        for rest in drop:
+            print(p, "combined group-1 artifact replaced by split ones:", best[rest][1])
+            del best[rest]
         return sorted(f for _, f in best.values())
     parts = []
     pats = {"LW_rows_*.csv": "LW", "IC_rows_*.csv": "IC", "T2_rows_*.csv": "T2", "C30_rows.csv": "C30", "ETF_rows.csv": "ETF",
