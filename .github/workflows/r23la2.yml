@@ -1,0 +1,37 @@
+name: r23la2
+# Round 23 look-ahead audit of part LW (docs/round23_results.md): truncation test of every LW strategy on a synthetic
+# random walk (scripts/r23_lookahead.py). sig: every strategy, 32 LW configurations, signals compared on every bar
+# before 48 cuts; engine: a set of strategies covering the engines and entry types, per-bar returns compared.
+# No market data is used. r23la2: the sig jobs at M15-H4 again, with stuck tasks killed after 1,500 s and the log
+# streamed (in r23la they had not finished after 2 h). Trigger: ci/R23LA2.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23LA2"]
+permissions:
+  contents: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  sig:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        tf: [M15, M30, H1, H2, H4]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - shell: bash
+        run: python -W ignore scripts/r23_lookahead.py --out out --k 32 --tfs ${{ matrix.tf }} --procs 4 2>&1 | grep --line-buffered -v Warning
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23la2-sig-${{ matrix.tf }}
+          path: out
+          retention-days: 60

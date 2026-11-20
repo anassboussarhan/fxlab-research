@@ -30,6 +30,7 @@ import r23_LW as LW  # noqa: E402
 
 G = {}
 SYM = "TSTUSD"
+TASK_KILL = 1500                                                           # s before a stuck task's worker is killed
 
 
 def synth_m1(path):
@@ -70,6 +71,7 @@ def task(args):
     key, tf, k, engine = args
     warnings.filterwarnings("ignore")
     signal.signal(signal.SIGALRM, _alarm)
+    G["q"].put((key, tf, os.getpid(), time.time()))
     bars = G["bars"][tf]
     e, fn, sps = G["cat"][key], G["fn"][key], G["specs"][key]
     seed = zlib.crc32(f"LW|{key}|{tf}".encode()) & 0x7FFFFFFF
@@ -156,15 +158,53 @@ def main():
         G["cat"][e.id], G["fn"][e.id], G["specs"][e.id] = e, fn, LW.strategy_specs(e, consts)
     jobs = [(e.id, tf, a.k, a.engine) for tf in a.tfs.split(",") for e in S]
     import multiprocessing as mp
-    with mp.get_context("fork").Pool(a.procs) as pool:
-        out = []
-        for r in pool.imap_unordered(task, jobs):
-            out.append(r)
-            if r["signal_lookahead"] or r["engine_lookahead"]:
-                print("LOOKAHEAD", r["key"], r["tf"], "configs", r["configs"], "signal", len(r["signal_lookahead"]),
-                      "engine", len(r["engine_lookahead"]), flush=True)
-                for x in (r["signal_lookahead"][:2] + r["engine_lookahead"][:2]):
-                    print("   ", json.dumps(x, default=str)[:400], flush=True)
+    ctx = mp.get_context("fork")
+    G["q"] = ctx.Queue()
+    pool = ctx.Pool(a.procs)
+    pend = {(j[0], j[1]): pool.apply_async(task, (j,)) for j in jobs}
+    started, out, killed, t_last = {}, [], [], time.time()
+    while pend:
+        time.sleep(2)
+        while True:
+            try:
+                k_, t_, pid, ts = G["q"].get_nowait()
+                started[(k_, t_)] = (pid, ts)
+            except Exception:                                              # noqa: BLE001  (queue empty)
+                break
+        alive = {w.pid for w in pool._pool if w.is_alive()}
+        cur = {}
+        for u_, (pid, ts) in started.items():
+            if u_ in pend and (pid not in cur or ts > cur[pid][1]):
+                cur[pid] = (u_, ts)
+        for u_, r_ in list(pend.items()):
+            if r_.ready():
+                del pend[u_]
+                try:
+                    r = r_.get()
+                except Exception as ex:                                    # noqa: BLE001
+                    print("TASK ERROR", u_, repr(ex)[:200], flush=True)
+                    continue
+                out.append(r)
+                if r["signal_lookahead"] or r["engine_lookahead"]:
+                    print("LOOKAHEAD", r["key"], r["tf"], "configs", r["configs"], "signal", len(r["signal_lookahead"]),
+                          "engine", len(r["engine_lookahead"]), flush=True)
+                    for x in (r["signal_lookahead"][:2] + r["engine_lookahead"][:2]):
+                        print("   ", json.dumps(x, default=str)[:400], flush=True)
+            elif u_ in started and started[u_][0] not in alive and time.time() - started[u_][1] > 30:
+                del pend[u_]
+                killed.append(f"{u_[0]}|{u_[1]}")
+        for pid, (u_, ts) in cur.items():                                  # a task stuck where its alarm cannot reach
+            if pid in alive and time.time() - ts > TASK_KILL and u_ in pend:   # it: kill the worker
+                print("KILL (stuck task)", u_, flush=True)
+                try:
+                    os.kill(pid, signal.SIGKILL)
+                except OSError:
+                    pass
+        if time.time() - t_last > 600:
+            print("progress", len(out), "of", len(jobs), "done; running", [u for u, _ in cur.values()][:6], flush=True)
+            t_last = time.time()
+    pool.terminate()
+    print("killed (stuck) tasks", killed, flush=True)
     json.dump(out, open(os.path.join(a.out, "lookahead.json"), "w"), indent=1, default=str)
     bad = sorted({r["key"] for r in out if r["signal_lookahead"] or r["engine_lookahead"]})
     print("strategies", len(S), "tasks", len(out), "with look-ahead", len(bad), bad, flush=True)
