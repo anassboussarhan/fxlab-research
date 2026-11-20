@@ -1,0 +1,60 @@
+name: r23la
+# Round 23 look-ahead audit of part LW (docs/round23_results.md): truncation test of every LW strategy on a synthetic
+# random walk (scripts/r23_lookahead.py). sig: every strategy, 32 LW configurations, signals compared on every bar
+# before 48 cuts; engine: a set of strategies covering the engines and entry types, per-bar returns compared.
+# No market data is used. Trigger: ci/R23LA.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R23LA"]
+permissions:
+  contents: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  sig:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        tf: [M15, M30, H1, H2, H4, H8, H12, D1]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - shell: bash
+        run: python -W ignore scripts/r23_lookahead.py --out out --k 32 --tfs ${{ matrix.tf }} --procs 4 2>&1 | grep -v Warning | tail -400
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23la-sig-${{ matrix.tf }}
+          path: out
+          retention-days: 60
+  engine:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        tf: [M15, H1, H4, D1]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - shell: bash
+        run: |
+          python -W ignore scripts/r23_lookahead.py --out out --k 16 --tfs ${{ matrix.tf }} --procs 4 --engine \
+            --only S.TREND.MA_CROSS,S.SES.LONDON_BREAKOUT,S.FAMOUS.CRABEL_NR,S.FAMOUS.TURTLE,S.MR.RSI_REVERSAL,S.BOOK.HEIKIN_ASHI,S.DAILY.IBS,S.FAMOUS.ALLIGATOR,S.FAMOUS.CONNORS_RSI2,S.BO.OPENING_RANGE,S.BOOK.ICHIMOKU_KUMO,S.TREND.TSMOM,S.BO.RANGE_EXPANSION,S.DAILY.CUM_RSI \
+            2>&1 | grep -v Warning | tail -400
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r23la-engine-${{ matrix.tf }}
+          path: out
+          retention-days: 60

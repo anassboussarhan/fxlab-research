@@ -83,7 +83,8 @@ def task(args):
     order = np.lexsort((pos, hrs))                                         # interleave the hours
     cuts = [int(c) for c in pos[order]]
     ecuts = set(cuts[:: max(1, len(cuts) // 4)][:4])
-    res = {"key": key, "tf": tf, "configs": 0, "signal_lookahead": [], "engine_lookahead": [], "errors": 0}
+    res = {"key": key, "tf": tf, "configs": 0, "signal_lookahead": [], "engine_lookahead": [], "errors": 0,
+           "last_bar_only": 0}
     t0 = time.time()
     for i, u in enumerate(U):
         params = {s["name"]: LW.draw(s, u[j]) for j, s in enumerate(sps)}
@@ -95,11 +96,13 @@ def task(args):
             for c in cuts:
                 tb = bars.iloc[:c]
                 part = fn(tb.copy(), **params)
-                d = diff_frame(full, part, c)
+                d = diff_frame(full, part, c - 1)                          # every bar before the cut but the last
                 if d:
                     res["signal_lookahead"].append({"config": i, "cut": str(bars.index[c]), "diff": d[:3],
                                                     "params": {kk: (round(v, 4) if isinstance(v, float) else v)
                                                                for kk, v in params.items()}})
+                elif diff_frame(full, part, c):                            # only the last bar differs: an end-of-day
+                    res["last_bar_only"] += 1                              # or end-of-data rule (the series ends there)
                 if engine and c in ecuts:
                     rp = LW.evaluate_one(e, fn, tb, SYM, params, u_exec)
                     m = max(0, c - 2)
@@ -158,12 +161,17 @@ def main():
         for r in pool.imap_unordered(task, jobs):
             out.append(r)
             if r["signal_lookahead"] or r["engine_lookahead"]:
-                print("LOOKAHEAD", r["key"], r["tf"], "signal", len(r["signal_lookahead"]), "engine",
-                      len(r["engine_lookahead"]), flush=True)
+                print("LOOKAHEAD", r["key"], r["tf"], "configs", r["configs"], "signal", len(r["signal_lookahead"]),
+                      "engine", len(r["engine_lookahead"]), flush=True)
+                for x in (r["signal_lookahead"][:2] + r["engine_lookahead"][:2]):
+                    print("   ", json.dumps(x, default=str)[:400], flush=True)
     json.dump(out, open(os.path.join(a.out, "lookahead.json"), "w"), indent=1, default=str)
     bad = sorted({r["key"] for r in out if r["signal_lookahead"] or r["engine_lookahead"]})
     print("strategies", len(S), "tasks", len(out), "with look-ahead", len(bad), bad, flush=True)
-    print("tasks with errors", [(r["key"], r["tf"], r.get("error")) for r in out if r["errors"]][:40], flush=True)
+    print("tasks with errors", [(r["key"], r["tf"], r["errors"], r.get("error")) for r in out if r["errors"]][:60], flush=True)
+    print("tasks with fewer than k configurations", [(r["key"], r["tf"], r["configs"]) for r in out if r["configs"] < a.k], flush=True)
+    print("last-bar-only differences (end-of-day rules)", sorted({r["key"] for r in out if r["last_bar_only"]}), flush=True)
+    print("configurations tested", sum(r["configs"] for r in out), flush=True)
 
 
 if __name__ == "__main__":
