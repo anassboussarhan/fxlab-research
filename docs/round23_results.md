@@ -1,4 +1,4 @@
-# Round 23 results: every gap from the round-23 audit (2026-11-20, draft: look-ahead audit running)
+# Round 23 results: every gap from the round-23 audit (2026-11-20)
 
 - **Pre-registration:** `docs/round23_preregistration.md`, with addenda 1-9. **Audit it answers:**
   `docs/round23_audit.md`.
@@ -89,6 +89,8 @@ each year from the 120 settings.
 - **LW:** 197 of 131,134 units ran fewer than 128 configurations because of the 30-minute unit cap (addendum 6):
   entropy 125, HMM 60, volatility forecast 12. S.RG.HMM was lost (no data) at H1, M30 and M15 on most
   long-history instruments (addendum 7).
+- **S.FAMOUS.TTM_SQUEEZE was not tested in LW.** Every drawn configuration had `min_periods` above its window and
+  failed, so it has no stream (see the truncation test below).
 - **IC-SMT did not run.** Its round-22 function returns trades instead of placing orders, so the round-23 recorder
   saw none and every configuration traded nothing. Its round-22 result (market entries at the next open, time
   exits, so causal) stands: it failed.
@@ -130,13 +132,32 @@ trading window opens after that hour.
 | SESSION_MOMENTUM | 813 | 549 | 11.25 | H2 27.8, H1 15.6, M15 15.2, M30 13.0, H4 11.3, H8 −4.2, H12 −3.3 |
 | NY_OPEN_REVERSAL | 685 | 170 | −0.77 | M15 14.6, M30 7.2, H1-H8 −0.5 to −2.7 |
 
-**Truncation test** (`scripts/r23_lookahead.py`):
-- **Status:** draft. The test of all 105 LW strategies at M15, H1, H4 and D1 is still running; this section is
-  completed when it finishes.
-- **Method:** 16 LW configurations per strategy and timeframe, each run on a synthetic random walk and on the same
-  series cut at 48 points.
-- **So far:** SESSION_MOMENTUM and NY_OPEN_REVERSAL change their signals on earlier bars when the future is cut
-  off.
+**Truncation test** (`scripts/r23_lookahead.py`; CI runs r23la 44642749896 and r23la2 44658703290):
+- **Method:**
+  - Every LW strategy at M15, M30, H1, H2, H4, H8, H12 and D1.
+  - The first 32 configurations of its LW Sobol sequence (rule parameters and exposed constants) on a synthetic
+    M1 random walk (2023-2024).
+  - Each run on the full series and on the same series cut at 48 points spread over every hour of the day.
+  - A causal rule gives the same signal on every earlier bar.
+  - The engine (state, trade, stops and targets, entries and exits) is tested the same way: 14 strategies covering
+    every engine and entry type, 16 configurations each, at M15, H1, H4 and D1, comparing per-bar returns.
+- **Result:** only SESSION_MOMENTUM and NY_OPEN_REVERSAL look ahead, and only when their exposed hour constants
+  separate.
+  - **Example (SESSION_MOMENTUM at M15):** with h = 4 and the hour constants drawn as 3, 3, 3, 16, 3 and 20,
+    cutting the series at 12:45 changed 22 signals from 07:00 on the same day.
+  - **Where:** SESSION_MOMENTUM at M15, M30, H1, H2 and H4; NY_OPEN_REVERSAL at M15, H1 and H2.
+  - **Not elsewhere:** at H8, H12 and D1 the test found no look-ahead, and LW's median t there is negative.
+- **No other strategy and no engine path looks ahead** in 26,012 signal and 896 engine configurations.
+  - The Crabel NR and Williams volatility breakouts differ only on the last bar before a cut. That is their
+    "out at day end" rule, which treats the last bar of the cut series as the end of a day. It is not information
+    from the future, since the clock tells when a day ends.
+- **What was not tested:**
+  - S.RG.HMM at M15 to H4: stuck and killed in every timeframe there. It was tested at H8, H12 and D1, with no
+    look-ahead, and runs the same code at every timeframe.
+  - S.FAMOUS.TTM_SQUEEZE: every configuration fails (its drawn `min_periods` exceeds its window). The same
+    happened in LW, so it was never tested in round 23 (0 of 1,250 units have a stream).
+  - Configurations that failed this way in LW also failed here and were no data in both: HIGH52 about 3 in 4,
+    VOL_TARGET about half.
 
 ### USD/TRY: no carry in the LW engine
 
