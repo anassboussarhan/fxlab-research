@@ -1,0 +1,52 @@
+name: r24xg
+# Round 24 reruns after addendum 5: R8 with the price difference of the two venues marked, theta per 8 hours, costs
+# as pre-registered and the placebo drawn at each entry; R10 with FRED's other endpoints. Trigger: ci/R24XG.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R24XG"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  funding:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas pyarrow scipy requests polars numba
+      - shell: bash
+        run: python -W ignore scripts/r24_crypto.py funding --out out 2>&1 | grep --line-buffered -v Warning | tail -60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-funding
+          path: out
+          retention-days: 60
+  liq:
+    runs-on: ubuntu-latest
+    timeout-minutes: 150
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays requests
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: bash ci/r23_place.sh USATECHIDXUSD
+      - shell: bash
+        run: python -W ignore scripts/r24_liq.py --out out 2>&1 | grep --line-buffered -v Warning | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-liq
+          path: out
+          retention-days: 60

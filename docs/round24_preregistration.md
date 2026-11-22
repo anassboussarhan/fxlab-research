@@ -306,3 +306,26 @@ below changes them.
 4. **Round 25 note:** the forked workers of round 25 run with one OpenMP / BLAS thread. The HMM rule's k-means
    deadlocked in forked workers once the parent process had started OpenMP threads. That is a likely cause of the
    round-23 HMM stalls below H2, recorded in the round-25 pre-registration.
+
+## Addendum 5 (2026-11-22, after the first R8 and R10 logs)
+
+1. **R8 did not implement three pre-registered definitions.** The first runs (45029171317, rerun 45040695736) gave
+   2019-2025 t of 6.5-13.6 (the ETH nested stream above 8). Examining it:
+   - **Prices:** the pre-registration marks the price difference of the two venues' perpetuals; the code counted
+     funding only. Each venue's daily 00:00 UTC prices (Binance archive; Deribit, Kraken, Hyperliquid, dYdX and
+     Gate.io public candles) now mark the legs open to open. Positions change only at day boundaries, so daily
+     marks give the same total as hourly ones. A venue without prices is left out and reported.
+   - **θ** is now compared with the expected spread per 8 hours, as written; the code used the daily sum.
+   - **Costs:** 5 bp per leg per side, as written (2 legs to open, 2 to close; a switch 4). The code charged
+     twice that.
+   - **Placebo:** venues are drawn at random at each entry or switch of the rule, as written. The code re-drew
+     them every day, so it switched (and paid) daily, which is why it showed t of about -24.
+
+   The first R8 results are void. The new run passes the truncation test (returns identical before every cut). A
+   synthetic check gives the expected carry when one venue's funding is persistently higher.
+2. **R10:** FRED's CSV endpoint timed out on the runner, so R10 was not run, as pre-registered. FRED's own other
+   endpoints (the dated CSV, the text file, ALFRED) are tried before giving up. Same data; still not run if none
+   answers.
+3. **R7 (no change):** its random-entry placebos meet the own rule as often as the real streams (4 of 4 each). The
+   basis trade earns the carry whatever the entry timing; θ adds nothing. This is reported as such, not as a
+   new edge (round 22's cash-and-carry is the same carry).

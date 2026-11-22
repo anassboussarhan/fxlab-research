@@ -20,10 +20,35 @@ import r24_common as C  # noqa: E402
 
 
 def fred(sid):
-    r = C.get(f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}", tries=8, timeout=240)
-    d = pd.read_csv(io.StringIO(r.text))
-    d.columns = ["date", "v"]
-    return pd.Series(pd.to_numeric(d.v, errors="coerce").to_numpy(), index=pd.to_datetime(d.date)).dropna()
+    """A FRED series, trying FRED's CSV, its dated CSV, its text file and ALFRED in turn (the first run timed out on
+    the CSV endpoint; addendum 5). Still FRED's own data."""
+    last = None
+    for url in (f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}",
+                f"https://fred.stlouisfed.org/graph/fredgraph.csv?id={sid}&cosd=2002-01-01&coed=2025-12-31",
+                f"https://fred.stlouisfed.org/data/{sid}.txt",
+                f"https://alfred.stlouisfed.org/graph/alfredgraph.csv?id={sid}"):
+        try:
+            r = C.get(url, tries=3, timeout=90)
+        except Exception as ex:                                            # noqa: BLE001
+            last = ex
+            print("FRED try failed", url, repr(ex)[:120], flush=True)
+            continue
+        txt = r.text
+        if url.endswith(".txt"):
+            lines = txt.splitlines()
+            k = next(i for i, l in enumerate(lines) if l.strip().upper().startswith("DATE"))
+            d = pd.read_csv(io.StringIO("\n".join(lines[k:])), sep=r"\s+")
+        else:
+            d = pd.read_csv(io.StringIO(txt))
+        d = d.iloc[:, :2]
+        d.columns = ["date", "v"]
+        s = pd.Series(pd.to_numeric(d.v, errors="coerce").to_numpy(), index=pd.to_datetime(d.date, errors="coerce"))
+        s = s[s.index.notna()].dropna()
+        if len(s) > 100:
+            print("FRED", sid, "from", url, len(s), "observations", flush=True)
+            return s
+        last = ValueError(f"{sid}: {len(s)} observations from {url}")
+    raise RuntimeError(f"FRED unreachable for {sid}: {last!r}"[:300])
 
 
 def main():

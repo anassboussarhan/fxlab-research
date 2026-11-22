@@ -252,10 +252,101 @@ VENUES = {"binance": fund_binance, "deribit": fund_deribit, "kraken": fund_krake
           "dydx": fund_dydx, "gate": fund_gate}
 
 
+# daily opening prices (00:00 UTC) of each venue's perpetual, to mark the price difference between the two legs
+# (addendum 5). Positions change only at day boundaries, so daily marks give the same total P&L as hourly ones.
+def _daily(ts_ms, opens):
+    s = pd.Series(pd.to_numeric(pd.Series(opens), errors="coerce").to_numpy(float),
+                  index=pd.to_datetime(pd.Series(ts_ms).astype("int64"), unit="ms", utc=True))
+    s = s[np.isfinite(s) & (s > 0)]
+    s.index = s.index.tz_localize(None).normalize()
+    return s[~s.index.duplicated()].sort_index()
+
+
+def px_binance(coin):
+    k = klines("um", f"{coin}USDT", "1d", years=range(2019, 2026))
+    s = k["open"].astype(float)
+    s.index = pd.DatetimeIndex(s.index).tz_localize(None).normalize()
+    return s[~s.index.duplicated()].sort_index()
+
+
+def px_deribit(coin):
+    ts, op = [], []
+    for y in range(2019, 2026):
+        t0 = int(pd.Timestamp(f"{y}-01-01", tz="UTC").timestamp() * 1000)
+        t1 = int(pd.Timestamp(f"{y + 1}-01-01", tz="UTC").timestamp() * 1000)
+        j = C.get("https://www.deribit.com/api/v2/public/get_tradingview_chart_data", js=True,
+                  params={"instrument_name": f"{coin}-PERPETUAL", "start_timestamp": t0, "end_timestamp": t1,
+                          "resolution": "1D"})
+        r = j.get("result", {}) or {}
+        ts += list(r.get("ticks", [])); op += list(r.get("open", []))
+        time.sleep(0.2)
+    return _daily(ts, op)
+
+
+def px_kraken(coin):
+    sym = {"BTC": "PF_XBTUSD", "ETH": "PF_ETHUSD"}[coin]
+    ts, op = [], []
+    for y in range(2019, 2026):
+        t0, t1 = int(pd.Timestamp(f"{y}-01-01", tz="UTC").timestamp()), int(pd.Timestamp(f"{y + 1}-01-01", tz="UTC").timestamp())
+        try:
+            j = C.get(f"https://futures.kraken.com/api/charts/v1/trade/{sym}/1d", js=True, params={"from": t0, "to": t1})
+        except Exception:                                                  # noqa: BLE001  no candles that year
+            continue
+        for x in j.get("candles", []) or []:
+            ts.append(int(x["time"])); op.append(x["open"])
+    return _daily(ts, op)
+
+
+def px_hyperliquid(coin):
+    t0 = int(pd.Timestamp("2023-01-01", tz="UTC").timestamp() * 1000)
+    t1 = int(pd.Timestamp("2026-01-01", tz="UTC").timestamp() * 1000)
+    j = C.get("https://api.hyperliquid.xyz/info", method="post", js=True,
+              body={"type": "candleSnapshot", "req": {"coin": coin, "interval": "1d", "startTime": t0, "endTime": t1}})
+    j = j or []
+    return _daily([x["t"] for x in j], [x["o"] for x in j])
+
+
+def px_dydx(coin):
+    ts, op, to = [], [], "2026-01-01T00:00:00.000Z"
+    for _ in range(60):
+        j = C.get(f"https://indexer.dydx.trade/v4/candles/perpetualMarkets/{coin}-USD", js=True,
+                  params={"resolution": "1DAY", "limit": 100, "toISO": to})
+        c = j.get("candles", []) or []
+        if not c:
+            break
+        for x in c:
+            ts.append(int(pd.Timestamp(x["startedAt"]).timestamp() * 1000)); op.append(x["open"])
+        first = min(pd.Timestamp(x["startedAt"]) for x in c)
+        nt = (first - pd.Timedelta(milliseconds=1)).strftime("%Y-%m-%dT%H:%M:%S.%f")[:-3] + "Z"
+        if nt >= to:
+            break
+        to = nt
+        time.sleep(0.2)
+    return _daily(ts, op)
+
+
+def px_gate(coin):
+    ts, op = [], []
+    for y in range(2019, 2026):
+        t0, t1 = int(pd.Timestamp(f"{y}-01-01", tz="UTC").timestamp()), int(pd.Timestamp(f"{y}-12-31", tz="UTC").timestamp())
+        try:
+            j = C.get("https://api.gateio.ws/api/v4/futures/usdt/candlesticks", js=True,
+                      params={"contract": f"{coin}_USDT", "interval": "1d", "from": t0, "to": t1})
+        except Exception:                                                  # noqa: BLE001
+            continue
+        for x in j or []:
+            ts.append(int(x["t"]) * 1000); op.append(x["o"])
+    return _daily(ts, op)
+
+
+PRICES = {"binance": px_binance, "deribit": px_deribit, "kraken": px_kraken, "hyperliquid": px_hyperliquid,
+          "dydx": px_dydx, "gate": px_gate}
+
+
 def cmd_funding(a):
     rows, ser, meta = [], {}, {}
     for coin in ("BTC", "ETH"):
-        D = {}
+        D, P = {}, {}
         for v, f in VENUES.items():
             s = _safe(f, coin)
             if s is None or len(s) < 30:
@@ -266,12 +357,22 @@ def cmd_funding(a):
                 meta[f"{coin}:{v}"] = "no development-period data"         # records (all 2026, never read)
                 continue
             d = s.groupby(s.index.tz_localize(None).normalize()).sum()     # funding paid per UTC day (per unit notional)
+            px = _safe(PRICES[v], coin)
+            px = px[px.index <= "2026-01-01"] if px is not None and len(px) else pd.Series(dtype=float)
+            if len(px) < 30:
+                meta[f"{coin}:{v}"] = {"funding_days": int(len(d)), "price": "no price data: left out"}
+                continue
+            cal = pd.date_range(px.index[0], px.index[-1], freq="D")
+            pr = (px.reindex(cal).shift(-1) / px.reindex(cal) - 1)         # day t: open t -> open t + 1
             D[v] = d
-            meta[f"{coin}:{v}"] = {"first": str(d.index[0].date()), "last": str(d.index[-1].date()), "days": int(len(d))}
-        print(coin, meta, flush=True)
+            P[v] = pr[pr.index <= "2025-12-31"]
+            meta[f"{coin}:{v}"] = {"first": str(d.index[0].date()), "last": str(d.index[-1].date()), "days": int(len(d)),
+                                   "price_first": str(px.index[0].date()), "price_days": int(P[v].notna().sum())}
+        print(coin, {k: v for k, v in meta.items() if k.startswith(coin)}, flush=True)
         if len(D) < 2:
             continue
         X = pd.DataFrame(D).sort_index()
+        PX = pd.DataFrame(P).reindex(X.index)
         names = list(X.columns)
         sets = [tuple(names)] + [(x, y) for i, x in enumerate(names) for y in names[i + 1:]]
         U = C.sobol(4, 128, seed=2480 + (coin == "ETH"))
@@ -281,8 +382,8 @@ def cmd_funding(a):
             p = {"theta": C.lin(u[0], 0.0, 0.001), "n": C.ilin(u[2], 1, 21), "set": C.cat(u[3], sets)}
             p["exit"] = C.lin(u[1], -p["theta"], p["theta"])
             desc.append(p)
-            cols[i] = funding_run(X, p)
-            colsp[i] = funding_run(X, p, rng=rng)
+            cols[i] = funding_run(X, PX, p)
+            colsp[i] = funding_run(X, PX, p, rng=rng)
         r, s_ = C.units("R8", f"R8-xvenue-{coin}", coin, pd.DataFrame(cols), desc=desc)
         rows += r
         ser.update(s_)
@@ -292,35 +393,42 @@ def cmd_funding(a):
     C.write(a.out, "R8", rows, ser, meta)
 
 
-def funding_run(X, p, rng=None, cost=5e-4):
-    """Daily: short the perpetual where the expected funding (mean of the last n days) is highest, long where it is
-    lowest, among venues with data that day; P&L = funding received - funding paid; four legs of costs on a switch."""
+def funding_run(X, PX, p, rng=None, cost=5e-4):
+    """Daily: short the perpetual where the expected funding (mean of the last n days, per 8 hours) is highest and long
+    it where it is lowest, among venues with funding and prices that day, when that spread is at least theta (held
+    while it stays at least the exit level). P&L per unit notional: funding received - funding paid + the price
+    difference of the two legs (open to open). 5 bp per leg per side: 2 legs to open, 2 to close (addendum 5).
+    Placebo (rng): at each entry or switch of the rule, the two venues are drawn at random among those available."""
     Z = X[list(p["set"])]
-    E = Z.rolling(p["n"], min_periods=1).mean().shift(1).to_numpy(float)   # known before the day starts
+    E = Z.rolling(p["n"], min_periods=1).mean().shift(1).to_numpy(float) / 3.0   # known before the day; per 8 hours
     Zv = Z.to_numpy(float)
+    Rv = PX[list(p["set"])].to_numpy(float)
     ret = np.zeros(len(Z))
-    cur = None
+    cur, held = None, None                                                 # the rule's pair; the traded pair
     for t in range(len(Z)):
-        ok = np.flatnonzero(np.isfinite(E[t]) & np.isfinite(Zv[t]))
-        if len(ok) < 2:
-            if cur is not None:
-                ret[t] -= 2 * cost * 2
-                cur = None
-            continue
-        e = E[t, ok]
-        hi, lo = ok[int(np.argmax(e))], ok[int(np.argmin(e))]
-        spread = E[t, hi] - E[t, lo]
-        if rng is not None:
-            hi, lo = (int(x) for x in rng.permutation(ok)[:2])
-        want = (hi, lo) if (spread >= p["theta"] or (cur is not None and spread >= p["exit"])) else None
+        ok = np.flatnonzero(np.isfinite(E[t]) & np.isfinite(Zv[t]) & np.isfinite(Rv[t]))
+        want = None
+        if len(ok) >= 2:
+            e = E[t, ok]
+            hi, lo = ok[int(np.argmax(e))], ok[int(np.argmin(e))]
+            spread = E[t, hi] - E[t, lo]
+            if spread >= p["theta"] or (cur is not None and spread >= p["exit"]):
+                want = (hi, lo)
+        new_held = held
         if want != cur:
-            if cur is not None:
-                ret[t] -= 2 * cost * 2                                     # close two legs
-            if want is not None:
-                ret[t] -= 2 * cost * 2                                     # open two legs
-            cur = want
-        if cur is not None:
-            ret[t] += Zv[t, cur[0]] - Zv[t, cur[1]]
+            new_held = want if (want is None or rng is None) else tuple(int(x) for x in rng.permutation(ok)[:2])
+        elif held is not None and not (held[0] in ok and held[1] in ok):   # a traded venue without data today
+            new_held = None if rng is None else (tuple(int(x) for x in rng.permutation(ok)[:2]) if len(ok) >= 2 else None)
+        if new_held != held:
+            if held is not None:
+                ret[t] -= 2 * cost                                         # close two legs
+            if new_held is not None:
+                ret[t] -= 2 * cost                                         # open two legs
+            held = new_held
+        cur = want
+        if held is not None:
+            a, b = held
+            ret[t] += (Zv[t, a] - Zv[t, b]) + (Rv[t, b] - Rv[t, a])        # short a, long b
     return pd.Series(ret, index=Z.index)
 
 
