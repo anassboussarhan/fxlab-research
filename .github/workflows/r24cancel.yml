@@ -1,0 +1,21 @@
+name: r24cancel
+# Cancels the run whose id is in ci/R24CANCEL (the sandbox token cannot cancel runs).
+on:
+  push:
+    branches: [main]
+    paths: ["ci/R24CANCEL"]
+permissions:
+  actions: write
+  contents: read
+jobs:
+  cancel:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for R in $(cat ci/R24CANCEL); do gh api -X POST repos/$GITHUB_REPOSITORY/actions/runs/$R/cancel || true; done
+          sleep 60
+          for R in $(cat ci/R24CANCEL); do s=$(gh api repos/$GITHUB_REPOSITORY/actions/runs/$R -q .status); echo "$R $s"; [ "$s" = completed ] || gh api -X POST repos/$GITHUB_REPOSITORY/actions/runs/$R/force-cancel || true; done
