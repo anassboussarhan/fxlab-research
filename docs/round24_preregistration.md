@@ -265,3 +265,21 @@ Not financial advice.
      previous 49 hours.
    - **R10:** the entry bar is the first daily bar opening after the Thursday 16:30 New York release (CFD FX-day bars
      open at 17:00 New York).
+
+## Addendum 3 (2026-11-22, after the first r24x jobs; no R1, R2, R4, R6, R7, R8, R10 or R11 result had been read)
+
+Already seen at this point, in the job logs: the R3 SMT and R9 CME-gap results (none meets the own rule). Nothing
+below changes them.
+
+1. **Rates (R1) checked.** The BIS coverage run (45027533950) has every currency to 2025-12, SGD excepted as
+   planned. JPY has 206 months from 2000-08: the Bank of Japan had no policy-rate target in 2001-2006 and
+   2013-2016. Months without a value carry the last published rate, as a trader would have known it. The rate
+   then was 0.1-0.25% against a market rate near zero, so the error is under 0.25% a year on JPY pairs.
+   R1-R3 relaunched on these rates, 16 jobs at a time so the other parts keep runners.
+2. **R4, R6, R11 data job fixed.** The Wikipedia page now has a navigation table first, so the tables are taken by
+   their columns (Symbol / Security / CIK for members; Added-Ticker and the effective date for changes), not by
+   position. Nothing else changes; the four stock parts rerun (workflow r24xs).
+3. **S&P 500 CFD data end in 2024.** The minute store behind round 22 (run 41447353092) holds USA500IDXUSD only
+   to part-way through 2024 (2024 has about four months). That has applied to every USA500IDXUSD result since
+   round 22 and was not recorded. Its 2019-2025 period is therefore 2019 to early 2024. This is reported, not
+   repaired: the free source for the rest is the same Dukascopy feed, and the instrument is kept with this note.

@@ -1,0 +1,56 @@
+name: r24xs
+# Round 24 rerun of the stock parts (R4, R6, R11a, R11b) after the S&P 500 table fix (addendum 3); jobs as in r24x.
+# only statistics are published by the combine. Trigger: ci/R24XS.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R24XS"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  sdata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas pyarrow scipy requests yfinance lxml html5lib beautifulsoup4
+      - shell: bash
+        run: python -W ignore scripts/r24_stocks.py data --out sdata 2>&1 | tail -40
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r24-sdata
+          path: sdata
+          retention-days: 30
+  stocks:
+    needs: sdata
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [ear, shortvol, pairs, adds]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas pyarrow scipy requests polars numba
+      - uses: actions/download-artifact@v4
+        with:
+          name: r24-sdata
+          path: sdata
+      - shell: bash
+        run: python -W ignore scripts/r24_stocks.py ${{ matrix.cmd }} --data sdata --out out 2>&1 | grep --line-buffered -v Warning | tail -60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-${{ matrix.cmd }}
+          path: out
+          retention-days: 60

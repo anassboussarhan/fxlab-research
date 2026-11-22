@@ -57,11 +57,24 @@ def cmd_data(a):
     os.makedirs(a.out, exist_ok=True)
     html = C.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies").text
     T = pd.read_html(io.StringIO(html))
-    cur, chg = T[0], T[1]
-    cur = cur.rename(columns=lambda c: str(c).strip())
+
+    def flat(cols):
+        if isinstance(cols, pd.MultiIndex):
+            return ["_".join(str(x).strip() for x in c if "Unnamed" not in str(x)).strip("_") for c in cols]
+        return [str(c).strip() for c in cols]
+
+    for t in T:                                                            # tables are chosen by content, not position
+        t.columns = flat(t.columns)
+    is_cur = [t for t in T if {"Symbol", "CIK", "Security"} <= set(t.columns)]
+    is_chg = [t for t in T if any(c.lower().startswith("added") and "ticker" in c.lower() for c in t.columns)
+              and any(c.lower().startswith(("date", "effective")) for c in t.columns)]
+    if not is_cur or not is_chg:
+        for i, t in enumerate(T):
+            print("table", i, t.shape, list(t.columns)[:8], flush=True)
+        raise SystemExit("S&P 500 tables not found")
+    cur, chg = max(is_cur, key=len).copy(), max(is_chg, key=len).copy()
     cur["ticker"] = cur["Symbol"].astype(str).str.replace(".", "-", regex=False)
     cur[["ticker", "Security", "GICS Sector", "CIK"]].to_csv(os.path.join(a.out, "sp500_current.csv"), index=False)
-    chg.columns = ["_".join([str(x) for x in c if "Unnamed" not in str(x)]).strip("_") for c in chg.columns]
     chg.to_csv(os.path.join(a.out, "sp500_changes.csv"), index=False)
     print("current", len(cur), "changes", len(chg), list(chg.columns), flush=True)
     add_col = [c for c in chg.columns if c.lower().startswith("added") and "ticker" in c.lower()][0]
