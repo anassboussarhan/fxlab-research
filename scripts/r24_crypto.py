@@ -262,6 +262,9 @@ def cmd_funding(a):
                 meta[f"{coin}:{v}"] = "no data"
                 continue
             s = s[s.index <= "2025-12-31 23:59"]
+            if len(s) < 30:                                                # e.g. a venue that serves only its latest
+                meta[f"{coin}:{v}"] = "no development-period data"         # records (all 2026, never read)
+                continue
             d = s.groupby(s.index.tz_localize(None).normalize()).sum()     # funding paid per UTC day (per unit notional)
             D[v] = d
             meta[f"{coin}:{v}"] = {"first": str(d.index[0].date()), "last": str(d.index[-1].date()), "days": int(len(d))}

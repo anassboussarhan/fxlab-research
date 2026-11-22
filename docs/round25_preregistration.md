@@ -100,7 +100,7 @@ No round-25 return of any kind had been computed.
   - seeds depend on rule and timeframe only, so configuration i is the same on every instrument.
 - **Timeframes:** H1, H2, H4, H8, H12, D1, D2, W1.
 
-**Execution dimensions** (an "on" switch is u < 0.5, as round 23):
+**Execution dimensions** (an "on" switch is u ≥ 0.5, probability 1/2, as round 23):
 | Group | Dimension | Range |
 |---|---|---|
 | as round 23 | direction | follow or reverse |

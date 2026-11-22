@@ -1,0 +1,35 @@
+name: r24xf
+# Round 24 rerun of R8 (cross-venue funding) after the empty-venue fix; job as in r24x. Trigger: ci/R24XF.
+# Only statistics are published by the combine.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R24XF"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  crypto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [funding]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas pyarrow scipy requests polars numba
+      - shell: bash
+        run: python -W ignore scripts/r24_crypto.py ${{ matrix.cmd }} --out out 2>&1 | grep --line-buffered -v Warning | tail -60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-${{ matrix.cmd }}
+          path: out
+          retention-days: 60

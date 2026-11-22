@@ -26,10 +26,10 @@ def stop_realized_vol(bars, mult: float = 2.0, n: int = 50, horizon: int = 10) -
     return mult * lr.rolling(n, min_periods=n).std() * np.sqrt(horizon) * bars["close"]
 
 
-def stop_structural(bars, side: pd.Series, k: int = 3, buffer_atr: float = 0.2) -> pd.Series:
+def stop_structural(bars, side: pd.Series, k: int = 3, buffer_atr: float = 0.2, atr_n: int = 14) -> pd.Series:
     """Beyond the last confirmed swing low (longs) / swing high (shorts) plus a buffer."""
     sh, sl, _, _ = causal_pivots(bars, k)
-    a = atr(bars, 14).to_numpy(float)
+    a = atr(bars, atr_n).to_numpy(float)
     c = bars["close"].to_numpy(float)
     s = side.reindex(bars.index).fillna(0).to_numpy()
     d = np.where(s > 0, c - sl + buffer_atr * a, np.where(s < 0, sh - c + buffer_atr * a, np.nan))
@@ -171,17 +171,22 @@ class RiskConfig:
     breakeven_r: float | None = None     # move the stop to entry after a favourable move of breakeven_r x stop
     partial_r: float | None = None       # take partial_frac of the position off at partial_r x stop distance
     partial_frac: float = 0.5
+    atr_n: int = 14                      # round 25: ATR length behind ATR stops, structural buffers, targets, trailing
 
 
 def build_orders(bars: pd.DataFrame, side: pd.Series, rc: RiskConfig, pip: float) -> pd.DataFrame:
     """Turn a decided side series into simulator orders using a RiskConfig."""
+    sp = dict(rc.stop_params)
     if rc.stop == "fixed":
-        sd = stop_fixed(bars, pip=pip, **rc.stop_params)
+        sd = stop_fixed(bars, pip=pip, **sp)
     elif rc.stop == "structural":
-        sd = stop_structural(bars, side, **rc.stop_params)
+        sp.setdefault("atr_n", rc.atr_n)
+        sd = stop_structural(bars, side, **sp)
     else:
-        sd = STOP_MODELS[rc.stop](bars, **rc.stop_params)
-    unit = atr(bars, 14)
+        if rc.stop == "atr":
+            sp.setdefault("n", rc.atr_n)
+        sd = STOP_MODELS[rc.stop](bars, **sp)
+    unit = atr(bars, rc.atr_n)
     tp = target_from_stop(sd, rc.target, unit=unit, **rc.target_params)
     if rc.sizing == "fixed_fractional":
         size = size_fixed_fractional(sd, bars["close"], rc.risk_per_trade, rc.max_leverage)

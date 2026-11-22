@@ -71,7 +71,8 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
             bt.attrs.update({f"pullback_{k}": v for k, v in b2.attrs.items()})
         elif exec_cfg and exec_cfg.get("type") == "order":
             bt = order_backtest(bars, sig_exec["side"], pip, cost, entry=exec_cfg.get("entry", "market"),
-                                k=exec_cfg.get("k", 0.0), ttl=exec_cfg.get("ttl", 0), rollovers=roll)
+                                k=exec_cfg.get("k", 0.0), ttl=exec_cfg.get("ttl", 0), rollovers=roll,
+                                atr_n=int(exec_cfg.get("atr_n", 14)))
         elif exec_cfg and exec_cfg.get("type") == "passive":
             bt = passive_backtest(bars, sig_exec["side"], pip, cost, offset=exec_cfg.get("offset", 0.0),
                                   max_wait=exec_cfg.get("max_wait", 0), rollovers=roll)
@@ -111,11 +112,15 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
     if "stop_dist" in sig and sig["stop_dist"].notna().any():
         from fxlab.execution.risk import size_fixed_fractional
         orders["size"] = size_fixed_fractional(orders["stop_dist"], bars["close"], rc.risk_per_trade, rc.max_leverage)
+    if "size_mult" in sig:                # round 25: per-trade size from the signal (strength / volatility sizing)
+        orders["size"] = orders["size"] * sig["size_mult"].reindex(orders.index).fillna(1.0)
     if state_with_stops:  # a continuous-position family run with stops: a flat/opposite signal also exits
         orders["side"] = np.sign(orders["side"])
+    atr_n = int((exec_cfg or {}).get("atr_n", rc.atr_n))
+
     def sim(entry="market", k=0.0, ttl=0):
         return simulate_trades(bars, orders, pip, cost, exit_on_flat=state_with_stops, rollovers=roll,
-                               entry=entry, k=k, ttl=ttl, m1=m1, carry=carry_all)
+                               entry=entry, k=k, ttl=ttl, m1=m1, carry=carry_all, atr_n=atr_n)
     if et == "order":
         res = sim(exec_cfg.get("entry", "market"), exec_cfg.get("k", 0.0), exec_cfg.get("ttl", 0))
         net, trades = res.bars["net"], res.trades

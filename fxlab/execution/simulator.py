@@ -382,6 +382,16 @@ def _m1_path(bars: pd.DataFrame, m1: pd.DataFrame | None):
     return off, f("bid_h"), f("bid_l"), f("ask_h"), f("ask_l"), True
 
 
+def _atr_n(bars: pd.DataFrame, n: int) -> np.ndarray:
+    """ATR(n) on mid prices (round 25: ATR length free for order levels)."""
+    from fxlab.features._util import atr
+    if "high" not in bars:
+        m = pd.DataFrame({k: (bars[f"bid_{c}"] + bars[f"ask_{c}"]) / 2 for k, c in
+                          (("open", "o"), ("high", "h"), ("low", "l"), ("close", "c"))}, index=bars.index)
+        return atr(m, int(n)).to_numpy(np.float64)
+    return atr(bars, int(n)).to_numpy(np.float64)
+
+
 def _atr14(bars: pd.DataFrame) -> np.ndarray:
     from fxlab.features._util import atr
     if "high" not in bars:
@@ -394,7 +404,7 @@ def _atr14(bars: pd.DataFrame) -> np.ndarray:
 def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost: CostModel = BASE,
                     exit_on_flat: bool = True, rollovers: np.ndarray | None = None, entry: str = "market",
                     k: float = 0.0, ttl: int = 0, m1: pd.DataFrame | None = None,
-                    carry: np.ndarray | None = None) -> TradeResult:
+                    carry: np.ndarray | None = None, atr_n: int = 14) -> TradeResult:
     """carry: optional point-in-time annualised rate differential (base - quote, decimal) per bar; when given,
     financing per rollover = (mark-up - side x carry) / 360 per unit notional (as vector_backtest).
     signals (indexed like bars, decided at bar close) columns:
@@ -417,7 +427,8 @@ def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost:
                     int(cost.latency_bars), cost.slip_spread_frac, cost.slip_fixed_pips, pip, cost.spread_mult,
                     cost.commission_bps_per_side * 1e-4, cost.swap_pips_per_night, exit_on_flat, be, pm, pf,
                     int(ETYPES[entry]), float(k), int(ttl),
-                    _atr14(bars) if entry in ("limit_pullback", "stop_breakout") else np.zeros(len(bars)),
+                    (_atr14(bars) if atr_n == 14 else _atr_n(bars, atr_n)) if entry in ("limit_pullback", "stop_breakout")
+                    else np.zeros(len(bars)),
                     *_m1_path(bars, m1), carry is not None,
                     np.zeros(len(bars)) if carry is None else np.asarray(carry, np.float64), _carry_markup(cost))
     bar_ret, te, tx, ts, ep, xp, rs, sz, fin, mae, mfe, spr = out
