@@ -66,11 +66,25 @@ def cmd_data(a):
             ("parse", f"https://en.wikipedia.org/w/api.php?action=parse&page={page}&prop=text&format=json"
                       "&formatversion=2&redirects=1"),
             ("wikiwand", f"https://www.wikiwand.com/en/articles/{page}")]  # a mirror of the same article
+    try:                                                                   # the article as of 2026-01-01 and the
+        rv = C.get("https://en.wikipedia.org/w/api.php", params={             # revisions before it: the changes table
+            "action": "query", "prop": "revisions", "titles": "List of S&P 500 companies", "rvlimit": 200,
+            "rvstart": "2026-01-01T00:00:00Z", "rvdir": "older", "rvprop": "ids|timestamp", "format": "json",
+            "formatversion": 2}, js=True, tries=3)
+        revs = rv["query"]["pages"][0]["revisions"]
+    except Exception as ex:                                                # noqa: BLE001
+        print("wikipedia revisions failed", repr(ex)[:120], flush=True)
+        revs = []
+    for k, r_ in enumerate(revs[:: max(1, len(revs) // 8)]):              # left the article after 2025
+        srcs.append((f"rev{r_['revid']}@{r_['timestamp']}", "https://en.wikipedia.org/w/api.php?action=parse"
+                     f"&oldid={r_['revid']}&prop=text&format=json&formatversion=2"))
+    used = {}
     is_cur = is_chg = []
+    cur_live = None
     for name, url in srcs:
         try:
             r = C.get(url, tries=3)
-            html = r.json()["parse"]["text"] if name == "parse" else r.text
+            html = r.json()["parse"]["text"] if (name == "parse" or name.startswith("rev")) else r.text
         except Exception as ex:                                            # noqa: BLE001
             print("wikipedia", name, "failed", repr(ex)[:120], flush=True)
             continue
@@ -88,15 +102,20 @@ def cmd_data(a):
                       and any(c.lower().startswith(("date", "effective")) for c in t.columns)]
             print("  ", flavor, "tables", len(T), "members", [len(t) for t in is_cur], "changes",
                   [len(t) for t in is_chg], flush=True)
+            if is_cur and cur_live is None and not name.startswith("rev"):
+                cur_live = (name, max(is_cur, key=len).copy())             # members: the live article
             if is_cur and is_chg:
                 break
-        if is_cur and is_chg:
+        if is_chg:
+            used = {"members": cur_live[0] if cur_live else name, "changes": name}
             break
         for i, t in enumerate(T):
             print("  table", i, t.shape, list(t.columns)[:8], flush=True)
-    if not is_cur or not is_chg:
+    if not is_chg or (cur_live is None and not is_cur):
         raise SystemExit("S&P 500 tables not found")
-    cur, chg = max(is_cur, key=len).copy(), max(is_chg, key=len).copy()
+    cur = cur_live[1] if cur_live is not None else max(is_cur, key=len).copy()
+    chg = max(is_chg, key=len).copy()
+    print("tables used", used, flush=True)
     cur["ticker"] = cur["Symbol"].astype(str).str.replace(".", "-", regex=False)
     cur[["ticker", "Security", "GICS Sector", "CIK"]].to_csv(os.path.join(a.out, "sp500_current.csv"), index=False)
     chg.to_csv(os.path.join(a.out, "sp500_changes.csv"), index=False)
@@ -136,7 +155,7 @@ def cmd_data(a):
     E = pd.DataFrame(ev, columns=["cik", "accepted"])
     E = E.merge(cur[["CIK", "ticker"]].rename(columns={"CIK": "cik"}), on="cik")
     E.to_csv(os.path.join(a.out, "earnings_8k.csv"), index=False)
-    json.dump({"current": len(cur), "changes": len(chg), "prices": len(P), "tickers": len(tick), "events": len(E),
+    json.dump({"tables": used, "current": len(cur), "changes": len(chg), "prices": len(P), "tickers": len(tick), "events": len(E),
                "sec_failed": len(bad)}, open(os.path.join(a.out, "data_meta.json"), "w"), indent=1)
     print("8-K 2.02 events", len(E), "SEC failures", len(bad), flush=True)
 

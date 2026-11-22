@@ -278,7 +278,10 @@ below changes them.
    R1-R3 relaunched on these rates, 16 jobs at a time so the other parts keep runners.
 2. **R4, R6, R11 data job fixed.** The Wikipedia page now has a navigation table first, so the tables are taken by
    their columns (Symbol / Security / CIK for members; Added-Ticker and the effective date for changes), not by
-   position. Nothing else changes; the four stock parts rerun (workflow r24xs).
+   position. The live article no longer has the changes table (only the members and a navigation box), so the
+   changes come from the article's last revision before 2026-01-01 that has it (Wikipedia's revision API); the
+   members stay the live list, as planned. The revision used is recorded in `data_meta.json`. Nothing else changes;
+   the four stock parts rerun (workflow r24xs).
 3. **S&P 500 CFD data end in 2024.** The minute store behind round 22 (run 41447353092) holds USA500IDXUSD only
    to part-way through 2024 (2024 has about four months). That has applied to every USA500IDXUSD result since
    round 22 and was not recorded. Its 2019-2025 period is therefore 2019 to early 2024. Round 24 keeps it with
