@@ -1,0 +1,173 @@
+name: r25data
+# Round 25 (docs/round25_preregistration.md) steps 2-3: the truncation test of the round-25 signal path (the gate for
+# parts P, CF and ALT), the S&P 500 CFD refill, the bars regrouped by class group and timeframe (artifacts
+# r25g-GROUP-TF from the round-24 R2 jobs' r25bars-SYM), and the altcoin universe and bars (Binance public archive).
+# Price data stay in artifacts. Trigger: ci/R25DATA.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R25DATA"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  BARS_RUN: "45035758022"
+jobs:
+  lookahead:
+    runs-on: ubuntu-latest
+    timeout-minutes: 330
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {tf: H1, cf: ""}
+          - {tf: H4, cf: ""}
+          - {tf: D1, cf: ""}
+          - {tf: H4, cf: "--cf --per-rule 0"}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - shell: bash
+        run: |
+          python -W ignore scripts/r25_lookahead.py --tf ${{ matrix.tf }} ${{ matrix.cf }} --out la --procs 4 2>&1 \
+            | grep --line-buffered -E '"lookahead_cuts": [1-9]|"error"|SUMMARY|^tf |KILL' | tail -150
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r25la-${{ matrix.tf }}${{ matrix.cf != '' && '-cf' || '' }}
+          path: la
+          retention-days: 60
+  usa500:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          bash ci/r23_place.sh USA500IDXUSD
+          mkdir -p chk && mv data/m1/USA500IDXUSD chk/store
+          mkdir -p data/m1/USA500IDXUSD
+          python ci/r23_hours.py --pair USA500IDXUSD --start 2024 --end 2025
+          ls data/m1/USA500IDXUSD
+          set +e
+          python -W ignore ci/r25_usa500.py --out fix
+          echo "refill exit code $?"
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r25fix-USA500IDXUSD
+          path: fix
+          retention-days: 60
+  regroup:
+    needs: usa500
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas pyarrow
+      - uses: actions/download-artifact@v4
+        continue-on-error: true
+        with:
+          name: r25fix-USA500IDXUSD
+          path: fix
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $BARS_RUN '^r25bars-' inb
+          python - <<'PY'
+          import glob, json, os, shutil
+          G = json.load(open("ci/r25_groups.json"))
+          fix = json.load(open("fix/usa500_fix.json")) if os.path.exists("fix/usa500_fix.json") else {"accepted": False}
+          print("USA500IDXUSD refill accepted:", fix.get("accepted"), {k: fix.get(k) for k in ("median_abs_diff_bp", "splice_from", "store_last")})
+          tfs = ["H1", "H2", "H4", "H8", "H12", "D1", "D2", "W1"]
+          missing = []
+          for g, syms in G["groups"].items():
+              for tf in tfs:
+                  d = f"g/{g}-{tf}"
+                  os.makedirs(d, exist_ok=True)
+                  for s in syms:
+                      src = f"fix/{s}_{tf}.parquet" if (s == "USA500IDXUSD" and fix.get("accepted")) else f"inb/r25bars-{s}/{s}_{tf}.parquet"
+                      if os.path.exists(src):
+                          shutil.copy(src, f"{d}/{s}_{tf}.parquet")
+                      else:
+                          missing.append(f"{s}_{tf}")
+          print("missing bars:", missing)
+          json.dump({"usa500": fix, "missing": missing}, open("g/regroup_meta.json", "w"), indent=1)
+          PY
+          for d in g/*/; do cp g/regroup_meta.json $d; done
+          du -sh g/*
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-FX-H1, path: g/FX-H1, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-FX-H2, path: g/FX-H2, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-FX-H4, path: g/FX-H4, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-FX-H8, path: g/FX-H8, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-FX-H12, path: g/FX-H12, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-FX-D1, path: g/FX-D1, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-FX-D2, path: g/FX-D2, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-FX-W1, path: g/FX-W1, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-OTHER-H1, path: g/OTHER-H1, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-OTHER-H2, path: g/OTHER-H2, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-OTHER-H4, path: g/OTHER-H4, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-OTHER-H8, path: g/OTHER-H8, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-OTHER-H12, path: g/OTHER-H12, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-OTHER-D1, path: g/OTHER-D1, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-OTHER-D2, path: g/OTHER-D2, retention-days: 60}}
+      - {uses: actions/upload-artifact@v4, with: {name: r25g-OTHER-W1, path: g/OTHER-W1, retention-days: 60}}
+  alt_universe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt requests
+      - shell: bash
+        run: python -W ignore ci/r25_alt.py universe --out alt 2>&1 | grep -v "^skip" | tail -20
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r25alt-universe
+          path: alt/universe.json
+          retention-days: 60
+          if-no-files-found: error
+  alt_bars:
+    needs: alt_universe
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    strategy:
+      fail-fast: false
+      matrix:
+        part: [0, 1, 2, 3, 4, 5]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt requests
+      - uses: actions/download-artifact@v4
+        with:
+          name: r25alt-universe
+          path: uni
+      - shell: bash
+        run: python -W ignore ci/r25_alt.py bars --universe uni/universe.json --part ${{ matrix.part }}/6 --out alt 2>&1 | grep -v "^skip" | cut -c1-300 | tail -40
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r25alt-bars-${{ matrix.part }}
+          path: alt
+          retention-days: 60
+          if-no-files-found: error

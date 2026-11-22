@@ -249,3 +249,44 @@ its frozen rule, written before 2026 data is read.
 - order flow (paid).
 
 Not financial advice.
+
+## Addendum 1 (2026-11-22, before any round-25 data was read)
+
+Changes found while building and testing the code on synthetic data:
+
+1. **Three more rules tied by role** (`scripts/r25_tied.py`). Round 23's unit statistics show that drawing every
+   literal separately broke three rules besides TTM Squeeze, each because a rolling window and its min_periods
+   were drawn apart:
+   - S.DAILY.HIGH52 failed on 88% of round-23 draws;
+   - S.DAILY.VOL_TARGET on 57%;
+   - S.VOL.COMPRESSION on 22%.
+
+   The audit (`round25_audit.md`) named only TTM. They are now tied:
+   - HIGH52: L for the 52-week window;
+   - VOL_TARGET: n for the window, ann for the annualisation;
+   - COMPRESSION: W for the rank window, f for its min_periods as a share of W, a for the arming window.
+
+   At their defaults each reproduces the library rule exactly (H4 and D1, synthetic). The part-AD list stays as
+   written: it was chosen from the round-23 draws that ran.
+2. **One thread per process.** In forked workers the HMM rule's k-means deadlocked in OpenMP once the parent had
+   started OpenMP threads (seen in a local part-CF test, stack dumps). Every round-25 job sets OMP / BLAS / numba
+   to one thread per process. This is a likely cause of the round-23 HMM stalls. HMM is still left out at H1, as
+   written.
+3. **Look-ahead found and fixed before any run.** The first truncation test (synthetic H4) flagged the regime
+   filter. Its rank window, in bars, came from the bar density of the whole sample. It now comes from the bar
+   count of the instrument's first year, known once that year is over. The session and weekday gates take the bar
+   step from the first 200 bars. After the fix every tested configuration is identical before every cut. The full
+   gate runs on CI (H1, H4, D1 and part CF) before part P starts.
+4. **Part ALT panel, point in time.** Only the members' bars are downloaded, so pooling every coin's history in
+   training would use future membership. In year Y the panel plan is made on the pooled history of Y's members
+   only (each with its whole earlier history) and applied to them during Y. Per-coin streams train on the coin's
+   own history.
+5. **Part ALT bars** come from the archive's 1-hour klines (H1-D1 need nothing finer). Bid and ask are 3.1 bp
+   either side, as written. A test with a constant position confirms that funding is charged at each stamp (longs
+   pay a positive rate) in place of the flat swap.
+6. **Part AD timing, made explicit.** The 32 trials proposed each January are scored on the days before that
+   January and compete with the earlier trials for the year's top 5. A trial's returns on a day depend only on
+   data up to that day.
+7. **Job layout** (`ci/r25_matrix.py`): 62 part-P jobs, about 580 core-hours. HMM and ENTROPY at H1 / H2 on the
+   42 FX pairs are too large for one job and are split by instrument. Their panel streams are made in the combine
+   from the saved unit aggregates.

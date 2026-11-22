@@ -227,7 +227,7 @@ def _latch(side, mag):
 
 
 def _next_start(idx):
-    step = pd.Series(idx[: min(len(idx), 5000)]).diff().dropna().median() if len(idx) > 2 else pd.Timedelta(hours=1)
+    step = pd.Series(idx[: min(len(idx), 200)]).diff().dropna().median() if len(idx) > 2 else pd.Timedelta(hours=1)
     return idx + step
 
 
@@ -243,7 +243,15 @@ def allow_days(idx, mask):
 
 
 def _bars_per_year(idx):
-    span = (idx[-1] - idx[0]).total_seconds() / (365.25 * 86400) if len(idx) > 1 else 1.0
+    """Bars in the instrument's first year (known once that year is over; causal for every later bar). With less
+    than a year of data, the count so far scaled to a year."""
+    if len(idx) < 2:
+        return 1.0
+    end = idx[0] + pd.Timedelta(days=365.25)
+    k = int(pd.DatetimeIndex(idx).searchsorted(end, side="left"))       # (index units may be us or ns)
+    if k < len(idx):
+        return float(k)
+    span = (idx[-1] - idx[0]).total_seconds() / (365.25 * 86400)
     return len(idx) / max(span, 1e-9)
 
 
@@ -340,7 +348,7 @@ def neighbour_strength(base_op, others):
     return np.maximum(1.0 / (K + 1), (agree - oppose) / (K + 1))
 
 
-def signal_path(cfg, bars, raw_side, trade_mode, neighbour_sides=None, cache=None):
+def signal_path(cfg, bars, raw_side, trade_mode, neighbour_sides=None, cache=None, strength=None):
     """The executed target: (side, size_mult). raw_side is the rule's side on bars (already x direction).
     side: state rules -> sign x magnitude for the native state engines (vector / order), sign for the trade engine
     with size_mult; trade rules -> entry triggers with size_mult."""
@@ -387,6 +395,8 @@ def signal_path(cfg, bars, raw_side, trade_mode, neighbour_sides=None, cache=Non
     mag = np.ones(n)
     if cfg["size"] and neighbour_sides:
         mag = mag * neighbour_strength(opinion(raw_side, trade_mode), [opinion(x, trade_mode) for x in neighbour_sides])
+    elif cfg["size"] and strength is not None:                             # part CF: the vote share
+        mag = mag * np.clip(np.nan_to_num(np.asarray(strength, float), nan=1.0), 0.0, 1.0)
     if cfg["vt"]:
         mag = mag * vol_scale(bars, *cfg["vt"])
     if trade_mode:
@@ -407,7 +417,7 @@ def rule_side(e, fn, bars_sig, params, cfg):
 
 
 def evaluate25(e, fn, bars, sym, params, cfg, sps=None, u_params=None, seed=0, placebo_side=None, financing=None,
-               cache=None, return_target=False):
+               cache=None, return_target=False, strength=None):
     """Per-bar net returns of one round-25 configuration (or the executed target when return_target)."""
     from fxlab.evaluate import evaluate
     trade_mode = bool(e is not None and e.extra.get("mode", "state") == "trade")
@@ -431,7 +441,7 @@ def evaluate25(e, fn, bars, sym, params, cfg, sps=None, u_params=None, seed=0, p
                 nb.append(sn["side"].reindex(bars.index).fillna(0.0).to_numpy(float) * cfg["dir"])
             except Exception:                                              # noqa: BLE001  a failed neighbour abstains
                 continue
-    side, size_mult = signal_path(cfg, bars, raw, trade_mode, nb, cache)
+    side, size_mult = signal_path(cfg, bars, raw, trade_mode, nb, cache, strength)
     if return_target:
         return side, size_mult
     sig = sig.copy()
