@@ -1,0 +1,37 @@
+name: r24xv
+# Round 24 R6 rerun after the timing fix (addendum 4): the position formed on day t's FINRA file runs from the open of
+# t + 1 to the open of t + 2. Stock data from r24xs (45035531557). Trigger: ci/R24XV.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R24XV"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  shortvol:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas pyarrow scipy requests polars numba
+      - uses: actions/download-artifact@v4
+        with:
+          name: r24-sdata
+          path: sdata
+          run-id: 45035531557
+          github-token: ${{ github.token }}
+      - shell: bash
+        run: python -W ignore scripts/r24_stocks.py shortvol --data sdata --out out 2>&1 | grep --line-buffered -v Warning | tail -60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-shortvol
+          path: out
+          retention-days: 60

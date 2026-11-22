@@ -287,3 +287,22 @@ below changes them.
    round 22 and was not recorded. Its 2019-2025 period is therefore 2019 to early 2024. Round 24 keeps it with
    this note. Round 25 refills 2024-2025 from Dukascopy minute candles (the round-23 downloader, free) and reruns
    the instrument there.
+
+## Addendum 4 (2026-11-22, after the R4, R6 and R11 logs; the R6 result is set aside as a fault)
+
+1. **R6 looked ahead by one day.** The first R6 run (r24xs 45035531557) gave 2019-2025 t of 3.8 (default) and 10.6
+   (nested), which the sanity rule sends for examination. The cause is in `sv_run`'s booking: the position formed on
+   day t's FINRA file (published after day t's close) earned the open of t to the open of t + 1, which contains
+   day t's own session. The pre-registered timing (addendum 2, item 3) is the open of t + 1 to the open of t + 2.
+   A synthetic check (a signal equal to day t's open-to-close move) gives t = 194 with the old booking and
+   t = -0.6 with the fixed one. That first R6 result is void.
+2. **R6 calendar.** The rerun uses the stock trading calendar from the first FINRA day. A day whose FINRA file is
+   missing (HTTP 404) has no signal, so a return never spans two days; the first run used FINRA days only.
+3. **Rerun:** R6 only (workflow r24xv), on the stock data of r24xs. Nothing else in R4, R6 or R11 changes. The R4
+   and R11 timing was checked the same way:
+   - R4 enters at the open after the announcement day (or later);
+   - R11b holds from the close before the first return day;
+   - R11a enters at a close and earns from the next day.
+4. **Round 25 note:** the forked workers of round 25 run with one OpenMP / BLAS thread. The HMM rule's k-means
+   deadlocked in forked workers once the parent process had started OpenMP threads. That is a likely cause of the
+   round-23 HMM stalls below H2, recorded in the round-25 pre-registration.

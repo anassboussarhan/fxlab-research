@@ -288,13 +288,13 @@ def cmd_shortvol(a):
         def one(d):
             ds = d.strftime("%Y%m%d")
             try:
-                r = C.get(f"https://cdn.finra.org/equity/regsho/daily/CNMSshvol{ds}.txt", tries=3, timeout=60)
+                r = C.get(f"https://cdn.finra.org/equity/regsho/daily/CNMSshvol{ds}.txt", tries=6, timeout=60)
             except Exception:                                              # noqa: BLE001
                 return d, None
             x = pd.read_csv(io.StringIO(r.text), sep="|")
             x = x[x["Symbol"].isin(fin)]
             return d, x[["Symbol", "ShortVolume", "TotalVolume"]]
-        with ThreadPoolExecutor(8) as ex:
+        with ThreadPoolExecutor(4) as ex:
             got = list(ex.map(one, days))
         parts = []
         for d, x in got:
@@ -309,12 +309,17 @@ def cmd_shortvol(a):
     ratio = (S.pivot_table(index="date", columns="Symbol", values="ShortVolume", aggfunc="sum")
              / S.pivot_table(index="date", columns="Symbol", values="TotalVolume", aggfunc="sum"))
     ratio.index = pd.to_datetime(ratio.index)
-    days = ratio.index
+    # the stock trading calendar from the first FINRA day: a day whose file is missing has no signal, and returns
+    # never span two days
+    days = O.index[(O.index >= ratio.index.min()) & (O.index <= "2025-12-31")]
+    print("FINRA files on", int(ratio.index.isin(days).sum()), "of", len(days), "trading days", flush=True)
     tk = [t for t in tick if t in ratio.columns]
-    Rt = ratio[tk].to_numpy(float)
+    Rt = ratio.reindex(days)[tk].to_numpy(float)
     Oo = O.reindex(days)[tk].to_numpy(float)
+    # day t's file is published after day t's close: the position formed on it runs from the open of t + 1 to the
+    # open of t + 2 (addendum 4; the first run booked open t -> open t + 1, a one-day look-ahead)
     roo = np.full_like(Oo, np.nan)
-    roo[:-1] = Oo[1:] / Oo[:-1] - 1                                       # open t -> open t + 1, booked on day t
+    roo[:-2] = Oo[2:] / Oo[1:-1] - 1
     rows, ser = [], {}
     rng = np.random.default_rng(2460)
     Rp = Rt.copy()
@@ -362,7 +367,8 @@ def sv_run(X, roo, days, p, cost=5e-4):
     W = np.where(gross > 0, W / np.maximum(gross, 1e-12), 0.0)
     ret = np.nansum(W * np.nan_to_num(roo), axis=1)
     turn = np.abs(np.diff(np.vstack([np.zeros((1, m)), W]), axis=0)).sum(1)
-    return ret - turn * cost
+    net = ret - turn * cost
+    return np.r_[0.0, net[:-1]]                                            # booked on t + 1, the day it is held
 
 
 # ------------------------------------------------------------------------------------------------ R11a ETF pairs
