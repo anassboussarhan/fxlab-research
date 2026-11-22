@@ -1,0 +1,21 @@
+name: r24rates
+# Round 24 R1: check that ci/r24_rates.py gets a complete series to 2025 for every currency (coverage only).
+# Trigger: ci/R24RATES.
+on:
+  push:
+    branches: [main]
+    paths: ["ci/R24RATES"]
+permissions:
+  contents: read
+jobs:
+  rates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 40
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas requests
+      - shell: bash
+        run: python ci/r24_rates.py
