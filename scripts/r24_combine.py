@@ -110,6 +110,34 @@ def main():
         P["void"] = False
         R = pd.concat([R, P], ignore_index=True)
     R["counted"] = R["counted"].fillna(True).astype(bool)
+    # Newey-West t of 2019-2025 (round 25 part HAC) for every stream whose series is stored (R3-R11; LW units keep
+    # no series, their HAC t comes from the round-25 reruns)
+    import wf25
+    ser = {}
+    for f, art in g("R24_series_*.parquet"):
+        x = pd.read_parquet(f)
+        for c in x.columns:
+            ser[c] = x[c]
+    for f, art in g("IC_series_*.parquet"):
+        tag = os.path.basename(f)[len("IC_series_"):-8]
+        x = pd.read_parquet(f)
+        for c in x.columns:
+            ser[f"{c}@{tag}"] = x[c]
+
+    def hac(r):
+        if r.get("part") == "R3":
+            k = f"IC-SMT{'-PLACEBO' if r['placebo'] else ''}-{r['selection']}@{str(r['symbol']).replace('+', '_')}"
+        else:
+            k = f"{r['family']}|{r['symbol']}|{r['selection']}{'|placebo' if r['placebo'] else ''}"
+        s_ = ser.get(k)
+        if s_ is None:
+            return np.nan
+        s_ = s_.dropna()
+        s_.index = pd.DatetimeIndex(pd.to_datetime(s_.index))
+        b = s_[(s_.index >= wf22.SPLIT) & (s_.index <= wf22.DEV_END)]
+        return wf25.nw_t(b.to_numpy()) if len(b) else np.nan
+    R["p2_hac_t"] = [hac(r) for r in R.to_dict("records")]
+    print("streams with a Newey-West t:", int(R.p2_hac_t.notna().sum()), "of", len(R), flush=True)
     real = R[~R.placebo & R.counted & ~R.void & R.p2_t.notna()].copy()
     real["p"] = 1 - norm.cdf(real.p2_t.astype(float))
     p = real.p.to_numpy()
@@ -124,7 +152,7 @@ def main():
     real["flag_t8"] = real.p2_t > 8
     R = R.merge(real[["p", "bh", "counts", "flag_t8"]], left_index=True, right_index=True, how="left")
     R.drop(columns=["choices"], errors="ignore").to_csv(os.path.join(a.out, "r24_streams.csv.gz"), index=False)
-    keep = ["part", "family", "symbol", "unit", "selection", "oos_first", "p1_mean", "p2_mean", "p2_t", "own", "bh"]
+    keep = ["part", "family", "symbol", "unit", "selection", "oos_first", "p1_mean", "p2_mean", "p2_t", "p2_hac_t", "own", "bh"]
     by_part = []
     for prt, grp in R[R.p2_t.notna()].groupby("part"):
         rl = grp[~grp.placebo & grp.counted & ~grp.void]
