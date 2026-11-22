@@ -1,0 +1,224 @@
+# Round 24: what was missed and can be tested for free (pre-registered 2026-11-22, before any data was read)
+
+**What this round runs:** the list agreed on 2026-11-22 ("Go ahead"):
+- items 1-3 close faults and gaps in round 23;
+- items 4-11 are new free data and folklore checks.
+
+Items 5 (insider buying), 11c (Congress trades), 12 (OANDA positioning) and 13 (small caps) are blocked; see
+"Blocked".
+
+**Rules for data:**
+- development data only (to 2025-12-31);
+- 2026 only as stated under "2026";
+- no paid data;
+- requests carry the project User-Agent only (`fxlab-research/1.0 (research data collection)`), no e-mail.
+
+**What was read before writing this:** the round-24 access probe (`ci/r24_probe.py`, run 2026-11-22). It records
+only HTTP status codes and byte counts. No data values from any source below had been read.
+
+## The selection core (every part, as round 23)
+
+- **Walk-forward:** `scripts/wf23.py`, 120 settings:
+  - window 12, 24, 36 or 60 months, or expanding;
+  - top 1, 3, 5 or 10;
+  - re-selection monthly, quarterly or yearly;
+  - score t or mean.
+- **Two streams per unit, both counted:**
+  - **default:** expanding window, top 5, yearly, t;
+  - **nested:** each January from the inner start + 3 years, the setting with the best inner t over all earlier
+    years.
+- **Configurations:** every parameter is free, drawn by scrambled Sobol (128 per unit unless stated). No value is
+  fixed by hand except where a part says why (data definitions, costs).
+- **Counting rule:**
+  - the first out-of-sample period up to 2018 has mean > 0, if it exists;
+  - 2019-2025 has mean > 0 with t ≥ 1.645;
+  - Benjamini-Hochberg at q = 0.10 over all round-24 real streams.
+- **Placebos:** each part has one (below). Placebos go through the same selection and are reported, not counted.
+  A real stream that counts while its part's placebos meet their own rule at more than twice the real rate is
+  examined for a fault before it is reported.
+- **Sanity checks before results are reported** (added after round 23):
+  - **Look-ahead:** every new or changed signal function passes the truncation test of `scripts/r23_lookahead.py`
+    (signals identical on every bar before 48 cuts) before its part is run.
+  - **Implausible streams:** any unit with 2019-2025 t above 8 is examined for a fault before it is reported.
+
+## R1. Carry in every engine (the round-23 USD/TRY fault)
+
+- **Engine change.** `financing="rates"` now works in every engine, not only the vector one: order, passive and
+  trade engines (stops, targets, trailing, partial exits).
+  - Financing per rollover = (|exposure| × mark-up − exposure × rate differential) / 360.
+  - The mark-up is the existing 0.75% a year per side.
+  - The rate differential is base minus quote, point-in-time: month m's average is used from the first day of
+    month m + 1.
+- **Rates:** OECD MEI 3-month interbank (IR3TIB01, else call money IRSTCI01) from DBnomics, monthly, for every
+  currency of the FX instruments.
+  - CNH uses the CNY series.
+  - Metals: XAU and XAG yield nothing, so a long metal position pays the dollar rate plus mark-up.
+  - A currency with no OECD series (SGD) has its pairs left out of R1 and reported.
+- **What runs:** part LW of round 23, unchanged except for financing, on every FX pair and metal:
+  - the 30 round-22 FX and metal instruments and the 14 wave-2 currency pairs;
+  - every timeframe M15-W1;
+  - the same Sobol configurations (same seeds), runner and placebos.
+- **USD/TRY is counted again in R1.** Indices, commodities, bonds and crypto keep the flat swap; their round-23
+  results stand and are not rerun.
+
+## R2. The two session rules with tied hour constants
+
+- **Rules:** S.SES.SESSION_MOMENTUM and S.SES.NY_OPEN_REVERSAL.
+- **The fix:** every hour constant in their code is replaced by its default plus one shared shift s, an integer in
+  [−8, 8], drawn by Sobol. A common shift keeps the reference hour before the trading window for every draw.
+- **Everything else as LW:**
+  - the rules' own parameters free;
+  - continuous execution;
+  - carry from R1 on FX;
+  - every instrument of round 23;
+  - M15-H12.
+- **Pre-condition:** both rewritten rules pass the truncation test. If either fails, it is not run and that is
+  reported.
+- **Placebos:** R1's LW placebos.
+
+## R3. Completeness
+
+- **S.FAMOUS.TTM_SQUEEZE:** in round 23 every draw had `min_periods` above its window. Here the window is drawn
+  first and `min_periods` is drawn within [1, window]. Run as LW on every instrument and timeframe, with carry on
+  FX.
+- **IC-SMT:** its round-22 function returns trades instead of placing orders through the recorder. It is ported to
+  the recorder (market entry at the next open and time exit, as round 22) and run as IC on its pairs.
+- **Placebos:** R1's LW placebos for TTM; IC's random-entry placebos for SMT.
+- **S.RG.HMM below H2:** not rerun. It is stuck in compiled code there at any budget the runners allow.
+
+## R4. Earnings-announcement drift without forecasts (US stocks)
+
+- **Universe:** the current S&P 500 members, with CIK, from Wikipedia's list.
+  - Survivorship bias: companies that left the index are missing, which flatters long positions. The long-short
+    and market-neutral forms are therefore the primary ones.
+- **Earnings dates:** 8-K filings that list Item 2.02 (results of operations), from the SEC submissions API
+  (data.sec.gov), 2009-2025.
+  - A filing accepted after 16:00 New York time dates to the next trading day.
+  - Duplicates within 5 trading days keep the first.
+- **Prices:** daily adjusted closes and opens (Yahoo), 2008-2025.
+- **Event signal:** the announcement-day abnormal return, the stock's return minus SPY's.
+- **Portfolio:**
+  - each day, the events of the last D days (D drawn 1-5) are ranked by the signal;
+  - long the top fraction q and short the bottom q (q drawn 0.1-0.5), or long-only against SPY;
+  - entry at the next open after a delay of 0-5 days;
+  - hold H trading days (H drawn 1-60);
+  - equal weight over open positions.
+- **Free parameters:** D, q, delay, H, direction (drift or reversal), form (long-short / long-only vs SPY), and a
+  liquidity filter (all, or above / below the median dollar volume of the last 60 days).
+- **Costs:** 5 bp per side (large-cap US stock CFDs at a prop firm).
+- **Periods:** P1 2009-2018, P2 2019-2025.
+- **Placebo:** the same portfolios with the event dates shifted by a random 20-120 trading days per stock.
+
+## R6. Daily short-sale volume (FINRA)
+
+- **Data:** FINRA consolidated daily short-sale volume files (Reg SHO), 2009-08 to 2025-12, for the R4 universe.
+- **Signal:** short-volume ratio = short volume / total volume, as a level averaged over L days (L drawn 1-20), or
+  its change against the previous L days.
+- **Portfolio:**
+  - cross-sectional ranks each day;
+  - long the low-ratio fraction q and short the high-ratio fraction q (q drawn 0.1-0.5), or the reverse;
+  - hold H days (H drawn 1-20);
+  - rebalance each day or each week;
+  - equal weight, market-neutral by construction.
+- **Costs:** 5 bp per side. **Periods:** P1 2009-2018, P2 2019-2025.
+- **Placebo:** the ratio shuffled across stocks within each day.
+
+## R7. Crypto quarterly-futures basis
+
+- **Data (Binance public archive):** hourly closes of the BTC and ETH quarterly contracts, coin-margined (BTCUSD /
+  ETHUSD_yymmdd) and USDT-margined (BTCUSDT / ETHUSDT_yymmdd), and of spot BTC / ETH against USDT.
+- **Trade:**
+  - long spot, short the quarterly, when the annualised basis (F / S − 1) × 365 / days to expiry is at least θ;
+  - exit at expiry, when the basis falls below an exit level, or by rolling to the next quarterly;
+  - marked to market daily.
+- **Free parameters:** θ (0-40% a year), exit level, entry window before expiry (any day, or within N days, N drawn
+  7-90), contract (front or next), margin type (coin or USDT).
+- **Costs:** 5 bp per leg per side (taker).
+- **Periods:** all data from 2020 on, so P2 only.
+- **Placebo:** the same trade entered on random days, ignoring θ.
+
+## R8. Perpetual funding across venues
+
+- **Venues** (those that answered the probe):
+  - Binance (public archive);
+  - Deribit, Kraken Futures, Hyperliquid, dYdX v4, Gate.io (public APIs).
+  - OKX serves only recent months and is left out.
+- **Data:** funding rates and hourly prices for the BTC and ETH perpetuals.
+- **Trade:** short the perpetual on the venue with the highest expected funding and long it on the lowest, when the
+  expected spread per 8 hours is at least θ.
+  - Expected funding: the last rate or the mean of the last n.
+  - Held until the spread falls below an exit level.
+  - Price differences between venues are marked hourly.
+- **Free parameters:** θ, exit level, n (1-21), venue set (any pair or all).
+- **Costs:** 5 bp per leg per side.
+- **Periods:** P2 only (most venues start 2019-2023).
+- **Placebo:** venues assigned at random at each entry.
+
+## R9. The bitcoin "CME gap"
+
+- **Data:** Binance BTC/USDT minute bars, 2017-08 to 2025-12.
+- **Gap:** spot at the CME Sunday 17:00 Chicago open divided by spot at the Friday 16:00 Chicago close, minus 1
+  (the weekend move).
+- **Trade:** from the Sunday open, fade the gap (or follow it). Exit when the Friday close is reached (a fraction f
+  of the way, f drawn 0.25-1), at a stop of k times the gap, or after H hours. Only gaps with |gap| ≥ g.
+- **Free parameters:** g, direction, f, k (0.5-5), H (1-120).
+- **Costs:** 5 bp per side.
+- **Periods:** P1 2017-08 to 2018, P2 2019-2025.
+- **Placebo:** the same trade from a random hour of the week.
+
+## R10. Fed "net liquidity"
+
+- **Data:** FRED WALCL (Fed balance sheet), WTREGEN (Treasury General Account) and RRPONTSYD (reverse repo).
+  - Net liquidity = WALCL − WTREGEN − RRP, weekly at the Wednesday level.
+  - Known after the Thursday 16:30 New York release, and traded from the Friday open.
+  - If FRED cannot be reached after retries, R10 is not run and that is reported.
+- **Signal:** the change over L weeks (L drawn 1-26), as a sign or as a z-score above a threshold.
+- **Trade:** long (or long / short) the Nasdaq CFD (Dukascopy USATECHIDXUSD daily) or BTC/USDT, held to the next
+  release.
+- **Free parameters:** L, threshold, form, side.
+- **Costs:** the round-23 CFD cost for the Nasdaq, 5 bp per side for BTC.
+- **Periods:**
+  - Nasdaq: P1 2012-2018, P2 2019-2025;
+  - BTC: P1 2017-08 to 2018, P2 2019-2025.
+- **Placebo:** the signal shifted by a random 26-104 weeks.
+
+## R11. Stock folklore
+
+**a. ETF pairs trading** (distance method):
+- **Universe:** the nine original SPDR sector ETFs (1998-) and the iShares single-country ETFs listed by 1996, with
+  no survivorship problem.
+- **Formation:**
+  - normalised prices over F days (F drawn 60-500);
+  - pairs with the smallest squared distance;
+  - top n traded (n drawn 1-20).
+- **Trade:** open when the spread is beyond k standard deviations (k drawn 1-3); close at a fraction of the way to
+  zero, or after H days.
+- **Re-formation:** monthly.
+- **Costs:** 2 bp per side.
+- **Periods:** P1 1999-2018, P2 2019-2025.
+- **Placebo:** random pairs.
+
+**b. S&P 500 additions:**
+- **Data:** Wikipedia's table of changes, effective dates 2008-2025. Announcement dates are not reliably listed, so
+  the effective date anchors the window.
+- **Trade:** buy (or short) each added stock from e days before to x days after the effective date (e drawn 0-10,
+  x drawn −5 to 20), against SPY.
+- **Costs:** 5 bp per side.
+- **Periods:** P1 2008-2018, P2 2019-2025.
+- **Placebo:** random dates for the same stocks.
+
+## Blocked (not run)
+
+| Item | Why |
+|---|---|
+| 5, insider buying | SEC form 4 details are served only from www.sec.gov/Archives, which refuses requests without a contact e-mail in the User-Agent (HTTP 403); the standing rule bars using Anas's e-mail |
+| 11c, Congress trades | the House and Senate Stock Watcher datasets return HTTP 403 |
+| 12, OANDA positioning | needs an OANDA practice token as the `OANDA_TOKEN` secret |
+| 13, small caps | needs Alpaca keys |
+
+## 2026
+
+Not used for anything above. A stream that counts gets one pre-registered check on 2026-01-01 to 2026-10-31 with
+its frozen rule, written before 2026 data is read.
+
+Not financial advice.
