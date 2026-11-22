@@ -1,0 +1,59 @@
+name: r25ad
+# Round 25 part AD (docs/round25_preregistration.md): TPE search inside each training window for the 20 rules of
+# ci/r25_ad_rules.json on the 28 G10 pairs, XAU and XAG at H1, H4 and D1 (ci/r25_AD.json). Bars from the r25data run
+# in ci/r25_data_run.txt (FX and OTHER groups), rates from round 24. Trigger: ci/R25AD.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R25AD"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  RATES_RUN: "45035758022"
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        shell: bash
+        run: echo "m=$(python -c 'import json; print(json.dumps(json.load(open("ci/r25_AD.json")), separators=(",", ":")))')" >> "$GITHUB_OUTPUT"
+  ad:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays optuna
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $(cat ci/r25_data_run.txt) "^r25g-(FX|OTHER)-${{ matrix.tf }}$" inb || exit 1
+          bash ci/dl_each.sh $RATES_RUN "^r24-rates$" rr || exit 1
+          cp rr/r24-rates/oecd_ir3m.csv data/rates/
+          mkdir -p bars && cp inb/*/*.parquet bars/ && ls bars | wc -l
+      - shell: bash
+        run: |
+          python -W ignore scripts/r25_ad.py --tf ${{ matrix.tf }} --rules "${{ matrix.rules }}" --placebo ${{ matrix.placebo }} \
+            --insts ${{ matrix.insts }} --bars bars --out out --tag ${{ matrix.tag }} --procs 4 --budget 19500 \
+            --financing rates_oecd 2>&1 | grep --line-buffered -v -i -E "warning|converg|fmin_slsqp|res = am" | tail -200
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r25AD-${{ matrix.tag }}
+          path: out
+          retention-days: 60

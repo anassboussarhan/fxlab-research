@@ -277,6 +277,7 @@ def main():
     ap.add_argument("--tfs", default=",".join(TFS))
     ap.add_argument("--only", default="", help="test runs: comma-separated strategy ids")
     ap.add_argument("--save-bars", default="", help="round 25: write the H1-W1 bars used here to this directory")
+    ap.add_argument("--save-series", action="store_true", help="round 25 part HAC: keep every unit's streams")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     warnings.filterwarnings("ignore")
@@ -343,6 +344,7 @@ def main():
     units = [(e.id, tf, a.n) for tf in tfs for e in S] + [(f"PLACEBO_{k:02d}", tf, a.n) for tf in tfs for k in range(npl)]
     rows, done, skipped, timing = [], set(), [], {}
     pooled = {}
+    unit_series = {}
 
     def write(final):
         """Write rows, pooled sums and meta (also as a checkpoint, so a job killed at its time limit keeps its work)."""
@@ -354,6 +356,8 @@ def main():
             P[f"{key}|{kind}|n"] = ct.astype(np.float32)
         if P:
             pd.DataFrame(P).to_parquet(os.path.join(a.out, f"LW_pooled_{sym}.parquet"))
+        if unit_series:
+            pd.DataFrame(unit_series).to_parquet(os.path.join(a.out, f"LW_series_{sym}.parquet"))
         json.dump({"symbol": sym, "tfs": tfs, "units": len(units), "done": len(done), "skipped": sk, "final": final,
                    "seconds": round(time.time() - t_job), "lost": G.get("lost", []), "unit_cap": a.unit_cap,
                    "exposure": expo, "unit_seconds": timing},
@@ -404,6 +408,9 @@ def main():
                 rows.extend(rr)
                 done.add((key, tf))
                 timing[f"{key}|{tf}"] = round(sec, 1)
+                if a.save_series:
+                    for kind, s_ in pl.items():
+                        unit_series[f"{key}|{tf}|{kind}"] = s_.astype(np.float32)
                 for kind, s_ in pl.items():
                     p_ = pooled.setdefault((key, kind), [pd.Series(dtype=np.float64), pd.Series(dtype=np.float64)])
                     p_[0] = p_[0].add(s_.astype(np.float64), fill_value=0.0)

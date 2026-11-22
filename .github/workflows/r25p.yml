@@ -1,0 +1,71 @@
+name: r25p
+# Round 25 parts P and CF (docs/round25_preregistration.md): one job per class group x timeframe x rule chunk
+# (ci/r25_P.json, from ci/r25_matrix.py), plus one placebo + CF job per group x timeframe. Bars from the r25data run in
+# ci/r25_data_run.txt; BIS policy rates from round 24 (r24lw 45035758022). Only statistics leave the artifacts.
+# Trigger: ci/R25P (its content: an optional jq filter on the matrix, e.g. a list of tags to rerun).
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R25P"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  RATES_RUN: "45035758022"
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          M = json.load(open("ci/r25_P.json"))
+          only = [l.strip() for l in open("ci/R25P").read().splitlines()[1:] if l.strip()]
+          if only:
+              M["include"] = [j for j in M["include"] if j["tag"] in only]
+          print("m=" + json.dumps(M, separators=(",", ":")))
+          PY
+          python -c "import json,os; d=json.loads(open(os.environ['GITHUB_OUTPUT']).read().split('m=',1)[1]); print(len(d['include']), 'jobs')"
+  p:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $(cat ci/r25_data_run.txt) "^r25g-${{ matrix.group }}-${{ matrix.tf }}$" inb || exit 1
+          bash ci/dl_each.sh $RATES_RUN "^r24-rates$" rr || exit 1
+          cp rr/r24-rates/oecd_ir3m.csv data/rates/ && ls data/rates && ls inb/*/ | head -5
+      - shell: bash
+        run: |
+          X=""
+          [ -n "${{ matrix.insts }}" ] && X="--insts ${{ matrix.insts }}"
+          [ "${{ matrix.cf }}" = "1" ] && X="$X --cf"
+          python -W ignore scripts/r25_P.py --group ${{ matrix.group }} --tf ${{ matrix.tf }} --rules "${{ matrix.rules }}" $X \
+            --placebos ${{ matrix.placebos }} --bars inb/r25g-${{ matrix.group }}-${{ matrix.tf }} --out out --tag ${{ matrix.tag }} \
+            --procs 4 --budget 19500 --financing rates_oecd 2>&1 | grep --line-buffered -v -i -E "warning|converg|fmin_slsqp|res = am" | tail -300
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r25P-${{ matrix.tag }}
+          path: out
+          retention-days: 60

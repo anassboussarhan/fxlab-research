@@ -1,0 +1,77 @@
+name: r25alt
+# Round 25 part ALT (docs/round25_preregistration.md): part P's rules and execution space on the point-in-time altcoin
+# universe (Binance USDT perpetuals) at H1-D1, funding charged as carry, per-coin and point-in-time panel streams.
+# Universe and bars from the r25data run in ci/r25_data_run.txt. Trigger: ci/R25ALT.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R25ALT"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        id: m
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $(cat ci/r25_data_run.txt) "^r25alt-universe$" uni || exit 1
+          python -W ignore ci/r25_matrix.py --alt-universe uni/r25alt-universe/universe.json 1>&2
+          echo "m=$(python -c 'import json; print(json.dumps(json.load(open("ci/r25_ALT.json")), separators=(",", ":")))')" >> "$GITHUB_OUTPUT"
+  alt:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          R=$(cat ci/r25_data_run.txt)
+          bash ci/dl_each.sh $R "^r25alt-universe$" uni || exit 1
+          bash ci/dl_each.sh $R "^r25alt-bars-[0-9]+$" altin || exit 1
+          mkdir -p alt/bars alt/fund
+          find altin -path "*/bars/*_${{ matrix.tf }}.parquet" -exec cp {} alt/bars/ \;
+          find altin -name "funding_*.csv" -exec cp {} alt/fund/ \;
+          python - <<'PY'
+          import json
+          U = json.load(open("uni/r25alt-universe/universe.json")); U["funding_dir"] = "alt/fund"
+          json.dump(U, open("alt/universe.json", "w"))
+          PY
+          ls alt/bars | wc -l; ls alt/fund | wc -l
+      - shell: bash
+        run: |
+          X=""
+          [ -n "${{ matrix.insts }}" ] && X="--insts ${{ matrix.insts }}"
+          python -W ignore scripts/r25_P.py --group ALT --universe alt/universe.json --tf ${{ matrix.tf }} --rules "${{ matrix.rules }}" $X \
+            --placebos ${{ matrix.placebos }} --bars alt/bars --out out --tag ${{ matrix.tag }} --procs 4 --budget 19500 \
+            2>&1 | grep --line-buffered -v -i -E "warning|converg|fmin_slsqp|res = am" | tail -300
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r25ALT-${{ matrix.tag }}
+          path: out
+          retention-days: 60

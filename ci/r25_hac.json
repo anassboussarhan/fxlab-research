@@ -1,0 +1,1025 @@
+{
+"criterion": "the 100 round-23 LW own-rule unit streams with the highest 2019-2025 t (real, counted; USD/TRY and the three voided rules left out)",
+"units": [
+{
+"symbol": "USATECHIDXUSD",
+"tf": "H2",
+"rule": "S.FAMOUS.ALLIGATOR",
+"selection": "nested",
+"p2_t": 3.674573
+},
+{
+"symbol": "XAUUSD",
+"tf": "M30",
+"rule": "S.BOOK.HEIKIN_ASHI",
+"selection": "nested",
+"p2_t": 3.611828
+},
+{
+"symbol": "XAUUSD",
+"tf": "M30",
+"rule": "S.DAILY.CUM_RSI",
+"selection": "nested",
+"p2_t": 3.465255
+},
+{
+"symbol": "DEUIDXEUR",
+"tf": "H2",
+"rule": "S.WEIRD.LUNAR",
+"selection": "nested",
+"p2_t": 3.461782
+},
+{
+"symbol": "XAUUSD",
+"tf": "D1",
+"rule": "S.BOOK.BW_FRACTAL",
+"selection": "nested",
+"p2_t": 3.269047
+},
+{
+"symbol": "XAUUSD",
+"tf": "M15",
+"rule": "S.BOOK.LIEN_FADER",
+"selection": "nested",
+"p2_t": 3.226694
+},
+{
+"symbol": "XAUUSD",
+"tf": "H4",
+"rule": "S.MR.STOCH_REVERSAL",
+"selection": "nested",
+"p2_t": 3.199141
+},
+{
+"symbol": "XAUUSD",
+"tf": "W1",
+"rule": "S.BOOK.CONNORS_R3",
+"selection": "default",
+"p2_t": 3.119927
+},
+{
+"symbol": "XAUUSD",
+"tf": "M15",
+"rule": "S.BOOK.BW_FRACTAL",
+"selection": "nested",
+"p2_t": 3.112756
+},
+{
+"symbol": "CHFJPY",
+"tf": "H8",
+"rule": "S.DAILY.IBS",
+"selection": "nested",
+"p2_t": 3.097233
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tf": "H1",
+"rule": "S.MR.BOLLINGER",
+"selection": "nested",
+"p2_t": 3.079977
+},
+{
+"symbol": "XAUUSD",
+"tf": "H8",
+"rule": "S.MR.STOCH_REVERSAL",
+"selection": "nested",
+"p2_t": 3.069905
+},
+{
+"symbol": "ETHUSDT",
+"tf": "M30",
+"rule": "S.MR.SHORT_REVERSAL",
+"selection": "default",
+"p2_t": 3.014244
+},
+{
+"symbol": "XAUUSD",
+"tf": "H12",
+"rule": "S.BOOK.CONNORS_R3",
+"selection": "nested",
+"p2_t": 2.991591
+},
+{
+"symbol": "XAUUSD",
+"tf": "H1",
+"rule": "S.SEAS.WEEKEND_GAP_FADE",
+"selection": "default",
+"p2_t": 2.981475
+},
+{
+"symbol": "USA30IDXUSD",
+"tf": "D1",
+"rule": "S.MR.ZSCORE",
+"selection": "nested",
+"p2_t": 2.978241
+},
+{
+"symbol": "ETHUSDT",
+"tf": "H8",
+"rule": "S.BOOK.WILLIAMS_SMASH",
+"selection": "default",
+"p2_t": 2.977722
+},
+{
+"symbol": "XAUUSD",
+"tf": "M30",
+"rule": "S.DAILY.IBS",
+"selection": "nested",
+"p2_t": 2.961579
+},
+{
+"symbol": "AUSIDXAUD",
+"tf": "D1",
+"rule": "S.BOOK.HEIKIN_ASHI",
+"selection": "nested",
+"p2_t": 2.958315
+},
+{
+"symbol": "GASCMDUSD",
+"tf": "H4",
+"rule": "S.SMC.SILVER_BULLET",
+"selection": "nested",
+"p2_t": 2.940549
+},
+{
+"symbol": "XAUUSD",
+"tf": "D2",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "nested",
+"p2_t": 2.922005
+},
+{
+"symbol": "AUDUSD",
+"tf": "M30",
+"rule": "S.MR.BOLLINGER",
+"selection": "nested",
+"p2_t": 2.921855
+},
+{
+"symbol": "XAUUSD",
+"tf": "M30",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "nested",
+"p2_t": 2.881471
+},
+{
+"symbol": "XAUUSD",
+"tf": "W1",
+"rule": "S.BOOK.WILLIAMS_R",
+"selection": "default",
+"p2_t": 2.861757
+},
+{
+"symbol": "XAUUSD",
+"tf": "M15",
+"rule": "S.BOOK.HEIKIN_ASHI",
+"selection": "nested",
+"p2_t": 2.821828
+},
+{
+"symbol": "FRAIDXEUR",
+"tf": "H4",
+"rule": "S.DAILY.OPEX",
+"selection": "nested",
+"p2_t": 2.814877
+},
+{
+"symbol": "USA30IDXUSD",
+"tf": "D1",
+"rule": "S.SEAS.TURN_OF_MONTH",
+"selection": "nested",
+"p2_t": 2.788274
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tf": "W1",
+"rule": "S.BOOK.LIEN_CHANNEL",
+"selection": "nested",
+"p2_t": 2.767446
+},
+{
+"symbol": "ESPIDXEUR",
+"tf": "D1",
+"rule": "S.BO.RETEST",
+"selection": "default",
+"p2_t": 2.752141
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tf": "H12",
+"rule": "S.RG.CHANGE_POINT",
+"selection": "nested",
+"p2_t": 2.732733
+},
+{
+"symbol": "XAUUSD",
+"tf": "M15",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "nested",
+"p2_t": 2.723006
+},
+{
+"symbol": "ESPIDXEUR",
+"tf": "D2",
+"rule": "S.TREND.KALMAN",
+"selection": "nested",
+"p2_t": 2.721106
+},
+{
+"symbol": "XAUUSD",
+"tf": "D1",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "nested",
+"p2_t": 2.716151
+},
+{
+"symbol": "XAUUSD",
+"tf": "D1",
+"rule": "S.MR.STOCH_REVERSAL",
+"selection": "nested",
+"p2_t": 2.7046
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "D1",
+"rule": "S.GEO.HARMONIC",
+"selection": "nested",
+"p2_t": 2.704555
+},
+{
+"symbol": "AUDCAD",
+"tf": "D1",
+"rule": "S.TREND.DONCHIAN",
+"selection": "nested",
+"p2_t": 2.696194
+},
+{
+"symbol": "XAUUSD",
+"tf": "M15",
+"rule": "S.BOOK.CONNORS_CRSI",
+"selection": "nested",
+"p2_t": 2.692981
+},
+{
+"symbol": "XAUUSD",
+"tf": "H2",
+"rule": "S.DAILY.OPEX",
+"selection": "default",
+"p2_t": 2.689185
+},
+{
+"symbol": "XAUUSD",
+"tf": "H2",
+"rule": "S.BOOK.CONNORS_R3",
+"selection": "nested",
+"p2_t": 2.689033
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "D2",
+"rule": "S.BOOK.ICHIMOKU_KUMO",
+"selection": "default",
+"p2_t": 2.68594
+},
+{
+"symbol": "XAUUSD",
+"tf": "D1",
+"rule": "S.BOOK.BW_AO",
+"selection": "nested",
+"p2_t": 2.675142
+},
+{
+"symbol": "CHEIDXCHF",
+"tf": "D2",
+"rule": "S.BO.RETEST",
+"selection": "default",
+"p2_t": 2.674453
+},
+{
+"symbol": "USDMXN",
+"tf": "W1",
+"rule": "S.BOOK.ELDER_IMPULSE",
+"selection": "nested",
+"p2_t": 2.674038
+},
+{
+"symbol": "XAUUSD",
+"tf": "D1",
+"rule": "S.BOOK.WILLIAMS_R",
+"selection": "nested",
+"p2_t": 2.667767
+},
+{
+"symbol": "XAUUSD",
+"tf": "H8",
+"rule": "S.BOOK.CONNORS_R3",
+"selection": "nested",
+"p2_t": 2.667276
+},
+{
+"symbol": "XAUUSD",
+"tf": "M15",
+"rule": "S.ST.SWING_STRUCTURE",
+"selection": "nested",
+"p2_t": 2.65622
+},
+{
+"symbol": "BTCUSDT",
+"tf": "M15",
+"rule": "S.BOOK.LIEN_INSIDE2",
+"selection": "default",
+"p2_t": 2.653821
+},
+{
+"symbol": "BTCUSDT",
+"tf": "H1",
+"rule": "S.DAILY.HALLOWEEN",
+"selection": "default",
+"p2_t": 2.652175
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tf": "H1",
+"rule": "S.BOOK.WILDER_DMI",
+"selection": "default",
+"p2_t": 2.649121
+},
+{
+"symbol": "HKGIDXHKD",
+"tf": "H1",
+"rule": "S.VOL.EXPANSION",
+"selection": "nested",
+"p2_t": 2.646586
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "H2",
+"rule": "S.MR.STOCH_REVERSAL",
+"selection": "nested",
+"p2_t": 2.643644
+},
+{
+"symbol": "XAUUSD",
+"tf": "D2",
+"rule": "S.BOOK.HEAD_SHOULDERS",
+"selection": "nested",
+"p2_t": 2.615706
+},
+{
+"symbol": "DEUIDXEUR",
+"tf": "D2",
+"rule": "S.BOOK.RASCHKE_ANTI",
+"selection": "nested",
+"p2_t": 2.594073
+},
+{
+"symbol": "XAUUSD",
+"tf": "W1",
+"rule": "S.MR.OU",
+"selection": "nested",
+"p2_t": 2.585419
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "D2",
+"rule": "S.WEIRD.MERCURY_RETRO",
+"selection": "nested",
+"p2_t": 2.559893
+},
+{
+"symbol": "XAUUSD",
+"tf": "D2",
+"rule": "S.BOOK.CONNORS_CRSI",
+"selection": "nested",
+"p2_t": 2.557578
+},
+{
+"symbol": "BRENTCMDUSD",
+"tf": "W1",
+"rule": "S.VOL.EXPANSION",
+"selection": "nested",
+"p2_t": 2.552273
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "W1",
+"rule": "S.BOOK.LIEN_FADER",
+"selection": "nested",
+"p2_t": 2.552116
+},
+{
+"symbol": "XAUUSD",
+"tf": "H2",
+"rule": "S.BOOK.WILLIAMS_R",
+"selection": "nested",
+"p2_t": 2.548024
+},
+{
+"symbol": "XAUUSD",
+"tf": "M30",
+"rule": "S.DAILY.HIGH52",
+"selection": "nested",
+"p2_t": 2.540159
+},
+{
+"symbol": "XAUUSD",
+"tf": "H12",
+"rule": "S.BOOK.CONNORS_PCTB",
+"selection": "nested",
+"p2_t": 2.529892
+},
+{
+"symbol": "XAUUSD",
+"tf": "D2",
+"rule": "S.SEAS.WEEKEND_GAP_FADE",
+"selection": "nested",
+"p2_t": 2.527168
+},
+{
+"symbol": "BRENTCMDUSD",
+"tf": "W1",
+"rule": "S.BO.VOL_BREAKOUT",
+"selection": "nested",
+"p2_t": 2.522465
+},
+{
+"symbol": "EURSEK",
+"tf": "H1",
+"rule": "S.GEO.FIB_RETRACE",
+"selection": "nested",
+"p2_t": 2.513019
+},
+{
+"symbol": "CHFJPY",
+"tf": "H2",
+"rule": "S.BOOK.HEIKIN_ASHI",
+"selection": "default",
+"p2_t": 2.505315
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "H12",
+"rule": "S.DAILY.DOUBLE_SEVEN",
+"selection": "nested",
+"p2_t": 2.504575
+},
+{
+"symbol": "UKGILTTRGBP",
+"tf": "H4",
+"rule": "S.BOOK.LIEN_PERFECT_ORDER",
+"selection": "nested",
+"p2_t": 2.501492
+},
+{
+"symbol": "UKGILTTRGBP",
+"tf": "D1",
+"rule": "S.MR.BOLLINGER",
+"selection": "default",
+"p2_t": 2.497959
+},
+{
+"symbol": "CHFJPY",
+"tf": "M15",
+"rule": "S.BOOK.HEIKIN_ASHI",
+"selection": "default",
+"p2_t": 2.484445
+},
+{
+"symbol": "BTCUSDT",
+"tf": "M15",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "default",
+"p2_t": 2.483354
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "W1",
+"rule": "S.DAILY.CUM_RSI",
+"selection": "nested",
+"p2_t": 2.476782
+},
+{
+"symbol": "CHFJPY",
+"tf": "W1",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "nested",
+"p2_t": 2.471468
+},
+{
+"symbol": "BTCUSDT",
+"tf": "M15",
+"rule": "S.BOOK.CONNORS_CRSI",
+"selection": "default",
+"p2_t": 2.46933
+},
+{
+"symbol": "BTCUSDT",
+"tf": "M15",
+"rule": "S.BOOK.WILLIAMS_R",
+"selection": "default",
+"p2_t": 2.469315
+},
+{
+"symbol": "BTCUSDT",
+"tf": "M15",
+"rule": "S.BOOK.HEIKIN_ASHI",
+"selection": "default",
+"p2_t": 2.469303
+},
+{
+"symbol": "BTCUSDT",
+"tf": "M15",
+"rule": "S.BOOK.BW_FRACTAL",
+"selection": "default",
+"p2_t": 2.469303
+},
+{
+"symbol": "BTCUSDT",
+"tf": "M30",
+"rule": "S.DAILY.CUM_RSI",
+"selection": "default",
+"p2_t": 2.462345
+},
+{
+"symbol": "BTCUSDT",
+"tf": "M30",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "default",
+"p2_t": 2.46164
+},
+{
+"symbol": "BTCUSDT",
+"tf": "H12",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "default",
+"p2_t": 2.459616
+},
+{
+"symbol": "USDCNH",
+"tf": "H2",
+"rule": "S.SEAS.TURN_OF_MONTH",
+"selection": "default",
+"p2_t": 2.456204
+},
+{
+"symbol": "BTCUSDT",
+"tf": "H1",
+"rule": "S.BOOK.HEIKIN_ASHI",
+"selection": "default",
+"p2_t": 2.456149
+},
+{
+"symbol": "XAUUSD",
+"tf": "H1",
+"rule": "S.BOOK.CONNORS_R3",
+"selection": "default",
+"p2_t": 2.455763
+},
+{
+"symbol": "BTCUSDT",
+"tf": "H1",
+"rule": "S.DAILY.VOL_TARGET",
+"selection": "default",
+"p2_t": 2.455316
+},
+{
+"symbol": "CHFJPY",
+"tf": "M15",
+"rule": "S.BO.RANGE_EXPANSION",
+"selection": "nested",
+"p2_t": 2.452009
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "D1",
+"rule": "S.TREND.INDICATOR_SIGNAL",
+"selection": "default",
+"p2_t": 2.451975
+},
+{
+"symbol": "XAUUSD",
+"tf": "M30",
+"rule": "S.FAMOUS.TD_SEQUENTIAL",
+"selection": "default",
+"p2_t": 2.444349
+},
+{
+"symbol": "BTCUSDT",
+"tf": "D2",
+"rule": "S.BOOK.RASCHKE_ANTI",
+"selection": "default",
+"p2_t": 2.442265
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "H1",
+"rule": "S.DAILY.HIGH52",
+"selection": "default",
+"p2_t": 2.431411
+},
+{
+"symbol": "ETHUSDT",
+"tf": "H12",
+"rule": "S.ST.PIVOT_POINTS",
+"selection": "default",
+"p2_t": 2.426336
+},
+{
+"symbol": "ESPIDXEUR",
+"tf": "D2",
+"rule": "S.BOOK.LIEN_PERFECT_ORDER",
+"selection": "nested",
+"p2_t": 2.425854
+},
+{
+"symbol": "AUSIDXAUD",
+"tf": "H4",
+"rule": "S.ST.CANDLESTICK",
+"selection": "nested",
+"p2_t": 2.424683
+},
+{
+"symbol": "XAUUSD",
+"tf": "M30",
+"rule": "S.BO.RANGE_EXPANSION",
+"selection": "default",
+"p2_t": 2.423194
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "H12",
+"rule": "S.VOL.EXPANSION",
+"selection": "nested",
+"p2_t": 2.422235
+},
+{
+"symbol": "HKGIDXHKD",
+"tf": "M30",
+"rule": "S.BOOK.RASCHKE_ANTI",
+"selection": "nested",
+"p2_t": 2.417706
+},
+{
+"symbol": "XAUUSD",
+"tf": "H4",
+"rule": "S.DAILY.CUM_RSI",
+"selection": "nested",
+"p2_t": 2.414954
+},
+{
+"symbol": "FRAIDXEUR",
+"tf": "H2",
+"rule": "S.MR.BOLLINGER",
+"selection": "nested",
+"p2_t": 2.41455
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "D2",
+"rule": "S.BOOK.RASCHKE_ANTI",
+"selection": "default",
+"p2_t": 2.413167
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tf": "D1",
+"rule": "S.BOOK.LIEN_CHANNEL",
+"selection": "nested",
+"p2_t": 2.409933
+},
+{
+"symbol": "USATECHIDXUSD",
+"tf": "W1",
+"rule": "S.WEIRD.MERCURY_RETRO",
+"selection": "default",
+"p2_t": 2.401049
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tf": "W1",
+"rule": "S.BOOK.TURTLE_SOUP",
+"selection": "nested",
+"p2_t": 2.400783
+}
+],
+"include": [
+{
+"symbol": "AUDCAD",
+"tfs": "W1,D1",
+"only": "S.TREND.DONCHIAN",
+"tag": "AUDCAD-W1D1"
+},
+{
+"symbol": "AUDUSD",
+"tfs": "H1,M30",
+"only": "S.MR.BOLLINGER",
+"tag": "AUDUSD-H1M30"
+},
+{
+"symbol": "AUSIDXAUD",
+"tfs": "W1,D1",
+"only": "S.BOOK.HEIKIN_ASHI",
+"tag": "AUSIDXAUD-W1D1"
+},
+{
+"symbol": "AUSIDXAUD",
+"tfs": "W1,H4",
+"only": "S.ST.CANDLESTICK",
+"tag": "AUSIDXAUD-W1H4"
+},
+{
+"symbol": "BRENTCMDUSD",
+"tfs": "W1",
+"only": "S.BO.VOL_BREAKOUT,S.VOL.EXPANSION",
+"tag": "BRENTCMDUSD-W1"
+},
+{
+"symbol": "BTCUSDT",
+"tfs": "H1",
+"only": "S.BOOK.HEIKIN_ASHI,S.DAILY.HALLOWEEN,S.DAILY.VOL_TARGET",
+"tag": "BTCUSDT-H1"
+},
+{
+"symbol": "BTCUSDT",
+"tfs": "H1,M15",
+"only": "S.BOOK.BW_FRACTAL,S.BOOK.CONNORS_CRSI,S.BOOK.HEIKIN_ASHI,S.BOOK.LIEN_INSIDE2,S.BOOK.WILLIAMS_R,S.DAILY.VOL_TARGET",
+"tag": "BTCUSDT-H1M15"
+},
+{
+"symbol": "BTCUSDT",
+"tfs": "H1,M30",
+"only": "S.DAILY.CUM_RSI,S.DAILY.VOL_TARGET",
+"tag": "BTCUSDT-H1M30"
+},
+{
+"symbol": "BTCUSDT",
+"tfs": "W1,D2",
+"only": "S.BOOK.RASCHKE_ANTI",
+"tag": "BTCUSDT-W1D2"
+},
+{
+"symbol": "BTCUSDT",
+"tfs": "W1,H12",
+"only": "S.DAILY.VOL_TARGET",
+"tag": "BTCUSDT-W1H12"
+},
+{
+"symbol": "CHEIDXCHF",
+"tfs": "W1,D2",
+"only": "S.BO.RETEST",
+"tag": "CHEIDXCHF-W1D2"
+},
+{
+"symbol": "CHFJPY",
+"tfs": "H1,M15",
+"only": "S.BO.RANGE_EXPANSION,S.BOOK.HEIKIN_ASHI",
+"tag": "CHFJPY-H1M15"
+},
+{
+"symbol": "CHFJPY",
+"tfs": "W1",
+"only": "S.DAILY.VOL_TARGET",
+"tag": "CHFJPY-W1"
+},
+{
+"symbol": "CHFJPY",
+"tfs": "W1,H2",
+"only": "S.BOOK.HEIKIN_ASHI",
+"tag": "CHFJPY-W1H2"
+},
+{
+"symbol": "CHFJPY",
+"tfs": "W1,H8",
+"only": "S.DAILY.IBS",
+"tag": "CHFJPY-W1H8"
+},
+{
+"symbol": "DEUIDXEUR",
+"tfs": "W1,D2",
+"only": "S.BOOK.RASCHKE_ANTI",
+"tag": "DEUIDXEUR-W1D2"
+},
+{
+"symbol": "DEUIDXEUR",
+"tfs": "W1,H2",
+"only": "S.WEIRD.LUNAR",
+"tag": "DEUIDXEUR-W1H2"
+},
+{
+"symbol": "ESPIDXEUR",
+"tfs": "W1,D1",
+"only": "S.BO.RETEST",
+"tag": "ESPIDXEUR-W1D1"
+},
+{
+"symbol": "ESPIDXEUR",
+"tfs": "W1,D2",
+"only": "S.BOOK.LIEN_PERFECT_ORDER,S.TREND.KALMAN",
+"tag": "ESPIDXEUR-W1D2"
+},
+{
+"symbol": "ETHUSDT",
+"tfs": "H1,M30",
+"only": "S.MR.SHORT_REVERSAL",
+"tag": "ETHUSDT-H1M30"
+},
+{
+"symbol": "ETHUSDT",
+"tfs": "W1,H12",
+"only": "S.ST.PIVOT_POINTS",
+"tag": "ETHUSDT-W1H12"
+},
+{
+"symbol": "ETHUSDT",
+"tfs": "W1,H8",
+"only": "S.BOOK.WILLIAMS_SMASH",
+"tag": "ETHUSDT-W1H8"
+},
+{
+"symbol": "EURSEK",
+"tfs": "H1",
+"only": "S.GEO.FIB_RETRACE",
+"tag": "EURSEK-H1"
+},
+{
+"symbol": "FRAIDXEUR",
+"tfs": "W1,H2",
+"only": "S.MR.BOLLINGER",
+"tag": "FRAIDXEUR-W1H2"
+},
+{
+"symbol": "FRAIDXEUR",
+"tfs": "W1,H4",
+"only": "S.DAILY.OPEX",
+"tag": "FRAIDXEUR-W1H4"
+},
+{
+"symbol": "GASCMDUSD",
+"tfs": "W1,H4",
+"only": "S.SMC.SILVER_BULLET",
+"tag": "GASCMDUSD-W1H4"
+},
+{
+"symbol": "HKGIDXHKD",
+"tfs": "H1",
+"only": "S.VOL.EXPANSION",
+"tag": "HKGIDXHKD-H1"
+},
+{
+"symbol": "HKGIDXHKD",
+"tfs": "H1,M30",
+"only": "S.BOOK.RASCHKE_ANTI",
+"tag": "HKGIDXHKD-H1M30"
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tfs": "H1",
+"only": "S.BOOK.WILDER_DMI,S.MR.BOLLINGER",
+"tag": "LIGHTCMDUSD-H1"
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tfs": "W1",
+"only": "S.BOOK.LIEN_CHANNEL,S.BOOK.TURTLE_SOUP",
+"tag": "LIGHTCMDUSD-W1"
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tfs": "W1,D1",
+"only": "S.BOOK.LIEN_CHANNEL",
+"tag": "LIGHTCMDUSD-W1D1"
+},
+{
+"symbol": "LIGHTCMDUSD",
+"tfs": "W1,H12",
+"only": "S.RG.CHANGE_POINT",
+"tag": "LIGHTCMDUSD-W1H12"
+},
+{
+"symbol": "UKGILTTRGBP",
+"tfs": "W1,D1",
+"only": "S.MR.BOLLINGER",
+"tag": "UKGILTTRGBP-W1D1"
+},
+{
+"symbol": "UKGILTTRGBP",
+"tfs": "W1,H4",
+"only": "S.BOOK.LIEN_PERFECT_ORDER",
+"tag": "UKGILTTRGBP-W1H4"
+},
+{
+"symbol": "USA30IDXUSD",
+"tfs": "W1,D1",
+"only": "S.MR.ZSCORE,S.SEAS.TURN_OF_MONTH",
+"tag": "USA30IDXUSD-W1D1"
+},
+{
+"symbol": "USATECHIDXUSD",
+"tfs": "H1",
+"only": "S.DAILY.HIGH52",
+"tag": "USATECHIDXUSD-H1"
+},
+{
+"symbol": "USATECHIDXUSD",
+"tfs": "W1",
+"only": "S.BOOK.LIEN_FADER,S.DAILY.CUM_RSI,S.WEIRD.MERCURY_RETRO",
+"tag": "USATECHIDXUSD-W1"
+},
+{
+"symbol": "USATECHIDXUSD",
+"tfs": "W1,D1",
+"only": "S.GEO.HARMONIC,S.TREND.INDICATOR_SIGNAL",
+"tag": "USATECHIDXUSD-W1D1"
+},
+{
+"symbol": "USATECHIDXUSD",
+"tfs": "W1,D2",
+"only": "S.BOOK.ICHIMOKU_KUMO,S.BOOK.RASCHKE_ANTI,S.WEIRD.MERCURY_RETRO",
+"tag": "USATECHIDXUSD-W1D2"
+},
+{
+"symbol": "USATECHIDXUSD",
+"tfs": "W1,H12",
+"only": "S.DAILY.DOUBLE_SEVEN,S.VOL.EXPANSION",
+"tag": "USATECHIDXUSD-W1H12"
+},
+{
+"symbol": "USATECHIDXUSD",
+"tfs": "W1,H2",
+"only": "S.FAMOUS.ALLIGATOR,S.MR.STOCH_REVERSAL",
+"tag": "USATECHIDXUSD-W1H2"
+},
+{
+"symbol": "USDCNH",
+"tfs": "W1,H2",
+"only": "S.SEAS.TURN_OF_MONTH",
+"tag": "USDCNH-W1H2"
+},
+{
+"symbol": "USDMXN",
+"tfs": "W1",
+"only": "S.BOOK.ELDER_IMPULSE",
+"tag": "USDMXN-W1"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "H1",
+"only": "S.BOOK.CONNORS_R3,S.SEAS.WEEKEND_GAP_FADE",
+"tag": "XAUUSD-H1"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "H1,M15",
+"only": "S.BOOK.BW_FRACTAL,S.BOOK.CONNORS_CRSI,S.BOOK.HEIKIN_ASHI,S.BOOK.LIEN_FADER,S.DAILY.VOL_TARGET,S.ST.SWING_STRUCTURE",
+"tag": "XAUUSD-H1M15"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "H1,M30",
+"only": "S.BO.RANGE_EXPANSION,S.BOOK.HEIKIN_ASHI,S.DAILY.CUM_RSI,S.DAILY.HIGH52,S.DAILY.IBS,S.DAILY.VOL_TARGET,S.FAMOUS.TD_SEQUENTIAL",
+"tag": "XAUUSD-H1M30"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "W1",
+"only": "S.BOOK.CONNORS_R3,S.BOOK.WILLIAMS_R,S.MR.OU",
+"tag": "XAUUSD-W1"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "W1,D1",
+"only": "S.BOOK.BW_AO,S.BOOK.BW_FRACTAL,S.BOOK.WILLIAMS_R,S.DAILY.VOL_TARGET,S.MR.STOCH_REVERSAL",
+"tag": "XAUUSD-W1D1"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "W1,D2",
+"only": "S.BOOK.CONNORS_CRSI,S.BOOK.HEAD_SHOULDERS,S.DAILY.VOL_TARGET,S.SEAS.WEEKEND_GAP_FADE",
+"tag": "XAUUSD-W1D2"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "W1,H12",
+"only": "S.BOOK.CONNORS_PCTB,S.BOOK.CONNORS_R3",
+"tag": "XAUUSD-W1H12"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "W1,H2",
+"only": "S.BOOK.CONNORS_R3,S.BOOK.WILLIAMS_R,S.DAILY.OPEX",
+"tag": "XAUUSD-W1H2"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "W1,H4",
+"only": "S.DAILY.CUM_RSI,S.MR.STOCH_REVERSAL",
+"tag": "XAUUSD-W1H4"
+},
+{
+"symbol": "XAUUSD",
+"tfs": "W1,H8",
+"only": "S.BOOK.CONNORS_R3,S.MR.STOCH_REVERSAL",
+"tag": "XAUUSD-W1H8"
+}
+]
+}

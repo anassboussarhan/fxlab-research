@@ -1,0 +1,70 @@
+name: r25hac
+# Round 25 part HAC (docs/round25_preregistration.md): the 100 strongest round-23 LW own-rule unit streams
+# (ci/r25_hac.json; USD/TRY and the three voided rules left out) rerun deterministically with the round-23 code, keeping
+# their series, so the combine can give their Newey-West t. A rerun counts as reproduced when its 2019-2025 t matches
+# the published one within 0.01. Data placed as round 23 placed it. Trigger: ci/R25HAC.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R25HAC"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        shell: bash
+        run: |
+          python - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          d = json.load(open("ci/r25_hac.json"))
+          w1 = {j["symbol"] for j in json.load(open("ci/r23a_wave1.json"))["include"]}
+          inc = [dict(j, wave=1 if j["symbol"] in w1 else 2) for j in d["include"]]
+          print("m=" + json.dumps({"include": inc}, separators=(",", ":")))
+          PY
+  rerun:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - if: matrix.wave == 1
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: bash ci/r23_place.sh ${{ matrix.symbol }}
+      - if: matrix.wave == 2
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $(cat ci/r23_w2_run.txt) "^r23h-${{ matrix.symbol }}$" dl_w2 || { echo "data download incomplete"; exit 1; }
+          mkdir -p data/m1/${{ matrix.symbol }}; find dl_w2 -name "*.parquet" -exec mv {} data/m1/${{ matrix.symbol }}/ \;
+          python ci/r23_rescale.py ${{ matrix.symbol }} && ls data/m1/${{ matrix.symbol }}
+      - shell: bash
+        run: |
+          python -W ignore scripts/r23_LW.py --symbol ${{ matrix.symbol }} --tfs ${{ matrix.tfs }} --only ${{ matrix.only }} \
+            --placebos 0 --save-series --budget 10000 --out out 2>&1 | grep --line-buffered -v Warning | tail -60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r25HAC-${{ matrix.tag }}
+          path: out
+          retention-days: 60
