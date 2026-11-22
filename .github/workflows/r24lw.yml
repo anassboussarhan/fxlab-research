@@ -42,15 +42,15 @@ jobs:
           other2 = ["USA30IDXUSD", "USSC2000IDXUSD", "AUSIDXAUD", "ESPIDXEUR"]
           G0 = "W1,D2,D1,H12,H8,H4,H2"
           inc = []
-          for tf in ("M15", "M30"):                                         # longest first
+          allf = "W1,D2,D1,H12,H8,H4,H2,H1,M30,M15"                       # R2 first: its jobs keep the bars round 25 uses
+          inc += [{"symbol": s, "tfs": allf, "tag": f"R2-{s}", "wave": 1, "tied": 1} for s in w1]
+          inc += [{"symbol": s, "tfs": G0 + ",H1", "tag": f"R2-{s}", "wave": 2, "tied": 1} for s in w2 + other2]
+          for tf in ("M15", "M30"):                                         # then R1, longest first
               inc += [{"symbol": s, "tfs": tf, "tag": f"R1-{s}-{tf.lower()}", "wave": 1, "tied": 0} for s in fx1]
           inc += [{"symbol": s, "tfs": G0, "tag": f"R1-{s}-0", "wave": 1, "tied": 0} for s in fx1]
           inc += [{"symbol": s, "tfs": "H1", "tag": f"R1-{s}-h1", "wave": 1, "tied": 0} for s in fx1]
           inc += [{"symbol": s, "tfs": G0, "tag": f"R1-{s}-0", "wave": 2, "tied": 0} for s in fx2]
           inc += [{"symbol": s, "tfs": "H1", "tag": f"R1-{s}-h1", "wave": 2, "tied": 0} for s in fx2]
-          allf = "W1,D2,D1,H12,H8,H4,H2,H1,M30,M15"
-          inc += [{"symbol": s, "tfs": allf, "tag": f"R2-{s}", "wave": 1, "tied": 1} for s in w1]
-          inc += [{"symbol": s, "tfs": G0 + ",H1", "tag": f"R2-{s}", "wave": 2, "tied": 1} for s in w2 + other2]
           print("m=" + json.dumps({"include": inc}))
           PY
           python -c "import json,os; d=json.loads(open(os.environ['GITHUB_OUTPUT']).read().split('m=',1)[1]); print(len(d['include']), 'jobs')"
