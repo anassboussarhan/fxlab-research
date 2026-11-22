@@ -33,6 +33,7 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
              m1: pd.DataFrame | None = None) -> dict:
     """Returns {'returns': per-bar net returns, 'trades': trade log or None, 'metrics': dict, 'signals': frame}.
     financing='rates': overnight financing from point-in-time interest-rate differentials (vector engine).
+    financing='rates_oecd': the same in every engine, with OECD rates for every currency (fxlab/data/rates_oecd.py).
     m1: the instrument's M1 bars; when given, the trade engine replays the minute path of any bar whose range
     contains both the stop and the target (otherwise stop-first)."""
     e = CATALOG[sid]
@@ -41,6 +42,11 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
     mode = mode_override or e.extra.get("mode", "state")
     state_with_stops = mode == "trade" and e.extra.get("mode", "state") == "state"
     roll = rollover_counts(bars.index)
+    carry_all = None                    # round 24 R1: rate-differential financing in every engine
+    if financing == "rates_oecd":
+        from fxlab.data import rates_oecd
+        if rates_oecd.has_rates(symbol):
+            carry_all = rates_oecd.rate_diff(symbol, bars.index).to_numpy(float)
     if mode == "state":
         if exec_cfg and exec_cfg.get("type") in ("confirm", "session"):
             from fxlab.execution.entries import confirm_entries, session_entries
@@ -70,12 +76,16 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
             bt = passive_backtest(bars, sig_exec["side"], pip, cost, offset=exec_cfg.get("offset", 0.0),
                                   max_wait=exec_cfg.get("max_wait", 0), rollovers=roll)
         else:
-            carry = None
+            carry = carry_all
             if financing == "rates":
                 from fxlab.data.rates import has_rates, rate_diff
                 if has_rates(symbol):
                     carry = rate_diff(symbol, bars.index).to_numpy()
             bt = vector_backtest(bars, sig_exec["side"], pip, cost, roll, carry=carry)
+            carry_all = None                # already applied
+        if carry_all is not None:
+            from fxlab.execution.simulator import apply_carry
+            bt = apply_carry(bt, roll, carry_all, cost)
         r = bt["net"]
         turnover = bt["position"].diff().abs()
         costs = bt["spread_slip"] + bt["commission"] + bt["financing"]
@@ -105,7 +115,7 @@ def evaluate(sid: str, bars: pd.DataFrame, symbol: str, panel=None, params=None,
         orders["side"] = np.sign(orders["side"])
     def sim(entry="market", k=0.0, ttl=0):
         return simulate_trades(bars, orders, pip, cost, exit_on_flat=state_with_stops, rollovers=roll,
-                               entry=entry, k=k, ttl=ttl, m1=m1)
+                               entry=entry, k=k, ttl=ttl, m1=m1, carry=carry_all)
     if et == "order":
         res = sim(exec_cfg.get("entry", "market"), exec_cfg.get("k", 0.0), exec_cfg.get("ttl", 0))
         net, trades = res.bars["net"], res.trades

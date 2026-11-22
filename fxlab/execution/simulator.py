@@ -65,6 +65,24 @@ def _arrays(bars: pd.DataFrame):
 
 
 # ---------------------------------------------------------------------------------------------- vector engine
+def _carry_markup(cost: CostModel) -> float:
+    """Financing mark-up per side (fraction a year), scaled with the cost model's swap as in vector_backtest."""
+    from fxlab.data.rates import SWAP_MARKUP_PA
+    return float(SWAP_MARKUP_PA * (cost.swap_pips_per_night / BASE.swap_pips_per_night if BASE.swap_pips_per_night else 1.0))
+
+
+def apply_carry(df: pd.DataFrame, rollovers: np.ndarray, carry: np.ndarray, cost: CostModel = BASE) -> pd.DataFrame:
+    """Replace the flat swap of a per-bar engine frame (columns position, financing, net) by rate-differential
+    financing: (|held| x mark-up - held x carry) x rollovers / 360 (round 24 R1)."""
+    held = df["position"].to_numpy(float)
+    cr = np.nan_to_num(np.asarray(carry, float))
+    fin = np.asarray(rollovers, float) / 360.0 * (np.abs(held) * _carry_markup(cost) - held * cr)
+    out = df.copy()
+    out["net"] = df["net"].to_numpy(float) + df["financing"].to_numpy(float) - fin
+    out["financing"] = fin
+    return out
+
+
 def vector_backtest(bars: pd.DataFrame, position: pd.Series, pip: float, cost: CostModel = BASE,
                     rollovers: np.ndarray | None = None, carry: np.ndarray | None = None) -> pd.DataFrame:
     """position[t] = target exposure decided at close of bar t, in [-1, 1].
@@ -107,7 +125,7 @@ def vector_backtest(bars: pd.DataFrame, position: pd.Series, pip: float, cost: C
 @njit(cache=True)
 def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_hold, trail_d, size_f,
               latency, slip_frac, slip_pips, pip, spread_mult, comm, swap_pips, exit_on_flat, be_m, part_m, part_fr,
-              etype, ek, ettl, atr_, m1o, mbh, mbl, mah, mal, use_m1):
+              etype, ek, ettl, atr_, m1o, mbh, mbl, mah, mal, use_m1, use_carry, carry_arr, markup):
     """etype: 0 market entry at the next open; 1 limit at the decision close (limit_touch); 2 limit k x ATR better
     (limit_pullback); 3 stop k x ATR beyond (stop_breakout). Pending orders live ettl bars (0 = until the signal
     changes); limit fills need a strict trade-through and fill at the better of level and open; stop fills at the
@@ -314,7 +332,11 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
             bar_ret[j] += f * (val - last_val)
             last_val = val
             if roll[j] > 0:
-                fc = roll[j] * swap_pips * pip / epx
+                if use_carry:                     # point-in-time rate differential (round 24 R1)
+                    cr = carry_arr[j] if not np.isnan(carry_arr[j]) else 0.0
+                    fc = roll[j] / 360.0 * (markup - np.sign(pos) * cr)
+                else:
+                    fc = roll[j] * swap_pips * pip / epx
                 fin += fc
                 bar_ret[j] -= f * fc
             ext_hi = bc[j] if fillbar else bh[j]        # on a mid-bar fill bar only the close is known post-fill
@@ -371,8 +393,11 @@ def _atr14(bars: pd.DataFrame) -> np.ndarray:
 
 def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost: CostModel = BASE,
                     exit_on_flat: bool = True, rollovers: np.ndarray | None = None, entry: str = "market",
-                    k: float = 0.0, ttl: int = 0, m1: pd.DataFrame | None = None) -> TradeResult:
-    """signals (indexed like bars, decided at bar close) columns:
+                    k: float = 0.0, ttl: int = 0, m1: pd.DataFrame | None = None,
+                    carry: np.ndarray | None = None) -> TradeResult:
+    """carry: optional point-in-time annualised rate differential (base - quote, decimal) per bar; when given,
+    financing per rollover = (mark-up - side x carry) / 360 per unit notional (as vector_backtest).
+    signals (indexed like bars, decided at bar close) columns:
        side (-1/0/1), stop_dist (price, required), tp_dist (price or NaN), max_hold (bars or NaN),
        trail_dist (price or NaN), size (fraction of equity notional, e.g. from risk sizing)."""
     s = signals.reindex(bars.index)
@@ -393,7 +418,8 @@ def simulate_trades(bars: pd.DataFrame, signals: pd.DataFrame, pip: float, cost:
                     cost.commission_bps_per_side * 1e-4, cost.swap_pips_per_night, exit_on_flat, be, pm, pf,
                     int(ETYPES[entry]), float(k), int(ttl),
                     _atr14(bars) if entry in ("limit_pullback", "stop_breakout") else np.zeros(len(bars)),
-                    *_m1_path(bars, m1))
+                    *_m1_path(bars, m1), carry is not None,
+                    np.zeros(len(bars)) if carry is None else np.asarray(carry, np.float64), _carry_markup(cost))
     bar_ret, te, tx, ts, ep, xp, rs, sz, fin, mae, mfe, spr = out
     idx = bars.index
     gross = ts * (xp - ep) / ep

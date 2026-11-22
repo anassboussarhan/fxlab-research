@@ -134,6 +134,7 @@ def main():
     ap.add_argument("--procs", type=int, default=2)
     ap.add_argument("--engine", action="store_true")
     ap.add_argument("--only", default="")
+    ap.add_argument("--tied", action="store_true")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     warnings.filterwarnings("ignore")
@@ -151,7 +152,15 @@ def main():
         S = [e for e in S if e.id in a.only.split(",")]
     probe = G["bars"]["H1"] if "H1" in G["bars"] else next(iter(G["bars"].values()))
     G["cat"], G["fn"], G["specs"] = {}, {}, {}
+    TIED = {}
+    if a.tied:
+        import r24_tied
+        TIED = r24_tied.TIED
     for e in S:
+        if e.id in TIED:
+            fn, sps = TIED[e.id]
+            G["cat"][e.id], G["fn"][e.id], G["specs"][e.id] = e, fn, list(sps)
+            continue
         fn, consts = XP.expose(e)
         if not (consts and XP.verified(e, fn, probe.iloc[-3000:])):
             fn, consts = e.fn, []

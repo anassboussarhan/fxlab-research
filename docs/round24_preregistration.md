@@ -222,3 +222,20 @@ Not used for anything above. A stream that counts gets one pre-registered check 
 its frozen rule, written before 2026 data is read.
 
 Not financial advice.
+
+## Addendum 1 (2026-11-22, before any round-24 run): how TTM Squeeze is tied
+
+- **What failed in round 23:** checking TTM's code showed the cause was not only `min_periods` above the window.
+  Its momentum is a regression over `np.arange(20) - 9.5`, applied to a rolling window of another 20. Once the two
+  20s were drawn separately, every configuration failed on the length mismatch.
+- **Tied by role instead** (`scripts/r24_tied.py`):
+  - L (6-60, log) for every 20-bar length, with (L - 1) / 2 as the regression centre;
+  - b (1-3.5) for the Bollinger multiplier;
+  - q (2-6) for the falling / rising run;
+  - k and m as before;
+  - the two midpoint divisors (/ 2) stay: they define an average.
+- **The session rules** are tied exactly as written in R2:
+  - SESSION_MOMENTUM: h and s;
+  - NY_OPEN_REVERSAL: k, s, the ATR length and the √8 scale, the latter two free as in round 23.
+- **Checks:** at their defaults all three reproduce the library rules exactly (M15 and H1, synthetic data). The
+  truncation test at M15, H1 and H2 (32 configurations each) finds no look-ahead and no failed configuration.

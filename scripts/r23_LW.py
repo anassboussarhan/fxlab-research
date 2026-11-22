@@ -156,12 +156,13 @@ def evaluate_one(e, fn, bars, sym, params, u_exec, placebo_side=None):
         sig = pd.DataFrame({"side": placebo_side}, index=bars.index)
     sig = sig.copy()
     sig["side"] = sig["side"] * d
+    fin = G.get("financing")                                                # round 24 R1: "rates_oecd"
     if mode == "native":
-        r = evaluate(e.id, bars, sym, signals=sig, exec_cfg=ent) if e is not None else \
-            evaluate("S.TREND.MA_CROSS", bars, sym, signals=sig, exec_cfg=ent, mode_override="state")
+        r = evaluate(e.id, bars, sym, signals=sig, exec_cfg=ent, financing=fin) if e is not None else \
+            evaluate("S.TREND.MA_CROSS", bars, sym, signals=sig, exec_cfg=ent, mode_override="state", financing=fin)
     else:
         r = evaluate(e.id if e is not None else "S.TREND.MA_CROSS", bars, sym, signals=sig[["side"]], mode_override="trade",
-                     risk_override=risk, exec_cfg=ent)
+                     risk_override=risk, exec_cfg=ent, financing=fin)
     return r["returns"]
 
 
@@ -270,6 +271,9 @@ def main():
     ap.add_argument("--budget", type=float, default=19000)
     ap.add_argument("--procs", type=int, default=4)
     ap.add_argument("--unit-cap", type=float, default=1800, help="seconds; a unit stops drawing configurations after this")
+    ap.add_argument("--tied", action="store_true", help="round 24: use scripts/r24_tied.py for the rules it lists")
+    ap.add_argument("--placebos", type=int, default=None, help="number of placebo units (default N_PLACEBO)")
+    ap.add_argument("--financing", default=None, help="rates_oecd: rate-differential financing in every engine (round 24)")
     ap.add_argument("--tfs", default=",".join(TFS))
     ap.add_argument("--only", default="", help="test runs: comma-separated strategy ids")
     a = ap.parse_args()
@@ -288,6 +292,10 @@ def main():
         pip = float(1e-4 * np.median(0.5 * (m1.bid_c + m1.ask_c)))
         INSTRUMENTS[sym] = Instrument(sym, sym[:-3], sym[-3:], pip, 1.0, "index")
     G["sym"] = sym
+    G["financing"] = a.financing
+    if a.financing == "rates_oecd":
+        from fxlab.data import rates_oecd
+        print("carry", sym, "has rates", rates_oecd.has_rates(sym), flush=True)
     G["bars"], G["day"], G["dd"] = {}, {}, {}
     tfs = [t for t in a.tfs.split(",") if t]
     d1 = None
@@ -310,7 +318,16 @@ def main():
         S = [e for e in S if e.id in a.only.split(",")]
     probe = G["bars"]["H1"] if "H1" in G["bars"] else G["bars"][tfs[0]]
     G["cat"], G["fn"], G["specs"], expo = {}, {}, {}, {}
+    TIED = {}
+    if a.tied:                                                             # round 24 R2 / R3: constants tied by role
+        import r24_tied
+        TIED = r24_tied.TIED
     for e in S:
+        if e.id in TIED:
+            fn, sps = TIED[e.id]
+            G["cat"][e.id], G["fn"][e.id], G["specs"][e.id] = e, fn, list(sps)
+            expo[e.id] = {"tied": True, "params": [s["name"] for s in sps]}
+            continue
         fn, consts = XP.expose(e)
         ok = bool(consts) and XP.verified(e, fn, probe.iloc[-3000:])
         if not ok:
@@ -318,7 +335,8 @@ def main():
         G["cat"][e.id], G["fn"][e.id] = e, fn
         G["specs"][e.id] = strategy_specs(e, consts)
         expo[e.id] = {"constants_exposed": len(consts), "verified": ok, "params": [s["name"] for s in G["specs"][e.id]]}
-    units = [(e.id, tf, a.n) for tf in tfs for e in S] + [(f"PLACEBO_{k:02d}", tf, a.n) for tf in tfs for k in range(N_PLACEBO)]
+    npl = N_PLACEBO if a.placebos is None else a.placebos
+    units = [(e.id, tf, a.n) for tf in tfs for e in S] + [(f"PLACEBO_{k:02d}", tf, a.n) for tf in tfs for k in range(npl)]
     rows, done, skipped, timing = [], set(), [], {}
     pooled = {}
 
