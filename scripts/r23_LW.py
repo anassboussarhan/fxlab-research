@@ -276,6 +276,7 @@ def main():
     ap.add_argument("--financing", default=None, help="rates_oecd: rate-differential financing in every engine (round 24)")
     ap.add_argument("--tfs", default=",".join(TFS))
     ap.add_argument("--only", default="", help="test runs: comma-separated strategy ids")
+    ap.add_argument("--save-bars", default="", help="round 25: write the H1-W1 bars used here to this directory")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     warnings.filterwarnings("ignore")
@@ -312,6 +313,9 @@ def main():
         G["day"][tf] = I17.trading_day(b.index)
         G["dd"][tf] = pd.Index(sorted(set(G["day"][tf])))
         print(sym, tf, "bars", len(b), flush=True)
+        if a.save_bars and tf in ("H1", "H2", "H4", "H8", "H12", "D1", "D2", "W1"):
+            os.makedirs(a.save_bars, exist_ok=True)
+            b.to_parquet(os.path.join(a.save_bars, f"{sym}_{tf}.parquet"), compression="zstd")
     del m1
     S = I17.strategies()
     if a.only:

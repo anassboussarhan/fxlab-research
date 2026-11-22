@@ -2,6 +2,7 @@ name: r24lw
 # Round 24 R1-R3 (docs/round24_preregistration.md):
 # - R1: LW of round 23 with rate-differential financing in every engine, on the FX pairs and metals;
 # - R2 / R3: the tied session rules and TTM Squeeze (scripts/r24_tied.py) on every instrument.
+# R2 jobs also keep the H1-W1 bars they build (artifact r25bars-SYM) for round 25.
 # rates: OECD short rates from DBnomics (ci/r24_rates.py), kept as an artifact. Trigger: ci/R24LW.
 on:
   workflow_dispatch:
@@ -99,7 +100,14 @@ jobs:
         shell: bash
         run: |
           python -W ignore scripts/r23_LW.py --symbol ${{ matrix.symbol }} --tfs ${{ matrix.tfs }} --budget 19500 --financing rates_oecd \
-            --tied --placebos 0 --only S.SES.SESSION_MOMENTUM,S.SES.NY_OPEN_REVERSAL,S.FAMOUS.TTM_SQUEEZE --out out 2>&1 | grep --line-buffered -v Warning | tail -400
+            --tied --placebos 0 --only S.SES.SESSION_MOMENTUM,S.SES.NY_OPEN_REVERSAL,S.FAMOUS.TTM_SQUEEZE --save-bars bars --out out 2>&1 | grep --line-buffered -v Warning | tail -400
+      - uses: actions/upload-artifact@v4
+        if: matrix.tied == 1
+        with:
+          name: r25bars-${{ matrix.symbol }}
+          path: bars
+          retention-days: 60
+          if-no-files-found: error
       - uses: actions/upload-artifact@v4
         if: always()
         with:
