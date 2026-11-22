@@ -1,0 +1,20 @@
+name: r24probe2
+# Round 24 R10: probe of the original publishers of WALCL, WTREGEN and RRPONTSYD (status codes and header lines).
+# Trigger: ci/R24PROBE2.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R24PROBE2"]
+permissions:
+  contents: read
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q requests && python ci/r24_probe2.py
