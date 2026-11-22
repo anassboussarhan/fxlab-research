@@ -55,22 +55,46 @@ def yf_prices(tickers, start="2007-01-01"):
 
 def cmd_data(a):
     os.makedirs(a.out, exist_ok=True)
-    html = C.get("https://en.wikipedia.org/wiki/List_of_S%26P_500_companies").text
-    T = pd.read_html(io.StringIO(html))
-
     def flat(cols):
         if isinstance(cols, pd.MultiIndex):
             return ["_".join(str(x).strip() for x in c if "Unnamed" not in str(x)).strip("_") for c in cols]
         return [str(c).strip() for c in cols]
 
-    for t in T:                                                            # tables are chosen by content, not position
-        t.columns = flat(t.columns)
-    is_cur = [t for t in T if {"Symbol", "CIK", "Security"} <= set(t.columns)]
-    is_chg = [t for t in T if any(c.lower().startswith("added") and "ticker" in c.lower() for c in t.columns)
-              and any(c.lower().startswith(("date", "effective")) for c in t.columns)]
-    if not is_cur or not is_chg:
+    page = "List_of_S%26P_500_companies"
+    srcs = [("page", f"https://en.wikipedia.org/wiki/{page}"),               # the same article, three ways of fetching
+            ("rest", f"https://en.wikipedia.org/api/rest_v1/page/html/{page}"),
+            ("parse", f"https://en.wikipedia.org/w/api.php?action=parse&page={page}&prop=text&format=json"
+                      "&formatversion=2&redirects=1"),
+            ("wikiwand", f"https://www.wikiwand.com/en/articles/{page}")]  # a mirror of the same article
+    is_cur = is_chg = []
+    for name, url in srcs:
+        try:
+            r = C.get(url, tries=3)
+            html = r.json()["parse"]["text"] if name == "parse" else r.text
+        except Exception as ex:                                            # noqa: BLE001
+            print("wikipedia", name, "failed", repr(ex)[:120], flush=True)
+            continue
+        print("wikipedia", name, "bytes", len(html), "<table", html.count("<table"), flush=True)
+        for flavor in ("lxml", "bs4"):                                     # html5lib when lxml drops a table
+            try:
+                T = pd.read_html(io.StringIO(html), flavor=flavor)
+            except Exception as ex:                                        # noqa: BLE001
+                print("  read_html", flavor, "failed", repr(ex)[:120], flush=True)
+                T = []
+            for t in T:                                                    # tables are chosen by content, not position
+                t.columns = flat(t.columns)
+            is_cur = [t for t in T if {"Symbol", "CIK", "Security"} <= set(t.columns)]
+            is_chg = [t for t in T if any(c.lower().startswith("added") and "ticker" in c.lower() for c in t.columns)
+                      and any(c.lower().startswith(("date", "effective")) for c in t.columns)]
+            print("  ", flavor, "tables", len(T), "members", [len(t) for t in is_cur], "changes",
+                  [len(t) for t in is_chg], flush=True)
+            if is_cur and is_chg:
+                break
+        if is_cur and is_chg:
+            break
         for i, t in enumerate(T):
-            print("table", i, t.shape, list(t.columns)[:8], flush=True)
+            print("  table", i, t.shape, list(t.columns)[:8], flush=True)
+    if not is_cur or not is_chg:
         raise SystemExit("S&P 500 tables not found")
     cur, chg = max(is_cur, key=len).copy(), max(is_chg, key=len).copy()
     cur["ticker"] = cur["Symbol"].astype(str).str.replace(".", "-", regex=False)
