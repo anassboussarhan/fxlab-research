@@ -1,0 +1,126 @@
+name: r24x
+# Round 24 R3 (IC-SMT), R4, R6, R7, R8, R9, R10, R11 (docs/round24_preregistration.md). Price data stay in artifacts;
+# only statistics are published by the combine. Trigger: ci/R24X.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R24X"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  sdata:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas pyarrow scipy requests yfinance lxml html5lib beautifulsoup4
+      - shell: bash
+        run: python -W ignore scripts/r24_stocks.py data --out sdata 2>&1 | tail -40
+      - uses: actions/upload-artifact@v4
+        with:
+          name: r24-sdata
+          path: sdata
+          retention-days: 30
+  stocks:
+    needs: sdata
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [ear, shortvol, pairs, adds]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas pyarrow scipy requests polars numba
+      - uses: actions/download-artifact@v4
+        with:
+          name: r24-sdata
+          path: sdata
+      - shell: bash
+        run: python -W ignore scripts/r24_stocks.py ${{ matrix.cmd }} --data sdata --out out 2>&1 | grep --line-buffered -v Warning | tail -60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-${{ matrix.cmd }}
+          path: out
+          retention-days: 60
+  crypto:
+    runs-on: ubuntu-latest
+    timeout-minutes: 340
+    strategy:
+      fail-fast: false
+      matrix:
+        cmd: [basis, funding, gap]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q numpy pandas pyarrow scipy requests polars numba
+      - shell: bash
+        run: python -W ignore scripts/r24_crypto.py ${{ matrix.cmd }} --out out 2>&1 | grep --line-buffered -v Warning | tail -60
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-${{ matrix.cmd }}
+          path: out
+          retention-days: 60
+  liq:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays requests
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: bash ci/r23_place.sh USATECHIDXUSD
+      - shell: bash
+        run: python -W ignore scripts/r24_liq.py --out out 2>&1 | grep --line-buffered -v Warning | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-liq
+          path: out
+          retention-days: 60
+  smt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    strategy:
+      fail-fast: false
+      matrix:
+        pair: ["EURUSD+GBPUSD", "USA500IDXUSD+USATECHIDXUSD"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          P="${{ matrix.pair }}"
+          bash ci/r23_place.sh ${P%%+*}
+          bash ci/r23_place.sh ${P##*+}
+      - shell: bash
+        run: python -W ignore scripts/r24_smt.py --symbol "${{ matrix.pair }}" --out out 2>&1 | grep --line-buffered -v Warning | tail -30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24X-smt-${{ strategy.job-index }}
+          path: out
+          retention-days: 60

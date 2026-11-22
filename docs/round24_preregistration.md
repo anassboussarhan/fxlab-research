@@ -239,3 +239,29 @@ Not financial advice.
   - NY_OPEN_REVERSAL: k, s, the ATR length and the √8 scale, the latter two free as in round 23.
 - **Checks:** at their defaults all three reproduce the library rules exactly (M15 and H1, synthetic data). The
   truncation test at M15, H1 and H2 (32 configurations each) finds no look-ahead and no failed configuration.
+
+## Addendum 2 (2026-11-22, before any round-24 result was read): rates source and four details
+
+1. **Rates source (R1).** The first R1 run (45027360273) was cancelled before any job finished. Its coverage
+   summary showed two problems:
+   - the OECD MEI series end in January 2024;
+   - the Turkish interbank series ends in April 2008.
+
+   Carried forward, these would have put stale rates on 2024-2025. R1 now uses the BIS central-bank policy rates
+   (WS_CBPOL, monthly; China's rate for CNH), still with a one-month lag. SGD has no policy rate and its pair stays
+   out. A currency without a series to 2025-11 stops the run.
+2. **R11b window.** The announcement precedes the effective date by a few days that the table does not give, so
+   an entry up to 10 days early could anticipate an announcement not yet made. The entry is therefore restricted
+   to e ∈ {0, 1} trading days before the effective date. The exit x is drawn 1-20 days after it. This tests the
+   effective-date move and the post-inclusion drift or reversal, not the run-up after the announcement.
+3. **R6 data.** FINRA's Reg SHO files cover volume reported to FINRA facilities (off-exchange), not all US
+   volume. The ratio is that share, as the free data define it. Returns run open to open from the day after the
+   signal.
+4. **Smaller definitions:**
+   - **R7:** coin-margined contracts are marked with the same linear approximation as USDT-margined ones (equal
+     coin quantity on both legs).
+   - **R8:** a venue switch pays 4 legs.
+   - **R9:** the placebo enters at a random minute of the surrounding week, with its "gap" measured over the
+     previous 49 hours.
+   - **R10:** the entry bar is the first daily bar opening after the Thursday 16:30 New York release (CFD FX-day bars
+     open at 17:00 New York).
