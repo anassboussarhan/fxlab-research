@@ -290,3 +290,20 @@ Changes found while building and testing the code on synthetic data:
 7. **Job layout** (`ci/r25_matrix.py`): 62 part-P jobs, about 580 core-hours. HMM and ENTROPY at H1 / H2 on the
    42 FX pairs are too large for one job and are split by instrument. Their panel streams are made in the combine
    from the saved unit aggregates.
+
+## Addendum 2 (2026-11-22, gate and data results; no round-25 return had been computed)
+
+- **Look-ahead gate passed** (r25data 45055180321), 48 cuts of a synthetic random walk:
+  - H1: 208 configurations, 0 with look-ahead, 0 errors;
+  - H4: 210, 0, 0;
+  - D1: 210, 0, 0;
+  - part CF (H4): 16 configurations, 0, 0.
+
+  Two (H1) and three (H4) configurations differ on the last bar of a cut only (rules acting on a bar's own close),
+  as allowed in round 23.
+- **USA500IDXUSD refill accepted.** The store ends 2024-05-23. 2,084 hours of 2024 were compared, with a median
+  absolute difference of 0.0 bp. The Dukascopy hour candles replace the store from 2024-05-01. The regrouped bars
+  have no missing instrument or timeframe.
+- **Altcoin universe:** 919 USDT perpetuals in the archive after the exclusions. 2020 has no member: no altcoin had
+  90 days of 2019 data in the archive's files, so ALT starts in 2021. 2021-2025 have 30 members each (60-326
+  eligible), 76 coins in all.
