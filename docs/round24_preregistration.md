@@ -281,5 +281,6 @@ below changes them.
    position. Nothing else changes; the four stock parts rerun (workflow r24xs).
 3. **S&P 500 CFD data end in 2024.** The minute store behind round 22 (run 41447353092) holds USA500IDXUSD only
    to part-way through 2024 (2024 has about four months). That has applied to every USA500IDXUSD result since
-   round 22 and was not recorded. Its 2019-2025 period is therefore 2019 to early 2024. This is reported, not
-   repaired: the free source for the rest is the same Dukascopy feed, and the instrument is kept with this note.
+   round 22 and was not recorded. Its 2019-2025 period is therefore 2019 to early 2024. Round 24 keeps it with
+   this note. Round 25 refills 2024-2025 from Dukascopy minute candles (the round-23 downloader, free) and reruns
+   the instrument there.
