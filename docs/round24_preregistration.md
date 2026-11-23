@@ -358,3 +358,25 @@ at each scale:
 
 A USD/TRY candidate goes forward only if, at x1.5, its portfolio still meets the own rule with the Newey-West
 condition. Its 2026 check is pre-registered separately, after this test and before 2026 data is read.
+
+## Addendum 8 (2026-11-23, after the stress test of addendum 7)
+
+**Stress result** (r24trs 45258441736). The 271 counting USD/TRY unit streams at carry x1, x1.5 and x2:
+
+| Carry | Meet the own rule | ... with the Newey-West condition |
+|---|---|---|
+| x1 | 271 | 271 |
+| x1.5 | 193 | 191 |
+| x2 | 128 | 125 |
+
+Their equal-weight portfolio has a 2019-2025 t of 7.2-7.7 (Newey-West 5.5-5.7) at every scale.
+
+**Examined before anything is reported.** The portfolio's mean is 0.54% a day, about 136% a year at unit exposure.
+Holding the pair returned about 35% a year (log) over the same years. That size is implausible for a timing rule,
+so the sanity rule applies. Workflow r24tryx reports:
+- the pair's largest days and any bad hourly prints;
+- the portfolio by year;
+- its share of return from its best 10 and 20 days;
+- its t without them, and without the pair's 10 largest-move days.
+
+No 2026 data is read until this is settled.
