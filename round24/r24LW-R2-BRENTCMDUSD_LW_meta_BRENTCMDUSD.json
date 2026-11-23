@@ -1,0 +1,82 @@
+{
+"symbol": "BRENTCMDUSD",
+"tfs": [
+"W1",
+"D2",
+"D1",
+"H12",
+"H8",
+"H4",
+"H2",
+"H1",
+"M30",
+"M15"
+],
+"units": 30,
+"done": 30,
+"skipped": [],
+"final": true,
+"seconds": 351,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.FAMOUS.TTM_SQUEEZE": {
+"tied": true,
+"params": [
+"k",
+"m",
+"L",
+"b",
+"q"
+]
+},
+"S.SES.NY_OPEN_REVERSAL": {
+"tied": true,
+"params": [
+"k",
+"s",
+"atr_n",
+"scale"
+]
+},
+"S.SES.SESSION_MOMENTUM": {
+"tied": true,
+"params": [
+"h",
+"s"
+]
+}
+},
+"unit_seconds": {
+"S.SES.NY_OPEN_REVERSAL|W1": 8.6,
+"S.SES.SESSION_MOMENTUM|W1": 9.1,
+"S.FAMOUS.TTM_SQUEEZE|W1": 10.1,
+"S.FAMOUS.TTM_SQUEEZE|D2": 12.7,
+"S.SES.NY_OPEN_REVERSAL|D2": 3.1,
+"S.SES.SESSION_MOMENTUM|D2": 2.7,
+"S.SES.NY_OPEN_REVERSAL|D1": 3.6,
+"S.SES.SESSION_MOMENTUM|D1": 3.1,
+"S.FAMOUS.TTM_SQUEEZE|D1": 7.3,
+"S.SES.NY_OPEN_REVERSAL|H12": 4.4,
+"S.SES.SESSION_MOMENTUM|H12": 3.8,
+"S.FAMOUS.TTM_SQUEEZE|H12": 11.7,
+"S.SES.NY_OPEN_REVERSAL|H8": 5.2,
+"S.SES.SESSION_MOMENTUM|H8": 4.4,
+"S.FAMOUS.TTM_SQUEEZE|H8": 15.8,
+"S.SES.NY_OPEN_REVERSAL|H4": 7.4,
+"S.SES.SESSION_MOMENTUM|H4": 6.4,
+"S.SES.NY_OPEN_REVERSAL|H2": 11.4,
+"S.SES.SESSION_MOMENTUM|H2": 11.2,
+"S.FAMOUS.TTM_SQUEEZE|H4": 28.9,
+"S.SES.NY_OPEN_REVERSAL|H1": 20.0,
+"S.SES.SESSION_MOMENTUM|H1": 20.5,
+"S.FAMOUS.TTM_SQUEEZE|H2": 50.2,
+"S.SES.NY_OPEN_REVERSAL|M30": 37.7,
+"S.SES.SESSION_MOMENTUM|M30": 34.8,
+"S.FAMOUS.TTM_SQUEEZE|H1": 93.8,
+"S.SES.NY_OPEN_REVERSAL|M15": 70.1,
+"S.SES.SESSION_MOMENTUM|M15": 55.9,
+"S.FAMOUS.TTM_SQUEEZE|M30": 157.2,
+"S.FAMOUS.TTM_SQUEEZE|M15": 224.3
+}
+}

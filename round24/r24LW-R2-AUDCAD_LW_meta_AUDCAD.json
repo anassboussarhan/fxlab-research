@@ -1,0 +1,82 @@
+{
+"symbol": "AUDCAD",
+"tfs": [
+"W1",
+"D2",
+"D1",
+"H12",
+"H8",
+"H4",
+"H2",
+"H1",
+"M30",
+"M15"
+],
+"units": 30,
+"done": 30,
+"skipped": [],
+"final": true,
+"seconds": 567,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.FAMOUS.TTM_SQUEEZE": {
+"tied": true,
+"params": [
+"k",
+"m",
+"L",
+"b",
+"q"
+]
+},
+"S.SES.NY_OPEN_REVERSAL": {
+"tied": true,
+"params": [
+"k",
+"s",
+"atr_n",
+"scale"
+]
+},
+"S.SES.SESSION_MOMENTUM": {
+"tied": true,
+"params": [
+"h",
+"s"
+]
+}
+},
+"unit_seconds": {
+"S.FAMOUS.TTM_SQUEEZE|W1": 12.9,
+"S.SES.NY_OPEN_REVERSAL|W1": 16.2,
+"S.SES.SESSION_MOMENTUM|W1": 17.1,
+"S.FAMOUS.TTM_SQUEEZE|D2": 16.6,
+"S.SES.NY_OPEN_REVERSAL|D2": 4.2,
+"S.SES.SESSION_MOMENTUM|D2": 3.9,
+"S.SES.NY_OPEN_REVERSAL|D1": 4.7,
+"S.SES.SESSION_MOMENTUM|D1": 4.2,
+"S.FAMOUS.TTM_SQUEEZE|D1": 10.5,
+"S.SES.NY_OPEN_REVERSAL|H12": 6.7,
+"S.SES.SESSION_MOMENTUM|H12": 5.5,
+"S.SES.NY_OPEN_REVERSAL|H8": 7.3,
+"S.SES.SESSION_MOMENTUM|H8": 6.4,
+"S.FAMOUS.TTM_SQUEEZE|H12": 18.1,
+"S.SES.NY_OPEN_REVERSAL|H4": 11.0,
+"S.SES.SESSION_MOMENTUM|H4": 9.7,
+"S.FAMOUS.TTM_SQUEEZE|H8": 24.2,
+"S.SES.NY_OPEN_REVERSAL|H2": 18.5,
+"S.SES.SESSION_MOMENTUM|H2": 18.7,
+"S.FAMOUS.TTM_SQUEEZE|H4": 42.1,
+"S.SES.NY_OPEN_REVERSAL|H1": 32.8,
+"S.SES.SESSION_MOMENTUM|H1": 33.9,
+"S.FAMOUS.TTM_SQUEEZE|H2": 79.4,
+"S.SES.NY_OPEN_REVERSAL|M30": 62.8,
+"S.SES.SESSION_MOMENTUM|M30": 60.7,
+"S.FAMOUS.TTM_SQUEEZE|H1": 146.8,
+"S.SES.NY_OPEN_REVERSAL|M15": 124.0,
+"S.SES.SESSION_MOMENTUM|M15": 110.5,
+"S.FAMOUS.TTM_SQUEEZE|M30": 256.1,
+"S.FAMOUS.TTM_SQUEEZE|M15": 374.2
+}
+}

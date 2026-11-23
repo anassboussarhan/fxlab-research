@@ -1,0 +1,74 @@
+{
+ "BTC:binance": {
+  "first": "2020-01-01",
+  "last": "2025-12-31",
+  "days": 2192,
+  "price_first": "2020-01-01",
+  "price_days": 2191
+ },
+ "BTC:deribit": {
+  "first": "2019-04-30",
+  "last": "2025-12-31",
+  "days": 2438,
+  "price_first": "2018-12-31",
+  "price_days": 2557
+ },
+ "BTC:kraken": {
+  "first": "2025-11-19",
+  "last": "2025-12-31",
+  "days": 43,
+  "price_first": "2022-03-23",
+  "price_days": 1380
+ },
+ "BTC:hyperliquid": {
+  "first": "2023-05-12",
+  "last": "2025-12-31",
+  "days": 965,
+  "price_first": "2023-01-01",
+  "price_days": 1096
+ },
+ "BTC:dydx": {
+  "first": "2023-10-26",
+  "last": "2025-12-31",
+  "days": 798,
+  "price_first": "2023-11-13",
+  "price_days": 779
+ },
+ "BTC:gate": "no development-period data",
+ "ETH:binance": {
+  "first": "2020-01-01",
+  "last": "2025-12-31",
+  "days": 2192,
+  "price_first": "2020-01-01",
+  "price_days": 2191
+ },
+ "ETH:deribit": {
+  "first": "2019-04-30",
+  "last": "2025-12-31",
+  "days": 2438,
+  "price_first": "2019-03-14",
+  "price_days": 2484
+ },
+ "ETH:kraken": {
+  "first": "2025-11-19",
+  "last": "2025-12-31",
+  "days": 43,
+  "price_first": "2022-03-23",
+  "price_days": 1380
+ },
+ "ETH:hyperliquid": {
+  "first": "2023-05-12",
+  "last": "2025-12-31",
+  "days": 965,
+  "price_first": "2023-01-01",
+  "price_days": 1096
+ },
+ "ETH:dydx": {
+  "first": "2023-10-26",
+  "last": "2025-12-31",
+  "days": 798,
+  "price_first": "2023-11-13",
+  "price_days": 779
+ },
+ "ETH:gate": "no development-period data"
+}

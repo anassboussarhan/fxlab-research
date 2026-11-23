@@ -1,0 +1,64 @@
+X10 instruments not used: ['USSC2000IDXUSD']
+R24_rows_*.csv files replaced by a later run: 2
+empty rows file (part not run): inp/45053878994/r24X-liq/R24_rows_R10.csv
+R24_series_*.parquet files replaced by a later run: 1
+streams with a Newey-West t: 44 of 96742
+{
+ "streams": 96742,
+ "real_streams_tested": 79814,
+ "own_rule": 905,
+ "bh": 340,
+ "counts": 276,
+ "first_bh_threshold_t": 4.707655102712988
+}
+  part  real_streams  real_own  real_own_share  real_max_t  placebo_streams  placebo_own  placebo_own_share  placebo_max_t  counts  void
+0   R1         77442       889        0.011480    7.379739             8089           24           0.002967       4.018314     275   992
+1  R11             4         0        0.000000    0.657610                4            0           0.000000       0.105888       0     0
+2   R2          2350        11        0.004681    2.408469                0            0                NaN            NaN       0     0
+3   R3             4         0        0.000000    0.545278                4            0           0.000000       1.182441       0     0
+4   R4             2         0        0.000000    0.901980                2            0           0.000000       1.523362       0     0
+5   R6             2         0        0.000000    1.042867                2            0           0.000000      -1.400524       0     0
+6   R7             4         4        1.000000    4.595080                4            4           1.000000       4.551671       1     0
+7   R8             4         1        0.250000    2.331213                4            0           0.000000       1.219604       0     0
+8   R9             2         0        0.000000    0.949202                2            0           0.000000       1.569783       0     0
+      part                       family  symbol                         unit selection   oos_first   p1_mean   p2_mean      p2_t  p2_hac_t    own    bh
+84713   R1         R1-S.BOOK.PNF_DOUBLE  USDTRY         S.BOOK.PNF_DOUBLE|D2    nested  2013-01-02  0.001032  0.014480  7.379739       NaN   True  True
+84833   R1         R1-S.SMC.FVG_RETRACE  USDTRY         S.SMC.FVG_RETRACE|D2    nested  2013-01-02  0.001726  0.020581  7.300327       NaN   True  True
+85167   R1        R1-S.DAILY.VOL_TARGET  USDTRY       S.DAILY.VOL_TARGET|H12    nested  2013-01-01  0.000605  0.006864  7.040862       NaN   True  True
+84997   R1       R1-S.MR.STOCH_REVERSAL  USDTRY       S.MR.STOCH_REVERSAL|D1    nested  2013-01-01  0.001166  0.010239  7.029372       NaN   True  True
+86069   R1      R1-S.BO.RANGE_EXPANSION  USDTRY      S.BO.RANGE_EXPANSION|H1    nested  2013-01-01  0.000320  0.008819  6.937882       NaN   True  True
+84731   R1           R1-S.DAILY.ABS_MOM  USDTRY           S.DAILY.ABS_MOM|D2    nested  2013-01-02  0.000743  0.013358  6.930979       NaN   True  True
+84996   R1       R1-S.MR.STOCH_REVERSAL  USDTRY       S.MR.STOCH_REVERSAL|D1   default  2010-01-01  0.000205  0.003454  6.928494       NaN   True  True
+84691   R1  R1-S.BOOK.DOUBLE_TOP_BOTTOM  USDTRY  S.BOOK.DOUBLE_TOP_BOTTOM|D2    nested  2013-01-02 -0.000591  0.008571  6.700746       NaN  False  True
+84697   R1     R1-S.BOOK.HEAD_SHOULDERS  USDTRY     S.BOOK.HEAD_SHOULDERS|D2    nested  2013-01-02  0.000276  0.005585  6.682410       NaN   True  True
+84717   R1       R1-S.BOOK.RASCHKE_ANTI  USDTRY       S.BOOK.RASCHKE_ANTI|D2    nested  2013-01-02  0.000775  0.012383  6.480982       NaN   True  True
+86079   R1         R1-S.BO.VOL_BREAKOUT  USDTRY         S.BO.VOL_BREAKOUT|H1    nested  2013-01-01  0.000361  0.009944  6.346163       NaN   True  True
+85115   R1       R1-S.BOOK.CONNORS_CRSI  USDTRY      S.BOOK.CONNORS_CRSI|H12    nested  2013-01-01  0.000926  0.007526  6.238314       NaN   True  True
+84763   R1    R1-S.FAMOUS.TD_SEQUENTIAL  USDTRY    S.FAMOUS.TD_SEQUENTIAL|D2    nested  2013-01-02  0.000277  0.005108  6.210723       NaN   True  True
+85091   R1      R1-S.BO.RANGE_EXPANSION  USDTRY     S.BO.RANGE_EXPANSION|H12    nested  2013-01-01  0.000397  0.002419  6.157188       NaN   True  True
+85325   R1     R1-S.BOOK.HEAD_SHOULDERS  USDTRY     S.BOOK.HEAD_SHOULDERS|H8    nested  2013-01-01  0.000145  0.001697  6.110934       NaN   True  True
+84869   R1         R1-S.VOL.COMPRESSION  USDTRY         S.VOL.COMPRESSION|D2    nested  2013-01-02 -0.000477  0.004295  6.106112       NaN  False  True
+86133   R1           R1-S.DAILY.CUM_RSI  USDTRY           S.DAILY.CUM_RSI|H1    nested  2013-01-01  0.001408  0.016856  6.063118       NaN   True  True
+85899   R1          R1-S.ST.SR_REVERSAL  USDTRY          S.ST.SR_REVERSAL|H2    nested  2013-01-01  0.000035  0.003669  6.045686       NaN   True  True
+84636   R1          R1-S.ST.SR_REVERSAL  USDTRY          S.ST.SR_REVERSAL|W1   default  2010-01-05  0.000718  0.036441  6.042482       NaN   True  True
+84871   R1           R1-S.VOL.EXPANSION  USDTRY           S.VOL.EXPANSION|D2    nested  2013-01-02  0.001019  0.006281  6.036077       NaN   True  True
+86142   R1        R1-S.DAILY.VOL_TARGET  USDTRY        S.DAILY.VOL_TARGET|H1   default  2010-01-01  0.000247  0.006064  5.996282       NaN   True  True
+85043   R1      R1-S.SMC.SWEEP_REVERSAL  USDTRY      S.SMC.SWEEP_REVERSAL|D1    nested  2013-01-01  0.000179  0.002278  5.949164       NaN   True  True
+85058   R1      R1-S.ST.SWING_STRUCTURE  USDTRY      S.ST.SWING_STRUCTURE|D1   default  2010-01-01  0.000069  0.004260  5.942002       NaN   True  True
+84637   R1          R1-S.ST.SR_REVERSAL  USDTRY          S.ST.SR_REVERSAL|W1    nested  2013-01-01  0.001704  0.032389  5.924595       NaN   True  True
+85264   R1          R1-S.ST.SR_REVERSAL  USDTRY         S.ST.SR_REVERSAL|H12   default  2010-01-01 -0.000019  0.001061  5.892258       NaN  False  True
+85895   R1      R1-S.ST.SWING_STRUCTURE  USDTRY      S.ST.SWING_STRUCTURE|H2    nested  2013-01-01  0.000236  0.004226  5.874637       NaN   True  True
+85733   R1       R1-S.BOOK.CONNORS_PCTB  USDTRY       S.BOOK.CONNORS_PCTB|H2    nested  2013-01-01  0.000836  0.011368  5.864209       NaN   True  True
+85057   R1          R1-S.ST.SR_REVERSAL  USDTRY          S.ST.SR_REVERSAL|D1    nested  2013-01-01  0.000169  0.002142  5.847085       NaN   True  True
+85353   R1      R1-S.BOOK.WILLIAMS_OOPS  USDTRY      S.BOOK.WILLIAMS_OOPS|H8    nested  2013-01-01  0.000586  0.001019  5.843190       NaN   True  True
+85107   R1         R1-S.BOOK.CONNORS_R3  USDTRY        S.BOOK.CONNORS_R3|H12    nested  2013-01-01  0.000218  0.005729  5.840621       NaN   True  True
+84906   R1     R1-S.BOOK.HEAD_SHOULDERS  USDTRY     S.BOOK.HEAD_SHOULDERS|D1   default  2010-01-01 -0.000005  0.001375  5.833757       NaN  False  True
+85133   R1         R1-S.BOOK.PNF_DOUBLE  USDTRY        S.BOOK.PNF_DOUBLE|H12    nested  2013-01-01  0.000158  0.002923  5.832517       NaN   True  True
+85685   R1      R1-S.ST.SWING_STRUCTURE  USDTRY      S.ST.SWING_STRUCTURE|H4    nested  2013-01-01  0.000088  0.002654  5.822577       NaN   True  True
+84881   R1      R1-S.BO.RANGE_EXPANSION  USDTRY      S.BO.RANGE_EXPANSION|D1    nested  2013-01-01  0.000095  0.001459  5.819735       NaN   True  True
+85207   R1       R1-S.MR.STOCH_REVERSAL  USDTRY      S.MR.STOCH_REVERSAL|H12    nested  2013-01-01  0.000130  0.002553  5.817297       NaN   True  True
+84680   R1         R1-S.BOOK.BW_FRACTAL  USDTRY         S.BOOK.BW_FRACTAL|D2   default  2010-01-04  0.000934  0.010685  5.810444       NaN   True  True
+86244   R1      R1-S.ST.SWING_STRUCTURE  USDTRY      S.ST.SWING_STRUCTURE|H1   default  2010-01-01  0.000181  0.003863  5.805047       NaN   True  True
+85725   R1         R1-S.BO.VOL_BREAKOUT  USDTRY         S.BO.VOL_BREAKOUT|H2    nested  2013-01-01  0.000535  0.002890  5.789981       NaN   True  True
+86093   R1     R1-S.BOOK.HEAD_SHOULDERS  USDTRY     S.BOOK.HEAD_SHOULDERS|H1    nested  2013-01-01  0.000072  0.002356  5.789339       NaN   True  True
+84499   R1       R1-S.BOOK.LIEN_INSIDE2  USDTRY       S.BOOK.LIEN_INSIDE2|W1    nested  2013-01-01  0.004031  0.011052  5.786287       NaN   True  True
