@@ -66,10 +66,10 @@ def panel_from_packs(inp, groups, members=None):
     for f, art in latest(inp, "P_pack_*.npz"):
         b = os.path.basename(f)[len("P_pack_"):-4]
         key, tf, sym = b.rsplit("_", 2)
-        packs.setdefault((key, tf), {})[sym] = f
+        prt = "P" if sym in groups["class"] else "ALT"
+        packs.setdefault((key, tf, prt), {})[sym] = f
     rows, notes = [], []
-    for (key, tf), byi in sorted(packs.items()):
-        part = "ALT" if all(s not in groups["class"] for s in byi) else "P"
+    for (key, tf, part), byi in sorted(packs.items()):
         if part == "ALT":
             klass_of = {s: "ALT" for s in byi}
             need = {"ALT": sorted((members or {}).keys())}
