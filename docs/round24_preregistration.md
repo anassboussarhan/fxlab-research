@@ -329,3 +329,15 @@ below changes them.
 3. **R7 (no change):** its random-entry placebos meet the own rule as often as the real streams (4 of 4 each). The
    basis trade earns the carry whatever the entry timing; θ adds nothing. This is reported as such, not as a
    new edge (round 22's cash-and-carry is the same carry).
+
+## Addendum 6 (2026-11-23, after the combine; written before the benchmark below was computed)
+
+The combine (r24z 45233635208) gives 276 counting streams. 271 are R1 units on USD/TRY (every timeframe H1-W1), 4 are
+R1 pooled streams, and 1 is R7 BTC basis (whose placebos pass as often as its real streams). 28% of USD/TRY's real R1
+streams meet the own rule, against 7% of its placebos. That pattern is a long-USD/TRY exposure (the lira's fall
+2019-2025 outran the rate differential), not timing. Before the results are written, two checks:
+1. **Benchmark:** buy-and-hold long USD/TRY with R1's carry (BIS differential) and with that differential x1.5 and x2
+   (offshore TRY funding ran above the policy rate). If buy-and-hold meets the own rule, the USD/TRY streams are
+   reported as that exposure, not as rule edges.
+2. **HAC:** LW units keep no series, so the counting USD/TRY units get their Newey-West t from a deterministic rerun
+   with `--save-series`, as round 25 part HAC.
