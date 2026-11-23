@@ -1,0 +1,66 @@
+name: r24trs
+# Round 24 addendum 7: USD/TRY R1 units rerun (same seeds) with carry x1, x1.5, x2, keeping series; then the stress and
+# Newey-West summary (ci/r24_trys.py). Trigger: ci/R24TRS.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R24TRS"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  lw:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        scale: ["1.0", "1.5", "2.0"]
+        tfs: ["W1,D2,D1,H12,H8,H4,H2", "H1"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $(cat ci/r23_w2_run.txt) "^r23h-USDTRY$" dl || exit 1
+          mkdir -p data/m1/USDTRY; find dl -name "*.parquet" -exec mv {} data/m1/USDTRY/ \;
+          python ci/r23_rescale.py USDTRY
+          bash ci/dl_each.sh 45035758022 "^r24-rates$" rr || exit 1
+          cp rr/r24-rates/oecd_ir3m.csv data/rates/
+      - shell: bash
+        run: |
+          python -W ignore scripts/r23_LW.py --symbol USDTRY --tfs ${{ matrix.tfs }} --budget 19500 --financing rates_oecd \
+            --carry-scale ${{ matrix.scale }} --placebos 10 --save-series --out out 2>&1 | grep --line-buffered -v Warning | tail -40
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r24TRS-x${{ matrix.scale }}-${{ strategy.job-index }}
+          path: out
+          retention-days: 60
+  summary:
+    needs: lw
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          mkdir -p inp res
+          bash ci/dl_each.sh ${{ github.run_id }} '^r24TRS-' inp || true
+          git fetch -q origin round24 && git show origin/round24:round24/r24_streams.csv.gz > res/r24_streams.csv.gz
+          python -W ignore ci/r24_trys.py

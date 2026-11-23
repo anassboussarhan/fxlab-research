@@ -341,3 +341,20 @@ streams meet the own rule, against 7% of its placebos. That pattern is a long-US
    reported as that exposure, not as rule edges.
 2. **HAC:** LW units keep no series, so the counting USD/TRY units get their Newey-West t from a deterministic rerun
    with `--save-series`, as round 25 part HAC.
+
+## Addendum 7 (2026-11-23, after the benchmark of addendum 6; no rule stream had been rerun)
+
+**Benchmark result** (r24try 45247565331): buy-and-hold long USD/TRY with R1's carry gives a 2019-2025 t of 1.30
+(HAC 1.25), and does not meet the own rule. Without carry the t is 4.71. With the differential x1.5 it is -0.39,
+and x2 gives -2.06. So the counting USD/TRY rules beat holding the pair: they are long in the lira's crashes
+(2021, 2023) and out of 2024-2025, when the lira held with 45-50% rates.
+
+**Stress test, before anything is reported as a candidate:** every USD/TRY R1 unit is rerun with the same seeds and
+the rate differential x1, x1.5 and x2, keeping series (workflow r24trs). Reported for the 271 counting unit streams
+at each scale:
+- the own rule with and without the Newey-West condition;
+- the median t;
+- the equal-weight portfolio of the streams.
+
+A USD/TRY candidate goes forward only if, at x1.5, its portfolio still meets the own rule with the Newey-West
+condition. Its 2026 check is pre-registered separately, after this test and before 2026 data is read.

@@ -274,6 +274,7 @@ def main():
     ap.add_argument("--tied", action="store_true", help="round 24: use scripts/r24_tied.py for the rules it lists")
     ap.add_argument("--placebos", type=int, default=None, help="number of placebo units (default N_PLACEBO)")
     ap.add_argument("--financing", default=None, help="rates_oecd: rate-differential financing in every engine (round 24)")
+    ap.add_argument("--carry-scale", type=float, default=1.0, help="round 24 addendum 7: rate differential x this")
     ap.add_argument("--tfs", default=",".join(TFS))
     ap.add_argument("--only", default="", help="test runs: comma-separated strategy ids")
     ap.add_argument("--save-bars", default="", help="round 25: write the H1-W1 bars used here to this directory")
@@ -295,6 +296,10 @@ def main():
         INSTRUMENTS[sym] = Instrument(sym, sym[:-3], sym[-3:], pip, 1.0, "index")
     G["sym"] = sym
     G["financing"] = a.financing
+    if a.carry_scale != 1.0:                                               # stress: TRY funding above the policy rate
+        import fxlab.data.rates_oecd as _RO
+        _rd = _RO.rate_diff
+        _RO.rate_diff = lambda s_, i_, _k=a.carry_scale: _rd(s_, i_) * _k
     if a.financing == "rates_oecd":
         from fxlab.data import rates_oecd
         print("carry", sym, "has rates", rates_oecd.has_rates(sym), flush=True)
