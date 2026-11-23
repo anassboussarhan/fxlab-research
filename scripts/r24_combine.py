@@ -75,6 +75,9 @@ def main():
         parts.append(x)
     for pat in ("IC_rows_*.csv", "R24_rows_*.csv"):
         for f, art in g(pat):
+            if os.path.getsize(f) < 5:                                     # a part that did not run (R10)
+                print("empty rows file (part not run):", f)
+                continue
             x = pd.read_csv(f)
             if pat.startswith("IC_"):
                 x["part"] = "R3"
