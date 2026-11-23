@@ -29,7 +29,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p inp res
-          for R in $(grep -E '^[0-9]+' ci/R25Z | cut -d' ' -f1); do
+          for R in $(grep -E '^[0-9]{8,} ' ci/R25Z | cut -d' ' -f1); do
             bash ci/dl_each.sh $R '^r25(P|AD|ALT|HAC)-' inp/$R || { echo "artifact download incomplete for run $R"; exit 1; }
           done
           bash ci/dl_each.sh $(cat ci/r25_data_run.txt) '^r25alt-universe$' uni || echo "no altcoin universe"

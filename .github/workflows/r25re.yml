@@ -32,7 +32,7 @@ jobs:
         shell: bash
         run: |
           mkdir -p inp
-          for R in $(grep -E '^[0-9]+' ci/R25RE | cut -d' ' -f1); do
+          for R in $(grep -E '^[0-9]{8,} ' ci/R25RE | cut -d' ' -f1); do
             names=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$R/artifacts?per_page=100" --paginate -q '.artifacts[].name' | grep -E '^r25(P|ALT|AD)-')
             for n in $names; do
               for k in 1 2 3 4 5; do gh run download $R -n $n -D inp/$R/$n 2>/dev/null && break; sleep $((20*k)); done
