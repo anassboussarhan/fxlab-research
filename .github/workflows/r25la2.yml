@@ -1,0 +1,29 @@
+name: r25la2
+# Round 25 addendum 4: truncation test of S.SEAS.FIX_REVERSAL with all 128 part-P configurations at H1 (and the
+# tied session rules for comparison). Trigger: ci/R25LA2.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R25LA2"]
+permissions:
+  contents: read
+jobs:
+  la:
+    runs-on: ubuntu-latest
+    timeout-minutes: 200
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - shell: bash
+        run: |
+          python -W ignore scripts/r25_lookahead.py --tf H1 --rules S.SEAS.FIX_REVERSAL --per-rule 128 --cuts 16 --out la --procs 4 2>&1 \
+            | grep --line-buffered -E 'SUMMARY|"error"' | tail -20
+          python - <<'PY'
+          import pandas as pd
+          d = pd.read_csv("la/r25_lookahead_H1.csv")
+          print("configs", len(d), "with look-ahead", int((d.lookahead_cuts > 0).sum()))
+          PY
