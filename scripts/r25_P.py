@@ -175,6 +175,7 @@ def main():
     ap.add_argument("--financing", default="rates_oecd")
     ap.add_argument("--groups", default="ci/r25_groups.json")
     ap.add_argument("--universe", default="", help="part ALT: universe file (members by year, funding dir)")
+    ap.add_argument("--only-keys", default="", help="reruns: keep only these keys (placebo / CF keys)")
     a = ap.parse_args()
     os.makedirs(a.out, exist_ok=True)
     warnings.filterwarnings("ignore")
@@ -237,6 +238,8 @@ def main():
     keys += [f"PLACEBO_{i:02d}" for i in range(a.placebos)]
     if a.cf:
         keys += ["CF", "CF_PLACEBO"]
+    if a.only_keys:
+        keys = [k for k in keys if k in set(a.only_keys.split(","))]
     units = [(k, s) for k in keys for s in syms]
     print("job", tag, "units", len(units), "keys", len(keys), "instruments", len(syms), "full group", full, flush=True)
     rows, series, done, meta_u = [], {}, set(), {}

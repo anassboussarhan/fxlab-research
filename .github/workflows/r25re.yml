@@ -1,0 +1,131 @@
+name: r25re
+# Round 25 reruns (addendum 3): rules left unfinished by jobs that reached their time budget, re-planned from the
+# observed seconds per unit (ci/r25_replan.py) over the runs listed in ci/R25RE. Trigger: ci/R25RE.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R25RE"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  RATES_RUN: "45035758022"
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    outputs:
+      p: ${{ steps.m.outputs.p }}
+      ad: ${{ steps.m.outputs.ad }}
+      np: ${{ steps.m.outputs.np }}
+      nad: ${{ steps.m.outputs.nad }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        id: m
+        shell: bash
+        run: |
+          mkdir -p inp
+          for R in $(grep -E '^[0-9]+' ci/R25RE | cut -d' ' -f1); do
+            names=$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$R/artifacts?per_page=100" --paginate -q '.artifacts[].name' | grep -E '^r25(P|ALT|AD)-')
+            for n in $names; do
+              for k in 1 2 3 4 5; do gh run download $R -n $n -D inp/$R/$n 2>/dev/null && break; sleep $((20*k)); done
+              find inp/$R/$n -type f ! -name '*_meta_*.json' -delete 2>/dev/null || true
+            done
+          done
+          bash ci/dl_each.sh $(cat ci/r25_data_run.txt) '^r25alt-universe$' uni || true
+          python ci/r25_replan.py --inp inp --universe uni/r25alt-universe/universe.json --out plan | head -2 1>&2
+          echo "p=$(python -c 'import json; print(json.dumps(json.load(open("plan/r25_P2.json")), separators=(",", ":")))')" >> "$GITHUB_OUTPUT"
+          echo "ad=$(python -c 'import json; print(json.dumps(json.load(open("plan/r25_AD2.json")), separators=(",", ":")))')" >> "$GITHUB_OUTPUT"
+          echo "np=$(python -c 'import json; print(len(json.load(open("plan/r25_P2.json"))["include"]))')" >> "$GITHUB_OUTPUT"
+          echo "nad=$(python -c 'import json; print(len(json.load(open("plan/r25_AD2.json"))["include"]))')" >> "$GITHUB_OUTPUT"
+          cat plan/replan_report.json | head -c 6000 1>&2
+  p:
+    needs: plan
+    if: needs.plan.outputs.np != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.p) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          R=$(cat ci/r25_data_run.txt)
+          if [ "${{ matrix.group }}" = "ALT" ]; then
+            bash ci/dl_each.sh $R "^r25alt-universe$" uni || exit 1
+            bash ci/dl_each.sh $R "^r25alt-bars-[0-9]+$" altin || exit 1
+            mkdir -p bars alt/fund
+            find altin -path "*/bars/*_${{ matrix.tf }}.parquet" -exec cp {} bars/ \;
+            find altin -name "funding_*.csv" -exec cp {} alt/fund/ \;
+            python -c "import json; U=json.load(open('uni/r25alt-universe/universe.json')); U['funding_dir']='alt/fund'; json.dump(U, open('alt/universe.json','w'))"
+          else
+            bash ci/dl_each.sh $R "^r25g-${{ matrix.group }}-${{ matrix.tf }}$" inb || exit 1
+            mkdir -p bars && cp inb/*/*.parquet bars/
+            bash ci/dl_each.sh $RATES_RUN "^r24-rates$" rr || exit 1
+            cp rr/r24-rates/oecd_ir3m.csv data/rates/
+          fi
+      - shell: bash
+        run: |
+          X=""
+          [ -n "${{ matrix.insts }}" ] && X="--insts ${{ matrix.insts }}"
+          [ "${{ matrix.cf }}" = "1" ] && X="$X --cf"
+          [ -n "${{ matrix.only_keys }}" ] && X="$X --only-keys ${{ matrix.only_keys }}"
+          [ "${{ matrix.group }}" = "ALT" ] && X="$X --universe alt/universe.json"
+          python -W ignore scripts/r25_P.py --group ${{ matrix.group }} --tf ${{ matrix.tf }} --rules "${{ matrix.rules }}" $X \
+            --placebos ${{ matrix.placebos }} --bars bars --out out --tag ${{ matrix.tag }} --procs 4 --budget 19500 \
+            --financing rates_oecd 2>&1 | grep --line-buffered -v -i -E "warning|converg|fmin_slsqp|res = am" | tail -200
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: ${{ matrix.group == 'ALT' && 'r25ALT' || 'r25P' }}-${{ matrix.tag }}
+          path: out
+          retention-days: 60
+  ad:
+    needs: plan
+    if: needs.plan.outputs.nad != '0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      max-parallel: 20
+      matrix: ${{ fromJSON(needs.plan.outputs.ad) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays optuna
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $(cat ci/r25_data_run.txt) "^r25g-(FX|OTHER)-${{ matrix.tf }}$" inb || exit 1
+          bash ci/dl_each.sh $RATES_RUN "^r24-rates$" rr || exit 1
+          cp rr/r24-rates/oecd_ir3m.csv data/rates/
+          mkdir -p bars && cp inb/*/*.parquet bars/
+      - shell: bash
+        run: |
+          python -W ignore scripts/r25_ad.py --tf ${{ matrix.tf }} --rules "${{ matrix.rules }}" --placebo ${{ matrix.placebo }} \
+            --insts ${{ matrix.insts }} --bars bars --out out --tag ${{ matrix.tag }} --procs 4 --budget 19500 \
+            --financing rates_oecd 2>&1 | grep --line-buffered -v -i -E "warning|converg|fmin_slsqp|res = am" | tail -100
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r25AD-${{ matrix.tag }}
+          path: out
+          retention-days: 60

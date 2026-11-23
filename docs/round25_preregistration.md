@@ -307,3 +307,15 @@ Changes found while building and testing the code on synthetic data:
 - **Altcoin universe:** 919 USDT perpetuals in the archive after the exclusions. 2020 has no member: no altcoin had
   90 days of 2019 data in the archive's files, so ALT starts in 2021. 2021-2025 have 30 members each (60-326
   eligible), 76 coins in all.
+
+## Addendum 3 (2026-11-23, after the first jobs finished; no round-25 statistic had been read)
+
+Some jobs reached their 5.4-hour budget with rules unfinished. Among them were FX-H4-00 (128 of 336 units),
+FX-H2-01 (706 of 1,428), ALT-H2-01 (129 of 1,368) and AD-H1-00 (34 of 120). The cost model (1.6 x the round-23
+unit times) was too low for the heavier rules, where neighbourhood sizing multiplies the rule evaluations.
+
+Nothing about the tests changes; finished units stand. Once the first pass is over, every unfinished rule x group x
+timeframe (and every lost AD unit) is rerun with the same seeds (workflow r25re, `ci/r25_replan.py`). The reruns are
+sized from the seconds per unit observed in its job and split by instruments where needed; split parts save
+aggregates and the combine makes the panels. A rule whose panel is still incomplete after the rerun is reported and
+its panel streams are not counted, as written.
