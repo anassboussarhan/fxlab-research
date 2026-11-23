@@ -1,0 +1,127 @@
+{
+"group": "ALT",
+"tf": "H2",
+"tag": "ALT-H2-01-r-INTRADAY-0",
+"units": 16,
+"done": 16,
+"final": true,
+"full_group": false,
+"missing_bars": [],
+"seconds": 252,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.SEAS.INTRADAY|1000BONKUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 40.6,
+"select_seconds": 0.5
+},
+"S.SEAS.INTRADAY|ARBUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 46.9,
+"select_seconds": 0.6
+},
+"S.SEAS.INTRADAY|ADAUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 76.8,
+"select_seconds": 1.5
+},
+"S.SEAS.INTRADAY|BCHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 77.2,
+"select_seconds": 1.6
+},
+"S.SEAS.INTRADAY|COMPUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 61.3,
+"select_seconds": 1.4
+},
+"S.SEAS.INTRADAY|DOTUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 58.8,
+"select_seconds": 2.0
+},
+"S.SEAS.INTRADAY|INJUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 39.5,
+"select_seconds": 0.8
+},
+"S.SEAS.INTRADAY|FILUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 56.5,
+"select_seconds": 1.6
+},
+"S.SEAS.INTRADAY|OPUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 40.5,
+"select_seconds": 0.9
+},
+"S.SEAS.INTRADAY|NEARUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 56.5,
+"select_seconds": 1.6
+},
+"S.SEAS.INTRADAY|LTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 65.4,
+"select_seconds": 1.7
+},
+"S.SEAS.INTRADAY|UXLINKUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 19.8,
+"select_seconds": 0.5
+},
+"S.SEAS.INTRADAY|TIAUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 28.8,
+"select_seconds": 0.5
+},
+"S.SEAS.INTRADAY|SOLUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 57.0,
+"select_seconds": 0.9
+},
+"S.SEAS.INTRADAY|XLMUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 46.4,
+"select_seconds": 0.9
+},
+"S.SEAS.INTRADAY|ZILUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 37.6,
+"select_seconds": 0.9
+}
+}
+}

@@ -1,0 +1,30 @@
+{
+"symbol": "FRAIDXEUR",
+"tfs": [
+"W1",
+"H4"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 12,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.DAILY.OPEX": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.OPEX|W1": 7.5,
+"S.DAILY.OPEX|H4": 8.1
+}
+}

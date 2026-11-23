@@ -1,0 +1,43 @@
+{
+"symbol": "ESPIDXEUR",
+"tfs": [
+"W1",
+"D2"
+],
+"units": 4,
+"done": 4,
+"skipped": [],
+"final": true,
+"seconds": 19,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.LIEN_PERFECT_ORDER": {
+"constants_exposed": 6,
+"verified": true,
+"params": [
+"thr",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5"
+]
+},
+"S.TREND.KALMAN": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"thr",
+"q_slope"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.LIEN_PERFECT_ORDER|W1": 14.3,
+"S.TREND.KALMAN|W1": 14.1,
+"S.BOOK.LIEN_PERFECT_ORDER|D2": 14.3,
+"S.TREND.KALMAN|D2": 15.8
+}
+}

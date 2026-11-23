@@ -1,0 +1,309 @@
+{
+"group": "FX",
+"tf": "H1",
+"tag": "FX-H1-01-r-WEEKDAY-0",
+"units": 42,
+"done": 42,
+"final": true,
+"full_group": true,
+"missing_bars": [],
+"seconds": 1560,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.SEAS.WEEKDAY|AUDCAD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 165.6,
+"select_seconds": 3.6
+},
+"S.SEAS.WEEKDAY|AUDCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 169.0,
+"select_seconds": 3.8
+},
+"S.SEAS.WEEKDAY|AUDNZD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 181.0,
+"select_seconds": 4.3
+},
+"S.SEAS.WEEKDAY|AUDJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 192.4,
+"select_seconds": 4.7
+},
+"S.SEAS.WEEKDAY|CADCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 162.1,
+"select_seconds": 3.8
+},
+"S.SEAS.WEEKDAY|AUDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 179.4,
+"select_seconds": 4.6
+},
+"S.SEAS.WEEKDAY|CADJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 185.0,
+"select_seconds": 4.6
+},
+"S.SEAS.WEEKDAY|CHFJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 180.3,
+"select_seconds": 4.5
+},
+"S.SEAS.WEEKDAY|EURAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 182.6,
+"select_seconds": 4.6
+},
+"S.SEAS.WEEKDAY|EURCAD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 178.0,
+"select_seconds": 4.3
+},
+"S.SEAS.WEEKDAY|EURCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 183.8,
+"select_seconds": 4.7
+},
+"S.SEAS.WEEKDAY|EURGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 184.1,
+"select_seconds": 4.8
+},
+"S.SEAS.WEEKDAY|EURNZD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 161.4,
+"select_seconds": 3.8
+},
+"S.SEAS.WEEKDAY|EURJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 185.7,
+"select_seconds": 4.8
+},
+"S.SEAS.WEEKDAY|GBPAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 157.3,
+"select_seconds": 3.8
+},
+"S.SEAS.WEEKDAY|EURUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 199.9,
+"select_seconds": 5.1
+},
+"S.SEAS.WEEKDAY|GBPCAD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 161.8,
+"select_seconds": 3.8
+},
+"S.SEAS.WEEKDAY|GBPCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 184.6,
+"select_seconds": 4.7
+},
+"S.SEAS.WEEKDAY|GBPJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 186.1,
+"select_seconds": 4.6
+},
+"S.SEAS.WEEKDAY|GBPNZD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 162.5,
+"select_seconds": 3.7
+},
+"S.SEAS.WEEKDAY|GBPUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 184.5,
+"select_seconds": 4.7
+},
+"S.SEAS.WEEKDAY|NZDCAD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 164.2,
+"select_seconds": 4.0
+},
+"S.SEAS.WEEKDAY|NZDCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 161.1,
+"select_seconds": 3.8
+},
+"S.SEAS.WEEKDAY|NZDJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 158.7,
+"select_seconds": 3.7
+},
+"S.SEAS.WEEKDAY|NZDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 185.2,
+"select_seconds": 4.5
+},
+"S.SEAS.WEEKDAY|USDCAD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 186.3,
+"select_seconds": 5.0
+},
+"S.SEAS.WEEKDAY|USDCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 185.8,
+"select_seconds": 4.6
+},
+"S.SEAS.WEEKDAY|USDJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 190.9,
+"select_seconds": 4.8
+},
+"S.SEAS.WEEKDAY|USDSEK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 66.8,
+"select_seconds": 5.1
+},
+"S.SEAS.WEEKDAY|USDNOK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 67.9,
+"select_seconds": 4.9
+},
+"S.SEAS.WEEKDAY|EURSEK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 67.0,
+"select_seconds": 5.1
+},
+"S.SEAS.WEEKDAY|EURNOK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 67.2,
+"select_seconds": 4.8
+},
+"S.SEAS.WEEKDAY|USDMXN": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 67.1,
+"select_seconds": 4.9
+},
+"S.SEAS.WEEKDAY|USDZAR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 69.4,
+"select_seconds": 5.1
+},
+"S.SEAS.WEEKDAY|USDTRY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 65.0,
+"select_seconds": 5.0
+},
+"S.SEAS.WEEKDAY|USDPLN": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 66.0,
+"select_seconds": 5.0
+},
+"S.SEAS.WEEKDAY|EURPLN": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 67.0,
+"select_seconds": 4.9
+},
+"S.SEAS.WEEKDAY|USDHUF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 61.4,
+"select_seconds": 5.0
+},
+"S.SEAS.WEEKDAY|EURHUF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 56.6,
+"select_seconds": 5.1
+},
+"S.SEAS.WEEKDAY|USDCZK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 44.2,
+"select_seconds": 2.2
+},
+"S.SEAS.WEEKDAY|USDCNH": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 36.1,
+"select_seconds": 1.9
+},
+"S.SEAS.WEEKDAY|USDSGD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 55.2,
+"select_seconds": 2.8
+}
+}
+}

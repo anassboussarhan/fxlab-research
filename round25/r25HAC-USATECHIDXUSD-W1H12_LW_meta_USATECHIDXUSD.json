@@ -1,0 +1,41 @@
+{
+"symbol": "USATECHIDXUSD",
+"tfs": [
+"W1",
+"H12"
+],
+"units": 4,
+"done": 4,
+"skipped": [],
+"final": true,
+"seconds": 14,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.DAILY.DOUBLE_SEVEN": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"n",
+"short",
+"__c0"
+]
+},
+"S.VOL.EXPANSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"s",
+"__c0",
+"__c1"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.DOUBLE_SEVEN|W1": 7.4,
+"S.VOL.EXPANSION|W1": 6.9,
+"S.DAILY.DOUBLE_SEVEN|H12": 8.3,
+"S.VOL.EXPANSION|H12": 8.3
+}
+}

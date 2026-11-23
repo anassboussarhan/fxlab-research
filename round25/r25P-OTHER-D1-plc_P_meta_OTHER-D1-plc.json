@@ -1,0 +1,1993 @@
+{
+"group": "OTHER",
+"tf": "D1",
+"tag": "OTHER-D1-plc",
+"units": 276,
+"done": 276,
+"final": true,
+"full_group": true,
+"missing_bars": [],
+"seconds": 794,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"PLACEBO_00|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 16.5,
+"select_seconds": 5.3
+},
+"PLACEBO_00|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 17.6,
+"select_seconds": 6.0
+},
+"PLACEBO_00|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 17.1,
+"select_seconds": 6.6
+},
+"PLACEBO_00|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 17.3,
+"select_seconds": 5.6
+},
+"PLACEBO_00|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 4.2
+},
+"PLACEBO_00|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.3
+},
+"PLACEBO_00|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.0
+},
+"PLACEBO_00|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.2
+},
+"PLACEBO_00|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.2
+},
+"PLACEBO_00|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.1
+},
+"PLACEBO_00|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.2
+},
+"PLACEBO_00|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.9,
+"select_seconds": 5.2
+},
+"PLACEBO_00|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.4
+},
+"PLACEBO_00|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.7
+},
+"PLACEBO_00|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.1
+},
+"PLACEBO_00|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.3
+},
+"PLACEBO_00|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.3
+},
+"PLACEBO_00|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 2.6
+},
+"PLACEBO_00|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 2.7
+},
+"PLACEBO_00|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.3
+},
+"PLACEBO_00|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.7,
+"select_seconds": 2.2
+},
+"PLACEBO_00|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.1,
+"select_seconds": 2.2
+},
+"PLACEBO_00|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 2.0
+},
+"PLACEBO_01|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 7.0
+},
+"PLACEBO_01|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.1,
+"select_seconds": 9.0
+},
+"PLACEBO_01|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 7.6
+},
+"PLACEBO_01|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.5,
+"select_seconds": 6.1
+},
+"PLACEBO_01|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 4.9
+},
+"PLACEBO_01|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.2,
+"select_seconds": 6.5
+},
+"PLACEBO_01|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.6,
+"select_seconds": 6.3
+},
+"PLACEBO_01|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.8,
+"select_seconds": 6.5
+},
+"PLACEBO_01|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.7,
+"select_seconds": 5.0
+},
+"PLACEBO_01|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.8
+},
+"PLACEBO_01|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.4
+},
+"PLACEBO_01|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.4
+},
+"PLACEBO_01|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.8,
+"select_seconds": 5.4
+},
+"PLACEBO_01|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.7
+},
+"PLACEBO_01|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.2
+},
+"PLACEBO_01|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.2
+},
+"PLACEBO_01|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.4
+},
+"PLACEBO_01|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 2.2
+},
+"PLACEBO_01|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 2.4
+},
+"PLACEBO_01|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.4
+},
+"PLACEBO_01|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.1,
+"select_seconds": 2.4
+},
+"PLACEBO_01|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.1,
+"select_seconds": 2.0
+},
+"PLACEBO_01|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 1.9
+},
+"PLACEBO_02|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.7,
+"select_seconds": 8.0
+},
+"PLACEBO_02|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.0,
+"select_seconds": 8.3
+},
+"PLACEBO_02|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.9,
+"select_seconds": 7.8
+},
+"PLACEBO_02|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.8,
+"select_seconds": 6.5
+},
+"PLACEBO_02|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 5.5
+},
+"PLACEBO_02|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.1,
+"select_seconds": 5.7
+},
+"PLACEBO_02|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.8,
+"select_seconds": 6.7
+},
+"PLACEBO_02|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 6.5
+},
+"PLACEBO_02|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 4.9
+},
+"PLACEBO_02|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.3
+},
+"PLACEBO_02|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.7
+},
+"PLACEBO_02|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.9
+},
+"PLACEBO_02|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.0
+},
+"PLACEBO_02|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.6
+},
+"PLACEBO_02|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.1
+},
+"PLACEBO_02|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.2
+},
+"PLACEBO_02|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.3
+},
+"PLACEBO_02|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.4
+},
+"PLACEBO_02|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.4
+},
+"PLACEBO_02|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.3
+},
+"PLACEBO_02|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.4
+},
+"PLACEBO_02|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 1.8
+},
+"PLACEBO_02|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 1.8
+},
+"PLACEBO_03|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.9,
+"select_seconds": 6.3
+},
+"PLACEBO_03|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.0,
+"select_seconds": 8.9
+},
+"PLACEBO_03|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.7,
+"select_seconds": 7.3
+},
+"PLACEBO_03|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.8,
+"select_seconds": 6.1
+},
+"PLACEBO_03|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.5,
+"select_seconds": 6.3
+},
+"PLACEBO_03|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 7.1
+},
+"PLACEBO_03|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 7.2
+},
+"PLACEBO_03|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.3,
+"select_seconds": 6.1
+},
+"PLACEBO_03|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.0,
+"select_seconds": 4.9
+},
+"PLACEBO_03|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.3
+},
+"PLACEBO_03|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.3
+},
+"PLACEBO_03|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.8
+},
+"PLACEBO_03|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 6.2
+},
+"PLACEBO_03|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.8,
+"select_seconds": 5.5
+},
+"PLACEBO_03|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.0
+},
+"PLACEBO_03|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.8,
+"select_seconds": 5.5
+},
+"PLACEBO_03|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.0,
+"select_seconds": 5.6
+},
+"PLACEBO_03|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.3
+},
+"PLACEBO_03|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 2.4
+},
+"PLACEBO_03|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.5
+},
+"PLACEBO_03|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.4
+},
+"PLACEBO_03|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.1,
+"select_seconds": 1.9
+},
+"PLACEBO_03|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 1.9
+},
+"PLACEBO_04|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.8,
+"select_seconds": 8.5
+},
+"PLACEBO_04|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.3,
+"select_seconds": 8.2
+},
+"PLACEBO_04|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.4,
+"select_seconds": 7.4
+},
+"PLACEBO_04|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.5,
+"select_seconds": 6.8
+},
+"PLACEBO_04|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.8,
+"select_seconds": 5.4
+},
+"PLACEBO_04|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.0,
+"select_seconds": 6.6
+},
+"PLACEBO_04|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.7,
+"select_seconds": 5.8
+},
+"PLACEBO_04|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.5,
+"select_seconds": 6.5
+},
+"PLACEBO_04|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 4.7
+},
+"PLACEBO_04|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.2
+},
+"PLACEBO_04|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.1
+},
+"PLACEBO_04|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.5
+},
+"PLACEBO_04|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.8
+},
+"PLACEBO_04|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.1
+},
+"PLACEBO_04|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.1,
+"select_seconds": 6.1
+},
+"PLACEBO_04|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.2
+},
+"PLACEBO_04|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.5
+},
+"PLACEBO_04|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.2
+},
+"PLACEBO_04|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 2.5
+},
+"PLACEBO_04|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.5
+},
+"PLACEBO_04|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.5
+},
+"PLACEBO_04|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 1.9
+},
+"PLACEBO_04|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 1.9
+},
+"PLACEBO_05|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 7.8
+},
+"PLACEBO_05|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.6,
+"select_seconds": 7.3
+},
+"PLACEBO_05|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 7.2
+},
+"PLACEBO_05|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.4,
+"select_seconds": 7.4
+},
+"PLACEBO_05|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 4.7
+},
+"PLACEBO_05|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.7,
+"select_seconds": 6.3
+},
+"PLACEBO_05|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.1,
+"select_seconds": 6.4
+},
+"PLACEBO_05|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.7,
+"select_seconds": 6.9
+},
+"PLACEBO_05|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 5.3
+},
+"PLACEBO_05|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 5.3
+},
+"PLACEBO_05|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.2
+},
+"PLACEBO_05|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.2
+},
+"PLACEBO_05|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.3
+},
+"PLACEBO_05|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 6.1
+},
+"PLACEBO_05|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.5
+},
+"PLACEBO_05|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.9,
+"select_seconds": 5.1
+},
+"PLACEBO_05|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.9,
+"select_seconds": 5.2
+},
+"PLACEBO_05|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.5
+},
+"PLACEBO_05|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 2.2
+},
+"PLACEBO_05|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.5
+},
+"PLACEBO_05|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.3
+},
+"PLACEBO_05|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 2.0
+},
+"PLACEBO_05|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 1.8
+},
+"PLACEBO_06|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.8,
+"select_seconds": 8.5
+},
+"PLACEBO_06|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.4,
+"select_seconds": 9.1
+},
+"PLACEBO_06|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.6,
+"select_seconds": 5.6
+},
+"PLACEBO_06|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 6.2
+},
+"PLACEBO_06|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.9,
+"select_seconds": 4.7
+},
+"PLACEBO_06|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 6.0
+},
+"PLACEBO_06|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.8,
+"select_seconds": 7.0
+},
+"PLACEBO_06|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.1,
+"select_seconds": 6.3
+},
+"PLACEBO_06|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.5,
+"select_seconds": 4.6
+},
+"PLACEBO_06|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.0
+},
+"PLACEBO_06|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.1
+},
+"PLACEBO_06|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.6,
+"select_seconds": 5.3
+},
+"PLACEBO_06|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.6,
+"select_seconds": 5.5
+},
+"PLACEBO_06|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.9
+},
+"PLACEBO_06|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.5
+},
+"PLACEBO_06|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.4
+},
+"PLACEBO_06|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.1,
+"select_seconds": 5.4
+},
+"PLACEBO_06|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 2.2
+},
+"PLACEBO_06|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.2
+},
+"PLACEBO_06|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.6,
+"select_seconds": 5.3
+},
+"PLACEBO_06|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 2.3
+},
+"PLACEBO_06|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 1.8
+},
+"PLACEBO_06|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 2.0
+},
+"PLACEBO_07|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 6.8
+},
+"PLACEBO_07|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 7.0,
+"select_seconds": 8.2
+},
+"PLACEBO_07|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.6,
+"select_seconds": 7.5
+},
+"PLACEBO_07|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.5,
+"select_seconds": 6.8
+},
+"PLACEBO_07|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.0,
+"select_seconds": 5.5
+},
+"PLACEBO_07|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.9,
+"select_seconds": 6.4
+},
+"PLACEBO_07|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.1,
+"select_seconds": 6.8
+},
+"PLACEBO_07|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.4,
+"select_seconds": 6.5
+},
+"PLACEBO_07|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.8,
+"select_seconds": 5.3
+},
+"PLACEBO_07|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.5
+},
+"PLACEBO_07|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.2
+},
+"PLACEBO_07|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.1
+},
+"PLACEBO_07|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.4
+},
+"PLACEBO_07|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.1,
+"select_seconds": 5.0
+},
+"PLACEBO_07|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.9
+},
+"PLACEBO_07|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.6
+},
+"PLACEBO_07|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.7
+},
+"PLACEBO_07|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 2.3
+},
+"PLACEBO_07|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 2.3
+},
+"PLACEBO_07|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.5
+},
+"PLACEBO_07|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 2.5
+},
+"PLACEBO_07|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 1.8
+},
+"PLACEBO_07|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 1.8
+},
+"PLACEBO_08|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.0,
+"select_seconds": 7.2
+},
+"PLACEBO_08|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.1,
+"select_seconds": 8.7
+},
+"PLACEBO_08|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.9,
+"select_seconds": 7.9
+},
+"PLACEBO_08|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.5,
+"select_seconds": 7.1
+},
+"PLACEBO_08|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.1,
+"select_seconds": 5.4
+},
+"PLACEBO_08|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.0,
+"select_seconds": 6.7
+},
+"PLACEBO_08|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 5.8
+},
+"PLACEBO_08|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.4,
+"select_seconds": 6.1
+},
+"PLACEBO_08|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.4
+},
+"PLACEBO_08|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.6,
+"select_seconds": 5.3
+},
+"PLACEBO_08|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.2
+},
+"PLACEBO_08|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.4
+},
+"PLACEBO_08|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.6
+},
+"PLACEBO_08|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.6,
+"select_seconds": 6.0
+},
+"PLACEBO_08|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.3
+},
+"PLACEBO_08|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.5
+},
+"PLACEBO_08|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.6,
+"select_seconds": 6.2
+},
+"PLACEBO_08|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 2.4
+},
+"PLACEBO_08|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 2.3
+},
+"PLACEBO_08|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.6
+},
+"PLACEBO_08|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 2.4
+},
+"PLACEBO_08|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.1,
+"select_seconds": 1.8
+},
+"PLACEBO_08|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.0,
+"select_seconds": 1.9
+},
+"PLACEBO_09|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.8,
+"select_seconds": 7.0
+},
+"PLACEBO_09|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.1,
+"select_seconds": 7.8
+},
+"PLACEBO_09|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 7.4
+},
+"PLACEBO_09|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.1,
+"select_seconds": 6.8
+},
+"PLACEBO_09|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.9,
+"select_seconds": 5.5
+},
+"PLACEBO_09|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.3,
+"select_seconds": 6.4
+},
+"PLACEBO_09|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 6.8
+},
+"PLACEBO_09|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.7,
+"select_seconds": 5.9
+},
+"PLACEBO_09|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 6.1,
+"select_seconds": 5.0
+},
+"PLACEBO_09|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.2
+},
+"PLACEBO_09|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.2,
+"select_seconds": 5.1
+},
+"PLACEBO_09|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.6,
+"select_seconds": 5.0
+},
+"PLACEBO_09|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.6
+},
+"PLACEBO_09|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 5.7
+},
+"PLACEBO_09|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.2
+},
+"PLACEBO_09|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.2,
+"select_seconds": 5.2
+},
+"PLACEBO_09|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.5,
+"select_seconds": 5.2
+},
+"PLACEBO_09|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.9,
+"select_seconds": 2.4
+},
+"PLACEBO_09|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 3.8,
+"select_seconds": 2.6
+},
+"PLACEBO_09|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.4,
+"select_seconds": 5.6
+},
+"PLACEBO_09|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.1,
+"select_seconds": 2.3
+},
+"PLACEBO_09|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.1,
+"select_seconds": 1.8
+},
+"PLACEBO_09|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 4.3,
+"select_seconds": 2.0
+},
+"CF|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 19.0,
+"select_seconds": 7.3
+},
+"CF|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 15.8,
+"select_seconds": 8.1
+},
+"CF|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 13.9,
+"select_seconds": 7.4
+},
+"CF|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 14.2,
+"select_seconds": 5.9
+},
+"CF|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.2,
+"select_seconds": 4.1
+},
+"CF|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.0,
+"select_seconds": 4.9
+},
+"CF|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.3,
+"select_seconds": 5.1
+},
+"CF|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.2,
+"select_seconds": 4.9
+},
+"CF|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.4,
+"select_seconds": 4.7
+},
+"CF|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 9.5,
+"select_seconds": 5.1
+},
+"CF|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 9.4,
+"select_seconds": 5.0
+},
+"CF|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 11.3,
+"select_seconds": 5.5
+},
+"CF|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.9,
+"select_seconds": 4.9
+},
+"CF|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 12.4,
+"select_seconds": 5.4
+},
+"CF|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.9,
+"select_seconds": 5.1
+},
+"CF|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.4,
+"select_seconds": 5.0
+},
+"CF|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 7.8,
+"select_seconds": 2.2
+},
+"CF|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.2,
+"select_seconds": 5.2
+},
+"CF|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 7.8,
+"select_seconds": 2.2
+},
+"CF|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.6,
+"select_seconds": 5.0
+},
+"CF|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 7.6,
+"select_seconds": 2.2
+},
+"CF|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 8.8,
+"select_seconds": 1.8
+},
+"CF|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 8.4,
+"select_seconds": 1.9
+},
+"CF_PLACEBO|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 11.8,
+"select_seconds": 7.1
+},
+"CF_PLACEBO|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 13.6,
+"select_seconds": 8.2
+},
+"CF_PLACEBO|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 12.6,
+"select_seconds": 6.5
+},
+"CF_PLACEBO|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 13.7,
+"select_seconds": 6.8
+},
+"CF_PLACEBO|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 11.7,
+"select_seconds": 4.4
+},
+"CF_PLACEBO|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 11.5,
+"select_seconds": 4.8
+},
+"CF_PLACEBO|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 11.9,
+"select_seconds": 5.0
+},
+"CF_PLACEBO|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.5,
+"select_seconds": 4.9
+},
+"CF_PLACEBO|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 9.3,
+"select_seconds": 4.7
+},
+"CF_PLACEBO|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 9.7,
+"select_seconds": 4.9
+},
+"CF_PLACEBO|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 9.4,
+"select_seconds": 4.9
+},
+"CF_PLACEBO|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.1,
+"select_seconds": 5.0
+},
+"CF_PLACEBO|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.2,
+"select_seconds": 4.8
+},
+"CF_PLACEBO|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 11.0,
+"select_seconds": 5.6
+},
+"CF_PLACEBO|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 9.9,
+"select_seconds": 4.9
+},
+"CF_PLACEBO|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.1,
+"select_seconds": 4.9
+},
+"CF_PLACEBO|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.1,
+"select_seconds": 4.9
+},
+"CF_PLACEBO|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 7.6,
+"select_seconds": 2.3
+},
+"CF_PLACEBO|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 7.8,
+"select_seconds": 2.3
+},
+"CF_PLACEBO|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 10.4,
+"select_seconds": 4.8
+},
+"CF_PLACEBO|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 7.4,
+"select_seconds": 2.1
+},
+"CF_PLACEBO|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 7.5,
+"select_seconds": 1.0
+},
+"CF_PLACEBO|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"members": 105,
+"seconds": 7.4,
+"select_seconds": 1.0
+}
+}
+}

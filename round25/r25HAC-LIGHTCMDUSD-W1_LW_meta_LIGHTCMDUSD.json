@@ -1,0 +1,42 @@
+{
+"symbol": "LIGHTCMDUSD",
+"tfs": [
+"W1"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 15,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.LIEN_CHANNEL": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"thr",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.BOOK.TURTLE_SOUP": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"n",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.LIEN_CHANNEL|W1": 9.7,
+"S.BOOK.TURTLE_SOUP|W1": 9.6
+}
+}

@@ -1,0 +1,106 @@
+{
+"symbol": "XAUUSD",
+"tfs": [
+"H1",
+"M30"
+],
+"units": 14,
+"done": 14,
+"skipped": [],
+"final": true,
+"seconds": 87,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BO.RANGE_EXPANSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"n",
+"__c0",
+"__c1"
+]
+},
+"S.BOOK.HEIKIN_ASHI": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.DAILY.CUM_RSI": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"k",
+"lo",
+"x",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.DAILY.HIGH52": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"tol",
+"m",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.DAILY.IBS": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"lo",
+"x",
+"short"
+]
+},
+"S.DAILY.VOL_TARGET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"tv",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.FAMOUS.TD_SEQUENTIAL": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"n",
+"__c0",
+"__c1"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.HIGH52|H1": 9.6,
+"S.DAILY.CUM_RSI|H1": 17.6,
+"S.BO.RANGE_EXPANSION|H1": 20.8,
+"S.DAILY.VOL_TARGET|H1": 6.4,
+"S.BOOK.HEIKIN_ASHI|H1": 25.8,
+"S.DAILY.IBS|H1": 24.0,
+"S.FAMOUS.TD_SEQUENTIAL|H1": 13.4,
+"S.DAILY.HIGH52|M30": 7.9,
+"S.BO.RANGE_EXPANSION|M30": 26.0,
+"S.DAILY.CUM_RSI|M30": 25.8,
+"S.BOOK.HEIKIN_ASHI|M30": 35.5,
+"S.DAILY.VOL_TARGET|M30": 13.3,
+"S.FAMOUS.TD_SEQUENTIAL|M30": 18.1,
+"S.DAILY.IBS|M30": 38.1
+}
+}

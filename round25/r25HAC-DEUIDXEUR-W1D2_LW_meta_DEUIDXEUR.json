@@ -1,0 +1,35 @@
+{
+"symbol": "DEUIDXEUR",
+"tfs": [
+"W1",
+"D2"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 10,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.RASCHKE_ANTI": {
+"constants_exposed": 7,
+"verified": true,
+"params": [
+"k",
+"d",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.RASCHKE_ANTI|W1": 4.8,
+"S.BOOK.RASCHKE_ANTI|D2": 6.5
+}
+}

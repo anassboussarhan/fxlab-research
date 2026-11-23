@@ -1,0 +1,28 @@
+{
+"symbol": "CHFJPY",
+"tfs": [
+"W1"
+],
+"units": 1,
+"done": 1,
+"skipped": [],
+"final": true,
+"seconds": 14,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.DAILY.VOL_TARGET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"tv",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.VOL_TARGET|W1": 8.4
+}
+}

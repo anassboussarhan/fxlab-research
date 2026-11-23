@@ -1,0 +1,498 @@
+{
+"group": "OTHER",
+"tf": "H2",
+"tag": "OTHER-H2-00",
+"units": 69,
+"done": 69,
+"final": true,
+"full_group": true,
+"missing_bars": [],
+"seconds": 7252,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.RG.HMM|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 993.3,
+"select_seconds": 5.2
+},
+"S.RG.HMM|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1208.4,
+"select_seconds": 5.3
+},
+"S.RG.HMM|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1403.0,
+"select_seconds": 5.9
+},
+"S.RG.HMM|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1482.7,
+"select_seconds": 5.5
+},
+"S.RG.HMM|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 784.3,
+"select_seconds": 3.9
+},
+"S.RG.HMM|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 962.6,
+"select_seconds": 4.6
+},
+"S.RG.HMM|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 795.1,
+"select_seconds": 4.8
+},
+"S.RG.HMM|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 588.3,
+"select_seconds": 4.3
+},
+"S.RG.HMM|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1083.7,
+"select_seconds": 4.2
+},
+"S.RG.HMM|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 662.4,
+"select_seconds": 4.7
+},
+"S.RG.HMM|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 610.0,
+"select_seconds": 4.9
+},
+"S.RG.HMM|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 545.2,
+"select_seconds": 5.3
+},
+"S.RG.HMM|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1036.0,
+"select_seconds": 4.9
+},
+"S.RG.HMM|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1078.2,
+"select_seconds": 4.9
+},
+"S.RG.HMM|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1045.0,
+"select_seconds": 4.8
+},
+"S.RG.HMM|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 388.5,
+"select_seconds": 2.1
+},
+"S.RG.HMM|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1131.2,
+"select_seconds": 4.0
+},
+"S.RG.HMM|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1180.8,
+"select_seconds": 4.2
+},
+"S.RG.HMM|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1129.8,
+"select_seconds": 4.7
+},
+"S.RG.HMM|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 254.2,
+"select_seconds": 1.9
+},
+"S.RG.HMM|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 641.1,
+"select_seconds": 2.0
+},
+"S.FORUM.NEWS_STRADDLE|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 385.2,
+"select_seconds": 5.1
+},
+"S.RG.HMM|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 748.9,
+"select_seconds": 2.3
+},
+"S.FORUM.NEWS_STRADDLE|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 410.4,
+"select_seconds": 5.6
+},
+"S.RG.HMM|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 755.0,
+"select_seconds": 1.6
+},
+"S.FORUM.NEWS_STRADDLE|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 293.1,
+"select_seconds": 4.3
+},
+"S.FORUM.NEWS_STRADDLE|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 275.5,
+"select_seconds": 4.0
+},
+"S.FORUM.NEWS_STRADDLE|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 220.0,
+"select_seconds": 3.1
+},
+"S.FORUM.NEWS_STRADDLE|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 247.7,
+"select_seconds": 3.8
+},
+"S.FORUM.NEWS_STRADDLE|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 255.5,
+"select_seconds": 3.8
+},
+"S.FORUM.NEWS_STRADDLE|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 170.0,
+"select_seconds": 3.6
+},
+"S.FORUM.NEWS_STRADDLE|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 203.1,
+"select_seconds": 4.0
+},
+"S.FORUM.NEWS_STRADDLE|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 196.8,
+"select_seconds": 4.5
+},
+"S.FORUM.NEWS_STRADDLE|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 190.6,
+"select_seconds": 4.8
+},
+"S.FORUM.NEWS_STRADDLE|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 309.7,
+"select_seconds": 4.8
+},
+"S.FORUM.NEWS_STRADDLE|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 215.0,
+"select_seconds": 4.8
+},
+"S.FORUM.NEWS_STRADDLE|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 331.5,
+"select_seconds": 4.5
+},
+"S.FORUM.NEWS_STRADDLE|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 310.1,
+"select_seconds": 4.4
+},
+"S.FORUM.NEWS_STRADDLE|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 128.3,
+"select_seconds": 2.0
+},
+"S.FORUM.NEWS_STRADDLE|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 329.4,
+"select_seconds": 4.6
+},
+"S.FORUM.NEWS_STRADDLE|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 344.1,
+"select_seconds": 4.7
+},
+"S.FORUM.NEWS_STRADDLE|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 344.3,
+"select_seconds": 4.5
+},
+"S.FORUM.NEWS_STRADDLE|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 94.2,
+"select_seconds": 1.9
+},
+"S.FORUM.NEWS_STRADDLE|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 193.6,
+"select_seconds": 2.2
+},
+"S.FORUM.NEWS_STRADDLE|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 218.1,
+"select_seconds": 1.7
+},
+"S.FORUM.NEWS_STRADDLE|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 218.4,
+"select_seconds": 1.8
+},
+"S.RG.FRACTAL|XAUUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 205.6,
+"select_seconds": 5.4
+},
+"S.RG.FRACTAL|XAGUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 207.0,
+"select_seconds": 5.9
+},
+"S.RG.FRACTAL|USA500IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 106.0,
+"select_seconds": 5.1
+},
+"S.RG.FRACTAL|USATECHIDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 99.5,
+"select_seconds": 4.8
+},
+"S.RG.FRACTAL|JPNIDXJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 77.2,
+"select_seconds": 3.6
+},
+"S.RG.FRACTAL|EUSIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 61.3,
+"select_seconds": 4.0
+},
+"S.RG.FRACTAL|DEUIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 90.9,
+"select_seconds": 4.5
+},
+"S.RG.FRACTAL|FRAIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 75.1,
+"select_seconds": 4.6
+},
+"S.RG.FRACTAL|GBRIDXGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 96.2,
+"select_seconds": 4.7
+},
+"S.RG.FRACTAL|CHEIDXCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 64.0,
+"select_seconds": 4.7
+},
+"S.RG.FRACTAL|HKGIDXHKD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 67.2,
+"select_seconds": 4.7
+},
+"S.RG.FRACTAL|USA30IDXUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 101.7,
+"select_seconds": 4.7
+},
+"S.RG.FRACTAL|AUSIDXAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 106.5,
+"select_seconds": 4.6
+},
+"S.RG.FRACTAL|ESPIDXEUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 63.0,
+"select_seconds": 5.1
+},
+"S.RG.FRACTAL|BRENTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 96.9,
+"select_seconds": 4.6
+},
+"S.RG.FRACTAL|BUNDTREUR": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 39.9,
+"select_seconds": 2.0
+},
+"S.RG.FRACTAL|LIGHTCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 102.3,
+"select_seconds": 4.8
+},
+"S.RG.FRACTAL|GASCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 109.7,
+"select_seconds": 4.6
+},
+"S.RG.FRACTAL|COPPERCMDUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 109.6,
+"select_seconds": 4.5
+},
+"S.RG.FRACTAL|UKGILTTRGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 29.1,
+"select_seconds": 2.0
+},
+"S.RG.FRACTAL|USTBONDTRUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 56.0,
+"select_seconds": 2.0
+},
+"S.RG.FRACTAL|BTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 60.2,
+"select_seconds": 1.1
+},
+"S.RG.FRACTAL|ETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 56.0,
+"select_seconds": 1.2
+}
+}
+}

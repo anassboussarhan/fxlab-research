@@ -1,0 +1,52 @@
+{
+"symbol": "XAUUSD",
+"tfs": [
+"H1"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 25,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.CONNORS_R3": {
+"constants_exposed": 16,
+"verified": true,
+"params": [
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8",
+"__c9",
+"__c10",
+"__c11",
+"__c12",
+"__c13",
+"__c14",
+"__c15"
+]
+},
+"S.SEAS.WEEKEND_GAP_FADE": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.CONNORS_R3|H1": 20.4,
+"S.SEAS.WEEKEND_GAP_FADE|H1": 20.5
+}
+}

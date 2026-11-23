@@ -1,0 +1,85 @@
+{
+"group": "FX",
+"tf": "H1",
+"tag": "FX-H1-00-r-CONNORS_CRSI-2",
+"units": 10,
+"done": 10,
+"final": true,
+"full_group": false,
+"missing_bars": [],
+"seconds": 829,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.BOOK.CONNORS_CRSI|EURCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 331.6,
+"select_seconds": 3.6
+},
+"S.BOOK.CONNORS_CRSI|AUDJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 334.7,
+"select_seconds": 3.4
+},
+"S.BOOK.CONNORS_CRSI|CADJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 337.8,
+"select_seconds": 3.5
+},
+"S.BOOK.CONNORS_CRSI|EURUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 360.1,
+"select_seconds": 3.6
+},
+"S.BOOK.CONNORS_CRSI|NZDCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 293.9,
+"select_seconds": 2.8
+},
+"S.BOOK.CONNORS_CRSI|EURSEK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 272.7,
+"select_seconds": 3.7
+},
+"S.BOOK.CONNORS_CRSI|GBPJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 344.9,
+"select_seconds": 3.4
+},
+"S.BOOK.CONNORS_CRSI|USDCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 349.0,
+"select_seconds": 3.3
+},
+"S.BOOK.CONNORS_CRSI|EURHUF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 142.7,
+"select_seconds": 2.1
+},
+"S.BOOK.CONNORS_CRSI|USDTRY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 178.4,
+"select_seconds": 2.1
+}
+}
+}

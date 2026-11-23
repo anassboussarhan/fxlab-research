@@ -1,0 +1,41 @@
+{
+"symbol": "CHFJPY",
+"tfs": [
+"H1",
+"M15"
+],
+"units": 4,
+"done": 4,
+"skipped": [],
+"final": true,
+"seconds": 62,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BO.RANGE_EXPANSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"n",
+"__c0",
+"__c1"
+]
+},
+"S.BOOK.HEIKIN_ASHI": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.BO.RANGE_EXPANSION|H1": 18.7,
+"S.BOOK.HEIKIN_ASHI|H1": 23.6,
+"S.BO.RANGE_EXPANSION|M15": 43.8,
+"S.BOOK.HEIKIN_ASHI|M15": 56.1
+}
+}

@@ -1,0 +1,121 @@
+{
+"tf": "H1",
+"units": 5,
+"done": 5,
+"final": true,
+"missing_bars": [],
+"lost": [],
+"unit_meta": {
+"S.BOOK.HEIKIN_ASHI|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 518.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+14,
+23,
+62,
+32,
+52
+],
+"2025": [
+14,
+23,
+62,
+32,
+52
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 517.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+60,
+111,
+186,
+278,
+439
+],
+"2025": [
+60,
+124,
+472,
+111,
+186
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 596.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+60,
+46,
+37,
+19,
+48
+],
+"2025": [
+60,
+37,
+46,
+19,
+48
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 635.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+248,
+464,
+327,
+207,
+228
+],
+"2025": [
+14,
+248,
+464,
+327,
+207
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 391.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+29,
+14,
+23,
+62,
+15
+],
+"2025": [
+29,
+14,
+23,
+62,
+32
+]
+}
+}
+},
+"seconds": 911
+}

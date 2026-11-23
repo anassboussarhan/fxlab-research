@@ -1,0 +1,209 @@
+{
+"tf": "H1",
+"units": 9,
+"done": 9,
+"final": true,
+"missing_bars": [],
+"lost": [],
+"unit_meta": {
+"S.RG.CHANGE_POINT|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 1661.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+434,
+212,
+239,
+245,
+258
+],
+"2025": [
+239,
+245,
+212,
+434,
+231
+]
+}
+},
+"S.RG.CHANGE_POINT|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 2166.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+73,
+72,
+511,
+497,
+425
+],
+"2025": [
+73,
+565,
+452,
+529,
+253
+]
+}
+},
+"S.RG.CHANGE_POINT|EURGBP": {
+"trials": 416,
+"errors": 0,
+"seconds": 3730.5,
+"stopped_at": 2021,
+"last_picks": {
+"2019": [
+330,
+292,
+342,
+313,
+338
+],
+"2020": [
+415,
+292,
+391,
+342,
+330
+]
+}
+},
+"S.RG.CHANGE_POINT|EURUSD": {
+"trials": 288,
+"errors": 0,
+"seconds": 3736.4,
+"stopped_at": 2017,
+"last_picks": {
+"2015": [
+67,
+91,
+226,
+173,
+172
+],
+"2016": [
+287,
+67,
+284,
+262,
+226
+]
+}
+},
+"S.RG.CHANGE_POINT|GBPCHF": {
+"trials": 384,
+"errors": 0,
+"seconds": 3709.5,
+"stopped_at": 2020,
+"last_picks": {
+"2018": [
+323,
+257,
+227,
+194,
+145
+],
+"2019": [
+323,
+257,
+227,
+380,
+194
+]
+}
+},
+"S.RG.CHANGE_POINT|GBPUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 3686.3,
+"stopped_at": 2022,
+"last_picks": {
+"2020": [
+405,
+387,
+393,
+279,
+410
+],
+"2021": [
+387,
+447,
+405,
+430,
+420
+]
+}
+},
+"S.RG.CHANGE_POINT|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 2279.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+481,
+541,
+29,
+14,
+350
+],
+"2025": [
+481,
+541,
+549,
+239,
+29
+]
+}
+},
+"S.RG.CHANGE_POINT|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 1149.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+274,
+86,
+394,
+327,
+70
+],
+"2025": [
+274,
+441,
+79,
+357,
+86
+]
+}
+},
+"S.RG.CHANGE_POINT|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 3018.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+383,
+415,
+444,
+443,
+234
+],
+"2025": [
+383,
+415,
+444,
+443,
+467
+]
+}
+}
+},
+"seconds": 6755
+}

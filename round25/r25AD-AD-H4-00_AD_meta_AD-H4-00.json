@@ -1,0 +1,6369 @@
+{
+"tf": "H4",
+"units": 330,
+"done": 287,
+"final": true,
+"missing_bars": [],
+"lost": [
+"S.BOOK.CONNORS_R3|GBPCHF",
+"S.BOOK.CONNORS_R3|GBPJPY",
+"S.BOOK.CONNORS_R3|GBPNZD",
+"S.BOOK.CONNORS_R3|GBPUSD",
+"S.BOOK.CONNORS_R3|NZDCAD",
+"S.BOOK.CONNORS_R3|NZDCHF",
+"S.BOOK.CONNORS_R3|NZDJPY",
+"S.BOOK.CONNORS_R3|NZDUSD",
+"S.BOOK.CONNORS_R3|USDCAD",
+"S.BOOK.CONNORS_R3|USDCHF",
+"S.BOOK.CONNORS_R3|USDJPY",
+"S.BOOK.CONNORS_R3|XAUUSD",
+"S.BOOK.CONNORS_R3|XAGUSD",
+"S.DAILY.HIGH52|AUDCAD",
+"S.DAILY.HIGH52|AUDCHF",
+"S.DAILY.HIGH52|AUDJPY",
+"S.DAILY.HIGH52|AUDNZD",
+"S.DAILY.HIGH52|AUDUSD",
+"S.DAILY.HIGH52|CADCHF",
+"S.DAILY.HIGH52|CADJPY",
+"S.DAILY.HIGH52|CHFJPY",
+"S.DAILY.HIGH52|EURAUD",
+"S.DAILY.HIGH52|EURCAD",
+"S.DAILY.HIGH52|EURCHF",
+"S.DAILY.HIGH52|EURGBP",
+"S.DAILY.HIGH52|EURJPY",
+"S.DAILY.HIGH52|EURNZD",
+"S.DAILY.HIGH52|EURUSD",
+"S.DAILY.HIGH52|GBPAUD",
+"S.DAILY.HIGH52|GBPCAD",
+"S.DAILY.HIGH52|GBPCHF",
+"S.DAILY.HIGH52|GBPJPY",
+"S.DAILY.HIGH52|GBPNZD",
+"S.DAILY.HIGH52|GBPUSD",
+"S.DAILY.HIGH52|NZDCAD",
+"S.DAILY.HIGH52|NZDCHF",
+"S.DAILY.HIGH52|NZDJPY",
+"S.DAILY.HIGH52|NZDUSD",
+"S.DAILY.HIGH52|USDCAD",
+"S.DAILY.HIGH52|USDCHF",
+"S.DAILY.HIGH52|USDJPY",
+"S.DAILY.HIGH52|XAUUSD",
+"S.DAILY.HIGH52|XAGUSD"
+],
+"unit_meta": {
+"S.RG.CHANGE_POINT|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 465.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+411,
+400,
+21,
+410,
+408
+],
+"2025": [
+461,
+159,
+411,
+410,
+469
+]
+}
+},
+"S.RG.CHANGE_POINT|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 496.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+53,
+500,
+433,
+478,
+52
+],
+"2025": [
+533,
+542,
+422,
+500,
+53
+]
+}
+},
+"S.RG.CHANGE_POINT|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 1156.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+176,
+27,
+186,
+416,
+191
+],
+"2025": [
+463,
+176,
+186,
+467,
+453
+]
+}
+},
+"S.RG.CHANGE_POINT|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 1278.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+492,
+505,
+478,
+397,
+480
+],
+"2025": [
+558,
+555,
+397,
+570,
+492
+]
+}
+},
+"S.RG.CHANGE_POINT|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 1110.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+369,
+437,
+434,
+389,
+362
+],
+"2025": [
+434,
+474,
+437,
+369,
+365
+]
+}
+},
+"S.RG.CHANGE_POINT|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 640.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+223,
+259,
+315,
+527,
+334
+],
+"2025": [
+426,
+315,
+259,
+569,
+223
+]
+}
+},
+"S.RG.CHANGE_POINT|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 582.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+283,
+272,
+501,
+491,
+346
+],
+"2025": [
+283,
+501,
+272,
+491,
+27
+]
+}
+},
+"S.RG.CHANGE_POINT|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 1501.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+277,
+326,
+327,
+350,
+374
+],
+"2025": [
+116,
+424,
+277,
+326,
+327
+]
+}
+},
+"S.RG.CHANGE_POINT|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 595.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+359,
+208,
+437,
+455,
+464
+],
+"2025": [
+76,
+359,
+497,
+454,
+434
+]
+}
+},
+"S.RG.CHANGE_POINT|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 1428.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+472,
+346,
+333,
+357,
+200
+],
+"2025": [
+472,
+559,
+346,
+200,
+108
+]
+}
+},
+"S.RG.CHANGE_POINT|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 1442.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+428,
+526,
+328,
+508,
+356
+],
+"2025": [
+428,
+328,
+526,
+508,
+541
+]
+}
+},
+"S.RG.CHANGE_POINT|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 426.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+426,
+222,
+387,
+439,
+354
+],
+"2025": [
+354,
+421,
+412,
+389,
+439
+]
+}
+},
+"S.RG.CHANGE_POINT|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 1680.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+530,
+535,
+493,
+514,
+483
+],
+"2025": [
+530,
+552,
+535,
+493,
+514
+]
+}
+},
+"S.RG.CHANGE_POINT|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 1382.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+47,
+61,
+50,
+510,
+248
+],
+"2025": [
+47,
+61,
+510,
+248,
+525
+]
+}
+},
+"S.RG.CHANGE_POINT|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 401.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+278,
+7,
+305,
+436,
+432
+],
+"2025": [
+278,
+7,
+83,
+66,
+305
+]
+}
+},
+"S.RG.CHANGE_POINT|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 1028.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+410,
+433,
+354,
+412,
+442
+],
+"2025": [
+410,
+455,
+354,
+433,
+468
+]
+}
+},
+"S.RG.CHANGE_POINT|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 406.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+321,
+200,
+426,
+227,
+350
+],
+"2025": [
+321,
+426,
+200,
+227,
+454
+]
+}
+},
+"S.RG.CHANGE_POINT|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 983.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+379,
+354,
+351,
+502,
+528
+],
+"2025": [
+563,
+379,
+537,
+573,
+131
+]
+}
+},
+"S.RG.CHANGE_POINT|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 1777.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+485,
+464,
+505,
+447,
+437
+],
+"2025": [
+559,
+485,
+561,
+464,
+567
+]
+}
+},
+"S.RG.CHANGE_POINT|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 1443.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+61,
+510,
+350,
+533,
+336
+],
+"2025": [
+61,
+510,
+350,
+533,
+336
+]
+}
+},
+"S.RG.CHANGE_POINT|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 397.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+391,
+398,
+424,
+442,
+445
+],
+"2025": [
+391,
+398,
+424,
+442,
+445
+]
+}
+},
+"S.RG.CHANGE_POINT|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 397.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+428,
+49,
+6,
+376,
+324
+],
+"2025": [
+428,
+451,
+367,
+390,
+407
+]
+}
+},
+"S.RG.CHANGE_POINT|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 585.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+540,
+526,
+496,
+487,
+337
+],
+"2025": [
+540,
+496,
+560,
+526,
+568
+]
+}
+},
+"S.RG.CHANGE_POINT|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 390.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+74,
+76,
+6,
+215,
+173
+],
+"2025": [
+74,
+76,
+475,
+111,
+314
+]
+}
+},
+"S.RG.CHANGE_POINT|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 580.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+463,
+543,
+444,
+512,
+451
+],
+"2025": [
+463,
+444,
+15,
+451,
+543
+]
+}
+},
+"S.RG.CHANGE_POINT|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 1448.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+66,
+481,
+316,
+450,
+542
+],
+"2025": [
+66,
+551,
+56,
+558,
+569
+]
+}
+},
+"S.RG.CHANGE_POINT|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 736.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+85,
+379,
+365,
+361,
+408
+],
+"2025": [
+198,
+434,
+309,
+430,
+418
+]
+}
+},
+"S.RG.CHANGE_POINT|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 1613.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+526,
+374,
+375,
+489,
+401
+],
+"2025": [
+526,
+571,
+374,
+489,
+375
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 186.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+411,
+442,
+336,
+422,
+328
+],
+"2025": [
+411,
+442,
+336,
+465,
+422
+]
+}
+},
+"S.RG.CHANGE_POINT|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 1646.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+276,
+469,
+310,
+341,
+387
+],
+"2025": [
+469,
+182,
+422,
+493,
+276
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 204.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+337,
+184,
+396,
+313,
+424
+],
+"2025": [
+337,
+184,
+396,
+426,
+185
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 239.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+13,
+252,
+333,
+454,
+488
+],
+"2025": [
+2,
+13,
+252,
+333,
+454
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 282.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+485,
+150,
+417,
+487,
+397
+],
+"2025": [
+485,
+150,
+417,
+487,
+397
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 210.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+430,
+349,
+336,
+435,
+380
+],
+"2025": [
+430,
+349,
+435,
+336,
+380
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 334.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+37,
+232,
+351,
+473,
+540
+],
+"2025": [
+565,
+37,
+232,
+351,
+560
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 298.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+42,
+9,
+395,
+532,
+425
+],
+"2025": [
+42,
+9,
+395,
+79,
+532
+]
+}
+},
+"S.RG.CHANGE_POINT|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 1000.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+373,
+405,
+423,
+413,
+435
+],
+"2025": [
+373,
+405,
+413,
+463,
+450
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 525.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+453,
+512,
+335,
+9,
+431
+],
+"2025": [
+453,
+512,
+335,
+9,
+460
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 560.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+499,
+410,
+355,
+307,
+500
+],
+"2025": [
+499,
+527,
+410,
+355,
+513
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 638.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+23,
+490,
+197,
+532,
+527
+],
+"2025": [
+23,
+490,
+197,
+557,
+532
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 542.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+248,
+386,
+508,
+422,
+472
+],
+"2025": [
+248,
+386,
+422,
+503,
+508
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 277.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+13,
+156,
+394,
+177,
+408
+],
+"2025": [
+13,
+156,
+68,
+9,
+177
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 305.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+31,
+472,
+305,
+369,
+537
+],
+"2025": [
+472,
+305,
+369,
+537,
+265
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 495.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+321,
+535,
+294,
+511,
+523
+],
+"2025": [
+321,
+535,
+294,
+511,
+523
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 321.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+350,
+457,
+353,
+460,
+422
+],
+"2025": [
+350,
+457,
+575,
+558,
+422
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 296.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+443,
+349,
+244,
+297,
+435
+],
+"2025": [
+443,
+244,
+349,
+297,
+435
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 327.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+337,
+266,
+425,
+342,
+358
+],
+"2025": [
+337,
+266,
+425,
+309,
+342
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 299.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+465,
+249,
+312,
+425,
+238
+],
+"2025": [
+44,
+465,
+249,
+312,
+569
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 488.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+46,
+503,
+537,
+413,
+30
+],
+"2025": [
+46,
+503,
+537,
+536,
+557
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 288.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+497,
+142,
+502,
+385,
+422
+],
+"2025": [
+497,
+142,
+502,
+554,
+385
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 210.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+322,
+332,
+378,
+426,
+287
+],
+"2025": [
+464,
+470,
+378,
+426,
+322
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 456.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+10,
+37,
+46,
+142,
+154
+],
+"2025": [
+10,
+81,
+37,
+46,
+21
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 209.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+426,
+272,
+393,
+332,
+444
+],
+"2025": [
+272,
+444,
+426,
+332,
+393
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 479.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+301,
+237,
+324,
+267,
+287
+],
+"2025": [
+301,
+267,
+237,
+287,
+381
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 301.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+507,
+484,
+347,
+487,
+264
+],
+"2025": [
+507,
+484,
+347,
+253,
+261
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 351.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+452,
+67,
+9,
+538,
+510
+],
+"2025": [
+9,
+452,
+67,
+555,
+538
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 222.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+313,
+408,
+74,
+10,
+344
+],
+"2025": [
+10,
+439,
+421,
+313,
+408
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 567.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+13,
+42,
+77,
+21,
+67
+],
+"2025": [
+13,
+42,
+77,
+21,
+64
+]
+}
+},
+"S.TREND.REGRESSION|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 153.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+238,
+407,
+357,
+254,
+4
+],
+"2025": [
+238,
+407,
+254,
+278,
+352
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 333.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+346,
+343,
+410,
+322,
+415
+],
+"2025": [
+346,
+343,
+449,
+410,
+316
+]
+}
+},
+"S.TREND.REGRESSION|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 148.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+2,
+350,
+373,
+442,
+387
+],
+"2025": [
+2,
+454,
+350,
+373,
+442
+]
+}
+},
+"S.TREND.REGRESSION|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 178.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+449,
+56,
+160,
+66,
+151
+],
+"2025": [
+56,
+66,
+449,
+151,
+160
+]
+}
+},
+"S.TREND.REGRESSION|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 233.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+233,
+536,
+364,
+282,
+262
+],
+"2025": [
+536,
+364,
+262,
+433,
+82
+]
+}
+},
+"S.BOOK.CONNORS_CRSI|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 694.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+9,
+25,
+13,
+42,
+1
+],
+"2025": [
+9,
+25,
+13,
+535,
+573
+]
+}
+},
+"S.TREND.REGRESSION|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 180.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+138,
+435,
+329,
+424,
+305
+],
+"2025": [
+305,
+97,
+435,
+138,
+472
+]
+}
+},
+"S.TREND.REGRESSION|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 144.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+444,
+222,
+179,
+439,
+284
+],
+"2025": [
+444,
+222,
+439,
+179,
+284
+]
+}
+},
+"S.TREND.REGRESSION|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 168.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+357,
+458,
+388,
+462,
+494
+],
+"2025": [
+357,
+570,
+544,
+388,
+458
+]
+}
+},
+"S.TREND.REGRESSION|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 227.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+444,
+508,
+457,
+503,
+504
+],
+"2025": [
+508,
+457,
+504,
+444,
+503
+]
+}
+},
+"S.TREND.REGRESSION|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 182.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+271,
+507,
+159,
+426,
+408
+],
+"2025": [
+271,
+507,
+159,
+477,
+408
+]
+}
+},
+"S.TREND.REGRESSION|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 164.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+135,
+389,
+163,
+493,
+395
+],
+"2025": [
+163,
+389,
+493,
+135,
+158
+]
+}
+},
+"S.TREND.REGRESSION|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 202.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+320,
+144,
+410,
+243,
+341
+],
+"2025": [
+144,
+341,
+320,
+410,
+358
+]
+}
+},
+"S.TREND.REGRESSION|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 157.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+371,
+422,
+332,
+222,
+236
+],
+"2025": [
+129,
+371,
+456,
+422,
+332
+]
+}
+},
+"S.TREND.REGRESSION|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 210.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+405,
+462,
+92,
+488,
+8
+],
+"2025": [
+405,
+92,
+8,
+462,
+488
+]
+}
+},
+"S.TREND.REGRESSION|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 214.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+295,
+396,
+330,
+241,
+286
+],
+"2025": [
+295,
+396,
+574,
+330,
+573
+]
+}
+},
+"S.TREND.REGRESSION|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 120.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+395,
+428,
+386,
+342,
+445
+],
+"2025": [
+395,
+428,
+386,
+445,
+411
+]
+}
+},
+"S.TREND.REGRESSION|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 199.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+281,
+4,
+459,
+510,
+223
+],
+"2025": [
+281,
+4,
+459,
+223,
+447
+]
+}
+},
+"S.TREND.REGRESSION|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 136.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+388,
+178,
+418,
+132,
+383
+],
+"2025": [
+178,
+388,
+132,
+418,
+383
+]
+}
+},
+"S.TREND.REGRESSION|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 209.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+244,
+302,
+528,
+468,
+503
+],
+"2025": [
+244,
+302,
+451,
+141,
+204
+]
+}
+},
+"S.TREND.REGRESSION|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 122.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+366,
+418,
+397,
+347,
+235
+],
+"2025": [
+366,
+457,
+458,
+397,
+347
+]
+}
+},
+"S.TREND.REGRESSION|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 184.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+486,
+441,
+518,
+423,
+385
+],
+"2025": [
+486,
+251,
+441,
+385,
+518
+]
+}
+},
+"S.TREND.REGRESSION|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 180.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+40,
+204,
+498,
+320,
+507
+],
+"2025": [
+40,
+498,
+204,
+270,
+320
+]
+}
+},
+"S.TREND.REGRESSION|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 152.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+398,
+381,
+285,
+378,
+350
+],
+"2025": [
+398,
+381,
+471,
+285,
+378
+]
+}
+},
+"S.TREND.REGRESSION|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 141.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+92,
+304,
+330,
+315,
+364
+],
+"2025": [
+92,
+304,
+330,
+190,
+364
+]
+}
+},
+"S.TREND.REGRESSION|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 144.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+6,
+199,
+446,
+363,
+441
+],
+"2025": [
+10,
+199,
+475,
+357,
+363
+]
+}
+},
+"S.TREND.REGRESSION|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 231.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+501,
+344,
+422,
+294,
+301
+],
+"2025": [
+501,
+344,
+422,
+294,
+301
+]
+}
+},
+"S.TREND.REGRESSION|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 191.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+153,
+427,
+419,
+282,
+542
+],
+"2025": [
+419,
+153,
+542,
+427,
+494
+]
+}
+},
+"S.TREND.REGRESSION|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 214.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+483,
+192,
+115,
+146,
+375
+],
+"2025": [
+483,
+115,
+462,
+192,
+375
+]
+}
+},
+"S.TREND.REGRESSION|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 204.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+521,
+483,
+409,
+274,
+539
+],
+"2025": [
+521,
+483,
+549,
+409,
+539
+]
+}
+},
+"S.TREND.REGRESSION|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 121.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+290,
+405,
+235,
+342,
+398
+],
+"2025": [
+290,
+405,
+417,
+432,
+342
+]
+}
+},
+"S.TREND.REGRESSION|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 133.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+220,
+32,
+56,
+52,
+240
+],
+"2025": [
+220,
+32,
+461,
+475,
+479
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 143.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+258,
+339,
+447,
+394,
+428
+],
+"2025": [
+258,
+339,
+447,
+394,
+428
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 138.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+29,
+165,
+170,
+97,
+306
+],
+"2025": [
+29,
+165,
+170,
+97,
+473
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 188.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+515,
+230,
+352,
+508,
+538
+],
+"2025": [
+515,
+230,
+352,
+508,
+538
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 165.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+117,
+328,
+506,
+246,
+405
+],
+"2025": [
+117,
+328,
+506,
+405,
+246
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 173.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+473,
+356,
+326,
+521,
+469
+],
+"2025": [
+549,
+473,
+356,
+326,
+521
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 130.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+13,
+255,
+156,
+371,
+258
+],
+"2025": [
+13,
+479,
+255,
+371,
+156
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 187.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+32,
+40,
+49,
+31,
+6
+],
+"2025": [
+32,
+40,
+49,
+31,
+6
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 191.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+514,
+509,
+507,
+33,
+513
+],
+"2025": [
+553,
+509,
+514,
+507,
+550
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 160.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+11,
+46,
+329,
+490,
+416
+],
+"2025": [
+11,
+46,
+490,
+329,
+416
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 208.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+470,
+483,
+494,
+524,
+349
+],
+"2025": [
+552,
+483,
+342,
+564,
+459
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 183.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+13,
+33,
+286,
+413,
+195
+],
+"2025": [
+13,
+286,
+413,
+560,
+198
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 133.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+66,
+388,
+415,
+381,
+424
+],
+"2025": [
+66,
+461,
+388,
+415,
+470
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 198.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+4,
+6,
+379,
+360,
+520
+],
+"2025": [
+4,
+16,
+6,
+379,
+360
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 210.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+288,
+465,
+509,
+389,
+208
+],
+"2025": [
+288,
+572,
+545,
+509,
+465
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 131.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+30,
+42,
+46,
+328,
+296
+],
+"2025": [
+30,
+42,
+46,
+31,
+40
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 131.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+261,
+354,
+419,
+413,
+380
+],
+"2025": [
+261,
+413,
+354,
+419,
+412
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 195.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+42,
+69,
+501,
+267,
+536
+],
+"2025": [
+42,
+552,
+501,
+267,
+536
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 211.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+523,
+481,
+423,
+346,
+510
+],
+"2025": [
+481,
+346,
+554,
+523,
+343
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 131.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+2,
+228,
+433,
+396,
+348
+],
+"2025": [
+46,
+42,
+2,
+228,
+433
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 220.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+543,
+539,
+103,
+10,
+11
+],
+"2025": [
+543,
+555,
+554,
+559,
+568
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 184.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+474,
+478,
+537,
+403,
+434
+],
+"2025": [
+474,
+478,
+537,
+403,
+434
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 153.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+98,
+310,
+374,
+404,
+366
+],
+"2025": [
+98,
+310,
+374,
+458,
+404
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 154.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+13,
+281,
+189,
+219,
+223
+],
+"2025": [
+13,
+281,
+259,
+189,
+219
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 144.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+321,
+366,
+371,
+245,
+111
+],
+"2025": [
+321,
+456,
+366,
+371,
+245
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 202.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+26,
+33,
+6,
+504,
+525
+],
+"2025": [
+26,
+33,
+10,
+44,
+6
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 189.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+18,
+11,
+64,
+242,
+283
+],
+"2025": [
+18,
+11,
+31,
+32,
+47
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 246.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+459,
+454,
+403,
+494,
+498
+],
+"2025": [
+556,
+459,
+454,
+403,
+494
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 120.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+42,
+392,
+383,
+359,
+368
+],
+"2025": [
+423,
+392,
+383,
+434,
+436
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 186.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+11,
+32,
+66,
+31,
+62
+],
+"2025": [
+32,
+11,
+66,
+31,
+62
+]
+}
+},
+"S.BOOK.HEIKIN_ASHI|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 127.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+72,
+82,
+315,
+86,
+292
+],
+"2025": [
+40,
+49,
+72,
+60,
+315
+]
+}
+},
+"S.TREND.DONCHIAN|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 130.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+225,
+197,
+384,
+380,
+387
+],
+"2025": [
+469,
+478,
+430,
+318,
+431
+]
+}
+},
+"S.TREND.DONCHIAN|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 140.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+184,
+441,
+385,
+411,
+443
+],
+"2025": [
+184,
+291,
+457,
+461,
+462
+]
+}
+},
+"S.TREND.DONCHIAN|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 195.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+424,
+441,
+393,
+493,
+525
+],
+"2025": [
+424,
+552,
+562,
+573,
+544
+]
+}
+},
+"S.TREND.DONCHIAN|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 164.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+486,
+374,
+511,
+474,
+493
+],
+"2025": [
+522,
+374,
+486,
+474,
+403
+]
+}
+},
+"S.TREND.DONCHIAN|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 171.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+517,
+542,
+474,
+490,
+117
+],
+"2025": [
+117,
+551,
+487,
+461,
+517
+]
+}
+},
+"S.TREND.DONCHIAN|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 131.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+323,
+331,
+391,
+409,
+251
+],
+"2025": [
+331,
+323,
+391,
+251,
+409
+]
+}
+},
+"S.TREND.DONCHIAN|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 182.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+3,
+59,
+7,
+448,
+390
+],
+"2025": [
+3,
+59,
+7,
+448,
+84
+]
+}
+},
+"S.TREND.DONCHIAN|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 195.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+320,
+251,
+334,
+528,
+463
+],
+"2025": [
+562,
+320,
+251,
+469,
+528
+]
+}
+},
+"S.TREND.DONCHIAN|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 162.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+1,
+443,
+39,
+389,
+391
+],
+"2025": [
+1,
+39,
+391,
+389,
+410
+]
+}
+},
+"S.TREND.DONCHIAN|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 174.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+502,
+453,
+466,
+407,
+506
+],
+"2025": [
+546,
+550,
+575,
+547,
+556
+]
+}
+},
+"S.TREND.DONCHIAN|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 183.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+484,
+535,
+501,
+498,
+496
+],
+"2025": [
+484,
+565,
+535,
+352,
+525
+]
+}
+},
+"S.TREND.DONCHIAN|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 127.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+438,
+441,
+444,
+62,
+426
+],
+"2025": [
+453,
+438,
+460,
+62,
+444
+]
+}
+},
+"S.TREND.DONCHIAN|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 167.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+455,
+490,
+405,
+511,
+481
+],
+"2025": [
+455,
+490,
+572,
+550,
+405
+]
+}
+},
+"S.TREND.DONCHIAN|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 167.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+418,
+364,
+524,
+457,
+513
+],
+"2025": [
+418,
+364,
+559,
+550,
+524
+]
+}
+},
+"S.TREND.DONCHIAN|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 138.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+351,
+302,
+290,
+437,
+338
+],
+"2025": [
+479,
+338,
+437,
+329,
+339
+]
+}
+},
+"S.TREND.DONCHIAN|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 124.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+402,
+434,
+397,
+400,
+407
+],
+"2025": [
+402,
+434,
+397,
+400,
+477
+]
+}
+},
+"S.TREND.DONCHIAN|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 168.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+484,
+535,
+309,
+320,
+358
+],
+"2025": [
+559,
+484,
+567,
+17,
+309
+]
+}
+},
+"S.TREND.DONCHIAN|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 206.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+13,
+32,
+90,
+41,
+502
+],
+"2025": [
+13,
+32,
+90,
+502,
+563
+]
+}
+},
+"S.TREND.DONCHIAN|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 130.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+51,
+424,
+375,
+413,
+407
+],
+"2025": [
+51,
+413,
+424,
+375,
+407
+]
+}
+},
+"S.TREND.DONCHIAN|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 186.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+455,
+442,
+211,
+514,
+338
+],
+"2025": [
+442,
+211,
+514,
+358,
+531
+]
+}
+},
+"S.TREND.DONCHIAN|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 127.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+32,
+373,
+370,
+402,
+371
+],
+"2025": [
+32,
+373,
+402,
+370,
+339
+]
+}
+},
+"S.TREND.DONCHIAN|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 189.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+426,
+488,
+535,
+513,
+439
+],
+"2025": [
+426,
+535,
+488,
+513,
+439
+]
+}
+},
+"S.TREND.DONCHIAN|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 149.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+17,
+430,
+422,
+273,
+34
+],
+"2025": [
+467,
+460,
+473,
+430,
+273
+]
+}
+},
+"S.TREND.DONCHIAN|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 143.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+432,
+325,
+439,
+442,
+418
+],
+"2025": [
+325,
+432,
+439,
+442,
+418
+]
+}
+},
+"S.TREND.DONCHIAN|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 210.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+491,
+417,
+488,
+492,
+541
+],
+"2025": [
+491,
+567,
+561,
+569,
+492
+]
+}
+},
+"S.TREND.DONCHIAN|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 186.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+34,
+269,
+440,
+489,
+338
+],
+"2025": [
+34,
+269,
+489,
+440,
+1
+]
+}
+},
+"S.TREND.DONCHIAN|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 180.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+39,
+60,
+492,
+325,
+294
+],
+"2025": [
+60,
+39,
+492,
+571,
+294
+]
+}
+},
+"S.TREND.DONCHIAN|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 193.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+508,
+539,
+481,
+357,
+179
+],
+"2025": [
+62,
+481,
+179,
+263,
+134
+]
+}
+},
+"S.TREND.DONCHIAN|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 118.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+328,
+322,
+226,
+303,
+391
+],
+"2025": [
+328,
+416,
+443,
+419,
+303
+]
+}
+},
+"S.TREND.DONCHIAN|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 122.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+400,
+365,
+359,
+378,
+379
+],
+"2025": [
+359,
+365,
+474,
+400,
+352
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 136.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+416,
+443,
+442,
+440,
+377
+],
+"2025": [
+416,
+442,
+457,
+361,
+365
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 134.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+130,
+425,
+33,
+422,
+405
+],
+"2025": [
+130,
+33,
+404,
+384,
+3
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 185.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+389,
+167,
+483,
+345,
+426
+],
+"2025": [
+389,
+297,
+426,
+167,
+352
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 148.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+178,
+453,
+11,
+258,
+509
+],
+"2025": [
+178,
+453,
+11,
+258,
+509
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 165.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+532,
+375,
+420,
+398,
+482
+],
+"2025": [
+398,
+566,
+508,
+556,
+534
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 134.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+44,
+27,
+48,
+439,
+154
+],
+"2025": [
+44,
+27,
+26,
+154,
+390
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 182.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+513,
+258,
+65,
+269,
+124
+],
+"2025": [
+1,
+124,
+523,
+495,
+562
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 180.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+476,
+527,
+511,
+421,
+469
+],
+"2025": [
+476,
+562,
+511,
+527,
+555
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 191.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+11,
+528,
+448,
+540,
+521
+],
+"2025": [
+11,
+528,
+448,
+540,
+521
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 185.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+482,
+420,
+510,
+432,
+453
+],
+"2025": [
+482,
+450,
+371,
+346,
+420
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 175.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+429,
+435,
+475,
+495,
+434
+],
+"2025": [
+429,
+223,
+495,
+475,
+435
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 179.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+479,
+520,
+433,
+525,
+430
+],
+"2025": [
+479,
+520,
+433,
+574,
+553
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 139.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+69,
+398,
+426,
+344,
+393
+],
+"2025": [
+398,
+426,
+69,
+476,
+427
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 200.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+517,
+514,
+27,
+356,
+224
+],
+"2025": [
+514,
+224,
+517,
+356,
+282
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 138.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+402,
+418,
+207,
+421,
+308
+],
+"2025": [
+418,
+207,
+421,
+308,
+443
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 133.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+384,
+349,
+395,
+354,
+390
+],
+"2025": [
+450,
+395,
+384,
+349,
+354
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 198.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+487,
+309,
+539,
+315,
+531
+],
+"2025": [
+569,
+3,
+554,
+315,
+539
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 175.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+462,
+302,
+433,
+413,
+348
+],
+"2025": [
+33,
+401,
+333,
+462,
+368
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 137.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+406,
+437,
+427,
+344,
+318
+],
+"2025": [
+437,
+189,
+303,
+433,
+465
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 188.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+377,
+520,
+360,
+304,
+511
+],
+"2025": [
+560,
+377,
+304,
+318,
+553
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 190.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+409,
+137,
+372,
+253,
+494
+],
+"2025": [
+508,
+334,
+539,
+457,
+409
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 145.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+256,
+275,
+56,
+404,
+390
+],
+"2025": [
+256,
+427,
+56,
+275,
+479
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 134.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+313,
+376,
+412,
+440,
+431
+],
+"2025": [
+313,
+473,
+431,
+412,
+454
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 131.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+202,
+331,
+49,
+435,
+384
+],
+"2025": [
+331,
+202,
+460,
+473,
+428
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 183.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+521,
+543,
+540,
+477,
+465
+],
+"2025": [
+521,
+558,
+552,
+543,
+540
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 185.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+56,
+504,
+542,
+109,
+135
+],
+"2025": [
+56,
+109,
+135,
+553,
+147
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 215.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+518,
+427,
+288,
+463,
+538
+],
+"2025": [
+518,
+549,
+355,
+540,
+409
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 214.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+474,
+406,
+379,
+409,
+372
+],
+"2025": [
+469,
+474,
+379,
+414,
+438
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 123.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+315,
+175,
+199,
+216,
+285
+],
+"2025": [
+66,
+315,
+214,
+364,
+285
+]
+}
+},
+"S.SEAS.WEEKEND_GAP_FADE|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 121.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+363,
+58,
+416,
+394,
+96
+],
+"2025": [
+363,
+58,
+7,
+416,
+96
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 121.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+337,
+247,
+159,
+430,
+313
+],
+"2025": [
+337,
+247,
+159,
+430,
+313
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 129.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+255,
+416,
+376,
+79,
+128
+],
+"2025": [
+255,
+416,
+79,
+469,
+128
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 173.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+490,
+415,
+383,
+420,
+475
+],
+"2025": [
+490,
+547,
+566,
+415,
+383
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 152.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+94,
+469,
+473,
+511,
+502
+],
+"2025": [
+94,
+469,
+473,
+511,
+502
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 124.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+367,
+417,
+404,
+398,
+401
+],
+"2025": [
+367,
+472,
+476,
+398,
+404
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 161.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+495,
+316,
+524,
+452,
+527
+],
+"2025": [
+495,
+524,
+316,
+559,
+488
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 177.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+254,
+387,
+452,
+446,
+345
+],
+"2025": [
+444,
+331,
+558,
+151,
+546
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 171.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+398,
+312,
+196,
+71,
+180
+],
+"2025": [
+196,
+553,
+71,
+312,
+226
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 156.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+49,
+243,
+42,
+369,
+338
+],
+"2025": [
+49,
+512,
+243,
+42,
+369
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 207.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+294,
+470,
+232,
+377,
+498
+],
+"2025": [
+470,
+294,
+568,
+232,
+560
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 167.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+480,
+48,
+473,
+479,
+202
+],
+"2025": [
+573,
+574,
+480,
+569,
+48
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 174.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+445,
+351,
+463,
+217,
+345
+],
+"2025": [
+569,
+445,
+351,
+463,
+565
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 135.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+428,
+303,
+417,
+431,
+398
+],
+"2025": [
+428,
+303,
+431,
+398,
+417
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 173.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+492,
+540,
+530,
+494,
+489
+],
+"2025": [
+546,
+548,
+564,
+492,
+540
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 122.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+319,
+426,
+441,
+412,
+400
+],
+"2025": [
+319,
+477,
+426,
+400,
+322
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 177.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+412,
+21,
+526,
+398,
+542
+],
+"2025": [
+21,
+412,
+526,
+398,
+461
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 123.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+51,
+365,
+342,
+76,
+377
+],
+"2025": [
+51,
+76,
+39,
+98,
+342
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 177.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+406,
+410,
+510,
+540,
+332
+],
+"2025": [
+565,
+557,
+410,
+406,
+573
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 168.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+463,
+468,
+505,
+476,
+433
+],
+"2025": [
+551,
+558,
+545,
+568,
+552
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 131.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+424,
+279,
+446,
+361,
+314
+],
+"2025": [
+424,
+457,
+279,
+448,
+446
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 182.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+63,
+48,
+53,
+529,
+515
+],
+"2025": [
+53,
+48,
+63,
+568,
+11
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 130.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+429,
+441,
+389,
+383,
+445
+],
+"2025": [
+429,
+441,
+389,
+361,
+410
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 126.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+345,
+327,
+384,
+440,
+180
+],
+"2025": [
+345,
+384,
+469,
+327,
+180
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 132.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+423,
+444,
+410,
+207,
+435
+],
+"2025": [
+478,
+450,
+468,
+444,
+462
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 168.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+534,
+533,
+474,
+523,
+499
+],
+"2025": [
+561,
+534,
+569,
+533,
+499
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 178.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+256,
+408,
+444,
+332,
+222
+],
+"2025": [
+256,
+408,
+332,
+222,
+427
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 173.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+296,
+343,
+538,
+134,
+541
+],
+"2025": [
+296,
+538,
+343,
+541,
+451
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 181.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+322,
+452,
+190,
+313,
+410
+],
+"2025": [
+571,
+558,
+322,
+190,
+406
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 110.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+400,
+288,
+222,
+141,
+410
+],
+"2025": [
+400,
+288,
+228,
+425,
+248
+]
+}
+},
+"S.BOOK.HEAD_SHOULDERS|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 113.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+241,
+408,
+209,
+176,
+273
+],
+"2025": [
+241,
+12,
+20,
+408,
+176
+]
+}
+},
+"S.DAILY.ABS_MOM|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 141.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+277,
+311,
+244,
+423,
+428
+],
+"2025": [
+8,
+277,
+423,
+311,
+244
+]
+}
+},
+"S.DAILY.ABS_MOM|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 128.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+410,
+8,
+310,
+418,
+212
+],
+"2025": [
+8,
+410,
+310,
+418,
+463
+]
+}
+},
+"S.DAILY.ABS_MOM|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 147.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+83,
+60,
+34,
+49,
+22
+],
+"2025": [
+83,
+34,
+60,
+22,
+49
+]
+}
+},
+"S.DAILY.ABS_MOM|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 199.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+157,
+231,
+259,
+536,
+276
+],
+"2025": [
+259,
+157,
+505,
+276,
+162
+]
+}
+},
+"S.DAILY.ABS_MOM|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 147.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+420,
+316,
+198,
+312,
+265
+],
+"2025": [
+420,
+316,
+198,
+454,
+472
+]
+}
+},
+"S.DAILY.ABS_MOM|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 173.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+32,
+104,
+266,
+273,
+8
+],
+"2025": [
+104,
+32,
+266,
+8,
+273
+]
+}
+},
+"S.DAILY.ABS_MOM|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 173.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+330,
+502,
+529,
+308,
+295
+],
+"2025": [
+330,
+529,
+502,
+295,
+568
+]
+}
+},
+"S.DAILY.ABS_MOM|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 180.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+526,
+542,
+308,
+335,
+444
+],
+"2025": [
+526,
+542,
+575,
+444,
+567
+]
+}
+},
+"S.DAILY.ABS_MOM|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 175.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+164,
+312,
+244,
+501,
+536
+],
+"2025": [
+164,
+501,
+312,
+147,
+475
+]
+}
+},
+"S.DAILY.ABS_MOM|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 154.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+372,
+36,
+444,
+268,
+289
+],
+"2025": [
+372,
+36,
+444,
+268,
+523
+]
+}
+},
+"S.DAILY.ABS_MOM|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 174.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+353,
+415,
+443,
+456,
+309
+],
+"2025": [
+443,
+353,
+309,
+552,
+286
+]
+}
+},
+"S.DAILY.ABS_MOM|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 187.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+534,
+501,
+386,
+316,
+537
+],
+"2025": [
+550,
+534,
+547,
+561,
+501
+]
+}
+},
+"S.DAILY.ABS_MOM|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 143.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+443,
+270,
+416,
+250,
+408
+],
+"2025": [
+463,
+453,
+443,
+464,
+270
+]
+}
+},
+"S.DAILY.ABS_MOM|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 206.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+141,
+253,
+343,
+190,
+441
+],
+"2025": [
+141,
+253,
+190,
+449,
+191
+]
+}
+},
+"S.DAILY.ABS_MOM|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 128.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+354,
+442,
+388,
+436,
+345
+],
+"2025": [
+451,
+354,
+465,
+442,
+345
+]
+}
+},
+"S.DAILY.ABS_MOM|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 121.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+444,
+376,
+291,
+303,
+354
+],
+"2025": [
+376,
+444,
+291,
+303,
+354
+]
+}
+},
+"S.DAILY.ABS_MOM|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 179.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+450,
+536,
+361,
+467,
+506
+],
+"2025": [
+450,
+536,
+361,
+467,
+506
+]
+}
+},
+"S.DAILY.ABS_MOM|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 193.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+10,
+333,
+374,
+507,
+357
+],
+"2025": [
+333,
+363,
+34,
+459,
+444
+]
+}
+},
+"S.DAILY.ABS_MOM|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 134.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+43,
+13,
+20,
+10,
+21
+],
+"2025": [
+43,
+41,
+20,
+13,
+433
+]
+}
+},
+"S.DAILY.ABS_MOM|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 178.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+427,
+219,
+407,
+259,
+412
+],
+"2025": [
+436,
+219,
+407,
+412,
+427
+]
+}
+},
+"S.DAILY.ABS_MOM|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 182.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+537,
+514,
+302,
+519,
+467
+],
+"2025": [
+537,
+514,
+302,
+519,
+467
+]
+}
+},
+"S.DAILY.ABS_MOM|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 136.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+38,
+16,
+435,
+28,
+345
+],
+"2025": [
+16,
+435,
+38,
+345,
+113
+]
+}
+},
+"S.DAILY.ABS_MOM|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 136.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+273,
+355,
+342,
+120,
+368
+],
+"2025": [
+273,
+120,
+342,
+355,
+368
+]
+}
+},
+"S.DAILY.ABS_MOM|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 126.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+58,
+43,
+62,
+133,
+392
+],
+"2025": [
+58,
+43,
+133,
+62,
+392
+]
+}
+},
+"S.DAILY.ABS_MOM|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 173.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+17,
+350,
+24,
+372,
+379
+],
+"2025": [
+17,
+350,
+24,
+539,
+372
+]
+}
+},
+"S.DAILY.ABS_MOM|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 197.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+36,
+530,
+520,
+324,
+495
+],
+"2025": [
+36,
+74,
+103,
+530,
+520
+]
+}
+},
+"S.DAILY.ABS_MOM|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 176.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+56,
+321,
+536,
+162,
+537
+],
+"2025": [
+56,
+548,
+552,
+558,
+537
+]
+}
+},
+"S.DAILY.ABS_MOM|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 128.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+284,
+370,
+336,
+202,
+209
+],
+"2025": [
+418,
+370,
+336,
+441,
+220
+]
+}
+},
+"S.DAILY.ABS_MOM|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 235.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+308,
+405,
+295,
+494,
+305
+],
+"2025": [
+308,
+405,
+572,
+551,
+494
+]
+}
+},
+"S.DAILY.ABS_MOM|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 129.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+123,
+380,
+291,
+441,
+316
+],
+"2025": [
+380,
+123,
+466,
+330,
+292
+]
+}
+},
+"S.DAILY.OPEX|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 121.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+80,
+430,
+215,
+437,
+245
+],
+"2025": [
+80,
+430,
+437,
+215,
+245
+]
+}
+},
+"S.DAILY.OPEX|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 138.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+143,
+239,
+208,
+338,
+209
+],
+"2025": [
+463,
+143,
+467,
+208,
+229
+]
+}
+},
+"S.DAILY.OPEX|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 207.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+540,
+357,
+439,
+258,
+534
+],
+"2025": [
+540,
+357,
+240,
+439,
+258
+]
+}
+},
+"S.DAILY.OPEX|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 154.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+394,
+361,
+367,
+16,
+72
+],
+"2025": [
+72,
+394,
+78,
+361,
+367
+]
+}
+},
+"S.DAILY.OPEX|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 126.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+394,
+343,
+393,
+445,
+363
+],
+"2025": [
+394,
+440,
+366,
+393,
+139
+]
+}
+},
+"S.DAILY.OPEX|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 180.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+284,
+61,
+367,
+219,
+515
+],
+"2025": [
+284,
+61,
+191,
+219,
+367
+]
+}
+},
+"S.DAILY.OPEX|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 206.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+16,
+57,
+61,
+246,
+431
+],
+"2025": [
+16,
+57,
+246,
+431,
+50
+]
+}
+},
+"S.DAILY.OPEX|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 189.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+355,
+528,
+513,
+460,
+479
+],
+"2025": [
+355,
+528,
+545,
+513,
+60
+]
+}
+},
+"S.DAILY.OPEX|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 159.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+365,
+294,
+482,
+297,
+450
+],
+"2025": [
+365,
+390,
+482,
+542,
+503
+]
+}
+},
+"S.DAILY.OPEX|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 200.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+503,
+541,
+425,
+428,
+491
+],
+"2025": [
+558,
+503,
+568,
+491,
+541
+]
+}
+},
+"S.DAILY.OPEX|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 141.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+403,
+431,
+373,
+358,
+383
+],
+"2025": [
+373,
+413,
+366,
+403,
+241
+]
+}
+},
+"S.DAILY.OPEX|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 179.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+64,
+416,
+135,
+425,
+520
+],
+"2025": [
+64,
+568,
+425,
+416,
+520
+]
+}
+},
+"S.DAILY.OPEX|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 209.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+528,
+534,
+400,
+495,
+485
+],
+"2025": [
+568,
+528,
+550,
+447,
+540
+]
+}
+},
+"S.DAILY.OPEX|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 197.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+188,
+519,
+474,
+300,
+503
+],
+"2025": [
+60,
+188,
+551,
+519,
+103
+]
+}
+},
+"S.DAILY.OPEX|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 122.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+370,
+371,
+366,
+327,
+379
+],
+"2025": [
+251,
+406,
+253,
+168,
+389
+]
+}
+},
+"S.DAILY.OPEX|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 139.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+390,
+374,
+0,
+328,
+389
+],
+"2025": [
+390,
+374,
+328,
+457,
+463
+]
+}
+},
+"S.DAILY.OPEX|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 177.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+393,
+543,
+398,
+421,
+503
+],
+"2025": [
+543,
+437,
+503,
+393,
+398
+]
+}
+},
+"S.DAILY.OPEX|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 172.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+347,
+473,
+506,
+407,
+513
+],
+"2025": [
+347,
+473,
+506,
+545,
+407
+]
+}
+},
+"S.DAILY.OPEX|GBPNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 137.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+37,
+0,
+110,
+30,
+9
+],
+"2025": [
+37,
+30,
+0,
+110,
+9
+]
+}
+},
+"S.DAILY.OPEX|GBPJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 180.0,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+422,
+533,
+446,
+326,
+438
+],
+"2025": [
+60,
+422,
+533,
+563,
+446
+]
+}
+},
+"S.DAILY.OPEX|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 123.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+74,
+71,
+7,
+95,
+42
+],
+"2025": [
+74,
+71,
+95,
+467,
+461
+]
+}
+},
+"S.DAILY.OPEX|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 186.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+511,
+510,
+496,
+434,
+537
+],
+"2025": [
+511,
+556,
+537,
+544,
+386
+]
+}
+},
+"S.DAILY.OPEX|NZDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 141.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+397,
+420,
+446,
+411,
+381
+],
+"2025": [
+471,
+472,
+462,
+420,
+397
+]
+}
+},
+"S.DAILY.OPEX|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 148.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+251,
+318,
+419,
+322,
+154
+],
+"2025": [
+251,
+456,
+318,
+322,
+419
+]
+}
+},
+"S.DAILY.OPEX|NZDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 200.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+57,
+538,
+407,
+472,
+542
+],
+"2025": [
+538,
+542,
+46,
+472,
+57
+]
+}
+},
+"S.DAILY.OPEX|USDCAD": {
+"trials": 576,
+"errors": 0,
+"seconds": 192.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+491,
+417,
+536,
+480,
+195
+],
+"2025": [
+417,
+480,
+491,
+536,
+240
+]
+}
+},
+"S.DAILY.OPEX|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 116.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+387,
+376,
+277,
+295,
+158
+],
+"2025": [
+387,
+376,
+203,
+160,
+277
+]
+}
+},
+"S.DAILY.OPEX|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 213.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+372,
+464,
+512,
+494,
+445
+],
+"2025": [
+372,
+464,
+512,
+417,
+347
+]
+}
+},
+"S.DAILY.OPEX|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 185.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+49,
+482,
+511,
+493,
+489
+],
+"2025": [
+49,
+60,
+1,
+11,
+43
+]
+}
+},
+"S.DAILY.OPEX|XAGUSD": {
+"trials": 480,
+"errors": 0,
+"seconds": 127.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+20,
+437,
+75,
+10,
+440
+],
+"2025": [
+20,
+112,
+461,
+463,
+49
+]
+}
+},
+"S.BOOK.CONNORS_R3|AUDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 122.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+27,
+303,
+71,
+439,
+322
+],
+"2025": [
+303,
+399,
+446,
+439,
+377
+]
+}
+},
+"S.BOOK.CONNORS_R3|AUDCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 137.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+420,
+298,
+194,
+446,
+395
+],
+"2025": [
+420,
+194,
+424,
+287,
+148
+]
+}
+},
+"S.BOOK.CONNORS_R3|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 159.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+388,
+414,
+419,
+352,
+204
+],
+"2025": [
+528,
+539,
+530,
+527,
+536
+]
+}
+},
+"S.BOOK.CONNORS_R3|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 185.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+510,
+267,
+537,
+264,
+497
+],
+"2025": [
+510,
+537,
+264,
+267,
+502
+]
+}
+},
+"S.BOOK.CONNORS_R3|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 142.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+32,
+31,
+64,
+74,
+69
+],
+"2025": [
+32,
+64,
+31,
+74,
+19
+]
+}
+},
+"S.BOOK.CONNORS_R3|AUDUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 184.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+393,
+510,
+343,
+358,
+515
+],
+"2025": [
+555,
+510,
+393,
+564,
+575
+]
+}
+},
+"S.BOOK.CONNORS_R3|CADJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 176.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+426,
+508,
+519,
+417,
+421
+],
+"2025": [
+426,
+508,
+519,
+421,
+546
+]
+}
+},
+"S.BOOK.CONNORS_R3|CHFJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 186.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+203,
+436,
+293,
+387,
+526
+],
+"2025": [
+203,
+293,
+159,
+387,
+436
+]
+}
+},
+"S.BOOK.CONNORS_R3|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 149.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+453,
+385,
+387,
+335,
+296
+],
+"2025": [
+453,
+296,
+385,
+533,
+335
+]
+}
+},
+"S.BOOK.CONNORS_R3|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 198.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+543,
+416,
+451,
+409,
+508
+],
+"2025": [
+543,
+416,
+564,
+451,
+409
+]
+}
+},
+"S.BOOK.CONNORS_R3|EURCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 202.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+374,
+542,
+437,
+353,
+458
+],
+"2025": [
+556,
+374,
+437,
+564,
+353
+]
+}
+},
+"S.BOOK.CONNORS_R3|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 202.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+453,
+449,
+518,
+392,
+437
+],
+"2025": [
+453,
+571,
+449,
+392,
+563
+]
+}
+},
+"S.BOOK.CONNORS_R3|EURNZD": {
+"trials": 480,
+"errors": 0,
+"seconds": 131.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+387,
+67,
+431,
+385,
+393
+],
+"2025": [
+387,
+67,
+88,
+385,
+431
+]
+}
+},
+"S.BOOK.CONNORS_R3|EURJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 196.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+421,
+486,
+308,
+492,
+162
+],
+"2025": [
+421,
+486,
+308,
+492,
+65
+]
+}
+},
+"S.BOOK.CONNORS_R3|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 132.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+12,
+104,
+236,
+357,
+438
+],
+"2025": [
+104,
+12,
+236,
+357,
+44
+]
+}
+},
+"S.BOOK.CONNORS_R3|GBPCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 132.9,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+371,
+434,
+281,
+407,
+360
+],
+"2025": [
+371,
+460,
+281,
+434,
+360
+]
+}
+},
+"S.BOOK.CONNORS_R3|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 191.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+409,
+371,
+27,
+458,
+519
+],
+"2025": [
+409,
+27,
+371,
+458,
+519
+]
+}
+}
+},
+"seconds": 19500
+}

@@ -1,0 +1,120 @@
+{
+"group": "ALT",
+"tf": "H2",
+"tag": "ALT-H2-01-r-REGIME_SWITCH-1",
+"units": 15,
+"done": 15,
+"final": true,
+"full_group": false,
+"missing_bars": [],
+"seconds": 77,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.VOL.REGIME_SWITCH|1000LUNCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 17.9,
+"select_seconds": 0.5
+},
+"S.VOL.REGIME_SWITCH|ALGOUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 22.5,
+"select_seconds": 0.9
+},
+"S.VOL.REGIME_SWITCH|ATOMUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 23.2,
+"select_seconds": 0.9
+},
+"S.VOL.REGIME_SWITCH|BNBUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 23.8,
+"select_seconds": 0.8
+},
+"S.VOL.REGIME_SWITCH|CRVUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 14.3,
+"select_seconds": 0.9
+},
+"S.VOL.REGIME_SWITCH|DYDXUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 11.7,
+"select_seconds": 0.6
+},
+"S.VOL.REGIME_SWITCH|FTMUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 12.5,
+"select_seconds": 0.9
+},
+"S.VOL.REGIME_SWITCH|KAVAUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 14.4,
+"select_seconds": 0.8
+},
+"S.VOL.REGIME_SWITCH|LUNAUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.7,
+"select_seconds": 0.2
+},
+"S.VOL.REGIME_SWITCH|NEIROETHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 5.6,
+"select_seconds": 0.2
+},
+"S.VOL.REGIME_SWITCH|ORDIUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 8.0,
+"select_seconds": 0.2
+},
+"S.VOL.REGIME_SWITCH|SUIUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 8.9,
+"select_seconds": 0.2
+},
+"S.VOL.REGIME_SWITCH|TLMUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 10.8,
+"select_seconds": 0.4
+},
+"S.VOL.REGIME_SWITCH|VETUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 14.2,
+"select_seconds": 0.5
+},
+"S.VOL.REGIME_SWITCH|XRPUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 12.8,
+"select_seconds": 0.5
+}
+}
+}

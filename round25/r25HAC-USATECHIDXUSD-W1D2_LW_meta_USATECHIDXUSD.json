@@ -1,0 +1,61 @@
+{
+"symbol": "USATECHIDXUSD",
+"tfs": [
+"W1",
+"D2"
+],
+"units": 6,
+"done": 6,
+"skipped": [],
+"final": true,
+"seconds": 19,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.ICHIMOKU_KUMO": {
+"constants_exposed": 6,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5"
+]
+},
+"S.BOOK.RASCHKE_ANTI": {
+"constants_exposed": 7,
+"verified": true,
+"params": [
+"k",
+"d",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6"
+]
+},
+"S.WEIRD.MERCURY_RETRO": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"mode",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.WEIRD.MERCURY_RETRO|W1": 8.9,
+"S.BOOK.ICHIMOKU_KUMO|W1": 11.0,
+"S.BOOK.RASCHKE_ANTI|W1": 10.8,
+"S.BOOK.ICHIMOKU_KUMO|D2": 9.5,
+"S.BOOK.RASCHKE_ANTI|D2": 3.1,
+"S.WEIRD.MERCURY_RETRO|D2": 2.5
+}
+}

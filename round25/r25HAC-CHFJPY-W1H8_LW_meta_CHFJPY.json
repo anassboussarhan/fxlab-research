@@ -1,0 +1,29 @@
+{
+"symbol": "CHFJPY",
+"tfs": [
+"W1",
+"H8"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 16,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.DAILY.IBS": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"lo",
+"x",
+"short"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.IBS|W1": 9.7,
+"S.DAILY.IBS|H8": 10.1
+}
+}

@@ -1,0 +1,121 @@
+{
+"tf": "H1",
+"units": 5,
+"done": 5,
+"final": true,
+"missing_bars": [],
+"lost": [],
+"unit_meta": {
+"S.DAILY.CUM_RSI|NZDJPY": {
+"trials": 480,
+"errors": 0,
+"seconds": 380.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+326,
+331,
+309,
+251,
+417
+],
+"2025": [
+470,
+251,
+326,
+331,
+393
+]
+}
+},
+"S.DAILY.CUM_RSI|CADCHF": {
+"trials": 480,
+"errors": 0,
+"seconds": 383.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+415,
+389,
+362,
+279,
+213
+],
+"2025": [
+389,
+415,
+353,
+427,
+476
+]
+}
+},
+"S.DAILY.CUM_RSI|EURGBP": {
+"trials": 576,
+"errors": 0,
+"seconds": 511.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+539,
+537,
+394,
+286,
+433
+],
+"2025": [
+539,
+537,
+394,
+433,
+286
+]
+}
+},
+"S.DAILY.CUM_RSI|GBPCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 538.1,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+77,
+91,
+318,
+63,
+266
+],
+"2025": [
+77,
+91,
+63,
+318,
+266
+]
+}
+},
+"S.DAILY.CUM_RSI|XAUUSD": {
+"trials": 448,
+"errors": 0,
+"seconds": 263.5,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+24,
+50,
+285,
+283,
+88
+],
+"2025": [
+24,
+50,
+88,
+63,
+39
+]
+}
+}
+},
+"seconds": 647
+}

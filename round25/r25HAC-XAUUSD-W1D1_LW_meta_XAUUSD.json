@@ -1,0 +1,78 @@
+{
+"symbol": "XAUUSD",
+"tfs": [
+"W1",
+"D1"
+],
+"units": 10,
+"done": 10,
+"skipped": [],
+"final": true,
+"seconds": 19,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.BW_AO": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.BW_FRACTAL": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.WILLIAMS_R": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"n",
+"m",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.DAILY.VOL_TARGET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"tv",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.MR.STOCH_REVERSAL": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"lo",
+"hi"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.BW_AO|W1": 8.7,
+"S.BOOK.WILLIAMS_R|W1": 8.9,
+"S.DAILY.VOL_TARGET|W1": 9.2,
+"S.BOOK.BW_FRACTAL|W1": 9.9,
+"S.MR.STOCH_REVERSAL|W1": 2.3,
+"S.BOOK.BW_AO|D1": 2.5,
+"S.BOOK.BW_FRACTAL|D1": 2.1,
+"S.BOOK.WILLIAMS_R|D1": 2.2,
+"S.DAILY.VOL_TARGET|D1": 1.1,
+"S.MR.STOCH_REVERSAL|D1": 1.8
+}
+}

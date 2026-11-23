@@ -1,0 +1,29 @@
+{
+"symbol": "CHFJPY",
+"tfs": [
+"W1",
+"H2"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 21,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.HEIKIN_ASHI": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.HEIKIN_ASHI|W1": 7.3,
+"S.BOOK.HEIKIN_ASHI|H2": 13.9
+}
+}

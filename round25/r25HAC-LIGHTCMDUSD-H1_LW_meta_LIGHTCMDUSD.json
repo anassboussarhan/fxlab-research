@@ -1,0 +1,35 @@
+{
+"symbol": "LIGHTCMDUSD",
+"tfs": [
+"H1"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 18,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.WILDER_DMI": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"thr",
+"__c0"
+]
+},
+"S.MR.BOLLINGER": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"k"
+]
+}
+},
+"unit_seconds": {
+"S.MR.BOLLINGER|H1": 12.2,
+"S.BOOK.WILDER_DMI|H1": 14.0
+}
+}

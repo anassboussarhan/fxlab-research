@@ -1,0 +1,28 @@
+{
+"symbol": "HKGIDXHKD",
+"tfs": [
+"H1"
+],
+"units": 1,
+"done": 1,
+"skipped": [],
+"final": true,
+"seconds": 18,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.VOL.EXPANSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"s",
+"__c0",
+"__c1"
+]
+}
+},
+"unit_seconds": {
+"S.VOL.EXPANSION|H1": 15.2
+}
+}

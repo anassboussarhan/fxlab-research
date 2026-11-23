@@ -1,0 +1,121 @@
+{
+"tf": "H1",
+"units": 5,
+"done": 5,
+"final": true,
+"missing_bars": [],
+"lost": [],
+"unit_meta": {
+"S.DAILY.CUM_RSI|EURAUD": {
+"trials": 576,
+"errors": 0,
+"seconds": 688.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+441,
+459,
+539,
+468,
+358
+],
+"2025": [
+459,
+220,
+441,
+468,
+539
+]
+}
+},
+"S.DAILY.CUM_RSI|GBPUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 689.2,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+500,
+83,
+497,
+349,
+391
+],
+"2025": [
+349,
+391,
+497,
+500,
+83
+]
+}
+},
+"S.DAILY.CUM_RSI|AUDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 697.3,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+182,
+472,
+209,
+512,
+415
+],
+"2025": [
+209,
+472,
+182,
+512,
+415
+]
+}
+},
+"S.DAILY.CUM_RSI|EURUSD": {
+"trials": 576,
+"errors": 0,
+"seconds": 792.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+328,
+451,
+399,
+246,
+503
+],
+"2025": [
+328,
+399,
+503,
+451,
+546
+]
+}
+},
+"S.DAILY.CUM_RSI|USDCHF": {
+"trials": 576,
+"errors": 0,
+"seconds": 433.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+404,
+459,
+506,
+423,
+328
+],
+"2025": [
+404,
+459,
+549,
+506,
+423
+]
+}
+}
+},
+"seconds": 1125
+}

@@ -1,0 +1,121 @@
+{
+"tf": "H1",
+"units": 5,
+"done": 5,
+"final": true,
+"missing_bars": [],
+"lost": [],
+"unit_meta": {
+"S.DAILY.CUM_RSI|GBPAUD": {
+"trials": 480,
+"errors": 0,
+"seconds": 670.4,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+444,
+443,
+363,
+312,
+60
+],
+"2025": [
+444,
+443,
+363,
+312,
+457
+]
+}
+},
+"S.DAILY.CUM_RSI|NZDCAD": {
+"trials": 480,
+"errors": 0,
+"seconds": 692.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+408,
+169,
+122,
+186,
+300
+],
+"2025": [
+169,
+408,
+300,
+411,
+81
+]
+}
+},
+"S.DAILY.CUM_RSI|AUDNZD": {
+"trials": 544,
+"errors": 0,
+"seconds": 807.7,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+402,
+258,
+274,
+365,
+404
+],
+"2025": [
+274,
+365,
+402,
+476,
+328
+]
+}
+},
+"S.DAILY.CUM_RSI|EURCAD": {
+"trials": 544,
+"errors": 0,
+"seconds": 818.6,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+511,
+430,
+500,
+329,
+421
+],
+"2025": [
+526,
+511,
+430,
+421,
+329
+]
+}
+},
+"S.DAILY.CUM_RSI|USDJPY": {
+"trials": 576,
+"errors": 0,
+"seconds": 579.8,
+"stopped_at": null,
+"last_picks": {
+"2024": [
+63,
+487,
+304,
+495,
+228
+],
+"2025": [
+487,
+63,
+476,
+554,
+539
+]
+}
+}
+},
+"seconds": 1254
+}

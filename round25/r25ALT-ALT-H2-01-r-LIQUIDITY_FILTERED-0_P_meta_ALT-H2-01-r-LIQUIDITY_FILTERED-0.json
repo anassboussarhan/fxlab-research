@@ -1,0 +1,127 @@
+{
+"group": "ALT",
+"tf": "H2",
+"tag": "ALT-H2-01-r-LIQUIDITY_FILTERED-0",
+"units": 16,
+"done": 16,
+"final": true,
+"full_group": false,
+"missing_bars": [],
+"seconds": 110,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.MS.LIQUIDITY_FILTERED|1000BONKUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 19.2,
+"select_seconds": 0.4
+},
+"S.MS.LIQUIDITY_FILTERED|ARBUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 21.3,
+"select_seconds": 0.4
+},
+"S.MS.LIQUIDITY_FILTERED|ADAUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 32.1,
+"select_seconds": 1.2
+},
+"S.MS.LIQUIDITY_FILTERED|BCHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 31.8,
+"select_seconds": 1.2
+},
+"S.MS.LIQUIDITY_FILTERED|COMPUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 22.3,
+"select_seconds": 1.1
+},
+"S.MS.LIQUIDITY_FILTERED|DOTUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 21.6,
+"select_seconds": 1.1
+},
+"S.MS.LIQUIDITY_FILTERED|INJUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 13.9,
+"select_seconds": 0.6
+},
+"S.MS.LIQUIDITY_FILTERED|FILUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 19.7,
+"select_seconds": 1.1
+},
+"S.MS.LIQUIDITY_FILTERED|OPUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 14.5,
+"select_seconds": 0.7
+},
+"S.MS.LIQUIDITY_FILTERED|NEARUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 19.9,
+"select_seconds": 1.1
+},
+"S.MS.LIQUIDITY_FILTERED|LTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 22.5,
+"select_seconds": 1.2
+},
+"S.MS.LIQUIDITY_FILTERED|TIAUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 10.3,
+"select_seconds": 0.3
+},
+"S.MS.LIQUIDITY_FILTERED|UXLINKUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 7.1,
+"select_seconds": 0.3
+},
+"S.MS.LIQUIDITY_FILTERED|SOLUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 19.9,
+"select_seconds": 1.1
+},
+"S.MS.LIQUIDITY_FILTERED|XLMUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 19.5,
+"select_seconds": 0.7
+},
+"S.MS.LIQUIDITY_FILTERED|ZILUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 15.3,
+"select_seconds": 0.7
+}
+}
+}

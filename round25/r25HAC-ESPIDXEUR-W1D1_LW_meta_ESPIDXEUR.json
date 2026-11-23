@@ -1,0 +1,30 @@
+{
+"symbol": "ESPIDXEUR",
+"tfs": [
+"W1",
+"D1"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 13,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BO.RETEST": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"n",
+"m",
+"tol",
+"__c0"
+]
+}
+},
+"unit_seconds": {
+"S.BO.RETEST|W1": 9.0,
+"S.BO.RETEST|D1": 9.5
+}
+}

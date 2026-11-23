@@ -1,0 +1,38 @@
+{
+"symbol": "USA30IDXUSD",
+"tfs": [
+"W1",
+"D1"
+],
+"units": 4,
+"done": 4,
+"skipped": [],
+"final": true,
+"seconds": 11,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.MR.ZSCORE": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"k"
+]
+},
+"S.SEAS.TURN_OF_MONTH": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"Y",
+"__c0"
+]
+}
+},
+"unit_seconds": {
+"S.MR.ZSCORE|W1": 7.9,
+"S.SEAS.TURN_OF_MONTH|W1": 7.9,
+"S.MR.ZSCORE|D1": 8.4,
+"S.SEAS.TURN_OF_MONTH|D1": 8.8
+}
+}

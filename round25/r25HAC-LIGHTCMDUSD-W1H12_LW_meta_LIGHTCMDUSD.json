@@ -1,0 +1,28 @@
+{
+"symbol": "LIGHTCMDUSD",
+"tfs": [
+"W1",
+"H12"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 21,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.RG.CHANGE_POINT": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"p",
+"__c0"
+]
+}
+},
+"unit_seconds": {
+"S.RG.CHANGE_POINT|W1": 7.3,
+"S.RG.CHANGE_POINT|H12": 14.7
+}
+}

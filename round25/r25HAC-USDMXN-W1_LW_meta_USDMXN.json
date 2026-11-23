@@ -1,0 +1,28 @@
+{
+"symbol": "USDMXN",
+"tfs": [
+"W1"
+],
+"units": 1,
+"done": 1,
+"skipped": [],
+"final": true,
+"seconds": 13,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.ELDER_IMPULSE": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.ELDER_IMPULSE|W1": 9.3
+}
+}

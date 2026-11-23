@@ -1,0 +1,27 @@
+{
+"symbol": "EURSEK",
+"tfs": [
+"H1"
+],
+"units": 1,
+"done": 1,
+"skipped": [],
+"final": true,
+"seconds": 23,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.GEO.FIB_RETRACE": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"zz",
+"__c0",
+"__c1"
+]
+}
+},
+"unit_seconds": {
+"S.GEO.FIB_RETRACE|H1": 18.4
+}
+}

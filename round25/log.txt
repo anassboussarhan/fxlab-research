@@ -1,0 +1,51 @@
+{
+ "streams": 790194,
+ "real_counted_streams": 126085,
+ "own_rule": 2323,
+ "bh": 753,
+ "counts": 523,
+ "first_bh_threshold_t": 4.800053624837253,
+ "hac_round23": {
+  "units": 100,
+  "rerun": 100,
+  "reproduced": 100,
+  "median_ratio_hac_to_iid": 1.03052034032925,
+  "still_above_1645": 100
+ }
+}
+  part  real_streams  real_own  real_own_share  real_max_t  placebo_streams  placebo_own  placebo_own_share  placebo_max_t  counts
+0   AD          1746        62        0.035510    3.184537               90            0           0.000000       1.208758       0
+1  ALT         16263       618        0.038000   23.497041             1680           41           0.024405       3.256250      31
+2   CF          1063         3        0.002822    2.556593             1073            3           0.002796       3.162611       0
+3    P        107013      1640        0.015325   38.629651            11106           62           0.005583       3.077175     492
+       part                   family                              unit  tf           symbol      klass      selection   oos_first   p1_mean   p2_mean       p2_t   p2_hac_t   own    bh
+416111    P    P-S.SEAS.FIX_REVERSAL         S.SEAS.FIX_REVERSAL|H1|fx  H1         PANEL:fx         fx   panel_nested  2013-01-01  0.001346  0.001151  38.629651  20.099693  True  True
+416110    P    P-S.SEAS.FIX_REVERSAL         S.SEAS.FIX_REVERSAL|H1|fx  H1         PANEL:fx         fx  panel_default  2010-01-01  0.000257  0.000187  23.772174  12.293062  True  True
+91725   ALT  ALT-S.SEAS.FIX_REVERSAL        S.SEAS.FIX_REVERSAL|H1|ALT  H1        PANEL:ALT        ALT  panel_default  2023-01-01       NaN  0.003359  23.497041  18.979638  True  True
+415949    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           EURUSD         fx    nested_plus  2013-01-01  0.001533  0.001524  23.399368  14.798639  True  True
+632478    P    P-S.SEAS.FIX_REVERSAL  S.SEAS.FIX_REVERSAL|H1|commodity  H1  PANEL:commodity  commodity   panel_nested  2019-01-02       NaN  0.005900  23.178085  14.002001  True  True
+416051    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDMXN         fx    nested_plus  2013-01-01  0.002407  0.002510  23.008529  14.325067  True  True
+416009    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDCAD         fx    nested_plus  2013-01-01  0.001656  0.001347  22.731565  16.015997  True  True
+415948    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           EURUSD         fx        default  2010-01-01  0.000503  0.000364  22.298722  14.082067  True  True
+416027    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDJPY         fx    nested_plus  2013-01-02  0.001308  0.001639  22.140134  15.303298  True  True
+415937    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           EURJPY         fx    nested_plus  2013-01-02  0.001344  0.001483  21.107793  15.541087  True  True
+416021    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDCHF         fx    nested_plus  2013-01-01  0.001487  0.001304  20.967962  15.646184  True  True
+415967    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           GBPJPY         fx    nested_plus  2013-01-01  0.001725  0.001709  20.868219  14.881417  True  True
+416026    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDJPY         fx        default  2010-01-04  0.000350  0.000384  20.674424  14.248213  True  True
+632483    P    P-S.SEAS.FIX_REVERSAL       S.SEAS.FIX_REVERSAL|H1|bond  H1       PANEL:bond       bond  panel_default  2022-01-03       NaN  0.000468  20.509861  13.476069  True  True
+415913    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           EURCAD         fx    nested_plus  2014-01-02  0.001586  0.001301  20.228441  14.998864  True  True
+415895    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           CADJPY         fx    nested_plus  2013-01-01  0.001747  0.001657  20.043933  14.340481  True  True
+416050    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDMXN         fx        default  2010-01-01  0.000694  0.000746  20.016292  12.489007  True  True
+416057    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDZAR         fx    nested_plus  2013-01-01  0.002639  0.001946  19.754657  16.937588  True  True
+416008    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDCAD         fx        default  2010-01-01  0.000333  0.000303  19.612134  14.038556  True  True
+632477    P    P-S.SEAS.FIX_REVERSAL  S.SEAS.FIX_REVERSAL|H1|commodity  H1  PANEL:commodity  commodity  panel_default  2016-01-01  0.000659  0.001499  19.572803  11.706039  True  True
+632474    P    P-S.SEAS.FIX_REVERSAL      S.SEAS.FIX_REVERSAL|H1|metal  H1      PANEL:metal      metal   panel_nested  2016-01-04  0.001487  0.002662  19.299403  12.512337  True  True
+415877    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           AUDJPY         fx    nested_plus  2013-01-01  0.001691  0.001826  19.175412  12.608863  True  True
+632406    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1      BRENTCMDUSD  commodity    nested_plus  2019-01-02       NaN  0.007168  19.116373  10.844442  True  True
+415955    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           GBPCAD         fx    nested_plus  2016-01-04  0.001475  0.001344  19.092442  12.912154  True  True
+632459    P    P-S.SEAS.FIX_REVERSAL      S.SEAS.FIX_REVERSAL|H1|index  H1      PANEL:index      index  panel_default  2015-01-02  0.000435  0.000554  18.908280  10.260307  True  True
+416015    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           USDSEK         fx    nested_plus  2013-01-01  0.001638  0.001537  18.810021  16.118064  True  True
+415979    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           GBPUSD         fx    nested_plus  2013-01-01  0.001390  0.001568  18.558490  13.520096  True  True
+632405    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1      BRENTCMDUSD  commodity        default  2016-01-04  0.001350  0.002303  18.550568  10.439990  True  True
+416003    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           NZDUSD         fx    nested_plus  2013-01-02  0.001565  0.001610  18.453783  12.543606  True  True
+632376    P    P-S.SEAS.FIX_REVERSAL            S.SEAS.FIX_REVERSAL|H1  H1           XAUUSD      metal    nested_plus  2017-01-03  0.001073  0.002220  18.063048  11.879604  True  True

@@ -1,0 +1,38 @@
+{
+"symbol": "USATECHIDXUSD",
+"tfs": [
+"W1",
+"D1"
+],
+"units": 4,
+"done": 4,
+"skipped": [],
+"final": true,
+"seconds": 24,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.GEO.HARMONIC": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"thr",
+"zz"
+]
+},
+"S.TREND.INDICATOR_SIGNAL": {
+"constants_exposed": 1,
+"verified": true,
+"params": [
+"kind",
+"__c0"
+]
+}
+},
+"unit_seconds": {
+"S.TREND.INDICATOR_SIGNAL|W1": 13.5,
+"S.GEO.HARMONIC|W1": 16.6,
+"S.TREND.INDICATOR_SIGNAL|D1": 17.2,
+"S.GEO.HARMONIC|D1": 18.2
+}
+}

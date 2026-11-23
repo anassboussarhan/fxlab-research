@@ -1,0 +1,51 @@
+{
+"symbol": "BTCUSDT",
+"tfs": [
+"H1"
+],
+"units": 3,
+"done": 3,
+"skipped": [],
+"final": true,
+"seconds": 18,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.HEIKIN_ASHI": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.DAILY.HALLOWEEN": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.DAILY.VOL_TARGET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"tv",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.VOL_TARGET|H1": 9.3,
+"S.DAILY.HALLOWEEN|H1": 11.4,
+"S.BOOK.HEIKIN_ASHI|H1": 14.0
+}
+}

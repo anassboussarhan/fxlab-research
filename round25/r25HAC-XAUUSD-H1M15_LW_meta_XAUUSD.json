@@ -1,0 +1,98 @@
+{
+"symbol": "XAUUSD",
+"tfs": [
+"H1",
+"M15"
+],
+"units": 12,
+"done": 12,
+"skipped": [],
+"final": true,
+"seconds": 230,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.BW_FRACTAL": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.CONNORS_CRSI": {
+"constants_exposed": 8,
+"verified": true,
+"params": [
+"lo",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7"
+]
+},
+"S.BOOK.HEIKIN_ASHI": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.LIEN_FADER": {
+"constants_exposed": 9,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8"
+]
+},
+"S.DAILY.VOL_TARGET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"tv",
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.ST.SWING_STRUCTURE": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.BW_FRACTAL|H1": 19.5,
+"S.BOOK.HEIKIN_ASHI|H1": 22.4,
+"S.BOOK.LIEN_FADER|H1": 24.2,
+"S.DAILY.VOL_TARGET|H1": 6.0,
+"S.ST.SWING_STRUCTURE|H1": 13.9,
+"S.BOOK.BW_FRACTAL|M15": 43.1,
+"S.BOOK.CONNORS_CRSI|H1": 76.6,
+"S.BOOK.HEIKIN_ASHI|M15": 59.2,
+"S.DAILY.VOL_TARGET|M15": 22.9,
+"S.BOOK.LIEN_FADER|M15": 63.8,
+"S.ST.SWING_STRUCTURE|M15": 47.0,
+"S.BOOK.CONNORS_CRSI|M15": 198.5
+}
+}

@@ -1,0 +1,30 @@
+{
+"symbol": "GASCMDUSD",
+"tfs": [
+"W1",
+"H4"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 11,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.SMC.SILVER_BULLET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"window",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.SMC.SILVER_BULLET|W1": 5.4,
+"S.SMC.SILVER_BULLET|H4": 7.5
+}
+}

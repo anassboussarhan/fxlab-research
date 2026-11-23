@@ -1,0 +1,85 @@
+{
+"group": "FX",
+"tf": "H1",
+"tag": "FX-H1-00-r-CHANGE_POINT-2",
+"units": 10,
+"done": 10,
+"final": true,
+"full_group": false,
+"missing_bars": [],
+"seconds": 2512,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.RG.CHANGE_POINT|EURCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 974.9,
+"select_seconds": 3.2
+},
+"S.RG.CHANGE_POINT|AUDJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 985.4,
+"select_seconds": 3.2
+},
+"S.RG.CHANGE_POINT|CADJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1000.0,
+"select_seconds": 3.2
+},
+"S.RG.CHANGE_POINT|EURUSD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 1068.1,
+"select_seconds": 3.4
+},
+"S.RG.CHANGE_POINT|NZDCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 854.8,
+"select_seconds": 2.7
+},
+"S.RG.CHANGE_POINT|GBPJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 986.9,
+"select_seconds": 3.4
+},
+"S.RG.CHANGE_POINT|USDCHF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 997.3,
+"select_seconds": 3.3
+},
+"S.RG.CHANGE_POINT|EURSEK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 954.0,
+"select_seconds": 2.4
+},
+"S.RG.CHANGE_POINT|EURHUF": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 485.0,
+"select_seconds": 2.3
+},
+"S.RG.CHANGE_POINT|USDTRY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 647.0,
+"select_seconds": 2.4
+}
+}
+}

@@ -1,0 +1,27 @@
+{
+"symbol": "ETHUSDT",
+"tfs": [
+"W1",
+"H8"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 10,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.WILLIAMS_SMASH": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.WILLIAMS_SMASH|W1": 5.8,
+"S.BOOK.WILLIAMS_SMASH|H8": 6.3
+}
+}

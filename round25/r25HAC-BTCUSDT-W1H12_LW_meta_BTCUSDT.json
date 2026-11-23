@@ -1,0 +1,30 @@
+{
+"symbol": "BTCUSDT",
+"tfs": [
+"W1",
+"H12"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 13,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.DAILY.VOL_TARGET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"tv",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.VOL_TARGET|W1": 5.7,
+"S.DAILY.VOL_TARGET|H12": 8.6
+}
+}

@@ -1,0 +1,32 @@
+{
+"symbol": "ETHUSDT",
+"tfs": [
+"H1",
+"M30"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 30,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.MR.SHORT_REVERSAL": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"thr",
+"h",
+"n",
+"__c0",
+"__c1"
+]
+}
+},
+"unit_seconds": {
+"S.MR.SHORT_REVERSAL|H1": 17.2,
+"S.MR.SHORT_REVERSAL|M30": 25.8
+}
+}

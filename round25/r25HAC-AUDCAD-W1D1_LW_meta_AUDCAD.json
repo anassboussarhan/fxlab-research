@@ -1,0 +1,28 @@
+{
+"symbol": "AUDCAD",
+"tfs": [
+"W1",
+"D1"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 14,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.TREND.DONCHIAN": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"m"
+]
+}
+},
+"unit_seconds": {
+"S.TREND.DONCHIAN|W1": 7.4,
+"S.TREND.DONCHIAN|D1": 7.8
+}
+}

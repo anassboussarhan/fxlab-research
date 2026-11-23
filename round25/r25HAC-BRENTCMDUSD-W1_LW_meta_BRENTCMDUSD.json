@@ -1,0 +1,38 @@
+{
+"symbol": "BRENTCMDUSD",
+"tfs": [
+"W1"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 10,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BO.VOL_BREAKOUT": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"__c0",
+"__c1"
+]
+},
+"S.VOL.EXPANSION": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"k",
+"s",
+"__c0",
+"__c1"
+]
+}
+},
+"unit_seconds": {
+"S.BO.VOL_BREAKOUT|W1": 6.5,
+"S.VOL.EXPANSION|W1": 6.7
+}
+}

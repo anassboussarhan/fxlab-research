@@ -1,0 +1,45 @@
+{
+"symbol": "XAUUSD",
+"tfs": [
+"W1",
+"H4"
+],
+"units": 4,
+"done": 4,
+"skipped": [],
+"final": true,
+"seconds": 13,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.DAILY.CUM_RSI": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"k",
+"lo",
+"x",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.MR.STOCH_REVERSAL": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n",
+"lo",
+"hi"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.CUM_RSI|W1": 7.3,
+"S.MR.STOCH_REVERSAL|W1": 7.0,
+"S.DAILY.CUM_RSI|H4": 9.4,
+"S.MR.STOCH_REVERSAL|H4": 9.4
+}
+}

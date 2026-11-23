@@ -1,0 +1,27 @@
+{
+"symbol": "AUSIDXAUD",
+"tfs": [
+"W1",
+"H4"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 11,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.ST.CANDLESTICK": {
+"constants_exposed": 0,
+"verified": false,
+"params": [
+"n"
+]
+}
+},
+"unit_seconds": {
+"S.ST.CANDLESTICK|W1": 6.9,
+"S.ST.CANDLESTICK|H4": 9.4
+}
+}

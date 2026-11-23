@@ -1,0 +1,32 @@
+{
+"symbol": "DEUIDXEUR",
+"tfs": [
+"W1",
+"H2"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 17,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.WEIRD.LUNAR": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"phase",
+"w",
+"dir",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.WEIRD.LUNAR|W1": 6.3,
+"S.WEIRD.LUNAR|H2": 11.0
+}
+}

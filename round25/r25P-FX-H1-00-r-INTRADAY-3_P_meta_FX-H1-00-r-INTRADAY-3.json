@@ -1,0 +1,85 @@
+{
+"group": "FX",
+"tf": "H1",
+"tag": "FX-H1-00-r-INTRADAY-3",
+"units": 10,
+"done": 10,
+"final": true,
+"full_group": false,
+"missing_bars": [],
+"seconds": 1008,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.SEAS.INTRADAY|GBPAUD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 385.0,
+"select_seconds": 5.6
+},
+"S.SEAS.INTRADAY|AUDNZD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 417.2,
+"select_seconds": 6.3
+},
+"S.SEAS.INTRADAY|CHFJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 446.6,
+"select_seconds": 6.9
+},
+"S.SEAS.INTRADAY|EURGBP": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 456.9,
+"select_seconds": 6.8
+},
+"S.SEAS.INTRADAY|EURNOK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 295.6,
+"select_seconds": 7.2
+},
+"S.SEAS.INTRADAY|GBPNZD": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 380.6,
+"select_seconds": 5.7
+},
+"S.SEAS.INTRADAY|NZDJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 372.9,
+"select_seconds": 5.7
+},
+"S.SEAS.INTRADAY|USDJPY": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 416.9,
+"select_seconds": 6.8
+},
+"S.SEAS.INTRADAY|USDCZK": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 126.6,
+"select_seconds": 1.9
+},
+"S.SEAS.INTRADAY|USDPLN": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 215.5,
+"select_seconds": 4.1
+}
+}
+}

@@ -1,0 +1,68 @@
+{
+"symbol": "XAUUSD",
+"tfs": [
+"W1"
+],
+"units": 3,
+"done": 3,
+"skipped": [],
+"final": true,
+"seconds": 14,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.CONNORS_R3": {
+"constants_exposed": 16,
+"verified": true,
+"params": [
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8",
+"__c9",
+"__c10",
+"__c11",
+"__c12",
+"__c13",
+"__c14",
+"__c15"
+]
+},
+"S.BOOK.WILLIAMS_R": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"n",
+"m",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.MR.OU": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"n",
+"k",
+"hl_min",
+"hl_max",
+"__c0",
+"__c1"
+]
+}
+},
+"unit_seconds": {
+"S.MR.OU|W1": 6.3,
+"S.BOOK.CONNORS_R3|W1": 7.8,
+"S.BOOK.WILLIAMS_R|W1": 7.9
+}
+}

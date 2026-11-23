@@ -1,0 +1,127 @@
+{
+"group": "ALT",
+"tf": "H2",
+"tag": "ALT-H2-01-r-REGIME_SWITCH-0",
+"units": 16,
+"done": 16,
+"final": true,
+"full_group": false,
+"missing_bars": [],
+"seconds": 130,
+"lost": [],
+"incomplete_keys": [],
+"unit_meta": {
+"S.VOL.REGIME_SWITCH|1000BONKUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 25.0,
+"select_seconds": 0.6
+},
+"S.VOL.REGIME_SWITCH|ARBUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 26.8,
+"select_seconds": 0.5
+},
+"S.VOL.REGIME_SWITCH|ADAUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 37.5,
+"select_seconds": 1.7
+},
+"S.VOL.REGIME_SWITCH|BCHUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 37.9,
+"select_seconds": 1.7
+},
+"S.VOL.REGIME_SWITCH|COMPUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 23.7,
+"select_seconds": 1.7
+},
+"S.VOL.REGIME_SWITCH|DOTUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 23.3,
+"select_seconds": 1.7
+},
+"S.VOL.REGIME_SWITCH|INJUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 16.0,
+"select_seconds": 0.9
+},
+"S.VOL.REGIME_SWITCH|FILUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 21.6,
+"select_seconds": 1.7
+},
+"S.VOL.REGIME_SWITCH|OPUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 16.6,
+"select_seconds": 0.9
+},
+"S.VOL.REGIME_SWITCH|LTCUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 23.5,
+"select_seconds": 2.0
+},
+"S.VOL.REGIME_SWITCH|NEARUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 21.9,
+"select_seconds": 1.8
+},
+"S.VOL.REGIME_SWITCH|UXLINKUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 8.9,
+"select_seconds": 0.5
+},
+"S.VOL.REGIME_SWITCH|SOLUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 22.4,
+"select_seconds": 1.8
+},
+"S.VOL.REGIME_SWITCH|TIAUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 12.4,
+"select_seconds": 0.4
+},
+"S.VOL.REGIME_SWITCH|XLMUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 20.9,
+"select_seconds": 1.1
+},
+"S.VOL.REGIME_SWITCH|ZILUSDT": {
+"n_run": 128,
+"errors": 0,
+"timeouts": 0,
+"seconds": 17.1,
+"select_seconds": 1.0
+}
+}
+}

@@ -1,0 +1,33 @@
+{
+"symbol": "UKGILTTRGBP",
+"tfs": [
+"W1",
+"H4"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 11,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.LIEN_PERFECT_ORDER": {
+"constants_exposed": 6,
+"verified": true,
+"params": [
+"thr",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.LIEN_PERFECT_ORDER|W1": 7.0,
+"S.BOOK.LIEN_PERFECT_ORDER|H4": 8.0
+}
+}

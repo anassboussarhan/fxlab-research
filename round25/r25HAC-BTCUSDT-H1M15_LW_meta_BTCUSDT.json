@@ -1,0 +1,95 @@
+{
+"symbol": "BTCUSDT",
+"tfs": [
+"H1",
+"M15"
+],
+"units": 12,
+"done": 12,
+"skipped": [],
+"final": true,
+"seconds": 275,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.BW_FRACTAL": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.CONNORS_CRSI": {
+"constants_exposed": 8,
+"verified": true,
+"params": [
+"lo",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7"
+]
+},
+"S.BOOK.HEIKIN_ASHI": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2"
+]
+},
+"S.BOOK.LIEN_INSIDE2": {
+"constants_exposed": 2,
+"verified": true,
+"params": [
+"__c0",
+"__c1"
+]
+},
+"S.BOOK.WILLIAMS_R": {
+"constants_exposed": 5,
+"verified": true,
+"params": [
+"n",
+"m",
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4"
+]
+},
+"S.DAILY.VOL_TARGET": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"tv",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.LIEN_INSIDE2|H1": 24.7,
+"S.BOOK.BW_FRACTAL|H1": 27.1,
+"S.BOOK.HEIKIN_ASHI|H1": 30.0,
+"S.DAILY.VOL_TARGET|H1": 6.5,
+"S.BOOK.WILLIAMS_R|H1": 14.5,
+"S.BOOK.BW_FRACTAL|M15": 43.6,
+"S.BOOK.CONNORS_CRSI|H1": 99.6,
+"S.BOOK.HEIKIN_ASHI|M15": 63.2,
+"S.BOOK.LIEN_INSIDE2|M15": 42.1,
+"S.DAILY.VOL_TARGET|M15": 17.8,
+"S.BOOK.WILLIAMS_R|M15": 37.2,
+"S.BOOK.CONNORS_CRSI|M15": 237.3
+}
+}

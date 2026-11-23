@@ -1,0 +1,59 @@
+{
+"symbol": "USATECHIDXUSD",
+"tfs": [
+"W1"
+],
+"units": 3,
+"done": 3,
+"skipped": [],
+"final": true,
+"seconds": 18,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.BOOK.LIEN_FADER": {
+"constants_exposed": 9,
+"verified": true,
+"params": [
+"__c0",
+"__c1",
+"__c2",
+"__c3",
+"__c4",
+"__c5",
+"__c6",
+"__c7",
+"__c8"
+]
+},
+"S.DAILY.CUM_RSI": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"k",
+"lo",
+"x",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+},
+"S.WEIRD.MERCURY_RETRO": {
+"constants_exposed": 3,
+"verified": true,
+"params": [
+"mode",
+"__c0",
+"__c1",
+"__c2"
+]
+}
+},
+"unit_seconds": {
+"S.BOOK.LIEN_FADER|W1": 10.5,
+"S.DAILY.CUM_RSI|W1": 10.1,
+"S.WEIRD.MERCURY_RETRO|W1": 10.7
+}
+}

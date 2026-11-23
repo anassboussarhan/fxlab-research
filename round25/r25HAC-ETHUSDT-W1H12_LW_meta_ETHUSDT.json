@@ -1,0 +1,25 @@
+{
+"symbol": "ETHUSDT",
+"tfs": [
+"W1",
+"H12"
+],
+"units": 2,
+"done": 2,
+"skipped": [],
+"final": true,
+"seconds": 11,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.ST.PIVOT_POINTS": {
+"constants_exposed": 0,
+"verified": false,
+"params": []
+}
+},
+"unit_seconds": {
+"S.ST.PIVOT_POINTS|W1": 6.1,
+"S.ST.PIVOT_POINTS|H12": 6.5
+}
+}

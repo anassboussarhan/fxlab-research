@@ -1,0 +1,31 @@
+{
+"symbol": "USATECHIDXUSD",
+"tfs": [
+"H1"
+],
+"units": 1,
+"done": 1,
+"skipped": [],
+"final": true,
+"seconds": 12,
+"lost": [],
+"unit_cap": 1800,
+"exposure": {
+"S.DAILY.HIGH52": {
+"constants_exposed": 4,
+"verified": true,
+"params": [
+"tol",
+"m",
+"short",
+"__c0",
+"__c1",
+"__c2",
+"__c3"
+]
+}
+},
+"unit_seconds": {
+"S.DAILY.HIGH52|H1": 8.6
+}
+}
