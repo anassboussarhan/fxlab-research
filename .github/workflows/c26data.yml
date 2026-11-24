@@ -1,0 +1,25 @@
+name: c26data
+# 2026 check: quality of the 2026 hour candles (ci/c26_data.py). Trigger: ci/C26DATA.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/C26DATA"]
+permissions:
+  contents: read
+  actions: read
+jobs:
+  q:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas pyarrow numpy
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          for S in USDTRY EUSIDXEUR CHEIDXCHF; do gh run download 45331755459 -n c26-m1-$S -D m1/$S; done
+          python ci/c26_data.py
