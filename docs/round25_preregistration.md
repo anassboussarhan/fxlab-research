@@ -332,3 +332,8 @@ Walk-forward selection picks that configuration because it wins every training w
   were.
 - **The first gate tested two configurations per rule.** It is repeated on every rule's full 128-configuration
   design at H1 and H4 (r25la3). Any other rule with a look-ahead configuration is void too.
+
+## Addendum 5 (2026-11-24)
+
+The full-design truncation test (r25la3) covers 26,752 configurations at H1 and H4. FIX_REVERSAL's single H1
+configuration is the only look-ahead; 9 configurations errored. No other rule is void.
