@@ -1,0 +1,18 @@
+name: r26sum
+# Summary of r26try (ci/r26_try_sum.py). Trigger: ci/R26SUM.
+on:
+  workflow_dispatch:
+  push: {branches: [main], paths: ["ci/R26SUM"]}
+permissions: {contents: read, actions: read}
+jobs:
+  s:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.13"}
+      - run: pip install -q pandas pyarrow
+      - env: {GH_TOKEN: "${{ github.token }}"}
+        run: |
+          mkdir -p inp && bash ci/dl_each.sh 45361261104 '^r26try-' inp
+          python ci/r26_try_sum.py
