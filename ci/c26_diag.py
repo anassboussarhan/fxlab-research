@@ -46,6 +46,15 @@ for u in units:
             rr = rf[m26]
             out["trades"]["top_bars"] = [(str(k), round(float(v), 4)) for k, v in rr.sort_values().tail(8).items()]
             out["trades"]["n_nonzero_2026"] = int((rr != 0).sum())
+            sig_ = fn(b.copy(), **params); sig_ = sig_.copy(); sig_["side"] = sig_["side"] * d_
+            res = evaluate(e.id, b, "USDTRY", signals=sig_[["side"]], mode_override="trade", risk_override=risk_, exec_cfg=ent_, financing="rates_oecd")
+            T = res["trades"]
+            T = T[pd.to_datetime(T.iloc[:, 0] if "entry_time" not in T else T["entry_time"], utc=True) >= pd.Timestamp("2026-01-01", tz="UTC")] if len(T) else T
+            out["trades"]["trade_columns"] = list(T.columns)
+            out["trades"]["n_trades_2026"] = int(len(T))
+            out["trades"]["trades_2026_head"] = T.head(12).astype(str).values.tolist()
+            sd = __import__("fxlab.execution.risk", fromlist=["x"]).stop_realized_vol(b, **risk_["stop_params"])
+            out["trades"]["stop_dist_2026_quantiles"] = [float(x) for x in sd[sd.index >= pd.Timestamp("2026-01-01", tz="UTC")].quantile([0, 0.1, 0.5, 0.9]).values]
             bb = b[b.index >= pd.Timestamp("2026-01-01", tz="UTC")]
             out["trades"]["bars_2026"] = [(str(k), round(float(x), 4), round(float(y), 4), round(float(z), 4)) for k, x, y, z in zip(bb.index[:3], bb.open[:3], bb.high[:3], bb.low[:3])]
             big = rr.sort_values().index[-1]
