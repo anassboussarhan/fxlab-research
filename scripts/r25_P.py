@@ -176,7 +176,11 @@ def main():
     ap.add_argument("--groups", default="ci/r25_groups.json")
     ap.add_argument("--universe", default="", help="part ALT: universe file (members by year, funding dir)")
     ap.add_argument("--only-keys", default="", help="reruns: keep only these keys (placebo / CF keys)")
+    ap.add_argument("--dev-end", default="", help="pre-registered 2026 checks only: data end, e.g. 2026-10-31")
     a = ap.parse_args()
+    if a.dev_end:
+        import dev_end
+        dev_end.apply(a.dev_end, int(a.dev_end[:4]))
     os.makedirs(a.out, exist_ok=True)
     warnings.filterwarnings("ignore")
     t_job = time.time()
@@ -316,7 +320,7 @@ def main():
                 rows.extend(rr)
                 for kind, sr in keep.items():
                     st = [r for r in rr if r["selection"] == kind]
-                    if st and st[0]["own"]:
+                    if st and (st[0]["own"] or a.dev_end):                     # 2026 checks keep every series
                         series[f"{k}|{a.tf}|{s}|{kind}"] = sr
                 aggs.setdefault(k, {})[s] = ag
                 meta_u[f"{k}|{s}"] = meta

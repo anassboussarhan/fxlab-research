@@ -120,7 +120,8 @@ def scores(ag, lo, b, sc, min_active, min_valid):
     return out
 
 
-def plan(ag, first_oos_year, setting, min_active=30, min_valid=50, min_train_years=3, last_year=2025, y0=None):
+def plan(ag, first_oos_year, setting, min_active=30, min_valid=50, min_train_years=3, last_year=None, y0=None):
+    last_year = wf23.LAST_YEAR if last_year is None else last_year
     """The re-selection plan: [(b, nxt, pick)] on ag's months (nxt None = to the end)."""
     w, top, rs, sc = setting
     if sc.startswith("decay"):
@@ -140,7 +141,8 @@ def plan(ag, first_oos_year, setting, min_active=30, min_valid=50, min_train_yea
     return out
 
 
-def stream(ag, pl, mkey=None, last_year=2025):
+def stream(ag, pl, mkey=None, last_year=None):
+    last_year = wf23.LAST_YEAR if last_year is None else last_year
     """Daily stream of instrument ag (an Agg25) following plan pl, whose month indices refer to mkey (default:
     ag's own months)."""
     mk = ag.mkey if mkey is None else mkey
@@ -160,10 +162,11 @@ def stream(ag, pl, mkey=None, last_year=2025):
 
 def walk_forward(ag, first_oos_year, setting, **kw):
     pl = plan(ag, first_oos_year, setting, **kw)
-    return stream(ag, pl, last_year=kw.get("last_year", 2025)), pl
+    return stream(ag, pl, last_year=kw.get("last_year", wf23.LAST_YEAR)), pl
 
 
-def nested_from_inner(inner, outer_years=3, last_year=2025):
+def nested_from_inner(inner, outer_years=3, last_year=None):
+    last_year = wf23.LAST_YEAR if last_year is None else last_year
     """wf23.nested's outer step on a dict name -> inner stream."""
     D = pd.DataFrame(inner)
     if D.empty:
@@ -185,7 +188,7 @@ def nested_from_inner(inner, outer_years=3, last_year=2025):
 
 def nested(ag, first_oos_year, settings, **kw):
     inner = {name(s): walk_forward(ag, first_oos_year, s, **kw)[0] for s in settings}
-    return nested_from_inner(inner, last_year=kw.get("last_year", 2025))
+    return nested_from_inner(inner, last_year=kw.get("last_year", wf23.LAST_YEAR))
 
 
 def pooled_stream(per_inst):
@@ -200,7 +203,7 @@ def panel(aggs, first_oos_year, setting, **kw):
     P = Pooled(aggs)
     P.dates = pd.DatetimeIndex([])                                         # unused by plan when y0 is given
     pl = plan(P, first_oos_year, setting, y0=P.y0, **kw)
-    per = {i: stream(a, pl, mkey=P.mkey, last_year=kw.get("last_year", 2025)) for i, a in enumerate(aggs)}
+    per = {i: stream(a, pl, mkey=P.mkey, last_year=kw.get("last_year", wf23.LAST_YEAR)) for i, a in enumerate(aggs)}
     return pooled_stream(per), per, pl
 
 
@@ -208,7 +211,7 @@ def panel_pit(aggs, members, first_oos_year, setting, **kw):
     """Point-in-time panel (part ALT): in year Y the plan is made on the pooled aggregates of the year's members only
     (their whole earlier history) and applied to them during Y. members: list of year lists, one per instrument.
     Returns (pooled stream, {i: instrument stream}, plans by year)."""
-    last_year = kw.get("last_year", 2025)
+    last_year = kw.get("last_year", wf23.LAST_YEAR)
     years = sorted({y for ys in members for y in ys if first_oos_year <= y <= last_year})
     per, plans = {}, {}
     for Y in years:
@@ -228,14 +231,14 @@ def panel_pit(aggs, members, first_oos_year, setting, **kw):
 
 def panel_pit_nested(aggs, members, first_oos_year, settings, **kw):
     inner = {name(s): panel_pit(aggs, members, first_oos_year, s, **kw)[0] for s in settings}
-    return nested_from_inner(inner, last_year=kw.get("last_year", 2025))
+    return nested_from_inner(inner, last_year=kw.get("last_year", wf23.LAST_YEAR))
 
 
 def panel_nested(aggs, first_oos_year, settings, **kw):
     inner = {}
     for s in settings:
         inner[name(s)] = panel(aggs, first_oos_year, s, **kw)[0]
-    return nested_from_inner(inner, last_year=kw.get("last_year", 2025))
+    return nested_from_inner(inner, last_year=kw.get("last_year", wf23.LAST_YEAR))
 
 
 # ------------------------------------------------------------------------------------------------ statistics

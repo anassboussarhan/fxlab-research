@@ -279,7 +279,11 @@ def main():
     ap.add_argument("--only", default="", help="test runs: comma-separated strategy ids")
     ap.add_argument("--save-bars", default="", help="round 25: write the H1-W1 bars used here to this directory")
     ap.add_argument("--save-series", action="store_true", help="round 25 part HAC: keep every unit's streams")
+    ap.add_argument("--dev-end", default="", help="pre-registered 2026 checks only: data end, e.g. 2026-10-31")
     a = ap.parse_args()
+    if a.dev_end:
+        import dev_end
+        dev_end.apply(a.dev_end, int(a.dev_end[:4]))
     os.makedirs(a.out, exist_ok=True)
     warnings.filterwarnings("ignore")
     t_job = time.time()

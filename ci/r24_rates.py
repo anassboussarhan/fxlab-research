@@ -58,7 +58,7 @@ for ccy, cc in BIS.items():
             x = f()
             x = x.resample("ME").mean() if name.endswith("_D") else x
             x.index = x.index.to_period("M")
-            x = x[(x.index >= pd.Period("2000-01", "M")) & (x.index <= pd.Period("2025-12", "M"))]
+            x = x[(x.index >= pd.Period("2000-01", "M")) & (x.index <= pd.Period(os.environ.get("RATES_END", "2025-12"), "M"))]
             if len(x) >= 24:
                 s, how = x, name
                 break

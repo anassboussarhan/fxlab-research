@@ -1,0 +1,185 @@
+name: check2026
+# The pre-registered 2026 check of the round 24-25 counting streams (docs/check2026_r24r25_preregistration.md):
+# data to 2026-10-31, the rounds' own code, seeds and configurations, selections from data before each re-selection
+# point (scripts/dev_end.py). The holdout opens with the unlock token. Only statistics are printed. Trigger: ci/C2026.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/C2026"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+  FXLAB_HOLDOUT_UNLOCK: "unlock 2026: authorised by Anas on 2026-11-01 after the candidates below were frozen"
+  END: "2026-10-31"
+jobs:
+  rates:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q pandas requests
+      - run: RATES_END=2026-10 python ci/r24_rates.py
+      - uses: actions/upload-artifact@v4
+        with: {name: c26-rates, path: data/rates, retention-days: 30}
+  hours:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    strategy:
+      fail-fast: false
+      matrix:
+        sym: [USDTRY, EUSIDXEUR, CHEIDXCHF]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          S=${{ matrix.sym }}
+          if [ "$S" = "USDTRY" ]; then
+            bash ci/dl_each.sh $(cat ci/r23_w2_run.txt) "^r23h-USDTRY$" dl || exit 1
+            mkdir -p data/m1/USDTRY; find dl -name "*.parquet" -exec mv {} data/m1/USDTRY/ \;
+            python ci/r23_hours.py --pair USDTRY --start 2026 --end 2026
+            python ci/r23_rescale.py USDTRY
+          else
+            bash ci/r23_place.sh $S
+            python ci/r23_hours.py --pair $S --start 2026 --end 2026
+          fi
+          ls data/m1/$S
+      - uses: actions/upload-artifact@v4
+        with: {name: "c26-m1-${{ matrix.sym }}", path: "data/m1/${{ matrix.sym }}", retention-days: 30}
+  r1:
+    needs: [rates, hours]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        scale: ["1.0", "1.5"]
+        tfs: ["W1,D2,D1,H12,H8,H4,H2", "H1"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with: {name: c26-m1-USDTRY, path: data/m1/USDTRY}
+      - uses: actions/download-artifact@v4
+        with: {name: c26-rates, path: rr}
+      - shell: bash
+        run: |
+          cp rr/oecd_ir3m.csv data/rates/
+          python -W ignore scripts/r23_LW.py --symbol USDTRY --tfs ${{ matrix.tfs }} --budget 19500 --financing rates_oecd \
+            --carry-scale ${{ matrix.scale }} --placebos 0 --save-series --dev-end $END --out out 2>&1 | grep --line-buffered -v Warning | tail -30
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: "c26-r1-x${{ matrix.scale }}-${{ strategy.job-index }}", path: out, retention-days: 30}
+  p:
+    needs: [rates, hours]
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - {sym: USDTRY, group: FX, tf: H1}
+          - {sym: USDTRY, group: FX, tf: H2}
+          - {sym: USDTRY, group: FX, tf: H4}
+          - {sym: USDTRY, group: FX, tf: H8}
+          - {sym: USDTRY, group: FX, tf: H12}
+          - {sym: USDTRY, group: FX, tf: D1}
+          - {sym: USDTRY, group: FX, tf: D2}
+          - {sym: USDTRY, group: FX, tf: W1}
+          - {sym: "EUSIDXEUR,CHEIDXCHF", group: OTHER, tf: W1}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - uses: actions/download-artifact@v4
+        with: {name: c26-rates, path: rr}
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          cp rr/oecd_ir3m.csv data/rates/
+          for S in $(echo "${{ matrix.sym }}" | tr ',' ' '); do
+            gh run download ${{ github.run_id }} -n c26-m1-$S -D data/m1/$S
+            python -W ignore scripts/r23_LW.py --symbol $S --tfs ${{ matrix.tf }} --only NONE --placebos 0 --save-bars bars \
+              --dev-end $END --out tmp_$S 2>&1 | tail -3
+          done
+          git fetch -q origin round25 && git show origin/round25:round25/r25_streams.csv.gz > r25.csv.gz
+          R=$(python - <<'PY'
+          import pandas as pd
+          d = pd.read_csv("r25.csv.gz", low_memory=False)
+          syms = "${{ matrix.sym }}".split(",")
+          c = d[(d.counts == True) & d.symbol.isin(syms) & (d.tf == "${{ matrix.tf }}") & ~d.family.str.endswith("FIX_REVERSAL")]
+          print(",".join(sorted({u.split("|")[0] for u in c.unit})))
+          PY
+          )
+          echo "rules: $R"
+          [ -z "$R" ] && { echo "no counting rule here"; mkdir -p out; exit 0; }
+          python -W ignore scripts/r25_P.py --group ${{ matrix.group }} --tf ${{ matrix.tf }} --rules "$R" --insts "${{ matrix.sym }}" \
+            --placebos 0 --bars bars --out out --tag c26-${{ matrix.tf }}-${{ strategy.job-index }} --procs 4 --budget 19500 \
+            --financing rates_oecd --dev-end $END 2>&1 | grep --line-buffered -v -i -E "warning|converg|fmin|res = am" | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: "c26-p-${{ strategy.job-index }}", path: out, retention-days: 30}
+  alt:
+    runs-on: ubuntu-latest
+    timeout-minutes: 300
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays requests
+      - shell: bash
+        run: |
+          ALT_END=$END ALT_LAST_YEAR=2026 python -W ignore ci/r25_alt.py universe --out alt 2>&1 | grep -v "^skip" | tail -3
+          python -c "import json; U=json.load(open('alt/universe.json')); print({s: U['members'].get(s) for s in ('GALAUSDT','ADAUSDT','WAVESUSDT')})"
+          ALT_END=$END python -W ignore ci/r25_alt.py bars --universe alt/universe.json --syms GALAUSDT,ADAUSDT,WAVESUSDT --out alt 2>&1 | grep -v "^skip" | cut -c1-200 | tail -5
+          python -c "import json; U=json.load(open('alt/universe.json')); U['funding_dir']='alt'; json.dump(U, open('alt/uni.json','w'))"
+          for spec in "H1 S.DAILY.DOUBLE_SEVEN,S.VOL.COMPRESSION GALAUSDT,ADAUSDT" "H8 S.SEAS.WEEKEND_GAP_FADE WAVESUSDT"; do
+            set -- $spec
+            python -W ignore scripts/r25_P.py --group ALT --universe alt/uni.json --tf $1 --rules $2 --insts $3 --placebos 0 \
+              --bars alt/bars --out out --tag c26-alt-$1 --procs 4 --budget 15000 --dev-end $END 2>&1 | grep -E "^job|NO BARS" | tail -3
+          done
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: c26-alt-0, path: out, retention-days: 30}
+  report:
+    needs: [r1, p, alt]
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          mkdir -p inp res
+          bash ci/dl_each.sh ${{ github.run_id }} '^c26-(r1|p|alt)-' inp || true
+          gh run download ${{ github.run_id }} -n c26-m1-USDTRY -D data/m1/USDTRY
+          gh run download ${{ github.run_id }} -n c26-rates -D rr && cp rr/oecd_ir3m.csv data/rates/
+          git fetch -q origin round24 round25
+          git show origin/round24:round24/r24_streams.csv.gz > res/r24_streams.csv.gz
+          git show origin/round25:round25/r25_streams.csv.gz > res/r25_streams.csv.gz
+          TRY_END=$END python -W ignore ci/r24_try.py > res/try_bh_2026.json || echo "benchmark failed"
+          python -W ignore ci/check2026.py

@@ -22,6 +22,8 @@ SETTINGS = [DEFAULT] + [(w, k, r, s) for w in (None, 12, 24, 36, 60) for k in (1
                         for s in ("t", "mean") if (w, k, r, s) != DEFAULT]
 
 
+LAST_YEAR = 2025                       # the last selection year (2026 only in pre-registered checks)
+
 def name(s):
     w, k, r, sc = s
     return f"w{'exp' if w is None else w}_top{k}_{r}_{sc}"
@@ -54,7 +56,8 @@ class Agg:
 
 
 def walk_forward(ag: Agg, first_oos_year, setting=DEFAULT, min_active=30, min_valid=50, min_train_years=3,
-                 last_year=2025):
+                 last_year=None):
+    last_year = LAST_YEAR if last_year is None else last_year
     w, top, rs, sc = setting
     yrs = ag.mkey // 12
     mon = ag.mkey % 12 + 1
@@ -99,8 +102,9 @@ def tstat(x):
     return float(x.mean() / (x.std(ddof=1) / math.sqrt(len(x))))
 
 
-def nested(ag: Agg, first_oos_year, min_active=30, min_valid=50, min_train_years=3, outer_years=3, last_year=2025,
+def nested(ag: Agg, first_oos_year, min_active=30, min_valid=50, min_train_years=3, outer_years=3, last_year=None,
            settings=SETTINGS):
+    last_year = LAST_YEAR if last_year is None else last_year
     inner = {}
     for s in settings:
         inner[name(s)], _ = walk_forward(ag, first_oos_year, s, min_active, min_valid, min_train_years, last_year)

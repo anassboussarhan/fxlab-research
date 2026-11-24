@@ -34,7 +34,7 @@ STABLE = {"USDC", "BUSD", "TUSD", "FDUSD", "USDP", "DAI", "UST", "PAX", "SUSD", 
 HALF = 3.1e-4
 KN = ["open_time", "open", "high", "low", "close", "volume", "close_time", "quote_volume", "count", "taker_buy_volume",
       "taker_buy_quote_volume", "ignore"]
-DEV_END = pd.Timestamp("2025-12-31 23:59", tz="UTC")
+DEV_END = pd.Timestamp(os.environ.get("ALT_END", "2025-12-31") + " 23:59", tz="UTC")
 
 
 def zip_csv(key, names):
@@ -81,7 +81,7 @@ def months_of(sym, interval, years):
 
 
 def daily_volume(sym):
-    keys = months_of(sym, "1d", range(2019, 2026))
+    keys = months_of(sym, "1d", range(2019, DEV_END.year + 1))
     parts = [p for p in (safe(zip_csv, k, KN) for k in keys) if p is not None and len(p)]
     if not parts:
         return None
@@ -99,7 +99,7 @@ def cmd_universe(a):
         vols = dict(zip(syms, ex.map(lambda s: safe(daily_volume, s), syms)))
     vols = {s: v for s, v in vols.items() if v is not None and len(v)}
     members, ranks = {}, {}
-    for Y in range(2020, 2026):
+    for Y in range(2020, int(os.environ.get("ALT_LAST_YEAR", "2025")) + 1):
         cand = []
         for s, v in vols.items():
             w = v[v.index.year == Y - 1].dropna()
@@ -117,7 +117,7 @@ def cmd_universe(a):
 
 def build(sym, out):
     from fxlab.data.store import resample
-    keys = months_of(sym, "1h", range(2019, 2026))
+    keys = months_of(sym, "1h", range(2019, DEV_END.year + 1))
     with ThreadPoolExecutor(8) as ex:
         parts = [p for p in ex.map(lambda k: safe(zip_csv, k, KN), keys) if p is not None and len(p)]
     if not parts:
@@ -161,7 +161,7 @@ def cmd_bars(a):
     U = json.load(open(a.universe))
     syms = sorted(U["members"])
     i, k = (int(x) for x in a.part.split("/"))
-    mine = syms[i::k]
+    mine = syms[i::k] if not a.syms else [x for x in a.syms.split(",") if x]
     os.makedirs(a.out, exist_ok=True)
     meta = {}
     for s in mine:
@@ -178,6 +178,7 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--universe", default="")
     ap.add_argument("--part", default="0/1")
+    ap.add_argument("--syms", default="")
     a = ap.parse_args()
     {"universe": cmd_universe, "bars": cmd_bars}[a.cmd](a)
 

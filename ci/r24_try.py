@@ -19,9 +19,10 @@ from fxlab.evaluate import evaluate  # noqa: E402
 import fxlab.data.rates_oecd as RO  # noqa: E402
 
 I17.strategies()
-m1 = load_m1("USDTRY")
+m1 = load_m1("USDTRY", allow_holdout=os.environ.get("TRY_END", "2025") >= "2026")
 b = resample(m1, "D1")
-b = b[b.index <= pd.Timestamp("2025-12-31 23:59", tz="UTC")]
+END = os.environ.get("TRY_END", "2025-12-31")
+b = b[b.index <= pd.Timestamp(END + " 23:59", tz="UTC")]
 day = I17.trading_day(b.index)
 dd = pd.Index(sorted(set(day)))
 sig = pd.DataFrame({"side": np.ones(len(b))}, index=b.index)
@@ -34,6 +35,10 @@ for k in (0.0, 1.0, 1.5, 2.0):
     st = wf25.stats(s)
     out[f"carry_x{k}"] = {x: (round(float(st[x]), 6) if st.get(x) is not None and np.isfinite(st[x]) else None)
                           for x in ("p1_mean", "p1_t", "p2_mean", "p2_t", "p2_hac_t")}
+    t26 = s[s.index >= "2026-01-01"]
+    if len(t26):
+        out[f"carry_x{k}"]["y2026"] = {"n": int(len(t26)), "mean": float(t26.mean()),
+                                       "t": float(t26.mean() / (t26.std(ddof=1) / np.sqrt(len(t26)))) if t26.std() > 0 else None}
     y = s.groupby(s.index.year).sum()
     out[f"carry_x{k}"]["annual_sum_2019_2025"] = {int(a): round(float(v), 3) for a, v in y[y.index >= 2019].items()}
 print(json.dumps(out, indent=1))
