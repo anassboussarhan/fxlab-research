@@ -1,0 +1,49 @@
+name: r25la3
+# Round 25 addendum 4: truncation test of every rule's full 128-configuration part-P design at H1 and H4 (the first
+# gate used 2 per rule and missed the one look-ahead configuration of FIX_REVERSAL). Trigger: ci/R25LA3.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R25LA3"]
+permissions:
+  contents: read
+jobs:
+  plan:
+    runs-on: ubuntu-latest
+    outputs:
+      m: ${{ steps.m.outputs.m }}
+    steps:
+      - uses: actions/checkout@v4
+      - id: m
+        run: echo "m=$(python3 -c 'import json; print(json.dumps(json.load(open("ci/r25_la3.json")), separators=(",", ":")))')" >> "$GITHUB_OUTPUT"
+  la:
+    needs: plan
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix: ${{ fromJSON(needs.plan.outputs.m) }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - shell: bash
+        run: |
+          python -W ignore scripts/r25_lookahead.py --tf ${{ matrix.tf }} --rules "${{ matrix.rules }}" --per-rule 128 --cuts 12 --out la --procs 4 2>&1 \
+            | grep --line-buffered -E 'SUMMARY|KILL' | tail -5
+          python - <<'PY'
+          import pandas as pd
+          d = pd.read_csv([f for f in __import__("glob").glob("la/r25_lookahead_*.csv")][0])
+          bad = d[d.get("lookahead_cuts", 0) > 0] if "lookahead_cuts" in d else d.iloc[:0]
+          print("configs", len(d), "errors", int(d["error"].notna().sum()) if "error" in d else 0, "with look-ahead", len(bad))
+          print(bad.groupby("key").size().to_dict() if len(bad) else {})
+          PY
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: r25la3-${{ matrix.tag }}
+          path: la
+          retention-days: 60

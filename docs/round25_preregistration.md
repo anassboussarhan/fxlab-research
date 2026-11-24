@@ -319,3 +319,16 @@ timeframe (and every lost AD unit) is rerun with the same seeds (workflow r25re,
 sized from the seconds per unit observed in its job and split by instruments where needed; split parts save
 aggregates and the combine makes the panels. A rule whose panel is still incomplete after the rerun is reported and
 its panel streams are not counted, as written.
+
+## Addendum 4 (2026-11-24, after the combine)
+
+The combine (r25z) flags 100 streams with 2019-2025 t above 8. All of them are S.SEAS.FIX_REVERSAL at H1, with t
+of about 17-39 on every asset class, crypto included (which has no London fix). A truncation test of its full
+128-configuration design at H1 (r25la2 45289156303) finds one configuration that looks ahead: its hour constants,
+drawn apart, put the reference price after the trading window. That is the fault of round 23's two session rules.
+Walk-forward selection picks that configuration because it wins every training window.
+
+- **FIX_REVERSAL is void** in round 25, at every timeframe. It would be re-run tied by role, as the session rules
+  were.
+- **The first gate tested two configurations per rule.** It is repeated on every rule's full 128-configuration
+  design at H1 and H4 (r25la3). Any other rule with a look-ahead configuration is void too.
