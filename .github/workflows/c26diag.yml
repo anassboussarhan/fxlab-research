@@ -1,0 +1,29 @@
+name: c26diag
+# 2026 check diagnostic (ci/c26_diag.py). Trigger: ci/C26DIAG.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/C26DIAG"]
+permissions:
+  contents: read
+  actions: read
+env:
+  FXLAB_HOLDOUT_UNLOCK: "unlock 2026: authorised by Anas on 2026-11-01 after the candidates below were frozen"
+jobs:
+  d:
+    runs-on: ubuntu-latest
+    timeout-minutes: 120
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh run download 45331755459 -n c26-m1-USDTRY -D data/m1/USDTRY
+          gh run download 45331755459 -n c26-rates -D rr && cp rr/oecd_ir3m.csv data/rates/
+          mkdir -p res && git fetch -q origin round24 && git show origin/round24:round24/r24_streams.csv.gz > res/r24_streams.csv.gz
+          python -W ignore ci/c26_diag.py
