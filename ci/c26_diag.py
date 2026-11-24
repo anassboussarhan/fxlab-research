@@ -14,7 +14,7 @@ m1 = load_m1("USDTRY"); m1 = m1[m1.index <= pd.Timestamp("2026-10-31 23:59", tz=
 S = {e.id: e for e in I17.strategies()}
 r24 = pd.read_csv("res/r24_streams.csv.gz", low_memory=False)
 c = r24[(r24.counts == True) & (r24.symbol == "USDTRY")]
-units = sorted({u for u in c.unit if u.endswith("|D1") or u.endswith("|W1")})[:6]
+units = ["S.BOOK.BW_FRACTAL|D1", "S.BO.RETEST|W1"]
 out = {}
 d1 = resample(m1, "D1")
 for u in units:
@@ -39,6 +39,18 @@ for u in units:
         except Exception as ex:  # noqa: BLE001
             continue
         m26 = rf.index >= pd.Timestamp("2026-01-01", tz="UTC")
+        if float(rf[m26].sum()) > 1.0 and "trades" not in out:
+            from fxlab.evaluate import evaluate
+            d_, mode_, ent_, risk_ = LW.execution(uu[len(sps):])
+            out["trades"] = {"unit": u, "i": i, "mode": mode_, "entry": str(ent_), "risk": str(risk_)[:300], "params": str(params)[:300]}
+            rr = rf[m26]
+            out["trades"]["top_bars"] = [(str(k), round(float(v), 4)) for k, v in rr.sort_values().tail(8).items()]
+            out["trades"]["n_nonzero_2026"] = int((rr != 0).sum())
+            bb = b[b.index >= pd.Timestamp("2026-01-01", tz="UTC")]
+            out["trades"]["bars_2026"] = [(str(k), round(float(x), 4), round(float(y), 4), round(float(z), 4)) for k, x, y, z in zip(bb.index[:3], bb.open[:3], bb.high[:3], bb.low[:3])]
+            big = rr.sort_values().index[-1]
+            w = b.loc[big - pd.Timedelta(days=10): big + pd.Timedelta(days=3)]
+            out["trades"]["around_top"] = [(str(k), round(float(o), 4), round(float(h), 4), round(float(l), 4), round(float(c_), 4)) for k, o, h, l, c_ in zip(w.index, w.open, w.high, w.low, w.close)]
         rows.append({"ret26_fin": float(rf[m26].sum()), "ret26_nofin": float(r0[m26].sum()), "ret2025_fin": float(rf[(rf.index.year == 2025)].sum()),
                      "mean_abs_side": float(side.abs().mean()), "max_abs_side": float(side.abs().max()), "mode": LW.execution(uu[len(sps):])[1]})
     R = pd.DataFrame(rows)
