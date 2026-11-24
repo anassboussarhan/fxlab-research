@@ -48,13 +48,14 @@ jobs:
           if [ "$S" = "USDTRY" ]; then
             bash ci/dl_each.sh $(cat ci/r23_w2_run.txt) "^r23h-USDTRY$" dl || exit 1
             mkdir -p data/m1/USDTRY; find dl -name "*.parquet" -exec mv {} data/m1/USDTRY/ \;
-            python ci/r23_hours.py --pair USDTRY --start 2026 --end 2026
+            HOURS_END=$END python ci/r23_hours.py --pair USDTRY --start 2026 --end 2026
             python ci/r23_rescale.py USDTRY
           else
             bash ci/r23_place.sh $S
-            python ci/r23_hours.py --pair $S --start 2026 --end 2026
+            HOURS_END=$END python ci/r23_hours.py --pair $S --start 2026 --end 2026
           fi
           ls data/m1/$S
+          ls data/m1/$S | grep -q 2026 || { echo "no 2026 data for $S"; exit 1; }
       - uses: actions/upload-artifact@v4
         with: {name: "c26-m1-${{ matrix.sym }}", path: "data/m1/${{ matrix.sym }}", retention-days: 30}
   r1:

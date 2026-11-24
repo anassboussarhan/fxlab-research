@@ -103,7 +103,7 @@ def main():
             frames.append(df)
     if frames:
         D = pd.concat(frames).drop_duplicates("ts").sort_values("ts")
-        D = D[D.ts <= pd.Timestamp("2025-12-31 23:59", tz="UTC")]
+        D = D[D.ts <= pd.Timestamp(os.environ.get("HOURS_END", "2025-12-31") + " 23:59", tz="UTC")]   # 2026: checks only
         os.makedirs(f"data/m1/{a.pair}", exist_ok=True)
         for y, g in D.groupby(D.ts.dt.year):
             g.to_parquet(f"data/m1/{a.pair}/{a.pair}_{y}.parquet", index=False)
