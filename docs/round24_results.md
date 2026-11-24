@@ -1,4 +1,17 @@
-# Round 24 results (2026-11-23)
+# Round 24 results (2026-11-23; corrected 2026-11-24)
+
+> **Correction (2026-11-24, addendum 9).** The USD/TRY result below was a trade-engine fault. The engine marked an
+> open trade's P&L against its entry price, so positions held through USD/TRY's tenfold rise carried a multiple of
+> their exposure, with financing on the entry exposure only.
+>
+> On the fixed engine (r26try 45361261104), USD/TRY R1 has:
+> - 1,614 real streams;
+> - 6.4% meet the own rule, against 6.25% of its placebos;
+> - a largest t of 4.07;
+> - **none counting.**
+>
+> **Round 24 therefore has no counting stream** except R7 BTC basis, which is the known cash-and-carry (its placebos
+> pass as often). The sections below are kept as written, with their USD/TRY conclusions void.
 
 Pre-registration: `round24_preregistration.md`, with addenda 1-8. Combine: r24z 45233635208. Statistics are on
 branch `round24` (`r24_summary.json`, `r24_streams.csv.gz`).

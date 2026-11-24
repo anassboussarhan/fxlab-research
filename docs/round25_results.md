@@ -1,4 +1,15 @@
-# Round 25 results (2026-11-24)
+# Round 25 results (2026-11-24, corrected the same day)
+
+> **Correction (addendum 6).** The 326 USD/TRY streams and the 31 FX panels below came from the trade-engine fault
+> of round 24 addendum 9.
+>
+> On the fixed engine (r26try 45361261104), USD/TRY part P has:
+> - 1,662 real streams, 4.75% meeting the own rule, against 1.9% of its placebos;
+> - a largest t of 5.00 (S.FAMOUS.TURTLE H4 nested-plus), which fails the own rule (negative P1 mean);
+> - **none counting.**
+>
+> **What remains:** the five single streams. All failed their 2026 check or did not trade in 2026
+> (`check2026_r24r25_results.md`). **Round 25 therefore has no edge.**
 
 Pre-registration: `round25_preregistration.md`, with addenda 1-4.
 - **Runs:**
