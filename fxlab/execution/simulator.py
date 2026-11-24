@@ -144,6 +144,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
     k = -1
     pos = 0.0; epx = 0.0; stop = np.nan; tgt = np.nan; trail = np.nan; ebar = -1; f = 0.0
     best = 0.0; worst = 0.0; fin = 0.0; mh = 0; last_val = 0.0
+    mark = 1.0                                   # price of the last mark: P&L is on the current exposure
     sd0 = 0.0; be_k = np.nan; pm_k = np.nan; pf_k = 0.0; part_done = False
     pend_side = 0.0; pend_lvl = 0.0; pend_born = 0; pend_d = 0; skip = False; fpx = 0.0; open_fill = False
     for j in range(n):
@@ -162,8 +163,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                 exit_now = True; reason = 4
             if exit_now:
                 px = sell_o if pos > 0 else buy_o
-                r = pos * (px - epx) / epx
-                bar_ret[j] += f * (r - last_val)
+                bar_ret[j] += f * pos * (px - mark) / mark
                 t_exit[k] = j; t_xpx[k] = px; t_reason[k] = reason; t_fin[k] = fin
                 t_mae[k] = worst; t_mfe[k] = best
                 bar_ret[j] -= f * comm
@@ -238,6 +238,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
             t_spread[k] = abs(epx - mid_o) / mid_o
             bar_ret[j] -= f * comm
             last_val = 0.0                       # P&L of this bar is measured from the fill price at the close
+            mark = epx
         elif etype == 0 and pos == 0 and d >= 0 and side_sig[d] != 0 and not np.isnan(stop_d[d]) and size_f[d] > 0:
             k += 1
             pos = side_sig[d]
@@ -254,6 +255,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
             # mark entry cost relative to the mid at the open
             last_val = pos * (mid_o - epx) / epx
             bar_ret[j] += f * last_val
+            mark = mid_o
         # ---------------------------------------------------------- 2) intrabar stop / target
         # A pending order that filled DURING this bar: the bar's high/low may have happened before the fill, so on
         # this bar only the stop can trigger (pessimistic); targets, partials, trailing and breakeven wait for the
@@ -298,8 +300,7 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                     px = tgt; reason = 2; done = True
                 worst = min(worst, (epx - hi) / epx); best = max(best, (epx - lo) / epx)
             if done:
-                r = pos * (px - epx) / epx
-                bar_ret[j] += f * (r - last_val)
+                bar_ret[j] += f * pos * (px - mark) / mark
                 bar_ret[j] -= f * comm
                 t_exit[k] = j; t_xpx[k] = px; t_reason[k] = reason; t_fin[k] = fin
                 t_mae[k] = worst; t_mfe[k] = best
@@ -320,23 +321,22 @@ def _simulate(bo, bh, bl, bc, ao, ah, al, ac, roll, side_sig, stop_d, tp_d, max_
                         px = lvl; hit = True
                 if hit:
                     fp = f * pf_k
-                    r = pos * (px - epx) / epx
-                    bar_ret[j] += fp * (r - last_val) - fp * comm
+                    bar_ret[j] += fp * pos * (px - mark) / mark - fp * comm
                     f -= fp
                     part_done = True
                     if be_k == be_k:          # with breakeven enabled, the remainder is protected at entry
                         stop = max(stop, epx) if pos > 0 else min(stop, epx)
         # ---------------------------------------------------------- 3) close: mark-to-market, trailing, financing
         if pos != 0:
-            val = pos * (((bc[j] if pos > 0 else ac[j]) - epx) / epx)
-            bar_ret[j] += f * (val - last_val)
-            last_val = val
+            pxc = bc[j] if pos > 0 else ac[j]
+            bar_ret[j] += f * pos * (pxc - mark) / mark          # on the exposure at the last mark (unit per bar)
+            mark = pxc
             if roll[j] > 0:
                 if use_carry:                     # point-in-time rate differential (round 24 R1)
                     cr = carry_arr[j] if not np.isnan(carry_arr[j]) else 0.0
                     fc = roll[j] / 360.0 * (markup - np.sign(pos) * cr)
                 else:
-                    fc = roll[j] * swap_pips * pip / epx
+                    fc = roll[j] * swap_pips * pip / mark
                 fin += fc
                 bar_ret[j] -= f * fc
             ext_hi = bc[j] if fillbar else bh[j]        # on a mid-bar fill bar only the close is known post-fill

@@ -380,3 +380,27 @@ so the sanity rule applies. Workflow r24tryx reports:
 - its t without them, and without the pair's 10 largest-move days.
 
 No 2026 data is read until this is settled.
+
+## Addendum 9 (2026-11-24): a trade-engine fault, and USD/TRY rerun
+
+**The fault.** The trade engine (`fxlab/execution/simulator.py`, `_simulate`, used by every custom-mode configuration)
+marked an open trade's P&L relative to its entry price, not the previous mark. A position held while the price
+moved by a factor g therefore carried g times its entry exposure, and its financing stayed on the entry exposure.
+
+- **Normal pairs:** negligible. On 30 synthetic configurations the summed returns differ by at most 0.0035.
+- **Large moves:** inflating. A long held through a ninefold rise books +685% in the old trade engine, against +206%
+  (the log move) in the vector engine.
+
+**Found** by the implausible 2026 check (0.83% a day on a 15% move): one configuration's 2026 returns came from a
+long opened in 2019.
+
+**The fix:** each bar's P&L is on the exposure at the last mark, as in the vector engine, with financing on that
+exposure. The fixed engine matches the vector engine exactly on the ninefold case. Stops, targets, fills and costs
+are unchanged.
+
+**What it changes:**
+- the USD/TRY R1 results (and their stress test, addenda 6-8) are void;
+- USD/TRY R1 is rerun on the fixed engine (workflow r26try) and counted against the round's BH threshold.
+
+Other instruments' results are left as they are. Their trades are short against their price moves, and none of them
+counted.

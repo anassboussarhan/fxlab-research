@@ -48,3 +48,16 @@ also reported.
 10 months is short, so a failure or a pass at these thresholds says little on its own.
 
 Not financial advice.
+
+## Addendum 1 (2026-11-24): result void, trade-engine fault
+
+The USD/TRY 2026 portfolios returned 0.49-0.83% a day (t 13-15) on a 15% move of the pair. Holding the pair with
+carry lost (t -7.3). The cause is the trade-engine fault of round 24 addendum 9: long positions opened years earlier
+carried several times their entry exposure. The USD/TRY 2026 result is void.
+
+The single streams stand:
+- ADA: 2026 t 1.35, fails;
+- EUSIDXEUR and CHEIDXCHF: flat all year, fail;
+- GALA and WAVES: not 2026 members, do not trade.
+
+If any USD/TRY stream still counts after the rerun, its 2026 check is run again on the fixed engine.

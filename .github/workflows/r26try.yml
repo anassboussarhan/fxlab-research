@@ -1,0 +1,65 @@
+name: r26try
+# Trade-engine fix (round 24 addendum 9, round 25 addendum 6): USD/TRY rerun on the fixed engine, development data only.
+# R1 of round 24 (both timeframe groups, carry x1, series kept) and part P of round 25 (every rule at H1-W1, series kept).
+# Trigger: ci/R26TRY.
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths: ["ci/R26TRY"]
+permissions:
+  contents: read
+  actions: read
+env:
+  PYTHONUNBUFFERED: "1"
+jobs:
+  r1:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        tfs: ["W1,D2,D1,H12,H8,H4,H2", "H1"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.13"}
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env: {GH_TOKEN: "${{ github.token }}"}
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $(cat ci/r23_w2_run.txt) "^r23h-USDTRY$" dl || exit 1
+          mkdir -p data/m1/USDTRY; find dl -name "*.parquet" -exec mv {} data/m1/USDTRY/ \;
+          python ci/r23_rescale.py USDTRY
+          bash ci/dl_each.sh 45035758022 "^r24-rates$" rr || exit 1
+          cp rr/r24-rates/oecd_ir3m.csv data/rates/
+          python -W ignore scripts/r23_LW.py --symbol USDTRY --tfs ${{ matrix.tfs }} --budget 19500 --financing rates_oecd \
+            --placebos 10 --save-series --out out 2>&1 | grep --line-buffered -v Warning | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: "r26try-r1-${{ strategy.job-index }}", path: out, retention-days: 60}
+  p:
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    strategy:
+      fail-fast: false
+      matrix:
+        tf: [H1, H2, H4, H8, H12, D1, D2, W1]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: {python-version: "3.13"}
+      - run: pip install -q -r ci/requirements-ci.txt holidays
+      - env: {GH_TOKEN: "${{ github.token }}"}
+        shell: bash
+        run: |
+          bash ci/dl_each.sh $(cat ci/r25_data_run.txt) "^r25g-FX-${{ matrix.tf }}$" inb || exit 1
+          mkdir -p bars && cp inb/*/USDTRY_${{ matrix.tf }}.parquet bars/
+          bash ci/dl_each.sh 45035758022 "^r24-rates$" rr || exit 1
+          cp rr/r24-rates/oecd_ir3m.csv data/rates/
+          python -W ignore scripts/r25_P.py --group FX --tf ${{ matrix.tf }} --rules all --insts USDTRY --placebos 10 --bars bars \
+            --out out --tag try-${{ matrix.tf }} --procs 4 --budget 19500 --financing rates_oecd --save-all-series 2>&1 \
+            | grep --line-buffered -v -i -E "warning|converg|fmin|res = am" | tail -20
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with: {name: "r26try-p-${{ matrix.tf }}", path: out, retention-days: 60}

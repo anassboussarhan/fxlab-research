@@ -337,3 +337,12 @@ Walk-forward selection picks that configuration because it wins every training w
 
 The full-design truncation test (r25la3) covers 26,752 configurations at H1 and H4. FIX_REVERSAL's single H1
 configuration is the only look-ahead; 9 configurations errored. No other rule is void.
+
+## Addendum 6 (2026-11-24): the trade-engine fault of round 24 addendum 9
+
+The same fault affects part P, CF and ALT custom-mode configurations.
+- **USD/TRY:** its 326 counting streams and the 31 FX panels (driven by USD/TRY) are void. USD/TRY part P is rerun
+  on the fixed engine, every rule at H1-W1 (workflow r26try). The FX panels are not rerun; their other 41 pairs
+  averaged about zero.
+- **Altcoins:** their large price moves make the three counting ALT single streams suspect too. All three had
+  already failed or did not trade in the 2026 check.
