@@ -1,0 +1,27 @@
+{
+ "label": "fwd",
+ "from": "2026-11-16",
+ "to": "2099-12-31",
+ "days": 7,
+ "first_day": "2026-11-16 00:00:00",
+ "last_day": "2026-11-25 00:00:00",
+ "days_traded": 4,
+ "net_fut_bp": -9.670141116628795,
+ "t": -0.4217062250178438,
+ "t_vs_dev_mean": -0.5630947718432415,
+ "verdict": "inconclusive",
+ "gross_bp": -9.389914193998086,
+ "net_fut2_bp": -9.950368039259507,
+ "net_cfd_bp": -10.853190032835796,
+ "volsized_return_pct": 0.05449656760711041,
+ "volsized_maxdd_pct": 0.0,
+ "by_month_bp": {
+  "2026-11": -9.670141116628795
+ },
+ "dev": {
+  "mean_bp": 3.268,
+  "t": 2.2524,
+  "n": 1652
+ },
+ "power_note": "expected t at the development mean is about mean / (sd / sqrt(n))"
+}
