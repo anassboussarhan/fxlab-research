@@ -1,0 +1,105 @@
+{
+ "data_last_fixing": "2026-11-27",
+ "forward_start": "2026-11-16",
+ "D7-base": {
+  "forward": {
+   "trades": 0
+  },
+  "open_positions": 4,
+  "latest_week": "2026-11-27",
+  "next_signals": [
+   {
+    "week": "2026-11-27 00:00:00",
+    "symbol": "GBPCAD",
+    "action": "buy",
+    "reason": "7-week low above the 200-week average"
+   }
+  ],
+  "history_2019_2025": {
+   "trades": 242,
+   "mean_R": 0.40303529980771,
+   "sum_R": 97.53454255346583,
+   "win_rate": 0.6983471074380165,
+   "worst_R": -7.874521776452386,
+   "t_clustered_month": 3.203628918321593,
+   "t_vs_dev": 0.024126855003507346,
+   "max_dd_R": -16.971786186936168
+  }
+ },
+ "D7-safe": {
+  "forward": {
+   "trades": 0
+  },
+  "open_positions": 1,
+  "latest_week": "2026-11-27",
+  "next_signals": [],
+  "history_2019_2025": {
+   "trades": 154,
+   "mean_R": 0.23763655582134735,
+   "sum_R": 36.59602959648749,
+   "win_rate": 0.6688311688311688,
+   "worst_R": -5.308913323466595,
+   "t_clustered_month": 1.5887852912340115,
+   "t_vs_dev": -1.0855259665481347,
+   "max_dd_R": -23.387260002579282
+  }
+ },
+ "D7-family": {
+  "forward": {
+   "trades": 0
+  },
+  "forward_without_double_seven": {
+   "trades": 0
+  },
+  "open_positions": 24,
+  "next_signals": [
+   {
+    "week": "2026-11-27 00:00:00",
+    "rule": "S.DAILY.THREE_DOWN",
+    "symbol": "AUDJPY",
+    "action": "exit"
+   },
+   {
+    "week": "2026-11-27 00:00:00",
+    "rule": "S.DAILY.THREE_DOWN",
+    "symbol": "AUDNZD",
+    "action": "exit"
+   },
+   {
+    "week": "2026-11-27 00:00:00",
+    "rule": "S.DAILY.THREE_DOWN",
+    "symbol": "AUDUSD",
+    "action": "exit"
+   },
+   {
+    "week": "2026-11-27 00:00:00",
+    "rule": "S.DAILY.THREE_DOWN",
+    "symbol": "CADJPY",
+    "action": "exit"
+   },
+   {
+    "week": "2026-11-27 00:00:00",
+    "rule": "S.DAILY.DOUBLE_SEVEN",
+    "symbol": "GBPCAD",
+    "action": "buy"
+   },
+   {
+    "week": "2026-11-27 00:00:00",
+    "rule": "S.BOOK.CONNORS_R3",
+    "symbol": "GBPUSD",
+    "action": "buy"
+   }
+  ],
+  "history_2019_2025": {
+   "trades": 1079,
+   "mean_R": 0.24338799388348878,
+   "sum_R": 262.6156454002844,
+   "win_rate": 0.6709916589434661,
+   "worst_R": -8.861540621524457,
+   "t_clustered_month": 3.029941600625202,
+   "t_vs_dev": 0.04217719800575097,
+   "max_dd_R": -37.613576426870225
+  },
+  "dev_mean_R": 0.24
+ }
+}
